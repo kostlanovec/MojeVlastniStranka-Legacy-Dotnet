@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<url>
+  <loc>https://www.kostlanovec.cz/</loc>
+  <lastmod>2023-05-09T12:23:39+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://www.kostlanovec.cz/omne</loc>
+  <lastmod>2023-05-07T12:31:01+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.kostlanovec.cz/projekty</loc>
+  <lastmod>2023-05-07T12:31:01+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.kostlanovec.cz/blog</loc>
+  <lastmod>2023-05-07T12:31:00+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.kostlanovec.cz/galerie</loc>
+  <lastmod>2023-05-07T12:31:00+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.kostlanovec.cz/sluzby/sluzby-weby</loc>
+  <lastmod>2023-05-07T12:31:23+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.kostlanovec.cz/sluzby/sluzby-aplikace</loc>
+  <lastmod>2023-05-07T12:31:23+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.kostlanovec.cz/sluzby/sluzba-social-network</loc>
+  <lastmod>2023-05-07T12:31:23+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.kostlanovec.cz/sluzby/sluzby-seo</loc>
+  <lastmod>2023-05-07T12:31:23+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.kostlanovec.cz/blogprispevky/16-uzitecnych-nastroju-pro-seo-a-web-development</loc>
+  <lastmod>2023-05-09T17:26:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.kostlanovec.cz/blogprispevky/optimalizacestranekproseo</loc>
+  <lastmod>2023-05-09T17:26:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.kostlanovec.cz/zivotopis/zivotopis_jan_sebastian_kostlan.docx</loc>
+  <lastmod>2023-05-07T12:31:24+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.kostlanovec.cz/projekt/projekt-stranka</loc>
+  <lastmod>2023-05-09T17:26:29+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.kostlanovec.cz/projekt/projekt-ketteboom</loc>
+  <lastmod>2023-05-09T17:26:26+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.kostlanovec.cz/blogprispevky/htaccess</loc>
+  <lastmod>2023-05-09T17:26:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
+</urlset>

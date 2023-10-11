@@ -1,0 +1,14 @@
+﻿@page
+@model MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog.BlogModel
+@{
+}
+
+<div id="blog-post-list">
+	@foreach (var post in Model.Posts)
+	{
+		<div class="blog-post-summary">
+        <h2><a asp-page="./EditBlog" asp-route-id="@post.Id">@post.Name</a></h2>
+			<p>@post.Description</p>
+		</div>
+	}
+</div>

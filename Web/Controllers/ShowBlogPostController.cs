@@ -1,0 +1,27 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using MojeVlastniStranka.DataAccess;
+
+namespace MojeVlastniStranka.Web.Controllers
+{
+	public class ShowBlogPostController : Controller
+	{
+		private readonly DataContext context;
+
+		public ShowBlogPostController(DataContext context)
+		{
+			this.context = context;
+		}
+		public IActionResult Blog(string Slug)
+		{
+			var blogPost = context.BlogPosts.FirstOrDefault(bp => bp.Slug == Slug);
+
+			if (blogPost == null)
+			{
+				return NotFound(); // Vrátí 404, pokud blogový příspěvek není nalezen
+			}
+
+			return View("Muchomurka", blogPost); // Výchozí název pohledu "Index"
+		}
+	}
+
+}

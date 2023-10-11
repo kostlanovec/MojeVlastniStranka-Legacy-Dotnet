@@ -1,0 +1,83 @@
+﻿@page
+
+@{
+	ViewData["Title"] = "Hlavní strana";
+	ViewData["Description"] = "Osobní stránka Jana Sebastiána Kostlána. Tvůrce, webdesigner, programátor a marketing maestro skrz SEO.";
+	ViewData["Author"] = "Jan Sebastián Kostlán";
+	ViewData["Keywords"] = "Weby, aplikace, Jan, Sebastián, Kostlán, SEO, webových, tvůrce, sociální, sítě, sociálních, sítí";
+}
+
+<header class="header__index">
+	<h1 class="header__h1 fadeInLeft visible">Kostlán <span class="subheading">Jan Sebastián</span></h1>
+	<p class="header__p fadeInLeft visible">Tvůrce webových aplikací budoucnosti. V dnešní době jsou weby online vizitkami, kterými ukazujete své kvality. <span class="span__header__p">"Kdo není na internetu, jako by neexistoval."</span></p>
+	<div class="a__button fadeInLeft visible">
+		<a title="skrolnutí ke kontaktům" href="#kontakt" class="header__a a__classic">Kontakt</a>
+	</div>
+	<div class="image__k image__relative fadeInRight visible">
+		<img src="images/bigger_k_better.svg" alt="k" class="header__k">
+	</div>
+</header>
+
+<main class="main">
+	<section class="section__collumns fadeInUp visible">
+		<p class="bigger__p red">Co nabízím</p>
+		<p class="bigger__p">Mými odbornými kompetencemi jsou</p>
+		<p>technologie, marketing, inovace</p>
+		<div class="div__collumns">
+			<a title="stránka služby weby" href="sluzby/sluzby-weby.html" class="a__in__columns animation__scale">
+				<div class="div__in__article__collumns">
+					<img src="images/sluzbyimages/website-program-svgrepo-com.svg" alt="Webová aplikace">
+					<h2 class="text__in__div">Weby</h2>
+					<p class="red text__in__div">Vývoj jednoduchých webových aplikací</p>
+				</div>
+			</a>
+			<a title="stránka služby aplikace" href="sluzby/sluzby-aplikace.html" class="a__in__columns animation__scale">
+				<div class="div__in__article__collumns">
+					<img src="images/sluzbyimages/application-coding-terminal-svgrepo-com.svg" alt="Desktopové a mobilní aplikace">
+					<h2 class="text__in__div">Aplikace</h2>
+					<p class="red text__in__div">Tvorba jednoduchých desktopových a mobilních aplikací</p>
+				</div>
+			</a>
+			<a title="stránka služby sociální sítě" href="sluzby/sluzba-social-network.html" class="a__in__columns animation__scale">
+				<div class="div__in__article__collumns">
+					<img src="images/sluzbyimages/social-network-brand-svgrepo-com.svg" alt="správa sociálních sítí">
+					<h2 class="text__in__div">Sociální sítě</h2>
+					<p class="text__in__div red">Správa sociálních sítí jako je instagram, facebook, ...</p>
+				</div>
+			</a>
+			<a title="stránka služby seo" href="sluzby/sluzby-seo.html" class="a__in__columns animation__scale">
+				<div class="div__in__article__collumns">
+					<img src="images/sluzbyimages/seo-graphic-thin-outline-in-a-circle-svgrepo-com.svg" alt="SEO">
+					<h2 class="text__in__div">SEO</h2>
+					<p class="text__in__div red">Optimalizace stránek pro lepší vyhledatelnost, neboli SEO</p>
+				</div>
+			</a>
+		</div>
+	</section>
+	<section class="fadeInUp index__section__blog">
+		<p class="bigger__p red">Blogové příspěvky</p>
+		<p class="p__bottom__margin">Doporučené mnou napsané články na stránce</p>
+		<div class="div__blog__contributions">
+			<article class="article__blog animation__scale img">
+				<a href="/i">
+					<img src="/images/blogimages/unityphoto.png" alt="unity photo" class="img__border__radius">
+					<p class="text__for__img">Unity a vývoj her</p>
+				</a>
+			</article>
+			<article class="article__blog animation__scale">
+				<a href="/blogprispevky/16-uzitecnych-nastroju-pro-seo-a-web-development.html">
+					<img src="images/blogimages/thumbnail16nastroju/thumbnai16nastroju-pocitac.jpg" alt="blog na 16 nástrojů pro seo a web development" class="img__border__radius">
+					<p class="text__for__img">16 nástrojů pro SEO a web dev</p>
+				</a>
+			</article>
+			<article class="article__blog animation__scale">
+				<a href="/blogprispevky/optimalizacestranekproseo.html">
+					<img src="images/blogimages/seocomputer.jpg" alt="Počítač s grafem" class="img__border__radius">
+					<p class="text__for__img">Optimalizace stránek pro SEO</p>
+				</a>
+			</article>
+		</div>
+	</section>
+	@Html.Partial("Shared/_contactform")
+
+</main>

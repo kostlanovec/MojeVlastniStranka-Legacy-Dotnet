@@ -1,0 +1,59 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout !=  null)
+    {
+        Layout = parentLayout.ToString();
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+}
+@if (SignInManager.IsSignedIn(User))
+{
+	<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+		<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Kostlanovec</a>
+		<div class="d-flex justify-content-between">
+			<button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="d-flex flex-column align-items-end">
+				<div>
+					<a id="manage" class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@UserManager.GetUserName(User)!</a>
+				</div>
+				<div class="nav-item me-3">
+					<form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+						<button id="logout" type="submit" class="px-3" href="#">Odhlásit se</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</header>
+}
+
+
+
+<style>
+	main {
+		position: relative; /* Set position to relative */
+		z-index: 2; /* Set a higher z-index value */
+	}
+</style>
+<div id="dynamicContentContainer"></div>
+<div class="container-fluid">
+	<div class="row">
+		<partial name="_ManageNav"/>
+		<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+			<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+				<h1 class="h2">Dashboard</h1>
+			</div>
+			@RenderBody()
+		</main>
+	</div>
+</div>
+@inject SignInManager<AdminUser> SignInManager
+@inject UserManager<AdminUser> UserManager
+
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

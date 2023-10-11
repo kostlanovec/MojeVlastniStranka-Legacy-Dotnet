@@ -1,0 +1,34 @@
+﻿@page
+@{
+}
+<header class="header__other fadeInLeft visible">
+	<h1 class="header__h1">Moje projekty</h1>
+	<p class="header__p">Tohle je moje "skladiště" mých projektů, které plánuji nebo jsem již zrealizoval. Zde popisuji podrobně postup při realizaci projektu.</p>
+</header>
+
+<!--Dynamické generování projektu-->
+<main class="main">
+	<article class="article__project fadeInUp visible">
+		<img src="images/projects/nevimzas.jpg" alt="Projekt stránka" class="img__border__radius"
+		     srcset="images/projects/website-image-mobile.jpg 480w, images/projects/nevimzas.jpg 900w"
+		     sizes="(max-width: 480px) 10vw, (max-width: 760px) 50vw, 760px">
+
+		<div class="div__absolute">
+			<h2 class="h2__article__project">Vývoj stránky</h2>
+			<p class="p__article__project">Tvorba mé stránky, protože jsem si uvědomil, že potřebuji nějakou stránku na sebe-reprezentaci</p>
+			<a class="a__button__project" href="projekt/projekt-stranka.html">Podívat se &#10230;</a>
+		</div>
+	</article>
+	<article class="article__project fadeInUp visible">
+		<img src="/images/projects/kettleboom-desktop.jpg" alt="Projekt KettleBoom" class="img__border__radius"
+		     srcset="/images/projects/kettleboom-mobile.jpg 480w, /images/projects/kettleboom-desktop.jpg 900w"
+		     sizes="(max-width: 480px) 10vw, (max-width: 760px) 50vw, 760px">
+
+		<div class="div__absolute">
+			<h2 class="h2__article__project">KettleBoom</h2>
+			<p class="p__article__project">Projekt na rozcvičení po delší době, kde se udělali základní herní mechanismy.</p>
+			<a class="a__button__project" href="projekt/projekt-ketteboom.html">Podívat se &#10230;</a>
+		</div>
+	</article>
+</main>
+<img src="~/SharedResources/Images/your-image.jpg" alt="Popis obrázku" />>

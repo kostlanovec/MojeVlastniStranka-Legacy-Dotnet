@@ -1,0 +1,9 @@
+﻿@model MojeVlastniStranka.DataAccess.Entities.BlogPost
+@{
+ViewData["Title"] = @Model.Title;
+ViewData["Description"] = @Model.Description;
+ViewData["Author"] = @Model.Author;
+ViewData["Keywords"] = @Model.Keywords;
+}
+
+@Html.Raw(Model.Content)

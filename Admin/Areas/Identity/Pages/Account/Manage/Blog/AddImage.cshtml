@@ -1,0 +1,34 @@
+﻿@page
+@model MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog.AddImageModel
+@{
+}
+
+<form method="post" enctype="multipart/form-data">
+	<div class="form-group">
+		<label for="file">Vyberte obrázek k nahrání:</label>
+		<input type="file" id="file" name="File" required />
+	</div>
+	<div class="form-group">
+		<label for="description">Popis:</label>
+		<input type="text" id="description" name="Description" required />
+	</div>
+	<button type="submit" class="btn btn-primary">Nahrát obrázek</button>
+</form>
+
+<h2>Seznam obrázku v galerii</h2>
+@foreach (var image in Model.Images)
+{
+	<figure>
+		<img src="@Url.Content($"~/images/galeriefotky/{image.FileName}")" alt="@image.Description" />
+		<figcaption>@image.Description</figcaption>
+	</figure>
+	<form method="post">
+		<input type="hidden" name="imageId" value="@image.Id" />
+		<div class="form-group">
+			<label for="newDescription">Nový popis:</label>
+			<input type="text" id="newDescription" name="newDescription" value="@image.Description" required />
+		</div>
+		<button type="submit" asp-page-handler="UpdateDescription" class="btn btn-primary">Aktualizovat popis</button>
+		<button type="submit" asp-page-handler="Delete" class="btn btn-danger">Odstranit obrázek</button>
+	</form>
+}

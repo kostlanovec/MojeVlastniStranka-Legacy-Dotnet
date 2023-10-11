@@ -1,0 +1,86 @@
+﻿@page
+@{
+}
+<header class="header__other fadeInRight visible">
+    <h1 class="header__h1">Projekt - KettleBoom</h1>
+    <p class="header__p">Jednoduchá hra vytvořená po menší pauze ve vývoji her. Hra sloužila jako opáčko základních herních mechanizmu ve 3D. Odkaz <a href="https://kostlanovec.itch.io/kettleboom" class="red">Zde</a>. Lepší stáhnout, protože s WebGL ještě bojuji :(</p>
+</header>
+
+<main class="main">
+	<article class="fadeInUp visible">
+		<img src="/images/projects/kettleboom-desktop.jpg" alt="Projekt KettleBoom"
+		     srcset="/images/projects/kettleboom-mobile.jpg 480w, /images/projects/kettleboom-desktop.jpg 900w"
+		     sizes="(max-width: 480px) 10vw, (max-width: 760px) 50vw, 760px">
+		<hr class="hr--red">
+		<h2 class="h2__div__article red">Popis hry</h2>
+		<p>Máte čarodějnický kotlíček a do něj vám musí padat lektvary, zároveň si musíte dávat pozor, aby vám do kotlíčku nespadly kočky, jinak vám kotlík vybouchne. Jednoduchý princip. Můžete se pohybovat z prava do leva. Rychlost spawnování objektů se postupně zrychluje, až to postupně stěžuje hru.</p>
+		<h2 class="h2__div__article red">Vývoj</h2>
+		<p>Hra byla vytvořená velice jednoduše. Stáhl jsem assety z internetu, protože modelovat se mi to nechtělo. První bylo potřeba vytvořit ovládání kotlíku. Pak nějaký objekty, které budou reagovat na dotyk. To se udělalo přes kolizi. Pak objekt, který bude přičítat skóre. Tam bylo potřeba vytvořit nějaké jednoduché UI. Do UI se udělalo i game over a menu. Přidání nějakých zvuku a konečné úpravy.</p>
+		<h2 class="h2__div__article red">Závěr</h2>
+		<p>Jako projekt na rozehřátí je to dostačující, protože si tady zopakujete skoro všechny základní herní mechanizmy ve 3D. Hra by mohla vypadat lépe, ale jak jsem již zmiňoval. Je to pouze na rozehřátí a vložil jsem to sem pro inspiraci.</p>
+		<hr class="hr--red">
+		<h2 class="h2__div__article red">Galerie</h2>
+		<figure class="figure__gallery fadeInUp visible">
+			<img src="/images/projects/Kettleboom/menu-kettleboom.png" alt="Menu hry" class="galerie-ikonka" onclick="zobraz(this)">
+			<img src="/images/projects/Kettleboom/game-kettleboom.png" alt="Samotná hra" class="galerie-ikonka" onclick="zobraz(this)">
+			<img src="/images/projects/Kettleboom/exit-kettleboom.png" alt="Game over okno" class="galerie-ikonka" onclick="zobraz(this)">
+		</figure>
+		<div id="modalniOkno" class="skryto">
+			<span class="zavri" onclick="zavri()">&times;</span>
+			<img id="zvetsenyObrazek" src="" alt="rozkliknutý obrázek">
+			<a class="sipky sipka-leva" onclick="predchozi()">&#10094;</a>
+			<a class="sipky sipka-prava" onclick="dalsi()">&#10095;</a>
+		</div>
+	</article>
+</main>
+<script>
+    let aktualniObrazek;
+    let obrazky = document.getElementsByClassName('galerie-ikonka');
+    let index;
+
+    function zobraz(obrazek) {
+        aktualniObrazek = obrazek;
+        index = najdiIndex(aktualniObrazek);
+        let modalniOkno = document.getElementById('modalniOkno');
+        let zvetsenyObrazek = document.getElementById('zvetsenyObrazek');
+        zvetsenyObrazek.src = aktualniObrazek.src;
+        modalniOkno.style.display = 'block';
+    }
+
+    function zavri() {
+        let modalniOkno = document.getElementById('modalniOkno');
+        modalniOkno.style.display = 'none';
+    }
+    function dalsi() {
+        index++;
+        if (index >= obrazky.length) {
+            index = 0;
+        }
+        aktualniObrazek = obrazky[index];
+        let zvetsenyObrazek = document.getElementById('zvetsenyObrazek');
+        zvetsenyObrazek.src = aktualniObrazek.src;
+    }
+
+    function predchozi() {
+        index--;
+        if (index < 0) {
+            index = obrazky.length - 1;
+        }
+        aktualniObrazek = obrazky[index];
+        let zvetsenyObrazek = document.getElementById('zvetsenyObrazek');
+        zvetsenyObrazek.src = aktualniObrazek.src;
+    }
+
+    function najdiIndex(obrazek) {
+        for (let i = 0; i < obrazky.length; i++) {
+            if (obrazky[i] === obrazek) {
+                return i;
+            }
+        }
+    }
+    document.addEventListener('keydown', function (event) {
+        if (event.key === "Escape") {
+            zavri();
+        }
+    });
+</script>

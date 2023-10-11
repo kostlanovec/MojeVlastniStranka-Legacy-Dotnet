@@ -1,0 +1,77 @@
+﻿@page
+@{
+	ViewData["Title"] = "Galerie";
+	ViewData["Description"] = "Galerie pro Osobní stránku Jana Sebastiána Kostlána. Tvůrce, webdesigner, programátor a marketing maestro skrz SEO.";
+	ViewData["Author"] = "Jan Sebastián Kostlán";
+	ViewData["Keywords"] = "obrázky, obrázek";
+}
+@model MojeVlastniStranka.Web.Pages.galerie.IndexModel
+<header class="header__other fadeInLeft visible">
+    <h1 class="header__h1">Galerie</h1>
+    <p class="header__p">Osobní fotky, které nesdílím na svém ig.</p>
+    <p class="header__p red">Postupem času to začne přibývat</p>
+</header>
+
+<main class="main">
+    <figure class="figure__gallery fadeInUp visible">
+        @foreach (var image in Model.Images)
+        {
+            <img src="/images/galeriefotky/@image.FileName" alt="@image.Description" class="galerie-ikonka animation__scale" onclick="zobraz(this)">
+        }
+    </figure>
+    <div id="modalniOkno" class="skryto">
+        <span class="zavri" onclick="zavri()">&times;</span>
+        <img id="zvetsenyObrazek" src="" alt="rozkliknutý obrázek">
+        <a class="sipky sipka-leva" onclick="predchozi()">&#10094;</a>
+        <a class="sipky sipka-prava" onclick="dalsi()">&#10095;</a>
+    </div>
+
+</main>
+<script>
+    let aktualniObrazek;
+    let obrazky = document.getElementsByClassName('galerie-ikonka');
+    let index;
+
+    function zobraz(obrazek) {
+        aktualniObrazek = obrazek;
+        index = najdiIndex(aktualniObrazek);
+        let modalniOkno = document.getElementById('modalniOkno');
+        let zvetsenyObrazek = document.getElementById('zvetsenyObrazek');
+        zvetsenyObrazek.src = aktualniObrazek.src;
+        modalniOkno.style.display = 'block';
+    }
+    function zavri() {
+        let modalniOkno = document.getElementById('modalniOkno');
+        modalniOkno.style.display = 'none';
+    }
+    function dalsi() {
+        index++;
+        if (index >= obrazky.length) {
+            index = 0;
+        }
+        aktualniObrazek = obrazky[index];
+        let zvetsenyObrazek = document.getElementById('zvetsenyObrazek');
+        zvetsenyObrazek.src = aktualniObrazek.src;
+    }
+    function predchozi() {
+        index--;
+        if (index < 0) {
+            index = obrazky.length - 1;
+        }
+        aktualniObrazek = obrazky[index];
+        let zvetsenyObrazek = document.getElementById('zvetsenyObrazek');
+        zvetsenyObrazek.src = aktualniObrazek.src;
+    }
+    function najdiIndex(obrazek) {
+        for (let i = 0; i < obrazky.length; i++) {
+            if (obrazky[i] === obrazek) {
+                return i;
+            }
+        }
+    }
+    document.addEventListener('keydown', function (event) {
+        if (event.key === "Escape") {
+            zavri();
+        }
+    });
+</script>

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "jquery": "^3.6.4",
+    "vanilla-cookieconsent": "^2.8.9"
+  }
+}

@@ -1,0 +1,207 @@
+﻿@page
+@model MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.WriteBlogModel
+@{
+}
+<!-- to-do udělat, že summernote budu mít již stažený-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+<div class="col-md-12">
+	<h2><span id="blogName">Jméno blogů</span></h2>
+	<button id="editSettingsBtn" class="btn btn-primary">Publikovat</button>
+	<div id="summernote"></div>
+	<input type="text" class="form-control" id="blogNameInput" style="display: none;" />
+</div>
+
+
+<style>
+	/* to-do udělat to, že mi to najde div, který je mimo tuhle část stránky*/
+	#settingsTable {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.8);
+		z-index: 999; 
+		display: none; 
+	}
+
+	#settingsForm {
+		padding: 20px;
+	}
+</style>
+
+
+<div id="settingsTable">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<form id="settingsForm" method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<!--to-do udělej sychronizovaný napsání jméno blogu, následně pak zobrazení do settingsTable-->
+						<label for="Name" class="text-white">Jméno blogu:</label>
+						<input name="Name" id="hiddenName"/>
+					</div>
+					<div class="form-group">
+						<!--to-do udělej sychronizovaný napsání jméno blogu, následně pak zobrazení do settingsTable-->
+						<label for="Slug" class="text-white">Url blogu:</label>
+						<input name="Slug" type="text" class="form-control" required/>
+					</div>
+					<div class="form-group">
+						<label for="Title" class="text-white">Titulek:</label>
+						<input type="text" class="form-control" name="Title" required/>
+					</div>
+					<div class="form-group">
+						<label for="Description" class="text-white">Popis:</label>
+						<input type="text" class="form-control" name="Description" required/>
+					</div>
+					<div class="form-group">
+						<label for="Author" class="text-white">Autor:</label>
+						<input type="text" class="form-control" name="Author" required/>
+					</div>
+					<div class="form-group">
+						<label for="Keywords" class="text-white">Klíčová slova:</label>
+						<input type="text" class="form-control" name="Keywords" required/>
+					</div>
+					<div class="form-group">
+						<label for="file" class="text-white">Obrázek:</label>
+						<input type="file" class="form-control-file" name="File" id="file" required/>
+						<div id="image-preview"></div>
+					</div>
+					<div class="form-group">
+						<label for="BlogCategoryId" class="text-white">Kategorie blogů:</label>
+						<select class="form-control" name="BlogCategoryId">
+							@foreach (var category in Model.BlogCategory)
+							{
+								<option value=@category.Id>@category.Name</option>
+							}
+						</select>
+					</div>
+					<input type="hidden" name="Content" id="hiddenContent"/>
+					<button type="submit" class="btn btn-primary">Publikovat</button>
+					<button id="backBtn" class="btn btn-secondary">Zpátky</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	// Show/hide settings table on button click
+	$('#editSettingsBtn').click(function () {
+		$('#settingsTable').toggle();
+		$('#blogNameInput').hide(); // Skryje pole pro jméno
+	});
+
+	// Při kliknutí na jméno blogu zobrazí pole pro editaci jména a skryje jméno
+	$('#blogName').click(function () {
+		$('#blogName').hide();
+		$('#blogNameInput').show().val($(this).text()).focus();
+		$('#settingsTable').hide(); // Skryje nastavení
+	});
+
+	// Funkce pro uložení změn v jméně po stisknutí Enter nebo ztrátě focusu
+	$('#blogNameInput').on('blur keyup', function (e) {
+		if (e.type === 'blur' || (e.type === 'keyup' && e.keyCode === 13)) {
+			var newName = $(this).val();
+			$('#blogName').text(newName).show();
+			$(this).hide();
+		}
+	});
+
+	// Funkce pro zrušení editace jména při stisknutí Esc
+	$('#blogNameInput').on('keydown', function (e) {
+		if (e.keyCode === 27) {
+			$(this).val($('#blogName').text()).hide();
+			$('#blogName').show();
+		}
+	});
+
+	// Show/hide settings table on button click
+	$('#editSettingsBtn').click(function () {
+		$('#settingsTable').toggle();
+		$('#blogNameInput').hide(); // Skryje pole pro jméno
+	});
+
+	// Show/hide name editing field on button click
+	$('#editNameBtn').click(function () {
+		$('#blogNameInput').toggle();
+		$('#blogNameInput').val($('#summernote h2').text()); // Nastaví hodnotu pole jména podle aktuálního jména blogu
+		$('#blogNameInput').focus(); // Focus na pole pro jméno
+		$('#settingsTable').hide(); // Skryje nastavení
+	});
+
+	// Tlačítko pro vrácení zpět
+	$('#backBtn').click(function () {
+		$('#settingsTable').hide();
+		$('#blogNameInput').hide();
+	});
+
+	$('#summernote').summernote({
+		addclass: {
+			debug: false,
+			classTags: [{ title: "Button", value: "btn btn-success" }, "jumbotron", "lead", "img-rounded", "img-circle", "img-responsive", "btn", "btn btn-success", "btn btn-danger", "text-muted", "text-primary", "text-warning", "text-danger", "text-success", "table-bordered", "table-responsive", "alert", "alert alert-success", "alert alert-info", "alert alert-warning", "alert alert-danger", "visible-sm", "hidden-xs", "hidden-md", "hidden-lg", "hidden-print"]
+		},
+		placeholder: 'Ahoj, jsem Hot boy',
+		tabsize: 2,
+		height: 120,
+		toolbar: [
+			['style', ['style', 'addclass', 'clear']],
+			['fontstyle', ['bold', 'italic', 'ul', 'ol', 'link', 'paragraph']],
+			['color', ['color']],
+			['para', ['ul', 'ol', 'paragraph']],
+			['table', ['table']],
+			['insert', ['link', 'picture', 'video']],
+			['view', ['fullscreen', 'codeview', 'help']]
+		]
+	});
+	// Show/hide settings table on button click
+	$('#editSettingsBtn').click(function () {
+		$('#settingsTable').toggle();
+	});
+
+	// Při odeslání formuláře
+	$('form').on('submit', function (e) {
+		var htmlContent = $('.note-editable').html();
+		var blogName = $('#blogName').text(); // Získáme jméno blogu
+
+		console.log(htmlContent);
+		console.log(blogName);
+		if (htmlContent.trim() === '' || htmlContent.trim() === '<p><br></p>') {
+			alert('Editor je prázdný! Prosím, vložte nějaký obsah.');
+			e.preventDefault(); // Zastaví odesílání formuláře
+			return false;
+		}
+
+		// Nastavíme hodnoty skrytých polí
+		$('#hiddenContent').val(htmlContent);
+		$('#hiddenName').val(blogName);
+	});
+	// Funkce, která zobrazí náhled obrázku
+	function showImagePreview(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+
+			reader.onload = function (e) {
+				// Vytvoříme element img pro zobrazení náhledu
+				var img = document.createElement('img');
+				img.src = e.target.result;
+
+				// Přidáme img do divu pro náhled
+				var previewDiv = document.getElementById('image-preview');
+				previewDiv.innerHTML = ''; // Vyčistíme předchozí náhledy
+				previewDiv.appendChild(img);
+			}
+
+			reader.readAsDataURL(input.files[0]); // Načteme nahraný soubor
+		}
+	}
+
+	// Při změně hodnoty v poli pro nahraný soubor zavoláme funkci showImagePreview
+	document.getElementById('file').addEventListener('change', function () {
+		showImagePreview(this);
+	});
+</script>

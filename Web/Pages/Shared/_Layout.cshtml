@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Osobní stránka Jana Sebastiána Kostlána</title>
+    <link rel="stylesheet" href="~/css/fast-style.css" asp-append-version="true" />
+    <meta name="description" content=@ViewData["Description"]>
+    <meta name="author" content=@ViewData["Author"]>
+    <meta name="keywords" content=@ViewData["Keywords"]>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/apple-icons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/apple-icons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-icons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/apple-icons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-icons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/apple-icons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/apple-icons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x52" href="/images/apple-icons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-icons/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/svg+xml" href="/images/bigger_k_better.svg">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff4f4f">
+    <meta name="msapplication-TileColor" content="#9f00a7">
+    <meta name="theme-color" content="#230042">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.kostlanovec.cz/">
+    <meta property="og:title" content="Osobní stránka Jana Sebastiána Kostlána">
+    <meta property="og:description" content="Osobní stránka Jana Sebastiána Kostlána. Tvůrce, programátor webů a desktopových aplikací.">
+    <meta property="og:image" content="https://www.kostlanovec.cz/images/socialprofilephoto.png">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.kostlanovec.cz/">
+    <meta property="twitter:title" content="Osobní stránka Jana Sebastiána Kostlána">
+    <meta property="twitter:description" content="Osobní stránka Jana Sebastiána Kostlána. Tvůrce, programátor webů a desktopových aplikací.">
+    <meta property="twitter:image" content="https://www.kostlanovec.cz/images/socialprofilephoto.png">
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SFNW32KZW0" ></script>
+    <script type="text/plain" data-cookiecategory="analytics">
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SFNW32KZW0');
+    </script>
+
+</head>
+<body>
+<nav class="nav fadeInDown visible">
+	<a title="Hlavní stránka" class="nav__a" href="/">
+		<img src="/images/bigger_k_better.svg" alt="logo Jana Sebastiána Kostlána" class="img__icon">
+	</a>
+	<a title="Stránka o mně" class="nav_a" href="/omne">O mně</a>
+	<a title="Stránka moje projekty" class="nav_a" href="/projekty">Projekty</a>
+	<a title="Blog" class="nav_a" href="/blog">Blog</a>
+	<a title="Galerie" class="nav_a" href="/galerie">Galerie</a>
+</nav>
+
+@RenderBody()
+
+<footer class="footer__indexpage fadeIn">
+	<p class="margin__right">© 2023 | Jan Sebastián Kostlán</p>
+	<p><a class="red" href="/zasadycookies.html">Zásady cookies</a></p>
+	<p><a class="red" href="/gdpr.html">GDPR</a></p>
+</footer>
+
+    <script>
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                $('.fadeIn, .fadeInUp, .fadeInDown, .fadeInRight, .fadeInLeft').each(function () {
+                    let position = $(this).offset().top;
+                    let topPosition = $(window).scrollTop() + $(window).height();
+                    if (position < topPosition) {
+                        $(this).addClass('visible');
+                    }
+                });
+            });
+        });
+    </script>
+    <link rel="stylesheet" href="/lib/vanilla-cookieconsent/src/cookieconsent.css" media="print" onload="this.media='all'">
+    <script defer src="/lib/vanilla-cookieconsent/src/cookieconsent.js" onload="this.media='all'"></script>
+    <script defer src="Scripts/cookieconsent-init.js" onload="this.media='all'"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

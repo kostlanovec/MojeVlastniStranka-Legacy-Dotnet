@@ -1,0 +1,22 @@
+﻿@page "{code:int}"
+@model MojeVlastniStrankaFinal.Web.Pages.StatusCodeModel
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="robots" content="noindex, nofollow">
+	<title>@Model.Code - Chyba</title>
+</head>
+<body>
+@if (Model.Code == 404)
+{
+	<h1>404 - Stránka nenalezena</h1>
+	<p>Omlouváme se, ale požadovaná stránka nebyla nalezena.</p>
+}
+else
+{
+	<h1>@Model.Code - Chyba</h1>
+	<p>Omlouváme se, ale došlo k chybě při zpracování vašeho požadavku.</p>
+}
+</body>
+</html>

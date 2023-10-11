@@ -1,0 +1,36 @@
+﻿@page
+@{
+	ViewData["Title"] = "Tabulka Kontaktních formulářů";
+}
+@model MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.TableContentFormModelPage
+
+<h2>Vykreslení tabulky</h2>
+ 
+<table class="table">
+	<thead>
+	<tr>
+		<th>Jméno</th>
+		<th>Příjmení</th>
+		<th>Email</th>
+		<th>Telefonní číslo</th>
+		<th>Zpráva</th>
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var form in Model.ViewModel)
+	{
+		<tr>
+			<td>@form.FirstName</td>
+			<td>@form.LastName</td>
+			<td><a href="mailto:@form.Email">@form.Email</a></td>
+			<td><a href="tel:@form.PhoneNumber">@form.PhoneNumber</a></td>
+			<td>@form.Message</td>
+		</tr>
+	}
+
+	</tbody>
+</table> 
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}

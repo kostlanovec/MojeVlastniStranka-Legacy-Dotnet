@@ -1,0 +1,102 @@
+﻿@page 
+@model MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.EditBlogPostModel
+@{
+}
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<form method="post" enctype="multipart/form-data">
+
+	<label for="Name"></label>
+	<input type="text" name="Name" value="@Model.BlogPost.Name" required />
+
+	<label for="Title">Title:</label>
+	<input type="text" name="Title" value="@Model.BlogPost.Title" required />
+
+	<label for="Description">Description:</label>
+	<input type="text" name="Description" value="@Model.BlogPost.Description" required />
+
+	<label for="Author">Author:</label>
+	<input type="text" name="Author" required value="@Model.BlogPost.Author" />
+
+	<label for="Keywords">Keywords:</label>
+	<input type="text" name="Keywords" required value="@Model.BlogPost.Keywords" />
+    
+	<label for="file">Blog Image:</label>
+	<input type="file" id="file" name="Image" />
+
+	<label for="BlogCategoryId">Selected Theme:</label>
+	<select name="BlogCategoryId">
+		@foreach (var category in Model.BlogCategory)
+		{
+			<option value=@category.Id>@category.Name</option>
+		}
+	</select>
+
+	<!-- Skrytý textarea pro obsah z Summernote -->
+	<textarea name="Content" id="hiddenContent" style="display:none;"></textarea>
+
+	<div id="summernote">@Html.Raw(Model.BlogPost.Content)</div>
+
+	<button type="submit">Submit</button>
+</form>
+
+<div id="image-preview"></div>
+
+<script>
+    // Funkce, která zobrazí náhled obrázku
+    function showImagePreview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                // Vytvoříme element img pro zobrazení náhledu
+                var img = document.createElement('img');
+                img.src = e.target.result;
+
+                // Přidáme img do divu pro náhled
+                var previewDiv = document.getElementById('image-preview');
+                previewDiv.innerHTML = ''; // Vyčistíme předchozí náhledy
+                previewDiv.appendChild(img);
+            }
+
+            reader.readAsDataURL(input.files[0]); // Načteme nahraný soubor
+        }
+    }
+
+    // Při změně hodnoty v poli pro nahraný soubor zavoláme funkci showImagePreview
+    document.getElementById('file').addEventListener('change', function () {
+        showImagePreview(this);
+    });
+</script>
+
+<script>
+    $('#summernote').summernote({
+        placeholder: 'Hello stand alone ui',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+    });
+</script>
+<script>
+    $('form').on('submit', function (e) {
+        var htmlContent = $('.note-editable').html();
+
+        if (htmlContent.trim() === '' || htmlContent.trim() === '<p><br></p>') {
+            alert('Editor je prázdný! Prosím, vložte nějaký obsah.');
+            e.preventDefault();  // Zastaví odesílání formuláře
+            return false;
+        }
+
+        $('#hiddenContent').val(htmlContent);
+    });
+</script>
