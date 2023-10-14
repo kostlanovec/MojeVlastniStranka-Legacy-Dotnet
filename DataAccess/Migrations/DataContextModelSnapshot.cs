@@ -70,6 +70,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -107,6 +110,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                             Author = "Pepek Námořník",
                             BlogCategoryId = 1,
                             Content = "<h1>Ahoj</h1>",
+                            Date = new DateTime(2023, 10, 14, 20, 26, 50, 700, DateTimeKind.Local).AddTicks(740),
                             Description = "moje klbasa",
                             ImagePath = "blogimages/boxing.jpg",
                             Keywords = "rohlík, klobása",
@@ -120,6 +124,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                             Author = "Chleba s marmeládou",
                             BlogCategoryId = 2,
                             Content = "<h1>Projekt</h1>",
+                            Date = new DateTime(2023, 10, 14, 20, 26, 50, 700, DateTimeKind.Local).AddTicks(793),
                             Description = "moje klbasa",
                             ImagePath = "blogimages/boxing.jpg",
                             Keywords = "Jsi slizký had, nemám tě rád",
@@ -131,11 +136,14 @@ namespace MojeVlastniStranka.DataAccess.Migrations
 
             modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.ContactForm", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .IsRequired()

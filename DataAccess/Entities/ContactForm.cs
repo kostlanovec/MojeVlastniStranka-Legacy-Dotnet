@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.InteropServices.JavaScript;
 
 namespace MojeVlastniStranka.DataAccess.Entities
 {
@@ -14,7 +15,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		/// Klíč.
 		/// </summary>
-		public int Id
+		public int? Id
 		{
 			get;
 			set;
@@ -70,26 +71,37 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			set;
 		}
 
-        /// <summary>
-        ///  Vytváří instanci <see cref="ContactForm"/> Vhodný pro uložení do databáze.
-        /// </summary>
-//#if DEBUG
-//		public static ContactForm Create(int id,string firstName, string lastName, string email, int phoneNumber, string feedBack)
-//		{
-//			var contactForm = new ContactForm()
-//			{
-//				Id = id,
-//				FirstName = firstName,
-//				LastName = lastName,
-//				Email = email,
-//				PhoneNumber = phoneNumber,
-//				FeedBack = feedBack
-//			};
+		/// <summary>
+		/// Vrací nebo nastavuje čas.
+		/// </summary>
+		public DateTime Date
+		{
+			get;
+			set;
+		}
 
-//			return contactForm;
-//        }
-//#else
-        public static ContactForm Create(string firstName, string lastName, string email, int phoneNumber, string feedBack)
+		/// <summary>
+		///  Vytváří instanci <see cref="ContactForm"/> Vhodný pro uložení do databáze.
+		/// </summary>
+#if DEBUG
+		public static ContactForm Create(int id, string firstName, string lastName, string email, int phoneNumber, string feedBack, DateTime date)
+		{
+			var contactForm = new ContactForm()
+			{
+				Id = id,
+				FirstName = firstName,
+				LastName = lastName,
+				Email = email,
+				PhoneNumber = phoneNumber,
+				FeedBack = feedBack,
+				Date = date
+			};
+
+			return contactForm;
+		}
+
+#else
+		public static ContactForm Create(string firstName, string lastName, string email, int phoneNumber, string feedBack, DateTime date)
         {
             var contactForm = new ContactForm()
             {
@@ -97,11 +109,12 @@ namespace MojeVlastniStranka.DataAccess.Entities
                 LastName = lastName,
                 Email = email,
                 PhoneNumber = phoneNumber,
-                FeedBack = feedBack
+                FeedBack = feedBack,
+				Date = date
             };
 
             return contactForm;
         }
-//#endif
+#endif
 	}
 }

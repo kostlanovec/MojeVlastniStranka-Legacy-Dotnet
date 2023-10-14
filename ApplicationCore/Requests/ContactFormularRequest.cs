@@ -51,6 +51,12 @@ namespace MojeVlastniStranka.ApplicationCore.Requests
             set;
         }
 
+        public DateTime date
+        {
+	        get;
+	        set;
+        }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (FirstName == null)

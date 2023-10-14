@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.InteropServices.JavaScript;
 
 namespace MojeVlastniStranka.DataAccess.Entities
 {
@@ -107,7 +108,17 @@ namespace MojeVlastniStranka.DataAccess.Entities
             get;
             set;
         }
-        public static BlogPost Create(string descriptions, string content, string title, string author, string keywords, int BlogCategoryId, string name, string imagePath, string slug)
+
+        /// <summary>
+        /// Vrací nebo nastavuje čas blogu.
+        /// </summary>
+		public DateTime Date
+		{
+			get;
+			set;
+		}
+
+        public static BlogPost Create(string descriptions, string content, string title, string author, string keywords, int BlogCategoryId, string name, string imagePath, string slug, DateTime date)
         {
             var blogCategory = new BlogPost()
             {
@@ -119,13 +130,14 @@ namespace MojeVlastniStranka.DataAccess.Entities
                 BlogCategoryId = BlogCategoryId,
                 Name = name,
                 ImagePath = imagePath,
-                Slug = slug
+                Slug = slug,
+                Date = date
             };
 
             return blogCategory;
         }
 #if DEBUG
-        public static BlogPost Create(int id, string descriptions, string content, string title, string author, string keywords, int BlogCategoryId, string name, string imagePath, string slug)
+        public static BlogPost Create(int id, string descriptions, string content, string title, string author, string keywords, int BlogCategoryId, string name, string imagePath, string slug, DateTime date)
         {
             var blogCategory = new BlogPost()
             {
@@ -138,7 +150,8 @@ namespace MojeVlastniStranka.DataAccess.Entities
                 BlogCategoryId = BlogCategoryId,
                 Name = name,
                 ImagePath = imagePath,
-                Slug = slug
+                Slug = slug, 
+                Date = date
             };
 
             return blogCategory;

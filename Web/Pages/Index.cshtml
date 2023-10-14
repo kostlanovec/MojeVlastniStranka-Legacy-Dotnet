@@ -1,5 +1,5 @@
 ﻿@page
-
+@model MojeVlastniStranka.Web.Pages.IndexModel
 @{
 	ViewData["Title"] = "Hlavní strana";
 	ViewData["Description"] = "Osobní stránka Jana Sebastiána Kostlána. Tvůrce, webdesigner, programátor a marketing maestro skrz SEO.";
@@ -58,24 +58,15 @@
 		<p class="bigger__p red">Blogové příspěvky</p>
 		<p class="p__bottom__margin">Doporučené mnou napsané články na stránce</p>
 		<div class="div__blog__contributions">
-			<article class="article__blog animation__scale img">
-				<a href="/i">
-					<img src="/images/blogimages/unityphoto.png" alt="unity photo" class="img__border__radius">
-					<p class="text__for__img">Unity a vývoj her</p>
-				</a>
-			</article>
-			<article class="article__blog animation__scale">
-				<a href="/blogprispevky/16-uzitecnych-nastroju-pro-seo-a-web-development.html">
-					<img src="images/blogimages/thumbnail16nastroju/thumbnai16nastroju-pocitac.jpg" alt="blog na 16 nástrojů pro seo a web development" class="img__border__radius">
-					<p class="text__for__img">16 nástrojů pro SEO a web dev</p>
-				</a>
-			</article>
-			<article class="article__blog animation__scale">
-				<a href="/blogprispevky/optimalizacestranekproseo.html">
-					<img src="images/blogimages/seocomputer.jpg" alt="Počítač s grafem" class="img__border__radius">
-					<p class="text__for__img">Optimalizace stránek pro SEO</p>
-				</a>
-			</article>
+			@for (var i = 0; i < Model.Posts.Count && i < 3; i++)
+			{
+				<article class="article__blog @(i == 0 ? "animation__scale img" : "animation__scale")">
+					<a href="/blog/@Model.Posts[i].Slug">
+						<img src="@Model.Posts[i].FilePath" alt="@Model.Posts[i].Name" class="img__border__radius">
+						<p class="text__for__img">@Model.Posts[i].Name</p>
+					</a>
+				</article>
+			}
 		</div>
 	</section>
 	@Html.Partial("Shared/_contactform")

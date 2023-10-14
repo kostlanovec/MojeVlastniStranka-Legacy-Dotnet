@@ -105,6 +105,11 @@ namespace MojeVlastniStranka.ApplicationCore.Requests
 			set;
 		}
 
+		public DateTime date
+		{
+			get;
+			set;
+		}
 		public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
 		{
 			// to-do validace, zda se jedna o html

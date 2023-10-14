@@ -21,12 +21,13 @@ namespace MojeVlastniStranka.ApplicationCore.Services
         public async Task AddContactForm(ContactFormularRequest contactFormularRequest)
         {
             var contactFormular = ContactForm.Create(
-                //1,
-                contactFormularRequest.FirstName,
+				1,
+				contactFormularRequest.FirstName,
                 contactFormularRequest.LastName,
                 contactFormularRequest.Email,
                 contactFormularRequest.PhoneNumber,
-                contactFormularRequest.Message
+                contactFormularRequest.Message,
+				contactFormularRequest.date = DateTime.Now
             );
 
             context.ContactForms.Add(contactFormular);
@@ -88,7 +89,8 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		        blogPostRequest.BlogCategoryId,
                 blogPostRequest.Name,
 				imagePath,
-				blogPostRequest.Slug
+				blogPostRequest.Slug,
+				blogPostRequest.date = DateTime.Now
 			);
             
             context.BlogPosts.Add( blogPost );
@@ -148,6 +150,22 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
 				await context.SaveChangesAsync();
 			}
+		}
+
+		public async Task<List<BlogPostSummary>> GetThreePost()
+		{
+			return await context.BlogPosts
+				.OrderBy(bp => bp.Id)
+				.Take(3)
+				.Select(bp => new BlogPostSummary
+				{
+					Id = bp.Id,
+					Name = bp.Name,
+					Description = bp.Description,
+					FilePath = bp.ImagePath,
+					Slug = bp.Slug,
+				})
+				.ToListAsync();
 		}
 	}
 }

@@ -37,6 +37,12 @@ namespace MojeVlastniStranka.ApplicationCore.Services
             return result;
         }
 
+		public async Task<List<BlogPostSummary>> GetThreePost()
+		{
+			var result = await dataManagementService.GetThreePost();
+			return result;
+		}
+
         public async Task<EditBlogPostDto> GetBlogPostById(int id)
         {
             return await dataManagementService.GetBlogPostById(id);
