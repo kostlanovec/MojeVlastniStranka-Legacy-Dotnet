@@ -64,7 +64,6 @@ namespace Admin
 
 			// Add services to the container.
 			builder.Services.AddRazorPages();
-            builder.Services.AddControllers();
             builder.Services.AddControllersWithViews();
 			var app = builder.Build();
 

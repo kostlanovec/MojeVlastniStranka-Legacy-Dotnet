@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.ApplicationCore.Requests;
@@ -30,7 +24,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
         {
             // to-do čtení z konfigurace, hard programming
 	        var uploadsDirectory = "C:\\app\\MojeVlastniStrankaFinanali\\Web\\wwwroot\\images\\galeriefotky";
-			var filePath = Path.Combine(uploadsDirectory, addImageRequest.File.FileName);
+			var filePath = Path.Combine(uploadsDirectory, addImageRequest.FileUpload.FileName);
 
             if (!Directory.Exists(uploadsDirectory))
             {
@@ -39,10 +33,10 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
             using (var fileStream = new FileStream(filePath, FileMode.Create))
             {
-                await addImageRequest.File.CopyToAsync(fileStream);
+                await addImageRequest.FileUpload.CopyToAsync(fileStream);
             }
 
-            var image = Image.Create(Path.Combine( addImageRequest.File.FileName), addImageRequest.Description);
+            var image = Image.Create(Path.Combine( addImageRequest.FileUpload.FileName), addImageRequest.Description);
             this.context.Images.Add(image);
             await this.context.SaveChangesAsync();
         }

@@ -90,7 +90,7 @@ namespace MojeVlastniStranka.ApplicationCore.Requests
 		/// <summary>
 		/// Url cesta k obrázku.
 		/// </summary>
-		public IFormFile File
+		public IFormFile FileUpload
 		{
 			get;
 			set;

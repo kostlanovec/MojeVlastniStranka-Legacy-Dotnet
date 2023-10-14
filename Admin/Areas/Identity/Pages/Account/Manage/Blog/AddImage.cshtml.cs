@@ -40,7 +40,7 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog
         [HttpPost]
         public async Task<IActionResult> OnPost()
         {
-            if (Input.File == null || Input.File.Length == 0)
+            if (Input.FileUpload == null || Input.FileUpload.Length == 0)
             {
                 ModelState.AddModelError(string.Empty, "Neplatný soubor.");
                 return Page();

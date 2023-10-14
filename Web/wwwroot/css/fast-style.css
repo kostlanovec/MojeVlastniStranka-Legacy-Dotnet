@@ -42,7 +42,7 @@ textarea, input, select, option{
 textarea{
     resize: vertical;
 }
-body{
+.body{
     background-color: var(--fialova);
     padding: 0;
     margin: 0;

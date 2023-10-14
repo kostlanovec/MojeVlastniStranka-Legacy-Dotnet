@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MojeVlastniStranka.ApplicationCore.Dto
+﻿namespace MojeVlastniStranka.ApplicationCore.Dto
 {
 	public class BlogPostSummary
 	{
 		public int? Id
-		{
-			get;
-			set;
-		}
-		public string Slug
 		{
 			get;
 			set;
@@ -31,6 +20,12 @@ namespace MojeVlastniStranka.ApplicationCore.Dto
 		}
 
 		public string FilePath
+		{
+			get;
+			set;
+		}
+
+		public string Slug
 		{
 			get;
 			set;

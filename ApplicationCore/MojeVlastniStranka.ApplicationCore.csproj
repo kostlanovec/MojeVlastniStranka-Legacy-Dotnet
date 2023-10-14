@@ -24,6 +24,10 @@
     </Compile>
   </ItemGroup>
 
+ <ItemGroup>
+     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+ </ItemGroup>
+ 
   <ItemGroup>
     <EmbeddedResource Update="Localization\Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>

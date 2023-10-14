@@ -49,7 +49,7 @@ namespace MojeVlastniStrankaFinanali
             {
                 endpoints.MapControllerRoute(
                     name: "blog",
-                    pattern: "blog/{Name}",
+                    pattern: "blog/{Slug}",
                     defaults: new { controller = "ShowBlogPost", action = "Blog" });
             });
 
@@ -57,7 +57,7 @@ namespace MojeVlastniStrankaFinanali
             {
 	            endpoints.MapControllerRoute(
 		            name: "projekty",
-		            pattern: "projekty/{Name}",
+		            pattern: "projekty/{Slug}",
 		            defaults: new { controller = "Projekty", action = "ShowBlog" });
             });
 			app.Run();

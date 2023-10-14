@@ -1,14 +1,7 @@
 ﻿using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.ApplicationCore.Requests;
-using MojeVlastniStranka.DataAccess.Entities;
 using MojeVlastniStranka.DataAccess;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 
 namespace MojeVlastniStranka.ApplicationCore.Services
 {
@@ -44,7 +37,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
             return result;
         }
 
-        public async Task<BlogPost> GetBlogPostById(int id)
+        public async Task<EditBlogPostDto> GetBlogPostById(int id)
         {
             return await dataManagementService.GetBlogPostById(id);
         }
@@ -61,7 +54,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
             return blogCategoryList;
         }
-
         public async Task<FormProcessingResult> UpdateBlogPost(EditBlogPostRequest editBlogPostRequest)
         {
 	        var result = new FormProcessingResult();

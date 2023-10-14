@@ -17,10 +17,10 @@ namespace MojeVlastniStranka.Web.Controllers
 
 			if (blogPost == null)
 			{
-				return NotFound(); // Vrátí 404, pokud blogový příspěvek není nalezen
+				return NotFound();
 			}
 
-			return View("Muchomurka", blogPost); // Výchozí název pohledu "Index"
+			return View("Muchomurka", blogPost);
 		}
 	}
 

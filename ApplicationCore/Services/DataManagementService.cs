@@ -52,7 +52,8 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 					Id = bp.Id,
 					Name = bp.Name,
 					Description = bp.Description,
-					FilePath = bp.ImagePath
+					FilePath = bp.ImagePath,
+					Slug = bp.Slug,
 				})
 				.ToListAsync();
 		}
@@ -77,7 +78,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
 		public async Task AddBlogPost(BlogPostRequest blogPostRequest)
         {
-	        var imagePath = await UploadImageAsync(blogPostRequest.File); // Získání cesty k uloženému obrázku
+	        var imagePath = await UploadImageAsync(blogPostRequest.FileUpload); // Získání cesty k uloženému obrázku
 			var blogPost = BlogPost.Create(
 		        blogPostRequest.Description,
 		        blogPostRequest.Content,
@@ -94,14 +95,37 @@ namespace MojeVlastniStranka.ApplicationCore.Services
             await context.SaveChangesAsync();
         }
 
-		public async Task<BlogPost> GetBlogPostById(int id)
+		public async Task<EditBlogPostDto> GetBlogPostById(int id)
 		{
 			var existingBlogPost = await context.BlogPosts
 				.SingleOrDefaultAsync(bp => bp.Id == id);
 
+			if (existingBlogPost == null)
+			{
+				// Handle the case where the blog post with the specified id was not found.
+				return null;
+			}
 
-			return existingBlogPost;
+			var editBlogPostDto = new EditBlogPostDto
+			{
+				Id = existingBlogPost.Id,
+				Name = existingBlogPost.Name,
+				Slug = existingBlogPost.Slug,
+				Description = existingBlogPost.Description,
+				Content = existingBlogPost.Content,
+				Title = existingBlogPost.Title,
+				Author = existingBlogPost.Author,
+				Keywords = existingBlogPost.Keywords,
+				BlogCategoryId = existingBlogPost.BlogCategoryId,
+				blogCategory = existingBlogPost.blogCategory
+			};
+
+			// Use the HandleFileUpload method to set the FileUpload property
+			editBlogPostDto.HandleFileUpload(existingBlogPost.ImagePath);
+
+			return editBlogPostDto;
 		}
+
 
 		public async Task UpdateBlogPost(EditBlogPostRequest editBlogPostRequest)
 		{

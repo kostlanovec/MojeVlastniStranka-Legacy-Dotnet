@@ -14,10 +14,10 @@
     @for (var i = 0; i < Model.Posts.Count; i++)
     {
       <article class="article__blog @(i == 0 ? "first__item" : i == 1 ? "second__item" : i == 2 ? "third__item" : "item")">
-        <a href="/blog/@Model.Posts[i].Slug">
-          <img src="images/@Model.Posts[i].FilePath" alt="@Model.Posts[i].Description">
-          <p class="text__for__img">@Model.Posts[i].Name</p>
-        </a>
+	      <a href="/blog/@Model.Posts[i].Slug">
+		      <img src="@Model.Posts[i].FilePath">
+		      <p class="text__for__img">@Model.Posts[i].Name</p>
+	      </a>
       </article>
     }
   </section>

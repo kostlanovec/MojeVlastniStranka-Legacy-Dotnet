@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
 using MojeVlastniStranka.DataAccess.Entities;
 using System.ComponentModel.DataAnnotations;
 
@@ -7,26 +6,6 @@ namespace MojeVlastniStranka.ApplicationCore.Dto
 {
 	public class EditBlogPostDto
 	{
-		public EditBlogPostDto(int id, string name, string slug, string description, string content, string title, string au
-		, string keywords, int blogCategoryId, string filePath)
-		{
-			Id = id;
-			Name = name;
-			Slug = slug;
-			Description = description;
-			Content = content;
-			Title = title;
-			Keywords = keywords;
-			BlogCategoryId = blogCategoryId;
-
-			// Check if the file exists at the specified filePath
-			// Check if the file exists at the specified filePath
-			if (File.Exists(filePath))
-			{
-				// Create a new IFormFile from the file at the filePath
-				FileUpload = new FormFile(new FileStream(filePath, FileMode.Open), 0, new FileInfo(filePath).Length, Path.GetFileName(filePath), Path.GetFileName(filePath));
-			}
-		}
 		/// <summary>
 		/// Vrací nebo nastavuje Id blog příspěvku.
 		/// </summary>
@@ -69,7 +48,7 @@ namespace MojeVlastniStranka.ApplicationCore.Dto
 		/// </summary>
 		public string Content
 		{
-			get;
+			get; 
 			set;
 		}
 
@@ -105,7 +84,7 @@ namespace MojeVlastniStranka.ApplicationCore.Dto
 		/// </summary>
 		public int BlogCategoryId
 		{
-			get;
+			get; 
 			set;
 		}
 
@@ -126,5 +105,25 @@ namespace MojeVlastniStranka.ApplicationCore.Dto
 			get;
 			set;
 		}
-	}
+
+        // You can add a method to handle the file upload if needed
+        public void HandleFileUpload(string filePath)
+        {
+            // Construct the full file path by combining the provided filePath with the base directory path
+            string fullFilePath = Path.Combine("C:\\app\\MojeVlastniStrankaFinanali\\Web\\wwwroot", filePath);
+
+            if (File.Exists(fullFilePath))
+            {
+                //to-do optimalizace
+
+
+                using (FileStream fileStream = new FileStream(fullFilePath, FileMode.Open))
+                {
+                    FileUpload = new FormFile(fileStream, 0, new FileInfo(fullFilePath).Length, Path.GetFileName(fullFilePath), Path.GetFileName(fullFilePath));
+                }
+
+            }
+        }
+
+    }
 }

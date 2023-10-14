@@ -11,7 +11,7 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage
     {
 		private readonly BlogService blogService;
 
-		public BlogPost BlogPost
+		public EditBlogPostDto EditBlogPostDto
 		{
 			get;
 			set;
@@ -45,7 +45,7 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage
 
 	    public async Task OnGetAsync()
 	    {
-			BlogPost = await blogService.GetBlogPostById(Id);
+			EditBlogPostDto = await blogService.GetBlogPostById(Id);
             BlogCategory = await blogService.GetAllCategoriesTask();
         }
 
@@ -62,7 +62,7 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage
 				Content = Input.Content,
 				Keywords = Input.Keywords,
 				BlogCategoryId = Input.BlogCategoryId,
-				File = Input.File
+				FileUpload = Input.FileUpload
 			};
 
 			blogService.UpdateBlogPost(blogPost);

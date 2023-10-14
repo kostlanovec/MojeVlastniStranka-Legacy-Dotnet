@@ -3,16 +3,31 @@
 @{
 }
 <!-- to-do udělat, že summernote budu mít již stažený-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<link href="lib/"
+
+@* <script src="/lib/summernote/summernote-image-attributes.js"></script> *@
+<link rel="stylesheet" href="~/css/fast-style.css" asp-append-version="true" />
 
 <div class="col-md-12">
-	<h2><span id="blogName">Jméno blogů</span></h2>
-	<button id="editSettingsBtn" class="btn btn-primary">Publikovat</button>
+	@if (!string.IsNullOrEmpty(Model.SuccessMessage))
+	{
+		<div class="alert alert-success">
+			@Model.SuccessMessage
+		</div>
+	}
+
+	else if (!ViewData.ModelState.IsValid)
+	{
+		<div class="alert alert-danger">
+			@Html.ValidationSummary(false, "", new { @class = "text-danger" })
+		</div>
+	}
+
 	<div id="summernote"></div>
-	<input type="text" class="form-control" id="blogNameInput" style="display: none;" />
+	<button id="editSettingsBtn" class="btn btn-primary">Publikovat</button>
 </div>
 
 
@@ -32,8 +47,15 @@
 	#settingsForm {
 		padding: 20px;
 	}
-</style>
 
+	label {
+		color: red !important;
+	}
+
+	#note-imageAttributes-1 .note-form-label {
+		color: red;
+	}
+</style>
 
 <div id="settingsTable">
 	<div class="container">
@@ -41,12 +63,10 @@
 			<div class="col-md-4">
 				<form id="settingsForm" method="post" enctype="multipart/form-data">
 					<div class="form-group">
-						<!--to-do udělej sychronizovaný napsání jméno blogu, následně pak zobrazení do settingsTable-->
 						<label for="Name" class="text-white">Jméno blogu:</label>
-						<input name="Name" id="hiddenName"/>
+						<input name="Name" type="text" class="form-control" required />
 					</div>
 					<div class="form-group">
-						<!--to-do udělej sychronizovaný napsání jméno blogu, následně pak zobrazení do settingsTable-->
 						<label for="Slug" class="text-white">Url blogu:</label>
 						<input name="Slug" type="text" class="form-control" required/>
 					</div>
@@ -64,11 +84,11 @@
 					</div>
 					<div class="form-group">
 						<label for="Keywords" class="text-white">Klíčová slova:</label>
-						<input type="text" class="form-control" name="Keywords" required/>
+						<input type="text" class="form-control" name="Keywords" id="keywords" required/>
 					</div>
 					<div class="form-group">
 						<label for="file" class="text-white">Obrázek:</label>
-						<input type="file" class="form-control-file" name="File" id="file" required/>
+						<input type="file" class="form-control-file" name="FileUpload" id="file" required/>
 						<div id="image-preview"></div>
 					</div>
 					<div class="form-group">
@@ -80,7 +100,7 @@
 							}
 						</select>
 					</div>
-					<input type="hidden" name="Content" id="hiddenContent"/>
+					<input type="hidden" name="Content" id="hiddenContent" />
 					<button type="submit" class="btn btn-primary">Publikovat</button>
 					<button id="backBtn" class="btn btn-secondary">Zpátky</button>
 				</form>
@@ -96,67 +116,57 @@
 		$('#blogNameInput').hide(); // Skryje pole pro jméno
 	});
 
-	// Při kliknutí na jméno blogu zobrazí pole pro editaci jména a skryje jméno
-	$('#blogName').click(function () {
-		$('#blogName').hide();
-		$('#blogNameInput').show().val($(this).text()).focus();
-		$('#settingsTable').hide(); // Skryje nastavení
-	});
-
-	// Funkce pro uložení změn v jméně po stisknutí Enter nebo ztrátě focusu
-	$('#blogNameInput').on('blur keyup', function (e) {
-		if (e.type === 'blur' || (e.type === 'keyup' && e.keyCode === 13)) {
-			var newName = $(this).val();
-			$('#blogName').text(newName).show();
-			$(this).hide();
-		}
-	});
-
-	// Funkce pro zrušení editace jména při stisknutí Esc
-	$('#blogNameInput').on('keydown', function (e) {
-		if (e.keyCode === 27) {
-			$(this).val($('#blogName').text()).hide();
-			$('#blogName').show();
-		}
-	});
-
 	// Show/hide settings table on button click
 	$('#editSettingsBtn').click(function () {
 		$('#settingsTable').toggle();
 		$('#blogNameInput').hide(); // Skryje pole pro jméno
 	});
-
-	// Show/hide name editing field on button click
-	$('#editNameBtn').click(function () {
-		$('#blogNameInput').toggle();
-		$('#blogNameInput').val($('#summernote h2').text()); // Nastaví hodnotu pole jména podle aktuálního jména blogu
-		$('#blogNameInput').focus(); // Focus na pole pro jméno
-		$('#settingsTable').hide(); // Skryje nastavení
-	});
-
 	// Tlačítko pro vrácení zpět
 	$('#backBtn').click(function () {
 		$('#settingsTable').hide();
 		$('#blogNameInput').hide();
 	});
 
+	var defaultContent = '<header class="header__other"><h1 class="header__h1 fadeInLeft visible">Optimalizace stránek pro SEO</h1><p class="header__p fadeInLeft visible">Základní informace k SEO.Nejdůležitější praktiky pro nalezení vaších stránek na internetu</p></header><main class="main fadeInUp visible"><h2 class="h2__div__article red">SEO optimalizace</h2><p>Jako majitel stránky chcete, aby vaše stránka byla snadno vyhledavatelná, ale bohužel v dnešní době máme velmi vysokou konkurenci na internetu. Tím nám může pomoci efektivní SEO neboli search engine optimization. Do češtiny optimalizace pro vyhledávače. V tomhle článku si rozebereme praktiky, které nám pomohou to zlepšit.</p></main>';
+
 	$('#summernote').summernote({
+		// popover: {
+		// 	image: [
+		// 		['custom', ['imageAttributes']],
+		// 		['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
+		// 		['float', ['floatLeft', 'floatRight', 'floatNone']],
+		// 		['remove', ['removeMedia']]
+		// 	],
+		// },
+		// lang: 'en-US', // Change to your chosen language
+		// imageAttributes: {
+		// 	icon: '<i class="note-icon-pencil"/>',
+		// 	removeEmpty: false, // true = remove attributes | false = leave empty if present
+		// 	disableUpload: false // true = don't display Upload Options | Display Upload Options
+		// },
 		addclass: {
 			debug: false,
-			classTags: [{ title: "Button", value: "btn btn-success" }, "jumbotron", "lead", "img-rounded", "img-circle", "img-responsive", "btn", "btn btn-success", "btn btn-danger", "text-muted", "text-primary", "text-warning", "text-danger", "text-success", "table-bordered", "table-responsive", "alert", "alert alert-success", "alert alert-info", "alert alert-warning", "alert alert-danger", "visible-sm", "hidden-xs", "hidden-md", "hidden-lg", "hidden-print"]
+			classTags: [{ title: "Button", "value": "btn btn-success" }, "body", "red", "h2__div__article", "header__h1", "fadeInLeft", "header__other", "header__p", "main" ]
 		},
-		placeholder: 'Ahoj, jsem Hot boy',
-		tabsize: 2,
-		height: 120,
+		focus: true,
+		height: 300,
 		toolbar: [
+			['structure', ['structurePlugin']],
+			['img', ['picture']],
 			['style', ['style', 'addclass', 'clear']],
 			['fontstyle', ['bold', 'italic', 'ul', 'ol', 'link', 'paragraph']],
-			['color', ['color']],
-			['para', ['ul', 'ol', 'paragraph']],
-			['table', ['table']],
-			['insert', ['link', 'picture', 'video']],
-			['view', ['fullscreen', 'codeview', 'help']]
-		]
+			['fontstyleextra', ['strikethrough', 'underline', 'hr', 'color', 'superscript', 'subscript']],
+			['extra', ['video', 'table', 'height']],
+			['misc', ['undo', 'redo', 'codeview', 'help']],
+			['insert', ['media', 'link', 'hr']],
+			['fontname', ['fontname']],
+			['fullscreen', ['fullscreen']]
+		],
+		callbacks: {
+			onInit: function () {
+				$('#summernote').summernote('code', defaultContent);
+			}
+		}
 	});
 	// Show/hide settings table on button click
 	$('#editSettingsBtn').click(function () {
@@ -164,44 +174,54 @@
 	});
 
 	// Při odeslání formuláře
-	$('form').on('submit', function (e) {
-		var htmlContent = $('.note-editable').html();
-		var blogName = $('#blogName').text(); // Získáme jméno blogu
-
+	$('form').on('submit', function () {
+		var htmlContent = $('.note-editable').html().trim();
 		console.log(htmlContent);
-		console.log(blogName);
-		if (htmlContent.trim() === '' || htmlContent.trim() === '<p><br></p>') {
-			alert('Editor je prázdný! Prosím, vložte nějaký obsah.');
-			e.preventDefault(); // Zastaví odesílání formuláře
-			return false;
+
+		$('#hiddenContent').val(htmlContent);
+		console.log($('#hiddenContent').val());
+		if (htmlContent === '' || htmlContent === '<p><br></p>') {
+			return null;
 		}
 
-		// Nastavíme hodnoty skrytých polí
-		$('#hiddenContent').val(htmlContent);
-		$('#hiddenName').val(blogName);
+		if (confirm('Je to takto finální?')) {
+			return null;
+		} else {
+			e.returnValue = '';
+		}
 	});
-	// Funkce, která zobrazí náhled obrázku
+
+
 	function showImagePreview(input) {
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
 
 			reader.onload = function (e) {
-				// Vytvoříme element img pro zobrazení náhledu
 				var img = document.createElement('img');
 				img.src = e.target.result;
 
-				// Přidáme img do divu pro náhled
 				var previewDiv = document.getElementById('image-preview');
-				previewDiv.innerHTML = ''; // Vyčistíme předchozí náhledy
+				previewDiv.innerHTML = '';
 				previewDiv.appendChild(img);
 			}
 
-			reader.readAsDataURL(input.files[0]); // Načteme nahraný soubor
+			reader.readAsDataURL(input.files[0]);
 		}
 	}
 
-	// Při změně hodnoty v poli pro nahraný soubor zavoláme funkci showImagePreview
 	document.getElementById('file').addEventListener('change', function () {
 		showImagePreview(this);
 	});
+
+		$(document).ready(function () {
+			$(window).scroll(function () {
+				$('.fadeIn, .fadeInUp, .fadeInDown, .fadeInRight, .fadeInLeft').each(function () {
+					let position = $(this).offset().top;
+					let topPosition = $(window).scrollTop() + $(window).height();
+					if (position < topPosition) {
+						$(this).addClass('visible');
+					}
+				});
+			});
+		});
 </script>
