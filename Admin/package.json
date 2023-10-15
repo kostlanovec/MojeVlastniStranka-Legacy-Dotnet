@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "hello": "^0.3.2",
+    "typo-js": "^1.2.3"
+  }
+}

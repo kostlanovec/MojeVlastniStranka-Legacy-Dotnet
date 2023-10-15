@@ -3,12 +3,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.ApplicationCore.Requests;
 using MojeVlastniStranka.ApplicationCore.Services;
-using MojeVlastniStranka.DataAccess.Entities;
+using MojeVlastniStranka.DataAccess;
 
 namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage
 {
     public class EditBlogPostModel : PageModel
     {
+	    private readonly DataContext context;
 		private readonly BlogService blogService;
 
 		public EditBlogPostDto EditBlogPostDto
@@ -43,7 +44,12 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage
             set;
         }
 
-	    public async Task OnGetAsync()
+        public string SuccessMessage
+        {
+	        get;
+	        set;
+        }
+		public async Task OnGetAsync()
 	    {
 			EditBlogPostDto = await blogService.GetBlogPostById(Id);
             BlogCategory = await blogService.GetAllCategoriesTask();
@@ -52,22 +58,25 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage
 		[HttpPost]
 		public async Task<IActionResult> OnPost()
 		{
+			BlogCategory = await blogService.GetAllCategoriesTask();
+			var processingResult = await blogService.UpdateBlogPost(Input);
 
-			EditBlogPostRequest blogPost = new EditBlogPostRequest()
+			if (processingResult.IsSuccess)
 			{
-				Name = Input.Name,
-				Title = Input.Title,
-				Author = Input.Author,
-				Description = Input.Description,
-				Content = Input.Content,
-				Keywords = Input.Keywords,
-				BlogCategoryId = Input.BlogCategoryId,
-				FileUpload = Input.FileUpload
-			};
+				// Nastavte SuccessMessage, pokud je operace úspěšná
+				SuccessMessage = "Operace byla úspěšná.";
 
-			blogService.UpdateBlogPost(blogPost);
-
-			return Page();
+				// Můžete provést další akci, například přesměrování na jinou stránku
+				return Page();
+			}
+			else
+			{
+				foreach (var error in processingResult.Errors)
+				{
+					ModelState.AddModelError(string.Empty, error.ErrorMessage);
+				}
+				return Page(); // Pokud došlo k chybě, zůstaňte na téže stránce a zobrazte chybové zprávy.
+			}
 		}
 	}
 }

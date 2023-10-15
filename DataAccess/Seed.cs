@@ -29,7 +29,7 @@ namespace Reservanto.NPS.DataAccess
 
             modelBuilder.Entity<Image>().HasData(image1, image2);
 
-            var contactForm1 = ContactForm.Create(1, "kontakt", "obsah", "info@kostlanovec.cz", 987654321, "alkoholik", DateTime.Now);
+            var contactForm1 = ContactForm.Create(1, "kontakt", "obsah", "info@kostlanovec.cz", "987654321", "alkoholik", DateTime.Now);
 #endif
         }
 	}

@@ -110,7 +110,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                             Author = "Pepek Námořník",
                             BlogCategoryId = 1,
                             Content = "<h1>Ahoj</h1>",
-                            Date = new DateTime(2023, 10, 14, 20, 26, 50, 700, DateTimeKind.Local).AddTicks(740),
+                            Date = new DateTime(2023, 10, 15, 13, 33, 56, 42, DateTimeKind.Local).AddTicks(855),
                             Description = "moje klbasa",
                             ImagePath = "blogimages/boxing.jpg",
                             Keywords = "rohlík, klobása",
@@ -124,7 +124,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                             Author = "Chleba s marmeládou",
                             BlogCategoryId = 2,
                             Content = "<h1>Projekt</h1>",
-                            Date = new DateTime(2023, 10, 14, 20, 26, 50, 700, DateTimeKind.Local).AddTicks(793),
+                            Date = new DateTime(2023, 10, 15, 13, 33, 56, 42, DateTimeKind.Local).AddTicks(905),
                             Description = "moje klbasa",
                             ImagePath = "blogimages/boxing.jpg",
                             Keywords = "Jsi slizký had, nemám tě rád",
@@ -161,8 +161,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

@@ -55,7 +55,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// Vrací nebo nastavuje telefonní číslo.
 		/// </summary>
 		[Phone]
-		public int PhoneNumber
+		public string PhoneNumber
 		{
 			get;
 			set;
@@ -84,7 +84,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		///  Vytváří instanci <see cref="ContactForm"/> Vhodný pro uložení do databáze.
 		/// </summary>
 #if DEBUG
-		public static ContactForm Create(int id, string firstName, string lastName, string email, int phoneNumber, string feedBack, DateTime date)
+		public static ContactForm Create(int id, string firstName, string lastName, string email, string phoneNumber, string feedBack, DateTime date)
 		{
 			var contactForm = new ContactForm()
 			{
@@ -101,7 +101,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		}
 
 #else
-		public static ContactForm Create(string firstName, string lastName, string email, int phoneNumber, string feedBack, DateTime date)
+		public static ContactForm Create(string firstName, string lastName, string email, string phoneNumber, string feedBack, DateTime date)
         {
             var contactForm = new ContactForm()
             {

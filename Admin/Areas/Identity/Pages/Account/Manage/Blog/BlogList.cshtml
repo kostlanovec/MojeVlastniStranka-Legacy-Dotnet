@@ -2,6 +2,22 @@
 @model MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog.BlogModel
 @{
 }
+<form method="get">
+	<input type="text" placeholder="Hledat podle názvu" name="searchString" />
+	<input type="text" placeholder="Hledat podle autora" name="author" />
+	<input type="text" placeholder="Hledat podle klíčového slova" name="keyword" />
+		<label for="BlogCategoryId" class="text-white">Kategorie blogů:</label>
+		<select class="form-control" name="category">
+			<option value="">Všechny</option>
+			@foreach (var category in Model.BlogCategory)
+			{
+				<option value="@category.Id">@category.Name</option>
+			}
+		</select>
+	<input type="date" name="fromDate" />
+	<input type="date" name="toDate" />
+	<button type="submit">Filtrovat</button>
+</form>
 
 <div id="blog-post-list">
 	@foreach (var post in Model.Posts)

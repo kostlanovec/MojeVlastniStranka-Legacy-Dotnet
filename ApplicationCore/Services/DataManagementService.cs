@@ -45,6 +45,10 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 	        return await context.BlogCategories.ToListAsync();
         }
 
+        public async Task<List<BlogPost>> GetAllBlogPosts()
+        {
+	        return await context.BlogPosts.ToListAsync();
+        }
 		public async Task<List<BlogPostSummary>> GetAllBlogPostSummaries()
 		{
 			return await context.BlogPosts

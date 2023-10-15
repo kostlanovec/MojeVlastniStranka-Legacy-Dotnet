@@ -34,7 +34,7 @@ namespace MojeVlastniStranka.ApplicationCore.Dto
         /// <summary>
         /// Vrací nebo nastavuje telefonní číslo zákazníka.
         /// </summary>
-        public int PhoneNumber
+        public string PhoneNumber
         {
             get;
             set;

@@ -66,5 +66,51 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 	        await dataManagementService.UpdateBlogPost(editBlogPostRequest);
             return result;
         }
-    }
+
+		public async Task<List<BlogPostSummary>> GetFilteredBlogPosts(string searchString, string author, string keyword, int category, DateTime? fromDate, DateTime? toDate)
+		{
+			var allPosts = await dataManagementService.GetAllBlogPosts();
+			var filteredPosts = allPosts;
+
+			if (!string.IsNullOrEmpty(searchString))
+			{
+				filteredPosts = filteredPosts.Where(p => p.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase) || p.Description.Contains(searchString, StringComparison.OrdinalIgnoreCase)).ToList();
+			}
+
+			if (!string.IsNullOrEmpty(author))
+			{
+				filteredPosts = filteredPosts.Where(p => p.Author == author).ToList();
+			}
+
+			if (!string.IsNullOrEmpty(keyword))
+			{
+				filteredPosts = filteredPosts.Where(p => p.Keywords == keyword).ToList();
+			}
+
+			if (category != 0)
+			{
+				filteredPosts = filteredPosts.Where(p => p.BlogCategoryId == category).ToList();
+			}
+
+			if (fromDate.HasValue)
+			{
+				filteredPosts = filteredPosts.Where(p => p.Date >= fromDate.Value).ToList();
+			}
+
+			if (toDate.HasValue)
+			{
+				filteredPosts = filteredPosts.Where(p => p.Date <= toDate.Value).ToList();
+			}
+
+			return filteredPosts.Select(p => new BlogPostSummary
+			{
+				Id = p.Id,
+				Name = p.Name,
+				Description = p.Description,
+				FilePath = p.ImagePath,
+				Slug = p.Slug
+			}).ToList();
+		}
+
+	}
 }
