@@ -59,6 +59,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 					Description = bp.Description,
 					FilePath = bp.ImagePath,
 					Slug = bp.Slug,
+					TimePublic = bp.Date
 				})
 				.ToListAsync();
 		}
@@ -170,6 +171,21 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 					Slug = bp.Slug,
 				})
 				.ToListAsync();
+		}
+
+		public async Task<FormProcessingResult> AddBlogCategory(BlogCategoryDto categoryDto)
+		{
+			var result = new FormProcessingResult();
+
+			// Validace kategorie, zda existuje nebo ne
+			// Můžete provést další validace, jak je považujete za vhodné
+
+			var newCategory = BlogCategory.Create(null, categoryDto.Name);
+			context.BlogCategories.Add(newCategory);
+			await context.SaveChangesAsync();
+
+			result.IsSuccess = true;
+			return result;
 		}
 	}
 }

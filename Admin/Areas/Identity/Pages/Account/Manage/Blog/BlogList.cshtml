@@ -2,29 +2,50 @@
 @model MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog.BlogModel
 @{
 }
+
+@* <form method="post">
+	<label for="newCategory">Nová kategorie:</label>
+	<input type="text" name="newCategory" />
+	<button type="submit">Přidat kategorii</button>
+</form> *@
+
 <form method="get">
 	<input type="text" placeholder="Hledat podle názvu" name="searchString" />
 	<input type="text" placeholder="Hledat podle autora" name="author" />
 	<input type="text" placeholder="Hledat podle klíčového slova" name="keyword" />
-		<label for="BlogCategoryId" class="text-white">Kategorie blogů:</label>
-		<select class="form-control" name="category">
-			<option value="">Všechny</option>
-			@foreach (var category in Model.BlogCategory)
-			{
-				<option value="@category.Id">@category.Name</option>
-			}
-		</select>
+	<label for="BlogCategoryId" class="text-white">Kategorie blogů:</label>
+	<select name="category">
+		<option value="">Všechny</option>
+		@foreach (var category in Model.BlogCategory){
+			<option value="@category.Id">@category.Name</option>
+		}
+	</select>
 	<input type="date" name="fromDate" />
 	<input type="date" name="toDate" />
 	<button type="submit">Filtrovat</button>
 </form>
 
-<div id="blog-post-list">
+
+<div class="row">
 	@foreach (var post in Model.Posts)
 	{
-		<div class="blog-post-summary">
-        <h2><a asp-page="./EditBlog" asp-route-id="@post.Id">@post.Name</a></h2>
-			<p>@post.Description</p>
+		<div class="col-md-4">
+			<div class="blog-post-summary">
+				<div class="card mb-4 shadow-sm">
+					<img class="bd-placeholder-img card-img-top" src="https://localhost:7207/@post.FilePath">
+					<div class="card-body">
+						<h2 class="card-text"><a asp-page="./EditBlog" asp-route-id="@post.Id">@post.Name</a></h2>
+						<p>@post.Description</p>
+						<div class="d-flex justify-content-between align-items-center">
+							<div class="btn-group">
+								<a class="btn btn-sm btn-outline-secondary" asp-page="./EditBlog" asp-route-id="@post.Id">Edit</a>
+								<a class="btn btn-sm btn-outline-secondary" href="https://localhost:7207/blog/@post.Slug">View</a>
+							</div>
+							<small class="text-muted">@post.TimePublic</small>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	}
 </div>

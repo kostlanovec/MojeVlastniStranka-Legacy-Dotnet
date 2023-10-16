@@ -30,5 +30,11 @@
 			get;
 			set;
 		}
+
+		public DateTime TimePublic
+		{
+			get;
+			set;
+		}
 	}
 }

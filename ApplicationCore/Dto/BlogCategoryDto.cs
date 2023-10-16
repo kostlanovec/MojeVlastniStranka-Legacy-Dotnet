@@ -5,7 +5,7 @@
 		/// <summary>
 		/// Vrací nebo nastavuje Id blog kategorie.
 		/// </summary>
-		public int Id
+		public int? Id
 		{
 			get;
 			set;

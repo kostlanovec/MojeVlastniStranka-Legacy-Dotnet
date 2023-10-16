@@ -1,6 +1,7 @@
 ﻿using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.ApplicationCore.Requests;
 using MojeVlastniStranka.DataAccess;
+using MojeVlastniStranka.DataAccess.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace MojeVlastniStranka.ApplicationCore.Services
@@ -108,8 +109,15 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				Name = p.Name,
 				Description = p.Description,
 				FilePath = p.ImagePath,
-				Slug = p.Slug
+				Slug = p.Slug,
+				TimePublic = p.Date
 			}).ToList();
+		}
+
+		public async Task<FormProcessingResult> AddBlogCategory(BlogCategoryDto categoryDto)
+		{
+			var result = await dataManagementService.AddBlogCategory(categoryDto);
+			return result;
 		}
 
 	}
