@@ -30,8 +30,6 @@
 	</header>
 }
 
-
-
 <style>
 	main {
 		position: relative; /* Set position to relative */
@@ -43,12 +41,14 @@
 		<partial name="_ManageNav"/>
 		<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 			<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+				<!--to-do udělat, že se to bude generovat automaticky podle toho, na jaké jsme stránce-->
 				<h1 class="h2">Dashboard</h1>
 			</div>
 			@RenderBody()
 		</main>
 	</div>
 </div>
+
 @inject SignInManager<AdminUser> SignInManager
 @inject UserManager<AdminUser> UserManager
 

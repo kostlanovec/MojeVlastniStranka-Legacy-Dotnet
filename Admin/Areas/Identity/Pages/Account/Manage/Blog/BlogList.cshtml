@@ -13,9 +13,8 @@
 	<input type="text" placeholder="Hledat podle názvu" name="searchString" />
 	<input type="text" placeholder="Hledat podle autora" name="author" />
 	<input type="text" placeholder="Hledat podle klíčového slova" name="keyword" />
-	<label for="BlogCategoryId" class="text-white">Kategorie blogů:</label>
-	<select name="category">
-		<option value="">Všechny</option>
+	<select>
+		<option value="">Všechny kategorie</option>
 		@foreach (var category in Model.BlogCategory){
 			<option value="@category.Id">@category.Name</option>
 		}

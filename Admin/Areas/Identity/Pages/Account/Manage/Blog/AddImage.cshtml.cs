@@ -37,28 +37,30 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog
             Images = await imageService.GetImagesAsync();
         }
 
-        [HttpPost]
         public async Task<IActionResult> OnPost()
         {
-            if (Input.FileUpload == null || Input.FileUpload.Length == 0)
+			if (Input.FileUpload == null || Input.FileUpload.Length == 0)
             {
                 ModelState.AddModelError(string.Empty, "Neplatný soubor.");
                 return Page();
             }
 
             await imageService.UploadImageAsync(Input);
+            Images = await imageService.GetImagesAsync();
             return Page();
         }
 
         public async Task<IActionResult> OnPostDeleteAsync(int imageId)
         {
-            await imageService.DeleteImageAsync(imageId);
+	        Images = await imageService.GetImagesAsync();
+			await imageService.DeleteImageAsync(imageId);
             return Page();
         }
 
         public async Task<IActionResult> OnPostUpdateDescriptionAsync(int imageId, string newDescription)
         {
-            await imageService.UpdateImageDescriptionAsync(imageId, newDescription);
+			await imageService.UpdateImageDescriptionAsync(imageId, newDescription);
+            Images = await imageService.GetImagesAsync();
             return Page();
         }
     }

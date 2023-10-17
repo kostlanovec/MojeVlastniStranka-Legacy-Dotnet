@@ -1,34 +1,74 @@
 ﻿@page
 @model MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog.AddImageModel
 @{
+    var baseUrl = "https://localhost:7207";
 }
+
+<!-- Add a modal for confirmation -->
+<div class="modal" id="confirmDeleteModal" tabindex="2" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Potvrzení odstranění</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Opravdu chcete tento obrázek odstranit?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
+                <form method="post">
+                    <input type="hidden" name="imageId" id="imageId" value="" />
+                    <button type="submit" asp-page-handler="Delete" class="btn btn-danger">Odstranit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <form method="post" enctype="multipart/form-data">
 	<div class="form-group">
 		<label for="file">Vyberte obrázek k nahrání:</label>
-		<input type="file" id="file" name="File" required />
+		<input type="file" id="file" name="FileUpload" required />
 	</div>
 	<div class="form-group">
 		<label for="description">Popis:</label>
-		<input type="text" id="description" name="Description" required />
+		<input type="text" id="description" name="Input.Description" required />
 	</div>
 	<button type="submit" class="btn btn-primary">Nahrát obrázek</button>
 </form>
 
+
 <h2>Seznam obrázku v galerii</h2>
-@foreach (var image in Model.Images)
-{
-	<figure>
-		<img src="@Url.Content($"~/images/galeriefotky/{image.FileName}")" alt="@image.Description" />
-		<figcaption>@image.Description</figcaption>
-	</figure>
-	<form method="post">
-		<input type="hidden" name="imageId" value="@image.Id" />
-		<div class="form-group">
-			<label for="newDescription">Nový popis:</label>
-			<input type="text" id="newDescription" name="newDescription" value="@image.Description" required />
-		</div>
-		<button type="submit" asp-page-handler="UpdateDescription" class="btn btn-primary">Aktualizovat popis</button>
-		<button type="submit" asp-page-handler="Delete" class="btn btn-danger">Odstranit obrázek</button>
-	</form>
-}
+<div class="row">
+    @foreach (var image in Model.Images)
+    {
+        <div class="col-md-4">
+            <img class="card-img-top" src="@Url.Content($"{baseUrl}/images/galeriefotky/{image.FileName}")" alt="@image.Description" />
+            <div class="card-body">
+                <h5 class="card-title">@image.Description</h5>
+                <form method="post">
+                    <input type="hidden" name="imageId" value="@image.Id" />
+                    <div class="form-group">
+                        <label for="newDescription">Nový popis:</label>
+                        <input type="text" id="newDescription" name="newDescription" value="@image.Description" required />
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Obrázek akce">
+                        <button type="submit" asp-page-handler="UpdateDescription" class="btn btn-primary">Aktualizovat popis</button>
+                        <button type="button" class="btn btn-danger" onclick="setDeleteImageId('@image.Id')" data-toggle="modal" data-target="#confirmDeleteModal" data-backdrop="false">Odstranit obrázek</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    // Set the imageId in the hidden input field before showing the delete confirmation modal
+    function setDeleteImageId(imageId) {
+        document.getElementById('imageId').value = imageId;
+    }
+</script>
+

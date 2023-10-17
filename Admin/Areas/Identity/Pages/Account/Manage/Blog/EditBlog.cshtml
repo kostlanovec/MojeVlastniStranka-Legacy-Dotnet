@@ -1,4 +1,5 @@
 ﻿@page
+@using Microsoft.DotNet.Scaffolding.Shared.Project
 @model MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.EditBlogPostModel
 @{
 }
@@ -81,7 +82,7 @@
 						<label for="file" class="text-white">Obrázek:</label>
 						<input type="file" class="form-control-file" name="File" id="file" required />
 						<div id="image-preview">
-
+							<img src="https://localhost:7207/@Model.EditBlogPostDto.FileUpload" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -106,7 +107,6 @@
 <script>
 	// Show/hide settings table on button click
 	$('#editSettingsBtn').click(function () {
-		console.log("ahoj");
 		$('#settingsTable').toggle();
 	});
 
@@ -124,13 +124,12 @@
 		// 		['remove', ['removeMedia']]
 		// 	],
 		// },
-		// lang: 'en-US', // Change to your chosen language
 		// imageAttributes: {
 		// 	icon: '<i class="note-icon-pencil"/>',
 		// 	removeEmpty: false, // true = remove attributes | false = leave empty if present
 		// 	disableUpload: false // true = don't display Upload Options | Display Upload Options
 		// },
-		lang: 'cs-CZ', // Nastavte svůj jazyk
+		lang: 'cs-CZ',
 		spellCheck: true,
 		addclass: {
 			debug: false,
@@ -173,11 +172,10 @@
 	});
 	// Při odeslání formuláře
 	$('form').on('submit', function () {
+		
 		var htmlContent = $('.note-editable').html().trim();
-		console.log(htmlContent);
 
 		$('#hiddenContent').val(htmlContent);
-		console.log($('#hiddenContent').val());
 		if (htmlContent === '' || htmlContent === '<p><br></p>') {
 			return null;
 		}

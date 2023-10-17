@@ -91,7 +91,7 @@ namespace MojeVlastniStranka.ApplicationCore.Dto
 		/// <summary>
 		/// Obrázek, z kterého pak získáme url cestu.
 		/// </summary>
-		public IFormFile? FileUpload
+		public string FileUpload
 		{
 			get;
 			set;
@@ -105,25 +105,6 @@ namespace MojeVlastniStranka.ApplicationCore.Dto
 			get;
 			set;
 		}
-
-        // You can add a method to handle the file upload if needed
-        public void HandleFileUpload(string filePath)
-        {
-            // Construct the full file path by combining the provided filePath with the base directory path
-            string fullFilePath = Path.Combine("C:\\app\\MojeVlastniStrankaFinanali\\Web\\wwwroot", filePath);
-
-            if (File.Exists(fullFilePath))
-            {
-                //to-do optimalizace
-
-
-                using (FileStream fileStream = new FileStream(fullFilePath, FileMode.Open))
-                {
-                    FileUpload = new FormFile(fileStream, 0, new FileInfo(fullFilePath).Length, Path.GetFileName(fullFilePath), Path.GetFileName(fullFilePath));
-                }
-
-            }
-        }
 
     }
 }

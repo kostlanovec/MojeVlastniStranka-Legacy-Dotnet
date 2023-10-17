@@ -124,11 +124,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				Author = existingBlogPost.Author,
 				Keywords = existingBlogPost.Keywords,
 				BlogCategoryId = existingBlogPost.BlogCategoryId,
-				blogCategory = existingBlogPost.blogCategory
+				blogCategory = existingBlogPost.blogCategory,
+				FileUpload = existingBlogPost.ImagePath
 			};
-
-			// Use the HandleFileUpload method to set the FileUpload property
-			editBlogPostDto.HandleFileUpload(existingBlogPost.ImagePath);
 
 			return editBlogPostDto;
 		}
