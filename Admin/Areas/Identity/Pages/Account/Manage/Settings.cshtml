@@ -1,0 +1,55 @@
+﻿@page
+@model MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.SettingsModel
+@{
+}
+<div class="row">
+    <div class="col-md-6">
+        <form id="profile-form" method="post" asp-route-handler="UpdateProfile" novalidate="novalidate">
+            <div class="form-floating mb-3">
+                <input class="form-control" placeholder="Please choose your username." disabled="" type="text" id="Username" name="Username" value="info@kostlanovec.cz">
+                <label class="form-label" for="Username">Username</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input class="form-control" placeholder="Please enter your phone number." type="tel" data-val="true" data-val-phone="The Phone number field is not a valid phone number." id="Input_PhoneNumber" name="Input.PhoneNumber" value="987654321">
+                <label class="form-label" for="Input_PhoneNumber">Phone number</label>
+                <span class="text-danger field-validation-valid" data-valmsg-for="Input.PhoneNumber" data-valmsg-replace="true"></span>
+            </div>
+            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
+            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8MD7S_WlW5VDg2uKZnB_mPRZ1sZ-XwW9pR3y9b7If-CGwzP2SSa7aGN51KtqXCLztJPILR6aGxF-fYpCkmq47eqe_CAcptXULoWnAjeJe9jJ9bkkPFTaW7eemxKX-8ujNARN-HP9DhoMBQl3Zbcoccfj3_IHQoS0ReUZr76IeOAugI3zBV1IwVfGTSkZVFVpkg">
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <p>Your account contains personal data that you have given us. This page allows you to download or delete that data.</p>
+        <p><strong>Deleting this data will permanently remove your account, and this cannot be recovered.</strong></p>
+        <form id="download-data" method="post" asp-page-handler="Download">
+            <button class="btn btn-primary" type="submit">Download</button>
+        </form>
+        <p>
+            <form id="delete" method="post" asp-page-handler="Delete">
+                <button class="btn btn-danger">Delete</button>
+            </form>
+        </p>
+    </div>
+</div>
+
+<div class="alert alert-warning" role="alert">
+    <p><strong>Deleting this data will permanently remove your account, and this cannot be recovered.</strong></p>
+</div>
+
+<div>
+    <form id="delete-user" method="post" asp-page-handler="DeleteUser">
+        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+        @if (Model.RequirePassword)
+        {
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Please enter your password." />
+                <label asp-for="Input.Password" class="form-label"></label>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+        }
+        <button class="w-100 btn btn-lg btn-danger" type="submit">Delete data and close my account</button>
+    </form>
+</div>

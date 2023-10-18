@@ -42,7 +42,8 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				LastName = cf.LastName,
 				Email = cf.Email,
 				PhoneNumber = cf.PhoneNumber,
-				Message = cf.FeedBack
+				Message = cf.FeedBack,
+				SendTime = cf.Date
 
 			}).ToList();
 

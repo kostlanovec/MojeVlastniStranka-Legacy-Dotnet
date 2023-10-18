@@ -48,5 +48,14 @@ namespace MojeVlastniStranka.ApplicationCore.Dto
             get;
             set;
         }
+
+        /// <summary>
+        /// Vrací nebo nastavuje, kdy byl formulář odeslaný.
+        /// </summary>
+        public DateTime SendTime
+        {
+            get;
+            set;
+        }
     }
 }

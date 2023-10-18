@@ -3,64 +3,42 @@
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
-
-<style>
-	.additional-nav-link  {
-		padding-left: 2em;
-	}
-
-	.additional-windows{
-		flex-direction: column;
-	}
-
-</style>
-
-	<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-		<div class="position-sticky pt-3">
-			<ul class="nav flex-column">
-				<li class="nav-item">
-					<div class="nav-link toggle active" data-toggle="user-settings"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>Základní nastavení</div>
-						<div class="additional-windows" data-toggle-id="user-settings" style="display:none;">
-							<a class="additional-nav-link" id="profile" asp-page=":/./Index">Profile</a>
-							<a class="additional-nav-link" id="email" asp-page="././Email">Email</a>
-							<a class="additional-nav-link" id="change-password" asp-page="././ChangePassword">Password</a>
-							<a class="additional-nav-link" id="two-factor" asp-page="/./TwoFactorAuthentication">Two-factor authentication</a>
-							<a class="additional-nav-link" id="personal-data" asp-page="./PersonalData">Personal data</a>
-					</div>
-				</li>
-				<li class="nav-item">
-					<div class="nav-link toggle active" data-toggle="blog-section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>Blog</div>
-						<div class="additional-windows" data-toggle-id="blog-section" style="display:none;">
-							<a class="additional-nav-link" id="blogList" asp-page="././Blog/BlogList"> Seznam blogů</a>
-							<a class="additional-nav-link" id="Writeblog" asp-page="././Blog/WriteBlog">Napsat blog</a>
-							<a class="additional-nav-link" id="addImage" asp-page="././Blog/AddImage">Přidání obrázku do galerie</a>
-						</div>
-				</li>
-				<li class="nav-item">
-					<div class="nav-link toggle active" data-toggle="contact-section">						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart" aria-hidden="true"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg> Kontakt</div>
-					<div class="additional-windows" data-toggle-id="contact-section" style="display:none;">
-						<a class="additional-nav-link" id="blogList" asp-page="././Contact/TableContentForm">Kontakní formulář</a>
-					</div>
-				</li>
-			</ul>
+<!-- Sidebar Start -->
+<div class="sidebar pe-4 pb-3">
+	<nav class="navbar bg-secondary navbar-dark">
+		<a asp-page="././Index" class="navbar-brand mx-4 mb-3">
+			<h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>Kostlanovec</h3>
+		</a>
+		<div class="d-flex align-items-center ms-4 mb-4">
+			<div class="position-relative">
+				<img class="rounded-circle" src="/img/ikonka.png" alt="" style="width: 40px; height: 40px;">
+				<div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+			</div>
+			<div class="ms-3">
+				<h6 class="mb-0">Jan Sebastián Kostlán</h6>
+				<span>Admin</span>
+			</div>
+		</div>
+		<div class="navbar-nav w-100">
+			<!--to-do vyřešit, proč je dashoboard červený i když ho nepoužívám-->
+			<a asp-page="././Index" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+			<div class="nav-item dropdown">
+				<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Blog</a>
+				<div class="dropdown-menu bg-transparent border-0">
+					<a asp-page="././blog/BlogList" class="dropdown-item">Příspěvky</a>
+					<a asp-page="././blog/WriteBlog" class="dropdown-item">Napsat blog</a>
+					<a asp-page="././blog/AddImage" class="dropdown-item">Přidání obrázku</a>
+				</div>
+			</div>
+			<div class="nav-item dropdown">
+				<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Marketing</a>
+				<div class="dropdown-menu bg-transparent border-0">
+					<a asp-page="././contact/TableContentForm" class="dropdown-item">Kontaktní formulář</a>
+				</div>
+			</div>
 		</div>
 	</nav>
-<script>
-	document.querySelectorAll('.toggle').forEach(function (toggle) {
-		toggle.addEventListener('click', function () {
-			var toggleId = toggle.getAttribute('data-toggle');
-			document.querySelectorAll('.additional-windows[data-toggle-id="' + toggleId + '"]').forEach(function (window) {
-				if (window.style.display === 'none') {
-					window.style.display = 'flex';
-				} else {
-					window.style.display = 'none';
-				}
-			});
-		});
-	});
-</script> 
+</div>
 
 
+<!-- Sidebar End -->

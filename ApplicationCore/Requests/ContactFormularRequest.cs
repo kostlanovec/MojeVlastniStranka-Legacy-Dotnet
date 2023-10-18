@@ -51,12 +51,18 @@ namespace MojeVlastniStranka.ApplicationCore.Requests
             set;
         }
 
-        public DateTime date
+        /// <summary>
+        /// Vrací nebo nastavuje datum, kdy byl formulář odeslaný
+        /// </summary>
+        public DateTime DateSend
         {
 	        get;
 	        set;
         }
 
+        /// <summary>
+        /// Validace
+        /// </summary>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (FirstName == null)

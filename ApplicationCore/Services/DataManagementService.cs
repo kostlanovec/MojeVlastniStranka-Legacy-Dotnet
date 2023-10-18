@@ -21,13 +21,13 @@ namespace MojeVlastniStranka.ApplicationCore.Services
         public async Task AddContactForm(ContactFormularRequest contactFormularRequest)
         {
             var contactFormular = ContactForm.Create(
-				1,
+				699,
 				contactFormularRequest.FirstName,
                 contactFormularRequest.LastName,
                 contactFormularRequest.Email,
                 contactFormularRequest.PhoneNumber,
                 contactFormularRequest.Message,
-				contactFormularRequest.date = DateTime.Now
+				contactFormularRequest.DateSend = DateTime.Now
             );
 
             context.ContactForms.Add(contactFormular);
@@ -95,7 +95,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
                 blogPostRequest.Name,
 				imagePath,
 				blogPostRequest.Slug,
-				blogPostRequest.date = DateTime.Now
+				blogPostRequest.DatePublic = DateTime.Now
 			);
             
             context.BlogPosts.Add( blogPost );

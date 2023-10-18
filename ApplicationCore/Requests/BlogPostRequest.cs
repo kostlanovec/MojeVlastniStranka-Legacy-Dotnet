@@ -99,17 +99,24 @@ namespace MojeVlastniStranka.ApplicationCore.Requests
 		/// <summary>
 		/// Vrací nebo nastavuje navigační vlastnost k blog kategorii.
 		/// </summary>
-		public BlogCategory blogCategory
+		public BlogCategory BlogCategory
 		{
 			get;
 			set;
 		}
 
-		public DateTime date
+		/// <summary>
+		/// Vrací nebo nastavuje datum publikování blog přístěvku
+		/// </summary>
+		public DateTime DatePublic
 		{
 			get;
 			set;
 		}
+
+		/// <summary>
+		/// Validace.
+		/// </summary>
 		public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
 		{
 			// to-do validace, zda se jedna o html

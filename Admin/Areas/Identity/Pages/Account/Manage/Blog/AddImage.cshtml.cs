@@ -39,6 +39,7 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog
 
         public async Task<IActionResult> OnPost()
         {
+	        Images = await imageService.GetImagesAsync();
 			if (Input.FileUpload == null || Input.FileUpload.Length == 0)
             {
                 ModelState.AddModelError(string.Empty, "Neplatný soubor.");
@@ -46,7 +47,6 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog
             }
 
             await imageService.UploadImageAsync(Input);
-            Images = await imageService.GetImagesAsync();
             return Page();
         }
 

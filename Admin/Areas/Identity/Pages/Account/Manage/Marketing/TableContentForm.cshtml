@@ -2,7 +2,7 @@
 @{
 	ViewData["Title"] = "Tabulka Kontaktních formulářů";
 }
-@model MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.TableContentFormModelPage
+@model MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Marketing.TableContentFormModelPage
 
 <h2>Vykreslení tabulky</h2>
  
@@ -14,6 +14,7 @@
 		<th>Email</th>
 		<th>Telefonní číslo</th>
 		<th>Zpráva</th>
+		<th>Datum</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -25,6 +26,7 @@
 			<td><a href="mailto:@form.Email">@form.Email</a></td>
 			<td><a href="tel:@form.PhoneNumber">@form.PhoneNumber</a></td>
 			<td>@form.Message</td>
+			<td>@form.SendTime</td>
 		</tr>
 	}
 

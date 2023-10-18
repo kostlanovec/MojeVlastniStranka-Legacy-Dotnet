@@ -8,49 +8,126 @@
         Layout = "/Areas/Identity/Pages/_Layout.cshtml";
     }
 }
-@if (SignInManager.IsSignedIn(User))
+@* @if (SignInManager.IsSignedIn(User))
 {
-	<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-		<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Kostlanovec</a>
-		<div class="d-flex justify-content-between">
-			<button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="d-flex flex-column align-items-end">
-				<div>
-					<a id="manage" class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@UserManager.GetUserName(User)!</a>
-				</div>
-				<div class="nav-item me-3">
-					<form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
-						<button id="logout" type="submit" class="px-3" href="#">Odhlásit se</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</header>
-}
 
-<style>
-	main {
-		position: relative; /* Set position to relative */
-		z-index: 90; /* Set a higher z-index value */
-	}
-</style>
-<div class="container-fluid">
-	<div class="row">
-		<partial name="_ManageNav"/>
-		<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-			<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-				<!--to-do udělat, že se to bude generovat automaticky podle toho, na jaké jsme stránce-->
-				<h1 class="h2">Dashboard</h1>
+} *@
+
+<div class="container-fluid position-relative d-flex p-0">
+	<partial name="_ManageNav"/>
+	<div class="content">
+		<nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
+			<a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+				<h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
+			</a>
+			<a href="#" class="sidebar-toggler flex-shrink-0">
+				<i class="fa fa-bars"></i>
+			</a>
+			<form class="d-none d-md-flex ms-4">
+				<input class="form-control bg-dark border-0" type="search" placeholder="Vyhledat">
+			</form>
+			<div class="navbar-nav align-items-center ms-auto">
+				<div class="nav-item dropdown">
+					<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+						<i class="fa fa-envelope me-lg-2"></i>
+						<span class="d-none d-lg-inline-flex">Zprávy</span>
+					</a>
+					<div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+						<a href="#" class="dropdown-item">
+							<div class="d-flex align-items-center">
+								<img class="rounded-circle" src="/img/ikonka.png" alt="" style="width: 40px; height: 40px;">
+								<div class="ms-2">
+									<h6 class="fw-normal mb-0">Kostlán poslal zprávu</h6>
+									<small>15 minutes ago</small>
+								</div>
+							</div>
+						</a>
+						<hr class="dropdown-divider">
+						<a href="#" class="dropdown-item">
+							<div class="d-flex align-items-center">
+								<img class="rounded-circle" src="/img/ikonka.png" alt="" style="width: 40px; height: 40px;">
+								<div class="ms-2">
+									<h6 class="fw-normal mb-0">Kostlán poslal zprávu</h6>
+									<small>15 minutes ago</small>
+								</div>
+							</div>
+						</a>
+						<hr class="dropdown-divider">
+						<a href="#" class="dropdown-item">
+							<div class="d-flex align-items-center">
+								<img class="rounded-circle" src="/img/ikonka.png" alt="" style="width: 40px; height: 40px;">
+								<div class="ms-2">
+									<h6 class="fw-normal mb-0">Kostlán poslal zprávu</h6>
+									<small>15 minutes ago</small>
+								</div>
+							</div>
+						</a>
+						<hr class="dropdown-divider">
+						<a href="#" class="dropdown-item text-center">Vidět všechny zprávy</a>
+					</div>
+				</div>
+				<div class="nav-item dropdown">
+					<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+						<i class="fa fa-bell me-lg-2"></i>
+						<span class="d-none d-lg-inline-flex">Oznámení</span>
+					</a>
+					<div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+						<a href="#" class="dropdown-item">
+							<h6 class="fw-normal mb-0">Profile updated</h6>
+							<small>15 minutes ago</small>
+						</a>
+						<hr class="dropdown-divider">
+						<a href="#" class="dropdown-item">
+							<h6 class="fw-normal mb-0">New user added</h6>
+							<small>15 minutes ago</small>
+						</a>
+						<hr class="dropdown-divider">
+						<a href="#" class="dropdown-item">
+							<h6 class="fw-normal mb-0">Password changed</h6>
+							<small>15 minutes ago</small>
+						</a>
+						<hr class="dropdown-divider">
+						<a href="#" class="dropdown-item text-center">Vidět všechny zprávy</a>
+					</div>
+				</div>
+				<div class="nav-item dropdown">
+					<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+						<img class="rounded-circle me-lg-2" src="/img/ikonka.png" alt="" style="width: 40px; height: 40px;">
+						<span class="d-none d-lg-inline-flex">Jan Sebastián Kostlán</span>
+					</a>
+					<div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+	@* 					<a href="#" class="dropdown-item">My Profile</a> *@
+						<a asp-page="./Settings" class="dropdown-item">Nastavení profilu</a>
+						<a asp-area="Identity" asp-page="/Account/Logout"  asp-route-returnUrl="@Url.Page("/Index", new { area = "" })"  class="dropdown-item">Odhlásit se</a>
+					</div>
+				</div>
 			</div>
-			@RenderBody()
-		</main>
+		</nav>
+		@RenderBody()
 	</div>
 </div>
 
 @inject SignInManager<AdminUser> SignInManager
 @inject UserManager<AdminUser> UserManager
+
+	
+<<script>
+	 document.addEventListener("DOMContentLoaded", function () {
+		 var sidebarToggler = document.querySelector('.sidebar-toggler');
+		 var sidebar = document.querySelector('.sidebar');
+		 var contentDiv = document.querySelector('.content');
+
+		 sidebarToggler.addEventListener('click', function () {
+			 if (sidebar.classList.contains('open')) {
+				 sidebar.classList.remove('open');
+				 contentDiv.classList.remove('open');
+			 } else {
+				 sidebar.classList.add('open');
+				 contentDiv.classList.add('open');
+			 }
+		 });
+	 });
+</script>
 
 
 @section Scripts {

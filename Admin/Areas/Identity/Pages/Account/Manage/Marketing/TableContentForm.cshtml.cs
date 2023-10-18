@@ -2,13 +2,17 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.ApplicationCore.Services;
 
-namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage
+namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Marketing
 {
 	public class TableContentFormModelPage : PageModel
 	{
 		private readonly ContactFormService contactFormService;
 
-		public List<ContactFormularDto> ViewModel { get; set; }
+        public List<ContactFormularDto> ViewModel
+        {
+            get;
+            set;
+        }
 
 		public TableContentFormModelPage(ContactFormService contactFormService)
 		{

@@ -22,7 +22,12 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog
 	        set;
         }
 
-		public List<BlogPostSummary> Posts { get; set; }
+        public List<BlogPostSummary> Posts
+        {
+            get;
+            set;
+        }
+
         public BlogModel(DataContext context, BlogService blogService)
         {
             this.context = context;

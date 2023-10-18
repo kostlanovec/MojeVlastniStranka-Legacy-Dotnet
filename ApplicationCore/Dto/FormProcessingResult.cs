@@ -1,16 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MojeVlastniStranka.ApplicationCore.Dto
 {
 	public class FormProcessingResult
 	{
-		public bool IsSuccess { get; set; }
-		public List<ValidationResult> Errors { get; set; }
+        /// <summary>
+        /// Vrací nebo nastavuje, zda validace proběhlá úspěšně.
+        /// </summary>
+        public bool IsSuccess
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Vrací nebo nastavuje list errorů, které se vypíšou uživateli.
+        /// </summary>
+        public List<ValidationResult> Errors
+        {
+            get;
+            set;
+        }
 	}
 
 }

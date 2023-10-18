@@ -24,11 +24,11 @@ namespace MojeVlastniStranka.DataAccess.Migrations
 
             modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.BlogCategory", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -110,7 +110,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                             Author = "Pepek Námořník",
                             BlogCategoryId = 1,
                             Content = "<h1>Ahoj</h1>",
-                            Date = new DateTime(2023, 10, 15, 13, 33, 56, 42, DateTimeKind.Local).AddTicks(855),
+                            Date = new DateTime(2023, 10, 18, 6, 38, 55, 8, DateTimeKind.Local).AddTicks(3784),
                             Description = "moje klbasa",
                             ImagePath = "blogimages/boxing.jpg",
                             Keywords = "rohlík, klobása",
@@ -124,7 +124,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                             Author = "Chleba s marmeládou",
                             BlogCategoryId = 2,
                             Content = "<h1>Projekt</h1>",
-                            Date = new DateTime(2023, 10, 15, 13, 33, 56, 42, DateTimeKind.Local).AddTicks(905),
+                            Date = new DateTime(2023, 10, 18, 6, 38, 55, 8, DateTimeKind.Local).AddTicks(3865),
                             Description = "moje klbasa",
                             ImagePath = "blogimages/boxing.jpg",
                             Keywords = "Jsi slizký had, nemám tě rád",
@@ -168,6 +168,28 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ContactForm");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 10,
+                            Date = new DateTime(2023, 10, 18, 6, 38, 55, 8, DateTimeKind.Local).AddTicks(4216),
+                            Email = "jan.novak@example.com",
+                            FeedBack = "Dobrý den, rád bych se zeptal na možnost spolupráce.",
+                            FirstName = "Jan",
+                            LastName = "Novák",
+                            PhoneNumber = "123456789"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Date = new DateTime(2023, 10, 18, 6, 38, 55, 8, DateTimeKind.Local).AddTicks(4230),
+                            Email = "info@kostlanovec.cz",
+                            FeedBack = "Dobrý, mám zájem o nové stránky vámi vyrobené. Těším se, až mi ukážete, co všechno dokážete.",
+                            FirstName = "Jan",
+                            LastName = "Kostlán",
+                            PhoneNumber = "987654321"
+                        });
                 });
 
             modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.Image", b =>
