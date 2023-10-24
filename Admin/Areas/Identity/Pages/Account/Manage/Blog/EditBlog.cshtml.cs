@@ -49,6 +49,7 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage
 	        get;
 	        set;
         }
+
 		public async Task OnGetAsync()
 	    {
 			EditBlogPostDto = await blogService.GetBlogPostById(Id);
@@ -61,12 +62,11 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage
 			BlogCategory = await blogService.GetAllCategoriesTask();
 			var processingResult = await blogService.UpdateBlogPost(Input);
 
+			/* Zpráva má jít z applicationcore*/
 			if (processingResult.IsSuccess)
 			{
-				// Nastavte SuccessMessage, pokud je operace úspěšná
 				SuccessMessage = "Operace byla úspěšná.";
 
-				// Můžete provést další akci, například přesměrování na jinou stránku
 				return Page();
 			}
 			else
@@ -75,7 +75,7 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage
 				{
 					ModelState.AddModelError(string.Empty, error.ErrorMessage);
 				}
-				return Page(); // Pokud došlo k chybě, zůstaňte na téže stránce a zobrazte chybové zprávy.
+				return Page();
 			}
 		}
 	}

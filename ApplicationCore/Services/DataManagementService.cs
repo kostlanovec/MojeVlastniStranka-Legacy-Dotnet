@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.ApplicationCore.Requests;
 using MojeVlastniStranka.DataAccess;
@@ -7,9 +8,9 @@ using MojeVlastniStranka.DataAccess.Entities;
 
 namespace MojeVlastniStranka.ApplicationCore.Services
 {
-    public class DataManagementService
+	public class DataManagementService
 	{
-		// Připojení k databázi.
+		// Připojení k databázi pomocí depedency injection.
 		private readonly DataContext context;
 
 		public DataManagementService(DataContext context)
@@ -17,38 +18,50 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			this.context = context;
 		}
 
-        //to-do vyřešit problém s tím, že když to mám v debug režimu, tak to po mně chce, abych tam dával růčně Id
-        public async Task AddContactForm(ContactFormularRequest contactFormularRequest)
-        {
-            var contactFormular = ContactForm.Create(
+		//to-do vyřešit problém s tím, že když to mám v debug režimu, tak to po mně chce, abych tam dával růčně Id (přežížení)
+		public async Task AddContactForm(ContactFormularRequest contactFormularRequest)
+		{
+			var contactFormular = ContactForm.Create(
 				699,
 				contactFormularRequest.FirstName,
-                contactFormularRequest.LastName,
-                contactFormularRequest.Email,
-                contactFormularRequest.PhoneNumber,
-                contactFormularRequest.Message,
+				contactFormularRequest.LastName,
+				contactFormularRequest.Email,
+				contactFormularRequest.PhoneNumber,
+				contactFormularRequest.Message,
 				contactFormularRequest.DateSend = DateTime.Now
-            );
+			);
 
-            context.ContactForms.Add(contactFormular);
-            await context.SaveChangesAsync();
-        }
+			context.ContactForms.Add(contactFormular);
+			await context.SaveChangesAsync();
+		}
 
-        // Nová metoda pro získání všech kontaktních formulářů.
-        public async Task<List<ContactForm>> GetAllContactForms()
-        {
-	        return await context.ContactForms.ToListAsync();
-        }
+		/// <summary>
+		/// Nová metoda pro získání všech kontaktních formulářů.
+		/// </summary>
+		public async Task<List<ContactForm>> GetAllContactForms()
+		{
+			return await context.ContactForms.ToListAsync();
+		}
 
-        public async Task<List<BlogCategory>> GetAllBlogCategory()
-        {
-	        return await context.BlogCategories.ToListAsync();
-        }
+		/// <summary>
+		/// Získá všechny blog kategorie.
+		/// </summary>
+		public async Task<List<BlogCategory>> GetAllBlogCategory()
+		{
+			return await context.BlogCategories.ToListAsync();
+		}
 
-        public async Task<List<BlogPost>> GetAllBlogPosts()
-        {
-	        return await context.BlogPosts.ToListAsync();
-        }
+		/// <summary>
+		/// Získá všechny blog příspěvky..
+		/// </summary>
+		public async Task<List<BlogPost>> GetAllBlogPosts()
+		{
+			return await context.BlogPosts.ToListAsync();
+		}
+
+		/// <summary>
+		/// Získá všechny popisky k blog příspěvku.
+		/// </summary>
 		public async Task<List<BlogPostSummary>> GetAllBlogPostSummaries()
 		{
 			return await context.BlogPosts
@@ -64,8 +77,12 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				.ToListAsync();
 		}
 
-		public async Task<string> UploadImageAsync(IFormFile file)
+		/// <summary>
+		/// Uloží obrázek do určeného úložiště.
+		/// </summary>
+		private async Task<string> UploadImageAsync(IFormFile file)
 		{
+			// to-do vyřešit tento otřesný hard-coding
 			var uploadsDirectory = "C:\\app\\MojeVlastniStrankaFinanali\\Web\\wwwroot\\images\\blog";
 			var filePath = Path.Combine(uploadsDirectory, file.FileName);
 
@@ -82,26 +99,33 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			return ("images/blog/" + file.FileName);
 		}
 
+
+		/// <summary>
+		/// Přidá nový blog příspěvek.
+		/// </summary>
 		public async Task AddBlogPost(BlogPostRequest blogPostRequest)
-        {
-	        var imagePath = await UploadImageAsync(blogPostRequest.FileUpload); // Získání cesty k uloženému obrázku
+		{
+			var imagePath = await UploadImageAsync(blogPostRequest.FileUpload); // Získání cesty k uloženému obrázku
 			var blogPost = BlogPost.Create(
-		        blogPostRequest.Description,
-		        blogPostRequest.Content,
-		        blogPostRequest.Title,
-		        blogPostRequest.Author,
-		        blogPostRequest.Keywords,
-		        blogPostRequest.BlogCategoryId,
-                blogPostRequest.Name,
+				blogPostRequest.Description,
+				blogPostRequest.Content,
+				blogPostRequest.Title,
+				blogPostRequest.Author,
+				blogPostRequest.Keywords,
+				blogPostRequest.BlogCategoryId,
+				blogPostRequest.Name,
 				imagePath,
 				blogPostRequest.Slug,
 				blogPostRequest.DatePublic = DateTime.Now
 			);
-            
-            context.BlogPosts.Add( blogPost );
-            await context.SaveChangesAsync();
-        }
 
+			context.BlogPosts.Add(blogPost);
+			await context.SaveChangesAsync();
+		}
+
+		/// <summary>
+		/// Získá blog příspěvek podle jeho id.
+		/// </summary>
 		public async Task<EditBlogPostDto> GetBlogPostById(int id)
 		{
 			var existingBlogPost = await context.BlogPosts
@@ -131,30 +155,50 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			return editBlogPostDto;
 		}
 
-
+		/// <summary>
+		/// Aktualizuje již existující blog příspěvek.
+		/// </summary>
 		public async Task UpdateBlogPost(EditBlogPostRequest editBlogPostRequest)
 		{
-
 			var existingBlogPost = await context.BlogPosts.SingleOrDefaultAsync(bp => bp.Id == editBlogPostRequest.Id);
 
 			if (existingBlogPost != null)
 			{
-				// Aktualizujte hodnoty příspěvku na základě nových dat z updatedBlogPost.
-				existingBlogPost.Description = editBlogPostRequest.Description;
-				existingBlogPost.Content = editBlogPostRequest.Content;
-				existingBlogPost.Title = editBlogPostRequest.Title;
-				existingBlogPost.Author = editBlogPostRequest.Author;
-				existingBlogPost.Keywords = editBlogPostRequest.Keywords;
-				existingBlogPost.BlogCategoryId = editBlogPostRequest.BlogCategoryId;
-				existingBlogPost.Name = editBlogPostRequest.Name;
-				existingBlogPost.ImagePath = await UploadImageAsync(editBlogPostRequest.FileUpload);
+				if (editBlogPostRequest != null)
+				{
+					existingBlogPost.Description = editBlogPostRequest.Description;
+					existingBlogPost.Content = editBlogPostRequest.Content;
+					existingBlogPost.Title = editBlogPostRequest.Title;
+					existingBlogPost.Author = editBlogPostRequest.Author;
+					existingBlogPost.Keywords = editBlogPostRequest.Keywords;
+					existingBlogPost.BlogCategoryId = editBlogPostRequest.BlogCategoryId;
+					existingBlogPost.Name = editBlogPostRequest.Name;
 
-				// Pokud máte také aktualizovat obrázek, můžete zde přidat kód pro aktualizaci obrázku.
+					if (editBlogPostRequest.FileUpload != null)
+					{
+						existingBlogPost.ImagePath = await UploadImageAsync(editBlogPostRequest.FileUpload);
+					}
+				}
 
 				await context.SaveChangesAsync();
 			}
 		}
 
+		// to-do přidat funkcionalitu na smazání blog příspěvku
+		public async Task DeleteBlogPost(int BlogId)
+		{
+			var existingBlog = await context.BlogPosts.SingleOrDefaultAsync(bp => bp.Id == BlogId);
+			if (existingBlog != null)
+			{
+				context.Remove(existingBlog);
+			}
+
+			await context.SaveChangesAsync();
+		}
+
+		/// <summary>
+		/// Získá tři blog příspěvky.
+		/// </summary>
 		public async Task<List<BlogPostSummary>> GetThreePost()
 		{
 			return await context.BlogPosts
@@ -171,19 +215,36 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				.ToListAsync();
 		}
 
-		public async Task<FormProcessingResult> AddBlogCategory(BlogCategoryDto categoryDto)
+		/// <summary>
+		/// Přidá novou blog kategorii.
+		/// </summary>
+		public async Task AddBlogCategory(string CategoryNameAdd)
 		{
-			var result = new FormProcessingResult();
+			var bloCategoryExist = await context.BlogCategories.SingleOrDefaultAsync(bp => bp.Name == CategoryNameAdd);
+			// to-do Validace kategorie, zda existuje nebo ne
+			// to-do Můžeme provést další validaci
 
-			// Validace kategorie, zda existuje nebo ne
-			// Můžete provést další validace, jak je považujete za vhodné
+			if (bloCategoryExist != null)
+			{
+				var newCategory = BlogCategory.Create(null, CategoryNameAdd);
+				context.BlogCategories.Add(newCategory);
+				await context.SaveChangesAsync();
+			}
 
-			var newCategory = BlogCategory.Create(null, categoryDto.Name);
-			context.BlogCategories.Add(newCategory);
+		}
+
+		/// <summary>
+		/// Odstraní již existující blog příspěvek podle jeho Id.
+		/// </summary>
+		public async Task DeleteBlogCategory(int BlogCategoryId)
+		{
+			var existingBlogCategory = await context.BlogCategories.SingleOrDefaultAsync(bp => bp.Id == BlogCategoryId);
+			if (existingBlogCategory != null)
+			{
+				context.Remove(existingBlogCategory);
+			}
+
 			await context.SaveChangesAsync();
-
-			result.IsSuccess = true;
-			return result;
 		}
 	}
 }

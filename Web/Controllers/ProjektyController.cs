@@ -19,14 +19,14 @@ namespace MojeVlastniStranka.Web.Controllers
 
 			if (blogPost == null)
 			{
-				return NotFound(); // Vrátí 404, pokud blogový příspěvek není nalezen
+				return NotFound();
 			}
 
 			var category = context.BlogCategories.FirstOrDefault(c => c.Id == blogPost.BlogCategoryId);
 
 			if (category == null)
 			{
-				return NotFound(); // Vrátí 404, pokud kategorie není nalezena
+				return NotFound();
 			}
 
 			return View("Projekty", blogPost);

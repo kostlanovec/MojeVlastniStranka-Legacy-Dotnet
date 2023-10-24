@@ -1,10 +1,15 @@
 ﻿@page
 @model MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog.AddImageModel
 @{
+    // to-do vyřešit, jak by to vypadalo na ostré verzi
     var baseUrl = "https://localhost:7207";
 }
+<!--to-do sjednotit všude jquery, bootstrap na jednotný-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!-- Add a modal for confirmation -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+
 <div class="modal" id="confirmDeleteModal" tabindex="2" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -31,7 +36,8 @@
 <form method="post" enctype="multipart/form-data">
 	<div class="form-group">
         <label for="FileUpload">Vyberte obrázek k nahrání:</label>
-		<input type="file" id="FileUpload" name="FileUpload" required />
+		<input type="file" id="FileUpload" name="FileUpload" id="file" required />
+		<div id="image-preview"></div>
 	</div>
 	<div class="form-group">
 		<label for="description">Popis:</label>
@@ -66,9 +72,33 @@
 </div>
 
 <script>
-    // Set the imageId in the hidden input field before showing the delete confirmation modal
     function setDeleteImageId(imageId) {
         document.getElementById('imageId').value = imageId;
     }
-</script>
 
+    function showImagePreview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var img = document.createElement('img');
+                img.src = e.target.result;
+
+                var previewDiv = document.getElementById('image-preview');
+                previewDiv.innerHTML = '';
+                previewDiv.appendChild(img);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var fileInput = document.getElementById('FileUpload');
+        if (fileInput) {
+            fileInput.addEventListener('change', function () {
+                showImagePreview(this);
+            });
+        }
+    });
+</script>

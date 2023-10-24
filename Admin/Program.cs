@@ -1,4 +1,4 @@
-using Admin.Areas.Identity.Data;
+﻿using Admin.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Admin.Data;
 using Microsoft.AspNetCore.Identity;
@@ -57,7 +57,7 @@ namespace Admin
 	            options.SlidingExpiration = true;
             });
 
-
+			// Zpřístupnění služeb z jiných vrstev pomocí dependency injection.
 			builder.Services.AddScoped<DataManagementService>();
 			builder.Services.AddScoped<ContactFormService>();
             builder.Services.AddScoped<BlogService>();

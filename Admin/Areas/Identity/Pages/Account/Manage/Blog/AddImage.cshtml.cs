@@ -9,6 +9,7 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog
 {
     public class AddImageModel : PageModel
     {
+        //to-do logování, jak se s tím pracuje
         private readonly DataContext context;
         private readonly ImageService imageService;
 

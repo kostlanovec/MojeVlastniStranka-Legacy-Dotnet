@@ -25,7 +25,11 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage
 			set;
 		}
 
-		public string SuccessMessage { get; set; } // Přidejte tuto vlastnost pro zprávu o úspěchu
+		public string SuccessMessage
+		{
+			get; 
+			set;
+		}
 
 		public WriteBlogModel(DataContext context, BlogService blogService)
 		{
@@ -47,10 +51,9 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage
 
 			if (processingResult.IsSuccess)
 			{
-				// Nastavte SuccessMessage, pokud je operace úspěšná
+				// to-do to by se mělo "načíst" z ApplicationCore.
 				SuccessMessage = "Operace byla úspěšná.";
 
-				// Můžete provést další akci, například přesměrování na jinou stránku
 				return Page();
 			}
 			else
@@ -59,7 +62,7 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage
 				{
 					ModelState.AddModelError(string.Empty, error.ErrorMessage);
 				}
-				return Page(); // Pokud došlo k chybě, zůstaňte na téže stránce a zobrazte chybové zprávy.
+				return Page();
 			}
 		}
 	}

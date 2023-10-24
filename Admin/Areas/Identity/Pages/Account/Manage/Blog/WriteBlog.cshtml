@@ -10,7 +10,6 @@
 <script src="/js/summernote/Plugins/summernote-ownplugin.js"></script>
 <script src="/lib/typo-js/typo.js"></script>
 <link rel="stylesheet" href="~/css/fast-style.css" asp-append-version="true" />
-
 <div class="col-md-12">
 	@if (!string.IsNullOrEmpty(Model.SuccessMessage))
 	{
@@ -32,7 +31,6 @@
 
 
  <style>
-	/* to-do udělat to, že mi to najde div, který je mimo tuhle část stránky*/
 	#settingsTable {
 		position: absolute;
 		top: 0;
@@ -52,7 +50,7 @@
 	<div id="settingsTable">
 		<div>
 			<div class="row">
-				<div class="col-md-4  mx-auto mt-2">
+				<div class="col-md-4  mx-auto" style="margin-top:80px">
 					<form id="settingsForm" method="post" enctype="multipart/form-data">
 						<div class="form-group">
 							<label for="Name" class="text-white">Jméno blogu:</label>
@@ -101,7 +99,6 @@
 		</div>
 	</div>
 </div>
-
 <script>
 	// Show/hide settings table on button click
 	$('#editSettingsBtn').click(function () {
@@ -116,21 +113,8 @@
 	var defaultContent = '<header class="header__other"><h1 class="header__h1 fadeInLeft visible">Optimalizace stránek pro SEO</h1><p class="header__p fadeInLeft visible">Základní informace k SEO.Nejdůležitější praktiky pro nalezení vaších stránek na internetu</p></header><main class="main fadeInUp visible"><h2 class="h2__div__article red">SEO optimalizace</h2><p>Jako majitel stránky chcete, aby vaše stránka byla snadno vyhledavatelná, ale bohužel v dnešní době máme velmi vysokou konkurenci na internetu. Tím nám může pomoci efektivní SEO neboli search engine optimization. Do češtiny optimalizace pro vyhledávače. V tomhle článku si rozebereme praktiky, které nám pomohou to zlepšit.</p></main>';
 
 	$('#summernote').summernote({
-		// popover: {
-		// 	image: [
-		// 		['custom', ['imageAttributes']],
-		// 		['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
-		// 		['float', ['floatLeft', 'floatRight', 'floatNone']],
-		// 		['remove', ['removeMedia']]
-		// 	],
-		// },
-		// lang: 'en-US', // Change to your chosen language
-		// imageAttributes: {
-		// 	icon: '<i class="note-icon-pencil"/>',
-		// 	removeEmpty: false, // true = remove attributes | false = leave empty if present
-		// 	disableUpload: false // true = don't display Upload Options | Display Upload Options
-		// },
-		lang: 'cs-CZ', // Nastavte svůj jazyk
+		lang: 'cs-CZ',
+		dialogsInBody: true,
 		spellCheck: true,
 		addclass: {
 			debug: false,
@@ -153,36 +137,31 @@
 			onInit: function () {
 				$('#summernote').summernote('code', defaultContent);
 			},
-			onChange: function (contents, $editable) {
-				var words = contents.replace(/<(?:.|\n)*?>/gm, '').split(/\s/);
-				var misspelled = [];
-				var dictionary = new Typo("en_US", false, false, { dictionaryPath: "localhost:7089/dictionaries" });
+			// to-do vyřešit kontrolu pravopisu
+			// onChange: function (contents, $editable) {
+			// 	var words = contents.replace(/<(?:.|\n)*?>/gm, '').split(/\s/);
+			// 	var misspelled = [];
+			// 	var dictionary = new Typo("en_US", false, false, { dictionaryPath: "localhost:7089/dictionaries" });
 
-				words.forEach(function (word) {
-					if (!dictionary.check(word) && !misspelled.includes(word)) {
-						misspelled.push(word);
-					}
-				});
+			// 	words.forEach(function (word) {
+			// 		if (!dictionary.check(word) && !misspelled.includes(word)) {
+			// 			misspelled.push(word);
+			// 		}
+			// 	});
 
 
-				console.log("Chyby v pravopisu:", misspelled);
-			}
+			// 	console.log("Chyby v pravopisu:", misspelled);
+			// }
 		}
 	});
 
-	// Při odeslání formuláře
+	// to-do vyřešit, proč nefunguje oficiální získavání dat
 	$('form').on('submit', function () {
 		var htmlContent = $('.note-editable').html().trim();
 
 		$('#hiddenContent').val(htmlContent);
 		if (htmlContent === '' || htmlContent === '<p><br></p>') {
 			return null;
-		}
-
-		if (confirm('Je to takto finální?')) {
-			return null;
-		} else {
-			e.returnValue = '';
 		}
 	});
 

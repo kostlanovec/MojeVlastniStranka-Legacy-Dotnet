@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using MojeVlastniStranka.DataAccess.Entities;
+﻿using MojeVlastniStranka.DataAccess.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace MojeVlastniStranka.ApplicationCore.Dto

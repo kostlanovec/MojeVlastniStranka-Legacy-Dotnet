@@ -3,17 +3,18 @@
 @{
 }
 
-@* <form method="post">
-	<label for="newCategory">Nová kategorie:</label>
-	<input type="text" name="newCategory" />
-	<button type="submit">Přidat kategorii</button>
-</form> *@
+<form method="post">
+	<label for="CategoryNameAdd">Nová kategorie:</label>
+	<input name="CategoryNameAdd" id="CategoryNameAdd"/>
+	<button type="submit" asp-page-handler="AddCategory">Přidat kategorii</button>
+</form>
 
+<div class="container-fluid pt-4 px-4">
 <form method="get">
 	<input type="text" placeholder="Hledat podle názvu" name="searchString" />
 	<input type="text" placeholder="Hledat podle autora" name="author" />
 	<input type="text" placeholder="Hledat podle klíčového slova" name="keyword" />
-	<select>
+	<select name="category">
 		<option value="">Všechny kategorie</option>
 		@foreach (var category in Model.BlogCategory){
 			<option value="@category.Id">@category.Name</option>
@@ -23,8 +24,6 @@
 	<input type="date" name="toDate" />
 	<button type="submit">Filtrovat</button>
 </form>
-
-
 <div class="row">
 	@foreach (var post in Model.Posts)
 	{
@@ -47,4 +46,5 @@
 			</div>
 		</div>
 	}
+</div>
 </div>

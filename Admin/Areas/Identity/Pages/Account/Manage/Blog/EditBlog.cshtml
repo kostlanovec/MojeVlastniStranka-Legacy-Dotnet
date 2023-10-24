@@ -1,5 +1,4 @@
 ﻿@page
-@using Microsoft.DotNet.Scaffolding.Shared.Project
 @model MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.EditBlogPostModel
 @{
 }
@@ -35,7 +34,6 @@
 
 
 <style>
-	/* to-do udělat to, že mi to najde div, který je mimo tuhle část stránky*/
 	#settingsTable {
 		position: absolute;
 		top: 0;
@@ -58,31 +56,34 @@
 			<div class="col-md-4">
 				<form id="settingsForm" method="post" enctype="multipart/form-data">
 					<div class="form-group">
-						<!--to-do udělej sychronizovaný napsání jméno blogu, následně pak zobrazení do settingsTable-->
+						<label for="Name" class="text-white">Jméno blogu:</label>
+						<input name="Name" type="text" class="form-control" required />
+					</div>
+					<div class="form-group">
 						<label for="Slug" class="text-white">Url blogu:</label>
-						<input name="Slug" type="text" class="form-control" value="@Model.EditBlogPostDto.Slug" required />
+						<input name="Slug" type="text" class="form-control" value="@Model.EditBlogPostDto.Slug" required/>
 					</div>
 					<div class="form-group">
 						<label for="Title" class="text-white">Titulek:</label>
-						<input type="text" class="form-control" name="Title" value="@Model.EditBlogPostDto.Title" required />
+						<input type="text" class="form-control" name="Title" value="@Model.EditBlogPostDto.Title" required/>
 					</div>
 					<div class="form-group">
 						<label for="Description" class="text-white">Popis:</label>
-						<input type="text" class="form-control" name="Description" value="@Model.EditBlogPostDto.Description" required />
+						<input type="text" class="form-control" name="Description" value="@Model.EditBlogPostDto.Description" required/>
 					</div>
 					<div class="form-group">
 						<label for="Author" class="text-white">Autor:</label>
-						<input type="text" class="form-control" name="Author" value="@Model.EditBlogPostDto.Author" required />
+						<input type="text" class="form-control" name="Author" value="@Model.EditBlogPostDto.Author" required/>
 					</div>
 					<div class="form-group">
 						<label for="Keywords" class="text-white">Klíčová slova:</label>
-						<input type="text" class="form-control" name="Keywords" value="@Model.EditBlogPostDto.Keywords" required />
+						<input type="text" class="form-control" name="Keywords" value="@Model.EditBlogPostDto.Keywords" required/>
 					</div>
 					<div class="form-group">
 						<label for="file" class="text-white">Obrázek:</label>
-						<input type="file" class="form-control-file" name="File" id="file" required />
+						<input type="file" class="form-control-file" name="File" id="file"/>
 						<div id="image-preview">
-							<img src="https://localhost:7207/@Model.EditBlogPostDto.FileUpload" />
+							<img src="https://localhost:7207/@Model.EditBlogPostDto.FileUpload"/>
 						</div>
 					</div>
 					<div class="form-group">
@@ -94,7 +95,7 @@
 							}
 						</select>
 					</div>
-					<input type="hidden" name="Content" id="hiddenContent" />
+					<input type="hidden" name="Content" id="hiddenContent"/>
 					<button type="submit" class="btn btn-primary">Publikovat</button>
 					<button id="backBtn" class="btn btn-secondary">Zpátky</button>
 				</form>
@@ -152,41 +153,32 @@
 			onInit: function () {
 				var htmlContent = '@Html.Raw(Model.EditBlogPostDto.Content)';
 				$('#summernote').summernote('code', htmlContent);
-			},
-			onChange: function (contents, $editable) {
-				console.log("tady jsem");
-				var words = contents.replace(/<(?:.|\n)*?>/gm, '').split(/\s/);
-				var misspelled = [];
-				var dictionary = new Typo("en_US", false, false, { dictionaryPath: "localhost:7089/dictionaries" });
-
-				words.forEach(function (word) {
-					if (!dictionary.check(word) && !misspelled.includes(word)) {
-						misspelled.push(word);
-					}
-				});
-
-
-				console.log("Chyby v pravopisu:", misspelled);
 			}
+			// onChange: function (contents, $editable) {
+			// 	console.log("tady jsem");
+			// 	var words = contents.replace(/<(?:.|\n)*?>/gm, '').split(/\s/);
+			// 	var misspelled = [];
+			// 	var dictionary = new Typo("en_US", false, false, { dictionaryPath: "localhost:7089/dictionaries" });
+
+			// 	words.forEach(function (word) {
+			// 		if (!dictionary.check(word) && !misspelled.includes(word)) {
+			// 			misspelled.push(word);
+			// 		}
+			// 	});
+
+
+			// 	console.log("Chyby v pravopisu:", misspelled);
+			// }
 		}
 	});
-	// Při odeslání formuláře
-	$('form').on('submit', function () {
-		
-		var htmlContent = $('.note-editable').html().trim();
 
+	$('form').on('submit', function () {
+		var htmlContent = $('.note-editable').html().trim();
 		$('#hiddenContent').val(htmlContent);
 		if (htmlContent === '' || htmlContent === '<p><br></p>') {
 			return null;
 		}
-
-		if (confirm('Je to takto finální?')) {
-			return null;
-		} else {
-			e.returnValue = '';
-		}
 	});
-
 
 	function showImagePreview(input) {
 		if (input.files && input.files[0]) {
@@ -199,11 +191,12 @@
 				var previewDiv = document.getElementById('image-preview');
 				previewDiv.innerHTML = '';
 				previewDiv.appendChild(img);
-			}
+			};
 
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
+
 
 	document.getElementById('file').addEventListener('change', function () {
 		showImagePreview(this);
