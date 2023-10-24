@@ -1,0 +1,21 @@
+﻿@page
+@model MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog.BlogCategoryModel
+@{
+}
+
+<form method="post">
+	<label for="CategoryNameAdd">Nová kategorie:</label>
+	<input name="CategoryNameAdd" id="CategoryNameAdd" />
+	<button type="submit" asp-page-handler="AddCategory">Přidat kategorii</button>
+</form>
+
+<form method="get">
+	<select name="category">
+		<option value="">Všechny kategorie</option>
+		@foreach (var category in Model.BlogCategory)
+		{
+			<option value="@category.Id">@category.Name</option>
+		}
+	</select>
+	<button type="submit" asp-page-handler="DeleteCategory">Filtrovat</button>
+</form>

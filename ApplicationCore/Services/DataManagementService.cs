@@ -238,6 +238,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// </summary>
 		public async Task DeleteBlogCategory(int BlogCategoryId)
 		{
+			// Předělat tak, že když budou existovat blog příspěvky s kategorií, která neexistuje, tak uděláme kategorii tak zvaně neurčenou.
 			var existingBlogCategory = await context.BlogCategories.SingleOrDefaultAsync(bp => bp.Id == BlogCategoryId);
 			if (existingBlogCategory != null)
 			{
