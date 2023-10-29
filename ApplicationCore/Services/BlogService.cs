@@ -1,6 +1,7 @@
 ﻿using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.ApplicationCore.Requests;
 using MojeVlastniStranka.DataAccess;
+using MojeVlastniStranka.DataAccess.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace MojeVlastniStranka.ApplicationCore.Services
@@ -144,7 +145,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		public async Task<FormProcessingResult> AddBlogCategory(string CategoryNameAdd)
 		{
 			var formProcessingResult = new FormProcessingResult();
-			 await dataManagementService.AddBlogCategory(CategoryNameAdd);
+			await dataManagementService.AddBlogCategory(CategoryNameAdd);
 			return formProcessingResult;
 
 		}
@@ -156,5 +157,11 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			return formProcessingResult;
 		}
 
-}
+		public async Task<FormProcessingResult> DeleteBlogPost(int? BlogId)
+		{
+			var formProcessingResult = new FormProcessingResult();
+			await dataManagementService.DeleteBlogPost(BlogId);
+			return formProcessingResult;
+		}
+	}
 }

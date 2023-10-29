@@ -23,12 +23,17 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog
 			this.blogService = blogService;
 		}
 
+		/// <summary>
+		/// Získá všechny blog kategorie z databáze.
+		/// </summary>
 		public async Task OnGetAsync()
         {
 	        BlogCategory = await blogService.GetAllCategoriesTask();
 		}
 
-
+		/// <summary>
+		/// Přidání blog kategorie do databáze.
+		/// </summary>
         public async Task<ActionResult> OnPostAddCategoryAsync(string CategoryNameAdd)
         {
 	        // Zde přistupujte k vaší službě pro přidání kategorie
@@ -38,11 +43,18 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog
 	        return Page();
         }
 
-        public async Task<ActionResult> OnGetDeleteCategoryAsync(int Id)
+		/// <summary>
+		/// Odebrání blog kategorie z databáze a přesunutí popřípadných blog příspěvku náležící k smazané blog kategorii ke kategorii neurčený.
+		/// </summary>
+        public async Task<ActionResult> OnPostDeleteCategoryAsync(int Id)
         {
+	        BlogCategory = await blogService.GetAllCategoriesTask();
+			if (Id == 1)
+	        {
+		        return Page();
+	        }
 			var result = await blogService.DeleteBlogCategory(Id);
 
-			BlogCategory = await blogService.GetAllCategoriesTask();
 			return Page();
         }
 	}

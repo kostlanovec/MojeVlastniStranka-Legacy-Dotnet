@@ -19,7 +19,7 @@ namespace Reservanto.NPS.DataAccess
             modelBuilder.Entity<BlogPost>().HasData(blogPost1, blogPost2);
 
             // Definování ukázkových obchodníků.
-            var merchant1 = BlogCategory.Create(1, "základ");
+            var merchant1 = BlogCategory.Create(3, "základ");
             var merchant2 = BlogCategory.Create(2, "blogpříspěvky");
 
             modelBuilder.Entity<BlogCategory>().HasData(merchant1, merchant2);
@@ -35,6 +35,10 @@ namespace Reservanto.NPS.DataAccess
             modelBuilder.Entity<ContactForm>().HasData(contactForm1, contactForm2);
 
 #endif
-		}
+            // Podstatná část blogů, kterou potřebujeme v případě neurčení nebo smazání blog kategorie, protože se to bude seedovat.
+	        var blogcategory = BlogCategory.Create(1, "neurčený");
+
+	        modelBuilder.Entity<BlogCategory>().HasData(blogcategory);
+        }
 	}
 }

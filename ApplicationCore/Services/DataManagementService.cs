@@ -185,15 +185,14 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		}
 
 		// to-do přidat funkcionalitu na smazání blog příspěvku
-		public async Task DeleteBlogPost(int BlogId)
+		public async Task DeleteBlogPost(int? BlogId)
 		{
 			var existingBlog = await context.BlogPosts.SingleOrDefaultAsync(bp => bp.Id == BlogId);
 			if (existingBlog != null)
 			{
 				context.Remove(existingBlog);
+				await context.SaveChangesAsync(); ;
 			}
-
-			await context.SaveChangesAsync();
 		}
 
 		/// <summary>
@@ -220,11 +219,11 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// </summary>
 		public async Task AddBlogCategory(string CategoryNameAdd)
 		{
-			var bloCategoryExist = await context.BlogCategories.SingleOrDefaultAsync(bp => bp.Name == CategoryNameAdd);
+			var blogCategoryExist = await context.BlogCategories.SingleOrDefaultAsync(bp => bp.Name == CategoryNameAdd);
 			// to-do Validace kategorie, zda existuje nebo ne
 			// to-do Můžeme provést další validaci
 
-			if (bloCategoryExist != null)
+			if (blogCategoryExist == null)
 			{
 				var newCategory = BlogCategory.Create(null, CategoryNameAdd);
 				context.BlogCategories.Add(newCategory);
@@ -234,18 +233,28 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		}
 
 		/// <summary>
-		/// Odstraní již existující blog příspěvek podle jeho Id.
+		/// Odstraní již existující blogkategorii podle jeho Id a všechny příspěvky se smazanou blog kategorií se přesunout do kategorie neurčený.
 		/// </summary>
 		public async Task DeleteBlogCategory(int BlogCategoryId)
 		{
-			// Předělat tak, že když budou existovat blog příspěvky s kategorií, která neexistuje, tak uděláme kategorii tak zvaně neurčenou.
 			var existingBlogCategory = await context.BlogCategories.SingleOrDefaultAsync(bp => bp.Id == BlogCategoryId);
-			if (existingBlogCategory != null)
+			// Blog 1 je takzvaně neučitý
+			if (existingBlogCategory != null || BlogCategoryId != 1)
 			{
-				context.Remove(existingBlogCategory);
-			}
+				var existingAllBlogWithDeleteBlogCategory = context.BlogPosts.Where(bp => bp.BlogCategoryId == BlogCategoryId);
 
-			await context.SaveChangesAsync();
+				if (existingAllBlogWithDeleteBlogCategory.Any())
+				{
+					foreach (var blogPost in existingAllBlogWithDeleteBlogCategory)
+					{
+						// 1 je blog takzvaně neurčený, což je takový, jestli nerozhodnout, že by to bylo spíše podle jména než kategorie. Což je diskutabilní.
+						blogPost.BlogCategoryId = 1;
+					}
+				}
+
+				context.Remove(existingBlogCategory);
+				await context.SaveChangesAsync();
+			}
 		}
 	}
 }

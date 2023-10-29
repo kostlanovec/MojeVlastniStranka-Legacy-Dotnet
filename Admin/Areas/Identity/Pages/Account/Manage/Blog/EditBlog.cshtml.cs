@@ -57,8 +57,9 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage
         }
 
 		[HttpPost]
-		public async Task<IActionResult> OnPost()
+		public async Task<IActionResult> UpdateBlogPostAsync()
 		{
+			EditBlogPostDto = await blogService.GetBlogPostById(Id);
 			BlogCategory = await blogService.GetAllCategoriesTask();
 			var processingResult = await blogService.UpdateBlogPost(Input);
 
@@ -76,6 +77,27 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage
 					ModelState.AddModelError(string.Empty, error.ErrorMessage);
 				}
 				return Page();
+			}
+		}
+
+		[HttpPost]
+		public async Task<ActionResult> DeleteBlogByIdAsync()
+		{
+			BlogCategory = await blogService.GetAllCategoriesTask();
+			var processingResult = await blogService.DeleteBlogPost(EditBlogPostDto.Id);
+
+			if (processingResult.IsSuccess)
+			{
+				return RedirectToPage("/Account/Manage/Blog/BlogList");
+			}
+			else
+			{
+				foreach (var error in processingResult.Errors)
+				{
+					ModelState.AddModelError(string.Empty, error.ErrorMessage);
+				}
+				return Page();
+
 			}
 		}
 	}
