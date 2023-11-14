@@ -34,6 +34,5 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog
 	        BlogCategory = await blogService.GetAllCategoriesTask();
 			Posts = await blogService.GetFilteredBlogPosts(searchString, author, keyword, category, fromDate, toDate);
         }
-
 	}
 }

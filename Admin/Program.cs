@@ -1,4 +1,4 @@
-﻿using Admin.Areas.Identity.Data;
+using Admin.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Admin.Data;
 using Microsoft.AspNetCore.Identity;

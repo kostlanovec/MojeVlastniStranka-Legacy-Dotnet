@@ -3,14 +3,6 @@
 @{
 	var baseUrl = "https://localhost:7207";
 }
-
-<form method="post">
-	<label for="CategoryNameAdd">Nová kategorie:</label>
-	<input name="CategoryNameAdd" id="CategoryNameAdd"/>
-	<button type="submit" asp-page-handler="AddCategory">Přidat kategorii</button>
-</form>
-
-<div class="container-fluid pt-4 px-4">
 <form method="get">
 	<input type="text" placeholder="Hledat podle názvu" name="searchString" />
 	<input type="text" placeholder="Hledat podle autora" name="author" />
@@ -47,5 +39,4 @@
 			</div>
 		</div>
 	}
-</div>
 </div>

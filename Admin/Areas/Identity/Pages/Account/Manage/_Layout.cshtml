@@ -1,23 +1,19 @@
-﻿@{
-    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout !=  null)
-    {
-        Layout = parentLayout.ToString();
-    }
-    else
-    {
-        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
-    }
-}
-@* @if (SignInManager.IsSignedIn(User))
-{
+﻿﻿@{
+	 if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout != null)
+	 {
+		 Layout = parentLayout.ToString();
+	 }
+	 else
+	 {
+		 Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+	 }
+ }
 
-} *@
-
-<div class="container-fluid position-relative d-flex p-0">
+<div class="container-fluid position-relative d-flex p-0" style="margin-top:-24px">
 	<partial name="_ManageNav"/>
 	<div class="content">
 		<nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
-			<a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+			<a asp-page="" class="navbar-brand d-flex d-lg-none me-4">
 				<h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
 			</a>
 			<a href="#" class="sidebar-toggler flex-shrink-0">
@@ -99,14 +95,16 @@
 						<span class="d-none d-lg-inline-flex">Jan Sebastián Kostlán</span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-	@* 					<a href="#" class="dropdown-item">My Profile</a> *@
+						@* <a href="#" class="dropdown-item">My Profile</a> *@
 						<a asp-page="./Settings" class="dropdown-item">Nastavení profilu</a>
 						<a asp-area="Identity" asp-page="/Account/Logout"  asp-route-returnUrl="@Url.Page("/Index", new { area = "" })"  class="dropdown-item">Odhlásit se</a>
 					</div>
 				</div>
 			</div>
 		</nav>
+		<div class="container-fluid pt-4 px-4">
 		@RenderBody()
+		</div>
 	</div>
 </div>
 
@@ -114,7 +112,7 @@
 @inject UserManager<AdminUser> UserManager
 
 	
-<<script>
+<script>
 	 document.addEventListener("DOMContentLoaded", function () {
 		 var sidebarToggler = document.querySelector('.sidebar-toggler');
 		 var sidebar = document.querySelector('.sidebar');

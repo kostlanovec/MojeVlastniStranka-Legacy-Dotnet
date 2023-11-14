@@ -83,7 +83,8 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage
 		[HttpPost]
 		public async Task<ActionResult> DeleteBlogByIdAsync()
 		{
-			BlogCategory = await blogService.GetAllCategoriesTask();
+            EditBlogPostDto = await blogService.GetBlogPostById(Id);
+            BlogCategory = await blogService.GetAllCategoriesTask();
 			var processingResult = await blogService.DeleteBlogPost(EditBlogPostDto.Id);
 
 			if (processingResult.IsSuccess)

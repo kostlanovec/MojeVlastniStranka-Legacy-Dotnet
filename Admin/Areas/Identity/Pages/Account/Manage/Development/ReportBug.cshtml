@@ -1,0 +1,21 @@
+﻿@page
+@model MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Development.ReportBugModel
+@{
+}
+<form class="col-sm-12">
+	<div class="bg-secondary rounded h-100 p-4">
+		<h6 class="mb-4">Nahlášení chyby</h6>
+		<div class="mb-3">
+			<label for="exampleInputEmail1" class="form-label">Stránka s chybou</label>
+			<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+			<div id="emailHelp" class="form-text">Pokud se jedna o chybu, která je patrná na více stránkách, tak je prosím všechny vypište v textovém poli.
+			</div>
+		</div>
+		<div class="form-floating">
+			<textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 200px;"></textarea>
+			<label for="floatingTextarea">Comments</label>
+		</div>
+		<!--Jméno a přijmení a další kontaktní údaje by se přidávaly automaticky, ale to zatím necháme být-->
+		<button type="submit" class="btn btn-primary">Odeslat</button>
+	</div>
+</form>

@@ -1,11 +1,6 @@
-﻿@inject SignInManager<AdminUser> SignInManager
-@{
-    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
-}
-
-<div class="sidebar pe-4 pb-3">
+﻿<div class="sidebar pe-4 pb-3">
 	<nav class="navbar bg-secondary navbar-dark">
-		<a asp-page="/Account/Manage/Blog/Index" class="navbar-brand mx-4 mb-3">
+		<a asp-page="/Account/Manage/Index" class="navbar-brand mx-4 mb-3">
 			<h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>Kostlanovec</h3>
 		</a>
 		<div class="d-flex align-items-center ms-4 mb-4">
@@ -19,9 +14,8 @@
 			</div>
 		</div>
 		<div class="navbar-nav w-100">
-			<!--to-do vyřešit, proč je dashoboard červený i když ho nepoužívám-->
 			<!--to-do na správná místa vložit vhodné ikonky-->
-			<a asp-page="././Index" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+			<a asp-page="/Account/Manage/Index" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
 			<div class="nav-item dropdown">
 				<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Blog</a>
 				<div class="dropdown-menu bg-transparent border-0">
@@ -35,7 +29,7 @@
 				<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Marketing</a>
 				<div class="dropdown-menu bg-transparent border-0">
 					<a asp-page="/Account/Manage/Marketing/TableContentForm" class="dropdown-item">Kontaktní formulář</a>
-					<a asp-page="/Account/Manage/Marketing/TableContentForm" class="dropdown-item">NewsLetter</a>
+					<a asp-page="/Account/Manage/Marketing/NewsLetter" class="dropdown-item">NewsLetter</a>
 				</div>
 			</div>
 			<div class="nav-item dropdown">
@@ -49,11 +43,21 @@
 			<div class="nav-item dropdown">
 				<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Vývoj</a>
 				<div class="dropdown-menu bg-transparent border-0">
-				<a asp-page="/Account/Manage/Marketing/TableContentForm" class="dropdown-item">Nápady k realizaci</a>
-				<a asp-page="/Account/Manage/Marketing/TableContentForm" class="dropdown-item">Nahlášení chyby</a>
-				<a asp-page="/Account/Manage/Marketing/TableContentForm" class="dropdown-item">Poznámky k vývoji</a>
+					<a asp-page="/Account/Manage/Development/IdeaToRelease" class="dropdown-item">Nápady k realizaci</a>
+					<a asp-page="/Account/Manage/Development/ReportBug" class="dropdown-item">Nahlášení chyby</a>
+					<a asp-page="/Account/Manage/Development/DevelopmentNotes" class="dropdown-item">Poznámky k vývoji</a>
 				</div>
 			</div>
 		</div>
 	</nav>
 </div>
+
+<script>
+	$(document).ready(function () {
+		var url = window.location.pathname;
+		$('a[href="' + url + '"]').addClass('active');
+		$('a[href="' + url + '"]').closest('.dropdown').addClass('active');
+		$('a[href="' + url + '"]').closest('.dropdown').find('.dropdown-toggle').addClass('active');
+	});
+</script>
+
