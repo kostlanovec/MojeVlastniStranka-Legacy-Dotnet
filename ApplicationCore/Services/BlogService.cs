@@ -1,4 +1,6 @@
-﻿using MojeVlastniStranka.ApplicationCore.Dto;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.ApplicationCore.Requests;
 using MojeVlastniStranka.DataAccess;
 using MojeVlastniStranka.DataAccess.Entities;
@@ -8,20 +10,20 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 {
 	public class BlogService
 	{
-		private readonly DataManagementService dataManagementService;
+		private readonly DataContext context;
 
 		public BlogService(DataContext context)
 		{
-			this.dataManagementService = new DataManagementService(context);
+			this.context = context;
 		}
 
 		/// <summary>
 		/// Přidání nového blog příspěvku.
 		/// </summary>
-		public async Task<FormProcessingResult> AddBlogPost(BlogPostRequest blogPostRequst)
+		public async Task<FormProcessingResult> AddBlogPost(BlogPostRequest blogPostRequest)
 		{
 			var result = new FormProcessingResult();
-			var validationResults = blogPostRequst.Validate(new ValidationContext(blogPostRequst)).ToList();
+			var validationResults = blogPostRequest.Validate(new ValidationContext(blogPostRequest)).ToList();
 
 			if (validationResults.Any())
 			{
@@ -30,7 +32,22 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				return result;
 			}
 
-			await dataManagementService.AddBlogPost(blogPostRequst);
+			var imagePath = await UploadImageAsync(blogPostRequest.FileUpload); // Získání cesty k uloženému obrázku
+			var blogPost = BlogPost.Create(
+				blogPostRequest.Description,
+				blogPostRequest.Content,
+				blogPostRequest.Title,
+				blogPostRequest.Author,
+				blogPostRequest.Keywords,
+				blogPostRequest.BlogCategoryId,
+				blogPostRequest.Name,
+				imagePath,
+				blogPostRequest.Slug,
+				blogPostRequest.DatePublic = DateTime.Now
+			);
+
+			context.BlogPosts.Add(blogPost);
+			await context.SaveChangesAsync();
 			result.IsSuccess = true;
 			return result;
 		}
@@ -40,7 +57,17 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// </summary>
 		public async Task<List<BlogPostSummary>> GetAllBlogPost()
 		{
-			var result = await dataManagementService.GetAllBlogPostSummaries();
+			var result = await context.BlogPosts
+				.Select(bp => new BlogPostSummary
+				{
+					Id = bp.Id,
+					Name = bp.Name,
+					Description = bp.Description,
+					FilePath = bp.ImagePath,
+					Slug = bp.Slug,
+					TimePublic = bp.Date
+				})
+				.ToListAsync();
 			return result;
 		}
 
@@ -49,7 +76,18 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// </summary>
 		public async Task<List<BlogPostSummary>> GetThreePost()
 		{
-			var result = await dataManagementService.GetThreePost();
+			var result = await context.BlogPosts
+				.OrderBy(bp => bp.Id)
+				.Take(3)
+				.Select(bp => new BlogPostSummary
+				{
+					Id = bp.Id,
+					Name = bp.Name,
+					Description = bp.Description,
+					FilePath = bp.ImagePath,
+					Slug = bp.Slug,
+				})
+				.ToListAsync();
 			return result;
 		}
 
@@ -58,7 +96,30 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// </summary>
 		public async Task<EditBlogPostDto> GetBlogPostById(int id)
 		{
-			return await dataManagementService.GetBlogPostById(id);
+			var existingBlogPost = await context.BlogPosts
+				.SingleOrDefaultAsync(bp => bp.Id == id);
+
+			if (existingBlogPost == null)
+			{
+				// Handle the case where the blog post with the specified id was not found.
+				return null;
+			}
+
+			var editBlogPostDto = new EditBlogPostDto
+			{
+				Id = existingBlogPost.Id,
+				Name = existingBlogPost.Name,
+				Slug = existingBlogPost.Slug,
+				Description = existingBlogPost.Description,
+				Content = existingBlogPost.Content,
+				Title = existingBlogPost.Title,
+				Author = existingBlogPost.Author,
+				Keywords = existingBlogPost.Keywords,
+				BlogCategoryId = existingBlogPost.BlogCategoryId,
+				blogCategory = existingBlogPost.blogCategory,
+				FileUpload = existingBlogPost.ImagePath
+			};
+			return editBlogPostDto;
 		}
 
 		/// <summary>
@@ -66,7 +127,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// </summary>
 		public async Task<List<BlogCategoryDto>> GetAllCategoriesTask()
 		{
-			var blogCategory = await dataManagementService.GetAllBlogCategory();
+			var blogCategory = await context.BlogCategories.ToListAsync();
 
 			var blogCategoryList = blogCategory.Select(e => new BlogCategoryDto()
 			{
@@ -83,7 +144,28 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		public async Task<FormProcessingResult> UpdateBlogPost(EditBlogPostRequest editBlogPostRequest)
 		{
 			var result = new FormProcessingResult();
-			await dataManagementService.UpdateBlogPost(editBlogPostRequest);
+			var existingBlogPost = await context.BlogPosts.SingleOrDefaultAsync(bp => bp.Id == editBlogPostRequest.Id);
+
+			if (existingBlogPost != null)
+			{
+				if (editBlogPostRequest != null)
+				{
+					existingBlogPost.Description = editBlogPostRequest.Description;
+					existingBlogPost.Content = editBlogPostRequest.Content;
+					existingBlogPost.Title = editBlogPostRequest.Title;
+					existingBlogPost.Author = editBlogPostRequest.Author;
+					existingBlogPost.Keywords = editBlogPostRequest.Keywords;
+					existingBlogPost.BlogCategoryId = editBlogPostRequest.BlogCategoryId;
+					existingBlogPost.Name = editBlogPostRequest.Name;
+
+					if (editBlogPostRequest.FileUpload != null)
+					{
+						existingBlogPost.ImagePath = await UploadImageAsync(editBlogPostRequest.FileUpload);
+					}
+				}
+
+				await context.SaveChangesAsync();
+			}
 			return result;
 		}
 
@@ -93,7 +175,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		public async Task<List<BlogPostSummary>> GetFilteredBlogPosts(string searchString, string author,
 			string keyword, int category, DateTime? fromDate, DateTime? toDate)
 		{
-			var allPosts = await dataManagementService.GetAllBlogPosts();
+			var allPosts = await context.BlogPosts.ToListAsync(); ;
 			var filteredPosts = allPosts;
 
 			if (!string.IsNullOrEmpty(searchString))
@@ -145,23 +227,76 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		public async Task<FormProcessingResult> AddBlogCategory(string CategoryNameAdd)
 		{
 			var formProcessingResult = new FormProcessingResult();
-			await dataManagementService.AddBlogCategory(CategoryNameAdd);
+			var blogCategoryExist = await context.BlogCategories.SingleOrDefaultAsync(bp => bp.Name == CategoryNameAdd);
+			// to-do Validace kategorie, zda existuje nebo ne
+			// to-do Můžeme provést další validaci
+
+			if (blogCategoryExist == null)
+			{
+				var newCategory = BlogCategory.Create(null, CategoryNameAdd);
+				context.BlogCategories.Add(newCategory);
+				await context.SaveChangesAsync();
+			}
 			return formProcessingResult;
 
 		}
 
 		// to-do vyřešit, jak při odstranění blog kategorie přistupovat.
-		public async Task<FormProcessingResult> DeleteBlogCategory(int IdBlogCategory){
+		public async Task<FormProcessingResult> DeleteBlogCategory(int BlogCategoryId){
 			var formProcessingResult = new FormProcessingResult();
-			await dataManagementService.DeleteBlogCategory(IdBlogCategory);
+			var existingBlogCategory = await context.BlogCategories.SingleOrDefaultAsync(bp => bp.Id == BlogCategoryId);
+			// Blog 1 je takzvaně neučitý
+			if (existingBlogCategory != null || BlogCategoryId != 1)
+			{
+				var existingAllBlogWithDeleteBlogCategory = context.BlogPosts.Where(bp => bp.BlogCategoryId == BlogCategoryId);
+
+				if (existingAllBlogWithDeleteBlogCategory.Any())
+				{
+					foreach (var blogPost in existingAllBlogWithDeleteBlogCategory)
+					{
+						// 1 je blog takzvaně neurčený, což je takový, jestli nerozhodnout, že by to bylo spíše podle jména než kategorie. Což je diskutabilní.
+						blogPost.BlogCategoryId = 1;
+					}
+				}
+
+				context.Remove(existingBlogCategory);
+				await context.SaveChangesAsync();
+			}
 			return formProcessingResult;
 		}
 
 		public async Task<FormProcessingResult> DeleteBlogPost(int? BlogId)
 		{
 			var formProcessingResult = new FormProcessingResult();
-			await dataManagementService.DeleteBlogPost(BlogId);
+			var existingBlog = await context.BlogPosts.SingleOrDefaultAsync(bp => bp.Id == BlogId);
+			if (existingBlog != null)
+			{
+				context.Remove(existingBlog);
+				await context.SaveChangesAsync(); ;
+			}
 			return formProcessingResult;
+		}
+
+		/// <summary>
+		/// Uloží obrázek do určeného úložiště.
+		/// </summary>
+		private async Task<string> UploadImageAsync(IFormFile file)
+		{
+			// to-do vyřešit tento otřesný hard-coding
+			var uploadsDirectory = "C:\\app\\MojeVlastniStrankaFinanali\\Web\\wwwroot\\images\\blog";
+			var filePath = Path.Combine(uploadsDirectory, file.FileName);
+
+			if (!Directory.Exists(uploadsDirectory))
+			{
+				Directory.CreateDirectory(uploadsDirectory);
+			}
+
+			using (var fileStream = new FileStream(filePath, FileMode.Create))
+			{
+				await file.CopyToAsync(fileStream);
+			}
+
+			return ("images/blog/" + file.FileName);
 		}
 	}
 }

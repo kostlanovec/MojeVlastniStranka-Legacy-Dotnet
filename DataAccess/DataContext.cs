@@ -38,6 +38,10 @@ namespace MojeVlastniStranka.DataAccess
 
 		public DbSet<Image> Images { get; set; }
 
+		public DbSet<IdeaToRelease> IdeaToReleases { get; set; }
+
+		public DbSet<ReportedBug> ReportedBugs { get; set; }
+
 		#endregion
 
 	}

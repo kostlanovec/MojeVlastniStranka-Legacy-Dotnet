@@ -13,8 +13,8 @@ namespace Reservanto.NPS.DataAccess
         {
 #if DEBUG
             // Definování ukázkových blgo příspěvku.
-            var blogPost1 = BlogPost.Create(1, "moje klbasa", "<h1>Ahoj</h1>", "Deset malých švestek", "Pepek Námořník", "rohlík, klobása", 1, "Jak mit obri pero", "blogimages/boxing.jpg", "Jak-mit-obri-pero", DateTime.Now);
-            var blogPost2 = BlogPost.Create(2, "moje klbasa", "<h1>Projekt</h1>", "Pět malých kačátek", "Chleba s marmeládou", "Jsi slizký had, nemám tě rád", 2, "deset malych cernousku", "blogimages/boxing.jpg", "deset-malych-cernousku", DateTime.Now);
+            var blogPost1 = BlogPost.Create(1, "moje klobasa", "<h1>Ahoj</h1>", "Deset malých švestek", "Pepek Námořník", "rohlík, klobása", 1, "Jak mit obri pero", "blogimages/boxing.jpg", "Jak-mit-obri-pero", DateTime.Now);
+            var blogPost2 = BlogPost.Create(2, "moje klobasa", "<h1>Projekt</h1>", "Pět malých kačátek", "Chleba s marmeládou", "Jsi slizký had, nemám tě rád", 2, "deset malych cernousku", "blogimages/boxing.jpg", "deset-malych-cernousku", DateTime.Now);
 
             modelBuilder.Entity<BlogPost>().HasData(blogPost1, blogPost2);
 
@@ -34,9 +34,15 @@ namespace Reservanto.NPS.DataAccess
 
             modelBuilder.Entity<ContactForm>().HasData(contactForm1, contactForm2);
 
+            var ideaToRealse1 = IdeaToRelease.Create(1, "Chtěl bych vytvořit nějakou animaci na vytváření koblih", DateTime.Now);
+
+            modelBuilder.Entity<IdeaToRelease>().HasData(ideaToRealse1);
+
+
 #endif
             // Podstatná část blogů, kterou potřebujeme v případě neurčení nebo smazání blog kategorie, protože se to bude seedovat.
 	        var blogcategory = BlogCategory.Create(1, "neurčený");
+
 
 	        modelBuilder.Entity<BlogCategory>().HasData(blogcategory);
         }

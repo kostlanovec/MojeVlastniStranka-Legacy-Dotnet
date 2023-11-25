@@ -9,13 +9,11 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 {
     public class ImageService
     {
-        private readonly DataManagementService dataManagementService;
         private readonly IHostEnvironment environment;
         private readonly DataContext context;
 
         public ImageService(DataContext context, IHostEnvironment environment)
         {
-            this.dataManagementService = new DataManagementService(context);
             this.environment = environment;
             this.context = context;
         }

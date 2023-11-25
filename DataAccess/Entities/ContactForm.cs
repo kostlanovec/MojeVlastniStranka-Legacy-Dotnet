@@ -84,7 +84,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		///  Vytváří instanci <see cref="ContactForm"/> Vhodný pro uložení do databáze.
 		/// </summary>
 #if DEBUG
-		public static ContactForm Create(int id, string firstName, string lastName, string email, string phoneNumber, string feedBack, DateTime date)
+		public static ContactForm Create(int? id, string firstName, string lastName, string email, string phoneNumber, string feedBack, DateTime date)
 		{
 			var contactForm = new ContactForm()
 			{

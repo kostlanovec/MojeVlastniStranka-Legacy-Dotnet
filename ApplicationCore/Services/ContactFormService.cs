@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.DataAccess;
 using MojeVlastniStranka.ApplicationCore.Requests;
+using MojeVlastniStranka.DataAccess.Entities;
 
 
 namespace MojeVlastniStranka.ApplicationCore.Services
@@ -9,16 +11,17 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
     public class ContactFormService
     {
-		private readonly DataManagementService dataManagementService;
-		public ContactFormService(DataContext context)
-		{
-			this.dataManagementService = new DataManagementService(context);
-		}
+	    private readonly DataContext context;
 
-		public async Task<FormProcessingResult> FormProcessing(ContactFormularRequest contactFormRequest)
+	    public ContactFormService(DataContext context)
+	    {
+		    this.context = context;
+	    }
+
+		public async Task<FormProcessingResult> FormProcessing(ContactFormularRequest contactFormularRequest)
         {
             var result = new FormProcessingResult();
-            var validationResults = contactFormRequest.Validate(new ValidationContext(contactFormRequest)).ToList();
+            var validationResults = contactFormularRequest.Validate(new ValidationContext(contactFormularRequest)).ToList();
 
             if (validationResults.Any())
             {
@@ -27,14 +30,25 @@ namespace MojeVlastniStranka.ApplicationCore.Services
                 return result;
             }
 
-            await dataManagementService.AddContactForm(contactFormRequest);
-            result.IsSuccess = true;
+			var contactFormular = ContactForm.Create(
+				null,
+				contactFormularRequest.FirstName,
+				contactFormularRequest.LastName,
+				contactFormularRequest.Email,
+				contactFormularRequest.PhoneNumber,
+				contactFormularRequest.Message,
+				contactFormularRequest.DateSend = DateTime.Now
+			);
+
+			context.ContactForms.Add(contactFormular);
+			await context.SaveChangesAsync();
+			result.IsSuccess = true;
             return result;
         }
 
 		public async Task<List<ContactFormularDto>> GetAllForms()
 		{
-			var contactForms = await dataManagementService.GetAllContactForms();
+			var contactForms = await context.ContactForms.ToListAsync();
 
 			var contactFormDtos = contactForms.Select(cf => new ContactFormularDto
 			{

@@ -58,10 +58,10 @@ namespace Admin
             });
 
 			// Zpřístupnění služeb z jiných vrstev pomocí dependency injection.
-			builder.Services.AddScoped<DataManagementService>();
 			builder.Services.AddScoped<ContactFormService>();
             builder.Services.AddScoped<BlogService>();
             builder.Services.AddScoped<ImageService>();
+            builder.Services.AddScoped<DevelopmentService>();
 
 			// Add services to the container.
 			builder.Services.AddRazorPages();
