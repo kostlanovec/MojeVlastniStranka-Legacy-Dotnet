@@ -12,15 +12,14 @@ namespace Reservanto.NPS.DataAccess
         public static void Initialize(ModelBuilder modelBuilder)
         {
 #if DEBUG
-            // Definování ukázkových blgo příspěvku.
+            // Definování ukázkových blog příspěvku.
             var blogPost1 = BlogPost.Create(1, "moje klobasa", "<h1>Ahoj</h1>", "Deset malých švestek", "Pepek Námořník", "rohlík, klobása", 1, "Jak mit obri pero", "blogimages/boxing.jpg", "Jak-mit-obri-pero", DateTime.Now);
             var blogPost2 = BlogPost.Create(2, "moje klobasa", "<h1>Projekt</h1>", "Pět malých kačátek", "Chleba s marmeládou", "Jsi slizký had, nemám tě rád", 2, "deset malych cernousku", "blogimages/boxing.jpg", "deset-malych-cernousku", DateTime.Now);
 
             modelBuilder.Entity<BlogPost>().HasData(blogPost1, blogPost2);
 
-            // Definování ukázkových obchodníků.
-            var merchant1 = BlogCategory.Create(3, "základ");
-            var merchant2 = BlogCategory.Create(2, "blogpříspěvky");
+            var merchant1 = BlogCategory.Create(4, "základ");
+            var merchant2 = BlogCategory.Create(3, "blogpříspěvky");
 
             modelBuilder.Entity<BlogCategory>().HasData(merchant1, merchant2);
 
@@ -38,13 +37,17 @@ namespace Reservanto.NPS.DataAccess
 
             modelBuilder.Entity<IdeaToRelease>().HasData(ideaToRealse1);
 
+            var testnotification = Notification.Create(1, DateTime.Now, "Testovací notifikace");
 
+            modelBuilder.Entity<Notification>().HasData(testnotification);
 #endif
             // Podstatná část blogů, kterou potřebujeme v případě neurčení nebo smazání blog kategorie, protože se to bude seedovat.
 	        var blogcategory = BlogCategory.Create(1, "neurčený");
 
+            // Tohle je specifický pro můj blog, jelikož chci mít rozdělený projekty a blog příspěvky.
+	        var blogcategoryProjekty = BlogCategory.Create(2, "projekty");
 
-	        modelBuilder.Entity<BlogCategory>().HasData(blogcategory);
+	        modelBuilder.Entity<BlogCategory>().HasData(blogcategory, blogcategoryProjekty);
         }
 	}
 }

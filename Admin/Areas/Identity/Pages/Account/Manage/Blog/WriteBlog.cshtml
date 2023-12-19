@@ -9,7 +9,6 @@
 <script src="/js/summernote/Plugins/summernote-ext-addclass.js"></script>
 <script src="/js/summernote/Plugins/summernote-ownplugin.js"></script>
 <script src="/lib/typo-js/typo.js"></script>
-<link rel="stylesheet" href="~/css/fast-style.css" asp-append-version="true" />
 <div class="col-md-12">
 	@if (!string.IsNullOrEmpty(Model.SuccessMessage))
 	{
@@ -24,7 +23,7 @@
 			@Html.ValidationSummary(false, "", new { @class = "text-danger" })
 		</div>
 	}
-
+	<link rel="stylesheet" href="~/css/fast-style.css" asp-append-version="true" />
 	<div id="summernote"></div>
 	<button id="editSettingsBtn" class="btn btn-primary">Publikovat</button>
 </div>
@@ -50,7 +49,7 @@
 	<div id="settingsTable">
 		<div>
 			<div class="row">
-				<div class="col-md-4  mx-auto" style="margin-top:80px">
+				<div class="col-md-4  mx-auto" style="margin-top:116px">
 					<form id="settingsForm" method="post" enctype="multipart/form-data">
 						<div class="form-group">
 							<label for="Name" class="text-white">Jméno blogu:</label>

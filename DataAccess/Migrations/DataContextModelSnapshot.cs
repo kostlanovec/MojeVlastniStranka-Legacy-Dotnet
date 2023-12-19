@@ -41,18 +41,23 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 3,
+                            Id = 4,
                             Name = "základ"
                         },
                         new
                         {
-                            Id = 2,
+                            Id = 3,
                             Name = "blogpříspěvky"
                         },
                         new
                         {
                             Id = 1,
                             Name = "neurčený"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "projekty"
                         });
                 });
 
@@ -115,7 +120,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                             Author = "Pepek Námořník",
                             BlogCategoryId = 1,
                             Content = "<h1>Ahoj</h1>",
-                            Date = new DateTime(2023, 11, 25, 14, 25, 37, 650, DateTimeKind.Local).AddTicks(7854),
+                            Date = new DateTime(2023, 12, 13, 7, 28, 48, 880, DateTimeKind.Local).AddTicks(1368),
                             Description = "moje klobasa",
                             ImagePath = "blogimages/boxing.jpg",
                             Keywords = "rohlík, klobása",
@@ -129,7 +134,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                             Author = "Chleba s marmeládou",
                             BlogCategoryId = 2,
                             Content = "<h1>Projekt</h1>",
-                            Date = new DateTime(2023, 11, 25, 14, 25, 37, 650, DateTimeKind.Local).AddTicks(7905),
+                            Date = new DateTime(2023, 12, 13, 7, 28, 48, 880, DateTimeKind.Local).AddTicks(1425),
                             Description = "moje klobasa",
                             ImagePath = "blogimages/boxing.jpg",
                             Keywords = "Jsi slizký had, nemám tě rád",
@@ -178,7 +183,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         new
                         {
                             Id = 10,
-                            Date = new DateTime(2023, 11, 25, 14, 25, 37, 650, DateTimeKind.Local).AddTicks(8053),
+                            Date = new DateTime(2023, 12, 13, 7, 28, 48, 880, DateTimeKind.Local).AddTicks(1615),
                             Email = "jan.novak@example.com",
                             FeedBack = "Dobrý den, rád bych se zeptal na možnost spolupráce.",
                             FirstName = "Jan",
@@ -188,7 +193,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         new
                         {
                             Id = 20,
-                            Date = new DateTime(2023, 11, 25, 14, 25, 37, 650, DateTimeKind.Local).AddTicks(8060),
+                            Date = new DateTime(2023, 12, 13, 7, 28, 48, 880, DateTimeKind.Local).AddTicks(1623),
                             Email = "info@kostlanovec.cz",
                             FeedBack = "Dobrý, mám zájem o nové stránky vámi vyrobené. Těším se, až mi ukážete, co všechno dokážete.",
                             FirstName = "Jan",
@@ -220,7 +225,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            DatePosted = new DateTime(2023, 11, 25, 14, 25, 37, 650, DateTimeKind.Local).AddTicks(8073),
+                            DatePosted = new DateTime(2023, 12, 13, 7, 28, 48, 880, DateTimeKind.Local).AddTicks(1644),
                             Idea = "Chtěl bych vytvořit nějakou animaci na vytváření koblih"
                         });
                 });
@@ -257,6 +262,34 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                             Id = 2,
                             Description = "stín minulosti",
                             FileName = "stinminulosti.jpg"
+                        });
+                });
+
+            modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.Notification", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
+
+                    b.Property<string>("ShortMessage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TimePublish")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notifications");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ShortMessage = "Testovací notifikace",
+                            TimePublish = new DateTime(2023, 12, 13, 7, 28, 48, 880, DateTimeKind.Local).AddTicks(1668)
                         });
                 });
 

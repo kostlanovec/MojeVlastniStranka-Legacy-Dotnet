@@ -6,8 +6,8 @@ using MojeVlastniStranka.DataAccess;
 
 namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Development
 {
-    public class ReportBugModel : PageModel
-    {
+	public class ReportBugModel : PageModel
+	{
 		private readonly DataContext context;
 		private readonly DevelopmentService developmentService;
 
@@ -18,35 +18,30 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Developme
 		}
 
 		[BindProperty]
-		public ReportedBugRequest ReportedBugRequestBinding
+		public ReportedBugRequest ReportedBugRequestBinding { get; set; }
+
+		public string SuccessMessage { get; private set; }
+
+		public async Task<IActionResult> OnPostAsync()
 		{
-			get;
-			set;
+			if (!ModelState.IsValid)
+			{
+				// Pokud validace selže
+				return Page();
+			}
+
+			var processingResult = await developmentService.ReportBug(ReportedBugRequestBinding);
+
+			if (processingResult)
+			{
+				// to-do to by se mělo "načíst" z ApplicationCore.
+				SuccessMessage = "Operace byla úspěšná.";
+
+				return Page();
+			}
+
+			// Pokud zpracování bugu selže
+			return Page();
 		}
-
-		public string SuccessMessage
-		{
-			get;
-			set;
-		}
-
-
-		[HttpPost]
-        public async Task<IActionResult> OnPostAsync()
-        {
-	        var processingResult = await developmentService.ReportBug(ReportedBugRequestBinding);
-
-	        if (processingResult == true)
-	        {
-		        // to-do to by se mělo "načíst" z ApplicationCore.
-		        SuccessMessage = "Operace byla úspěšná.";
-
-		        return Page();
-	        }
-	        else
-	        {
-		        return Page();
-	        }
-        }
 	}
 }

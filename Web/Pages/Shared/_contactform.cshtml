@@ -40,14 +40,12 @@
 	</address>
 }
 
-<!-- AJAX kód pro odeslání formuláře -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
         $('#kontakt').on('submit', function (event) {
             event.preventDefault();
 
-            // Clear previous errors
             $("#errorMessages").empty().hide();
 
             $.ajax({
@@ -58,17 +56,14 @@
                     if (response.success) {
                         alert(response.message);
                     } else {
-                        // Handle and show errors
                         $.each(response.errors, function (index, error) {
                             $("#errorMessages").append('<p>' + error.memberName + ': ' + error.errorMessage + '</p>');
                         });
 
-                        // Show the error messages div
                         $("#errorMessages").show();
                     }
                 },
                 error: function () {
-                    // This handles errors that are not caught on the server-side, like a 500 server error.
                     $("#errorMessages").append('<p>An unexpected error occurred. Please try again later.</p>');
                     $("#errorMessages").show();
                 }

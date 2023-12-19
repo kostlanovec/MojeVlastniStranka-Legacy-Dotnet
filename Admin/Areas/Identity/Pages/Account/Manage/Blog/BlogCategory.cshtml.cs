@@ -49,7 +49,8 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog
         public async Task<ActionResult> OnPostDeleteCategoryAsync(int Id)
         {
 	        BlogCategory = await blogService.GetAllCategoriesTask();
-			if (Id == 1)
+			// blog kategorie je 1, což znamená
+			if (Id == 1 || Id == 2)
 	        {
 		        return Page();
 	        }

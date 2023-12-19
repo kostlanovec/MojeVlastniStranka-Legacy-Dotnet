@@ -7,10 +7,11 @@
 	<h6 class="mb-4">Nápady k realizaci</h6>
 		<p>Máš nějaký nápad pro přidání nové funkce, prvků nebo chceš diskutovat o tom, jak si zpříjemnit práci se stránkou. Neváhej a napiš nám</p>
 		<div class="form-floating">
-			<textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 200px;"></textarea>
+			<textarea name="Idea" class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 200px;"></textarea>
 			<label for="floatingTextarea">Comments</label>
 		</div>
-	<!--Jméno a přijmení a další kontaktní údaje by se přidávaly automaticky, ale to zatím necháme být-->
+		<!--Jméno a přijmení a další kontaktní údaje by se přidávaly automaticky, ale to zatím necháme být-->
+		<div asp-validation-summary="All" class="text-danger"></div>
 		<button type="submit" class="btn btn-primary">Odeslat</button>
 	</div>
 </form>

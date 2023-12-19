@@ -30,7 +30,6 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Developme
 			set;
 		}
 
-		[HttpPost]
         public async Task<IActionResult> OnPostAsync()
         {
 			var processingResult = await developmentService.AddIdeaToRelease(IdeaToReleaseRequestBinding);

@@ -2,3 +2,71 @@
 @model MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Marketing.NewsLetterModel
 @{
 }
+
+<h1>Newsletter</h1>
+<div id="summernote"></div>
+<script>
+	// Show/hide settings table on button click
+	$('#editSettingsBtn').click(function () {
+		$('#settingsTable').toggle();
+	});
+
+	// Tlačítko pro vrácení zpět
+	$('#backBtn').click(function () {
+		$('#settingsTable').hide();
+	});
+
+	var defaultContent = '<header class="header__other"><h1 class="header__h1 fadeInLeft visible">Optimalizace stránek pro SEO</h1><p class="header__p fadeInLeft visible">Základní informace k SEO.Nejdůležitější praktiky pro nalezení vaších stránek na internetu</p></header><main class="main fadeInUp visible"><h2 class="h2__div__article red">SEO optimalizace</h2><p>Jako majitel stránky chcete, aby vaše stránka byla snadno vyhledavatelná, ale bohužel v dnešní době máme velmi vysokou konkurenci na internetu. Tím nám může pomoci efektivní SEO neboli search engine optimization. Do češtiny optimalizace pro vyhledávače. V tomhle článku si rozebereme praktiky, které nám pomohou to zlepšit.</p></main>';
+
+	$('#summernote').summernote({
+		lang: 'cs-CZ',
+		dialogsInBody: true,
+		spellCheck: true,
+		addclass: {
+			debug: false,
+			classTags: [{ title: "Button", "value": "btn btn-success" }, "body", "red", "h2__div__article", "header__h1", "fadeInLeft", "header__other", "header__p", "main"]
+		},
+		focus: true,
+		height: 300,
+		toolbar: [
+			['structure', ['structurePlugin']],
+			['img', ['picture']],
+			['style', ['style', 'addclass', 'clear']],
+			['fontstyle', ['bold', 'italic', 'ul', 'ol', 'link', 'paragraph']],
+			['fontstyleextra', ['strikethrough', 'underline', 'hr', 'color', 'superscript', 'subscript']],
+			['extra', ['video', 'table', 'height']],
+			['misc', ['undo', 'redo', 'codeview', 'help']],
+			['fontname', ['fontname']],
+			['fullscreen', ['fullscreen']]
+		],
+		callbacks: {
+			onInit: function () {
+				$('#summernote').summernote('code', defaultContent);
+			},
+			// to-do vyřešit kontrolu pravopisu
+			// onChange: function (contents, $editable) {
+			// 	var words = contents.replace(/<(?:.|\n)*?>/gm, '').split(/\s/);
+			// 	var misspelled = [];
+			// 	var dictionary = new Typo("en_US", false, false, { dictionaryPath: "localhost:7089/dictionaries" });
+
+			// 	words.forEach(function (word) {
+			// 		if (!dictionary.check(word) && !misspelled.includes(word)) {
+			// 			misspelled.push(word);
+			// 		}
+			// 	});
+
+
+			// 	console.log("Chyby v pravopisu:", misspelled);
+			// }
+		}
+	});
+
+	// to-do vyřešit, proč nefunguje oficiální získavání dat
+	$('form').on('submit', function () {
+		var htmlContent = $('.note-editable').html().trim();
+
+		$('#hiddenContent').val(htmlContent);
+		if (htmlContent === '' || htmlContent === '<p><br></p>') {
+			return null;
+		}
+	});</script>

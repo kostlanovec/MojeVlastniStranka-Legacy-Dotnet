@@ -58,7 +58,7 @@ namespace MojeVlastniStrankaFinanali
 	            endpoints.MapControllerRoute(
 		            name: "projekty",
 		            pattern: "projekty/{Slug}",
-		            defaults: new { controller = "Projekty", action = "ShowBlog" });
+		            defaults: new { controller = "Projekty", action = "ShowProject" });
             });
 			app.Run();
 		}

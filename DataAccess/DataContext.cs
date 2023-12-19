@@ -42,6 +42,8 @@ namespace MojeVlastniStranka.DataAccess
 
 		public DbSet<ReportedBug> ReportedBugs { get; set; }
 
+		public DbSet<Notification> Notifications { get; set; }
+
 		#endregion
 
 	}

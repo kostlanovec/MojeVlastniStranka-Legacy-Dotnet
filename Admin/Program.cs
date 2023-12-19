@@ -62,6 +62,8 @@ namespace Admin
             builder.Services.AddScoped<BlogService>();
             builder.Services.AddScoped<ImageService>();
             builder.Services.AddScoped<DevelopmentService>();
+			builder.Services.AddScoped<NotificationService>();
+			;
 
 			// Add services to the container.
 			builder.Services.AddRazorPages();

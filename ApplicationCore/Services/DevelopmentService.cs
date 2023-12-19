@@ -1,4 +1,6 @@
-﻿using MojeVlastniStranka.ApplicationCore.Requests;
+﻿using Microsoft.EntityFrameworkCore;
+using MojeVlastniStranka.ApplicationCore.Dto;
+using MojeVlastniStranka.ApplicationCore.Requests;
 using MojeVlastniStranka.DataAccess;
 using MojeVlastniStranka.DataAccess.Entities;
 
@@ -36,5 +38,57 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			context.SaveChangesAsync();
 			return true;
 		}
+
+		public async Task<List<ReportedBugDto>> GetAllReports()
+		{
+			var listReports = await context.ReportedBugs.ToListAsync();
+
+			var contactFormDtos = listReports.Select(cf => new ReportedBugDto()
+			{
+				Id = cf.Id,
+				Url = cf.Url,
+				Bug = cf.Bug
+				
+			}).ToList();
+
+			return contactFormDtos;
+		}
+
+		public async Task<List<IdeaToReleaseDto>> GetAllIdeas()
+		{
+			var listideacontext = await context.IdeaToReleases.ToListAsync();
+
+			var ideatoReleaseDtos = listideacontext.Select(cf => new IdeaToReleaseDto()
+			{
+				Id = cf.Id,
+				Idea = cf.Idea
+
+			}).ToList();
+
+			return ideatoReleaseDtos;
+		}
+
+		public async Task DeleteBugAsync(int bugId)
+		{
+			var bugToRemove = await context.ReportedBugs.FindAsync(bugId);
+			if (bugToRemove != null)
+			{
+				context.ReportedBugs.Remove(bugToRemove);
+				await context.SaveChangesAsync();
+			}
+		}
+
+		public async Task DeleteIdeaAsync(int ideaId)
+		{
+			var ideaToRemove = await context.IdeaToReleases.FindAsync(ideaId);
+			if (ideaToRemove != null)
+			{
+				context.IdeaToReleases.Remove(ideaToRemove);
+				await context.SaveChangesAsync();
+			}
+		}
+
 	}
+
+
 }

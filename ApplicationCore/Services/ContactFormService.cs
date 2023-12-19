@@ -12,6 +12,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
     public class ContactFormService
     {
 	    private readonly DataContext context;
+	    public NotificationService NotificationService;
 
 	    public ContactFormService(DataContext context)
 	    {
@@ -40,6 +41,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				contactFormularRequest.DateSend = DateTime.Now
 			);
 
+			NotificationService.CreateNotification($"New contact form from {contactFormularRequest.FirstName} {contactFormularRequest.LastName}.");
 			context.ContactForms.Add(contactFormular);
 			await context.SaveChangesAsync();
 			result.IsSuccess = true;
@@ -58,7 +60,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				PhoneNumber = cf.PhoneNumber,
 				Message = cf.FeedBack,
 				SendTime = cf.Date
-
 			}).ToList();
 
 			return contactFormDtos;

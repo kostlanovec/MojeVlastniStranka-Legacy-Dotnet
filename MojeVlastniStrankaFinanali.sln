@@ -18,8 +18,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MojeVlastniStranka.Admin", 
 		{DC9AFCAB-23FD-47EF-9482-D467E50894C5} = {DC9AFCAB-23FD-47EF-9482-D467E50894C5}
 	EndProjectSection
 EndProject
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "SeoGenerate", "SeoGenerate\SeoGenerate.pyproj", "{89C152C1-6408-47FD-B2FF-8CFD8FED293F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,8 +40,6 @@ Global
 		{D348F657-B3F9-4D86-9EBF-B71F9FF103A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D348F657-B3F9-4D86-9EBF-B71F9FF103A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D348F657-B3F9-4D86-9EBF-B71F9FF103A3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{89C152C1-6408-47FD-B2FF-8CFD8FED293F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{89C152C1-6408-47FD-B2FF-8CFD8FED293F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

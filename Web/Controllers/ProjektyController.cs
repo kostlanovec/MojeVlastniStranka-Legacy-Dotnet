@@ -13,9 +13,9 @@ namespace MojeVlastniStranka.Web.Controllers
 	    }
 
 
-		public IActionResult ShowBlog(string Name)
+		public IActionResult ShowProject(string Slug)
 		{
-			var blogPost = context.BlogPosts.FirstOrDefault(bp => bp.Name == Name);
+			var blogPost = context.BlogPosts.FirstOrDefault(bp => bp.Slug == Slug);
 
 			if (blogPost == null)
 			{
@@ -29,7 +29,7 @@ namespace MojeVlastniStranka.Web.Controllers
 				return NotFound();
 			}
 
-			return View("Projekty", blogPost);
+			return View("Shared/Muchomurka", blogPost);
 		}
 
 
