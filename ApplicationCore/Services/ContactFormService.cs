@@ -32,7 +32,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
             }
 
 			var contactFormular = ContactForm.Create(
-				null,
 				contactFormularRequest.FirstName,
 				contactFormularRequest.LastName,
 				contactFormularRequest.Email,

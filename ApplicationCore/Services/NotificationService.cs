@@ -17,7 +17,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		public void CreateNotification(string shortmessage)
 		{
 			var notification = Notification.Create(
-				null,
 				DateTime.Now,
 				shortmessage
 			);

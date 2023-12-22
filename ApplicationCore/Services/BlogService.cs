@@ -233,7 +233,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
 			if (blogCategoryExist == null)
 			{
-				var newCategory = BlogCategory.Create(null, CategoryNameAdd);
+				var newCategory = BlogCategory.Create(CategoryNameAdd);
 				context.BlogCategories.Add(newCategory);
 				await context.SaveChangesAsync();
 			}

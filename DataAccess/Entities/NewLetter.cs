@@ -44,7 +44,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 #else
 		public static NewsLetter Create(string email)
 		{
-			var newsLetter = new NewLetter()
+			var newsLetter = new NewsLetter()
 			{
 				Email = email
 			};

@@ -32,7 +32,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 #if DEBUG
 			var bug = ReportedBug.Create(null, reporetedBug.Url, reporetedBug.Bug, DateTime.Now);
 #else
-			var bug = IdeaToRelease.Create(ideaToReleaseRequest.Idea, DateTime.Now);
+			var bug = ReportedBug.Create(reporetedBug.Url, reporetedBug.Bug, DateTime.Now);
 #endif
 			context.ReportedBugs.Add(bug);
 			context.SaveChangesAsync();
