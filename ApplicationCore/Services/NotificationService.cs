@@ -16,10 +16,18 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
 		public void CreateNotification(string shortmessage)
 		{
+#if DEBUG
+			var notification = Notification.Create(
+				null,
+				DateTime.Now,
+				shortmessage
+			);
+#else
 			var notification = Notification.Create(
 				DateTime.Now,
 				shortmessage
 			);
+#endif
 			context.Notifications.Add(notification);
 			context.SaveChangesAsync();
 		}

@@ -30,8 +30,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
                 result.Errors = validationResults;
                 return result;
             }
-
+#if DEBUG
 			var contactFormular = ContactForm.Create(
+				null,
 				contactFormularRequest.FirstName,
 				contactFormularRequest.LastName,
 				contactFormularRequest.Email,
@@ -39,7 +40,16 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				contactFormularRequest.Message,
 				contactFormularRequest.DateSend = DateTime.Now
 			);
-
+#else
+	var contactFormular = ContactForm.Create(
+				contactFormularRequest.FirstName,
+				contactFormularRequest.LastName,
+				contactFormularRequest.Email,
+				contactFormularRequest.PhoneNumber,
+				contactFormularRequest.Message,
+				contactFormularRequest.DateSend = DateTime.Now
+			);
+#endif
 			NotificationService.CreateNotification($"New contact form from {contactFormularRequest.FirstName} {contactFormularRequest.LastName}.");
 			context.ContactForms.Add(contactFormular);
 			await context.SaveChangesAsync();
