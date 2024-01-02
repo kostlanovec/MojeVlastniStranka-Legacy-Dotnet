@@ -11,6 +11,7 @@ namespace MojeVlastniStranka.Web.Controllers
 		{
 			this.context = context;
 		}
+
 		public IActionResult Blog(string Slug)
 		{
 			var blogPost = context.BlogPosts.FirstOrDefault(bp => bp.Slug == Slug);
@@ -23,5 +24,4 @@ namespace MojeVlastniStranka.Web.Controllers
 			return View("Muchomurka", blogPost);
 		}
 	}
-
 }

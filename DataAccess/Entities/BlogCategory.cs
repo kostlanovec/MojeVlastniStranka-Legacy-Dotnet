@@ -37,10 +37,11 @@ namespace MojeVlastniStranka.DataAccess.Entities
         }
         }
 #else
-        public static BlogCategory Create(string name)
+        public static BlogCategory Create(int? id, string name)
         {
             var blogCategory = new BlogCategory()
             {
+                Id = id,
                 Name = name
             };
 

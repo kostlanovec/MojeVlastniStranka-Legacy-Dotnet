@@ -42,10 +42,10 @@ namespace Reservanto.NPS.DataAccess
             modelBuilder.Entity<Notification>().HasData(testnotification);
 #else
             // Podstatná část blogů, kterou potřebujeme v případě neurčení nebo smazání blog kategorie, protože se to bude seedovat.
-            var blogcategory = BlogCategory.Create("neurčený");
+            var blogcategory = BlogCategory.Create( 1, "neurčený");
 
             // Tohle je specifický pro můj blog, jelikož chci mít rozdělený projekty a blog příspěvky.
-	        var blogcategoryProjekty = BlogCategory.Create("projekty");
+	        var blogcategoryProjekty = BlogCategory.Create(2, "projekty");
 
 	        modelBuilder.Entity<BlogCategory>().HasData(blogcategory, blogcategoryProjekty);
 #endif
