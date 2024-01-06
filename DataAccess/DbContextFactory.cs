@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Asn1;
 
 namespace MojeVlastniStranka.DataAccess
 {
@@ -22,7 +24,8 @@ namespace MojeVlastniStranka.DataAccess
 			var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
 
 			// Nastavuje spojení na SQL Server pomocí řetězce připojení z konfiguračních dat.
-			optionsBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+			//optionsBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+			optionsBuilder.UseMySql(Configuration.GetConnectionString("DefaultConnection"), new MariaDbServerVersion(new Version(11, 4, 0)));
 
 			// Vytváří novou instanci DataContextu s nastavenými možnostmi.
 			DataContext context = new DataContext(optionsBuilder.Options);

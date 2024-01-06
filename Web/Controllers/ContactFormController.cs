@@ -16,7 +16,7 @@ namespace MojeVlastniStranka.Web.Controllers
 		}
 
 		[HttpPost]
-		// to-do Přidat možnost, jakou zemi skrz telefonní číslo máme
+		// todo Přidat možnost, jakou zemi skrz telefonní číslo máme
 		public async Task<IActionResult> SubmitContactForm(ContactFormularRequest contactform)
 		{
 			ContactFormService contactFormService = new ContactFormService(context);

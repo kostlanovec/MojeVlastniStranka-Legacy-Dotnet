@@ -24,7 +24,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		/// Vrací nebo nastavuje křesní jméno.
 		/// </summary>
-		[Column(TypeName = "nvarchar(20)")]
+		[Column(TypeName = "varchar(20)")]
 		public string FirstName
 		{
 			get;
@@ -34,7 +34,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		/// Vrací nebo nastavuje přijímení.
 		/// </summary>
-		[Column(TypeName = "nvarchar(20)")]
+		[Column(TypeName = "varchar(20)")]
 		public string LastName
 		{
 			get;
@@ -44,7 +44,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		/// Vrací nebo nastavuje email pro odeslání reakce.
 		/// </summary>
-		[Column(TypeName = "nvarchar(max)")]
+		[Column(TypeName = "text")]
 		public string Email
 		{
 			get;
@@ -55,6 +55,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// Vrací nebo nastavuje telefonní číslo.
 		/// </summary>
 		[Phone]
+		[Column(TypeName = "varchar(20)")]
 		public string PhoneNumber
 		{
 			get;
@@ -64,7 +65,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		/// Vrací nebo nastavuje text od zákazníka.
 		/// </summary>
-		[Column(TypeName = "nvarchar(max)")]
+		[Column(TypeName = "text")]
 		public string FeedBack
 		{
 			get;

@@ -17,14 +17,14 @@ namespace MojeVlastniStranka.DataAccess.Entities
             set;
         }
 
-        [Column(TypeName = "nvarchar(max)")]
+        [Column(TypeName = "text")]
         public string Name
         {
 	        get;
 	        set;
         }
 
-        [Column(TypeName = "nvarchar(max)")]
+        [Column(TypeName = "text")]
         public string Slug
         {
 	        get;
@@ -33,7 +33,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		/// Vrací nebo nastavuje popisek k blog příspěvku.
 		/// </summary>
-		[Column(TypeName = "nvarchar(max)")]
+		[Column(TypeName = "text")]
 
         public string Description
         {
@@ -44,7 +44,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// <summary>
         /// Vrací nebo nastavuje obsah v html
         /// </summary>
-        [Column(TypeName = "nvarchar(max)")]
+        [Column(TypeName = "text")]
 
         public string Content
         {
@@ -55,7 +55,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// <summary>
         /// Vrací nebo nastavuje titulek blog příspěvku. 
         /// </summary>
-        [Column(TypeName = "nvarchar(max)")]
+        [Column(TypeName = "text")]
 
         public string Title
         {
@@ -66,7 +66,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// <summary>
         /// Vrací nebo nastavuje autora blog příspěvku.
         /// </summary>
-        [Column(TypeName = "nvarchar(50)")]
+        [Column(TypeName = "varchar(50)")]
         public string Author
         {
             get;
@@ -76,7 +76,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// <summary>
         /// Vrací nebo nastavuje klíčová slova blog příspěvku.
         /// </summary>
-        [Column(TypeName = "nvarchar(max)")]
+        [Column(TypeName = "text")]
 
         public string Keywords
         {
@@ -93,7 +93,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
             set;
         }
 
-        [Column(TypeName = "nvarchar(max)")]
+        [Column(TypeName = "text")]
         public string ImagePath
         {
 	        get;

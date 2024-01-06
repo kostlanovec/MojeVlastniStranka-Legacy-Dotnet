@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MojeVlastniStranka.DataAccess;
 
@@ -18,9 +17,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.10")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
-
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.BlogCategory", b =>
                 {
@@ -28,11 +25,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
-
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
 
@@ -67,45 +62,43 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
-
                     b.Property<string>("Author")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int>("BlogCategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ImagePath")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Keywords")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Slug")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -120,7 +113,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                             Author = "Pepek Námořník",
                             BlogCategoryId = 1,
                             Content = "<h1>Ahoj</h1>",
-                            Date = new DateTime(2023, 12, 13, 7, 28, 48, 880, DateTimeKind.Local).AddTicks(1368),
+                            Date = new DateTime(2024, 1, 6, 11, 15, 56, 631, DateTimeKind.Local).AddTicks(2058),
                             Description = "moje klobasa",
                             ImagePath = "blogimages/boxing.jpg",
                             Keywords = "rohlík, klobása",
@@ -134,7 +127,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                             Author = "Chleba s marmeládou",
                             BlogCategoryId = 2,
                             Content = "<h1>Projekt</h1>",
-                            Date = new DateTime(2023, 12, 13, 7, 28, 48, 880, DateTimeKind.Local).AddTicks(1425),
+                            Date = new DateTime(2024, 1, 6, 11, 15, 56, 631, DateTimeKind.Local).AddTicks(2333),
                             Description = "moje klobasa",
                             ImagePath = "blogimages/boxing.jpg",
                             Keywords = "Jsi slizký had, nemám tě rád",
@@ -150,30 +143,28 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
-
                     b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("FeedBack")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(20)");
 
                     b.HasKey("Id");
 
@@ -183,7 +174,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         new
                         {
                             Id = 10,
-                            Date = new DateTime(2023, 12, 13, 7, 28, 48, 880, DateTimeKind.Local).AddTicks(1615),
+                            Date = new DateTime(2024, 1, 6, 11, 15, 56, 631, DateTimeKind.Local).AddTicks(3488),
                             Email = "jan.novak@example.com",
                             FeedBack = "Dobrý den, rád bych se zeptal na možnost spolupráce.",
                             FirstName = "Jan",
@@ -193,7 +184,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         new
                         {
                             Id = 20,
-                            Date = new DateTime(2023, 12, 13, 7, 28, 48, 880, DateTimeKind.Local).AddTicks(1623),
+                            Date = new DateTime(2024, 1, 6, 11, 15, 56, 631, DateTimeKind.Local).AddTicks(3538),
                             Email = "info@kostlanovec.cz",
                             FeedBack = "Dobrý, mám zájem o nové stránky vámi vyrobené. Těším se, až mi ukážete, co všechno dokážete.",
                             FirstName = "Jan",
@@ -208,14 +199,12 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
-
                     b.Property<DateTime>("DatePosted")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Idea")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -225,7 +214,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            DatePosted = new DateTime(2023, 12, 13, 7, 28, 48, 880, DateTimeKind.Local).AddTicks(1644),
+                            DatePosted = new DateTime(2024, 1, 6, 11, 15, 56, 631, DateTimeKind.Local).AddTicks(3670),
                             Idea = "Chtěl bych vytvořit nějakou animaci na vytváření koblih"
                         });
                 });
@@ -236,15 +225,13 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("FileName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -271,14 +258,12 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
-
                     b.Property<string>("ShortMessage")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("TimePublish")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -289,7 +274,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         {
                             Id = 1,
                             ShortMessage = "Testovací notifikace",
-                            TimePublish = new DateTime(2023, 12, 13, 7, 28, 48, 880, DateTimeKind.Local).AddTicks(1668)
+                            TimePublish = new DateTime(2024, 1, 6, 11, 15, 56, 631, DateTimeKind.Local).AddTicks(3806)
                         });
                 });
 
@@ -299,18 +284,16 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
-
                     b.Property<string>("Bug")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("DatePosted")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Url")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 

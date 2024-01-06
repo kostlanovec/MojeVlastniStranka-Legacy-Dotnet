@@ -27,7 +27,6 @@ namespace Admin
 
             builder.Services.Configure<IdentityOptions>(options =>
             {
-	            // Password settings.
 	            options.Password.RequireDigit = true;
 	            options.Password.RequireLowercase = true;
 	            options.Password.RequireNonAlphanumeric = true;
@@ -35,12 +34,10 @@ namespace Admin
 	            options.Password.RequiredLength = 6;
 	            options.Password.RequiredUniqueChars = 1;
 
-	            // Lockout settings.
 	            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(90);
 	            options.Lockout.MaxFailedAccessAttempts = 5;
 	            options.Lockout.AllowedForNewUsers = true;
 
-	            // User settings.
 	            options.User.AllowedUserNameCharacters =
 		            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
 	            options.User.RequireUniqueEmail = false;
@@ -48,7 +45,6 @@ namespace Admin
 
             builder.Services.ConfigureApplicationCookie(options =>
             {
-	            // Cookie settings
 	            options.Cookie.HttpOnly = true;
 	            options.ExpireTimeSpan = TimeSpan.FromDays(90);
 
@@ -57,24 +53,19 @@ namespace Admin
 	            options.SlidingExpiration = true;
             });
 
-			// Zpřístupnění služeb z jiných vrstev pomocí dependency injection.
 			builder.Services.AddScoped<ContactFormService>();
             builder.Services.AddScoped<BlogService>();
             builder.Services.AddScoped<ImageService>();
             builder.Services.AddScoped<DevelopmentService>();
 			builder.Services.AddScoped<NotificationService>();
-			;
 
-			// Add services to the container.
 			builder.Services.AddRazorPages();
             builder.Services.AddControllersWithViews();
 			var app = builder.Build();
 
-			// Configure the HTTP request pipeline.
 			if (!app.Environment.IsDevelopment())
 			{
 				app.UseExceptionHandler("/Error");
-				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 				app.UseHsts();
 			}
 

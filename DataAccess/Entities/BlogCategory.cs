@@ -16,7 +16,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// <summary>
         /// Vrací nebo nastavuje jméno kategorie blogu.
         /// </summary>
-        [Column(TypeName = "nvarchar(max)")]
+        [Column(TypeName = "varchar(100)")]
         public string Name { get; set; }
 
         /// <summary>
