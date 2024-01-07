@@ -22,8 +22,8 @@ namespace Admin
             builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
             builder.Services.AddDbContext<DataContext>(options =>
-		            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")),
-	            ServiceLifetime.Scoped);
+					   options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), new MariaDbServerVersion(new Version(11, 4, 0))),
+				ServiceLifetime.Scoped);
 
             builder.Services.Configure<IdentityOptions>(options =>
             {

@@ -110,9 +110,8 @@
 s
 @inject SignInManager<AdminUser> SignInManager
 @inject UserManager<AdminUser> UserManager
-
 	
-<script>
+ <script>
 	 document.addEventListener("DOMContentLoaded", function () {
 		 var sidebarToggler = document.querySelector('.sidebar-toggler');
 		 var sidebar = document.querySelector('.sidebar');
@@ -129,7 +128,6 @@ s
 		 });
 	 });
 </script>
-
 
 @section Scripts {
     @RenderSection("Scripts", required: false)
