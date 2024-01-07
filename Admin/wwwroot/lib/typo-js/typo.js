@@ -1,4 +1,4 @@
-/* globals chrome: false */
+﻿/* globals chrome: false */
 /* globals __dirname: false */
 /* globals require: false */
 /* globals Buffer: false */
@@ -71,6 +71,7 @@ Typo = function (dictionary, affData, wordsData, settings) {
 	var i, j, _len, _jlen;
 	
 	if (dictionary) {
+		console.log("začínáme");
 		self.dictionary = dictionary;
 
 		// If the data is preloaded, just setup the Typo object.
@@ -237,7 +238,8 @@ Typo.prototype = {
 	 *          always returned.
 	 */
 	
-	_readFile : function (path, charset, async) {
+	_readFile: function (path, charset, async) {
+		console.log("Reading file: " + path);)
 		charset = charset || "utf8";
 		
 		if (typeof XMLHttpRequest !== 'undefined') {
@@ -247,18 +249,19 @@ Typo.prototype = {
 			
 			if (async) {
 				promise = new Promise(function(resolve, reject) {
-					req.onload = function() {
+					req.onload = function () {
+						console.log("Request successful");
 						if (req.status === 200) {
 							resolve(req.responseText);
-						}
-						else {
+						} else {
 							reject(req.statusText);
 						}
 					};
-					
-					req.onerror = function() {
+
+					req.onerror = function () {
+						console.log("Request failed");
 						reject(req.statusText);
-					}
+					};
 				});
 			}
 		
