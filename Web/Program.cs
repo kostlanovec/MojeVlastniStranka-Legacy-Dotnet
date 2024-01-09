@@ -16,6 +16,9 @@ namespace MojeVlastniStrankaFinanali
 					options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), new MariaDbServerVersion(new Version(11, 4, 0))),
 				ServiceLifetime.Scoped);
 
+			// migrate
+            var dataContext = builder.Services.BuildServiceProvider().GetService<DataContext>();
+            dataContext.Database.Migrate();
 
 			builder.Services.AddControllers();
 			builder.Services.AddScoped<BlogService>();
@@ -30,7 +33,7 @@ namespace MojeVlastniStrankaFinanali
 
                 app.UseStatusCodePagesWithReExecute("/StatusCode/{0}");
 				app.UseHsts();
-			} 
+			}
 
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();

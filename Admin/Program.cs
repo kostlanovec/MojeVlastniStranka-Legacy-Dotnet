@@ -13,10 +13,13 @@ namespace Admin
 		public static void Main(string[] args)
 		{
 			var builder = WebApplication.CreateBuilder(args);
-         
+
             builder.Services.AddDbContext<AdminContext>(options =>
                     options.UseMySql(builder.Configuration.GetConnectionString("AdminContextConnection"), new MariaDbServerVersion(new Version(11, 4, 0))),
                 ServiceLifetime.Scoped);
+
+            var adminContext = builder.Services.BuildServiceProvider().GetService<AdminContext>();
+            adminContext.Database.Migrate();
 
             builder.Services.AddDefaultIdentity<AdminUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AdminContext>();
 
@@ -25,6 +28,9 @@ namespace Admin
             builder.Services.AddDbContext<DataContext>(options =>
 					   options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), new MariaDbServerVersion(new Version(11, 4, 0))),
 				ServiceLifetime.Scoped);
+
+            var dataContext = builder.Services.BuildServiceProvider().GetService<DataContext>();
+            dataContext.Database.Migrate();
 
             builder.Services.Configure<IdentityOptions>(options =>
             {
