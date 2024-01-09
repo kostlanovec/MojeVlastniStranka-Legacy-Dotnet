@@ -107,7 +107,6 @@ namespace Admin.Areas.Identity.Pages.Account
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure:false);
                     _logger.LogInformation("User logged in.");
-
                     if (result.Succeeded)
                     {
                         // Přesměrování na stránku pro správu účtu
@@ -130,7 +129,6 @@ namespace Admin.Areas.Identity.Pages.Account
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return Page();
         }
     }

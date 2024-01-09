@@ -13,10 +13,11 @@ namespace Admin
 		public static void Main(string[] args)
 		{
 			var builder = WebApplication.CreateBuilder(args);
-            var connectionString = builder.Configuration.GetConnectionString("AdminContextConnection") ?? throw new InvalidOperationException("Connection string 'AdminContextConnection' not found.");
+         
+            builder.Services.AddDbContext<AdminContext>(options =>
+                    options.UseMySql(builder.Configuration.GetConnectionString("AdminContextConnection"), new MariaDbServerVersion(new Version(11, 4, 0))),
+                ServiceLifetime.Scoped);
 
-
-			builder.Services.AddDbContext<AdminContext>(options => options.UseSqlServer(connectionString));
             builder.Services.AddDefaultIdentity<AdminUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AdminContext>();
 
             builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
