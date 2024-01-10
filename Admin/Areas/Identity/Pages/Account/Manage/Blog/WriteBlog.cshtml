@@ -135,7 +135,7 @@
 		callbacks: {
 			onInit: function () {
 				$('#summernote').summernote('code', defaultContent);
-			},
+			}/*,
 			onChange: function (contents, $editable) {
 				var words = contents.replace(/<(?:.|\n)*?>/gm, '').split(/\s/);
 				var misspelled = [];
@@ -149,11 +149,11 @@
 
 
 				console.log("Chyby v pravopisu:", misspelled);
-			}
+			}*/
 		}
 	});
 
-	// to-do vyřešit, proč nefunguje oficiální získavání dat
+	// todo vyřešit, proč nefunguje oficiální získavání dat
 	$('form').on('submit', function () {
 		var htmlContent = $('.note-editable').html().trim();
 

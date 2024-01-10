@@ -1,4 +1,4 @@
-﻿<!-- Formulář -->
+﻿
 @Html.AntiForgeryToken()
 @using (Html.BeginForm("SubmitContactForm", "ContactForm", FormMethod.Post, new { id = "kontakt", @class = "form fadeInUp" }))
 {
@@ -57,7 +57,7 @@
                         alert(response.message);
                     } else {
                         $.each(response.errors, function (index, error) {
-                            $("#errorMessages").append('<p>' + error.memberName + ': ' + error.errorMessage + '</p>');
+                            $("#errorMessages").append('<p>' + error.memberName + 'x ' + error.errorMessage + '</p>');
                         });
 
                         $("#errorMessages").show();

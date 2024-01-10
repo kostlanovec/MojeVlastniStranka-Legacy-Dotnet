@@ -50,7 +50,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				contactFormularRequest.DateSend = DateTime.Now
 			);
 #endif
-			NotificationService.CreateNotification($"New contact form from {contactFormularRequest.FirstName} {contactFormularRequest.LastName}.");
+			/*NotificationService.CreateNotification($"New contact form from {contactFormularRequest.FirstName} {contactFormularRequest.LastName}.");*/
 			context.ContactForms.Add(contactFormular);
 			await context.SaveChangesAsync();
 			result.IsSuccess = true;

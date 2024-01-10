@@ -258,7 +258,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				{
 					foreach (var blogPost in existingAllBlogWithDeleteBlogCategory)
 					{
-						// 1 je blog takzvaně neurčený, což je takový, jestli nerozhodnout, že by to bylo spíše podle jména než kategorie. Což je diskutabilní.
+						// todo 1 je blog takzvaně neurčený, což je takový, jestli nerozhodnout, že by to bylo spíše podle jména než kategorie. Což je diskutabilní.
 						blogPost.BlogCategoryId = 1;
 					}
 				}
@@ -286,8 +286,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// </summary>
 		private async Task<string> UploadImageAsync(IFormFile file)
 		{
-			// to-do vyřešit tento otřesný hard-coding
-			var uploadsDirectory = "C:\\app\\MojeVlastniStrankaFinanali\\Web\\wwwroot\\images\\blog";
+            // todo vyřešit tento otřesný hard-coding
+            var absolutePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+            var uploadsDirectory = "C:\\app\\MojeVlastniStrankaFinanali\\Web\\wwwroot\\images\\blog";
 			var filePath = Path.Combine(uploadsDirectory, file.FileName);
 
 			if (!Directory.Exists(uploadsDirectory))
