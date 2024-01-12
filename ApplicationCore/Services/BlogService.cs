@@ -245,7 +245,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
 		}
 
-		// to-do vyřešit, jak při odstranění blog kategorie přistupovat.
+		// todo vyřešit, jak při odstranění blog kategorie přistupovat.
 		public async Task<FormProcessingResult> DeleteBlogCategory(int BlogCategoryId){
 			var formProcessingResult = new FormProcessingResult();
 			var existingBlogCategory = await context.BlogCategories.SingleOrDefaultAsync(bp => bp.Id == BlogCategoryId);
@@ -269,6 +269,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			return formProcessingResult;
 		}
 
+		/// <summary>
+		/// Smaže blog příspěvek podle jeho Id.
+		/// </summary>
 		public async Task<FormProcessingResult> DeleteBlogPost(int? BlogId)
 		{
 			var formProcessingResult = new FormProcessingResult();
@@ -286,9 +289,8 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// </summary>
 		private async Task<string> UploadImageAsync(IFormFile file)
 		{
-            // todo vyřešit tento otřesný hard-coding
             var absolutePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
-            var uploadsDirectory = "C:\\app\\MojeVlastniStrankaFinanali\\Web\\wwwroot\\images\\blog";
+            var uploadsDirectory = absolutePath + "images\\blog";
 			var filePath = Path.Combine(uploadsDirectory, file.FileName);
 
 			if (!Directory.Exists(uploadsDirectory))

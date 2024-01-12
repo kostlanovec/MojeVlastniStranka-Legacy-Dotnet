@@ -33,10 +33,13 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog
             this.imageService = imageService;
         }
 
-        public string UrlToImage = "http://localhost:5266";
+#if DEBUG
+	    public string UrlToImage = "http://localhost:5266";
+#else
+  public string UrlToImage = "http://localhost:5266";
+#endif
 
-
-		public async Task OnGet()
+        public async Task OnGet()
         {
             Input = new AddImageRequest();
             Images = await imageService.GetImagesAsync();

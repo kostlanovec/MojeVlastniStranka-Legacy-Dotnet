@@ -19,6 +19,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		    this.context = context;
 	    }
 
+		/// <summary>
+		/// Zpracování formuláře.
+		/// </summary>
 		public async Task<FormProcessingResult> FormProcessing(ContactFormularRequest contactFormularRequest)
         {
             var result = new FormProcessingResult();
@@ -57,6 +60,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
             return result;
         }
 
+		/// <summary>
+		/// Získání všech formulářů.
+		/// </summary>
 		public async Task<List<ContactFormularDto>> GetAllForms()
 		{
 			var contactForms = await context.ContactForms.ToListAsync();

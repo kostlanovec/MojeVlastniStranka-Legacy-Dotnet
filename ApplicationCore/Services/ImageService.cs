@@ -18,10 +18,14 @@ namespace MojeVlastniStranka.ApplicationCore.Services
             this.context = context;
         }
 
+		/// <summary>
+		/// Uploudování obrázků do wwwrootu.
+		/// </summary>
         public async Task UploadImageAsync(AddImageRequest addImageRequest)
         {
-            // to-do čtení z konfigurace, hard programming
-	        var uploadsDirectory = "C:\\app\\MojeVlastniStrankaFinanali\\Web\\wwwroot\\images\\galeriefotky";
+			var absolutePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+
+			var uploadsDirectory = absolutePath + "\\images\\galeriefotky";
 			var filePath = Path.Combine(uploadsDirectory, addImageRequest.FileUpload.FileName);
 
             if (!Directory.Exists(uploadsDirectory))
@@ -39,6 +43,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
             await this.context.SaveChangesAsync();
         }
 
+		/// <summary>
+		/// Získání všech obrázku.
+		/// </summary>
 		public async Task<List<ImageDto>> GetImagesAsync()
 		{
 			return await this.context.Images
@@ -51,6 +58,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				.ToListAsync();
 		}
 
+		/// <summary>
+		/// Aktualizování popisku obrázku.
+		/// </summary>
 		public async Task UpdateImageDescriptionAsync(int imageId, string newDescription)
         {
 	        var image = await this.context.Images.FindAsync(imageId);
@@ -61,6 +71,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 	        }
         }
 
+		/// <summary>
+		/// Vymazání obrázku.
+		/// </summary>
         public async Task DeleteImageAsync(int imageId)
         {
 	        var image = await this.context.Images.FindAsync(imageId);

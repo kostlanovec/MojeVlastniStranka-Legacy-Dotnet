@@ -14,6 +14,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			this.context = context;
 		}
 
+		/// <summary>
+		/// Přidání nápadu do databáze.
+		/// </summary>
 		public async Task<bool> AddIdeaToRelease(IdeaToReleaseRequest ideaToReleaseRequest)
 		{
 #if DEBUG
@@ -27,6 +30,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			return true;
 		}
 
+		/// <summary>
+		/// Přidání chyby do databáze.
+		/// </summary>
 		public async Task<bool> ReportBug(ReportedBugRequest reporetedBug)
 		{
 #if DEBUG
@@ -39,6 +45,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			return true;
 		}
 
+		/// <summary>
+		/// Získání všech chyb z databáze.
+		/// </summary>
 		public async Task<List<ReportedBugDto>> GetAllReports()
 		{
 			var listReports = await context.ReportedBugs.ToListAsync();
@@ -54,6 +63,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			return contactFormDtos;
 		}
 
+		/// <summary>
+		/// Źískání všech nápadu z databáze.
+		/// </summary>
 		public async Task<List<IdeaToReleaseDto>> GetAllIdeas()
 		{
 			var listideacontext = await context.IdeaToReleases.ToListAsync();
@@ -68,6 +80,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			return ideatoReleaseDtos;
 		}
 
+		/// <summary>
+		/// Smazání chyby z databáze.
+		/// </summary>
 		public async Task DeleteBugAsync(int bugId)
 		{
 			var bugToRemove = await context.ReportedBugs.FindAsync(bugId);
@@ -78,6 +93,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			}
 		}
 
+		/// <summary>
+		/// Smazání nápadu z databáze.
+		/// </summary>
 		public async Task DeleteIdeaAsync(int ideaId)
 		{
 			var ideaToRemove = await context.IdeaToReleases.FindAsync(ideaId);

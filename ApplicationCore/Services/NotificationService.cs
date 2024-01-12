@@ -14,6 +14,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			this.context = context;
 		}
 
+		/// <summary>
+		/// Tvorba nové notifikace.
+		/// </summary>
 		public void CreateNotification(string shortmessage)
 		{
 #if DEBUG
@@ -32,6 +35,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			context.SaveChangesAsync();
 		}
 
+		/// <summary>
+		/// Získání všech notifikací.
+		/// </summary>
 		public async Task<List<NotificationDto>> GetAllNotification()
 		{
 			var result = await context.Notifications
