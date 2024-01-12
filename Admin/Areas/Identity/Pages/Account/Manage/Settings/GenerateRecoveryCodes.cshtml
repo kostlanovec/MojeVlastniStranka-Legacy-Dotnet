@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Generate two-factor authentication (2FA) recovery codes";
 }
-
+<div class="bg-secondary rounded h-100 p-4">
 <partial name="_StatusMessage" for="StatusMessage" />
 <h4>@ViewData["Title"]</h4>
 <div class="alert alert-warning" role="alert">
@@ -20,7 +20,8 @@
     </p>
 </div>
 <div>
-    <form method="post" class="form-group">
-        <button class="btn btn-danger" type="submit">Generate Recovery Codes</button>
-    </form>
+	<form method="post" class="form-group">
+		<button class="btn btn-danger" type="submit">Generate Recovery Codes</button>
+	</form>
+</div>
 </div>
