@@ -3,6 +3,7 @@
 @{
 	var baseUrl = "https://localhost:7207";
 }
+<div class="bg-secondary rounded h-100 p-4">
 <form method="get">
 	<input type="text" placeholder="Hledat podle názvu" name="searchString" />
 	<input type="text" placeholder="Hledat podle autora" name="author" />
@@ -17,7 +18,7 @@
 	<input type="date" name="toDate" />
 	<button type="submit">Filtrovat</button>
 </form>
-<div class="row">
+<div class="row mt-4">
 	@foreach (var post in Model.Posts)
 	{
 		<div class="col-md-4">
@@ -39,4 +40,5 @@
 			</div>
 		</div>
 	}
+</div>
 </div>

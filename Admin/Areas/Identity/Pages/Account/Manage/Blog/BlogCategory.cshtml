@@ -2,21 +2,22 @@
 @model MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog.BlogCategoryModel
 @{
 }
+<div class="bg-secondary rounded h-100 p-4">
+	<form method="post">
+		<label for="CategoryNameAdd">Nová kategorie:</label>
+		<input name="CategoryNameAdd" id="CategoryNameAdd" />
+		<button type="submit" asp-page-handler="AddCategory">Přidat kategorii</button>
+	</form>
 
-<form method="post">
-	<label for="CategoryNameAdd">Nová kategorie:</label>
-	<input name="CategoryNameAdd" id="CategoryNameAdd" />
-	<button type="submit" asp-page-handler="AddCategory">Přidat kategorii</button>
-</form>
-
-<form method="post">
-	<select name="Id">
-		<option value="">Všechny kategorie</option>
-		@foreach (var category in Model.BlogCategory)
-		{
-			<option value="@category.Id">@category.Name</option>
-		}
-	</select>
-	<p class="alert  alert-danger">Při smazání blog kategorie se příspěvky náležící k smazané blog kategorii přesunout do kategorie neurčený</p>
-	<button type="submit" asp-page-handler="DeleteCategory">Smazat blog kategorii</button>
-</form>
+	<form method="post">
+		<select name="Id">
+			<option value="">Všechny kategorie</option>
+			@foreach (var category in Model.BlogCategory)
+			{
+				<option value="@category.Id">@category.Name</option>
+			}
+		</select>
+		<p class="alert  alert-danger">Při smazání blog kategorie se příspěvky náležící k smazané blog kategorii přesunout do kategorie neurčený</p>
+		<button type="submit" asp-page-handler="DeleteCategory">Smazat blog kategorii</button>
+	</form>
+</div>

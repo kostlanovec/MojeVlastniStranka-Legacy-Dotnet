@@ -4,6 +4,7 @@ using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.ApplicationCore.Requests;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
+using static System.Net.WebRequestMethods;
 
 namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog
 {
@@ -32,7 +33,10 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog
             this.imageService = imageService;
         }
 
-        public async Task OnGet()
+        public string UrlToImage = "http://localhost:5266";
+
+
+		public async Task OnGet()
         {
             Input = new AddImageRequest();
             Images = await imageService.GetImagesAsync();

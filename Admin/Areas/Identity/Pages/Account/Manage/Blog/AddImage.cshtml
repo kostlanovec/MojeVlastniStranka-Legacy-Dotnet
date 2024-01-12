@@ -2,14 +2,14 @@
 @model MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog.AddImageModel
 @{
     // todo vyřešit, jak by to vypadalo na ostré verzi
-    var baseUrl = "https://localhost:7207";
+    var baseUrl = Model.UrlToImage;
 }
 <!--todo sjednotit všude jquery, bootstrap na jednotný-->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
-
+<div class="bg-secondary rounded h-100 p-4">
 <div class="modal" id="confirmDeleteModal" tabindex="2" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -49,26 +49,27 @@
 
 <h2>Seznam obrázku v galerii</h2>
 <div class="row">
-    @foreach (var image in Model.Images)
-    {
-        <div class="col-md-4">
-            <img class="card-img-top" src="@Url.Content($"{baseUrl}/images/galeriefotky/{image.FileName}")" alt="@image.Description" />
-            <div class="card-body">
-                <h5 class="card-title">@image.Description</h5>
-                <form method="post">
-                    <input type="hidden" name="imageId" value="@image.Id" />
-                    <div class="form-group">
-                        <label for="newDescription">Nový popis:</label>
-                        <input type="text" id="newDescription" name="newDescription" value="@image.Description" required />
-                    </div>
-                    <div class="btn-group" role="group" aria-label="Obrázek akce">
-                        <button type="submit" asp-page-handler="UpdateDescription" class="btn btn-primary">Aktualizovat popis</button>
-                        <button type="button" class="btn btn-danger" onclick="setDeleteImageId('@image.Id')" data-toggle="modal" data-target="#confirmDeleteModal" data-backdrop="false">Odstranit obrázek</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    }
+	@foreach (var image in Model.Images)
+	{
+		<div class="col-md-4">
+			<img class="card-img-top" src="@Url.Content($"{baseUrl}/images/galeriefotky/{image.FileName}")" alt="@image.Description" />
+			<div class="card-body">
+				<h5 class="card-title">@image.Description</h5>
+				<form method="post">
+					<input type="hidden" name="imageId" value="@image.Id" />
+					<div class="form-group">
+						<label for="newDescription">Nový popis:</label>
+						<input type="text" id="newDescription" name="newDescription" value="@image.Description" required />
+					</div>
+					<div class="btn-group" role="group" aria-label="Obrázek akce">
+						<button type="submit" asp-page-handler="UpdateDescription" class="btn btn-primary">Aktualizovat popis</button>
+						<button type="button" class="btn btn-danger" onclick="setDeleteImageId('@image.Id')" data-toggle="modal" data-target="#confirmDeleteModal" data-backdrop="false">Odstranit obrázek</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	}
+</div>
 </div>
 
 <script>
