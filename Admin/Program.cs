@@ -65,6 +65,7 @@ namespace Admin
             builder.Services.AddScoped<ImageService>();
             builder.Services.AddScoped<DevelopmentService>();
 			builder.Services.AddScoped<NotificationService>();
+            builder.Services.AddScoped<DashboardService>();
 
 			builder.Services.AddRazorPages();
             builder.Services.AddControllersWithViews();
