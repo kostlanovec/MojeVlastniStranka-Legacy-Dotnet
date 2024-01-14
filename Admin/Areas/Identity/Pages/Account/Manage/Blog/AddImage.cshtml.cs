@@ -36,7 +36,7 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog
 #if DEBUG
 	    public string UrlToImage = "http://localhost:5266";
 #else
-  public string UrlToImage = "http://localhost:5266";
+  public string UrlToImage = "https://kostalanovec.cz";
 #endif
 
         public async Task OnGet()

@@ -84,6 +84,7 @@
             reader.onload = function (e) {
                 var img = document.createElement('img');
                 img.src = e.target.result;
+                img.classList.add('img-fluid');
 
                 var previewDiv = document.getElementById('image-preview');
                 previewDiv.innerHTML = '';
