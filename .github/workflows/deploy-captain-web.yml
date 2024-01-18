@@ -10,18 +10,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.0.x
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build the app
+        run: dotnet publish Web -c Release -o out
       - uses: a7ul/tar-action@v1.1.0
         with:
           command: c
           cwd: "./"
           files: |
-            Admin
-            ApplicationCore
-            DataAccess
-            SharedResources
-            Web
-            MojeVlastniStrankaFinanali.sln
+            out/
             captain-definition-web
           outPath: deploy.tar
 
