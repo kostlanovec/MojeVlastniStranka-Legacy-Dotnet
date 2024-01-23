@@ -1,0 +1,5 @@
+FROM mcr.microsoft.com/dotnet/sdk:7.0
+WORKDIR /app
+COPY . .
+WORKDIR /app/out
+ENTRYPOINT ["dotnet", "MojeVlastniStranka.Admin.dll", "--urls", "http://0.0.0.0:80"]
