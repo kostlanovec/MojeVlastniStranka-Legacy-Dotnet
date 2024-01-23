@@ -134,21 +134,7 @@
 		callbacks: {
 			onInit: function () {
 				$('#summernote').summernote('code', defaultContent);
-			}/*,
-			onChange: function (contents, $editable) {
-				var words = contents.replace(/<(?:.|\n)*?>/gm, '').split(/\s/);
-				var misspelled = [];
-				var dictionary = new Typo("cs_CZ", false, false, { dictionaryPath: "localhost:7208/dictionaries" });
-
-				words.forEach(function (word) {
-					if (!dictionary.check(word) && !misspelled.includes(word)) {
-						misspelled.push(word);
-					}
-				});
-
-
-				console.log("Chyby v pravopisu:", misspelled);
-			}*/
+			}
 		}
 	});
 
