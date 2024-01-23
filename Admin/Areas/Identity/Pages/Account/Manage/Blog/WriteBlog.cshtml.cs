@@ -51,7 +51,6 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage
 
 			if (processingResult.IsSuccess)
 			{
-				// todo to by se mělo "načíst" z ApplicationCore.
 				SuccessMessage = "Operace byla úspěšná.";
 
 				return Page();

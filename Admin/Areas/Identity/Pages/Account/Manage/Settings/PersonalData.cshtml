@@ -1,19 +1,19 @@
 ﻿@page
 @model MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Settings.PersonalDataModel
 @{
-    ViewData["Title"] = "Personal Data";
+    ViewData["Title"] = "Osobní data";
 }
 
 <div class="bg-secondary rounded h-100 p-4">
 	<h4>@ViewData["Title"]</h4>
 	<form asp-page="DownloadPersonalData" method="post" class="form-group">
-		<p>Your account contains personal data that you have given us. This page allows you to download or delete that data.</p>
+		<p>Tahle osobní stránka obsahuje data, která jste nám poskytli. Tahle stránka vám dovoluje stáhnout nebo vymazat vaše data.</p>
 		<p>
-			<strong>Deleting this data will permanently remove your account, and this cannot be recovered.</strong>
+			<strong>Smazání těchto dat na dobro smazete svůj učet a nebude moct být obnovený.</strong>
 		</p>
-		<button class="btn btn-success" type="submit">Download</button>
-		<p>
-			<a asp-page="DeletePersonalData" class="btn btn-primary">Delete</a>
+		<button class="btn btn-success" type="submit">Stažení</button>
+		<p class="mt-2">
+			<a asp-page="DeletePersonalData" class="btn btn-primary">Smazání</a>
 		</p>
 	</form>
 </div>

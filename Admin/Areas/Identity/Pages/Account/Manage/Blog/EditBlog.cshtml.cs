@@ -30,7 +30,7 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage
         {
 	        get;
 	        set;
-        } = new EditBlogPostRequest();
+        }
 
         public EditBlogPostModel(BlogService blogService)
 	    {
@@ -57,7 +57,7 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage
         }
 
 		[HttpPost]
-		public async Task<IActionResult> UpdateBlogPostAsync()
+		public async Task<IActionResult> OnPostUpdateBlogPostAsync()
 		{
 			EditBlogPostDto = await blogService.GetBlogPostById(Id);
 			BlogCategory = await blogService.GetAllCategoriesTask();
@@ -67,38 +67,29 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage
 			if (processingResult.IsSuccess)
 			{
 				SuccessMessage = "Operace byla úspěšná.";
-
 				return Page();
+
 			}
 			else
 			{
-				foreach (var error in processingResult.Errors)
-				{
-					ModelState.AddModelError(string.Empty, error.ErrorMessage);
-				}
 				return Page();
 			}
+
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> DeleteBlogByIdAsync()
+		public async Task<ActionResult> OnPostDeleteBlogByIdAsync()
 		{
             EditBlogPostDto = await blogService.GetBlogPostById(Id);
             BlogCategory = await blogService.GetAllCategoriesTask();
-			var processingResult = await blogService.DeleteBlogPost(EditBlogPostDto.Id);
+			var processingResult = await blogService.DeleteBlogPost(Id);
 
 			if (processingResult.IsSuccess)
 			{
 				return RedirectToPage("/Account/Manage/Blog/BlogList");
 			}
-			else
-			{
-				foreach (var error in processingResult.Errors)
-				{
-					ModelState.AddModelError(string.Empty, error.ErrorMessage);
-				}
-				return Page();
-
+			else{
+				return RedirectToPage("/Account/Manage/Blog/BlogList");
 			}
 		}
 	}

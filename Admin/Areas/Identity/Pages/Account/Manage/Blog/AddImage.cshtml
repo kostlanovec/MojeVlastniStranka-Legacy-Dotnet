@@ -1,7 +1,6 @@
 ﻿@page
 @model MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog.AddImageModel
 @{
-    // todo vyřešit, jak by to vypadalo na ostré verzi
     var baseUrl = Model.UrlToImage;
 }
 <!--todo sjednotit všude jquery, bootstrap na jednotný-->
@@ -36,12 +35,12 @@
 <form method="post" enctype="multipart/form-data">
 	<div class="form-group">
         <label for="FileUpload">Vyberte obrázek k nahrání:</label>
-		<input type="file" id="FileUpload" name="FileUpload" id="file" required />
+            <input class="form-control bg-dark" type="file" id="FileUpload" name="FileUpload" id="file" required />
 		<div id="image-preview"></div>
 	</div>
 	<div class="form-group">
 		<label for="description">Popis:</label>
-		<input type="text" id="description" name="Description" required />
+            <input class="form-control" type="text" id="description" name="Description" required />
 	</div>
 	<button type="submit" class="btn btn-primary">Nahrát obrázek</button>
 </form>
@@ -59,7 +58,7 @@
 					<input type="hidden" name="imageId" value="@image.Id" />
 					<div class="form-group">
 						<label for="newDescription">Nový popis:</label>
-						<input type="text" id="newDescription" name="newDescription" value="@image.Description" required />
+                            <input class="form-control" type="text" id="newDescription" name="newDescription" value="@image.Description" required />
 					</div>
 					<div class="btn-group" role="group" aria-label="Obrázek akce">
 						<button type="submit" asp-page-handler="UpdateDescription" class="btn btn-primary">Aktualizovat popis</button>

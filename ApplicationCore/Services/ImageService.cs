@@ -23,10 +23,12 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// </summary>
         public async Task UploadImageAsync(AddImageRequest addImageRequest)
         {
-			var absolutePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
 
-			var uploadsDirectory = absolutePath + "\\images\\galeriefotky";
-			var filePath = Path.Combine(uploadsDirectory, addImageRequest.FileUpload.FileName);
+            var currentDirectory = Directory.GetCurrentDirectory();
+            var modifiedPath = Path.Combine(currentDirectory.Substring(0, currentDirectory.LastIndexOf("Admin")), "Web", "wwwroot");
+
+            var uploadsDirectory = modifiedPath + "\\images\\blog";
+            var filePath = Path.Combine(uploadsDirectory, addImageRequest.FileUpload.Name);
 
             if (!Directory.Exists(uploadsDirectory))
             {

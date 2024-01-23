@@ -1,13 +1,4 @@
-﻿using MojeVlastniStranka.ApplicationCore.Dto;
-using MojeVlastniStranka.ApplicationCore.Requests;
-using MojeVlastniStranka.DataAccess.Entities;
-using MojeVlastniStranka.DataAccess;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MojeVlastniStranka.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
 namespace MojeVlastniStranka.ApplicationCore.Services
@@ -21,11 +12,17 @@ namespace MojeVlastniStranka.ApplicationCore.Services
             this.context = context;
         }
 
+        /// <summary>
+        /// Získá celkový počet poslaných formulářů.
+        /// </summary>
         public async Task<int> NumberOfContactForms()
         {
             return await context.ContactForms.CountAsync();
         }
 
+        /// <summary>
+        /// Získá celkový počet blog příspěvků.
+        /// </summary>
         public async Task<int> NumberOfBlogPosts()
         {
             return await context.BlogPosts.CountAsync();

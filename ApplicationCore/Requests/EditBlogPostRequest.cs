@@ -10,7 +10,7 @@ namespace MojeVlastniStranka.ApplicationCore.Requests
 		/// Vrací nebo nastavuje Id blog příspěvku.
 		/// </summary>
 		[Key]
-		public int? Id
+		public int Id
 		{
 			get;
 			set;

@@ -101,7 +101,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
 			if (existingBlogPost == null)
 			{
-				// Handle the case where the blog post with the specified id was not found.
 				return null;
 			}
 
@@ -245,8 +244,14 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
 		}
 
+		/// <summary>
+		/// Smazání blog kategorie podle jeho id.
+		/// </summary>
+		/// <param name="BlogCategoryId">Smazání blog kategorie.</param>
+		/// <returns></returns>
 		// todo vyřešit, jak při odstranění blog kategorie přistupovat.
-		public async Task<FormProcessingResult> DeleteBlogCategory(int BlogCategoryId){
+		public async Task<FormProcessingResult> DeleteBlogCategory(int BlogCategoryId)
+        {
 			var formProcessingResult = new FormProcessingResult();
 			var existingBlogCategory = await context.BlogCategories.SingleOrDefaultAsync(bp => bp.Id == BlogCategoryId);
 			// Blog 1 je takzvaně neučitý
@@ -289,11 +294,14 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// </summary>
 		private async Task<string> UploadImageAsync(IFormFile file)
 		{
-            var absolutePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
-            var uploadsDirectory = absolutePath + "images\\blog";
+            var currentDirectory = Directory.GetCurrentDirectory();
+            var modifiedPath = Path.Combine(currentDirectory.Substring(0, currentDirectory.LastIndexOf("Admin")), "Web", "wwwroot");
+
+            var uploadsDirectory = modifiedPath + "\\images\\blog";
 			var filePath = Path.Combine(uploadsDirectory, file.FileName);
 
 			if (!Directory.Exists(uploadsDirectory))
+
 			{
 				Directory.CreateDirectory(uploadsDirectory);
 			}

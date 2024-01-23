@@ -7,7 +7,7 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog
     public class BlogModel : PageModel
     {
         //todo odstraňování blog kategorií má jeden problém. Co s příspěvky, které mají přiřazený konkrétní blog kategorii, který bude odstraněný?
-        // Nebude lepší na interakci s tím, jestli mazat nebo přidávat blog kategorii pohled nebo novou stránku?
+        //todo Nebude lepší na interakci s tím, jestli mazat nebo přidávat blog kategorii pohled nebo novou stránku?
         private readonly DataContext context;
         private readonly BlogService blogService;
 
