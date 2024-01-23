@@ -24,6 +24,7 @@ jobs:
           cwd: "./"
           files: |
             out/
+            Dockerfile
             captain-definition-web
           outPath: deploy.tar
 
