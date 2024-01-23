@@ -36,9 +36,10 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog
 #if DEBUG
 	    public string UrlToImage = "http://localhost:5266";
 #else
+	    public string UrlToImage = "https://kostlanovec.cz";
 #endif
 
-        public async Task OnGet()
+		public async Task OnGet()
         {
             Input = new AddImageRequest();
             Images = await imageService.GetImagesAsync();
