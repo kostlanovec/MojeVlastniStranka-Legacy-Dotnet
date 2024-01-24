@@ -36,6 +36,21 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		}
 
 		/// <summary>
+		/// Smaže notifikaci na základě poskytnutého Id.
+		/// </summary>
+		public async Task<FormProcessingResult> DeleteNotification(int? NotificationId)
+		{
+			var formProcessingResult = new FormProcessingResult();
+			var existingNotification = await context.Notifications.SingleOrDefaultAsync(bp => bp.Id == NotificationId);
+			if (existingNotification != null)
+			{
+				context.Remove(existingNotification);
+				await context.SaveChangesAsync(); ;
+			}
+			return formProcessingResult;
+		}
+
+		/// <summary>
 		/// Získání všech notifikací.
 		/// </summary>
 		public async Task<List<NotificationDto>> GetAllNotification()

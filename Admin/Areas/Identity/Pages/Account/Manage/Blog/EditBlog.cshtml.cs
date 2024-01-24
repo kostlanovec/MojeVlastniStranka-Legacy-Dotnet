@@ -88,9 +88,8 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage
 			{
 				return RedirectToPage("/Account/Manage/Blog/BlogList");
 			}
-			else{
-				return RedirectToPage("/Account/Manage/Blog/BlogList");
-			}
+
+			return RedirectToPage("/Account/Manage/Blog/BlogList");
 		}
 	}
 }
