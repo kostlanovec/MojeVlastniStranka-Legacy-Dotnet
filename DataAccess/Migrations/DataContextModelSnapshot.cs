@@ -16,7 +16,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.10")
+                .HasAnnotation("ProductVersion", "7.0.15")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.BlogCategory", b =>
@@ -113,7 +113,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                             Author = "Pepek Námořník",
                             BlogCategoryId = 1,
                             Content = "<h1>Ahoj</h1>",
-                            Date = new DateTime(2024, 1, 6, 11, 15, 56, 631, DateTimeKind.Local).AddTicks(2058),
+                            Date = new DateTime(2024, 1, 26, 13, 23, 55, 361, DateTimeKind.Local).AddTicks(3831),
                             Description = "moje klobasa",
                             ImagePath = "blogimages/boxing.jpg",
                             Keywords = "rohlík, klobása",
@@ -127,7 +127,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                             Author = "Chleba s marmeládou",
                             BlogCategoryId = 2,
                             Content = "<h1>Projekt</h1>",
-                            Date = new DateTime(2024, 1, 6, 11, 15, 56, 631, DateTimeKind.Local).AddTicks(2333),
+                            Date = new DateTime(2024, 1, 26, 13, 23, 55, 361, DateTimeKind.Local).AddTicks(3883),
                             Description = "moje klobasa",
                             ImagePath = "blogimages/boxing.jpg",
                             Keywords = "Jsi slizký had, nemám tě rád",
@@ -163,7 +163,6 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         .HasColumnType("varchar(20)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasColumnType("varchar(20)");
 
                     b.HasKey("Id");
@@ -174,7 +173,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         new
                         {
                             Id = 10,
-                            Date = new DateTime(2024, 1, 6, 11, 15, 56, 631, DateTimeKind.Local).AddTicks(3488),
+                            Date = new DateTime(2024, 1, 26, 13, 23, 55, 361, DateTimeKind.Local).AddTicks(4025),
                             Email = "jan.novak@example.com",
                             FeedBack = "Dobrý den, rád bych se zeptal na možnost spolupráce.",
                             FirstName = "Jan",
@@ -184,7 +183,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         new
                         {
                             Id = 20,
-                            Date = new DateTime(2024, 1, 6, 11, 15, 56, 631, DateTimeKind.Local).AddTicks(3538),
+                            Date = new DateTime(2024, 1, 26, 13, 23, 55, 361, DateTimeKind.Local).AddTicks(4031),
                             Email = "info@kostlanovec.cz",
                             FeedBack = "Dobrý, mám zájem o nové stránky vámi vyrobené. Těším se, až mi ukážete, co všechno dokážete.",
                             FirstName = "Jan",
@@ -214,7 +213,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            DatePosted = new DateTime(2024, 1, 6, 11, 15, 56, 631, DateTimeKind.Local).AddTicks(3670),
+                            DatePosted = new DateTime(2024, 1, 26, 13, 23, 55, 361, DateTimeKind.Local).AddTicks(4044),
                             Idea = "Chtěl bych vytvořit nějakou animaci na vytváření koblih"
                         });
                 });
@@ -274,7 +273,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         {
                             Id = 1,
                             ShortMessage = "Testovací notifikace",
-                            TimePublish = new DateTime(2024, 1, 6, 11, 15, 56, 631, DateTimeKind.Local).AddTicks(3806)
+                            TimePublish = new DateTime(2024, 1, 26, 13, 23, 55, 361, DateTimeKind.Local).AddTicks(4057)
                         });
                 });
 

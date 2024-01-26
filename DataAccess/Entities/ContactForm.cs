@@ -56,7 +56,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// </summary>
 		[Phone]
 		[Column(TypeName = "varchar(20)")]
-		public string PhoneNumber
+		public string? PhoneNumber
 		{
 			get;
 			set;
@@ -85,7 +85,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		///  Vytváří instanci <see cref="ContactForm"/> Vhodný pro uložení do databáze.
 		/// </summary>
 #if DEBUG
-		public static ContactForm Create(int? id, string firstName, string lastName, string email, string phoneNumber, string feedBack, DateTime date)
+		public static ContactForm Create(int? id, string firstName, string lastName, string email, string? phoneNumber, string feedBack, DateTime date)
 		{
 			var contactForm = new ContactForm()
 			{
@@ -102,7 +102,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		}
 
 #else
-		public static ContactForm Create(string firstName, string lastName, string email, string phoneNumber, string feedBack, DateTime date)
+		public static ContactForm Create(string firstName, string lastName, string email, string? phoneNumber, string feedBack, DateTime date)
         {
             var contactForm = new ContactForm()
             {
