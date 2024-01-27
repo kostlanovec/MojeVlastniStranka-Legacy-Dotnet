@@ -1,5 +1,4 @@
-﻿@using Microsoft.CodeAnalysis.CSharp.Syntax
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="cs">
 <head>
     <meta charset="utf-8" />
@@ -45,7 +44,7 @@
         gtag('js', new Date());
         gtag('config', 'G-SFNW32KZW0');
     </script>
-    @if (!ViewData.ContainsKey("nofollow") || ViewData["nofollow"] != "false") {
+    @if (ViewData["nofollow"] == "true") {
 	    <meta name="robots" content="nofollow">
     }
 </head>
