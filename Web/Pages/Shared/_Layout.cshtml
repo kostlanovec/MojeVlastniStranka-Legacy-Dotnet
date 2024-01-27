@@ -45,6 +45,9 @@
         gtag('js', new Date());
         gtag('config', 'G-SFNW32KZW0');
     </script>
+    @if (!ViewData.ContainsKey("nofollow") || ViewData["nofollow"] != "false") {
+	    <meta name="robots" content="nofollow">
+    }
 </head>
 <body class="body">
 <nav class="nav fadeInDown visible">
