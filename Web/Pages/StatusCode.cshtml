@@ -1,16 +1,5 @@
 ﻿@page "{code:int}"
 @model MojeVlastniStrankaFinal.Web.Pages.StatusCodeModel
-@{
-	Layout = null;
-}
-
-<!DOCTYPE html>
-<html>
-<head>
-	<meta name="robots" content="noindex, nofollow">
-	<title>@Model.Code - Chyba</title>
-</head>
-<body>
 @if (Model.Code == 404)
 {
 	<h1>404 error</h1>
@@ -21,5 +10,8 @@ else
 	<h1>@Model.Code - Chyba</h1>
 	<p>Omlouváme se, ale došlo k chybě při zpracování vašeho požadavku.</p>
 }
-</body>
-</html>
+
+@section
+{
+	<meta name="robots" content="nofollow">
+}
