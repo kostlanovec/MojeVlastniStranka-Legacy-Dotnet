@@ -1,14 +1,32 @@
-﻿<!DOCTYPE html>
+﻿@{
+	var jsonLD = @"
+    {
+        ""@context"": ""http://schema.org"",
+        ""@type"": ""Person"",
+        ""name"": ""Jan Sebastián Kostlán"",
+        ""url"": ""https://www.kostlanovec.cz"",
+        ""sameAs"": [
+            ""https://www.linkedin.com/in/jan-kostlan-7a9bb4215"",
+            ""https://www.instagram.com/kostlan1/"",
+            ""https://github.com/kostlanovec"",
+            ""https://www.facebook.com/jan.sebastiankostlan.1""
+        ],
+        ""email"": ""info@kostlanovec.cz"",
+        ""description"": ""Osobní stránka Jana Sebastiána Kostlána. Tvůrce, programátor webů a desktopových aplikací."",
+        ""image"": ""https://kostlanovec.cz/images/profil-photo.jpg"",
+        ""jobTitle"": ""Programátor""
+    }";
+}
+<!DOCTYPE html>
 <html lang="cs">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewData["Title"] - Osobní stránka Jana Sebastiána Kostlána</title>
     <link rel="stylesheet" href="~/css/fast-style.css" asp-append-version="true" />
     <meta name="description" content=@ViewData["Description"]>
     <meta name="author" content=@ViewData["Author"]>
     <meta name="keywords" content=@ViewData["Keywords"]>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" sizes="57x57" href="/images/apple-icons/apple-touch-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/images/apple-icons/apple-touch-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-icons/apple-touch-icon-72x72.png">
@@ -43,6 +61,9 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-SFNW32KZW0');
+    </script>
+    <script type="application/ld+json">
+    @Html.Raw(jsonLD)
     </script>
     @if (ViewData["nofollow"] == "true") {
 	    <meta name="robots" content="nofollow">

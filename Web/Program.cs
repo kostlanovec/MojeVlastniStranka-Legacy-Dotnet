@@ -63,6 +63,8 @@ namespace MojeVlastniStrankaFinanali
 		            pattern: "projekty/{Slug}",
 		            defaults: new { controller = "Projekty", action = "ShowProject" });
             });
+
+
 			app.Run();
 		}
 	}

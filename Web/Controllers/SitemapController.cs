@@ -41,18 +41,76 @@ namespace MojeVlastniStranka.Web.Controllers
         [Route("sitemap.xml")]
         public IActionResult GenerateSitemap()
         {
-            var nodes = new List<SitemapNode>();
+            var nodes = new List<SitemapNode>
+            {
+                new()
+                {
+                    Url = "https://kostlanovec.cz",
+                    Frequency = SitemapFrequency.Monthly,
+                    Priority = 1
+                },
+
+                new()
+                {
+					Url = "https://kostlanovec.cz/omne",
+					Frequency = SitemapFrequency.Monthly,
+					Priority = 0.9
+				},
+                new()
+                {
+                    Url = "https://kostlanovec.cz/sluzby/weby",
+                    Frequency = SitemapFrequency.Monthly,
+                    Priority = 0.9
+                },
+                new()
+                {
+                    Url = "https://kostlanovec.cz/sluzby/aplikace",
+                    Frequency = SitemapFrequency.Monthly,
+                    Priority = 0.9
+                },
+                new()
+                {
+                    Url = "https://kostlanovec.cz/sluzby/socialnisite",
+                    Frequency = SitemapFrequency.Monthly,
+                    Priority = 0.9
+                },
+                new()
+                {
+                    Url = "https://kostlanovec.cz/sluzby/seo",
+                    Frequency = SitemapFrequency.Monthly,
+                    Priority = 0.9
+                },
+                new()
+                {
+                    Url = "https://kostlanovec.cz/projekty",
+                    Frequency = SitemapFrequency.Monthly,
+                    Priority = 0.8
+                },
+                new()
+                {
+                    Url = "https://kostlanovec.cz/blog",
+                    Frequency = SitemapFrequency.Always,
+                    Priority = 0.8
+                },
+                new()
+                {
+                    Url = "https://kostlanovec.cz/galerie",
+                    Frequency = SitemapFrequency.Monthly,
+                    Priority = 0.6
+                }
+            };
 
             var blogPosts = context.BlogPosts.ToList();
             foreach (var post in blogPosts)
             {
-                var url = $"{Request.Scheme}://{Request.Host}/blog/detail/{post.Slug}";
+                var url = $"{Request.Scheme}://{Request.Host}/blog/{post.Slug}";
 
                 var node = new SitemapNode
                 {
                     Url = url,
                     LastModified = post.Date,
-                    Frequency = SitemapFrequency.Always
+                    Frequency = SitemapFrequency.Always,
+                    Priority = 0.5
                 };
 
                 nodes.Add(node);
