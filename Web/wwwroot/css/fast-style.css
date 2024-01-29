@@ -178,7 +178,7 @@ img{
     order: 3;
 }
 
-.main, .header__index, .footer__indexpage, .header__other, .header__noindex{
+.main, .header__index, .footer__indexpage, .header__other, .header__noindex, .share-buttons{
     padding: 1em;
 }
 
@@ -205,7 +205,6 @@ img{
 }
 
 .contacts__description::before {
-
     left: -50px;
     position: absolute;
     content: '';
@@ -350,7 +349,6 @@ img{
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 }
-
 
 .a__button__project{
     border: 2px solid;
@@ -525,6 +523,32 @@ img{
     border: 1px solid var(--cervena);
 }
 
+.share-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.share-button {
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 8px 16px;
+}
+
+.facebook {
+    background-color: #3b5998;
+}
+
+.twitter {
+    background-color: #1da1f2;
+}
+
+.linkedin {
+    background-color: #0077b5;
+}
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -574,7 +598,7 @@ img{
 }
 
 @media (min-width:760px){
-    .header__index, .main, .header__other, .header__noindex{
+    .header__index, .main, .header__other, .header__noindex, .share-buttons{
         margin-left: 50px;
         margin-right: 50px;
     }
@@ -668,7 +692,7 @@ img{
 }
 
 @media (min-width: 961px){
-    .header__index, .main, .header__other, .header__noindex{
+    .header__index, .main, .header__other, .header__noindex, .share-buttons{
         margin-left: 100px;
         margin-right: 100px;
     }
@@ -715,7 +739,7 @@ img{
 }
 
 @media (min-width: 1281px){
-    .header__index, .main, .header__other, .header__noindex{
+    .header__index, .main, .header__other, .header__noindex, .share-buttons{
         margin-left: 150px;
         margin-right: 150px;
     }
