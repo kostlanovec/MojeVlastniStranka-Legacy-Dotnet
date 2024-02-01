@@ -1,6 +1,8 @@
 ﻿@page
 @model MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.WriteBlogModel
-
+@{
+	ViewData["Title"] = "Napsání blogu";
+}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
@@ -76,7 +78,7 @@
 						</div>
 						<div class="form-group">
 							<label for="file" class="text-white">Obrázek:</label>
-							<input type="file" class="form-control-file" name="FileUpload" id="file" required/>
+							<input type="file" class="form-control-file" name="FileUpload" id="file"/>
 							<div id="image-preview"></div>
 						</div>
 						<div class="form-group">
@@ -98,7 +100,6 @@
 	</div>
 </div>
 <script>
-	// Show/hide settings table on button click
 	$('#editSettingsBtn').click(function () {
 		$('#settingsTable').toggle();
 	});
@@ -108,8 +109,10 @@
 		$('#settingsTable').hide();
 	});
 
+	// Definování základního textu pro snaží orientaci v editoru
 	var defaultContent = '<header class="header__other"><h1 class="header__h1 fadeInLeft visible">Optimalizace stránek pro SEO</h1><p class="header__p fadeInLeft visible">Základní informace k SEO.Nejdůležitější praktiky pro nalezení vaších stránek na internetu</p></header><main class="main fadeInUp visible"><h2 class="h2__div__article red">SEO optimalizace</h2><p>Jako majitel stránky chcete, aby vaše stránka byla snadno vyhledavatelná, ale bohužel v dnešní době máme velmi vysokou konkurenci na internetu. Tím nám může pomoci efektivní SEO neboli search engine optimization. Do češtiny optimalizace pro vyhledávače. V tomhle článku si rozebereme praktiky, které nám pomohou to zlepšit.</p></main>';
 
+	// Inicializování summernote
 	$('#summernote').summernote({
 		lang: 'cs-CZ',
 		dialogsInBody: true,
@@ -138,7 +141,7 @@
 		}
 	});
 
-	// todo vyřešit, proč nefunguje oficiální získavání dat
+	// Při odesílání formuláře zaregistrovat, zda tam je nějaký obsah
 	$('form').on('submit', function () {
 		var htmlContent = $('.note-editable').html().trim();
 
@@ -148,7 +151,7 @@
 		}
 	});
 
-
+	// Ukazání obrázků po jeho odesláním
 	function showImagePreview(input) {
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
@@ -170,15 +173,16 @@
 		showImagePreview(this);
 	});
 
-		$(document).ready(function () {
-			$(window).scroll(function () {
-				$('.fadeIn, .fadeInUp, .fadeInDown, .fadeInRight, .fadeInLeft').each(function () {
-					let position = $(this).offset().top;
-					let topPosition = $(window).scrollTop() + $(window).height();
-					if (position < topPosition) {
-						$(this).addClass('visible');
-					}
-				});
+	// Speciální efekt pro moji stránku
+	$(document).ready(function () {
+		$(window).scroll(function () {
+			$('.fadeIn, .fadeInUp, .fadeInDown, .fadeInRight, .fadeInLeft').each(function () {
+				let position = $(this).offset().top;
+				let topPosition = $(window).scrollTop() + $(window).height();
+				if (position < topPosition) {
+					$(this).addClass('visible');
+				}
 			});
 		});
+	});
 </script>

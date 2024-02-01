@@ -1,6 +1,8 @@
 ﻿@page
 @model MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.EditBlogPostModel
-
+@{
+	ViewData["Title"] = "Editování blogu";
+}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
@@ -65,10 +67,11 @@
 							<label for="Title" class="text-white">Titulek:</label>
 							<input type="text" class="form-control" name="Title" value="@Model.EditBlogPostDto.Title" required/>
 						</div>
-						<div class="form-group">
-							<label for="Description" class="text-white">Popis:</label>
-							<input type="text" class="form-control" name="Description" value="@Model.EditBlogPostDto.Description" required/>
+						<div class="form-floating">
+							<textarea class="form-control" placeholder="Zanech vystižný popis" id="floatingTextarea" name="Description" required>@Model.EditBlogPostDto.Description</textarea>
+							<label for="floatingTextarea">Popis:</label>
 						</div>
+
 						<div class="form-group">
 							<label for="Author" class="text-white">Autor:</label>
 							<input type="text" class="form-control" name="Author" value="@Model.EditBlogPostDto.Author" required/>
@@ -79,19 +82,28 @@
 						</div>
 						<div class="form-group">
 							<label for="file" class="text-white">Obrázek:</label>
-							<input type="file" class="form-control-file" name="File" id="file"/>
+							<input type="file" class="form-control bg-dark" name="File" id="file" />
 							<div id="image-preview">
+								<!--todo opravit, tohle může fungovat jen na localu-->
 								<img src="https://localhost:7207/@Model.EditBlogPostDto.FileUpload"/>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="BlogCategoryId" class="text-white">Kategorie blogů:</label>
-							<select class="form-control" name="BlogCategoryId">
+							<select class="form-select" name="BlogCategoryId">
 								@foreach (var category in Model.BlogCategory)
 								{
-									<option value=@category.Id>@category.Name</option>
+									if (category.Id == Model.EditBlogPostDto.BlogCategoryId)
+									{
+										<option value="@category.Id" selected>@category.Name</option>
+									}
+									else
+									{
+										<option value="@category.Id">@category.Name</option>
+									}
 								}
 							</select>
+
 						</div>
 						<input type="hidden" name="Content" id="hiddenContent"/>
 						<input type="hidden" asp-for="Id" />
@@ -106,31 +118,16 @@
 </div>
 
 <script>
-	// Show/hide settings table on button click
 	$('#editSettingsBtn').click(function () {
 		$('#settingsTable').toggle();
 	});
 
-	// Tlačítko pro vrácení zpět
 	$('#backBtn').click(function () {
-		
 		$('#settingsTable').hide();
 	});
 
+	// Inicializování summernote
 	$('#summernote').summernote({
-		// popover: {
-		// 	image: [
-		// 		['custom', ['imageAttributes']],
-		// 		['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
-		// 		['float', ['floatLeft', 'floatRight', 'floatNone']],
-		// 		['remove', ['removeMedia']]
-		// 	],
-		// },
-		// imageAttributes: {
-		// 	icon: '<i class="note-icon-pencil"/>',
-		// 	removeEmpty: false, // true = remove attributes | false = leave empty if present
-		// 	disableUpload: false // true = don't display Upload Options | Display Upload Options
-		// },
 		lang: 'cs-CZ',
 		spellCheck: true,
 		addclass: {
@@ -155,24 +152,10 @@
 				var htmlContent = '@Html.Raw(Model.EditBlogPostDto.Content)';
 				$('#summernote').summernote('code', htmlContent);
 			}
-			// onChange: function (contents, $editable) {
-			// 	console.log("tady jsem");
-			// 	var words = contents.replace(/<(?:.|\n)*?>/gm, '').split(/\s/);
-			// 	var misspelled = [];
-			// 	var dictionary = new Typo("en_US", false, false, { dictionaryPath: "localhost:7089/dictionaries" });
-
-			// 	words.forEach(function (word) {
-			// 		if (!dictionary.check(word) && !misspelled.includes(word)) {
-			// 			misspelled.push(word);
-			// 		}
-			// 	});
-
-
-			// 	console.log("Chyby v pravopisu:", misspelled);
-			// }
 		}
 	});
 
+	// Odesílání formuláře
 	$('form').on('submit', function () {
 		var htmlContent = $('.note-editable').html().trim();
 		$('#hiddenContent').val(htmlContent);
@@ -180,7 +163,8 @@
 			return null;
 		}
 	});
-
+	
+	// Vykreslení obrázku po nahrátí
 	function showImagePreview(input) {
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
@@ -203,6 +187,7 @@
 		showImagePreview(this);
 	});
 
+	// Speciální efekty používáné mnou stránkou
 	$(document).ready(function () {
 		$(window).scroll(function () {
 			$('.fadeIn, .fadeInUp, .fadeInDown, .fadeInRight, .fadeInLeft').each(function () {

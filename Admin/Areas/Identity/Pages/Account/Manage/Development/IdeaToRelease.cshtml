@@ -1,6 +1,7 @@
 ﻿@page
 @model MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Development.IdeaToReleaseModel
 @{
+	ViewData["Title"] = "Nápady k vývoji";
 }
 <form class="col-sm-12" method="post">
 	<div class="bg-secondary rounded h-100 p-4">
@@ -10,7 +11,7 @@
 			<textarea name="Idea" class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 200px;"></textarea>
 			<label for="floatingTextarea">Comments</label>
 		</div>
-		<!--Jméno a přijmení a další kontaktní údaje by se přidávaly automaticky, ale to zatím necháme být-->
+		<!--Jméno a přijmení a další kontaktní údaje by se přidávaly automaticky, ale to zatím necháme být a ještě k tomu přes email.-->
 		<div asp-validation-summary="All" class="text-danger"></div>
 		<button type="submit" class="btn btn-primary">Odeslat</button>
 	</div>

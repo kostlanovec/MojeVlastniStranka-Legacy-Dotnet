@@ -25,6 +25,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			var result = new FormProcessingResult();
 			var validationResults = blogPostRequest.Validate(new ValidationContext(blogPostRequest)).ToList();
 
+            string imagePath = "images/default.jpg";
 			if (validationResults.Any())
 			{
 				result.IsSuccess = false;
@@ -32,7 +33,10 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				return result;
 			}
 
-			var imagePath = await UploadImageAsync(blogPostRequest.FileUpload); // Získání cesty k uloženému obrázku
+            if (blogPostRequest.FileUpload != null)
+            {
+                imagePath = await UploadImageAsync(blogPostRequest.FileUpload);
+            }
 			var blogPost = BlogPost.Create(
 				blogPostRequest.Description,
 				blogPostRequest.Content,
@@ -154,7 +158,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 					existingBlogPost.Title = editBlogPostRequest.Title;
 					existingBlogPost.Author = editBlogPostRequest.Author;
 					existingBlogPost.Keywords = editBlogPostRequest.Keywords;
-					existingBlogPost.BlogCategoryId = editBlogPostRequest.BlogCategoryId;
+                    existingBlogPost.BlogCategoryId = editBlogPostRequest.BlogCategoryId;
 					existingBlogPost.Name = editBlogPostRequest.Name;
 
 					if (editBlogPostRequest.FileUpload != null)
@@ -227,8 +231,8 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		{
 			var formProcessingResult = new FormProcessingResult();
 			var blogCategoryExist = await context.BlogCategories.SingleOrDefaultAsync(bp => bp.Name == CategoryNameAdd);
-			// to-do Validace kategorie, zda existuje nebo ne
-			// to-do Můžeme provést další validaci
+			// todo Validace kategorie, zda existuje nebo ne
+			// todo Můžeme provést další validaci
 
 			if (blogCategoryExist == null)
 			{
@@ -248,7 +252,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// Smazání blog kategorie podle jeho id.
 		/// </summary>
 		/// <param name="BlogCategoryId">Smazání blog kategorie.</param>
-		/// <returns></returns>
 		// todo vyřešit, jak při odstranění blog kategorie přistupovat.
 		public async Task<FormProcessingResult> DeleteBlogCategory(int BlogCategoryId)
         {
