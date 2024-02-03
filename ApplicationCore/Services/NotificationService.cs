@@ -65,5 +65,23 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
 			return result;
 		}
+
+		/// <summary>
+		/// Vezme tři nejnovější notifikace.
+		/// </summary>
+		public async Task<List<NotificationDto>> GetThreeNotification()
+		{
+			var result = await context.Notifications
+				.OrderByDescending(bp => bp.TimePublish)
+				.Select(bp => new NotificationDto()
+				{
+					Id = bp.Id,
+					ShortMessage = bp.ShortMessage
+				})
+				.Take(3)
+				.ToListAsync();
+
+			return result;
+		}
 	}
 }

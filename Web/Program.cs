@@ -23,6 +23,7 @@ namespace MojeVlastniStrankaFinanali
 
 			builder.Services.AddControllers();
 			builder.Services.AddScoped<BlogService>();
+			builder.Services.AddScoped<NotificationService>();
 
 			builder.Services.AddRazorPages();
 

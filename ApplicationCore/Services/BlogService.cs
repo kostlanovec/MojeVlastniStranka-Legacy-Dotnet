@@ -47,7 +47,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				blogPostRequest.Name,
 				imagePath,
 				blogPostRequest.Slug,
-				blogPostRequest.DatePublic = DateTime.Now
+				blogPostRequest.DatePublic =  DateTime.Now
 			);
 
 			context.BlogPosts.Add(blogPost);
@@ -55,6 +55,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			result.IsSuccess = true;
 			return result;
 		}
+
 
 		/// <summary>
 		/// Získá blog příspěvky s popiskem a dalšími informace důležitý pro interakci.
@@ -316,5 +317,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
 			return ("images/blog/" + file.FileName);
 		}
+
 	}
-}
+	 }

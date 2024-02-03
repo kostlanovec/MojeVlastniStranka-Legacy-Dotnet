@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Admin.Pages
+namespace MojeVlastniStranka.Admin.Pages
 {
     [Authorize]
     public class IndexModel : PageModel

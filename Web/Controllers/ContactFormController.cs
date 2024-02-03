@@ -9,16 +9,18 @@ namespace MojeVlastniStranka.Web.Controllers
 	public class ContactFormController : Controller
 	{
 		private readonly DataContext context;
-		public ContactFormController(DataContext context)
+		public NotificationService Notification;
+		public ContactFormController(DataContext context, NotificationService notification)
 		{
 			this.context = context;
+			this.Notification = notification;
 		}
 
 		[HttpPost]
 		// todo Přidat možnost, jakou zemi skrz telefonní číslo máme
 		public async Task<IActionResult> SubmitContactForm(ContactFormularRequest contactform)
 		{
-			ContactFormService contactFormService = new ContactFormService(context);
+			ContactFormService contactFormService = new ContactFormService(context, Notification);
 			var result = await contactFormService.FormProcessing(contactform);
 
 			if (result.IsSuccess)

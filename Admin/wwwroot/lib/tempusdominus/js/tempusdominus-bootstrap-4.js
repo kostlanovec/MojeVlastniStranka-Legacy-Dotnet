@@ -1317,7 +1317,7 @@ var DateTimePicker = function ($, moment) {
         };
 
         DateTimePicker.prototype.clear = function clear() {
-            this._setValue(null); //todo
+            this._setValue(null);
         };
 
         DateTimePicker.prototype.keyBinds = function keyBinds(_keyBinds) {

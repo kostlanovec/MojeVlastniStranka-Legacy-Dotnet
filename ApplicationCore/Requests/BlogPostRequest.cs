@@ -114,6 +114,7 @@ namespace MojeVlastniStranka.ApplicationCore.Requests
 			set;
 		}
 
+
 		/// <summary>
 		/// Validace.
 		/// </summary>

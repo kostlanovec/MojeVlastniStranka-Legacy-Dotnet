@@ -1,14 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using MojeVlastniStranka.ApplicationCore.Services;
+using MojeVlastniStranka.ApplicationCore.Requests;
 
 namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Marketing
 {
     public class NewsLetterModel : PageModel
     {
-        /// <summary>
-        /// todo nastavení newsletteru bude na určité věci, které chceme zákazníkovi posílat. NewsLettry by bylo vhodné asi i přidávat do databáze.
-        /// </summary>
-        public void OnGet()
+        private readonly MailService mailService;
+
+        [BindProperty]
+        public NewsLetterRequest NewsLetterRequest
         {
-        }
+			get;
+			set;
+		}
+
+	    public NewsLetterModel(MailService mailService)
+	    {
+			this.mailService = mailService;
+		}
+
+        public void OnPost()
+        {
+            mailService.SendMail(NewsLetterRequest);
+		}
     }
 }

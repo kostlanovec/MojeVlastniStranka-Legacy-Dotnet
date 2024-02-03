@@ -10,9 +10,13 @@
 <script src="/js/summernote/Plugins/summernote-ext-addclass.js"></script>
 <script src="/js/summernote/Plugins/summernote-ownplugin.js"></script>
 <script src="/lib/typo-js/typo.js"></script>
-<link rel="stylesheet" href="~/css/fast-style.css" asp-append-version="true" />
 <h1>Newsletter</h1>
 <div id="summernote"></div>
+<form method="post">
+	<input class="control" name="Subject"/>
+	<input type="hidden" name="Body" id="hiddenContent" />
+	<button type="submit" class="btn btn-primary">Poslat newsletter</button>
+</form>
 <script>
 	// Show/hide settings table on button click
 	$('#editSettingsBtn').click(function () {
@@ -54,7 +58,6 @@
 		}
 	});
 
-	// to-do vyřešit, proč nefunguje oficiální získavání dat
 	$('form').on('submit', function () {
 		var htmlContent = $('.note-editable').html().trim();
 
@@ -65,6 +68,7 @@
 	});
 
 	$(document).ready(function () {
+		$('.note-editable').addClass('body');
 		$(window).scroll(function () {
 			$('.fadeIn, .fadeInUp, .fadeInDown, .fadeInRight, .fadeInLeft').each(function () {
 				let position = $(this).offset().top;
@@ -74,4 +78,10 @@
 				}
 			});
 		});
-	});</script>
+	});
+</script>
+<style>
+.note-editable {
+	background-color: #fff;
+}
+</style>
