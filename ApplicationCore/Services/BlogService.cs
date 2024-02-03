@@ -253,7 +253,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// Smazání blog kategorie podle jeho id.
 		/// </summary>
 		/// <param name="BlogCategoryId">Smazání blog kategorie.</param>
-		// todo vyřešit, jak při odstranění blog kategorie přistupovat.
 		public async Task<FormProcessingResult> DeleteBlogCategory(int BlogCategoryId)
         {
 			var formProcessingResult = new FormProcessingResult();
@@ -267,7 +266,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				{
 					foreach (var blogPost in existingAllBlogWithDeleteBlogCategory)
 					{
-						// todo 1 je blog takzvaně neurčený, což je takový, jestli nerozhodnout, že by to bylo spíše podle jména než kategorie. Což je diskutabilní.
 						blogPost.BlogCategoryId = 1;
 					}
 				}
