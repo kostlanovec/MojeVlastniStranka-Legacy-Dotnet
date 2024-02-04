@@ -1,0 +1,54 @@
+﻿@page
+@model MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Settings.RoleSettingsModel
+@{
+	ViewData["Title"] = "Role Management";
+}
+
+<h1>Role Management</h1>
+
+<h3>Create New Role</h3>
+<form method="post" asp-page-handler="Create">
+	<div class="form-group">
+		<label asp-for="NewRoleName"></label>
+		<input asp-for="NewRoleName" class="form-control" />
+		<span asp-validation-for="NewRoleName" class="text-danger"></span>
+	</div>
+	<button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+<hr />
+
+<h3>Existing Roles</h3>
+<table class="table">
+	<thead>
+	<tr>
+		<th>Role Name</th>
+		<th>Actions</th>
+			<th>User Roles</th>
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var role in Model.Roles)
+	{
+		<tr>
+			<td>@role.Name</td>
+			<td>
+				<form method="post" asp-page-handler="Edit" asp-route-id="@role.Id">
+					<button type="submit" class="btn btn-primary">Edit</button>
+				</form>
+				<form method="post" asp-page-handler="Delete" asp-route-id="@role.Id">
+					<button type="submit" class="btn btn-danger">Delete</button>
+				</form>
+			</td>
+			<td>
+			</td>
+		</tr>
+	}
+	</tbody>
+	@foreach (var nevim in Model.Roles)
+	{
+		<p>@nevim.Name</p>
+		<p>@nevim.Id</p>
+		
+	}
+</table>

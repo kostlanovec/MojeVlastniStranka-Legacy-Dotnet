@@ -37,6 +37,7 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Settings
                 return NotFound($"Unable to load user with ID '{user.Id}'.");
             }
 
+
             return Page();
         }
 
