@@ -15,7 +15,11 @@
         ""description"": ""Osobní stránka Jana Sebastiána Kostlána. Tvůrce, programátor webů a desktopových aplikací."",
         ""image"": ""https://kostlanovec.cz/images/profil-photo.jpg"",
         ""jobTitle"": ""Programátor""
+
     }";
+
+	string canonicalUrl = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}";
+
 }
 <!DOCTYPE html>
 <html lang="cs">
@@ -68,6 +72,7 @@
     @if (ViewData["nofollow"] == "true") {
 	    <meta name="robots" content="nofollow">
     }
+    <link rel="canonical" href="@canonicalUrl" />
 </head>
 <body class="body">
 <nav class="nav fadeInDown visible">

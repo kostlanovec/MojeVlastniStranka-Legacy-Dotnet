@@ -63,6 +63,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		public async Task<List<BlogPostSummary>> GetAllBlogPost()
 		{
 			var result = await context.BlogPosts
+				.Where(bp => bp.BlogCategoryId != 2)
 				.Select(bp => new BlogPostSummary
 				{
 					Id = bp.Id,
