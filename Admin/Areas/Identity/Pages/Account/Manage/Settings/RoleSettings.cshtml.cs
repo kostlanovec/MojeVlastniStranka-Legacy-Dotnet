@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 using Admin.Areas.Identity.Data;
 
 namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Settings
@@ -12,10 +13,12 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Settings
 		private readonly RoleManager<IdentityRole> _roleManager;
 		private readonly UserManager<AdminUser> _userManager;
 
+
 		public RoleSettingsModel(RoleManager<IdentityRole> roleManager, UserManager<AdminUser> userManager)
 		{
 			_roleManager = roleManager;
 			_userManager = userManager;
+	
 		}
 
         public IEnumerable<IdentityRole> Roles { get; set; }
@@ -26,18 +29,32 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Settings
 		public string NewRoleName { get; set; }
 
         [BindProperty]
-        public IQueryable<AdminUser> Users { get; set; }
+        public List<AdminUser> Users { get; set; }
+
+		public List<string> userRoles { get; set; }
 
 		public void OnGet()
 		{
 			Roles = _roleManager.Roles;
 
-            Users = _userManager.Users;
+            Users = _userManager.Users.ToList();
 
 
-        }
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            userRoles = getttingRoles(identity);
 
-        public async Task<IActionResult> OnPostCreateAsync()
+
+		}
+
+		public static List<string> getttingRoles(ClaimsIdentity identity)
+		{
+			return identity.Claims
+				.Where(c => c.Type == ClaimTypes.Role)
+				.Select(c => c.Value)
+				.ToList();
+		}
+
+		public async Task<IActionResult> OnPostCreateAsync()
 		{
 			if (ModelState.IsValid)
 			{

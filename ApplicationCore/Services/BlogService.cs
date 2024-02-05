@@ -72,9 +72,28 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 					Slug = bp.Slug,
 					TimePublic = bp.Date
 				})
+
 				.ToListAsync();
 			return result;
 		}
+
+		public async Task<List<BlogPostSummary>> GetAllProject()
+		{
+			var result = await context.BlogPosts
+				.Where(bp => bp.BlogCategoryId == 2)
+				.Select(bp => new BlogPostSummary
+				{
+					Id = bp.Id,
+					Name = bp.Name,
+					Description = bp.Description,
+					FilePath = bp.ImagePath,
+					Slug = bp.Slug,
+					TimePublic = bp.Date
+				})
+				.ToListAsync();
+			return result;
+		}
+
 
 		/// <summary>
 		/// Získá tři blog příspěvky pro hlavní stránku.

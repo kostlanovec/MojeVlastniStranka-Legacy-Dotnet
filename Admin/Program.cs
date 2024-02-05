@@ -70,6 +70,7 @@ namespace Admin
             builder.Services.AddScoped<DashboardService>();
 			builder.Services.AddScoped<MailService>();
 
+
 			builder.Services.AddRazorPages();
             builder.Services.AddControllersWithViews();
 			var app = builder.Build();

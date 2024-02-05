@@ -3,7 +3,7 @@
 @{
 	ViewData["Title"] = "Role Management";
 }
-
+<div class="bg-secondary rounded h-100 p-4">
 <h1>Role Management</h1>
 
 <h3>Create New Role</h3>
@@ -24,7 +24,7 @@
 	<tr>
 		<th>Role Name</th>
 		<th>Actions</th>
-			<th>User Roles</th>
+		<th>Users in Role</th> <!-- Add this header -->
 	</tr>
 	</thead>
 	<tbody>
@@ -45,10 +45,31 @@
 		</tr>
 	}
 	</tbody>
-	@foreach (var nevim in Model.Roles)
-	{
-		<p>@nevim.Name</p>
-		<p>@nevim.Id</p>
-		
-	}
 </table>
+
+
+<h3>All users</h3>
+<table class="table">
+	<thead>
+	<tr>
+		<th>UserName</th>
+		<th>Email</th>
+
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var user in Model.userRoles)
+	{
+
+
+		<tr>
+			@user
+		</tr>
+
+	}	
+
+	</tbody>
+
+	
+</table>
+</div>

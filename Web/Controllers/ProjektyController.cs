@@ -17,22 +17,13 @@ namespace MojeVlastniStranka.Web.Controllers
 		{
 			var blogPost = context.BlogPosts.FirstOrDefault(bp => bp.Slug == Slug);
 
-			if (blogPost == null)
+			if (blogPost == null || blogPost.BlogCategoryId != 2)
 			{
 				return NotFound();
 			}
 
-			var category = context.BlogCategories.FirstOrDefault(c => c.Id == blogPost.BlogCategoryId);
 
-			if (category == null)
-			{
-				return NotFound();
-			}
-
-			return View("Shared/Muchomurka", blogPost);
+			return View("Muchomurka", blogPost);
 		}
-
-
-
 	}
 }
