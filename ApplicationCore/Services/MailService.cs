@@ -6,7 +6,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 {
 	public class MailService
 	{
-
+		/// <summary>
+		/// Posílá newsletter.
+		/// </summary>
 		public void SendMail(NewsLetterRequest newsLetterRequest)
 		{
 			var message = new MimeMessage();
