@@ -2,7 +2,6 @@ using Admin.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Admin.Data;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.FileProviders;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
 
@@ -23,6 +22,7 @@ namespace Admin
 
 			builder.Services.AddDefaultIdentity<AdminUser>(options => options.SignIn.RequireConfirmedAccount = true)
 				.AddRoles<IdentityRole>()
+                .AddRoleManager<RoleManager<IdentityRole>>()
 				.AddEntityFrameworkStores<AdminContext>();
 
 			builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);

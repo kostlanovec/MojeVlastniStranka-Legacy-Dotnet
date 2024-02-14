@@ -24,7 +24,7 @@
 	<tr>
 		<th>Role Name</th>
 		<th>Actions</th>
-		<th>Users in Role</th> <!-- Add this header -->
+		<th>Users in Role</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -49,27 +49,20 @@
 
 
 <h3>All users</h3>
-<table class="table">
-	<thead>
-	<tr>
-		<th>UserName</th>
-		<th>Email</th>
 
-	</tr>
-	</thead>
-	<tbody>
-	@foreach (var user in Model.userRoles)
+	@foreach (var userwithroles in Model.UsersWithRoles)
 	{
 
 
-		<tr>
-			@user
-		</tr>
+		<p>
+			uživatel: @userwithroles.Key.UserName
+		</p>
+		<p>@foreach (var role in userwithroles.Value)
+			{
+				<span>@role</span>
+			}
+		</p>
 
 	}	
 
-	</tbody>
-
-	
-</table>
 </div>

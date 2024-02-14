@@ -4,6 +4,7 @@ namespace MojeVlastniStranka.ApplicationCore.Requests
 {
 	public class ReportedBugRequest
 	{
+		
 		[Required(ErrorMessage = "Url is required.")]
 		[Url]
 		public string Url

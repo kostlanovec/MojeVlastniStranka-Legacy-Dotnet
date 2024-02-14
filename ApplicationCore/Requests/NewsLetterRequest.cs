@@ -1,19 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace MojeVlastniStranka.ApplicationCore.Requests
 {
 	public class NewsLetterRequest
 	{
+		/// <summary>
+		/// Vrací nebo nastavuje subject v emailu.
+		/// </summary>
 		public string Subject
 		{
 			get;
 			set;
 		}
 
+		/// <summary>
+		/// Vrací nebo nastavuje html
+		/// </summary>
+		/// todo přijít na nějaký vhodný validační html tag.
 		public string Body
 		{
 			get;

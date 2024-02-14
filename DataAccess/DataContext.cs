@@ -44,6 +44,8 @@ namespace MojeVlastniStranka.DataAccess
 
 		public DbSet<Notification> Notifications { get; set; }
 
+		public DbSet<Message> Messages { get; set; }
+
 		#endregion
 
 	}

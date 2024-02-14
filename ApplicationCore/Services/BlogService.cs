@@ -78,6 +78,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			return result;
 		}
 
+		/// <summary>
+		/// Získá všechny blog příspěvky s id 2 neboli získá všechny projekty.
+		/// </summary>
 		public async Task<List<BlogPostSummary>> GetAllProject()
 		{
 			var result = await context.BlogPosts
