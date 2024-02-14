@@ -17,7 +17,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// <summary>
 		/// Tvorba nové notifikace.
 		/// </summary>
-		public void CreateMessage(string shortmessage, string longMessage)
+		public void CreateMessage(string shortmessage)
 		{
 #if DEBUG
 			var notification = Notification.Create(
@@ -26,10 +26,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				shortmessage
 			);
 #else
-			var notification = Message.Create(
+			var notification = Notification.Create(
 				DateTime.Now,
-				shortmessage,
-				longMessage
+				shortmessage
 			);
 #endif
 			context.Notifications.Add(notification);
