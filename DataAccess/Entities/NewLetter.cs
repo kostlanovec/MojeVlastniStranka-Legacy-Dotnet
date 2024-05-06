@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace MojeVlastniStranka.DataAccess.Entities
 {
-	public class NewsLetter
+	public class NewsLetter: IEntities
 	{
 		protected NewsLetter() { }
 
 		/// <summary>
 		/// Vrací nebo nastavuje Id nápadu.
 		/// </summary>
-		public int? Id
+		public Guid Id
 		{
 			get;
 			set;
@@ -29,8 +29,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		///  Vytváří instanci <see cref="NewsLetter"/> Vhodný pro uložení do databáze.
 		/// </summary>
-#if DEBUG
-		public static NewsLetter Create(int? id, string email)
+		public static NewsLetter Create(Guid id, string email)
 		{
 			var newsLetter = new NewsLetter()
 			{
@@ -40,17 +39,5 @@ namespace MojeVlastniStranka.DataAccess.Entities
 
 			return newsLetter;
 		}
-
-#else
-		public static NewsLetter Create(string email)
-		{
-			var newsLetter = new NewsLetter()
-			{
-				Email = email
-			};
-
-			return newsLetter;
-		}
-#endif
 	}
 }

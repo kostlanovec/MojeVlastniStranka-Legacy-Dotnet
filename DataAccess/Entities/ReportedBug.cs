@@ -2,13 +2,13 @@
 
 namespace MojeVlastniStranka.DataAccess.Entities
 {
-	public class ReportedBug
+	public class ReportedBug: IEntities
 	{
 		protected ReportedBug() { }
 		/// <summary>
 		/// Vrací nebo nastavuje Id nápadu.
 		/// </summary>
-		public int? Id
+		public Guid Id
 		{
 			get;
 			set;
@@ -39,11 +39,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			set;
 		}
 
-		/// <summary>
-		///  Vytváří instanci <see cref="ContactForm"/> Vhodný pro uložení do databáze.
-		/// </summary>
-#if DEBUG
-		public static ReportedBug Create(int? id, string url, string bug, DateTime datePosted)
+		public static ReportedBug Create(Guid id, string url, string bug, DateTime datePosted)
 		{
 			var reportedBug = new ReportedBug()
 			{
@@ -55,19 +51,5 @@ namespace MojeVlastniStranka.DataAccess.Entities
 
 			return reportedBug;
 		}
-
-#else
-		public static ReportedBug Create( string url, string bug, DateTime datePosted)
-		{
-			var reportedBug = new ReportedBug()
-			{
-				Url = url,
-				Bug = bug,
-				DatePosted = datePosted
-			};
-
-			return reportedBug;
-		}
-#endif
 	}
 }

@@ -72,36 +72,42 @@
 	    <meta name="robots" content="nofollow">
     }
     <link rel="canonical" href="@canonicalUrl" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 </head>
 <body class="body">
-<nav class="nav fadeInDown visible">
-	<a title="Hlavní stránka" class="nav__a" href="/">
-		<img src="/images/bigger_k_better.svg" alt="logo Jana Sebastiána Kostlána" class="img__icon">
-	</a>
-	<a title="Stránka o mně" class="nav_a" href="/omne">O mně</a>
-	<a title="Stránka moje projekty" class="nav_a" href="/projekty">Projekty</a>
-	<a title="Blog" class="nav_a" href="/blog">Blog</a>
-	<a title="Galerie" class="nav_a" href="/galerie">Galerie</a>
+<nav class="menu" id="menu">
+	<ul class="menu-list">
+		<li class="menu-item"><a href="#">Blog</a></li>
+		<li class="menu-item"><a href="#">Projekty</a></li>
+		<li class="menu-item"><a href="#">O mně</a></li>
+		<li class="menu-item"><a href="/kontakt">Kontakt</a></li>
+	</ul>
 </nav>
 
 @RenderBody()
 
-<footer class="footer__indexpage fadeIn">
-	<p class="margin__right">© 2023 | Jan Sebastián Kostlán</p>
-	<p><a class="red" href="/zasadycookies">Zásady cookies</a></p>
-	<p><a class="red" href="/gdpr">GDPR</a></p>
+<footer class="footer">
+	<p>2023 | Jan Sebastián Kostlán</p>
+	<div class="footer__last__element">
+		<p>GDPR</p>
+		<p>Cookies</p>
+	</div>
 </footer>
 
     <script>
-        $(document).ready(function () {
-            $(window).scroll(function () {
-                $('.fadeIn, .fadeInUp, .fadeInDown, .fadeInRight, .fadeInLeft').each(function () {
-                    let position = $(this).offset().top;
-                    let topPosition = $(window).scrollTop() + $(window).height();
-                    if (position < topPosition) {
-                        $(this).addClass('visible');
-                    }
-                });
+        document.addEventListener("DOMContentLoaded", function () {
+            var sidebarToggler = document.querySelector('.sidebar-toggler');
+            var sidebar = document.querySelector('.sidebar');
+            var contentDiv = document.querySelector('.content');
+
+            sidebarToggler.addEventListener('click', function () {
+                if (sidebar.classList.contains('open')) {
+                    sidebar.classList.remove('open');
+                    contentDiv.classList.remove('open');
+                } else {
+                    sidebar.classList.add('open');
+                    contentDiv.classList.add('open');
+                }
             });
         });
     </script>

@@ -12,12 +12,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MojeVlastniStranka.Applicat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MojeVlastniStranka.Web", "Web\MojeVlastniStranka.Web.csproj", "{A62A9B4F-005F-487E-BCB3-D32B6B956DF2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MojeVlastniStranka.Admin", "Admin\MojeVlastniStranka.Admin.csproj", "{D348F657-B3F9-4D86-9EBF-B71F9FF103A3}"
-	ProjectSection(ProjectDependencies) = postProject
-		{A62A9B4F-005F-487E-BCB3-D32B6B956DF2} = {A62A9B4F-005F-487E-BCB3-D32B6B956DF2}
-		{DC9AFCAB-23FD-47EF-9482-D467E50894C5} = {DC9AFCAB-23FD-47EF-9482-D467E50894C5}
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,10 +30,6 @@ Global
 		{A62A9B4F-005F-487E-BCB3-D32B6B956DF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A62A9B4F-005F-487E-BCB3-D32B6B956DF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A62A9B4F-005F-487E-BCB3-D32B6B956DF2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D348F657-B3F9-4D86-9EBF-B71F9FF103A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D348F657-B3F9-4D86-9EBF-B71F9FF103A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D348F657-B3F9-4D86-9EBF-B71F9FF103A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D348F657-B3F9-4D86-9EBF-B71F9FF103A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

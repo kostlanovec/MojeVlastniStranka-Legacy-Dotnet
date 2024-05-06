@@ -2,16 +2,18 @@
 using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
-namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog
+using System.Configuration;
+namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Blog
 {
-    public class BlogModel : PageModel
-    {
-        //todo odstraňování blog kategorií má jeden problém. Co s příspěvky, které mají přiřazený konkrétní blog kategorii, který bude odstraněný?
-        //todo Nebude lepší na interakci s tím, jestli mazat nebo přidávat blog kategorii pohled nebo novou stránku?
-        private readonly DataContext context;
-        private readonly BlogService blogService;
+	public class BlogModel : PageModel
+	{
+		private readonly DataContext context;
+		private readonly BlogService blogService;
 
-        public List<BlogCategoryDto> BlogCategory
+
+		public string BaseUrl = "kontakt";
+
+	public List<BlogCategoryDto> BlogCategory
         {
 	        get;
 	        set;
@@ -29,7 +31,7 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog
             this.blogService = blogService;
         }
 
-        public async Task OnGetAsync(string searchString, string author, string keyword, int category, DateTime? fromDate, DateTime? toDate)
+        public async Task OnGetAsync(string searchString, string author, string keyword, Guid category, DateTime? fromDate, DateTime? toDate)
         {
 	        BlogCategory = await blogService.GetAllCategoriesTask();
 			Posts = await blogService.GetFilteredBlogPosts(searchString, author, keyword, category, fromDate, toDate);

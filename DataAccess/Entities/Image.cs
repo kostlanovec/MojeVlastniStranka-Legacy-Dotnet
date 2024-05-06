@@ -2,7 +2,7 @@
 
 namespace MojeVlastniStranka.DataAccess.Entities
 {
-    public class Image
+    public class Image: IEntities
     {
         protected Image()
         {
@@ -12,7 +12,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// Nastavení id obrázku.
         /// </summary>
         [Key]
-        public int Id
+        public Guid Id
         {
 	        get;
 	        set;
@@ -32,22 +32,11 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// </summary>
         public string Description { get; set; }
 
-        public static Image Create(int id, string fileName, string description)
+        public static Image Create(Guid id, string fileName, string description)
         {
             var image = new Image()
             {
                 Id = id,
-                FileName = fileName,
-                Description = description
-            };
-
-            return image;
-        }
-
-        public static Image Create(string fileName, string description)
-        {
-            var image = new Image()
-            {
                 FileName = fileName,
                 Description = description
             };

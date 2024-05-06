@@ -11,7 +11,7 @@ namespace MojeVlastniStranka.ApplicationCore.Dto
 		/// <summary>
 		/// Vrací nebo nastavuje Id nápadu.
 		/// </summary>
-		public int? Id
+		public Guid Id
 		{
 			get; 
 			set;

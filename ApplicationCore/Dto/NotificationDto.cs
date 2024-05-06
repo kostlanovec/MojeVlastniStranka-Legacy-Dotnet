@@ -5,7 +5,7 @@
 		/// <summary>
 		/// Vrací nebo nastavuje Id.
 		/// </summary>
-		public int? Id
+		public Guid Id
 		{
 			get;
 			set;

@@ -7,14 +7,14 @@ using Microsoft.VisualBasic;
 
 namespace MojeVlastniStranka.DataAccess.Entities
 {
-	public class ImportantNotification
+	public class ImportantNotification: IEntities
 	{
 		protected ImportantNotification() { }
 
 		/// <summary>
 		/// Vrací nebo nastavuje id.
 		/// </summary>
-		public int? Id
+		public Guid Id
 		{
 			get;
 			set;
@@ -41,8 +41,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		///  Vytváří instanci <see cref="NewsLetter"/> Vhodný pro uložení do databáze.
 		/// </summary>
-#if DEBUG
-		public static ImportantNotification Create(int? id, DateTime timePublish, string shortMessage)
+		public static ImportantNotification Create(Guid id, DateTime timePublish, string shortMessage)
 		{
 			var notification = new ImportantNotification()
 			{
@@ -53,18 +52,5 @@ namespace MojeVlastniStranka.DataAccess.Entities
 
 			return notification;
 		}
-
-#else
-		public static ImportantNotification Create(DateTime timePublish, string shortMessage)
-		{
-			var notification = new ImportantNotification()
-			{
-				TimePublish = timePublish,
-				ShortMessage = shortMessage
-			};
-
-			return notification;
-		}
-#endif
-	}
+    }
 }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MojeVlastniStranka.DataAccess.Entities
 {
-    public class BlogCategory
+    public class BlogCategory: IEntities
     {
         protected BlogCategory() { }
 
@@ -11,7 +11,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// Vrací nebo nastavuje Id kategorie blogu.
         /// </summary>
         [Key]
-        public int? Id { get; set; }
+        public Guid Id { get; set; }
 
         /// <summary>
         /// Vrací nebo nastavuje jméno kategorie blogu.
@@ -24,20 +24,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// </summary>
         public ICollection<BlogPost> BlogPosts { get; set; }
 
-#if DEBUG
-        public static BlogCategory Create(int? id, string name)
-        {
-            var blogCategory = new BlogCategory()
-            {
-                Id = id,
-                Name = name
-            };
-
-            return blogCategory;
-        }
-        }
-#else
-        public static BlogCategory Create(int? id, string name)
+        public static BlogCategory Create(Guid id, string name)
         {
             var blogCategory = new BlogCategory()
             {
@@ -48,7 +35,6 @@ namespace MojeVlastniStranka.DataAccess.Entities
             return blogCategory;
         }
     }
-#endif
 
     
 }

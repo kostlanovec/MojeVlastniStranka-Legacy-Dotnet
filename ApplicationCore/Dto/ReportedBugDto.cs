@@ -5,7 +5,7 @@
 		/// <summary>
 		/// Vrací nebo nastavuje Id nahlášení chyby.
 		/// </summary>
-		public int? Id
+		public Guid Id
 		{
 			get;
 			set;

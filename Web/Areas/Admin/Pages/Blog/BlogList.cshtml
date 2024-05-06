@@ -1,0 +1,64 @@
+﻿@page
+@model MojeVlastniStranka.User.Areas.Admin.Pages.Blog.BlogModel
+@{
+	ViewData["Title"] = "Seznam blog příspěvku";
+	var BaseUrl = "/Identity/Account/Manage/Blog";
+}
+
+<div class="bg-secondary rounded h-100 p-4">
+<form method="get">
+	<div class="row">
+		<div class="col-md-3 mb-3">
+			<input type="text" class="form-control" placeholder="Hledat podle názvu" name="searchString" />
+		</div>
+		<div class="col-md-3 mb-3">
+			<input type="text" class="form-control" placeholder="Hledat podle autora" name="author" />
+		</div>
+		<div class="col-md-3 mb-3">
+			<input type="text" class="form-control" placeholder="Hledat podle klíčového slova" name="keyword" />
+		</div>
+		<div class="col-md-3 mb-3">
+			<select class="form-select" name="category">
+				<option value="">Všechny kategorie</option>
+				@foreach (var category in Model.BlogCategory){
+					<option value="@category.Id">@category.Name</option>
+				}
+			</select>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3 mb-3">
+			<input class="form-control" type="date" name="fromDate" />
+		</div>
+		<div class="col-md-3 mb-3">
+			<input class="form-control" type="date" name="toDate" />
+		</div>
+	</div>
+	<div class="row">
+		<button class="btn btn-primary" type="submit">Filtrovat</button>
+	</div>
+</form>
+<div class="row mt-4">
+	@foreach (var post in Model.Posts)
+	{
+		<div class="col-md-4">
+			<div class="blog-post-summary">
+				<div class="card mb-4 shadow-sm">
+						<img class="bd-placeholder-img card-img-top" src="@Model.BaseUrl/@post.FilePath" alt="Image description">
+					<div class="card-body">
+						<h2 class="card-text"><a asp-page="./EditBlog" asp-route-id="@post.Id">@post.Name</a></h2>
+						<p>@post.Description</p>
+						<div class="d-flex justify-content-between align-items-center">
+							<div class="btn-group">
+								<a class="btn btn-sm btn-outline-secondary" asp-page="./EditBlog" asp-route-id="@post.Id">Edit</a>
+								<a class="btn btn-sm btn-outline-secondary" href="@Model.BaseUrl/blog/@post.Slug">View</a>
+							</div>
+							<small class="text-muted">@post.TimePublic</small>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+</div>
+</div>

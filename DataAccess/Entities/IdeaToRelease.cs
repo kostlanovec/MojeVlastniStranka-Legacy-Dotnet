@@ -1,12 +1,15 @@
-﻿namespace MojeVlastniStranka.DataAccess.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MojeVlastniStranka.DataAccess.Entities
 {
-	public class IdeaToRelease
+	public class IdeaToRelease: IEntities
 	{
 		protected IdeaToRelease() { }
 		/// <summary>
 		/// Vrací nebo nastavuje Id nápadu.
 		/// </summary>
-		public int? Id
+		[Key]
+		public Guid Id
 		{
 			get;
 			set;
@@ -33,8 +36,7 @@
 		/// <summary>
 		///  Vytváří instanci <see cref="ContactForm"/> Vhodný pro uložení do databáze.
 		/// </summary>
-#if DEBUG
-		public static IdeaToRelease Create(int? id, string idea, DateTime datePosted)
+		public static IdeaToRelease Create(Guid id, string idea, DateTime datePosted)
 		{
 			var ideaToRelease = new IdeaToRelease()
 			{
@@ -46,17 +48,5 @@
 			return ideaToRelease;
 		}
 
-#else
-		public static IdeaToRelease Create(string idea, DateTime datePosted)
-		{
-			var ideaToRelease = new IdeaToRelease()
-			{
-				Idea = idea,
-				DatePosted = datePosted
-			};
-
-			return ideaToRelease;
-		}
-#endif
 	}
 }

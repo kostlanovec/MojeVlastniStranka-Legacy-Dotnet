@@ -19,18 +19,11 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// </summary>
 		public void CreateMessage(string shortmessage)
 		{
-#if DEBUG
 			var notification = Notification.Create(
-				null,
+				Guid.NewGuid(), 
 				DateTime.Now,
 				shortmessage
 			);
-#else
-			var notification = Notification.Create(
-				DateTime.Now,
-				shortmessage
-			);
-#endif
 			context.Notifications.Add(notification);
 			context.SaveChangesAsync();
 		}
@@ -38,7 +31,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// <summary>
 		/// Smaže notifikaci na základě poskytnutého Id.
 		/// </summary>
-		public async Task<FormProcessingResult> DeleteMessage(int? NotificationId)
+		public async Task<FormProcessingResult> DeleteMessage(Guid NotificationId)
 		{
 			var formProcessingResult = new FormProcessingResult();
 			var existingNotification = await context.Messages.SingleOrDefaultAsync(bp => bp.Id == NotificationId);

@@ -38,6 +38,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
                 imagePath = await UploadImageAsync(blogPostRequest.FileUpload);
             }
 			var blogPost = BlogPost.Create(
+				Guid.NewGuid(),
 				blogPostRequest.Description,
 				blogPostRequest.Content,
 				blogPostRequest.Title,
@@ -63,7 +64,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		public async Task<List<BlogPostSummary>> GetAllBlogPost()
 		{
 			var result = await context.BlogPosts
-				.Where(bp => bp.BlogCategoryId != 2)
 				.Select(bp => new BlogPostSummary
 				{
 					Id = bp.Id,
@@ -84,7 +84,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		public async Task<List<BlogPostSummary>> GetAllProject()
 		{
 			var result = await context.BlogPosts
-				.Where(bp => bp.BlogCategoryId == 2)
 				.Select(bp => new BlogPostSummary
 				{
 					Id = bp.Id,
@@ -122,7 +121,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// <summary>
 		/// Získá blog příspěvek podle jeho id.
 		/// </summary>
-		public async Task<EditBlogPostDto> GetBlogPostById(int id)
+		public async Task<EditBlogPostDto> GetBlogPostById(Guid id)
 		{
 			var existingBlogPost = await context.BlogPosts
 				.SingleOrDefaultAsync(bp => bp.Id == id);
@@ -200,7 +199,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// Získá filtrovaný blog příspěvky.
 		/// </summary>
 		public async Task<List<BlogPostSummary>> GetFilteredBlogPosts(string searchString, string author,
-			string keyword, int category, DateTime? fromDate, DateTime? toDate)
+			string keyword, Guid category, DateTime? fromDate, DateTime? toDate)
 		{
 			var allPosts = await context.BlogPosts.ToListAsync(); ;
 			var filteredPosts = allPosts;
@@ -222,7 +221,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				filteredPosts = filteredPosts.Where(p => p.Keywords == keyword).ToList();
 			}
 
-			if (category != 0)
+			if (category != Guid.Empty)
 			{
 				filteredPosts = filteredPosts.Where(p => p.BlogCategoryId == category).ToList();
 			}
@@ -260,11 +259,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
 			if (blogCategoryExist == null)
 			{
-#if DEBUG
-				var newCategory = BlogCategory.Create(null, CategoryNameAdd);
-#else
-				var newCategory = BlogCategory.Create(null, CategoryNameAdd);
-#endif
+				var newCategory = BlogCategory.Create(Guid.NewGuid(), CategoryNameAdd);
 				context.BlogCategories.Add(newCategory);
 				await context.SaveChangesAsync();
 			}
@@ -276,33 +271,30 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// Smazání blog kategorie podle jeho id.
 		/// </summary>
 		/// <param name="BlogCategoryId">Smazání blog kategorie.</param>
-		public async Task<FormProcessingResult> DeleteBlogCategory(int BlogCategoryId)
+		public async Task<FormProcessingResult> DeleteBlogCategory(Guid BlogCategoryId)
         {
 			var formProcessingResult = new FormProcessingResult();
 			var existingBlogCategory = await context.BlogCategories.SingleOrDefaultAsync(bp => bp.Id == BlogCategoryId);
 			// Blog 1 je takzvaně neučitý
-			if (existingBlogCategory != null || BlogCategoryId != 1)
-			{
 				var existingAllBlogWithDeleteBlogCategory = context.BlogPosts.Where(bp => bp.BlogCategoryId == BlogCategoryId);
 
 				if (existingAllBlogWithDeleteBlogCategory.Any())
 				{
 					foreach (var blogPost in existingAllBlogWithDeleteBlogCategory)
 					{
-						blogPost.BlogCategoryId = 1;
+						blogPost.BlogCategoryId = Guid.Empty;
 					}
 				}
 
 				context.Remove(existingBlogCategory);
 				await context.SaveChangesAsync();
-			}
 			return formProcessingResult;
 		}
 
 		/// <summary>
 		/// Smaže blog příspěvek podle jeho Id.
 		/// </summary>
-		public async Task<FormProcessingResult> DeleteBlogPost(int? BlogId)
+		public async Task<FormProcessingResult> DeleteBlogPost(Guid BlogId)
 		{
 			var formProcessingResult = new FormProcessingResult();
 			var existingBlog = await context.BlogPosts.SingleOrDefaultAsync(bp => bp.Id == BlogId);

@@ -5,7 +5,7 @@
 		/// <summary>
 		/// Id obrázku
 		/// </summary>
-		public int Id
+		public Guid Id
 		{
 			get;
 			set;

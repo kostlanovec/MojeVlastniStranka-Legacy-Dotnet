@@ -2,9 +2,10 @@
 
 namespace MojeVlastniStranka.DataAccess.Entities
 {
-	public class BugReport
+	public class BugReport: IEntities
 	{
-		public int Id
+		[Key]
+		public Guid Id
 		{
 			get;
 			set;
@@ -22,5 +23,17 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			get;
 			set;
 		}
-	}
+
+        public static BugReport Create(Guid id, string url, string report)
+        {
+            var bugReport = new BugReport()
+            {
+                Id = id,
+                Url = url,
+                Report = report
+            };
+
+            return bugReport;
+        }
+    }
 }

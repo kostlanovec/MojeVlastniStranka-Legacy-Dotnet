@@ -1,33 +1,80 @@
-﻿using System.Runtime.InteropServices.JavaScript;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
+using Microsoft.Extensions.Options;
+using System.Configuration;
+using MojeVlastniStranka.DataAccess.Entities;
 
 
-namespace MojeVlastniStrankaFinanali
+namespace MojeVlastniStrankaFinanali.Web
 {
 	public class Program
 	{
 		public static void Main(string[] args)
 		{
 			var builder = WebApplication.CreateBuilder(args);
-			builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-			builder.Services.AddDbContext<DataContext>(options =>
-					options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), new MariaDbServerVersion(new Version(11, 4, 0))),
-				ServiceLifetime.Scoped);
+            builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-			// migrate
-            var dataContext = builder.Services.BuildServiceProvider().GetService<DataContext>();
-            dataContext.Database.Migrate();
+            /* builder.Services.AddDbContext<DataContext>(options =>
+                     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), new MariaDbServerVersion(new Version(11, 4, 0))),
+             ServiceLifetime.Scoped);*/
 
-			builder.Services.AddControllers();
-			builder.Services.AddScoped<BlogService>();
+            builder.Services.AddDbContext<DataContext>(options =>
+                    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")),
+                ServiceLifetime.Scoped);
+
+            /*	builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);*/
+
+            builder.Services.AddDefaultIdentity<User>(options =>
+				{
+					// Password settings.
+					options.Password.RequireDigit = true;
+					options.Password.RequireLowercase = true;
+					options.Password.RequireNonAlphanumeric = true;
+					options.Password.RequireUppercase = true;
+					options.Password.RequiredLength = 6;
+					options.Password.RequiredUniqueChars = 1;
+
+					// Lockout settings.
+					options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+					options.Lockout.MaxFailedAccessAttempts = 5;
+					options.Lockout.AllowedForNewUsers = true;
+
+					// User settings.
+					options.User.AllowedUserNameCharacters =
+						"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+					options.User.RequireUniqueEmail = false;
+				})
+	            .AddRoles<IdentityRole<Guid>>()
+				.AddEntityFrameworkStores<DataContext>();
+
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+	            // Cookie settings
+	            options.Cookie.HttpOnly = true;
+	            options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+	            options.LoginPath = "/Identity/Account/Login";
+	            options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+	            options.SlidingExpiration = true;
+            });
+
+
 			builder.Services.AddScoped<NotificationService>();
+            builder.Services.AddScoped<ContactFormService>();
+            builder.Services.AddScoped<BlogService>();
+			builder.Services.AddScoped<ImageService>();
+			builder.Services.AddScoped<DevelopmentService>();
+			builder.Services.AddScoped<DashboardService>();
+            builder.Services.AddScoped<MailService>();
 
-			builder.Services.AddRazorPages();
+            builder.Services.AddRazorPages();
+            builder.Services.AddControllers();
 
-			var app = builder.Build();
+            var app = builder.Build();
 
 			if (!app.Environment.IsDevelopment())
 			{

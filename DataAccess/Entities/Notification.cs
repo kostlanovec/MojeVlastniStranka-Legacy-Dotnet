@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualBasic;
-
-namespace MojeVlastniStranka.DataAccess.Entities
+﻿namespace MojeVlastniStranka.DataAccess.Entities
 {
-	public class Notification
+	public class Notification: IEntities
 	{
 		protected Notification () { }
 
 		/// <summary>
 		/// Vrací nebo nastavuje id.
 		/// </summary>
-		public int? Id
+		public Guid Id
 		{
 			get;
 			set;
@@ -41,8 +34,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		///  Vytváří instanci <see cref="NewsLetter"/> Vhodný pro uložení do databáze.
 		/// </summary>
-#if DEBUG
-		public static Notification Create(int? id, DateTime timePublish, string shortMessage)
+		public static Notification Create(Guid id, DateTime timePublish, string shortMessage)
 		{
 			var notification = new Notification()
 			{
@@ -54,17 +46,5 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			return notification;
 		}
 
-#else
-		public static Notification Create(DateTime timePublish, string shortMessage)
-		{
-			var notification = new Notification()
-			{
-				TimePublish = timePublish,
-				ShortMessage = shortMessage
-			};
-
-			return notification;
-		}
-#endif
 	}
 }

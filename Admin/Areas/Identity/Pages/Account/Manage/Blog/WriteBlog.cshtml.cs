@@ -5,7 +5,7 @@ using MojeVlastniStranka.ApplicationCore.Requests;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
 
-namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage
+namespace MojeVlastniStranka.Admin.Areas.Identity.Pages
 {
 	public class WriteBlogModel : PageModel
 	{

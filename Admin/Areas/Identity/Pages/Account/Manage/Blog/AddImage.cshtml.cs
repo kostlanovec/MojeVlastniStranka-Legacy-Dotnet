@@ -6,7 +6,7 @@ using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
 using static System.Net.WebRequestMethods;
 
-namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog
+namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Blog
 {
     public class AddImageModel : PageModel
     {

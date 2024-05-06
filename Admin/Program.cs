@@ -13,10 +13,16 @@ namespace Admin
 		{
 			var builder = WebApplication.CreateBuilder(args);
 
+#if DEBUG
             builder.Services.AddDbContext<AdminContext>(options =>
-                    options.UseMySql(builder.Configuration.GetConnectionString("AdminContextConnection"), new MariaDbServerVersion(new Version(11, 4, 0))),
+                    options.UseSqlServer(builder.Configuration.GetConnectionString("AdminContextConnection")),
                 ServiceLifetime.Scoped);
 
+#else
+                builder.Services.AddDbContext<AdminContext>(options =>
+                    options.UseMySql(builder.Configuration.GetConnectionString("AdminContextConnection"), new MariaDbServerVersion(new Version(11, 4, 0))),
+                ServiceLifetime.Scoped);
+#endif
             var adminContext = builder.Services.BuildServiceProvider().GetService<AdminContext>();
             adminContext.Database.Migrate();
 
@@ -69,10 +75,13 @@ namespace Admin
 			builder.Services.AddScoped<NotificationService>();
             builder.Services.AddScoped<DashboardService>();
 			builder.Services.AddScoped<MailService>();
+			builder.Services.AddScoped<NotificationService>();
+			builder.Services.AddScoped<NotificationService>();
 
 
 			builder.Services.AddRazorPages();
             builder.Services.AddControllersWithViews();
+			builder.Services.AddControllers();
 			var app = builder.Build();
 
 			if (!app.Environment.IsDevelopment())
@@ -94,7 +103,6 @@ namespace Admin
 			app.MapControllerRoute(
 				name: "default",
 				pattern: "{controller=Home}/{action=Index}/{id?}");
-
 			app.Run();
 		}
 	}

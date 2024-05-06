@@ -23,10 +23,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// </summary>
         public async Task UploadImageAsync(AddImageRequest addImageRequest)
         {
-
             var currentDirectory = Directory.GetCurrentDirectory();
 
-            var modifiedPath = Path.Combine(currentDirectory.Substring(0, currentDirectory.LastIndexOf("Admin")), "Web", "wwwroot");
+            var modifiedPath = Path.Combine(currentDirectory, "Web", "wwwroot");
             var uploadsDirectory = modifiedPath + "\\images\\blog";
             var filePath = Path.Combine(uploadsDirectory, addImageRequest.FileUpload.Name);
 
@@ -40,7 +39,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
                 await addImageRequest.FileUpload.CopyToAsync(fileStream);
             }
 
-            var image = Image.Create(Path.Combine( addImageRequest.FileUpload.FileName), addImageRequest.Description);
+            var image = Image.Create(Guid.NewGuid(), Path.Combine( addImageRequest.FileUpload.FileName), addImageRequest.Description);
             this.context.Images.Add(image);
             await this.context.SaveChangesAsync();
         }

@@ -17,7 +17,7 @@ namespace MojeVlastniStranka.Web.Controllers
 		{
 			var blogPost = context.BlogPosts.FirstOrDefault(bp => bp.Slug == Slug);
 
-			if (blogPost == null || blogPost.BlogCategoryId != 2)
+			if (blogPost == null)
 			{
 				return NotFound();
 			}

@@ -4,7 +4,7 @@ using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
 
-namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog
+namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Blog
 {
     public class BlogCategoryModel : PageModel
     {
@@ -46,14 +46,13 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Blog
 		/// <summary>
 		/// Odebrání blog kategorie z databáze a přesunutí popřípadných blog příspěvku náležící k smazané blog kategorii ke kategorii neurčený.
 		/// </summary>
-        public async Task<ActionResult> OnPostDeleteCategoryAsync(int Id)
+        public async Task<ActionResult> OnPostDeleteCategoryAsync(Guid Id)
         {
 	        BlogCategory = await blogService.GetAllCategoriesTask();
 			// blog kategorie je 1, což znamená
-			if (Id == 1 || Id == 2)
-	        {
+
 		        return Page();
-	        }
+	        
 			var result = await blogService.DeleteBlogCategory(Id);
 
 			return Page();

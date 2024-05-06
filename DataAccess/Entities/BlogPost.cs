@@ -4,14 +4,14 @@ using System.Runtime.InteropServices.JavaScript;
 
 namespace MojeVlastniStranka.DataAccess.Entities
 {
-    public class BlogPost
+    public class BlogPost: IEntities
     {
         protected BlogPost(){}
         /// <summary>
         /// Vrací nebo nastavuje Id blog příspěvku.
         /// </summary>
         [Key]
-        public int? Id
+        public Guid Id
         {
             get;
             set;
@@ -87,7 +87,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// <summary>
         /// Vrací nebo nastavuje Id kategorie.
         /// </summary>
-        public int BlogCategoryId
+        public Guid BlogCategoryId
         {
             get;
             set;
@@ -118,26 +118,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			set;
 		}
 
-        public static BlogPost Create(string descriptions, string content, string title, string author, string keywords, int BlogCategoryId, string name, string imagePath, string slug, DateTime date)
-        {
-            var blogCategory = new BlogPost()
-            {
-                Description = descriptions,
-                Content = content,
-                Title = title,
-                Author = author,
-                Keywords = keywords,
-                BlogCategoryId = BlogCategoryId,
-                Name = name,
-                ImagePath = imagePath,
-                Slug = slug,
-                Date = date
-            };
-
-            return blogCategory;
-        }
-#if DEBUG
-        public static BlogPost Create(int id, string descriptions, string content, string title, string author, string keywords, int BlogCategoryId, string name, string imagePath, string slug, DateTime date)
+        public static BlogPost Create(Guid id, string descriptions, string content, string title, string author, string keywords, Guid BlogCategoryId, string name, string imagePath, string slug, DateTime date)
         {
             var blogCategory = new BlogPost()
             {
@@ -156,6 +137,5 @@ namespace MojeVlastniStranka.DataAccess.Entities
 
             return blogCategory;
         }
-#endif
     }
 }

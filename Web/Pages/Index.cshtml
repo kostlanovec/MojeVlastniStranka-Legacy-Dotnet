@@ -7,69 +7,98 @@
 	ViewData["Keywords"] = "Weby, aplikace, Jan, Sebastián, Kostlán, SEO, webových, tvůrce, sociální, sítě, sociálních, sítí";
 }
 
-
-<header class="header__index">
-	<h1 class="header__h1 fadeInLeft visible">Kostlán <span class="subheading">Jan Sebastián</span></h1>
-	<p class="header__p fadeInLeft visible">Tvůrce webových aplikací budoucnosti. V dnešní době jsou weby online vizitkami, kterými ukazujete své kvality. <span class="span__header__p">"Kdo není na internetu, jako by neexistoval."</span></p>
-	<div class="a__button fadeInLeft visible">
-		<a title="skrolnutí ke kontaktům" href="#kontakt" class="header__a a__classic">Kontakt</a>
+<header class="header">
+	<figure>
+		<img class="header--figure" src="images/react.svg" alt="Kostlanovec">
+	</figure>
+	<div>
+		<h1>Jan Sebastián Kostlán</h1>
+		<p>Tvůrce webů, her a student, který se zajímá o softwarový vývoj. Zajímá se taktéž o vědu jako celek.</p>
+		<button class="arrow"></button>
 	</div>
-	<div class="image__k image__relative fadeInRight visible">
-		<img src="images/bigger_k_better.svg" alt="k" class="header__k">
-	</div>
+      
 </header>
 
 <main class="main">
-	<section class="section__collumns fadeInUp visible">
-		<p class="bigger__p red">Co nabízím</p>
-		<p class="bigger__p">Mými odbornými kompetencemi jsou</p>
-		<p>technologie, marketing, inovace</p>
-		<div class="div__collumns">
-			<a title="stránka služby weby" asp-page="sluzby/weby" class="a__in__columns animation__scale">
-				<div class="div__in__article__collumns">
-					<img src="images/sluzbyimages/website-program-svgrepo-com.svg" alt="Webová aplikace">
-					<h2 class="text__in__div">Weby</h2>
-					<p class="red text__in__div">Vývoj jednoduchých webových aplikací</p>
+	<div class="services">
+		<h2>Nabízené služby</h2>
+		<div class="swiper-container services__Swiper">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<article class="scrolling__article">
+						<img src="images/webovestranky.jpg" alt="Webové stránky">
+						<div>
+							<div>
+								<h3>Webové stránky</h3>
+							</div>
+						</div>
+					</article>
 				</div>
-			</a>
-			<a title="stránka služby aplikace" asp-page="sluzby/aplikace" class="a__in__columns animation__scale">
-				<div class="div__in__article__collumns">
-					<img src="images/sluzbyimages/application-coding-terminal-svgrepo-com.svg" alt="Desktopové a mobilní aplikace">
-					<h2 class="text__in__div">Aplikace</h2>
-					<p class="red text__in__div">Tvorba jednoduchých desktopových a mobilních aplikací</p>
-				</div>
-			</a>
-			<a title="stránka služby sociální sítě" asp-page="sluzby/socialnisite" class="a__in__columns animation__scale">
-				<div class="div__in__article__collumns">
-					<img src="images/sluzbyimages/social-network-brand-svgrepo-com.svg" alt="správa sociálních sítí">
-					<h2 class="text__in__div">Sociální sítě</h2>
-					<p class="text__in__div red">Správa sociálních sítí jako je instagram, facebook, ...</p>
-				</div>
-			</a>
-			<a title="stránka služby seo" asp-page="sluzby/seo" class="a__in__columns animation__scale">
-				<div class="div__in__article__collumns">
-					<img src="images/sluzbyimages/seo-graphic-thin-outline-in-a-circle-svgrepo-com.svg" alt="SEO">
-					<h2 class="text__in__div">SEO</h2>
-					<p class="text__in__div red">Optimalizace stránek pro lepší vyhledatelnost, neboli SEO</p>
-				</div>
-			</a>
+			</div>
+			<div class="swiper-pagination"></div>
 		</div>
-	</section>
-	<section class="fadeInUp index__section__blog">
-		<p class="bigger__p red">Blogové příspěvky</p>
-		<p class="p__bottom__margin">Doporučené mnou napsané články na stránce</p>
-		<div class="div__blog__contributions">
-			@for (var i = 0; i < Model.Posts.Count && i < 3; i++)
-			{
-				<article class="article__blog @(i == 0 ? "animation__scale img" : "animation__scale")">
-					<a href="/blog/@Model.Posts[i].Slug">
-						<img src="@Model.Posts[i].FilePath" alt="@Model.Posts[i].Name" class="img__border__radius">
-						<p class="text__for__img">@Model.Posts[i].Name</p>
-					</a>
-				</article>
-			}
+	</div>
+	<div>
+		<h2>Blog příspěvky</h2>
+		<div class="swiper-container blog__Swiper">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<figure class="figure__blog">
+						<img src="images/psychologie.jpg" alt="Blog">
+						<div class="figure__blog__div">
+							<h3>Barvy a vliv na psychiku</h3>
+							<p>Jak barvy ovlivňují lidskou mysl? Je to velice zajímavé si uvědomit, kolik toho má na nás vliv.</p>
+						</div>
+					</figure>
+				</div>
+			</div>
+			<div class="swiper-pagination"></div>
 		</div>
-	</section>
-	@Html.Partial("Shared/_contactform")
+	</div>
+
+	
+	<div class="aboutme__Card">
+		<div class="aboutme__Card__images">
+			<img src="images/osobnifotka.png" alt="Blog">
+			<img class="megafone" src="images/icons/megafon.svg" aria-hidden="true" alt="Megafon">
+		</div>
+		<div class="aboutme__text">
+			<h2>Něco o mně</h2>
+			<p>Zdravím, jsem Jan Sebastián Kostlán, programátor a tvůrce webových aplikací. Nesmírně si užívám volnost při programování. Ve svém volnu, pokud neprogramuji, tak se věnuji fitness, protože věřím, že každý by měl se sebou něco dělat a to nejen fyzicky, ale i intelektuálně. Učit se každý den nových dovedností. Baví mě pracovat na věcech ve kterých věřím, že mají smysl a jsou prospěšné pro ostatní lidi a mne samotného.</p>
+		</div>
+	</div>
 
 </main>
+
+
+<form class="form__newsletter" method="post" action="/newsletter">
+	<h2>Buď v obraze</h2>
+	<img class="email__ikonka" src="images/icons/emailikonka.svg" alt="Email ikona" aria-hidden="true">
+	<p>Chceš dostávat pravidelné newslettery o tom, co plánuji a co píšu. Nezapomeň vyplnit email.</p>
+	<input type="email" name="email" placeholder="E-mail" required class="input__email">
+	<button class="button" type="submit">Odeslat</button>
+</form>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+        var swiperServices = new Swiper('.services__Swiper', {
+            slidesPerView: 'auto',
+            spaceBetween: 30,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+
+        var swiperBlog = new Swiper('.blog__Swiper', {
+            slidesPerView: 'auto',
+            spaceBetween: 30,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+
+        function scrollToNextContent() {
+            // Your scroll function
+        }
+    </script>

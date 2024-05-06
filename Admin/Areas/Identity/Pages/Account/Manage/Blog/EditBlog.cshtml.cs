@@ -5,7 +5,7 @@ using MojeVlastniStranka.ApplicationCore.Requests;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
 
-namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage
+namespace MojeVlastniStranka.Admin.Areas.Identity.Pages
 {
     public class EditBlogPostModel : PageModel
     {
@@ -38,7 +38,7 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage
 	    }
 
         [BindProperty(SupportsGet = true)]
-        public int Id
+        public Guid Id
         {
             get;
             set;

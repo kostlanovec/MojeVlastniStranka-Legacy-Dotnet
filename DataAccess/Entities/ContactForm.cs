@@ -5,7 +5,7 @@ using System.Runtime.InteropServices.JavaScript;
 namespace MojeVlastniStranka.DataAccess.Entities
 {
 	[Table(nameof(ContactForm))]
-	public class ContactForm
+	public class ContactForm: IEntities
 	{
 		/// <summary>
 		/// Chráněný konstruktor.
@@ -15,7 +15,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		/// Klíč.
 		/// </summary>
-		public int? Id
+		public Guid Id
 		{
 			get;
 			set;
@@ -84,8 +84,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		///  Vytváří instanci <see cref="ContactForm"/> Vhodný pro uložení do databáze.
 		/// </summary>
-#if DEBUG
-		public static ContactForm Create(int? id, string firstName, string lastName, string email, string? phoneNumber, string feedBack, DateTime date)
+		public static ContactForm Create(Guid id, string firstName, string lastName, string email, string? phoneNumber, string feedBack, DateTime date)
 		{
 			var contactForm = new ContactForm()
 			{
@@ -101,21 +100,5 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			return contactForm;
 		}
 
-#else
-		public static ContactForm Create(string firstName, string lastName, string email, string? phoneNumber, string feedBack, DateTime date)
-        {
-            var contactForm = new ContactForm()
-            {
-                FirstName = firstName,
-                LastName = lastName,
-                Email = email,
-                PhoneNumber = phoneNumber,
-                FeedBack = feedBack,
-				Date = date
-            };
-
-            return contactForm;
-        }
-#endif
 	}
 }

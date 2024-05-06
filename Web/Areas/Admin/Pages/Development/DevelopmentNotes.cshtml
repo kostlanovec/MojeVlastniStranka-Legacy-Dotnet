@@ -1,0 +1,48 @@
+﻿@page
+@model MojeVlastniStranka.User.Areas.Admin.Pages.Development.DevelopmentNotesModel
+@{
+	ViewData["Title"] = "Poznámky k vývoji";
+}
+<div class="row gap-1">
+	<div class="h-100 bg-secondary rounded p-4 col-md-6 mb-4">
+		<div class="d-flex align-items-center justify-content-between mb-4">
+			<h6 class="mb-0">Idea To Release</h6>
+			<a href="">Show All</a>
+		</div>
+		
+		@foreach (var idea in Model.IdeaToReleaseDto)
+		{
+			<div class="d-flex align-items-center border-bottom py-2">
+				<div class="w-100 ms-3">
+					<div class="d-flex w-100 align-items-center justify-content-between">
+						<span>@idea.Idea</span>
+						<form method="post" asp-page-handler="DeleteIdea" asp-route-id="@idea.Id">
+							<button type="submit" class="btn btn-sm"><i class="fa fa-times"></i></button>
+						</form>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+
+	<div class="h-100 bg-secondary rounded p-4 col-md-6 mb-4">
+		<div class="d-flex align-items-center justify-content-between mb-4">
+			<h6 class="mb-0">To Do List</h6>
+			<a href="">Show All</a>
+		</div>
+		@foreach (var bug in Model.ReportedBugDto)
+		{
+			<div class="d-flex align-items-center border-bottom py-2">
+				<div class="w-100 ms-3">
+					<div class="d-flex w-100 align-items-center justify-content-between">
+						<span>@bug.Bug</span>
+						<span>@bug.Url</span>
+						<form method="post" asp-page-handler="DeleteBug" asp-route-id="@bug.Id">
+							<button type="submit" class="btn btn-sm"><i class="fa fa-times"></i></button>
+						</form>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>

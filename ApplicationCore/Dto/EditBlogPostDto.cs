@@ -9,7 +9,7 @@ namespace MojeVlastniStranka.ApplicationCore.Dto
 		/// Vrací nebo nastavuje Id blog příspěvku.
 		/// </summary>
 		[Key]
-		public int? Id
+		public Guid Id
 		{
 			get;
 			set;
@@ -81,7 +81,7 @@ namespace MojeVlastniStranka.ApplicationCore.Dto
 		/// <summary>
 		/// Vrací nebo nastavuje Id kategorie.
 		/// </summary>
-		public int BlogCategoryId
+		public Guid BlogCategoryId
 		{
 			get; 
 			set;

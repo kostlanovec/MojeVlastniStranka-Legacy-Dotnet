@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="24"
+   height="24"
+   viewBox="0 0 24 24"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="iconmonstr-megaphone-10.svg"
+   inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="43.625"
+     inkscape:cx="12"
+     inkscape:cy="12"
+     inkscape:window-width="2400"
+     inkscape:window-height="1261"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <path
+     d="M 4.7883732,17.113012 C 3.0665314,17.78182 1.1664673,16.828741 0.53733279,14.98357 -0.09277555,13.138396 0.79249266,11.099921 2.5114127,10.43111 L 5.668772,9.2040959 7.9457325,15.885998 Z M 10.906365,20.39194 C 10.480774,20.235849 10.113617,19.947443 9.8457962,19.564972 l -1.5923137,-2.27623 -3.2148188,1.249754 2.534068,3.46603 c 0.2843766,0.388675 0.769375,0.537531 1.2047049,0.368001 l 2.1581444,-0.837304 c 0.223022,-0.08682 0.372028,-0.317349 0.371054,-0.571641 -0.002,-0.254294 -0.151928,-0.479642 -0.378844,-0.563374 z M 6.9231456,8.7172185 9.200106,15.399119 c 2.098738,-0.431056 4.944451,-0.414518 8.663746,0.414518 L 13.310905,2.4508686 C 10.899548,5.7225607 8.7696455,7.6235534 6.9231456,8.7172185 Z M 17.436313,5.51065 c 0.833653,0.4248549 1.515377,1.1877328 1.84358,2.1883642 0.330149,0.9995976 0.247368,2.0467453 -0.152902,2.9316008 l 1.370266,0.700856 C 21.066984,10.074481 21.186774,8.5859373 20.718331,7.1656197 20.249889,5.7442687 19.282814,4.659907 18.099534,4.0551865 Z m 1.156985,-2.5480949 c 1.447204,0.7391027 2.627562,2.0653525 3.20021,3.8019852 0.57265,1.7366328 0.426565,3.5569967 -0.269767,5.0930897 l 1.405325,0.719461 C 23.798752,10.657492 23.979896,8.3853975 23.266034,6.216674 22.550223,4.0489843 21.077697,2.3940146 19.271127,1.4709117 Z"
+     id="path1"
+     style="fill:none;stroke:#f4effa;stroke-width:0.4;stroke-dasharray:none;stroke-opacity:1" />
+</svg>

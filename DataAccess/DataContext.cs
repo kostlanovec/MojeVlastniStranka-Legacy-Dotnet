@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MojeVlastniStranka.DataAccess.Entities;
 using Reservanto.NPS.DataAccess;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace MojeVlastniStranka.DataAccess
 {
-	public class DataContext : DbContext
+	public class DataContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
 	{
 		public DataContext(DbContextOptions<DataContext> options) : base(options)
 		{
@@ -29,10 +31,10 @@ namespace MojeVlastniStranka.DataAccess
 			base.OnModelCreating(modelBuilder);
 		}
 
-		#region DbSet
-		// Definice DbSetů pro každou třídu, kterou chceme mapovat na databázovou tabulku.
+        // Definice DbSetů pro každou třídu, kterou chceme mapovat na databázovou tabulku.
+        #region DbSet
 
-		public DbSet<ContactForm> ContactForms { get; set; }
+        public DbSet<ContactForm> ContactForms { get; set; }
 		public DbSet<BlogPost> BlogPosts { get; set; }
 		public DbSet<BlogCategory> BlogCategories { get; set; }
 
