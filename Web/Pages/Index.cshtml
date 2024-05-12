@@ -7,56 +7,81 @@
 	ViewData["Keywords"] = "Weby, aplikace, Jan, Sebastián, Kostlán, SEO, webových, tvůrce, sociální, sítě, sociálních, sítí";
 }
 
-<header class="header">
-	<figure>
-		<img class="header--figure" src="images/react.svg" alt="Kostlanovec">
-	</figure>
-	<div>
-		<h1>Jan Sebastián Kostlán</h1>
-		<p>Tvůrce webů, her a student, který se zajímá o softwarový vývoj. Zajímá se taktéž o vědu jako celek.</p>
-		<button class="arrow"></button>
-	</div>
-      
-</header>
-
 <main class="main">
-	<div class="services">
-		<h2>Nabízené služby</h2>
-		<div class="swiper-container services__Swiper">
-			<div class="swiper-wrapper">
-				<div class="swiper-slide">
-					<article class="scrolling__article">
-						<img src="images/webovestranky.jpg" alt="Webové stránky">
-						<div>
-							<div>
-								<h3>Webové stránky</h3>
-							</div>
-						</div>
-					</article>
-				</div>
-			</div>
-			<div class="swiper-pagination"></div>
+	<header class="header">
+		<figure class="header--figure">
+			<img class="header--figure--image" src="images/react.svg" alt="Kostlanovec">
+		</figure>
+		<div>
+			<h1 class="h1--index">Jan Sebastián Kostlán</h1>
+			<p class="p--index">Tvůrce webů, her a student, který se zajímá o softwarový vývoj. Zajímá se taktéž o vědu jako celek.</p>
+			<button id="scrollBtn" class="arrow"></button>
 		</div>
+	</header>
+	<div id="target" class="services">
+		<h2>Nabízené služby</h2>
+		<section class="scrolling__container">
+			<article class="scrolling__article">
+				<img src="images/webovestranky.jpg" alt="Webové stránky">
+				<div>
+					<div>
+						<h3>Webové stránky</h3>
+					</div>
+				</div>
+			</article>
+			<article class="scrolling__article">
+				<img src="images/webovestranky.jpg" alt="Webové stránky">
+				<div>
+					<div>
+						<h3>Webové stránky</h3>
+					</div>
+				</div>
+			</article>
+			<article class="scrolling__article">
+				<img src="images/webovestranky.jpg" alt="Webové stránky">
+				<div>
+					<div>
+						<h3>Webové stránky</h3>
+					</div>
+				</div>
+			</article>
+			<article class="scrolling__article">
+				<img src="images/webovestranky.jpg" alt="Webové stránky">
+				<div>
+					<div>
+						<h3>Webové stránky</h3>
+					</div>
+				</div>
+			</article>
+		</section>
 	</div>
 	<div>
 		<h2>Blog příspěvky</h2>
-		<div class="swiper-container blog__Swiper">
-			<div class="swiper-wrapper">
-				<div class="swiper-slide">
-					<figure class="figure__blog">
-						<img src="images/psychologie.jpg" alt="Blog">
-						<div class="figure__blog__div">
-							<h3>Barvy a vliv na psychiku</h3>
-							<p>Jak barvy ovlivňují lidskou mysl? Je to velice zajímavé si uvědomit, kolik toho má na nás vliv.</p>
-						</div>
-					</figure>
-				</div>
+		<div class="wrapper">
+			<div class="slide">
+				<figure class="figure__blog">
+					<img src="images/psychologie.jpg" alt="Blog">
+					<div class="figure__blog__div">
+						<h3>Barvy a vliv na psychiku</h3>
+						<p>Jak barvy ovlivňují lidskou mysl? Je to velice zajímavé si uvědomit, kolik toho má na nás vliv.</p>
+					</div>
+				</figure>
+				<figure class="figure__blog">
+					<img src="images/psychologie.jpg" alt="Blog">
+					<div class="figure__blog__div">
+						<h3>Zajímavosti ze světa</h3>
+						<p>Jak barvy ovlivňují lidskou mysl? Je to velice zajímavé si uvědomit, kolik toho má na nás vliv.</p>
+					</div>
+				</figure>
 			</div>
-			<div class="swiper-pagination"></div>
+			<div class="pagination">
+				<span class="behind--dot"><span class="dot"></span></span>
+				<span class="behind--dot"><span class="dot"></span></span>
+			</div>
 		</div>
 	</div>
 
-	
+
 	<div class="aboutme__Card">
 		<div class="aboutme__Card__images">
 			<img src="images/osobnifotka.png" alt="Blog">
@@ -78,27 +103,65 @@
 	<input type="email" name="email" placeholder="E-mail" required class="input__email">
 	<button class="button" type="submit">Odeslat</button>
 </form>
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script>
-        var swiperServices = new Swiper('.services__Swiper', {
-            slidesPerView: 'auto',
-            spaceBetween: 30,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-        });
+	document.addEventListener("DOMContentLoaded", function () {
+		let currentIndex = 0;
+		const figures = document.querySelectorAll(".figure__blog");
+		const dots = document.querySelectorAll(".dot");
+		let autoAdvanceTimer;
 
-        var swiperBlog = new Swiper('.blog__Swiper', {
-            slidesPerView: 'auto',
-            spaceBetween: 30,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-        });
+		function hideAllFigures() {
+			figures.forEach(function (figure) {
+				figure.style.display = "none";
+			});
+		}
 
-        function scrollToNextContent() {
-            // Your scroll function
-        }
-    </script>
+		function removeActiveClassFromDots() {
+			dots.forEach(function (dot) {
+				dot.classList.remove("active");
+			});
+		}
+
+		function showFigure(index) {
+			hideAllFigures();
+			removeActiveClassFromDots();
+			figures[index].style.display = "flex";
+			dots[index].classList.add("active");
+		}
+
+		function toggleFigure() {
+			currentIndex++;
+			if (currentIndex >= figures.length) {
+				currentIndex = 0;
+			}
+			showFigure(currentIndex);
+		}
+
+		function startAutoAdvance() {
+			autoAdvanceTimer = setInterval(toggleFigure, 3000);
+		}
+
+		function resetAutoAdvance() {
+			clearInterval(autoAdvanceTimer);
+			startAutoAdvance();
+		}
+
+		showFigure(0);
+		startAutoAdvance();
+
+		dots.forEach(function (dot, index) {
+			dot.addEventListener('click', function () {
+				currentIndex = index;
+				showFigure(currentIndex);
+				resetAutoAdvance();
+			});
+		});
+
+		document.getElementById("scrollBtn").addEventListener("click", function () {
+			const targetElement = document.getElementById("target");
+			targetElement.scrollIntoView({ behavior: "smooth" });
+		});
+	});
+
+
+</script>

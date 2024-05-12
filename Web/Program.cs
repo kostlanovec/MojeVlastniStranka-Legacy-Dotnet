@@ -112,6 +112,14 @@ namespace MojeVlastniStrankaFinanali.Web
 		            defaults: new { controller = "Projekty", action = "ShowProject" });
             });
 
+			// api endpoints
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapControllerRoute(
+										name: "api",
+															pattern: "api/{controller}/{action}/{id?}");
+			});
+
 
 			app.Run();
 		}

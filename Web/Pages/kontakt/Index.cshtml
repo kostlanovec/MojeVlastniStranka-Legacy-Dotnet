@@ -1,0 +1,31 @@
+﻿@page
+@model MojeVlastniStranka.Web.Pages.kontakt.kontaktModel
+@{
+	ViewData["Title"] = "Kontakt";
+	ViewData["Description"] = "Kontaktujte mě přes formulář nebo přes sociální sítě. Rád vám poradím s vaším projektem.";
+	ViewData["Author"] = "Jan Sebastián Kostlán";
+	ViewData["Keywords"] = "Kontakt, formulář, sociální sítě, Jan, Sebastián, Kostlán, SEO, webových, tvůrce, sociální, sítě, sociálních, sítí";
+
+}
+
+<h2>Sociální sítě</h2>
+<div class="socials--buttons">
+	<a href="" class="socials--button">
+		<img class="social--image" src="/images/hamburgermenu.svg"/>
+		<p class="social--text">kostlan</p>
+	</a>
+	
+	<a href="" class="socials--button">
+		<img class="social--image" src="/images/hamburgermenu.svg"/>
+		<p class="social--text">kostlan</p>
+	</a>
+</div>
+
+<h1>Formulář</h1>
+<form class="form">
+	<input class="input__form" type="text" name="Name" placeholder="Jméno" required><br>
+	<input class="input__form" type="email" name="Email" placeholder="Email" required><br>
+	<input class="input__form" type="text" name="Phone" placeholder="Telefon"><br>
+	<textarea class="textarea__form" name="Message" cols="30" rows="10" placeholder="Dobrý den, mám zájem o / mám dotaz na" required></textarea><br>
+	<button class="button form--button" type="submit">Odeslat</button>
+</form>

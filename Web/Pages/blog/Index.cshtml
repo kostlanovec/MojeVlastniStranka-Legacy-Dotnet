@@ -7,14 +7,15 @@
 	ViewData["Keywords"] = "blog, osobní";
 }
 
-<header class="header__other fadeInLeft visible">
-	<h1 class="header__h1">Blog</h1>
-	<p class="header__p">Osobní blog, kde se dozvíte o mých pohnutkách, zájmech a pohnutkách. <span class="span__header__p">Ne pro každého je tohle čtení.</span></p>
+<header>
+	<h1>Blog</h1>
+	<input class="searchbar" type="text" placeholder="hledat"/>
+	<div id="results"></div>
 </header>
 
 <main class="main">
-  <h2 class="h2__blog fadeInUp visible">Odbornější články</h2>
-	<section class="section__blog fadeInUp visible">
+  <h2>Odbornější články</h2>
+	<section>
 		@for (var i = 0; i < Model.Posts.Count; i++)
 		{
 			<article class="article__blog @(i == 0 ? "first__item" : i == 1 ? "second__item" : i == 2 ? "third__item" : "item")">
@@ -27,3 +28,25 @@
 	</section>
 
 </main>
+
+<script>
+	$(document).ready(function() {
+		$('#searchBox').keyup(function() {
+			var query = $(this).val();
+			if (query.length > 2) { // Vyhledávání začne po zadání 3 znaků
+				$.ajax({
+					url: '/api/search',
+					data: { 'query': query },
+					success: function(data) {
+						$('#results').empty();
+						data.forEach(function(article) {
+							$('#results').append('<p><strong>' + article.title + '</strong> - ' + article.content + '</p>');
+						});
+					}
+				});
+			} else {
+				$('#results').empty();
+			}
+		});
+	});
+</script>

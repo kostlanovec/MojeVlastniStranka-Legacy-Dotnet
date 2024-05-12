@@ -61,10 +61,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\api\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\js\qr.js" />
     <None Include="wwwroot\lib\generatorqrcode\.gitignore" />
     <None Include="wwwroot\lib\generatorqrcode\index.svg" />
