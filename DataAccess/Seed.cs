@@ -33,8 +33,8 @@ namespace Reservanto.NPS.DataAccess
 
             modelBuilder.Entity<Image>().HasData(image1, image2);
 
-            var contactForm1 = ContactForm.Create(Guid.NewGuid(), "Jan", "Novák", "jan.novak@example.com", "123456789", "Dobrý den, rád bych se zeptal na možnost spolupráce.", DateTime.Now);
-            var contactForm2 = ContactForm.Create(Guid.NewGuid(), "Jan", "Kostlán", "info@kostlanovec.cz", "987654321", "Dobrý, mám zájem o nové stránky vámi vyrobené. Těším se, až mi ukážete, co všechno dokážete.", DateTime.Now);
+            var contactForm1 = ContactForm.Create(Guid.NewGuid(), "jan.novak@example.com", "123456789", "Dobrý den, rád bych se zeptal na možnost spolupráce.", DateTime.Now);
+            var contactForm2 = ContactForm.Create(Guid.NewGuid(), "info@kostlanovec.cz", "987654321", "Dobrý, mám zájem o nové stránky vámi vyrobené. Těším se, až mi ukážete, co všechno dokážete.", DateTime.Now);
 
             modelBuilder.Entity<ContactForm>().HasData(contactForm1, contactForm2);
 

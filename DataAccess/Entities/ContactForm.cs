@@ -5,7 +5,7 @@ using System.Runtime.InteropServices.JavaScript;
 namespace MojeVlastniStranka.DataAccess.Entities
 {
 	[Table(nameof(ContactForm))]
-	public class ContactForm: IEntities
+	public class ContactForm : IEntities
 	{
 		/// <summary>
 		/// Chráněný konstruktor.
@@ -13,7 +13,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		protected ContactForm() { }
 
 		/// <summary>
-		/// Klíč.
+		/// Vrací nebo nastavuje Id formuláře.
 		/// </summary>
 		public Guid Id
 		{
@@ -22,29 +22,9 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		}
 
 		/// <summary>
-		/// Vrací nebo nastavuje křesní jméno.
-		/// </summary>
-		[Column(TypeName = "varchar(20)")]
-		public string FirstName
-		{
-			get;
-			set;
-		}
-
-		/// <summary>
-		/// Vrací nebo nastavuje přijímení.
-		/// </summary>
-		[Column(TypeName = "varchar(20)")]
-		public string LastName
-		{
-			get;
-			set;
-		}
-
-		/// <summary>
 		/// Vrací nebo nastavuje email pro odeslání reakce.
 		/// </summary>
-		[Column(TypeName = "text")]
+		[Column(TypeName = "nvarchar(1000)")]
 		public string Email
 		{
 			get;
@@ -65,8 +45,8 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		/// Vrací nebo nastavuje text od zákazníka.
 		/// </summary>
-		[Column(TypeName = "text")]
-		public string FeedBack
+		[Column(TypeName = "nvarchar(1000)")]
+		public string Message
 		{
 			get;
 			set;
@@ -84,16 +64,14 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		///  Vytváří instanci <see cref="ContactForm"/> Vhodný pro uložení do databáze.
 		/// </summary>
-		public static ContactForm Create(Guid id, string firstName, string lastName, string email, string? phoneNumber, string feedBack, DateTime date)
+		public static ContactForm Create(Guid id, string email, string? phoneNumber, string message, DateTime date)
 		{
 			var contactForm = new ContactForm()
 			{
 				Id = id,
-				FirstName = firstName,
-				LastName = lastName,
 				Email = email,
 				PhoneNumber = phoneNumber,
-				FeedBack = feedBack,
+				Message = message,
 				Date = date
 			};
 

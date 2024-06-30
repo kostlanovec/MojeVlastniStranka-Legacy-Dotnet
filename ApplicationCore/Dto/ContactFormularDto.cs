@@ -1,26 +1,7 @@
-﻿using System.Collections;
-
-namespace MojeVlastniStranka.ApplicationCore.Dto
+﻿namespace MojeVlastniStranka.ApplicationCore.Dto
 {
     public class ContactFormularDto
     {
-        /// <summary>
-        /// Vrací nebo nastavuje první jméno zákazníka.
-        /// </summary>
-        public string FirstName
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Vrací nebo nastavuje příjmení zákazníka.
-        /// </summary>
-        public string LastName
-        {
-            get;
-            set;
-        }
 
         /// <summary>
         /// Vrací nebo nastavuje email zákazníka.

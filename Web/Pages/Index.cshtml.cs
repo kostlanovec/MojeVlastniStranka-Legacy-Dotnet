@@ -26,9 +26,7 @@ namespace MojeVlastniStranka.Web.Pages
 		[HttpPost]
 		public async Task OnPostAsync()
 		{
-
 			Posts = await blogService.GetThreePost();
-
 		}
 	}
 }

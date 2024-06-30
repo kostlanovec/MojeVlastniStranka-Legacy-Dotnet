@@ -67,6 +67,7 @@ namespace MojeVlastniStrankaFinanali.Web
             builder.Services.AddScoped<DevelopmentService>();
             builder.Services.AddScoped<DashboardService>();
             builder.Services.AddScoped<MailService>();
+            builder.Services.AddScoped<FormService>();
 
             builder.Services.AddRazorPages();
             builder.Services.AddControllers();
