@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MojeVlastniStranka.Web.Pages.sluzby
 {
-    public class aplikaceModel : PageModel
+    public class tvorbaherModel : PageModel
     {
         public void OnGet()
         {

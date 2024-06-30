@@ -1,4 +1,5 @@
 ﻿@page
+@model MojeVlastniStranka.Web.Pages.omne.IndexModel
 @{
 	ViewData["Title"] = "O mně";
 	ViewData["Description"] = "Představení Jana Sebastiána Kostlána. Tvůrce, webdesigner, programátor a marketing maestro skrz SEO.";
@@ -11,12 +12,12 @@
 </header>
 
 <main class="main">
-	<article class="article__about__me fadeInUp visible" >
+	<article class="article__about__me fadeInUp visible">
 		<div class="div__in__article__article__about__me">
 			<p class="p__omne__role">Programátor</p>
 			<h2 class="h2__div__article red">Jan Sebastián Kostlán</h2>
 			<p>Zdravím, jsem Jan Sebastián Kostlán, programátor a tvůrce webových aplikací. Nesmírně si užívám volnost při programování. Ve svém volnu, pokud neprogramuji, tak se věnuji fitness, protože věřím, že každý by měl se sebou něco dělat a to nejen fyzicky, ale i intelektuálně. Učit se každý den nových dovedností. Baví mě pracovat na věcech ve kterých věřím, že mají smysl a jsou prospěšné pro ostatní lidi a mne samotného.</p>
-			<p>V případě nějakých otázek mě neváhej kontaktovat <a class="red" href="/#kontakt">Zde</a></p>
+			<p>V případě nějakých otázek mě neváhej kontaktovat <a  asp-page="./kontakt/index" class="red">Zde</a></p>
 		</div>
 		<figure class="figure__in__article__about__me fadeInUp visible">
 			<img alt="osobní fotka" src="/images/profil-photo.jpg">

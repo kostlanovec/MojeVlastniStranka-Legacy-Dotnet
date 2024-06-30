@@ -24,8 +24,6 @@ namespace MojeVlastniStranka.DataAccess
 				entity.Property(e => e.Id).ValueGeneratedOnAdd();
 			});
 
-
-
 			Seed.Initialize(modelBuilder);
 
 			base.OnModelCreating(modelBuilder);
@@ -36,6 +34,7 @@ namespace MojeVlastniStranka.DataAccess
 
         public DbSet<ContactForm> ContactForms { get; set; }
 		public DbSet<BlogPost> BlogPosts { get; set; }
+		public DbSet<Project> Projects { get; set; }
 		public DbSet<BlogCategory> BlogCategories { get; set; }
 
 		public DbSet<Image> Images { get; set; }

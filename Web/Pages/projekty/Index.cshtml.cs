@@ -1,26 +1,40 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
+using MojeVlastniStranka.DataAccess.Enums;
+using MojeVlastniStranka.DataAccess.Entities;
 
 namespace MojeVlastniStranka.Web.Pages.projekty
 {
     public class IndexModel : PageModel
     {
 		private readonly DataContext context;
-		private readonly BlogService blogService;
+		private readonly ProjectService blogService;
 
-		public List<BlogPostSummary> Posts { get; set; }
-		public IndexModel(DataContext context, BlogService blogService)
+		public IndexModel(DataContext context, ProjectService blogService)
 		{
 			this.context = context;
 			this.blogService = blogService;
 		}
 
-		public async Task OnGetAsync()
-		{
-			Posts = await blogService.GetAllProject();
-		}
-	}
+        [HttpGet("projekty/{status}")]
+        public async Task<IActionResult> GetProjectsByStatus(string status)
+        {
+            IEnumerable<Project> projects;
+
+            if (Enum.TryParse(status, out ProjectStatus projectStatus))
+            {
+                projects = await blogService.GetProjectsByStatus(projectStatus);
+            }
+            else
+            {
+                projects = Enumerable.Empty<Project>();
+            }
+
+            return new JsonResult(projects);
+        }
+
+
+    }
 }

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MojeVlastniStranka.Web.Pages.sluzby
 {
-    public class webyModel : PageModel
+    public class webovestrankyModel : PageModel
     {
         public void OnGet()
         {

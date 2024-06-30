@@ -22,10 +22,11 @@ namespace MojeVlastniStranka.DataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -49,7 +50,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.ToTable("AspNetRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -63,9 +64,8 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -74,10 +74,509 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
+                {
+                    b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.BlogCategory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BlogCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("befc3c49-89a2-4042-bca3-0f78e961f7ee"),
+                            Name = "základ"
+                        },
+                        new
+                        {
+                            Id = new Guid("6d3c89f3-3277-4d4e-b9a2-e723c6c7f0f4"),
+                            Name = "blogpříspěvky"
+                        },
+                        new
+                        {
+                            Id = new Guid("1bcfd356-e612-4260-bae0-f1df5d53ad39"),
+                            Name = "neurčený"
+                        },
+                        new
+                        {
+                            Id = new Guid("2a753165-0430-448c-84f0-5ea18aa744ce"),
+                            Name = "projekty"
+                        });
+                });
+
+            modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.BlogPost", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<Guid>("BlogCategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Keywords")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogCategoryId");
+
+                    b.ToTable("BlogPosts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("4840737d-12fd-4b34-a7c9-1fb8099a3537"),
+                            Author = "Pepek Námořník",
+                            BlogCategoryId = new Guid("1bcfd356-e612-4260-bae0-f1df5d53ad39"),
+                            Content = "<h1>Ahoj</h1>",
+                            Date = new DateTime(2024, 6, 28, 15, 48, 24, 133, DateTimeKind.Local).AddTicks(6988),
+                            Description = "moje klobasa",
+                            ImagePath = "blogimages/boxing.jpg",
+                            Keywords = "rohlík, klobása",
+                            Name = "Jak mit obri pero",
+                            Slug = "Jak-mit-obri-pero",
+                            Title = "Deset malých švestek"
+                        },
+                        new
+                        {
+                            Id = new Guid("35a1d470-ebe1-4c65-934c-3992fda17a71"),
+                            Author = "Chleba s marmeládou",
+                            BlogCategoryId = new Guid("2a753165-0430-448c-84f0-5ea18aa744ce"),
+                            Content = "<h1>Projekt</h1>",
+                            Date = new DateTime(2024, 6, 28, 15, 48, 24, 133, DateTimeKind.Local).AddTicks(7049),
+                            Description = "moje klobasa",
+                            ImagePath = "blogimages/boxing.jpg",
+                            Keywords = "Jsi slizký had, nemám tě rád",
+                            Name = "deset malych cernousku",
+                            Slug = "deset-malych-cernousku",
+                            Title = "Pět malých kačátek"
+                        });
+                });
+
+            modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.ContactForm", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("FeedBack")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("varchar(20)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ContactForm");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("f456f1a5-9f7c-4be8-81b1-d0746c114ac5"),
+                            Date = new DateTime(2024, 6, 28, 15, 48, 24, 133, DateTimeKind.Local).AddTicks(7291),
+                            Email = "jan.novak@example.com",
+                            FeedBack = "Dobrý den, rád bych se zeptal na možnost spolupráce.",
+                            FirstName = "Jan",
+                            LastName = "Novák",
+                            PhoneNumber = "123456789"
+                        },
+                        new
+                        {
+                            Id = new Guid("91035c2a-e063-4469-aa6d-d07b847b5fdb"),
+                            Date = new DateTime(2024, 6, 28, 15, 48, 24, 133, DateTimeKind.Local).AddTicks(7298),
+                            Email = "info@kostlanovec.cz",
+                            FeedBack = "Dobrý, mám zájem o nové stránky vámi vyrobené. Těším se, až mi ukážete, co všechno dokážete.",
+                            FirstName = "Jan",
+                            LastName = "Kostlán",
+                            PhoneNumber = "987654321"
+                        });
+                });
+
+            modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.IdeaToRelease", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DatePosted")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Idea")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("IdeaToReleases");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("ccb146c8-1069-440a-8680-88dba68a94a6"),
+                            DatePosted = new DateTime(2024, 6, 28, 15, 48, 24, 133, DateTimeKind.Local).AddTicks(7323),
+                            Idea = "Chtěl bych vytvořit nějakou animaci na vytváření koblih"
+                        });
+                });
+
+            modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.Image", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Images");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("d0bb42fd-c0bd-4a40-8d8e-6cd7912ac775"),
+                            Description = "konec světa",
+                            FileName = "konecsveta.jpg"
+                        },
+                        new
+                        {
+                            Id = new Guid("7d376e7d-e91b-45e0-bb59-9eae945ae9c1"),
+                            Description = "stín minulosti",
+                            FileName = "stinminulosti.jpg"
+                        });
+                });
+
+            modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.Message", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("LongMessage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShortMessage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TimePublish")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.Notification", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ShortMessage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TimePublish")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notifications");
+                });
+
+            modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.Project", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Keywords")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("projectStatus")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Projects");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("774bfae1-d890-416f-a800-7b15c41063ee"),
+                            Content = "obsah",
+                            Date = new DateTime(2024, 6, 28, 0, 0, 0, 0, DateTimeKind.Local),
+                            Description = "Description 1",
+                            ImagePath = "tvorbaher.jpg",
+                            Keywords = "Keywords 1",
+                            Name = "Project 1",
+                            Slug = "slug-1",
+                            Title = "Title 1",
+                            projectStatus = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("3aae9b26-3193-41b3-93b1-eed6ec10b666"),
+                            Content = "obsah",
+                            Date = new DateTime(2024, 6, 28, 0, 0, 0, 0, DateTimeKind.Local),
+                            Description = "Description 2",
+                            ImagePath = "tvorbaher.jpg",
+                            Keywords = "Keywords 2",
+                            Name = "Project 2",
+                            Slug = "slug-2",
+                            Title = "Title 2",
+                            projectStatus = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("e8240675-c283-4b76-93c7-b23ec808e590"),
+                            Content = "obsah",
+                            Date = new DateTime(2024, 6, 28, 0, 0, 0, 0, DateTimeKind.Local),
+                            Description = "Description 3",
+                            ImagePath = "tvorbaher.jpg",
+                            Keywords = "Keywords 3",
+                            Name = "Project 3",
+                            Slug = "slug-3",
+                            Title = "Title 3",
+                            projectStatus = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("853965a8-98c6-47cb-92c1-ad51b73c0404"),
+                            Content = "obsah",
+                            Date = new DateTime(2024, 6, 28, 0, 0, 0, 0, DateTimeKind.Local),
+                            Description = "Description 4",
+                            ImagePath = "tvorbaher.jpg",
+                            Keywords = "Keywords 4",
+                            Name = "Project 4",
+                            Slug = "slug-4",
+                            Title = "Title 4",
+                            projectStatus = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("a285bba1-aceb-4ce1-90d3-42df4e728a7d"),
+                            Content = "obsah",
+                            Date = new DateTime(2024, 6, 28, 0, 0, 0, 0, DateTimeKind.Local),
+                            Description = "Description 5",
+                            ImagePath = "tvorbaher.jpg",
+                            Keywords = "Keywords 5",
+                            Name = "Project 5",
+                            Slug = "slug-5",
+                            Title = "Title 5",
+                            projectStatus = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("f7371d73-3d23-4d18-9a24-f7cee3e935f7"),
+                            Content = "obsah",
+                            Date = new DateTime(2024, 6, 28, 0, 0, 0, 0, DateTimeKind.Local),
+                            Description = "Description 6",
+                            ImagePath = "tvorbaher.jpg",
+                            Keywords = "Keywords 6",
+                            Name = "Project 6",
+                            Slug = "slug-6",
+                            Title = "Title 6",
+                            projectStatus = 2
+                        });
+                });
+
+            modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.ReportedBug", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Bug")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DatePosted")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ReportedBugs");
+                });
+
+            modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -139,426 +638,51 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("LoginProvider", "ProviderKey");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserLogins", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId", "LoginProvider", "Name");
-
-                    b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.BlogCategory", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("varchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("BlogCategories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("001fd484-3d81-412c-8cd6-6bab058a08a2"),
-                            Name = "základ"
-                        },
-                        new
-                        {
-                            Id = new Guid("cd74fe34-8f19-4ebb-8b64-c3cb43145789"),
-                            Name = "blogpříspěvky"
-                        },
-                        new
-                        {
-                            Id = new Guid("d17236a9-d7ea-45b1-99bb-a2415029dfcb"),
-                            Name = "neurčený"
-                        },
-                        new
-                        {
-                            Id = new Guid("6b10a5be-128f-43c1-a612-c75cb5250a6f"),
-                            Name = "projekty"
-                        });
-                });
-
-            modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.BlogPost", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Author")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<Guid>("BlogCategoryId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("ImagePath")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Keywords")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Slug")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BlogCategoryId");
-
-                    b.ToTable("BlogPosts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("b68b5ee7-9e8d-4093-85ff-4748bd166c12"),
-                            Author = "Pepek Námořník",
-                            BlogCategoryId = new Guid("d17236a9-d7ea-45b1-99bb-a2415029dfcb"),
-                            Content = "<h1>Ahoj</h1>",
-                            Date = new DateTime(2024, 5, 5, 16, 39, 9, 944, DateTimeKind.Local).AddTicks(2206),
-                            Description = "moje klobasa",
-                            ImagePath = "blogimages/boxing.jpg",
-                            Keywords = "rohlík, klobása",
-                            Name = "Jak mit obri pero",
-                            Slug = "Jak-mit-obri-pero",
-                            Title = "Deset malých švestek"
-                        },
-                        new
-                        {
-                            Id = new Guid("3ac3dd4c-8b79-4d80-8c99-ecd93779996c"),
-                            Author = "Chleba s marmeládou",
-                            BlogCategoryId = new Guid("6b10a5be-128f-43c1-a612-c75cb5250a6f"),
-                            Content = "<h1>Projekt</h1>",
-                            Date = new DateTime(2024, 5, 5, 16, 39, 9, 944, DateTimeKind.Local).AddTicks(2268),
-                            Description = "moje klobasa",
-                            ImagePath = "blogimages/boxing.jpg",
-                            Keywords = "Jsi slizký had, nemám tě rád",
-                            Name = "deset malych cernousku",
-                            Slug = "deset-malych-cernousku",
-                            Title = "Pět malých kačátek"
-                        });
-                });
-
-            modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.ContactForm", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("FeedBack")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("varchar(20)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("varchar(20)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("varchar(20)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ContactForm");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("9e675378-68b2-47d4-91be-1ed8c5afcbae"),
-                            Date = new DateTime(2024, 5, 5, 16, 39, 9, 944, DateTimeKind.Local).AddTicks(2460),
-                            Email = "jan.novak@example.com",
-                            FeedBack = "Dobrý den, rád bych se zeptal na možnost spolupráce.",
-                            FirstName = "Jan",
-                            LastName = "Novák",
-                            PhoneNumber = "123456789"
-                        },
-                        new
-                        {
-                            Id = new Guid("952d2245-c359-4db5-95ef-b6a9670edd3e"),
-                            Date = new DateTime(2024, 5, 5, 16, 39, 9, 944, DateTimeKind.Local).AddTicks(2466),
-                            Email = "info@kostlanovec.cz",
-                            FeedBack = "Dobrý, mám zájem o nové stránky vámi vyrobené. Těším se, až mi ukážete, co všechno dokážete.",
-                            FirstName = "Jan",
-                            LastName = "Kostlán",
-                            PhoneNumber = "987654321"
-                        });
-                });
-
-            modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.IdeaToRelease", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DatePosted")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Idea")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("IdeaToReleases");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("6cde3f16-6ef3-4389-aab3-8131f92498f9"),
-                            DatePosted = new DateTime(2024, 5, 5, 16, 39, 9, 944, DateTimeKind.Local).AddTicks(2488),
-                            Idea = "Chtěl bych vytvořit nějakou animaci na vytváření koblih"
-                        });
-                });
-
-            modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.Image", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FileName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Images");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("f83749e0-3993-4f85-9ef9-4e3f11f34d7f"),
-                            Description = "konec světa",
-                            FileName = "konecsveta.jpg"
-                        },
-                        new
-                        {
-                            Id = new Guid("7574c606-684d-414f-b7f1-2224c0739bc9"),
-                            Description = "stín minulosti",
-                            FileName = "stinminulosti.jpg"
-                        });
-                });
-
-            modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.Message", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("LongMessage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShortMessage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("TimePublish")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Messages");
-                });
-
-            modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.Notification", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ShortMessage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("TimePublish")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Notifications");
-                });
-
-            modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.ReportedBug", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Bug")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DatePosted")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ReportedBugs");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("MojeVlastniStranka.DataAccess.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("MojeVlastniStranka.DataAccess.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("MojeVlastniStranka.DataAccess.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("MojeVlastniStranka.DataAccess.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

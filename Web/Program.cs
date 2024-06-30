@@ -2,18 +2,16 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
-using Microsoft.Extensions.Options;
-using System.Configuration;
 using MojeVlastniStranka.DataAccess.Entities;
 
 
 namespace MojeVlastniStrankaFinanali.Web
 {
-	public class Program
-	{
-		public static void Main(string[] args)
-		{
-			var builder = WebApplication.CreateBuilder(args);
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
 
             builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
@@ -28,47 +26,48 @@ namespace MojeVlastniStrankaFinanali.Web
             /*	builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);*/
 
             builder.Services.AddDefaultIdentity<User>(options =>
-				{
-					// Password settings.
-					options.Password.RequireDigit = true;
-					options.Password.RequireLowercase = true;
-					options.Password.RequireNonAlphanumeric = true;
-					options.Password.RequireUppercase = true;
-					options.Password.RequiredLength = 6;
-					options.Password.RequiredUniqueChars = 1;
+                {
+                    // Heslo nastavení.
+                    options.Password.RequireDigit = true;
+                    options.Password.RequireLowercase = true;
+                    options.Password.RequireNonAlphanumeric = true;
+                    options.Password.RequireUppercase = true;
+                    options.Password.RequiredLength = 6;
+                    options.Password.RequiredUniqueChars = 1;
 
-					// Lockout settings.
-					options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-					options.Lockout.MaxFailedAccessAttempts = 5;
-					options.Lockout.AllowedForNewUsers = true;
+                    // Lockout settings.
+                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                    options.Lockout.MaxFailedAccessAttempts = 5;
+                    options.Lockout.AllowedForNewUsers = true;
 
-					// User settings.
-					options.User.AllowedUserNameCharacters =
-						"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-					options.User.RequireUniqueEmail = false;
-				})
-	            .AddRoles<IdentityRole<Guid>>()
-				.AddEntityFrameworkStores<DataContext>();
+                    // Uživatelské nastavnení.
+                    options.User.AllowedUserNameCharacters =
+                        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                    options.User.RequireUniqueEmail = false;
+                })
+                .AddRoles<IdentityRole<Guid>>()
+                .AddEntityFrameworkStores<DataContext>();
 
 
             builder.Services.ConfigureApplicationCookie(options =>
             {
-	            // Cookie settings
-	            options.Cookie.HttpOnly = true;
-	            options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
 
-	            options.LoginPath = "/Identity/Account/Login";
-	            options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-	            options.SlidingExpiration = true;
+                options.LoginPath = "/Identity/Account/Login";
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.SlidingExpiration = true;
             });
 
 
-			builder.Services.AddScoped<NotificationService>();
+            builder.Services.AddScoped<NotificationService>();
             builder.Services.AddScoped<ContactFormService>();
             builder.Services.AddScoped<BlogService>();
-			builder.Services.AddScoped<ImageService>();
-			builder.Services.AddScoped<DevelopmentService>();
-			builder.Services.AddScoped<DashboardService>();
+            builder.Services.AddScoped<ProjectService>();
+            builder.Services.AddScoped<ImageService>();
+            builder.Services.AddScoped<DevelopmentService>();
+            builder.Services.AddScoped<DashboardService>();
             builder.Services.AddScoped<MailService>();
 
             builder.Services.AddRazorPages();
@@ -76,25 +75,25 @@ namespace MojeVlastniStrankaFinanali.Web
 
             var app = builder.Build();
 
-			if (!app.Environment.IsDevelopment())
-			{
-				app.UseExceptionHandler("/Error");
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Error");
 
                 app.UseStatusCodePagesWithReExecute("/StatusCode/{0}");
-				app.UseHsts();
-			}
+                app.UseHsts();
+            }
 
-			app.UseHttpsRedirection();
-			app.UseStaticFiles();
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
 
-			app.UseAuthorization();
+            app.UseAuthorization();
 
-			app.MapRazorPages();
-			app.MapControllerRoute(
-				name: "default",
-				pattern: "{controller=Home}/{action=Index}/{id?}");
+            app.MapRazorPages();
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.UseEndpoints(endpoints =>
             {
@@ -106,22 +105,22 @@ namespace MojeVlastniStrankaFinanali.Web
 
             app.UseEndpoints(endpoints =>
             {
-	            endpoints.MapControllerRoute(
-		            name: "projekty",
-		            pattern: "projekty/{Slug}",
-		            defaults: new { controller = "Projekty", action = "ShowProject" });
+                endpoints.MapControllerRoute(
+                    name: "projekty",
+                    pattern: "projekty/{Slug}",
+                    defaults: new { controller = "Projekty", action = "ShowProject" });
             });
 
-			// api endpoints
-			app.UseEndpoints(endpoints =>
-			{
-				endpoints.MapControllerRoute(
-										name: "api",
-															pattern: "api/{controller}/{action}/{id?}");
-			});
+            // api endpoints
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                name: "api",
+                pattern: "api/{controller}/{action}/{id?}");
+            });
 
 
-			app.Run();
-		}
-	}
+            app.Run();
+        }
+    }
 }

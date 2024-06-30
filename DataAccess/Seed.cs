@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MojeVlastniStranka.DataAccess.Entities;
+using MojeVlastniStranka.DataAccess.Enums;
 using System;
 
 namespace Reservanto.NPS.DataAccess
@@ -43,6 +44,17 @@ namespace Reservanto.NPS.DataAccess
             modelBuilder.Entity<IdeaToRelease>().HasData(ideaToRealse1);
 
             modelBuilder.Entity<BlogCategory>().HasData(blogcategory, blogcategoryProjekty);
-        }
+
+			var project1 = Project.Create(Guid.NewGuid(), "Description 1", "obsah", "Title 1", "Keywords 1", "Project 1", "tvorbaher.jpg", "slug-1", DateTime.Now, ProjectStatus.Planning);
+			var project2 = Project.Create(Guid.NewGuid(), "Description 2", "obsah", "Title 2", "Keywords 2", "Project 2", "tvorbaher.jpg", "slug-2", DateTime.Now, ProjectStatus.Development);
+			var project3 = Project.Create(Guid.NewGuid(), "Description 3", "obsah", "Title 3", "Keywords 3", "Project 3", "tvorbaher.jpg", "slug-3", DateTime.Now, ProjectStatus.Finalized);
+			var project4 = Project.Create(Guid.NewGuid(), "Description 4", "obsah", "Title 4", "Keywords 4", "Project 4", "tvorbaher.jpg", "slug-4", DateTime.Now, ProjectStatus.Planning);
+			var project5 = Project.Create(Guid.NewGuid(), "Description 5", "obsah", "Title 5", "Keywords 5", "Project 5", "tvorbaher.jpg", "slug-5", DateTime.Now, ProjectStatus.Development);
+			var project6 = Project.Create(Guid.NewGuid(), "Description 6", "obsah", "Title 6", "Keywords 6", "Project 6", "tvorbaher.jpg", "slug-6", DateTime.Now, ProjectStatus.Finalized);
+
+			modelBuilder.Entity<Project>().HasData(project1, project2, project3, project4, project5, project6);
+
+
+		}
     }
 }
