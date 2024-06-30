@@ -61,6 +61,10 @@
 	margin-bottom: 2em;
 }
 
+.projects__container {
+	display: flex;
+}
+
 .megafone {
 	width: 100px;
 	position: absolute;
@@ -87,14 +91,16 @@
 	text-align: left;
 }
 
-.ul__service li:before {
-	content: '✓';
-	margin-left: 2em;
+.li--x::before {
+	content: "X" !important;
 }
 
-.ul__service .li--x{
-	content: "x";
+
+.ul__service li:before {
+	content: '✓';
+	margin-right: 2em;
 }
+
 
 .zoom-effect:hover {
 	transform: scale(1.1);
@@ -166,6 +172,31 @@ h3{
 	background-position: center;
 	background-repeat: no-repeat;
 	margin-top: 4em;
+}
+
+.arrow--project {
+	border: none;
+	background-color: transparent;
+	background-image: url(/images/arrow_bottom.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	width: 50px;
+	margin-right: 2em;
+	transform: rotate(-90deg);
+}
+
+/*make white more transpalent*/
+.arrow--project:hover{
+	cursor: pointer;
+	opacity: 0.7;
+}
+
+.arrow--project.rotated {
+	transform: rotate(0deg);
+}
+
+.projects__section{
+	display: none;
 }
 
 .header {

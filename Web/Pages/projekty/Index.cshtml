@@ -1,14 +1,63 @@
 ﻿@page
 @model MojeVlastniStranka.Web.Pages.projekty.IndexModel
+@using MojeVlastniStranka.DataAccess.Enums
+@*todo tenhle enums se mi opravdu nelíbí, opravit!!!*@
 @{
     ViewData["Title"] = "Moje projekty";
 }
 
-<header class="header__other fadeInLeft visible">
-    <h1 class="header__h1">Moje projekty</h1>
-    <p class="header__p">Tohle je moje "skladiště" mých projektů, které plánuji nebo jsem již zrealizoval. Zde popisuji podrobně postup při realizaci projektu.</p>
-</header>
-
+<main class="main">
+    <h1>Projekty</h1>
+    <div class="projects__container">
+        <button class="arrow--project" onclick="toggleSection('development-projects')"></button>
+        <h2>Rozpracované projekty</h2>
+    </div>
+    <section id="development-projects" class="projects__section">
+        @foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatus.Development))
+        {
+            <article class="project">
+                <a href="/projekty/@project.Slug">
+                <img src="@project.ImagePath" alt="@project.Name" />
+                <h3>@project.Name</h3>
+                <div>
+                     <p>@project.Description</p>
+                </div>
+               </a>
+            </article>
+        }
+    </section>
+    <div class="projects__container">
+        <button onclick="toggleSection('development-projects')"></button>
+        <h2>Hotové projekty</h2>
+    </div>
+    <section id="finalized-projects" class="projects__section">
+        @foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatus.Finalized))
+        {
+            <article class="project">
+                <img src="@project.ImagePath" alt="@project.Name" />
+                <h3>@project.Name</h3>
+                <p>@project.Description</p>
+                <a href="/projekty/@project.Slug">Detail</a>
+            </article>
+        }
+    </section>
+    <div class="projects__container">
+        <button onclick="toggleSection('playnning-projects')"></button>
+        <h2>Plánované projekty</h2>
+    </div>
+    <section id="playnning-projects" class="projects__section">
+        @foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatus.Planning))
+        {
+            <article class="project">
+                <img src="@project.ImagePath" alt="@project.Name" />
+                <h3>@project.Name</h3>
+                <p>@project.Description</p>
+                <a href="/projekty/@project.Slug">Detail</a>
+            </article>
+        }
+    </section>
+</main>
+@*
 <main class="main">
     <div>
         <button onclick="loadProjectsByStatus('All')">Všechny</button>
@@ -18,9 +67,9 @@
     </div>
     <div id="projectsContainer">
     </div>
-</main>
+</main>*@
 
-@section Scripts {
+@*@section Scripts {
     <script>
         async function loadProjectsByStatus(status) {
             console.log(status);
@@ -70,3 +119,19 @@
         }
     </script>
 }
+
+*@
+
+<script>
+    function toggleSection(sectionId) {
+        var section = document.getElementById(sectionId);
+        if (section.style.display === 'none' || section.style.display === '') {
+            section.style.display = 'block';
+        } else {
+            section.style.display = 'none';
+        }
+
+        var button = document.querySelector('.arrow--project');
+        button.classList.toggle('rotated');
+    }
+</script>

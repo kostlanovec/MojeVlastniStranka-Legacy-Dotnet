@@ -1,8 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
-using MojeVlastniStranka.DataAccess.Enums;
 using MojeVlastniStranka.DataAccess.Entities;
 
 namespace MojeVlastniStranka.Web.Pages.projekty
@@ -10,14 +8,22 @@ namespace MojeVlastniStranka.Web.Pages.projekty
     public class IndexModel : PageModel
     {
 		private readonly DataContext context;
-		private readonly ProjectService blogService;
+		private readonly ProjectService projectService;
 
 		public IndexModel(DataContext context, ProjectService blogService)
 		{
 			this.context = context;
-			this.blogService = blogService;
+			this.projectService = blogService;
 		}
 
+        public List<Project> AllProjects { get; set; }
+
+        public async Task OnGetAsync()
+        {
+            AllProjects = projectService.GetAllProjects();
+        }
+
+        /*
         [HttpGet("projekty/{status}")]
         public async Task<IActionResult> GetProjectsByStatus(string status)
         {
@@ -25,7 +31,7 @@ namespace MojeVlastniStranka.Web.Pages.projekty
 
             if (Enum.TryParse(status, out ProjectStatus projectStatus))
             {
-                projects = await blogService.GetProjectsByStatus(projectStatus);
+                projects = await projectService.GetProjectsByStatus(projectStatus);
             }
             else
             {
@@ -34,7 +40,6 @@ namespace MojeVlastniStranka.Web.Pages.projekty
 
             return new JsonResult(projects);
         }
-
-
+        */
     }
 }

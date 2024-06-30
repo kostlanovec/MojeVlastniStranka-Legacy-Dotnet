@@ -18,17 +18,17 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// Vrací všechny projekty.
 		/// </summary>
 		/// <returns></returns>
-		public List<Project> GetProjectsAllProjects()
+		public List<Project> GetAllProjects()
 		{
 			return context.Projects.ToList();
 		}
-
+		/*
 		/// <summary>
 		/// Vrací nebo nastavuje projekty podle jeho statusu.
 		/// </summary>
 		public async Task< List<Project>> GetProjectsByStatus(ProjectStatus status)
 		{
 			return context.Projects.Where(p => p.projectStatus == status).ToList();
-		}
+		}*/
 	}
 }
