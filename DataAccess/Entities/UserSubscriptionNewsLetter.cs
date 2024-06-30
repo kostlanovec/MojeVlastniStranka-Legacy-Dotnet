@@ -1,31 +1,35 @@
-﻿namespace MojeVlastniStranka.DataAccess.Entities
-{
-	internal class UserSubscriptionNewsLetter: IEntities
-	{
-		protected UserSubscriptionNewsLetter() { }
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-		/// <summary>
-		/// Vrací nebo nastavuje Id Odběrovatelé.
-		/// </summary>
-		public Guid Id
-		{
-			get;
-			set;
-		}
+namespace MojeVlastniStranka.DataAccess.Entities
+{
+    internal class UserSubscriptionNewsLetter : IEntities
+    {
+        protected UserSubscriptionNewsLetter() { }
 
         /// <summary>
-		/// Vrací nebo nastavuje Email odběrovatele.
-		/// </summary>
-		public string email
-		{
-			get;
-			set;
-		}
+        /// Vrací nebo nastavuje Id Odběrovatelé.
+        /// </summary>
+        public Guid Id
+        {
+            get;
+            set;
+        }
 
-		/// <summary>
-		/// Vrací nebo nastavuje has uživatelovi.
-		/// </summary>
-		public string Hastag
+        /// <summary>
+        /// Vrací nebo nastavuje Email odběrovatele.
+        /// </summary>
+        [Column(TypeName = "nvarchar(1000)")]
+        public string email
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Vrací nebo nastavuje has uživatelovi.
+        /// </summary>
+        [Column(TypeName = "nvarchar(1000)")]
+        public string Hastag
 		{
 			get;
 			set;

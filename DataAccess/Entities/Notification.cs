@@ -1,4 +1,6 @@
-﻿namespace MojeVlastniStranka.DataAccess.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace MojeVlastniStranka.DataAccess.Entities
 {
 	public class Notification: IEntities
 	{
@@ -22,10 +24,11 @@
 			set;
 		}
 
-		/// <summary>
-		/// Vrací nebo nastavuje krátkou zprávu.
-		/// </summary>
-		public string ShortMessage
+        /// <summary>
+        /// Vrací nebo nastavuje krátkou zprávu.
+        /// </summary>
+        [Column(TypeName = "nvarchar(100)")]
+        public string ShortMessage
 		{
 			get;
 			set;

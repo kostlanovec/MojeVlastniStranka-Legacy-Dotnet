@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MojeVlastniStranka.DataAccess.Entities
 {
@@ -21,6 +22,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// <summary>
         /// Jméno souboru.
         /// </summary>
+        [Column(TypeName = "nvarchar(1000)")]
         public string FileName
         {
 	        get;
@@ -30,6 +32,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// <summary>
         /// Nastavení alt atributu pro obrázek.
         /// </summary>
+        [Column(TypeName = "nvarchar(1000)")]
         public string Description { get; set; }
 
         public static Image Create(Guid id, string fileName, string description)

@@ -16,24 +16,23 @@ namespace MojeVlastniStranka.DataAccess.Entities
             set;
         }
 
-        [Column(TypeName = "text")]
+        [Column(TypeName = "nvarchar(200)")]
         public string Name
         {
 	        get;
 	        set;
         }
 
-        [Column(TypeName = "text")]
+        [Column(TypeName = "nvarchar(200)")]
         public string Slug
         {
 	        get;
 	        set;
         }
-		/// <summary>
-		/// Vrací nebo nastavuje popisek k blog příspěvku.
-		/// </summary>
-		[Column(TypeName = "text")]
-
+        /// <summary>
+        /// Vrací nebo nastavuje popisek k blog příspěvku.
+        /// </summary>
+        [Column(TypeName = "nvarchar(1000)")]
         public string Description
         {
             get;
@@ -43,8 +42,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// <summary>
         /// Vrací nebo nastavuje obsah v html
         /// </summary>
-        [Column(TypeName = "text")]
-
+        [Column(TypeName = "nvarchar(max)")]
         public string Content
         {
             get;
@@ -54,7 +52,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// <summary>
         /// Vrací nebo nastavuje titulek blog příspěvku. 
         /// </summary>
-        [Column(TypeName = "text")]
+        [Column(TypeName = "nvarchar(200)")]
 
         public string Title
         {
@@ -75,8 +73,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// <summary>
         /// Vrací nebo nastavuje klíčová slova blog příspěvku.
         /// </summary>
-        [Column(TypeName = "text")]
-
+        [Column(TypeName = "nvarchar(1000)")]
         public string Keywords
         {
             get;
@@ -92,7 +89,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
             set;
         }
 
-        [Column(TypeName = "text")]
+        [Column(TypeName = "nvarchar(1000)")]
         public string ImagePath
         {
 	        get;

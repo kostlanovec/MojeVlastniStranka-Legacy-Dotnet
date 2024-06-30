@@ -52,8 +52,6 @@ namespace Reservanto.NPS.DataAccess
 			var project6 = Project.Create(Guid.NewGuid(), "Description 6", "obsah", "Title 6", "Keywords 6", "Project 6", "/images/tvorbaher.jpg", "slug-6", DateTime.Now, ProjectStatus.Finalized);
 
 			modelBuilder.Entity<Project>().HasData(project1, project2, project3, project4, project5, project6);
-
-
 		}
     }
 }

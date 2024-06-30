@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualBasic;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MojeVlastniStranka.DataAccess.Entities
 {
@@ -29,10 +24,11 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			set;
 		}
 
-		/// <summary>
-		/// Vrací nebo nastavuje krátkou zprávu.
-		/// </summary>
-		public string ShortMessage
+        /// <summary>
+        /// Vrací nebo nastavuje krátkou zprávu.
+        /// </summary>
+        [Column(TypeName = "nvarchar(1000)")]
+        public string ShortMessage
 		{
 			get;
 			set;

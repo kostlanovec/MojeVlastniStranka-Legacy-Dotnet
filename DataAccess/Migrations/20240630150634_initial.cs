@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MojeVlastniStranka.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -86,7 +86,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Idea = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Idea = table.Column<string>(type: "nvarchar(1000)", nullable: false),
                     DatePosted = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -99,8 +99,8 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    FileName = table.Column<string>(type: "nvarchar(1000)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(1000)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -113,8 +113,8 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TimePublish = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ShortMessage = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LongMessage = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ShortMessage = table.Column<string>(type: "nvarchar(100)", nullable: false),
+                    LongMessage = table.Column<string>(type: "nvarchar(1000)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -127,7 +127,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TimePublish = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ShortMessage = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ShortMessage = table.Column<string>(type: "nvarchar(100)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -139,13 +139,13 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Slug = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
-                    Content = table.Column<string>(type: "text", nullable: false),
-                    Title = table.Column<string>(type: "text", nullable: false),
-                    Keywords = table.Column<string>(type: "text", nullable: false),
-                    ImagePath = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(200)", nullable: false),
+                    Slug = table.Column<string>(type: "nvarchar(200)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(1000)", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(200)", nullable: false),
+                    Keywords = table.Column<string>(type: "nvarchar(1000)", nullable: false),
+                    ImagePath = table.Column<string>(type: "nvarchar(1000)", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     projectStatus = table.Column<int>(type: "int", nullable: false)
                 },
@@ -159,8 +159,8 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Bug = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Url = table.Column<string>(type: "nvarchar(1000)", nullable: false),
+                    Bug = table.Column<string>(type: "nvarchar(1000)", nullable: false),
                     DatePosted = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -279,15 +279,15 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Slug = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
-                    Content = table.Column<string>(type: "text", nullable: false),
-                    Title = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(200)", nullable: false),
+                    Slug = table.Column<string>(type: "nvarchar(200)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(1000)", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(200)", nullable: false),
                     Author = table.Column<string>(type: "varchar(50)", nullable: false),
-                    Keywords = table.Column<string>(type: "text", nullable: false),
+                    Keywords = table.Column<string>(type: "nvarchar(1000)", nullable: false),
                     BlogCategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ImagePath = table.Column<string>(type: "text", nullable: false),
+                    ImagePath = table.Column<string>(type: "nvarchar(1000)", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -306,10 +306,10 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("1bcfd356-e612-4260-bae0-f1df5d53ad39"), "neurčený" },
-                    { new Guid("2a753165-0430-448c-84f0-5ea18aa744ce"), "projekty" },
-                    { new Guid("6d3c89f3-3277-4d4e-b9a2-e723c6c7f0f4"), "blogpříspěvky" },
-                    { new Guid("befc3c49-89a2-4042-bca3-0f78e961f7ee"), "základ" }
+                    { new Guid("843c0b41-cf77-48f9-8c76-52942760a843"), "blogpříspěvky" },
+                    { new Guid("ba246baf-081d-4f19-8c84-fe78c63483be"), "projekty" },
+                    { new Guid("c39a1ce0-e53c-4b3c-8a06-f025f5aecb73"), "neurčený" },
+                    { new Guid("cfbe756f-b600-4736-8af4-8d7eab13b118"), "základ" }
                 });
 
             migrationBuilder.InsertData(
@@ -317,22 +317,22 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                 columns: new[] { "Id", "Date", "Email", "FeedBack", "FirstName", "LastName", "PhoneNumber" },
                 values: new object[,]
                 {
-                    { new Guid("91035c2a-e063-4469-aa6d-d07b847b5fdb"), new DateTime(2024, 6, 28, 15, 48, 24, 133, DateTimeKind.Local).AddTicks(7298), "info@kostlanovec.cz", "Dobrý, mám zájem o nové stránky vámi vyrobené. Těším se, až mi ukážete, co všechno dokážete.", "Jan", "Kostlán", "987654321" },
-                    { new Guid("f456f1a5-9f7c-4be8-81b1-d0746c114ac5"), new DateTime(2024, 6, 28, 15, 48, 24, 133, DateTimeKind.Local).AddTicks(7291), "jan.novak@example.com", "Dobrý den, rád bych se zeptal na možnost spolupráce.", "Jan", "Novák", "123456789" }
+                    { new Guid("48403d09-50e0-4458-92d5-833c9eeb3aab"), new DateTime(2024, 6, 30, 17, 6, 33, 722, DateTimeKind.Local).AddTicks(6428), "jan.novak@example.com", "Dobrý den, rád bych se zeptal na možnost spolupráce.", "Jan", "Novák", "123456789" },
+                    { new Guid("66df0d27-55fb-4592-a37d-cc490bb9a0f2"), new DateTime(2024, 6, 30, 17, 6, 33, 722, DateTimeKind.Local).AddTicks(6438), "info@kostlanovec.cz", "Dobrý, mám zájem o nové stránky vámi vyrobené. Těším se, až mi ukážete, co všechno dokážete.", "Jan", "Kostlán", "987654321" }
                 });
 
             migrationBuilder.InsertData(
                 table: "IdeaToReleases",
                 columns: new[] { "Id", "DatePosted", "Idea" },
-                values: new object[] { new Guid("ccb146c8-1069-440a-8680-88dba68a94a6"), new DateTime(2024, 6, 28, 15, 48, 24, 133, DateTimeKind.Local).AddTicks(7323), "Chtěl bych vytvořit nějakou animaci na vytváření koblih" });
+                values: new object[] { new Guid("78265a7e-4e05-4797-bc2b-406d56a17a24"), new DateTime(2024, 6, 30, 17, 6, 33, 722, DateTimeKind.Local).AddTicks(6464), "Chtěl bych vytvořit nějakou animaci na vytváření koblih" });
 
             migrationBuilder.InsertData(
                 table: "Images",
                 columns: new[] { "Id", "Description", "FileName" },
                 values: new object[,]
                 {
-                    { new Guid("7d376e7d-e91b-45e0-bb59-9eae945ae9c1"), "stín minulosti", "stinminulosti.jpg" },
-                    { new Guid("d0bb42fd-c0bd-4a40-8d8e-6cd7912ac775"), "konec světa", "konecsveta.jpg" }
+                    { new Guid("4b184b10-768b-41f4-9b2d-a7cf863f63ed"), "stín minulosti", "stinminulosti.jpg" },
+                    { new Guid("8e264bb8-9daf-4623-b3ec-64d334cac320"), "konec světa", "konecsveta.jpg" }
                 });
 
             migrationBuilder.InsertData(
@@ -340,12 +340,12 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                 columns: new[] { "Id", "Content", "Date", "Description", "ImagePath", "Keywords", "Name", "Slug", "Title", "projectStatus" },
                 values: new object[,]
                 {
-                    { new Guid("3aae9b26-3193-41b3-93b1-eed6ec10b666"), "obsah", new DateTime(2024, 6, 28, 0, 0, 0, 0, DateTimeKind.Local), "Description 2", "tvorbaher.jpg", "Keywords 2", "Project 2", "slug-2", "Title 2", 1 },
-                    { new Guid("774bfae1-d890-416f-a800-7b15c41063ee"), "obsah", new DateTime(2024, 6, 28, 0, 0, 0, 0, DateTimeKind.Local), "Description 1", "tvorbaher.jpg", "Keywords 1", "Project 1", "slug-1", "Title 1", 0 },
-                    { new Guid("853965a8-98c6-47cb-92c1-ad51b73c0404"), "obsah", new DateTime(2024, 6, 28, 0, 0, 0, 0, DateTimeKind.Local), "Description 4", "tvorbaher.jpg", "Keywords 4", "Project 4", "slug-4", "Title 4", 0 },
-                    { new Guid("a285bba1-aceb-4ce1-90d3-42df4e728a7d"), "obsah", new DateTime(2024, 6, 28, 0, 0, 0, 0, DateTimeKind.Local), "Description 5", "tvorbaher.jpg", "Keywords 5", "Project 5", "slug-5", "Title 5", 1 },
-                    { new Guid("e8240675-c283-4b76-93c7-b23ec808e590"), "obsah", new DateTime(2024, 6, 28, 0, 0, 0, 0, DateTimeKind.Local), "Description 3", "tvorbaher.jpg", "Keywords 3", "Project 3", "slug-3", "Title 3", 2 },
-                    { new Guid("f7371d73-3d23-4d18-9a24-f7cee3e935f7"), "obsah", new DateTime(2024, 6, 28, 0, 0, 0, 0, DateTimeKind.Local), "Description 6", "tvorbaher.jpg", "Keywords 6", "Project 6", "slug-6", "Title 6", 2 }
+                    { new Guid("393f0d7e-211c-4ddc-9fe6-7372729431de"), "obsah", new DateTime(2024, 6, 30, 0, 0, 0, 0, DateTimeKind.Local), "Description 3", "/images/tvorbaher.jpg", "Keywords 3", "Project 3", "slug-3", "Title 3", 2 },
+                    { new Guid("4a75f53d-432c-4d56-8eaf-51d3e4d7a2af"), "obsah", new DateTime(2024, 6, 30, 0, 0, 0, 0, DateTimeKind.Local), "Description 5", "/images/tvorbaher.jpg", "Keywords 5", "Project 5", "slug-5", "Title 5", 1 },
+                    { new Guid("8fa392ab-2704-4adc-bc4b-3d5e2f286789"), "obsah", new DateTime(2024, 6, 30, 0, 0, 0, 0, DateTimeKind.Local), "Description 2", "/images/tvorbaher.jpg", "Keywords 2", "Project 2", "slug-2", "Title 2", 1 },
+                    { new Guid("99fce4f6-262e-49ff-bc23-4d2cb83e7460"), "obsah", new DateTime(2024, 6, 30, 0, 0, 0, 0, DateTimeKind.Local), "Description 1", "/images/tvorbaher.jpg", "Keywords 1", "Project 1", "slug-1", "Title 1", 0 },
+                    { new Guid("de50505d-931b-4dcf-bdc8-256bf3cc6a2d"), "obsah", new DateTime(2024, 6, 30, 0, 0, 0, 0, DateTimeKind.Local), "Description 4", "/images/tvorbaher.jpg", "Keywords 4", "Project 4", "slug-4", "Title 4", 0 },
+                    { new Guid("f75f9909-3ec8-4997-8c66-5abe30b09f02"), "obsah", new DateTime(2024, 6, 30, 0, 0, 0, 0, DateTimeKind.Local), "Description 6", "/images/tvorbaher.jpg", "Keywords 6", "Project 6", "slug-6", "Title 6", 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -353,8 +353,8 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                 columns: new[] { "Id", "Author", "BlogCategoryId", "Content", "Date", "Description", "ImagePath", "Keywords", "Name", "Slug", "Title" },
                 values: new object[,]
                 {
-                    { new Guid("35a1d470-ebe1-4c65-934c-3992fda17a71"), "Chleba s marmeládou", new Guid("2a753165-0430-448c-84f0-5ea18aa744ce"), "<h1>Projekt</h1>", new DateTime(2024, 6, 28, 15, 48, 24, 133, DateTimeKind.Local).AddTicks(7049), "moje klobasa", "blogimages/boxing.jpg", "Jsi slizký had, nemám tě rád", "deset malych cernousku", "deset-malych-cernousku", "Pět malých kačátek" },
-                    { new Guid("4840737d-12fd-4b34-a7c9-1fb8099a3537"), "Pepek Námořník", new Guid("1bcfd356-e612-4260-bae0-f1df5d53ad39"), "<h1>Ahoj</h1>", new DateTime(2024, 6, 28, 15, 48, 24, 133, DateTimeKind.Local).AddTicks(6988), "moje klobasa", "blogimages/boxing.jpg", "rohlík, klobása", "Jak mit obri pero", "Jak-mit-obri-pero", "Deset malých švestek" }
+                    { new Guid("c0cd39bb-d087-4c28-939d-e967e34d906d"), "Chleba s marmeládou", new Guid("ba246baf-081d-4f19-8c84-fe78c63483be"), "<h1>Projekt</h1>", new DateTime(2024, 6, 30, 17, 6, 33, 722, DateTimeKind.Local).AddTicks(6179), "moje klobasa", "blogimages/boxing.jpg", "Jsi slizký had, nemám tě rád", "deset malych cernousku", "deset-malych-cernousku", "Pět malých kačátek" },
+                    { new Guid("d547254f-44fb-4521-8307-f56c2eb8b6c3"), "Pepek Námořník", new Guid("c39a1ce0-e53c-4b3c-8a06-f025f5aecb73"), "<h1>Ahoj</h1>", new DateTime(2024, 6, 30, 17, 6, 33, 722, DateTimeKind.Local).AddTicks(6118), "moje klobasa", "blogimages/boxing.jpg", "rohlík, klobása", "Jak mit obri pero", "Jak-mit-obri-pero", "Deset malých švestek" }
                 });
 
             migrationBuilder.CreateIndex(

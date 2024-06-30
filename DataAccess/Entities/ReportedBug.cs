@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MojeVlastniStranka.DataAccess.Entities
 {
@@ -15,16 +16,18 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		}
 
 		[Url]
-		public string Url
+        [Column(TypeName = "nvarchar(1000)")]
+        public string Url
 		{
 			get;
 			set;
 		}
 
-		/// <summary>
-		/// Vrací nebo nastavuje nápad na vylepšení.
-		/// </summary>
-		public string Bug
+        /// <summary>
+        /// Vrací nebo nastavuje nápad na vylepšení.
+        /// </summary>
+        [Column(TypeName = "nvarchar(1000)")]
+        public string Bug
 		{
 			get;
 			set;

@@ -1,5 +1,6 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace MojeVlastniStranka.DataAccess.Entities
@@ -17,10 +18,11 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			set;
 		}
 
-		/// <summary>
-		/// Vrací nebo nastavuje email NewLetteru.
-		/// </summary>
-		public string Email
+        /// <summary>
+        /// Vrací nebo nastavuje email NewLetteru.
+        /// </summary>
+        [Column(TypeName = "nvarchar(1000)")]
+        public string Email
 		{
 			get;
 			set;
