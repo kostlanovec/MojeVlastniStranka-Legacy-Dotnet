@@ -60,9 +60,7 @@ namespace MojeVlastniStrankaFinanali.Web
                 options.SlidingExpiration = true;
             });
 
-
             builder.Services.AddScoped<NotificationService>();
-            builder.Services.AddScoped<ContactFormService>();
             builder.Services.AddScoped<BlogService>();
             builder.Services.AddScoped<ProjectService>();
             builder.Services.AddScoped<ImageService>();

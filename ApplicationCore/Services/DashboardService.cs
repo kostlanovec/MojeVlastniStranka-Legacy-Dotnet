@@ -27,7 +27,5 @@ namespace MojeVlastniStranka.ApplicationCore.Services
         {
             return await context.BlogPosts.CountAsync();
         }
-
-
     }
 }

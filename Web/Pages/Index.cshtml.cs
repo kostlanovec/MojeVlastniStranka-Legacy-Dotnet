@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.ApplicationCore.Services;
@@ -20,6 +21,14 @@ namespace MojeVlastniStranka.Web.Pages
 		public async Task OnGetAsync()
 		{
 			Posts = await blogService.GetThreePost();
+		}
+
+		[HttpPost]
+		public async Task OnPostAsync()
+		{
+
+			Posts = await blogService.GetThreePost();
+
 		}
 	}
 }

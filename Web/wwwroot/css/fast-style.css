@@ -78,6 +78,24 @@
 	color: var(--white);
 }
 
+.service__article{
+
+}
+
+.ul__service {
+	list-style: none;
+	text-align: left;
+}
+
+.ul__service li:before {
+	content: '✓';
+	margin-left: 2em;
+}
+
+.ul__service .li--x{
+	content: "x";
+}
+
 .zoom-effect:hover {
 	transform: scale(1.1);
 }

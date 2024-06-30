@@ -1,4 +1,5 @@
-﻿using MailKit.Net.Smtp;
+﻿using Google.Protobuf.Reflection;
+using MailKit.Net.Smtp;
 using MimeKit;
 using MojeVlastniStranka.ApplicationCore.Requests;
 
@@ -64,6 +65,13 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				client.Send(message);
 				client.Disconnect(true);
 			}
+		}
+
+		public void SendEmailForNewsLetter(string email)
+		{
+			// generate token and save to database with email
+			// send email with token
+			// user click on link with token
 		}
 	}
 }
