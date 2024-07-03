@@ -57,6 +57,70 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			return result;
 		}
 
+		/// <summary>
+		/// Získá všechny blog kategorie s příspěvky.
+		/// </summary>
+		public async Task<List<BlogCategoryWithPostsDto>> GetAllCategoriesWithPosts()
+		{
+			var result = await context.BlogCategories
+				.Include(bc => bc.BlogPosts)
+				.Select(bc => new BlogCategoryWithPostsDto
+				{
+					Name = bc.Name,
+					BlogPosts = bc.BlogPosts.Select(bp => new BlogPostSummary
+					{
+						Id = bp.Id,
+						Name = bp.Name,
+						Description = bp.Description,
+						FilePath = bp.ImagePath,
+						Slug = bp.Slug,
+						TimePublic = bp.Date
+					}).ToList()
+				})
+				.ToListAsync();
+			return result;
+		}
+
+		/// <summary>
+		/// Získá všechny blog kategorie s příspěvky a 4 novějšími příspěvky.
+		/// </summary>
+		public async Task<List<BlogCategoryWithPostsDto>> GetAllCategoriesPostsWitFourNewerPosts()
+		{
+			var blogcategorylist = await GetAllCategoriesWithPosts();
+			var fourNewerPosts = await GetFourNewerPosts();
+
+			var specialCategory = new BlogCategoryWithPostsDto
+			{
+				Name = "Nejnovější příspěvky",
+				BlogPosts = fourNewerPosts
+			};
+
+            blogcategorylist.Insert(0, specialCategory);
+
+            return blogcategorylist;
+		}
+
+		/// <summary>
+		/// Získá 4 blog príspěvky.
+		/// </summary>
+		public async Task<List<BlogPostSummary>> GetFourNewerPosts()
+		{
+			var result = await context.BlogPosts
+				.OrderByDescending(bp => bp.Date)
+				.Take(4)
+				.Select(bp => new BlogPostSummary
+				{
+					Id = bp.Id,
+					Name = bp.Name,
+					Description = bp.Description,
+					FilePath = bp.ImagePath,
+					Slug = bp.Slug,
+					TimePublic = bp.Date
+				})
+				.ToListAsync();
+
+			return result;
+		}
 
 		/// <summary>
 		/// Získá blog příspěvky s popiskem a dalšími informace důležitý pro interakci.
@@ -142,7 +206,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				Author = existingBlogPost.Author,
 				Keywords = existingBlogPost.Keywords,
 				BlogCategoryId = existingBlogPost.BlogCategoryId,
-				blogCategory = existingBlogPost.blogCategory,
+				blogCategory = existingBlogPost.BlogCategory,
 				FileUpload = existingBlogPost.ImagePath
 			};
 			return editBlogPostDto;

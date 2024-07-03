@@ -81,7 +81,7 @@ namespace MojeVlastniStranka.ApplicationCore.Dto
 		/// <summary>
 		/// Vrací nebo nastavuje Id kategorie.
 		/// </summary>
-		public Guid BlogCategoryId
+		public Guid? BlogCategoryId
 		{
 			get; 
 			set;

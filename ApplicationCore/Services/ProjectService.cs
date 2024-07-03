@@ -22,6 +22,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		{
 			return context.Projects.ToList();
 		}
+
 		/*
 		/// <summary>
 		/// Vrací nebo nastavuje projekty podle jeho statusu.
@@ -30,5 +31,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		{
 			return context.Projects.Where(p => p.projectStatus == status).ToList();
 		}*/
+
+
 	}
 }

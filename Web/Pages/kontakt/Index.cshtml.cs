@@ -25,6 +25,9 @@ namespace MojeVlastniStranka.Web.Pages.kontakt
 			set;
 		}
 
+		/// <summary>
+		/// Odeslání formuláøe.
+		/// </summary>
 		public void OnPost()
         {
 			Form.SendTime = DateTime.Now;

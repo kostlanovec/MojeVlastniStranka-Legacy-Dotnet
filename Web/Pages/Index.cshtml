@@ -8,7 +8,7 @@
 }
 
 <main class="main">
-	<header class="header">
+	<header class="header header--index">
 		<figure class="header--figure">
 			<img class="header--figure--image" src="images/website_image.svg" alt="Kostlanovec">
 		</figure>
@@ -59,29 +59,24 @@
 		<h2>Blog příspěvky</h2>
 		<div class="wrapper">
 			<div class="slide">
-				<figure class="figure__blog">
-					<img src="images/psychologie.jpg" alt="Blog">
-					<div class="figure__blog__div">
-						<h3>Barvy a vliv na psychiku</h3>
-						<p>Jak barvy ovlivňují lidskou mysl? Je to velice zajímavé si uvědomit, kolik toho má na nás vliv.</p>
-					</div>
-				</figure>
-				<figure class="figure__blog">
-					<img src="images/working.jpg" alt="Blog">
-					<div class="figure__blog__div">
-						<h3>Pracovitostt</h3>
-						<p>Jak neprokrastinovat a být opravdu velmi pracovity člověk, a dosáhnout svých cílů.</p>
-					</div>
-				</figure>
+				@foreach (var post in Model.Posts)
+				{
+					<figure class="figure__blog">
+						<img src="@post.FilePath" alt="Blog">
+						<div class="figure__blog__div">
+							<h3>@post.Name</h3>
+							<p>@post.Description</p>
+						</div>
+					</figure>
+				}
 			</div>
 			<div class="pagination">
+				<span class="behind--dot"><span class="dot"></span></span>
 				<span class="behind--dot"><span class="dot"></span></span>
 				<span class="behind--dot"><span class="dot"></span></span>
 			</div>
 		</div>
 	</div>
-
-
 	<div class="aboutme__Card">
 		<div class="aboutme__Card__images">
 			<img src="images/osobnifotka.png" alt="Blog">

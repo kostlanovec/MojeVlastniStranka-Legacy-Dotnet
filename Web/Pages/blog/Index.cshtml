@@ -7,28 +7,55 @@
 	ViewData["Keywords"] = "blog, osobní";
 }
 
-<header>
-	<h1>Blog</h1>
-	<input class="searchbar" type="text" placeholder="hledat"/>
-	<div id="results"></div>
-</header>
-
 <main class="main">
-  <h2>Odbornější články</h2>
-	<section>
-		@for (var i = 0; i < Model.Posts.Count; i++)
-		{
-			<article class="article__blog @(i == 0 ? "first__item" : i == 1 ? "second__item" : i == 2 ? "third__item" : "item")">
-				<a href="/blog/@Model.Posts[i].Slug">
-					<img src="@Model.Posts[i].FilePath">
-					<p class="text__for__img">@Model.Posts[i].Name</p>
-				</a>
-			</article>
-		}
-	</section>
+	<header>
+		<h1 class="h1--index">Blog</h1>
+			<input class="searchbar" type="text" placeholder="hledat" />
+		<div id="results"></div>
+	</header>
+    @foreach (var category in Model.CategoriesWithPosts)
+    {
+        <section>
+            <h2 class="blog__h2">@category.Name</h2>
+            <div class="div--blog--articles">
+                @{
+                    bool isFirstPost = true;
+                }
+                @foreach (var post in category.BlogPosts)
+                {
+                    if (isFirstPost)
+                    {
+                        <article class="article--first--post">
+                            <a class="blog--a" href="/Blog/@post.Slug">
+                                <h3 class="blog__first__h3">@post.Name</h3>
+                                <img src="@post.FilePath" alt="@post.Name" />
+                            </a>
+                        </article>
+                        isFirstPost = false;
+                    }
+                    else
+                    {
+                        <article class="article--post">
+                            <a class="blog--a blog--a--other" href="/Blog/@post.Slug">
+                                <img src="@post.FilePath" alt="@post.Name" />
+                                <div class="blog--div">
+                                    <h3 class="blog__h3">@post.Name</h3>
+                                    <div class="blog--data">
+                                        <p>@post.Description</p>
+                                        <p>@post.TimePublic.ToString("dd.MM.yyyy")</p>
+                                    </div>
+                                </div>
 
+                            </a>
+                        </article>
+                    }
+                }
+            </div>
+        </section>
+    }
+	</>
 </main>
-
+@*
 <script>
 	$(document).ready(function() {
 		$('#searchBox').keyup(function() {
@@ -48,5 +75,6 @@
 				$('#results').empty();
 			}
 		});
-	});
+	});*/
 </script>
+*@

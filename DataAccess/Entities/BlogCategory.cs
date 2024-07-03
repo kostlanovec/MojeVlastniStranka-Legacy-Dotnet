@@ -11,13 +11,21 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// Vrací nebo nastavuje Id kategorie blogu.
         /// </summary>
         [Key]
-        public Guid Id { get; set; }
+        public Guid Id
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// Vrací nebo nastavuje jméno kategorie blogu.
         /// </summary>
         [Column(TypeName = "nvarchar(100)")]
-        public string Name { get; set; }
+        public string Name
+        { 
+            get;
+            set;
+        }
 
         /// <summary>
         /// Vrací nebo nastavuje kolekci blog příspěvku.
@@ -35,6 +43,4 @@ namespace MojeVlastniStranka.DataAccess.Entities
             return blogCategory;
         }
     }
-
-    
 }

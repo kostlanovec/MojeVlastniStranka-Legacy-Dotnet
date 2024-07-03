@@ -6,53 +6,54 @@
     ViewData["Title"] = "Moje projekty";
 }
 
-<main class="main">
+<main class="main main__project">
     <h1>Projekty</h1>
     <div class="projects__container">
-        <button class="arrow--project" onclick="toggleSection('development-projects')"></button>
+        <button class="arrow--project" onclick="toggleSection('development-projects', this)"></button>
         <h2>Rozpracované projekty</h2>
     </div>
     <section id="development-projects" class="projects__section">
         @foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatus.Development))
         {
-            <article class="project">
-                <a href="/projekty/@project.Slug">
-                <img src="@project.ImagePath" alt="@project.Name" />
-                <h3>@project.Name</h3>
-                <div>
-                     <p>@project.Description</p>
-                </div>
-               </a>
+            <article class="article--project">
+                <a class="article--project__a" href="/projekty/@project.Slug">
+                    <img src="@project.ImagePath" alt="@project.Name" />
+                    <h3 class="article--project__h3">@project.Name</h3>
+                    @*<p>@project.Description</p>*@
+
+                </a>
             </article>
         }
     </section>
     <div class="projects__container">
-        <button onclick="toggleSection('development-projects')"></button>
+        <button class="arrow--project" onclick="toggleSection('finalized-projects', this)"></button>
         <h2>Hotové projekty</h2>
     </div>
     <section id="finalized-projects" class="projects__section">
         @foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatus.Finalized))
         {
-            <article class="project">
-                <img src="@project.ImagePath" alt="@project.Name" />
-                <h3>@project.Name</h3>
-                <p>@project.Description</p>
-                <a href="/projekty/@project.Slug">Detail</a>
+            <article class="article--project">
+                <a class="article--project__a" href="/projekty/@project.Slug">
+                    <img src="@project.ImagePath" alt="@project.Name" />
+                    <h3 class="article--project__h3">@project.Name</h3>
+                    @*<p>@project.Description</p>*@
+                </a>
             </article>
         }
     </section>
     <div class="projects__container">
-        <button onclick="toggleSection('playnning-projects')"></button>
+        <button class="arrow--project" onclick="toggleSection('planning-projects', this)"></button>
         <h2>Plánované projekty</h2>
     </div>
-    <section id="playnning-projects" class="projects__section">
+    <section id="planning-projects" class="projects__section">
         @foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatus.Planning))
         {
-            <article class="project">
-                <img src="@project.ImagePath" alt="@project.Name" />
-                <h3>@project.Name</h3>
-                <p>@project.Description</p>
-                <a href="/projekty/@project.Slug">Detail</a>
+            <article class="article--project">
+                <a class="article--project__a" href="/projekty/@project.Slug">
+                    <img src="@project.ImagePath" alt="@project.Name" />
+                    <h3 class="article--project__h3">@project.Name</h3>
+                    @*<p>@project.Description</p>*@
+                </a>
             </article>
         }
     </section>
@@ -123,15 +124,14 @@
 *@
 
 <script>
-    function toggleSection(sectionId) {
+    function toggleSection(sectionId, button) {
         var section = document.getElementById(sectionId);
         if (section.style.display === 'none' || section.style.display === '') {
-            section.style.display = 'block';
+            section.style.display = 'grid';
         } else {
             section.style.display = 'none';
         }
 
-        var button = document.querySelector('.arrow--project');
         button.classList.toggle('rotated');
     }
 </script>
