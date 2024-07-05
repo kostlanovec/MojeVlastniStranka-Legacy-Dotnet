@@ -1,7 +1,6 @@
 ﻿@page
 @model MojeVlastniStranka.User.Areas.Admin.Pages.Blog.AddImageModel
 @{
-    var baseUrl = Model.UrlToImage;
 	ViewData["Title"] = "Přidání obrázků";
 }
 <!--todo sjednotit všude jquery, bootstrap na jednotný-->
@@ -52,7 +51,7 @@
 	@foreach (var image in Model.Images)
 	{
 		<div class="col-md-4">
-			<img class="card-img-top" src="@Url.Content($"{baseUrl}/images/galeriefotky/{image.FileName}")" alt="@image.Description" />
+			<img class="card-img-top" src="@image.FileName" alt="@image.Description" />
 			<div class="card-body">
 				<h5 class="card-title">@image.Description</h5>
 				<form method="post">

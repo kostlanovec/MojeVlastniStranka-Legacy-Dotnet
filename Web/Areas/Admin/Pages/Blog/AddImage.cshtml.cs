@@ -4,13 +4,12 @@ using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.ApplicationCore.Requests;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
-using static System.Net.WebRequestMethods;
 
 namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
 {
     public class AddImageModel : PageModel
     {
-        //to-do logování, jak se s tím pracuje
+        //todo logování, jak se s tím pracuje
         private readonly DataContext context;
         private readonly ImageService imageService;
 
@@ -32,12 +31,6 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
             context = dataContext;
             this.imageService = imageService;
         }
-
-#if DEBUG
-	    public string UrlToImage = "http://localhost:5266";
-#else
-	    public string UrlToImage = "https://kostlanovec.cz";
-#endif
 
 		public async Task OnGet()
         {

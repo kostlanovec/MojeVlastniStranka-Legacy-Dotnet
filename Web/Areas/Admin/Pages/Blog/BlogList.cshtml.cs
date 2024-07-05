@@ -2,16 +2,12 @@
 using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
-using System.Configuration;
 namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
 {
 	public class BlogModel : PageModel
 	{
 		private readonly DataContext context;
 		private readonly BlogService blogService;
-
-
-		public string BaseUrl = "kontakt";
 
 	public List<BlogCategoryDto> BlogCategory
         {

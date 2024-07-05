@@ -45,12 +45,12 @@
     <meta property="og:url" content="https://www.kostlanovec.cz/">
     <meta property="og:title" content="Osobní stránka Jana Sebastiána Kostlána">
     <meta property="og:description" content="Osobní stránka Jana Sebastiána Kostlána. Tvůrce, programátor webů a desktopových aplikací.">
-    <meta property="og:image" content="https://www.kostlanovec.cz/images/socialprofilephoto.png">
+    <meta property="og:image" content="/images/socialprofilephoto.png">
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://www.kostlanovec.cz/">
     <meta property="twitter:title" content="Osobní stránka Jana Sebastiána Kostlána">
     <meta property="twitter:description" content="Osobní stránka Jana Sebastiána Kostlána. Tvůrce, programátor webů a desktopových aplikací.">
-    <meta property="twitter:image" content="https://www.kostlanovec.cz/images/socialprofilephoto.png">
+    <meta property="twitter:image" content="/images/socialprofilephoto.png">
     <script src="/lib/jquery/dist/jquery.min.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SFNW32KZW0" ></script>
     <script type="text/plain" data-cookiecategory="analytics">
@@ -76,7 +76,7 @@
 <nav class="menu" id="menu">
 	<div class="menu-basic">
 		<a class="a-index" asp-page="/Index">Kostlanovec</a>
-            <button class="hamburger">
+            <button aria-label="Hamburger menu" class="hamburger">
                 <svg class="svg--hamburger">
                     <use xlink:href="#menu" />
                     <use xlink:href="#menu" />
@@ -86,17 +86,16 @@
 	<ul class="menu-list">
 		<li class="menu-item"><a asp-page="/blog/index">Blog</a></li>
 		<li class="menu-item"><a asp-page="/projekty/index">Projekty</a></li>
-		<li class="menu-item"><a asp-page="/omne/index">O mně</a></li>
 		<li class="menu-item"><a asp-page="/kontakt/index">Kontakt</a></li>
 	</ul>
 </nav>
 @RenderBody()
 
 <footer class="footer">
-	<p>2023 | Jan Sebastián Kostlán</p>
+	<p>2024 | Jan Sebastián Kostlán</p>
 	<div class="footer__last__element">
-		<p>GDPR</p>
-		<p>Cookies</p>
+        <a class="white--a" asp-page="/gdpr">GDPR</a>
+        <a class="white--a" asp-page="/zasadycookies">Cookies</a>
 	</div>
 </footer>
 
