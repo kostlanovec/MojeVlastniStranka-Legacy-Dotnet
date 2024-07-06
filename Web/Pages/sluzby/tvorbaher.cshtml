@@ -1,8 +1,69 @@
 ﻿@page
 @model MojeVlastniStranka.Web.Pages.sluzby.tvorbaherModel
+
 @{
-	ViewData["Title"] = "Apliace";
-	ViewData["Description"] = "Tvorba aplikaci na míru jako je unity, react, maui, ASP.NET Core.";
+	ViewData["Title"] = "Tvorba her";
+	ViewData["Description"] = "Tvorba her na míru pomocí Unity. Jan Sebastián Kostlán - Tvůrce, vývojář a programátor.";
 	ViewData["Author"] = "Jan Sebastián Kostlán";
-	ViewData["Keywords"] = "stránky, react, maui, ASP.NET Core";
+	ViewData["Keywords"] = "hry, Unity, vývoj her";
 }
+
+<main class="main">
+	<header class="header header-service">
+		<div>
+			<h1>Tvorba her na míru</h1>
+			<p>Nabízíme profesionální služby v oblasti vývoje her na míru pomocí Unity. Ať už máte nápad na jednoduchou hru nebo komplexní projekt, jsme tu, abychom vám pomohli přivést váš sen k životu.</p>
+		</div>
+		<img src="~/images/game_development.svg" />
+	</header>
+	<article class="service__article">
+		<h2 class="service--h2">Hra na míru</h2>
+		<div class="service--layout">
+			<img src="~/images/custom_game.svg" />
+			<ul class="ul__service">
+				<li>Kompletní vývoj hry</li>
+				<li>Grafický návrh</li>
+				<li>Implementace herních mechanismů</li>
+				<li>Optimalizace a testování</li>
+			</ul>
+		</div>
+		<div>
+			<h3>Popis</h3>
+			<p class="service--p">Vytvoříme hru na míru přesně podle vašich představ. Od prvotního nápadu, přes grafický návrh a implementaci herních mechanismů, až po optimalizaci a testování. Každý projekt je unikátní a proto je cena stanovena na základě domluvy.</p>
+		</div>
+		<div class="serivce--price--div">
+			<p class="service--price">Cena dle domluvy</p>
+		</div>
+	</article>
+	<article class="service__article">
+		<h2 class="service--h2">Kompletní vývoj hry</h2>
+		<div class="service--layout">
+			<img src="~/images/complete_game_development.svg" />
+			<ul class="ul__service">
+				<li>Analýza a návrh hry</li>
+				<li>Vývoj všech herních prvků</li>
+				<li>Grafika a zvukové efekty</li>
+				<li>Testování a optimalizace</li>
+				<li>Podpora po spuštění hry</li>
+			</ul>
+		</div>
+		<div>
+			<h3>Popis</h3>
+			<p class="service--p">Nabízíme kompletní vývoj hry od začátku do konce. Začneme analýzou a návrhem, pokračujeme vývojem všech herních prvků, grafikou a zvukovými efekty, a nakonec testováním a optimalizací. Poskytujeme také podporu po spuštění hry. Cena je stanovena na základě domluvy, vzhledem k jedinečnosti každého projektu.</p>
+		</div>
+		<div class="serivce--price--div">
+			<p class="service--price">Cena dle domluvy</p>
+		</div>
+	</article>
+	<h2>Mám zájem o tvorbu hry</h2>
+	<form class="contact__form" method="post">
+		<select class="input__form">
+			<option value="CustomizedGame">Hra na míru</option>
+			<option value="CompleteDevelopmentGame">Kompletní vývoj hry</option>
+		</select>
+		<input class="input__form" type="email" name="Email" placeholder="Email" required>
+		<input class="input__form" type="text" name="PhoneNumber" placeholder="Telefon">
+		<textarea class="textarea__form" name="Message" cols="30" rows="10" placeholder="Dobrý den, mám zájem o / mám dotaz na" required></textarea>
+		<button class="button form--button" type="submit">Odeslat</button>
+	</form>
+</main>

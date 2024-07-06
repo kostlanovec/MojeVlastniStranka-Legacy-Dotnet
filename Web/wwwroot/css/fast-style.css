@@ -28,17 +28,34 @@ h2 {
 	font-size: 1.7em;
 }
 
+.center__text{
+	text-align: center;
+}
+
+.contact__form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 h3, .service--price {
 	font-size: 1.4em;
-	text-align: left;
 }
 
-.service--layout{
-	display: flex;
+.header--index{
+	text-align: center;
 }
 
-.service--layout > *{
-	width: 50%;
+.figure__blog__div{
+	text-align: center;
+}
+
+ul {
+	padding: 0;
+}
+
+.serivce--price--div{
+	margin-top: 2em;
 }
 
 textarea {
@@ -95,15 +112,6 @@ input[type="text"] {
 	margin-bottom: 2em;
 }
 
-.service--h2{
-	text-align: left;
-}
-
-.service--p{
-	text-align: left;
-
-}
-
 .social--image {
 	width: 40px;
 	height: 50px;
@@ -114,7 +122,6 @@ input[type="text"] {
 .social--text {
 	flex-grow: 1;
 	font-weight: bold;
-	text-align: left;
 }
 
 .contact__form > *:not(:first-child) {
@@ -167,14 +174,12 @@ input[type="text"] {
 
 .article--project__h3 {
 	position: absolute;
-	text-align: left;
 	bottom: 0;
 	margin: 1em
 }
 
 .ul__service {
 	list-style: none;
-	text-align: left;
 }
 
 .li--x::before {
@@ -227,7 +232,6 @@ input[type="text"] {
 
 .body {
 	background: linear-gradient(45deg, var(--darkblue) 0%, var(--purple) 100%);
-	text-align: center;
 	padding: 0;
 	margin: 0;
 }
@@ -256,6 +260,7 @@ input[type="text"] {
 	background-position: center;
 	background-repeat: no-repeat;
 	margin-top: 4em;
+	text-align: center;
 }
 
 .arrow--project {
@@ -373,7 +378,6 @@ input[type="text"] {
 }
 
 .aboutme__Card {
-	text-align: left;
 	background: linear-gradient(45deg, var(--bluegradient--start--color) 0%, var(--bluegradient--end--color) 100%);
 	padding: 2dvh;
 	border-radius: 10px;
@@ -662,11 +666,16 @@ input[type="text"] {
 }
 
 @media screen and (min-width: 768px) {
-
-	.contact__form {
+	.service--layout {
 		display: flex;
-		flex-direction: column;
-		align-items: center;
+	}
+
+		.service--layout > * {
+			width: 50%;
+		}
+
+	.input__form{
+		margin:0;
 	}
 
 	.blog__first__h3 {
@@ -832,7 +841,6 @@ input[type="text"] {
 	}
 }
 
-
 @media screen and (max-width: 767px) {
 	.scrolling__article {
 		display: inline-block;
@@ -868,7 +876,6 @@ input[type="text"] {
 		vertical-align: top;
 	}
 }
-
 
 @media screen and (min-width: 1370px) {
 

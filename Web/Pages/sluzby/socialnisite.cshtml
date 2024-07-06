@@ -1,8 +1,88 @@
 ﻿@page
 @model MojeVlastniStranka.Web.Pages.sluzby.socialnisiteModel
+
 @{
 	ViewData["Title"] = "Sociální sítě";
-	ViewData["Description"] = "Správa sociálních sítí na míru jako je instagram, facebook, tik-tok a plno dalších. Tvůrce, webdesigner, programátor a marketing maestro skrz SEO.";
+	ViewData["Description"] = "Správa sociálních sítí na míru jako je Instagram, Facebook, TikTok a plno dalších. Jan Sebastián Kostlán - Tvůrce, webdesigner, programátor a marketing maestro skrz SEO.";
 	ViewData["Author"] = "Jan Sebastián Kostlán";
-	ViewData["Keywords"] = "blog, osobní";
+	ViewData["Keywords"] = "sociální sítě, správa, marketing";
 }
+
+<main class="main">
+	<header class="header header-service">
+		<div>
+			<h1>Správa sociálních sítí</h1>
+			<p>Nabízíme profesionální správu vašich sociálních sítí, abyste se mohli soustředit na své podnikání. Zajistíme, aby váš profil na sociálních sítích byl atraktivní a interaktivní, a aby přilákal a udržel vaši cílovou skupinu.</p>
+		</div>
+		<img src="~/images/social_media.svg" />
+	</header>
+	<article class="service__article">
+		<h2 class="service--h2">Základní správa</h2>
+		<div class="service--layout">
+			<img src="~/images/basic_social_media.svg" />
+			<ul class="ul__service">
+				<li>Vytváření a plánování příspěvků</li>
+				<li>Základní analýza výkonu</li>
+				<li>Správa komentářů a zpráv</li>
+				<li class="li--x">Pokročilé reklamní kampaně</li>
+			</ul>
+		</div>
+		<div>
+			<h3>Popis</h3>
+			<p class="service--p">Základní správa sociálních sítí zahrnuje vytváření a plánování příspěvků, základní analýzu výkonu a správu komentářů a zpráv. Tato služba je ideální pro malé podniky, které chtějí zůstat aktivní na sociálních sítích.</p>
+		</div>
+		<div class="serivce--price--div">
+			<p class="service--price">Cena 3000 Kč</p>
+		</div>
+	</article>
+	<article class="service__article">
+		<h2 class="service--h2">Pokročilá správa</h2>
+		<div class="service--layout">
+			<ul class="ul__service">
+				<li>Vytváření a plánování příspěvků</li>
+				<li>Hloubková analýza výkonu</li>
+				<li>Správa komentářů a zpráv</li>
+				<li>Pokročilé reklamní kampaně</li>
+			</ul>
+			<img src="~/images/advanced_social_media.svg" />
+		</div>
+		<div>
+			<h3>Popis</h3>
+			<p class="service--p">Pokročilá správa sociálních sítí zahrnuje vše ze základní správy, plus hloubkovou analýzu výkonu a pokročilé reklamní kampaně. Tato služba je vhodná pro střední a velké podniky, které chtějí maximálně využít potenciál sociálních sítí.</p>
+		</div>
+		<div class="serivce--price--div">
+			<p class="service--price">Cena 6000 Kč</p>
+		</div>
+	</article>
+	<article class="service__article">
+		<h2 class="service--h2">Dlouhodobá spolupráce</h2>
+		<div class="service--layout">
+			<ul class="ul__service">
+				<li>Kompletní správa sociálních sítí</li>
+				<li>Strategické plánování obsahu</li>
+				<li>Pokročilé reklamní kampaně</li>
+				<li>Pravidelné reporty a konzultace</li>
+			</ul>
+			<img src="~/images/long_term_social_media.svg" />
+		</div>
+		<div>
+			<h3>Popis</h3>
+			<p class="service--p">Dlouhodobá spolupráce zahrnuje kompletní správu sociálních sítí, strategické plánování obsahu, pokročilé reklamní kampaně a pravidelné reporty a konzultace. Tato služba je ideální pro firmy, které chtějí dlouhodobě růst a budovat silnou online přítomnost.</p>
+		</div>
+		<div class="serivce--price--div">
+			<p class="service--price">Cena dle domluvy</p>
+		</div>
+	</article>
+	<h2>Mám zájem o správu sociálních sítí</h2>
+	<form class="contact__form" method="post">
+		<select class="input__form">
+			<option value="BasicSocialNetworks">Základní správa</option>
+			<option value="AdvancedSocialNetworks">Pokročilá správa</option>
+			<option value="CollaborationSocialNetworks">Dlouhodobá spolupráce</option>
+		</select>
+		<input class="input__form" type="email" name="Email" placeholder="Email" required>
+		<input class="input__form" type="text" name="PhoneNumber" placeholder="Telefon">
+		<textarea class="textarea__form" name="Message" cols="30" rows="10" placeholder="Dobrý den, mám zájem o / mám dotaz na" required></textarea>
+		<button class="button form--button" type="submit">Odeslat</button>
+	</form>
+</main>

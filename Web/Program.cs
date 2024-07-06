@@ -15,17 +15,13 @@ namespace MojeVlastniStrankaFinanali.Web
 
             builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-            /* builder.Services.AddDbContext<DataContext>(options =>
-                     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), new MariaDbServerVersion(new Version(11, 4, 0))),
-             ServiceLifetime.Scoped);*/
-
             builder.Services.AddDbContext<DataContext>(options =>
                     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")),
                 ServiceLifetime.Scoped);
 
-            /*	builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);*/
+			/*	builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);*/
 
-            builder.Services.AddDefaultIdentity<User>(options =>
+			builder.Services.AddDefaultIdentity<User>(options =>
                 {
                     // Heslo nastavení.
                     options.Password.RequireDigit = true;
@@ -55,8 +51,8 @@ namespace MojeVlastniStrankaFinanali.Web
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
 
-                options.LoginPath = "/Identity/Account/Login";
-                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.LoginPath = "/Admin/Account/Login";
+                options.AccessDeniedPath = "/Admin/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
 
@@ -68,6 +64,7 @@ namespace MojeVlastniStrankaFinanali.Web
             builder.Services.AddScoped<DashboardService>();
             builder.Services.AddScoped<MailService>();
             builder.Services.AddScoped<FormService>();
+            builder.Services.AddScoped<ServicesOfferedService>();
 
             builder.Services.AddRazorPages();
             builder.Services.AddControllers();
@@ -78,7 +75,7 @@ namespace MojeVlastniStrankaFinanali.Web
             {
                 app.UseExceptionHandler("/Error");
 
-                app.UseStatusCodePagesWithReExecute("/StatusCode/{0}");
+				app.UseStatusCodePagesWithReExecute("/StatusCode/{0}");
                 app.UseHsts();
             }
 
@@ -110,7 +107,6 @@ namespace MojeVlastniStrankaFinanali.Web
                     defaults: new { controller = "Projekty", action = "ShowProject" });
             });
 
-            // api endpoints
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

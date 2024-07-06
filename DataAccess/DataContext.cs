@@ -29,25 +29,21 @@ namespace MojeVlastniStranka.DataAccess
 			base.OnModelCreating(modelBuilder);
 		}
 
-        // Definice DbSetů pro každou třídu, kterou chceme mapovat na databázovou tabulku.
-        #region DbSet
-
-        public DbSet<ContactForm> ContactForms { get; set; }
+		// Definice DbSetů pro každou třídu, kterou chceme mapovat na databázovou tabulku.
+		#region DbSet
+		public DbSet<ContactForm> ContactForms { get; set; }
 		public DbSet<BlogPost> BlogPosts { get; set; }
 		public DbSet<Project> Projects { get; set; }
 		public DbSet<BlogCategory> BlogCategories { get; set; }
-
 		public DbSet<Image> Images { get; set; }
-
 		public DbSet<IdeaToRelease> IdeaToReleases { get; set; }
-
 		public DbSet<ReportedBug> ReportedBugs { get; set; }
-
 		public DbSet<Notification> Notifications { get; set; }
-
 		public DbSet<Message> Messages { get; set; }
+		public DbSet<ServiceRequest> ServiceRequests { get; set; }
+		public DbSet<NewsLetter> NewsLetters { get; set; }
 
+		public DbSet<UserSubscriptionNewsLetter> UserSubscriptionsNewsLetter{get; set;}
 		#endregion
-
 	}
 }

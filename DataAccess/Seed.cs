@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using MojeVlastniStranka.DataAccess.Entities;
 using MojeVlastniStranka.DataAccess.Enums;
 
@@ -18,7 +19,7 @@ namespace Reservanto.NPS.DataAccess
             var blogcategory = BlogCategory.Create(nerceny, "neurčený");
             var blogcategoryProjekty = BlogCategory.Create(projekty, "projekty");
 
-            var blogPost1 = BlogPost.Create(Guid.NewGuid(), "moje klobasa", "<h1>Ahoj</h1>", "Deset malých švestek", "Pepek Námořník", "rohlík, klobása", nerceny , "Jak mit obri pero", "blogimages/boxing.jpg", "Jak-mit-obri-pero", DateTime.Now);
+            var blogPost1 = BlogPost.Create(Guid.NewGuid(), "moje klobasa", "<h1>Ahoj</h1>", "Deset malých švestek", "Pepek Námořník", "rohlík, klobása", nerceny, "Jak mit obri pero", "ímaablogimages/boxing.jpg", "Jak-mit-obri-pero", DateTime.Now);
             var blogPost2 = BlogPost.Create(Guid.NewGuid(), "moje klobasa", "<h1>Projekt</h1>", "Pět malých kačátek", "Chleba s marmeládou", "Jsi slizký had, nemám tě rád", projekty, "deset malych cernousku", "blogimages/boxing.jpg", "deset-malych-cernousku", DateTime.Now);
 
             modelBuilder.Entity<BlogPost>().HasData(blogPost1, blogPost2);
@@ -44,14 +45,31 @@ namespace Reservanto.NPS.DataAccess
 
             modelBuilder.Entity<BlogCategory>().HasData(blogcategory, blogcategoryProjekty);
 
-			var project1 = Project.Create(Guid.NewGuid(), "Description 1", "obsah", "Title 1", "Keywords 1", "Project 1", "/images/tvorbaher.jpg", "slug-1", DateTime.Now, ProjectStatus.Planning);
-			var project2 = Project.Create(Guid.NewGuid(), "Description 2", "obsah", "Title 2", "Keywords 2", "Project 2", "/images/tvorbaher.jpg", "slug-2", DateTime.Now, ProjectStatus.Development);
-			var project3 = Project.Create(Guid.NewGuid(), "Description 3", "obsah", "Title 3", "Keywords 3", "Project 3", "/images/tvorbaher.jpg", "slug-3", DateTime.Now, ProjectStatus.Finalized);
-			var project4 = Project.Create(Guid.NewGuid(), "Description 4", "obsah", "Title 4", "Keywords 4", "Project 4", "/images/tvorbaher.jpg", "slug-4", DateTime.Now, ProjectStatus.Planning);
-			var project5 = Project.Create(Guid.NewGuid(), "Description 5", "obsah", "Title 5", "Keywords 5", "Project 5", "/images/tvorbaher.jpg", "slug-5", DateTime.Now, ProjectStatus.Development);
-			var project6 = Project.Create(Guid.NewGuid(), "Description 6", "obsah", "Title 6", "Keywords 6", "Project 6", "/images/tvorbaher.jpg", "slug-6", DateTime.Now, ProjectStatus.Finalized);
+            var project1 = Project.Create(Guid.NewGuid(), "Description 1", "obsah", "Title 1", "Keywords 1", "Project 1", "/images/tvorbaher.jpg", "slug-1", DateTime.Now, ProjectStatus.Planning);
+            var project2 = Project.Create(Guid.NewGuid(), "Description 2", "obsah", "Title 2", "Keywords 2", "Project 2", "/images/tvorbaher.jpg", "slug-2", DateTime.Now, ProjectStatus.Development);
+            var project3 = Project.Create(Guid.NewGuid(), "Description 3", "obsah", "Title 3", "Keywords 3", "Project 3", "/images/tvorbaher.jpg", "slug-3", DateTime.Now, ProjectStatus.Finalized);
+            var project4 = Project.Create(Guid.NewGuid(), "Description 4", "obsah", "Title 4", "Keywords 4", "Project 4", "/images/tvorbaher.jpg", "slug-4", DateTime.Now, ProjectStatus.Planning);
+            var project5 = Project.Create(Guid.NewGuid(), "Description 5", "obsah", "Title 5", "Keywords 5", "Project 5", "/images/tvorbaher.jpg", "slug-5", DateTime.Now, ProjectStatus.Development);
+            var project6 = Project.Create(Guid.NewGuid(), "Description 6", "obsah", "Title 6", "Keywords 6", "Project 6", "/images/tvorbaher.jpg", "slug-6", DateTime.Now, ProjectStatus.Finalized);
 
-			modelBuilder.Entity<Project>().HasData(project1, project2, project3, project4, project5, project6);
-		}
+            modelBuilder.Entity<Project>().HasData(project1, project2, project3, project4, project5, project6);
+
+            // identity seed users
+            modelBuilder.Entity<User>().HasData(new User
+            {
+                Id = Guid.NewGuid(),
+                UserName = "admin",
+                NormalizedUserName = "ADMIN",
+                Email = "info@kostlanovec.cz"
+            });
+
+            // identity seed role admin
+            modelBuilder.Entity<IdentityRole<Guid>>().HasData(new IdentityRole<Guid>
+			{
+				Id = Guid.NewGuid(),
+				Name = "admin",
+				NormalizedName = "ADMIN"
+			});
+        }
     }
 }

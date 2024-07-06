@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MojeVlastniStranka.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class IdentityAndServices : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -57,7 +57,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "varchar(100)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(100)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,11 +69,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FirstName = table.Column<string>(type: "varchar(20)", nullable: false),
-                    LastName = table.Column<string>(type: "varchar(20)", nullable: false),
-                    Email = table.Column<string>(type: "text", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(1000)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "varchar(20)", nullable: true),
-                    FeedBack = table.Column<string>(type: "text", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(1000)", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -122,6 +120,18 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "NewsLetters",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(1000)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NewsLetters", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Notifications",
                 columns: table => new
                 {
@@ -166,6 +176,36 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ReportedBugs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ServiceRequests",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MainService = table.Column<int>(type: "int", nullable: false),
+                    subService = table.Column<int>(type: "int", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ServiceRequests", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserSubscriptionsNewsLetter",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    email = table.Column<string>(type: "nvarchar(1000)", nullable: false),
+                    Hastag = table.Column<string>(type: "nvarchar(1000)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserSubscriptionsNewsLetter", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -286,7 +326,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     Title = table.Column<string>(type: "nvarchar(200)", nullable: false),
                     Author = table.Column<string>(type: "varchar(50)", nullable: false),
                     Keywords = table.Column<string>(type: "nvarchar(1000)", nullable: false),
-                    BlogCategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BlogCategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ImagePath = table.Column<string>(type: "nvarchar(1000)", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -297,42 +337,51 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         name: "FK_BlogPosts_BlogCategories_BlogCategoryId",
                         column: x => x.BlogCategoryId,
                         principalTable: "BlogCategories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { new Guid("b33bf885-20c9-4b2f-b634-d7c2ef6cddb4"), null, "admin", "ADMIN" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { new Guid("425928ef-df2f-415f-8a4a-b42b325c47d7"), 0, "6707720a-12ac-4eb7-afaf-f56132fd3c54", "info@kostlanovec.cz", false, false, null, null, "ADMIN", null, null, false, null, false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "BlogCategories",
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("843c0b41-cf77-48f9-8c76-52942760a843"), "blogpříspěvky" },
-                    { new Guid("ba246baf-081d-4f19-8c84-fe78c63483be"), "projekty" },
-                    { new Guid("c39a1ce0-e53c-4b3c-8a06-f025f5aecb73"), "neurčený" },
-                    { new Guid("cfbe756f-b600-4736-8af4-8d7eab13b118"), "základ" }
+                    { new Guid("48c1f357-fd4c-4c40-91e5-b6036a1a96e9"), "neurčený" },
+                    { new Guid("a769b14f-fcac-448c-9a07-1c3787eff180"), "základ" },
+                    { new Guid("b79af3ea-3f70-41b8-9b9f-0eefd526d0d1"), "projekty" },
+                    { new Guid("fe916dbe-800e-4dcd-8d57-acb621ca1e5c"), "blogpříspěvky" }
                 });
 
             migrationBuilder.InsertData(
                 table: "ContactForm",
-                columns: new[] { "Id", "Date", "Email", "FeedBack", "FirstName", "LastName", "PhoneNumber" },
+                columns: new[] { "Id", "Date", "Email", "Message", "PhoneNumber" },
                 values: new object[,]
                 {
-                    { new Guid("48403d09-50e0-4458-92d5-833c9eeb3aab"), new DateTime(2024, 6, 30, 17, 6, 33, 722, DateTimeKind.Local).AddTicks(6428), "jan.novak@example.com", "Dobrý den, rád bych se zeptal na možnost spolupráce.", "Jan", "Novák", "123456789" },
-                    { new Guid("66df0d27-55fb-4592-a37d-cc490bb9a0f2"), new DateTime(2024, 6, 30, 17, 6, 33, 722, DateTimeKind.Local).AddTicks(6438), "info@kostlanovec.cz", "Dobrý, mám zájem o nové stránky vámi vyrobené. Těším se, až mi ukážete, co všechno dokážete.", "Jan", "Kostlán", "987654321" }
+                    { new Guid("22a676a1-ce54-49f7-be71-ba3ca75b80e4"), new DateTime(2024, 7, 6, 10, 55, 7, 691, DateTimeKind.Local).AddTicks(4621), "jan.novak@example.com", "Dobrý den, rád bych se zeptal na možnost spolupráce.", "123456789" },
+                    { new Guid("d560e027-0f46-40e0-8bcf-5c4484119c52"), new DateTime(2024, 7, 6, 10, 55, 7, 691, DateTimeKind.Local).AddTicks(4628), "info@kostlanovec.cz", "Dobrý, mám zájem o nové stránky vámi vyrobené. Těším se, až mi ukážete, co všechno dokážete.", "987654321" }
                 });
 
             migrationBuilder.InsertData(
                 table: "IdeaToReleases",
                 columns: new[] { "Id", "DatePosted", "Idea" },
-                values: new object[] { new Guid("78265a7e-4e05-4797-bc2b-406d56a17a24"), new DateTime(2024, 6, 30, 17, 6, 33, 722, DateTimeKind.Local).AddTicks(6464), "Chtěl bych vytvořit nějakou animaci na vytváření koblih" });
+                values: new object[] { new Guid("7194e5e4-afbf-41fd-be4b-5f7135cb025c"), new DateTime(2024, 7, 6, 10, 55, 7, 691, DateTimeKind.Local).AddTicks(4657), "Chtěl bych vytvořit nějakou animaci na vytváření koblih" });
 
             migrationBuilder.InsertData(
                 table: "Images",
                 columns: new[] { "Id", "Description", "FileName" },
                 values: new object[,]
                 {
-                    { new Guid("4b184b10-768b-41f4-9b2d-a7cf863f63ed"), "stín minulosti", "stinminulosti.jpg" },
-                    { new Guid("8e264bb8-9daf-4623-b3ec-64d334cac320"), "konec světa", "konecsveta.jpg" }
+                    { new Guid("b40d9bc0-8324-47d8-b032-c150ea7ca59b"), "stín minulosti", "stinminulosti.jpg" },
+                    { new Guid("ba857d38-f350-4177-be81-0c4c56345e3a"), "konec světa", "konecsveta.jpg" }
                 });
 
             migrationBuilder.InsertData(
@@ -340,12 +389,12 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                 columns: new[] { "Id", "Content", "Date", "Description", "ImagePath", "Keywords", "Name", "Slug", "Title", "projectStatus" },
                 values: new object[,]
                 {
-                    { new Guid("393f0d7e-211c-4ddc-9fe6-7372729431de"), "obsah", new DateTime(2024, 6, 30, 0, 0, 0, 0, DateTimeKind.Local), "Description 3", "/images/tvorbaher.jpg", "Keywords 3", "Project 3", "slug-3", "Title 3", 2 },
-                    { new Guid("4a75f53d-432c-4d56-8eaf-51d3e4d7a2af"), "obsah", new DateTime(2024, 6, 30, 0, 0, 0, 0, DateTimeKind.Local), "Description 5", "/images/tvorbaher.jpg", "Keywords 5", "Project 5", "slug-5", "Title 5", 1 },
-                    { new Guid("8fa392ab-2704-4adc-bc4b-3d5e2f286789"), "obsah", new DateTime(2024, 6, 30, 0, 0, 0, 0, DateTimeKind.Local), "Description 2", "/images/tvorbaher.jpg", "Keywords 2", "Project 2", "slug-2", "Title 2", 1 },
-                    { new Guid("99fce4f6-262e-49ff-bc23-4d2cb83e7460"), "obsah", new DateTime(2024, 6, 30, 0, 0, 0, 0, DateTimeKind.Local), "Description 1", "/images/tvorbaher.jpg", "Keywords 1", "Project 1", "slug-1", "Title 1", 0 },
-                    { new Guid("de50505d-931b-4dcf-bdc8-256bf3cc6a2d"), "obsah", new DateTime(2024, 6, 30, 0, 0, 0, 0, DateTimeKind.Local), "Description 4", "/images/tvorbaher.jpg", "Keywords 4", "Project 4", "slug-4", "Title 4", 0 },
-                    { new Guid("f75f9909-3ec8-4997-8c66-5abe30b09f02"), "obsah", new DateTime(2024, 6, 30, 0, 0, 0, 0, DateTimeKind.Local), "Description 6", "/images/tvorbaher.jpg", "Keywords 6", "Project 6", "slug-6", "Title 6", 2 }
+                    { new Guid("01d4ce50-1c49-491d-a42e-4fcb04452cce"), "obsah", new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Local), "Description 4", "/images/tvorbaher.jpg", "Keywords 4", "Project 4", "slug-4", "Title 4", 0 },
+                    { new Guid("533f8cd5-5206-45f2-98b8-d65abc165594"), "obsah", new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Local), "Description 1", "/images/tvorbaher.jpg", "Keywords 1", "Project 1", "slug-1", "Title 1", 0 },
+                    { new Guid("55eba25b-9db7-4aaf-8943-6560b0da691a"), "obsah", new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Local), "Description 2", "/images/tvorbaher.jpg", "Keywords 2", "Project 2", "slug-2", "Title 2", 1 },
+                    { new Guid("eafea372-6439-4308-8d9b-9003f269b34b"), "obsah", new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Local), "Description 6", "/images/tvorbaher.jpg", "Keywords 6", "Project 6", "slug-6", "Title 6", 2 },
+                    { new Guid("fa85c0aa-be89-4bcc-8206-c54c309cc7a9"), "obsah", new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Local), "Description 3", "/images/tvorbaher.jpg", "Keywords 3", "Project 3", "slug-3", "Title 3", 2 },
+                    { new Guid("fc3e5cf2-fbde-41c9-95ba-8158f8dc35a6"), "obsah", new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Local), "Description 5", "/images/tvorbaher.jpg", "Keywords 5", "Project 5", "slug-5", "Title 5", 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -353,8 +402,8 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                 columns: new[] { "Id", "Author", "BlogCategoryId", "Content", "Date", "Description", "ImagePath", "Keywords", "Name", "Slug", "Title" },
                 values: new object[,]
                 {
-                    { new Guid("c0cd39bb-d087-4c28-939d-e967e34d906d"), "Chleba s marmeládou", new Guid("ba246baf-081d-4f19-8c84-fe78c63483be"), "<h1>Projekt</h1>", new DateTime(2024, 6, 30, 17, 6, 33, 722, DateTimeKind.Local).AddTicks(6179), "moje klobasa", "blogimages/boxing.jpg", "Jsi slizký had, nemám tě rád", "deset malych cernousku", "deset-malych-cernousku", "Pět malých kačátek" },
-                    { new Guid("d547254f-44fb-4521-8307-f56c2eb8b6c3"), "Pepek Námořník", new Guid("c39a1ce0-e53c-4b3c-8a06-f025f5aecb73"), "<h1>Ahoj</h1>", new DateTime(2024, 6, 30, 17, 6, 33, 722, DateTimeKind.Local).AddTicks(6118), "moje klobasa", "blogimages/boxing.jpg", "rohlík, klobása", "Jak mit obri pero", "Jak-mit-obri-pero", "Deset malých švestek" }
+                    { new Guid("200dd600-648e-4c0b-8b8b-35193b6c9b66"), "Chleba s marmeládou", new Guid("b79af3ea-3f70-41b8-9b9f-0eefd526d0d1"), "<h1>Projekt</h1>", new DateTime(2024, 7, 6, 10, 55, 7, 691, DateTimeKind.Local).AddTicks(4027), "moje klobasa", "blogimages/boxing.jpg", "Jsi slizký had, nemám tě rád", "deset malych cernousku", "deset-malych-cernousku", "Pět malých kačátek" },
+                    { new Guid("931d2ae0-7637-44f2-8c43-ecd77666b81e"), "Pepek Námořník", new Guid("48c1f357-fd4c-4c40-91e5-b6036a1a96e9"), "<h1>Ahoj</h1>", new DateTime(2024, 7, 6, 10, 55, 7, 691, DateTimeKind.Local).AddTicks(3960), "moje klobasa", "blogimages/boxing.jpg", "rohlík, klobása", "Jak mit obri pero", "Jak-mit-obri-pero", "Deset malých švestek" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -436,6 +485,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                 name: "Messages");
 
             migrationBuilder.DropTable(
+                name: "NewsLetters");
+
+            migrationBuilder.DropTable(
                 name: "Notifications");
 
             migrationBuilder.DropTable(
@@ -443,6 +495,12 @@ namespace MojeVlastniStranka.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "ReportedBugs");
+
+            migrationBuilder.DropTable(
+                name: "ServiceRequests");
+
+            migrationBuilder.DropTable(
+                name: "UserSubscriptionsNewsLetter");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

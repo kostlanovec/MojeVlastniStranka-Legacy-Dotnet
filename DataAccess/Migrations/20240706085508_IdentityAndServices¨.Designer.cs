@@ -12,8 +12,8 @@ using MojeVlastniStranka.DataAccess;
 namespace MojeVlastniStranka.DataAccess.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240630183106_IdontKnow¨")]
-    partial class IdontKnow
+    [Migration("20240706085508_IdentityAndServices¨")]
+    partial class IdentityAndServices
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,6 +51,14 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("b33bf885-20c9-4b2f-b634-d7c2ef6cddb4"),
+                            Name = "admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -173,22 +181,22 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("629d3f4b-46c7-4b30-82ff-ff68c2b75e58"),
+                            Id = new Guid("a769b14f-fcac-448c-9a07-1c3787eff180"),
                             Name = "základ"
                         },
                         new
                         {
-                            Id = new Guid("de67dcc3-3ea6-46ab-9716-9a66f14a26b4"),
+                            Id = new Guid("fe916dbe-800e-4dcd-8d57-acb621ca1e5c"),
                             Name = "blogpříspěvky"
                         },
                         new
                         {
-                            Id = new Guid("46099960-9f61-41ac-a84a-c03fc15a1d95"),
+                            Id = new Guid("48c1f357-fd4c-4c40-91e5-b6036a1a96e9"),
                             Name = "neurčený"
                         },
                         new
                         {
-                            Id = new Guid("87fb7223-5e3e-4274-a881-5650ac58e943"),
+                            Id = new Guid("b79af3ea-3f70-41b8-9b9f-0eefd526d0d1"),
                             Name = "projekty"
                         });
                 });
@@ -203,7 +211,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(50)");
 
-                    b.Property<Guid>("BlogCategoryId")
+                    b.Property<Guid?>("BlogCategoryId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Content")
@@ -246,11 +254,11 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("88b839b5-7875-43aa-b240-0f7eae7ec165"),
+                            Id = new Guid("931d2ae0-7637-44f2-8c43-ecd77666b81e"),
                             Author = "Pepek Námořník",
-                            BlogCategoryId = new Guid("46099960-9f61-41ac-a84a-c03fc15a1d95"),
+                            BlogCategoryId = new Guid("48c1f357-fd4c-4c40-91e5-b6036a1a96e9"),
                             Content = "<h1>Ahoj</h1>",
-                            Date = new DateTime(2024, 6, 30, 20, 31, 5, 963, DateTimeKind.Local).AddTicks(9535),
+                            Date = new DateTime(2024, 7, 6, 10, 55, 7, 691, DateTimeKind.Local).AddTicks(3960),
                             Description = "moje klobasa",
                             ImagePath = "blogimages/boxing.jpg",
                             Keywords = "rohlík, klobása",
@@ -260,11 +268,11 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5568548b-8cb0-46a1-99e2-67887ddafc74"),
+                            Id = new Guid("200dd600-648e-4c0b-8b8b-35193b6c9b66"),
                             Author = "Chleba s marmeládou",
-                            BlogCategoryId = new Guid("87fb7223-5e3e-4274-a881-5650ac58e943"),
+                            BlogCategoryId = new Guid("b79af3ea-3f70-41b8-9b9f-0eefd526d0d1"),
                             Content = "<h1>Projekt</h1>",
-                            Date = new DateTime(2024, 6, 30, 20, 31, 5, 963, DateTimeKind.Local).AddTicks(9588),
+                            Date = new DateTime(2024, 7, 6, 10, 55, 7, 691, DateTimeKind.Local).AddTicks(4027),
                             Description = "moje klobasa",
                             ImagePath = "blogimages/boxing.jpg",
                             Keywords = "Jsi slizký had, nemám tě rád",
@@ -301,16 +309,16 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("bd6fe48a-1109-4b42-8bf0-d7d84d0652a4"),
-                            Date = new DateTime(2024, 6, 30, 20, 31, 5, 964, DateTimeKind.Local).AddTicks(111),
+                            Id = new Guid("22a676a1-ce54-49f7-be71-ba3ca75b80e4"),
+                            Date = new DateTime(2024, 7, 6, 10, 55, 7, 691, DateTimeKind.Local).AddTicks(4621),
                             Email = "jan.novak@example.com",
                             Message = "Dobrý den, rád bych se zeptal na možnost spolupráce.",
                             PhoneNumber = "123456789"
                         },
                         new
                         {
-                            Id = new Guid("23e505ac-8234-41cd-8afd-9c97bd2241bc"),
-                            Date = new DateTime(2024, 6, 30, 20, 31, 5, 964, DateTimeKind.Local).AddTicks(120),
+                            Id = new Guid("d560e027-0f46-40e0-8bcf-5c4484119c52"),
+                            Date = new DateTime(2024, 7, 6, 10, 55, 7, 691, DateTimeKind.Local).AddTicks(4628),
                             Email = "info@kostlanovec.cz",
                             Message = "Dobrý, mám zájem o nové stránky vámi vyrobené. Těším se, až mi ukážete, co všechno dokážete.",
                             PhoneNumber = "987654321"
@@ -337,8 +345,8 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("dc251d25-9e40-4d3a-acac-10efa1e41da7"),
-                            DatePosted = new DateTime(2024, 6, 30, 20, 31, 5, 964, DateTimeKind.Local).AddTicks(146),
+                            Id = new Guid("7194e5e4-afbf-41fd-be4b-5f7135cb025c"),
+                            DatePosted = new DateTime(2024, 7, 6, 10, 55, 7, 691, DateTimeKind.Local).AddTicks(4657),
                             Idea = "Chtěl bych vytvořit nějakou animaci na vytváření koblih"
                         });
                 });
@@ -364,13 +372,13 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3f9ba961-d98b-4982-b6fe-5edac2484757"),
+                            Id = new Guid("ba857d38-f350-4177-be81-0c4c56345e3a"),
                             Description = "konec světa",
                             FileName = "konecsveta.jpg"
                         },
                         new
                         {
-                            Id = new Guid("7efa9722-0c4f-4600-ab2f-47eacdfc3134"),
+                            Id = new Guid("b40d9bc0-8324-47d8-b032-c150ea7ca59b"),
                             Description = "stín minulosti",
                             FileName = "stinminulosti.jpg"
                         });
@@ -396,6 +404,21 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.NewsLetter", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NewsLetters");
                 });
 
             modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.Notification", b =>
@@ -463,9 +486,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a69bfb19-d45b-416f-bfea-1ee64ea8b31a"),
+                            Id = new Guid("533f8cd5-5206-45f2-98b8-d65abc165594"),
                             Content = "obsah",
-                            Date = new DateTime(2024, 6, 30, 0, 0, 0, 0, DateTimeKind.Local),
+                            Date = new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
                             Description = "Description 1",
                             ImagePath = "/images/tvorbaher.jpg",
                             Keywords = "Keywords 1",
@@ -476,9 +499,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c4ef15a1-a7b2-4a8c-8a28-b8f3183fc155"),
+                            Id = new Guid("55eba25b-9db7-4aaf-8943-6560b0da691a"),
                             Content = "obsah",
-                            Date = new DateTime(2024, 6, 30, 0, 0, 0, 0, DateTimeKind.Local),
+                            Date = new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
                             Description = "Description 2",
                             ImagePath = "/images/tvorbaher.jpg",
                             Keywords = "Keywords 2",
@@ -489,9 +512,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("236be4fc-9cd8-4cb6-b86c-ed067c0298e6"),
+                            Id = new Guid("fa85c0aa-be89-4bcc-8206-c54c309cc7a9"),
                             Content = "obsah",
-                            Date = new DateTime(2024, 6, 30, 0, 0, 0, 0, DateTimeKind.Local),
+                            Date = new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
                             Description = "Description 3",
                             ImagePath = "/images/tvorbaher.jpg",
                             Keywords = "Keywords 3",
@@ -502,9 +525,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("07e5a851-20cb-468e-8757-b16dd9875887"),
+                            Id = new Guid("01d4ce50-1c49-491d-a42e-4fcb04452cce"),
                             Content = "obsah",
-                            Date = new DateTime(2024, 6, 30, 0, 0, 0, 0, DateTimeKind.Local),
+                            Date = new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
                             Description = "Description 4",
                             ImagePath = "/images/tvorbaher.jpg",
                             Keywords = "Keywords 4",
@@ -515,9 +538,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9b1b2dd9-8d07-4bc2-8f93-7af853f66337"),
+                            Id = new Guid("fc3e5cf2-fbde-41c9-95ba-8158f8dc35a6"),
                             Content = "obsah",
-                            Date = new DateTime(2024, 6, 30, 0, 0, 0, 0, DateTimeKind.Local),
+                            Date = new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
                             Description = "Description 5",
                             ImagePath = "/images/tvorbaher.jpg",
                             Keywords = "Keywords 5",
@@ -528,9 +551,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("dace6f00-ef41-46f7-95b7-a27a551986c4"),
+                            Id = new Guid("eafea372-6439-4308-8d9b-9003f269b34b"),
                             Content = "obsah",
-                            Date = new DateTime(2024, 6, 30, 0, 0, 0, 0, DateTimeKind.Local),
+                            Date = new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
                             Description = "Description 6",
                             ImagePath = "/images/tvorbaher.jpg",
                             Keywords = "Keywords 6",
@@ -561,6 +584,38 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ReportedBugs");
+                });
+
+            modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.ServiceRequest", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MainService")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("subService")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ServiceRequests");
                 });
 
             modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.User", b =>
@@ -627,6 +682,40 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("425928ef-df2f-415f-8a4a-b42b325c47d7"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "6707720a-12ac-4eb7-afaf-f56132fd3c54",
+                            Email = "info@kostlanovec.cz",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "ADMIN",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        });
+                });
+
+            modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.UserSubscriptionNewsLetter", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Hastag")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserSubscriptionsNewsLetter");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -682,13 +771,11 @@ namespace MojeVlastniStranka.DataAccess.Migrations
 
             modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.BlogPost", b =>
                 {
-                    b.HasOne("MojeVlastniStranka.DataAccess.Entities.BlogCategory", "blogCategory")
+                    b.HasOne("MojeVlastniStranka.DataAccess.Entities.BlogCategory", "BlogCategory")
                         .WithMany("BlogPosts")
-                        .HasForeignKey("BlogCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BlogCategoryId");
 
-                    b.Navigation("blogCategory");
+                    b.Navigation("BlogCategory");
                 });
 
             modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.BlogCategory", b =>

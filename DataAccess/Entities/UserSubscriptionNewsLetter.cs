@@ -2,7 +2,7 @@
 
 namespace MojeVlastniStranka.DataAccess.Entities
 {
-    internal class UserSubscriptionNewsLetter : IEntities
+    public class UserSubscriptionNewsLetter : IEntities
     {
         protected UserSubscriptionNewsLetter() { }
 

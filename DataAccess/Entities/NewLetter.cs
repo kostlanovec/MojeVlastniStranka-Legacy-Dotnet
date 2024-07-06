@@ -1,7 +1,4 @@
-﻿
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MojeVlastniStranka.DataAccess.Entities
 {

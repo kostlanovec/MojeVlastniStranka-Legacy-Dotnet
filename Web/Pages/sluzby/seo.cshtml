@@ -7,3 +7,62 @@
 	ViewData["Author"] = "Jan Sebastián Kostlán";
 	ViewData["Keywords"] = "SEO, optimalizace, analytics";
 }
+
+<main class="main">
+	<header class="header header-service">
+		<div>
+			<h1>SEO Optimalizace</h1>
+			<p>Nabízíme profesionální služby SEO optimalizace pro zlepšení viditelnosti vašich webových stránek ve vyhledávačích. Zajistíme, aby váš web byl snadno nalezitelný a přilákal více návštěvníků.</p>
+		</div>
+		<img src="~/images/website_image.svg" />
+	</header>
+	<article class="service__article">
+		<h2 class="service--h2">Základní SEO Optimalizace</h2>
+		<div class="service--layout">
+			<img src="~/images/website_image.svg" />
+			<ul class="ul__service">
+				<li>On-page optimalizace</li>
+				<li>Základní analýza klíčových slov</li>
+				<li>Optimalizace rychlosti načítání stránky</li>
+				<li class="li--x">Pokročilé reportování</li>
+			</ul>
+		</div>
+		<div>
+			<h3>Popis</h3>
+			<p class="service--p">Poskytneme základní SEO optimalizaci, která zahrnuje on-page optimalizaci, analýzu klíčových slov a optimalizaci rychlosti načítání stránky. Tato služba je ideální pro menší webové stránky a začínající projekty.</p>
+		</div>
+		<div class="serivce--price--div">
+			<p class="service--price">Cena 4000 Kč</p>
+		</div>
+	</article>
+	<article class="service__article">
+		<h2 class="service--h2">Pokročilá SEO Optimalizace</h2>
+		<div class="service--layout">
+			<ul class="ul__service">
+				<li>Pokročilá on-page a off-page optimalizace</li>
+				<li>Hloubková analýza klíčových slov</li>
+				<li>Optimalizace rychlosti načítání stránky</li>
+				<li>Pokročilé reportování a sledování výkonu</li>
+			</ul>
+			<img src="~/images/website_image.svg" />
+		</div>
+		<div>
+			<h3>Popis</h3>
+			<p class="service--p">Pokročilá SEO optimalizace zahrnuje detailní on-page a off-page optimalizaci, hloubkovou analýzu klíčových slov, optimalizaci rychlosti načítání stránky a pokročilé reportování. Tato služba je vhodná pro větší webové stránky a e-shopy.</p>
+		</div>
+		<div class="serivce--price--div">
+			<p class="service--price">Cena 8000 Kč</p>
+		</div>
+	</article>
+	<h2>Mám zájem o SEO optimalizaci</h2>
+	<form class="contact__form" method="post">
+		<select class="input__form">
+			<option value="BasicSeo">Základní SEO Optimalizace</option>
+			<option value="Advanced">Pokročilá SEO Optimalizace</option>
+		</select>
+		<input class="input__form" type="email" name="Email" placeholder="Email" required>
+		<input class="input__form" type="text" name="PhoneNumber" placeholder="Telefon">
+		<textarea class="textarea__form" name="Message" cols="30" rows="10" placeholder="Dobrý den, mám zájem o / mám dotaz na" required></textarea>
+		<button class="button form--button" type="submit">Odeslat</button>
+	</form>
+</main>
