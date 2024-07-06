@@ -4,6 +4,8 @@
 @using MojeVlastniStranka.DataAccess.Entities
 
 @inject NotificationService notificationService
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 @functions {
 	 public Task<List<NotificationDto>> GetDataFromDatabase()
 	 {
@@ -31,6 +33,7 @@
 
 	<script src="lib/jquery/dist/jquery.js"></script>
 </head>
+<body>
 
 <div class="container-fluid position-relative d-flex p-0" style="margin-top:-24px">
 	<partial name="_Navbar" />
@@ -104,10 +107,6 @@
 		</div>
 	</div>
 </div>
-
-@inject SignInManager<User> SignInManager
-@inject UserManager<User> UserManager
-
 <script>
 	document.addEventListener("DOMContentLoaded", function () {
 		var sidebarToggler = document.querySelector('.sidebar-toggler');
@@ -129,3 +128,5 @@
 @section Scripts {
 	@RenderSection("Scripts", required: false)
 }
+</body>
+</html>

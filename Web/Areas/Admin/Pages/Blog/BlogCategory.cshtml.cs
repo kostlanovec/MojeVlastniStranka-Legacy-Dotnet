@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.ApplicationCore.Services;
@@ -6,7 +7,9 @@ using MojeVlastniStranka.DataAccess;
 
 namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
 {
-    public class BlogCategoryModel : PageModel
+	[Authorize
+
+	public class BlogCategoryModel : PageModel
     {
 	    private readonly BlogService blogService;
 	    private readonly DataContext context;
@@ -49,9 +52,8 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
         public async Task<ActionResult> OnPostDeleteCategoryAsync(Guid Id)
         {
 	        BlogCategory = await blogService.GetAllCategoriesTask();
-			// blog kategorie je 1, což znamená
 
-		        return Page();
+		    return Page();
 	        
 			var result = await blogService.DeleteBlogCategory(Id);
 

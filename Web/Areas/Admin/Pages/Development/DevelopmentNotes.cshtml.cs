@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MojeVlastniStranka.ApplicationCore.Dto;
@@ -7,7 +8,8 @@ using MojeVlastniStranka.DataAccess.Entities;
 
 namespace MojeVlastniStranka.User.Areas.Admin.Pages.Development
 {
-    public class DevelopmentNotesModel : PageModel
+	[Authorize]
+	public class DevelopmentNotesModel : PageModel
     {
 	    private readonly DataContext context;
 	    private readonly DevelopmentService developmentService;

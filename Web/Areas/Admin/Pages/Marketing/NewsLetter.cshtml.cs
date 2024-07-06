@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.ApplicationCore.Requests;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MojeVlastniStranka.User.Areas.Admin.Pages.Marketing
 {
-    public class NewsLetterModel : PageModel
+	[Authorize]
+	public class NewsLetterModel : PageModel
     {
         private readonly MailService mailService;
 

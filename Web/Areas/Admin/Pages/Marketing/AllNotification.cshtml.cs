@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.ApplicationCore.Services;
@@ -5,7 +6,8 @@ using MojeVlastniStranka.DataAccess;
 
 namespace MojeVlastniStranka.User.Areas.Admin.Pages.Marketing
 {
-    public class AllNotificationModel : PageModel
+	[Authorize]
+	public class AllNotificationModel : PageModel
     {
 		private readonly DataContext context;
 		private readonly NotificationService notificationService;

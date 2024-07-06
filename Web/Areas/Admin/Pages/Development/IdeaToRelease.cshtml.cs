@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MojeVlastniStranka.ApplicationCore.Requests;
 using MojeVlastniStranka.ApplicationCore.Services;
@@ -6,7 +7,8 @@ using MojeVlastniStranka.DataAccess;
 
 namespace MojeVlastniStranka.User.Areas.Admin.Pages.Development
 {
-    public class IdeaToReleaseModel : PageModel
+	[Authorize]
+	public class IdeaToReleaseModel : PageModel
     {
 	    private readonly DataContext context;
 	    private readonly DevelopmentService developmentService;
