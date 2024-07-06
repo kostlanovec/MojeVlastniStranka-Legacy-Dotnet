@@ -13,12 +13,12 @@ namespace MojeVlastniStranka.Web.Areas.Identity.Pages.Account.Manage
 	[Authorize]
 	public partial class IndexModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<DataAccess.Entities.User> _userManager;
+        private readonly SignInManager<DataAccess.Entities.User> _signInManager;
 
         public IndexModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            UserManager<DataAccess.Entities.Userr> userManager,
+            SignInManager<DataAccess.Entities.User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -39,7 +39,7 @@ namespace MojeVlastniStranka.Web.Areas.Identity.Pages.Account.Manage
             public string PhoneNumber { get; set; }
         }
 
-        private async Task LoadAsync(IdentityUser user)
+        private async Task LoadAsync(DataAccess.Entities.User user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);

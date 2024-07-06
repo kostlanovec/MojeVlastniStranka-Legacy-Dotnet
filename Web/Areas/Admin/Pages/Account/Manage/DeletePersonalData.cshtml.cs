@@ -12,13 +12,13 @@ namespace MojeVlastniStranka.Web.Areas.Identity.Pages.Account.Manage
     [Authorize]
     public class DeletePersonalDataModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<DataAccess.Entities.User> _userManager;
+        private readonly SignInManager<DataAccess.Entities.User> _signInManager;
         private readonly ILogger<DeletePersonalDataModel> _logger;
 
         public DeletePersonalDataModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<DataAccess.Entities.User> userManager,
+            SignInManager<DataAccess.Entities.User> signInManager,
             ILogger<DeletePersonalDataModel> logger)
         {
             _userManager = userManager;

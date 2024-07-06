@@ -12,8 +12,8 @@ using MojeVlastniStranka.DataAccess;
 namespace MojeVlastniStranka.DataAccess.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240706085508_IdentityAndServices¨")]
-    partial class IdentityAndServices
+    [Migration("20240706140117_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,11 +25,10 @@ namespace MojeVlastniStranka.DataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -55,13 +54,13 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b33bf885-20c9-4b2f-b634-d7c2ef6cddb4"),
+                            Id = "5b228401-39a8-4edb-a4fb-cbdaabbd22b4",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -75,8 +74,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -85,7 +85,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -99,8 +99,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -109,7 +110,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.ToTable("AspNetUserClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
@@ -120,8 +121,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -130,13 +132,13 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.ToTable("AspNetUserLogins", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -145,10 +147,10 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
@@ -181,22 +183,22 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a769b14f-fcac-448c-9a07-1c3787eff180"),
+                            Id = new Guid("3f60420e-7526-4412-84b4-5b049439bbdd"),
                             Name = "základ"
                         },
                         new
                         {
-                            Id = new Guid("fe916dbe-800e-4dcd-8d57-acb621ca1e5c"),
+                            Id = new Guid("ed84cad2-efdb-4edb-a6e6-f6ef01ed82fb"),
                             Name = "blogpříspěvky"
                         },
                         new
                         {
-                            Id = new Guid("48c1f357-fd4c-4c40-91e5-b6036a1a96e9"),
+                            Id = new Guid("b45c9d0a-0ad1-4d1c-8e59-38e60b9273ac"),
                             Name = "neurčený"
                         },
                         new
                         {
-                            Id = new Guid("b79af3ea-3f70-41b8-9b9f-0eefd526d0d1"),
+                            Id = new Guid("6ea1dc98-8b37-4a91-b8b0-3252c0db45bd"),
                             Name = "projekty"
                         });
                 });
@@ -254,13 +256,13 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("931d2ae0-7637-44f2-8c43-ecd77666b81e"),
+                            Id = new Guid("552d7ed8-fdf5-4e84-a275-ed900716247a"),
                             Author = "Pepek Námořník",
-                            BlogCategoryId = new Guid("48c1f357-fd4c-4c40-91e5-b6036a1a96e9"),
+                            BlogCategoryId = new Guid("b45c9d0a-0ad1-4d1c-8e59-38e60b9273ac"),
                             Content = "<h1>Ahoj</h1>",
-                            Date = new DateTime(2024, 7, 6, 10, 55, 7, 691, DateTimeKind.Local).AddTicks(3960),
+                            Date = new DateTime(2024, 7, 6, 16, 1, 16, 851, DateTimeKind.Local).AddTicks(7359),
                             Description = "moje klobasa",
-                            ImagePath = "blogimages/boxing.jpg",
+                            ImagePath = "ímaablogimages/boxing.jpg",
                             Keywords = "rohlík, klobása",
                             Name = "Jak mit obri pero",
                             Slug = "Jak-mit-obri-pero",
@@ -268,11 +270,11 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("200dd600-648e-4c0b-8b8b-35193b6c9b66"),
+                            Id = new Guid("2d322115-985f-430c-b0c3-3d5b20dbe4bb"),
                             Author = "Chleba s marmeládou",
-                            BlogCategoryId = new Guid("b79af3ea-3f70-41b8-9b9f-0eefd526d0d1"),
+                            BlogCategoryId = new Guid("6ea1dc98-8b37-4a91-b8b0-3252c0db45bd"),
                             Content = "<h1>Projekt</h1>",
-                            Date = new DateTime(2024, 7, 6, 10, 55, 7, 691, DateTimeKind.Local).AddTicks(4027),
+                            Date = new DateTime(2024, 7, 6, 16, 1, 16, 851, DateTimeKind.Local).AddTicks(7599),
                             Description = "moje klobasa",
                             ImagePath = "blogimages/boxing.jpg",
                             Keywords = "Jsi slizký had, nemám tě rád",
@@ -309,16 +311,16 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("22a676a1-ce54-49f7-be71-ba3ca75b80e4"),
-                            Date = new DateTime(2024, 7, 6, 10, 55, 7, 691, DateTimeKind.Local).AddTicks(4621),
+                            Id = new Guid("aa00139d-941b-40fb-ae59-3d02d36df8da"),
+                            Date = new DateTime(2024, 7, 6, 16, 1, 16, 851, DateTimeKind.Local).AddTicks(8112),
                             Email = "jan.novak@example.com",
                             Message = "Dobrý den, rád bych se zeptal na možnost spolupráce.",
                             PhoneNumber = "123456789"
                         },
                         new
                         {
-                            Id = new Guid("d560e027-0f46-40e0-8bcf-5c4484119c52"),
-                            Date = new DateTime(2024, 7, 6, 10, 55, 7, 691, DateTimeKind.Local).AddTicks(4628),
+                            Id = new Guid("119cefac-c04c-4b8e-93ff-3cfb537dc65f"),
+                            Date = new DateTime(2024, 7, 6, 16, 1, 16, 851, DateTimeKind.Local).AddTicks(8119),
                             Email = "info@kostlanovec.cz",
                             Message = "Dobrý, mám zájem o nové stránky vámi vyrobené. Těším se, až mi ukážete, co všechno dokážete.",
                             PhoneNumber = "987654321"
@@ -345,8 +347,8 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7194e5e4-afbf-41fd-be4b-5f7135cb025c"),
-                            DatePosted = new DateTime(2024, 7, 6, 10, 55, 7, 691, DateTimeKind.Local).AddTicks(4657),
+                            Id = new Guid("3c206220-db18-4c35-8476-a09a7b2223a1"),
+                            DatePosted = new DateTime(2024, 7, 6, 16, 1, 16, 851, DateTimeKind.Local).AddTicks(8145),
                             Idea = "Chtěl bych vytvořit nějakou animaci na vytváření koblih"
                         });
                 });
@@ -372,13 +374,13 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ba857d38-f350-4177-be81-0c4c56345e3a"),
+                            Id = new Guid("4b393eea-52fc-445a-8ad3-1c752935b878"),
                             Description = "konec světa",
                             FileName = "konecsveta.jpg"
                         },
                         new
                         {
-                            Id = new Guid("b40d9bc0-8324-47d8-b032-c150ea7ca59b"),
+                            Id = new Guid("1db82bc8-9883-4a39-abcb-0564e7e32fb4"),
                             Description = "stín minulosti",
                             FileName = "stinminulosti.jpg"
                         });
@@ -486,7 +488,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("533f8cd5-5206-45f2-98b8-d65abc165594"),
+                            Id = new Guid("4ee044dd-d186-4b99-8090-4e20f1aab2b1"),
                             Content = "obsah",
                             Date = new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
                             Description = "Description 1",
@@ -499,7 +501,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("55eba25b-9db7-4aaf-8943-6560b0da691a"),
+                            Id = new Guid("d9cc60a1-f12b-406f-a72f-7876f879cad3"),
                             Content = "obsah",
                             Date = new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
                             Description = "Description 2",
@@ -512,7 +514,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fa85c0aa-be89-4bcc-8206-c54c309cc7a9"),
+                            Id = new Guid("6e00037e-9e1d-41bd-9e51-caeaa1c415ec"),
                             Content = "obsah",
                             Date = new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
                             Description = "Description 3",
@@ -525,7 +527,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("01d4ce50-1c49-491d-a42e-4fcb04452cce"),
+                            Id = new Guid("8643b2f0-4452-4b44-b917-e29cb2eb42f8"),
                             Content = "obsah",
                             Date = new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
                             Description = "Description 4",
@@ -538,7 +540,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fc3e5cf2-fbde-41c9-95ba-8158f8dc35a6"),
+                            Id = new Guid("e41f78ff-b887-4f7d-b6b3-ce3eb1b817c7"),
                             Content = "obsah",
                             Date = new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
                             Description = "Description 5",
@@ -551,7 +553,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("eafea372-6439-4308-8d9b-9003f269b34b"),
+                            Id = new Guid("383ae6d2-52cd-4e0d-ac30-9d65092764bd"),
                             Content = "obsah",
                             Date = new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
                             Description = "Description 6",
@@ -620,9 +622,8 @@ namespace MojeVlastniStranka.DataAccess.Migrations
 
             modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.User", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -686,14 +687,17 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("425928ef-df2f-415f-8a4a-b42b325c47d7"),
+                            Id = "f0a04d30-cf5b-43b5-ae56-5998bff1b7b6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6707720a-12ac-4eb7-afaf-f56132fd3c54",
+                            ConcurrencyStamp = "8be4afb8-cde5-4439-a8c2-a510e234a425",
                             Email = "info@kostlanovec.cz",
-                            EmailConfirmed = false,
+                            EmailConfirmed = true,
                             LockoutEnabled = false,
+                            NormalizedEmail = "INFO@KOSTLANOVEC.CZ",
                             NormalizedUserName = "ADMIN",
+                            PasswordHash = "[REDACTED_HASH]",
                             PhoneNumberConfirmed = false,
+                            SecurityStamp = "0b651327-bdec-44c7-89b9-3aeb0d497d44",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -718,16 +722,16 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.ToTable("UserSubscriptionsNewsLetter");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.HasOne("MojeVlastniStranka.DataAccess.Entities.User", null)
                         .WithMany()
@@ -736,7 +740,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.HasOne("MojeVlastniStranka.DataAccess.Entities.User", null)
                         .WithMany()
@@ -745,9 +749,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -760,7 +764,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.HasOne("MojeVlastniStranka.DataAccess.Entities.User", null)
                         .WithMany()

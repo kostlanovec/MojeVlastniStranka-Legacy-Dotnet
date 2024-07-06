@@ -1,0 +1,45 @@
+﻿@model MojeVlastniStranka.DataAccess.Entities.Project
+@{
+    ViewData["Title"] = @Model.Title;
+    ViewData["Description"] = @Model.Description;
+    ViewData["Keywords"] = @Model.Keywords;
+}
+<main class="main">
+    @Html.Raw(Model.Content)
+
+    <script src="https://kit.fontawesome.com/704ff50790.js" crossorigin="anonymous"></script>
+    <div class="share-buttons">
+        <button class="share-button facebook">
+            <i class="fab fa-facebook-f"></i>
+        </button>
+        <button class="share-button twitter">
+            <i class="fab fa-twitter"></i>
+        </button>
+        <button class="share-button linkedin">
+            <i class="fab fa-linkedin-in"></i>
+        </button>
+    </div>
+    <script>
+        const shareButtons = document.querySelectorAll('.share-button');
+        shareButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const url = window.location.href;
+                const platform = button.classList[1];
+                let shareUrl;
+                switch (platform) {
+                    case 'facebook':
+                        shareUrl = `https://www.facebook.com/dialog/share?app_id=1552041721475989&display=popup&href= https://kostlanovec.cz/blog/@Model.Slug&redirect_uri=https://kostlanovec.cz/blog/@Model.Slug `;
+                        break;
+                    case 'twitter':
+                        shareUrl = `https://twitter.com/intent/tweet?title=@Model.Name&related=Kostlanovec&url=https://kostlanovec.cz/blog/@Model.Slug `;
+                        break;
+                    case 'linkedin':
+                        shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=https://kostlanovec.cz/blog/@Model.Slug https://www.linkedin.com/shareArticle?mini=true&url=https://kostlanovec.cz/blog/@Model.Slug `;
+                        break;
+                }
+                window.open(shareUrl, '_blank');
+            });
+        });
+    </script>
+
+</main>

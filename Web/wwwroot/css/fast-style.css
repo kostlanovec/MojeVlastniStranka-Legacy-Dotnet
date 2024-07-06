@@ -110,6 +110,7 @@ input[type="text"] {
 }
 .form--text{
 	margin-bottom: 2em;
+	text-align: center;
 }
 
 .social--image {

@@ -13,11 +13,11 @@ namespace MojeVlastniStranka.Web.Areas.Identity.Pages.Account.Manage
 	[Authorize]
 	public class GenerateRecoveryCodesModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<DataAccess.Entities.User> _userManager;
         private readonly ILogger<GenerateRecoveryCodesModel> _logger;
 
         public GenerateRecoveryCodesModel(
-            UserManager<IdentityUser> userManager,
+            UserManager<DataAccess.Entities.User> userManager,
             ILogger<GenerateRecoveryCodesModel> logger)
         {
             _userManager = userManager;

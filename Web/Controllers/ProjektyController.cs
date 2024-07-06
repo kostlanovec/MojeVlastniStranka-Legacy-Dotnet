@@ -21,7 +21,7 @@ namespace MojeVlastniStranka.Web.Controllers
 				return NotFound();
 			}
 
-			return View("Muchomurka", project);
+			return View("ProjectLayout", project);
 		}
 	}
 }

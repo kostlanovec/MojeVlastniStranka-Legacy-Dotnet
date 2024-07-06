@@ -7,7 +7,7 @@ using MojeVlastniStranka.DataAccess;
 
 namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
 {
-	[Authorize
+	[Authorize]
 
 	public class BlogCategoryModel : PageModel
     {

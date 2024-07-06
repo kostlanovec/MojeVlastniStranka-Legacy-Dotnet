@@ -13,12 +13,12 @@ namespace MojeVlastniStranka.Web.Areas.Identity.Pages.Account.Manage
 	[Authorize]
 	public class ExternalLoginsModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<DataAccess.Entities.User> _userManager;
+        private readonly SignInManager<DataAccess.Entities.User> _signInManager;
 
         public ExternalLoginsModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            UserManager<DataAccess.Entities.User> userManager,
+            SignInManager<DataAccess.Entities.User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

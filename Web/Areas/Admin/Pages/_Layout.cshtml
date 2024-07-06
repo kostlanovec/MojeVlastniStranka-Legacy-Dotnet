@@ -97,7 +97,9 @@
 					</a>
 					<div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
 						<a asp-page="./Settings" class="dropdown-item">Nastavení profilu</a>
-						<a asp-area="Admin" asp-page="/Account/Logout" class="dropdown-item">Odhlásit se</a>
+						<form class="class=" dropdown-item"" asp-area="Admin" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index")" method="post">
+							<button type="submit">Odhlásit se</button>
+						</form>
 					</div>
 				</div>
 			</>

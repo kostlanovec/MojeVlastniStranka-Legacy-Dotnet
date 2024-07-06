@@ -13,13 +13,13 @@ namespace MojeVlastniStranka.Web.Areas.Identity.Pages.Account.Manage
 	[Authorize]
 	public class ResetAuthenticatorModel : PageModel
     {
-        UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        UserManager<DataAccess.Entities.User> _userManager;
+        private readonly SignInManager<DataAccess.Entities.User> _signInManager;
         ILogger<ResetAuthenticatorModel> _logger;
 
         public ResetAuthenticatorModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<DataAccess.Entities.User> userManager,
+            SignInManager<DataAccess.Entities.User> signInManager,
             ILogger<ResetAuthenticatorModel> logger)
         {
             _userManager = userManager;

@@ -17,13 +17,13 @@ namespace MojeVlastniStranka.Web.Areas.Identity.Pages.Account.Manage
 	[Authorize]
 	public partial class EmailModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<DataAccess.Entities.User> _userManager;
+        private readonly SignInManager<DataAccess.Entities.User> _signInManager;
         private readonly IEmailSender _emailSender;
 
         public EmailModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<DataAccess.Entities.User> userManager,
+            SignInManager<DataAccess.Entities.User> signInManager,
             IEmailSender emailSender)
         {
             _userManager = userManager;
@@ -51,7 +51,7 @@ namespace MojeVlastniStranka.Web.Areas.Identity.Pages.Account.Manage
             public string NewEmail { get; set; }
         }
 
-        private async Task LoadAsync(IdentityUser user)
+        private async Task LoadAsync(DataAccess.Entities.User user)
         {
             var email = await _userManager.GetEmailAsync(user);
             Email = email;

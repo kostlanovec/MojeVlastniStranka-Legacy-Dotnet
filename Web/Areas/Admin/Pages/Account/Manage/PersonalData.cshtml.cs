@@ -10,11 +10,11 @@ namespace MojeVlastniStranka.Web.Areas.Identity.Pages.Account.Manage
 	[Authorize]
 	public class PersonalDataModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<DataAccess.Entities.User> _userManager;
         private readonly ILogger<PersonalDataModel> _logger;
 
         public PersonalDataModel(
-            UserManager<IdentityUser> userManager,
+            UserManager<DataAccess.Entities.User> userManager,
             ILogger<PersonalDataModel> logger)
         {
             _userManager = userManager;
