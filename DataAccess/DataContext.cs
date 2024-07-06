@@ -2,11 +2,10 @@
 using MojeVlastniStranka.DataAccess.Entities;
 using Reservanto.NPS.DataAccess;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
 
 namespace MojeVlastniStranka.DataAccess
 {
-	public class DataContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
+	public class DataContext : IdentityDbContext<User>
 	{
 		public DataContext(DbContextOptions<DataContext> options) : base(options)
 		{

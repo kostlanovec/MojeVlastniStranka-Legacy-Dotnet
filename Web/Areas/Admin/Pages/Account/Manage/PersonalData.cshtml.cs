@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -6,7 +7,8 @@ using Microsoft.Extensions.Logging;
 
 namespace MojeVlastniStranka.Web.Areas.Identity.Pages.Account.Manage
 {
-    public class PersonalDataModel : PageModel
+	[Authorize]
+	public class PersonalDataModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<PersonalDataModel> _logger;

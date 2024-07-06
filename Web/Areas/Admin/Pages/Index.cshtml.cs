@@ -17,18 +17,28 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Account.Manage
             this.dashboardService = dashboardService;
         }
 
+        /// <summary>
+        /// Získá poèet vyplìných kontaktních formuláøù
+        /// </summary>
         public int NumberOfContactForms
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Získá poèet blogových pøíspìvkù.
+        /// </summary>
         public int NumberOfBlogPosts
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Získá poèet vyplìných kontaktních formuláøù a poèet blogových pøíspìvkù.
+        /// </summary>
+        /// <returns></returns>
         public async Task OnGetAsync()
         {
             NumberOfContactForms = await dashboardService.NumberOfContactForms();

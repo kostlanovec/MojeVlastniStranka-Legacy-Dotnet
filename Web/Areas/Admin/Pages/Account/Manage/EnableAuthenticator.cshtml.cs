@@ -10,10 +10,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MojeVlastniStranka.Web.Areas.Identity.Pages.Account.Manage
 {
-    public class EnableAuthenticatorModel : PageModel
+	[Authorize]
+	public class EnableAuthenticatorModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<EnableAuthenticatorModel> _logger;

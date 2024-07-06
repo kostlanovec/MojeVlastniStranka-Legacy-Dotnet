@@ -16,10 +16,10 @@ namespace MojeVlastniStranka.Web.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class ResendEmailConfirmationModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<DataAccess.Entities.User> _userManager;
         private readonly IEmailSender _emailSender;
 
-        public ResendEmailConfirmationModel(UserManager<IdentityUser> userManager, IEmailSender emailSender)
+        public ResendEmailConfirmationModel(UserManager<DataAccess.Entities.User> userManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;

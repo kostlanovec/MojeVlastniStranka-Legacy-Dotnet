@@ -14,9 +14,9 @@ namespace MojeVlastniStranka.Web.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class ConfirmEmailModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<DataAccess.Entities.User> _userManager;
 
-        public ConfirmEmailModel(UserManager<IdentityUser> userManager)
+        public ConfirmEmailModel(UserManager<DataAccess.Entities.User> userManager)
         {
             _userManager = userManager;
         }

@@ -54,19 +54,26 @@ namespace Reservanto.NPS.DataAccess
 
             modelBuilder.Entity<Project>().HasData(project1, project2, project3, project4, project5, project6);
 
+
+            var hasher = new PasswordHasher<User>();
+
             // identity seed users
             modelBuilder.Entity<User>().HasData(new User
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.NewGuid().ToString(),
                 UserName = "admin",
                 NormalizedUserName = "ADMIN",
-                Email = "info@kostlanovec.cz"
+                Email = "info@kostlanovec.cz",
+                EmailConfirmed = true,
+                NormalizedEmail = "INFO@KOSTLANOVEC.CZ",
+                SecurityStamp = Guid.NewGuid().ToString("D"),
+                PasswordHash = hasher.HashPassword(new User(), "[REDACTED]")
             });
 
             // identity seed role admin
-            modelBuilder.Entity<IdentityRole<Guid>>().HasData(new IdentityRole<Guid>
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
 			{
-				Id = Guid.NewGuid(),
+                Id = Guid.NewGuid().ToString(),
 				Name = "admin",
 				NormalizedName = "ADMIN"
 			});

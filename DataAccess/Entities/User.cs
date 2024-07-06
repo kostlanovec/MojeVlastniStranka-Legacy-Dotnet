@@ -5,7 +5,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
     /// <summary>
     /// Definuje třídu reprezentující uživatele.
     /// </summary>
-    public class User: IdentityUser<Guid>, IEntities
+    public class User: IdentityUser
     {
     }
 }

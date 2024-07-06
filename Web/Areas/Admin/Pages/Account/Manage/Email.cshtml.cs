@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,8 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace MojeVlastniStranka.Web.Areas.Identity.Pages.Account.Manage
 {
-    public partial class EmailModel : PageModel
+	[Authorize]
+	public partial class EmailModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;

@@ -72,6 +72,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Areas\Admin\Pages\Account\_OutsideLayout.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Update="Pages\gdpr.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>

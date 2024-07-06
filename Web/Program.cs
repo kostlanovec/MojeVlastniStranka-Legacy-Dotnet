@@ -41,7 +41,7 @@ namespace MojeVlastniStrankaFinanali.Web
                         "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                     options.User.RequireUniqueEmail = false;
                 })
-                .AddRoles<IdentityRole<Guid>>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<DataContext>();
 
 
@@ -91,28 +91,21 @@ namespace MojeVlastniStrankaFinanali.Web
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
+
+                app.MapControllerRoute(
                     name: "blog",
                     pattern: "blog/{Slug}",
                     defaults: new { controller = "ShowBlogPost", action = "Blog" });
-            });
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
+
+                app.MapControllerRoute(
                     name: "projekty",
                     pattern: "projekty/{Slug}",
                     defaults: new { controller = "Projekty", action = "ShowProject" });
-            });
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
+                app.MapControllerRoute(
                 name: "api",
                 pattern: "api/{controller}/{action}/{id?}");
-            });
 
 
             app.Run();

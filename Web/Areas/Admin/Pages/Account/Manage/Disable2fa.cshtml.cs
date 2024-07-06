@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -9,7 +10,8 @@ using Microsoft.Extensions.Logging;
 
 namespace MojeVlastniStranka.Web.Areas.Identity.Pages.Account.Manage
 {
-    public class Disable2faModel : PageModel
+	[Authorize]
+	public class Disable2faModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<Disable2faModel> _logger;
