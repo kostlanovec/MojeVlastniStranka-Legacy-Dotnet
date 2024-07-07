@@ -378,7 +378,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
             var currentDirectory = Directory.GetCurrentDirectory();
             var modifiedPath = Path.Combine(currentDirectory.Substring(0, currentDirectory.LastIndexOf("Admin")), "Web", "wwwroot");
 
-            var uploadsDirectory = modifiedPath + "\\images\\blog";
+            var uploadsDirectory = currentDirectory + "\\wwwroot\\images\\blog";
 			var filePath = Path.Combine(uploadsDirectory, file.FileName);
 
 			if (!Directory.Exists(uploadsDirectory))
