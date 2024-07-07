@@ -19,8 +19,6 @@ namespace MojeVlastniStrankaFinanali.Web
                     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")),
                 ServiceLifetime.Scoped);
 
-			/*	builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);*/
-
 			builder.Services.AddDefaultIdentity<User>(options =>
                 {
                     // Heslo nastavení.
@@ -36,14 +34,13 @@ namespace MojeVlastniStrankaFinanali.Web
                     options.Lockout.MaxFailedAccessAttempts = 5;
                     options.Lockout.AllowedForNewUsers = true;
 
-                    // Uživatelské nastavnení.
+                    // Uživatelské nastavení.
                     options.User.AllowedUserNameCharacters =
                         "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                     options.User.RequireUniqueEmail = false;
                 })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<DataContext>();
-
 
             builder.Services.ConfigureApplicationCookie(options =>
             {
@@ -91,22 +88,19 @@ namespace MojeVlastniStrankaFinanali.Web
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
+            app.MapControllerRoute(
+                name: "blog",
+                pattern: "blog/{Slug}",
+                defaults: new { controller = "ShowBlogPost", action = "Blog" });
 
-                app.MapControllerRoute(
-                    name: "blog",
-                    pattern: "blog/{Slug}",
-                    defaults: new { controller = "ShowBlogPost", action = "Blog" });
+             app.MapControllerRoute(
+                 name: "projekty",
+                 pattern: "projekty/{Slug}",
+                 defaults: new { controller = "Projekty", action = "ShowProject" });
 
-
-                app.MapControllerRoute(
-                    name: "projekty",
-                    pattern: "projekty/{Slug}",
-                    defaults: new { controller = "Projekty", action = "ShowProject" });
-
-                app.MapControllerRoute(
+             app.MapControllerRoute(
                 name: "api",
                 pattern: "api/{controller}/{action}/{id?}");
-
 
             app.Run();
         }

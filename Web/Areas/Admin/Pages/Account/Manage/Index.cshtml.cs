@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +13,7 @@ namespace MojeVlastniStranka.Web.Areas.Identity.Pages.Account.Manage
         private readonly SignInManager<DataAccess.Entities.User> _signInManager;
 
         public IndexModel(
-            UserManager<DataAccess.Entities.Userr> userManager,
+            UserManager<DataAccess.Entities.User> userManager,
             SignInManager<DataAccess.Entities.User> signInManager)
         {
             _userManager = userManager;

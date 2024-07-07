@@ -34,12 +34,15 @@
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Nastavení účtu</a>
                 <div class="dropdown-menu bg-transparent border-0">
-                    <a asp-area="Admin" asp-page="/Settings/Email" class="dropdown-item">Změna emailu</a>
-                    <a asp-page="/Settings/ChangePassword" class="dropdown-item">Změna hesla</a>
-                    <a asp-page="/Settings/TwoFactorAuthentication" class="dropdown-item">Dvoufázové ověření</a>
-                    <a asp-page="/Settings/PersonalData" class="dropdown-item">Osobní údaje</a>
+                    <a asp-area="Admin" asp-page="/Account/Manage/Email" class="dropdown-item">Změna emailu</a>
+                    <a asp-area="Admin" asp-page="/Account/Manage/SetPassword" class="dropdown-item">Změna hesla</a>
+                    <a asp-area="Admin" asp-page="/Account/Manage/TwoFactorAuthentication" class="dropdown-item">Dvoufázové ověření</a>
+                    <a asp-area="Admin" asp-page="/Account/Manage/PersonalData" class="dropdown-item">Osobní údaje</a>
+                    <a asp-area="Admin" asp-page="/Account/Manage/EnableAuthenticator" class="dropdown-item">Povolení autenticátoru</a>
+                    <a asp-area="Admin" asp-page="/Account/Manage/ExternalLogins" class="dropdown-item">Externí přihlášení</a>
                 </div>
             </div>
+
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Účty</a>
                 <div class="dropdown-menu bg-transparent border-0">

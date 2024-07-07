@@ -28,8 +28,42 @@ h2 {
 	font-size: 1.7em;
 }
 
-h3 {
+p{
+	color: var(--white);
+}
+
+.center__text {
+	text-align: center;
+}
+
+.contact__form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+h3, .service--price {
 	font-size: 1.4em;
+}
+
+.header--index {
+	text-align: center;
+}
+
+.figure__blog__div {
+	text-align: center;
+}
+
+ul {
+	padding: 0;
+}
+
+.serivce--price--div {
+	margin-top: 2em;
+}
+
+textarea {
+	resize: vertical;
 }
 
 button:hover {
@@ -39,7 +73,6 @@ button:hover {
 p {
 	margin: 0;
 	padding: 0;
-	color: var(--white);
 }
 
 img {
@@ -55,7 +88,7 @@ input[type="text"] {
 	min-height: 87vh;
 }
 
-.div--blog--articles{
+.div--blog--articles {
 	display: grid;
 	gap: 24px;
 }
@@ -79,8 +112,10 @@ input[type="text"] {
 	align-items: center;
 	text-decoration: none;
 }
-.form--text{
+
+.form--text {
 	margin-bottom: 2em;
+	text-align: center;
 }
 
 .social--image {
@@ -93,7 +128,6 @@ input[type="text"] {
 .social--text {
 	flex-grow: 1;
 	font-weight: bold;
-	text-align: left;
 }
 
 .contact__form > *:not(:first-child) {
@@ -105,7 +139,7 @@ input[type="text"] {
 	color: var(--darkblue);
 }
 
-.contact__form{
+.contact__form {
 	margin-bottom: 2em;
 }
 
@@ -121,34 +155,37 @@ input[type="text"] {
 	opacity: 0.7;
 }
 
-.zoom-effect{
+.zoom-effect {
 	transition: transform 0.3s;
 }
 
-.scrolling__article__a{
+.scrolling__article__a {
 	text-decoration: none;
 	color: var(--white);
 }
 
-.article--project{
+.white--a {
+	text-decoration: none;
+	color: var(--white);
+}
+
+.article--project {
 	position: relative;
 }
 
-.article--project__a{
+.article--project__a {
 	text-decoration: none;
 	color: var(--white);
 }
 
 .article--project__h3 {
 	position: absolute;
-	text-align: left;
 	bottom: 0;
 	margin: 1em
 }
 
 .ul__service {
 	list-style: none;
-	text-align: left;
 }
 
 .li--x::before {
@@ -183,11 +220,11 @@ input[type="text"] {
 	height: 20px;
 }
 
-.behind--dot:hover{
-	cursor: pointer;
-}
+	.behind--dot:hover {
+		cursor: pointer;
+	}
 
-.blog__h3{
+.blog__h3 {
 	margin: 0;
 }
 
@@ -201,7 +238,6 @@ input[type="text"] {
 
 .body {
 	background: linear-gradient(45deg, var(--darkblue) 0%, var(--purple) 100%);
-	text-align: center;
 	padding: 0;
 	margin: 0;
 }
@@ -216,6 +252,7 @@ input[type="text"] {
 .menu-list {
 	display: none;
 }
+
 .figure__blog {
 	display: flex;
 	flex-direction: column
@@ -230,6 +267,7 @@ input[type="text"] {
 	background-position: center;
 	background-repeat: no-repeat;
 	margin-top: 4em;
+	text-align: center;
 }
 
 .arrow--project {
@@ -243,14 +281,14 @@ input[type="text"] {
 	transform: rotate(-90deg);
 }
 
-.arrow--project:hover{
-	cursor: pointer;
-	opacity: 0.7;
-}
+	.arrow--project:hover {
+		cursor: pointer;
+		opacity: 0.7;
+	}
 
-.arrow--project.rotated {
-	transform: rotate(0deg);
-}
+	.arrow--project.rotated {
+		transform: rotate(0deg);
+	}
 
 .projects__section {
 	display: none;
@@ -294,11 +332,11 @@ input[type="text"] {
 	padding-top: 1em;
 }
 
-.nav > p {
-	z-index: 5;
-	align-self: center;
-	padding: 1em;
-}
+	.nav > p {
+		z-index: 5;
+		align-self: center;
+		padding: 1em;
+	}
 
 .absolute {
 	position: absolute;
@@ -313,7 +351,8 @@ input[type="text"] {
 .scrolling__container {
 	position: relative;
 }
-.scrolling__article--div{
+
+.scrolling__article--div {
 	position: absolute;
 	bottom: 0;
 	margin: 1em;
@@ -347,7 +386,6 @@ input[type="text"] {
 }
 
 .aboutme__Card {
-	text-align: left;
 	background: linear-gradient(45deg, var(--bluegradient--start--color) 0%, var(--bluegradient--end--color) 100%);
 	padding: 2dvh;
 	border-radius: 10px;
@@ -412,6 +450,7 @@ input[type="text"] {
 	border: none;
 	border-radius: 8px;
 	margin-top: 2em;
+	padding: 1em;
 }
 
 .h1--index {
@@ -432,9 +471,9 @@ input[type="text"] {
 	float: right;
 }
 
-.footer__last__element p:first-child {
-	margin-right: 1em;
-}
+	.footer__last__element p:first-child {
+		margin-right: 1em;
+	}
 
 .main {
 	margin-left: 35px;
@@ -447,17 +486,17 @@ input[type="text"] {
 	padding: 1em;
 }
 
-.textarea__form{
+.textarea__form {
 	width: 100%;
 	max-width: 448px;
 	padding: 1em;
 }
 
-.form--button{
+.form--button {
 	background-color: var(--bluediffrent);
 }
 
-.searchbar{
+.searchbar {
 	width: 100%;
 	max-width: 700px;
 	border-radius: 36px;
@@ -468,13 +507,13 @@ input[type="text"] {
 	display: flex;
 }
 
-.searchbar:focus {
-	outline: none;
-}
+	.searchbar:focus {
+		outline: none;
+	}
 
-.searchbar[type="text"] {
-	color: var(--white);
-}
+	.searchbar[type="text"] {
+		color: var(--white);
+	}
 
 .pagination {
 	display: flex;
@@ -498,17 +537,21 @@ input[type="text"] {
 	transition: transform 0.3s;
 }
 
-.scrolling__article:hover {
-	transform: scale(1.05);
-	z-index: 3;
+	.scrolling__article:hover {
+		transform: scale(1.05);
+		z-index: 3;
+	}
+
+.active {
+	background-color: blue;
 }
 
-.blog--a{
+.blog--a {
 	text-decoration: none;
 	color: var(--white);
 }
 
-.blog--a--other{
+.blog--a--other {
 	display: flex;
 	gap: 1em;
 }
@@ -524,23 +567,23 @@ input[type="text"] {
 	gap: 1em;
 }
 
-.blog--data:nth-child(2){
-	margin-top: auto;
-}
+	.blog--data:nth-child(2) {
+		margin-top: auto;
+	}
 
 .blog--a--other > * {
 	width: 50%;
 }
 
-.article--first--post{
+.article--first--post {
 	position: relative;
 }
 
-.blog__h2{
-	text-align:left;
+.blog__h2 {
+	text-align: left;
 }
 
-.blog__first__h3{
+.blog__first__h3 {
 	position: absolute;
 	bottom: 0;
 	margin: 1em;
@@ -555,16 +598,16 @@ input[type="text"] {
 	stroke-linejoin: round;
 }
 
-.hamburger svg use:nth-of-type(1) {
-	opacity: 1;
-	stroke-dashoffset: 221;
-	stroke-dasharray: 46 249;
-	transition: stroke-dashoffset .12s linear .2s, stroke-dasharray .12s linear .2s, opacity 0s linear .2s;
-}
+	.hamburger svg use:nth-of-type(1) {
+		opacity: 1;
+		stroke-dashoffset: 221;
+		stroke-dasharray: 46 249;
+		transition: stroke-dashoffset .12s linear .2s, stroke-dasharray .12s linear .2s, opacity 0s linear .2s;
+	}
 
-.hamburger svg use:nth-of-type(2) {
-	animation: stroke-animation-reverse 1.2s ease-out forwards;
-}
+	.hamburger svg use:nth-of-type(2) {
+		animation: stroke-animation-reverse 1.2s ease-out forwards;
+	}
 
 .hamburger.open svg use:nth-of-type(1) {
 	stroke-dashoffset: 175;
@@ -631,6 +674,17 @@ input[type="text"] {
 }
 
 @media screen and (min-width: 768px) {
+	.service--layout {
+		display: flex;
+	}
+
+		.service--layout > * {
+			width: 50%;
+		}
+
+	.input__form {
+		margin: 0;
+	}
 
 	.blog__first__h3 {
 		position: inherit;
@@ -730,13 +784,13 @@ input[type="text"] {
 	}
 
 	.figure__blog {
-		flex-direction: row;
+		flex-direction: row-reverse;
 	}
 
-	.figure__blog > img {
-		width: 50%;
-		height: auto;
-	}
+		.figure__blog > img {
+			width: 50%;
+			height: auto;
+		}
 
 	.figure__blog__div {
 		display: flex;
@@ -767,34 +821,33 @@ input[type="text"] {
 		position: relative;
 	}
 
-	.scrolling__article img {
-		width: 100%;
-		height: auto;
-		display: block;
-	}
+		.scrolling__article img {
+			width: 100%;
+			height: auto;
+			display: block;
+		}
 
-	.scrolling__article:nth-child(1) {
-		grid-column: span 5;
-	}
+		.scrolling__article:nth-child(1) {
+			grid-column: span 5;
+		}
 
-	.scrolling__article:nth-child(2) {
-		grid-column: span 3;
-	}
+		.scrolling__article:nth-child(2) {
+			grid-column: span 3;
+		}
 
-	.scrolling__article:nth-child(3),
-	.scrolling__article:nth-child(4) {
-		grid-column: span 4;
-	}
+		.scrolling__article:nth-child(3),
+		.scrolling__article:nth-child(4) {
+			grid-column: span 4;
+		}
 
-	.scrolling__article:nth-child(5) {
-		grid-column: span 3;
-	}
+		.scrolling__article:nth-child(5) {
+			grid-column: span 3;
+		}
 
 	.swiper-slide {
 		max-width: 1300px;
 	}
 }
-
 
 @media screen and (max-width: 767px) {
 	.scrolling__article {
@@ -832,8 +885,15 @@ input[type="text"] {
 	}
 }
 
-
 @media screen and (min-width: 1370px) {
+
+	.header-service {
+		display: flex;
+	}
+
+		.header-service > * {
+			width: 50%;
+		}
 
 	.header--index {
 		height: 100vh;
@@ -867,10 +927,10 @@ input[type="text"] {
 		gap: 10px;
 	}
 
-	.div--blog--articles > * {
-		grid-column: span 5;
-		grid-row: span 2;
-	}
+		.div--blog--articles > * {
+			grid-column: span 5;
+			grid-row: span 2;
+		}
 
 
 	.article--first--post {

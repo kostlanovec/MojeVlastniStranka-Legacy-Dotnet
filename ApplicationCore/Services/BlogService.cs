@@ -161,7 +161,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			return result;
 		}
 
-
 		/// <summary>
 		/// Získá tři blog příspěvky pro hlavní stránku.
 		/// </summary>
@@ -376,7 +375,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		private async Task<string> UploadImageAsync(IFormFile file)
 		{
             var currentDirectory = Directory.GetCurrentDirectory();
-            var modifiedPath = Path.Combine(currentDirectory.Substring(0, currentDirectory.LastIndexOf("Admin")), "Web", "wwwroot");
 
             var uploadsDirectory = currentDirectory + "\\wwwroot\\images\\blog";
 			var filePath = Path.Combine(uploadsDirectory, file.FileName);
