@@ -40,7 +40,7 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
         public async Task<ActionResult> OnPostAddCategoryAsync(string CategoryNameAdd)
         {
 	        // Zde přistupujte k vaší službě pro přidání kategorie
-	        var result = await blogService.AddBlogCategory(CategoryNameAdd);
+	        await blogService.AddBlogCategory(CategoryNameAdd);
 
 	        BlogCategory = await blogService.GetAllCategoriesTask();
 	        return Page();
@@ -52,10 +52,8 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
         public async Task<ActionResult> OnPostDeleteCategoryAsync(Guid Id)
         {
 	        BlogCategory = await blogService.GetAllCategoriesTask();
-
-		    return Page();
 	        
-			var result = await blogService.DeleteBlogCategory(Id);
+			await blogService.DeleteBlogCategory(Id);
 
 			return Page();
         }

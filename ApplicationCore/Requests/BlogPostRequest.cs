@@ -81,7 +81,7 @@ namespace MojeVlastniStranka.ApplicationCore.Requests
 		/// <summary>
 		/// Vrací nebo nastavuje Id kategorie.
 		/// </summary>
-		public Guid BlogCategoryId
+		public Guid? BlogCategoryId
 		{
 			get;
 			set;
@@ -90,7 +90,7 @@ namespace MojeVlastniStranka.ApplicationCore.Requests
 		/// <summary>
 		/// Url cesta k obrázku.
 		/// </summary>
-		public IFormFile? FileUpload
+		public IFormFile FileUpload
 		{
 			get;
 			set;

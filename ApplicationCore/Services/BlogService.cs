@@ -330,34 +330,40 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
 		}
 
-		/// <summary>
-		/// Smazání blog kategorie podle jeho id.
-		/// </summary>
-		/// <param name="BlogCategoryId">Smazání blog kategorie.</param>
-		public async Task<FormProcessingResult> DeleteBlogCategory(Guid BlogCategoryId)
+        /// <summary>
+        /// Smazání blog kategorie podle jeho id.
+        /// </summary>
+        /// <param name="BlogCategoryId">Smazání blog kategorie.</param>
+        public async Task<FormProcessingResult> DeleteBlogCategory(Guid BlogCategoryId)
         {
-			var formProcessingResult = new FormProcessingResult();
-			var existingBlogCategory = await context.BlogCategories.SingleOrDefaultAsync(bp => bp.Id == BlogCategoryId);
-			// Blog 1 je takzvaně neučitý
-				var existingAllBlogWithDeleteBlogCategory = context.BlogPosts.Where(bp => bp.BlogCategoryId == BlogCategoryId);
+            var formProcessingResult = new FormProcessingResult();
+            var existingBlogCategory = await context.BlogCategories.SingleOrDefaultAsync(bp => bp.Id == BlogCategoryId);
 
-				if (existingAllBlogWithDeleteBlogCategory.Any())
-				{
-					foreach (var blogPost in existingAllBlogWithDeleteBlogCategory)
-					{
-						blogPost.BlogCategoryId = Guid.Empty;
-					}
-				}
+            if (existingBlogCategory != null)
+            {
+                // Najít všechny blogy, které patří do kategorie, která má být smazána
+                var existingAllBlogWithDeleteBlogCategory = context.BlogPosts.Where(bp => bp.BlogCategoryId == BlogCategoryId);
 
-				context.Remove(existingBlogCategory);
-				await context.SaveChangesAsync();
-			return formProcessingResult;
-		}
+                if (existingAllBlogWithDeleteBlogCategory.Any())
+                {
+                    foreach (var blogPost in existingAllBlogWithDeleteBlogCategory)
+                    {
+                        // Nastavit BlogCategoryId na null
+                        blogPost.BlogCategoryId = null;
+                    }
+                }
 
-		/// <summary>
-		/// Smaže blog příspěvek podle jeho Id.
-		/// </summary>
-		public async Task<FormProcessingResult> DeleteBlogPost(Guid BlogId)
+                context.Remove(existingBlogCategory);
+                await context.SaveChangesAsync();
+            }
+
+            return formProcessingResult;
+        }
+
+        /// <summary>
+        /// Smaže blog příspěvek podle jeho Id.
+        /// </summary>
+        public async Task<FormProcessingResult> DeleteBlogPost(Guid BlogId)
 		{
 			var formProcessingResult = new FormProcessingResult();
 			var existingBlog = await context.BlogPosts.SingleOrDefaultAsync(bp => bp.Id == BlogId);
