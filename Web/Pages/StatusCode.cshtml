@@ -5,14 +5,15 @@
 	ViewData["nofollow"] = true;
 }
 
-
-@if (Model.Code == 404)
-{
-	<h1>404 error</h1>
-	<p>Omlouváme se, ale náš server neumí cítit emoce, ale určité víme, že vás mrzí, že jste nenašli to, co jste hledali.</p>
-}
-else
-{
-	<h1>@Model.Code - Chyba</h1>
-	<p>Omlouváme se, ale došlo k chybě při zpracování vašeho požadavku.</p>
-}
+<main class="main">
+	@if (Model.Code == 404)
+	{
+		<h1>404 error</h1>
+		<p>Omlouváme se, ale náš server neumí cítit emoce, ale určité víme, že vás mrzí, že jste nenašli to, co jste hledali.</p>
+	}
+	else
+	{
+		<h1>@Model.Code - Chyba</h1>
+		<p>Omlouváme se, ale došlo k chybě při zpracování vašeho požadavku.</p>
+	}
+</main>
