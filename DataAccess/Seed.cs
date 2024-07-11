@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using MojeVlastniStranka.DataAccess.Entities;
-using MojeVlastniStranka.DataAccess.Enums;
+using MojeVlastniStranka.Common.Enums;
 
 namespace Reservanto.NPS.DataAccess
 {

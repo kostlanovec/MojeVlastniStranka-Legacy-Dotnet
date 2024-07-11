@@ -1,6 +1,6 @@
-﻿namespace MojeVlastniStranka.ApplicationCore.Enums
+﻿namespace MojeVlastniStranka.Common.Enums
 {
-	public enum ProjectStatusEnum
+	public enum ProjectStatus
 	{
 		/// <summary>
 		/// Projekt je plánovaný.

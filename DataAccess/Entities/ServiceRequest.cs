@@ -1,4 +1,4 @@
-﻿using MojeVlastniStranka.DataAccess.Enums;
+﻿using MojeVlastniStranka.Common.Enums;
 namespace MojeVlastniStranka.DataAccess.Entities
 {
 	public class ServiceRequest: IEntities

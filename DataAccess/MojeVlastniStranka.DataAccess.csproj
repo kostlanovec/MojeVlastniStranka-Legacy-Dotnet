@@ -20,4 +20,8 @@
     <PackageReference Include="System.Windows.Extensions" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Common\MojeVlastniStranka.Common.csproj" />
+  </ItemGroup>
+
 </Project>

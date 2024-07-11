@@ -1,4 +1,4 @@
-﻿using MojeVlastniStranka.DataAccess.Enums;
+﻿using MojeVlastniStranka.Common.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace MojeVlastniStranka.ApplicationCore.Dto

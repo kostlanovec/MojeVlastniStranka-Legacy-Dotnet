@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using MojeVlastniStranka.DataAccess.Enums;
+using MojeVlastniStranka.Common.Enums;
 
 namespace MojeVlastniStranka.DataAccess.Entities
 {

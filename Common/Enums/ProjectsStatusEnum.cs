@@ -1,6 +1,6 @@
-﻿namespace MojeVlastniStranka.DataAccess.Enums
+﻿namespace MojeVlastniStranka.Common.Enums
 {
-	public enum ProjectStatus
+	public enum ProjectStatusEnum
 	{
 		/// <summary>
 		/// Projekt je plánovaný.

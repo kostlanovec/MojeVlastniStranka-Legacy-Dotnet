@@ -1,7 +1,7 @@
 ﻿using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.DataAccess;
 using MojeVlastniStranka.DataAccess.Entities;
-using MojeVlastniStranka.DataAccess.Enums;
+using MojeVlastniStranka.Common.Enums;
 namespace MojeVlastniStranka.ApplicationCore.Services
 {
 	public class ServicesOfferedService

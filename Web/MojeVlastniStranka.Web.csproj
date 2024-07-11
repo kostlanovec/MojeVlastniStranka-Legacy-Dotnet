@@ -57,6 +57,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ApplicationCore\MojeVlastniStranka.ApplicationCore.csproj" />
+    <ProjectReference Include="..\Common\MojeVlastniStranka.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,4 +1,4 @@
-﻿namespace MojeVlastniStranka.DataAccess.Enums
+﻿namespace MojeVlastniStranka.Common.Enums
 {
 	public enum MainServiceEnum
 	{
