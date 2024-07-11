@@ -55,7 +55,7 @@
 			</article>
 		</section>
 	</div>
-	<div>
+	<div class="menu--blogposts">
 		<h2>Blog příspěvky</h2>
 		<div class="wrapper">
 			<div class="slide">
@@ -189,4 +189,42 @@
 	scrollContainer.addEventListener('mouseleave', function () {
 		isScrolling = false;
 	});
+
+	document.addEventListener('DOMContentLoaded', (event) => {
+		showDialog();
+	});
+
+	function showDialog() {
+		const dialog = document.getElementById('myDialog');
+		if (typeof dialog.showModal === "function") {
+			dialog.showModal();
+		} else {
+			alert("Dialog element is not supported in this browser.");
+		}
+	}
+
+	function closeDialog() {
+		document.getElementById('myDialog').close();
+	}
 </script>
+
+<style>
+	dialog {
+		border: none;
+		border-radius: 5px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		padding: 20px;
+	}
+
+	.btn-close {
+		background-color: #007bff;
+		color: white;
+		border: none;
+		padding: 10px 20px;
+		cursor: pointer;
+	}
+</style>
+<dialog id="myDialog">
+	<p>Zdravím, stránka je pořád ve vývoji. Ještě je to nehotová verze, ale budu rád za zpětnou vazbu.</p>
+	<button class="btn-close" onclick="closeDialog()">Zavřít</button>
+</dialog>

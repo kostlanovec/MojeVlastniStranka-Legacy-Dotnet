@@ -89,6 +89,10 @@ input[type="text"] {
 	gap: 24px;
 }
 
+.menu--blogposts{
+	margin-top: 5em;
+}
+
 .socials--buttons {
 	width: 100%;
 	display: flex;
@@ -126,7 +130,7 @@ input[type="text"] {
 }
 
 .contact__form > *:not(:first-child) {
-	margin-top: 1em;
+	margin-top: 0.5em;
 }
 
 .contact__form > * {
