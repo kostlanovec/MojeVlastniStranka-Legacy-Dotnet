@@ -1,5 +1,4 @@
-﻿using Google.Protobuf.Reflection;
-using MailKit.Net.Smtp;
+﻿using MailKit.Net.Smtp;
 using MimeKit;
 using MojeVlastniStranka.ApplicationCore.Requests;
 

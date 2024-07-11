@@ -52,7 +52,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
     <PackageReference Include="SimpleMvcSitemap" Version="4.0.1" />
   </ItemGroup>
 
@@ -61,6 +60,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\images\arrow.svg" />
+    <None Include="wwwroot\images\arrow_bottom--hover.svg" />
+    <None Include="wwwroot\images\arrow_bottom.svg" />
+    <None Include="wwwroot\images\blog\instagram.svg" />
+    <None Include="wwwroot\images\hamburgermenu.svg" />
+    <None Include="wwwroot\images\icons\discord.svg" />
+    <None Include="wwwroot\images\icons\emailikonka.svg" />
+    <None Include="wwwroot\images\icons\facebook.svg" />
+    <None Include="wwwroot\images\icons\instagram.svg" />
+    <None Include="wwwroot\images\icons\linkedin.svg" />
+    <None Include="wwwroot\images\icons\megafon.svg" />
+    <None Include="wwwroot\images\icons\youtubee.svg" />
+    <None Include="wwwroot\images\react.svg" />
+    <None Include="wwwroot\images\sluzbyimages\application-coding-terminal-svgrepo-com.svg" />
+    <None Include="wwwroot\images\sluzbyimages\seo-graphic-thin-outline-in-a-circle-svgrepo-com.svg" />
+    <None Include="wwwroot\images\sluzbyimages\social-network-brand-svgrepo-com.svg" />
+    <None Include="wwwroot\images\sluzbyimages\website-program-svgrepo-com.svg" />
+    <None Include="wwwroot\images\website_image.svg" />
     <None Include="wwwroot\js\qr.js" />
     <None Include="wwwroot\lib\generatorqrcode\.gitignore" />
     <None Include="wwwroot\lib\generatorqrcode\index.svg" />
