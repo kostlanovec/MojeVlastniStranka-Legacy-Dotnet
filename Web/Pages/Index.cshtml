@@ -18,7 +18,7 @@
 			<button id="scrollBtn" aria-label="Šipka pro scrollování" class="arrow"></button>
 		</div>
 	</header>
-	<div id="target" class="services">
+	<div id="target" class="services reveal">
 		<h2>Nabízené služby</h2>
 		<section class="scrolling__container" id="scrollContainer">
 			<article class="scrolling__article">
@@ -55,7 +55,7 @@
 			</article>
 		</section>
 	</div>
-	<div class="menu--blogposts">
+	<div class="menu--blogposts reveal">
 		<h2>Blog příspěvky</h2>
 		<div class="wrapper">
 			<div class="slide">
@@ -77,7 +77,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="aboutme__Card">
+	<div class="aboutme__Card reveal">
 		<div class="aboutme__Card__images">
 			<img src="images/osobnifotka.png" alt="Blog">
 			<img class="megafone" src="images/icons/megafon.svg" aria-hidden="true" alt="Megafon">
@@ -91,7 +91,7 @@
 </main>
 
 
-<form class="form__newsletter" method="post">
+<form class="form__newsletter reveal" method="post">
 	<h2>Buď v obraze</h2>
 	<img class="email__ikonka" src="images/icons/emailikonka.svg" alt="Email ikona" aria-hidden="true">
 	<p>Chceš dostávat pravidelné newslettery o tom, co plánuji a co píšu. Nezapomeň vyplnit email.</p>
@@ -152,6 +152,21 @@
 				resetAutoAdvance();
 			});
 		});
+
+		const observer = new IntersectionObserver((entries, observer) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('visible');
+					observer.unobserve(entry.target);
+				}
+			});
+		}, { threshold: 0.1 });
+
+		const revealElements = document.querySelectorAll('.reveal');
+		revealElements.forEach(element => {
+			observer.observe(element);
+		});
+
 
 		document.getElementById("scrollBtn").addEventListener("click", function () {
 			const targetElement = document.getElementById("target");

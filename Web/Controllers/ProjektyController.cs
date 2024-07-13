@@ -3,7 +3,7 @@ using MojeVlastniStranka.DataAccess;
 
 namespace MojeVlastniStranka.Web.Controllers
 {
-    public class ProjektyController : Controller
+    public class ProjektyController : BaseController
     {
 	    private readonly DataContext context;
 

@@ -7,7 +7,7 @@ using AspNetCore.SEOHelper.Sitemap;
 
 namespace MojeVlastniStranka.Web.Controllers
 {
-    public class SitemapController : Controller
+    public class SitemapController : BaseController
     {
         private readonly DataContext context;
 
@@ -26,7 +26,7 @@ namespace MojeVlastniStranka.Web.Controllers
                 foreach (SitemapNode sitemapNode in sitemapNodes)
                 {
                     XElement content = new XElement(xnamespace + "url",
-                        new XElement(xnamespace + "loc", Uri.EscapeUriString(sitemapNode.Url)),
+                        new XElement(xnamespace + "loc", Uri.EscapeDataString(sitemapNode.Url)),
                         !sitemapNode.LastModified.HasValue ? null : new XElement(xnamespace + "lastmod", sitemapNode.LastModified.Value.ToLocalTime().ToString("yyyy-MM-ddTHH:mm:sszzz")),
                         !sitemapNode.Frequency.HasValue ? null : new XElement(xnamespace + "changefreq", sitemapNode.Frequency.Value.ToString().ToLowerInvariant()),
                         !sitemapNode.Priority.HasValue ? null : new XElement(xnamespace + "priority", sitemapNode.Priority.Value.ToString("F1", CultureInfo.InvariantCulture))
@@ -92,12 +92,6 @@ namespace MojeVlastniStranka.Web.Controllers
                     Frequency = SitemapFrequency.Always,
                     Priority = 0.8
                 },
-                new()
-                {
-                    Url = "https://kostlanovec.cz/galerie",
-                    Frequency = SitemapFrequency.Monthly,
-                    Priority = 0.6
-                }
             };
 
             var blogPosts = context.BlogPosts.ToList();

@@ -3,7 +3,7 @@ using MojeVlastniStranka.DataAccess;
 
 namespace MojeVlastniStranka.Web.Controllers
 {
-	public class ShowBlogPostController : Controller
+	public class ShowBlogPostController : BaseController
 	{
 		private readonly DataContext context;
 

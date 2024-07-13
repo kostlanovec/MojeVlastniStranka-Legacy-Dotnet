@@ -586,7 +586,6 @@ input[type="text"] {
 	margin: 1em;
 }
 
-
 .hamburger svg {
 	fill: none;
 	stroke: var(--white);
@@ -624,6 +623,17 @@ input[type="text"] {
 
 .menu.open {
 	background-color: var(--darkblue);
+}
+
+.reveal {
+	opacity: 0;
+	transform: translateY(20px);
+	transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.visible {
+	opacity: 1;
+	transform: translateY(0);
 }
 
 @keyframes stroke-animation {
@@ -857,6 +867,7 @@ input[type="text"] {
 		margin-top: 1em;
 		padding: 1em;
 		width: 100%;
+		align-items: center;
 	}
 
 	.menu-list {

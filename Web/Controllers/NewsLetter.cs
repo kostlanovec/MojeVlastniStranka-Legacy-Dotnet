@@ -3,7 +3,7 @@ using MojeVlastniStranka.ApplicationCore.Services;
 
 namespace MojeVlastniStranka.Web.Controllers
 {
-	public class NewsLetter : Controller
+	public class NewsLetter : BaseController
 	{
 		private readonly MailService mailService;
 
