@@ -16,7 +16,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		public async Task AddServiceRequestAsync(ServiceRequestDto serviceRequestDto)
 		{
 			var serviceRequest = ServiceRequest.Create(
-				Guid.NewGuid(),
 				MainServiceEnum.Website,
 				serviceRequestDto.SubService,
 				serviceRequestDto.Email,

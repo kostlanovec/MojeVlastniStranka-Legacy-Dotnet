@@ -41,7 +41,6 @@ namespace MojeVlastniStranka.DataAccess
 		public DbSet<Message> Messages { get; set; }
 		public DbSet<ServiceRequest> ServiceRequests { get; set; }
 		public DbSet<NewsLetter> NewsLetters { get; set; }
-
 		public DbSet<UserSubscriptionNewsLetter> UserSubscriptionsNewsLetter{get; set;}
 		#endregion
 	}

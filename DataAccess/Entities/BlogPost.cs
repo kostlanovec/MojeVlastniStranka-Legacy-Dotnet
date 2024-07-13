@@ -116,12 +116,12 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			set;
 		}
 
-		public static BlogPost Create(Guid id, string description, string content, string title, string author, string keywords, Guid? blogCategoryId, string name, string imagePath, string slug, DateTime date)
+		public static BlogPost Create(string description, string content, string title, string author, string keywords, Guid? blogCategoryId, string name, string imagePath, string slug, DateTime date)
 		{
 			var blogPost = new BlogPost()
 			{
-				Id = id,
-				Description = description,
+                Id = Guid.NewGuid(),
+                Description = description,
 				Content = content,
 				Title = title,
 				Author = author,

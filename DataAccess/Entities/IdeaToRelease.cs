@@ -38,11 +38,11 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		///  Vytváří instanci <see cref="ContactForm"/> Vhodný pro uložení do databáze.
 		/// </summary>
-		public static IdeaToRelease Create(Guid id, string idea, DateTime datePosted)
+		public static IdeaToRelease Create(string idea, DateTime datePosted)
 		{
 			var ideaToRelease = new IdeaToRelease()
 			{
-				Id = id,
+				Id = Guid.NewGuid(),
 				Idea = idea,
 				DatePosted = datePosted
 			};

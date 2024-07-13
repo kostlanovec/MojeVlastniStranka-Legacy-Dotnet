@@ -107,12 +107,12 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			set;
 		}
 
-		public static Project Create(Guid id, string descriptions, string content, string title, string keywords, string name, string imagePath, string slug, DateTime date, ProjectStatus projectStatus)
+		public static Project Create(string descriptions, string content, string title, string keywords, string name, string imagePath, string slug, DateTime date, ProjectStatus projectStatus)
 		{
 			var blogCategory = new Project()
 			{
-				Id = id,
-				Description = descriptions,
+                Id = Guid.NewGuid(),
+                Description = descriptions,
 				Content = content,
 				Title = title,
 				Keywords = keywords,

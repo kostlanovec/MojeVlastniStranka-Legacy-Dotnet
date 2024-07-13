@@ -32,11 +32,11 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// </summary>
         public ICollection<BlogPost> BlogPosts { get; set; }
 
-        public static BlogCategory Create(Guid id, string name)
+        public static BlogCategory Create(string name)
         {
             var blogCategory = new BlogCategory()
             {
-                Id = id,
+                Id = Guid.NewGuid(),
                 Name = name
             };
 

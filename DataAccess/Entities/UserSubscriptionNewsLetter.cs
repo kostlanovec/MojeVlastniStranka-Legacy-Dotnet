@@ -35,11 +35,11 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			set;
 		}
 
-        public static UserSubscriptionNewsLetter Create(Guid id, string email, string hastag)
+        public static UserSubscriptionNewsLetter Create(string email, string hastag)
         {
             var userSubscriptionNewsLetter = new UserSubscriptionNewsLetter()
             {
-                Id = id,
+                Id = Guid.NewGuid(),
                 email = email,
                 Hastag = hastag
             };

@@ -64,12 +64,12 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		///  Vytváří instanci <see cref="ContactForm"/> Vhodný pro uložení do databáze.
 		/// </summary>
-		public static ContactForm Create(Guid id, string email, string? phoneNumber, string message, DateTime date)
+		public static ContactForm Create(string email, string? phoneNumber, string message, DateTime date)
 		{
 			var contactForm = new ContactForm()
 			{
-				Id = id,
-				Email = email,
+                Id = Guid.NewGuid(),
+                Email = email,
 				PhoneNumber = phoneNumber,
 				Message = message,
 				Date = date

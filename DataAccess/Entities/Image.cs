@@ -35,11 +35,11 @@ namespace MojeVlastniStranka.DataAccess.Entities
         [Column(TypeName = "nvarchar(1000)")]
         public string Description { get; set; }
 
-        public static Image Create(Guid id, string fileName, string description)
+        public static Image Create(string fileName, string description)
         {
             var image = new Image()
             {
-                Id = id,
+                Id = Guid.NewGuid(),
                 FileName = fileName,
                 Description = description
             };

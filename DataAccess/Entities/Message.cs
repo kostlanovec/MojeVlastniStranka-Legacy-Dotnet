@@ -47,11 +47,11 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		///  Vytváří instanci <see cref="NewsLetter"/> Vhodný pro uložení do databáze.
 		/// </summary>
-		public static Message Create(Guid id, DateTime timePublish, string shortMessage, string longMessage)
+		public static Message Create(DateTime timePublish, string shortMessage, string longMessage)
 		{
 			var message = new Message()
 			{
-				Id = id,
+                Id = Guid.NewGuid(),
 				TimePublish = timePublish,
 				ShortMessage = shortMessage,
 				LongMessage = longMessage

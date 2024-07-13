@@ -37,12 +37,12 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		///  Vytváří instanci <see cref="NewsLetter"/> Vhodný pro uložení do databáze.
 		/// </summary>
-		public static ImportantNotification Create(Guid id, DateTime timePublish, string shortMessage)
+		public static ImportantNotification Create(DateTime timePublish, string shortMessage)
 		{
 			var notification = new ImportantNotification()
 			{
-				Id = id,
-				TimePublish = timePublish,
+                Id = Guid.NewGuid(),
+                TimePublish = timePublish,
 				ShortMessage = shortMessage
 			};
 

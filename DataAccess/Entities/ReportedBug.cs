@@ -42,12 +42,12 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			set;
 		}
 
-		public static ReportedBug Create(Guid id, string url, string bug, DateTime datePosted)
+		public static ReportedBug Create(string url, string bug, DateTime datePosted)
 		{
 			var reportedBug = new ReportedBug()
 			{
-				Id = id,
-				Url = url,
+                Id = Guid.NewGuid(),
+                Url = url,
 				Bug = bug,
 				DatePosted = datePosted
 			};

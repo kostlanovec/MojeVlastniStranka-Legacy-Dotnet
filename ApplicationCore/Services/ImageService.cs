@@ -39,7 +39,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
                 await addImageRequest.FileUpload.CopyToAsync(fileStream);
             }
 
-            var image = Image.Create(Guid.NewGuid(), Path.Combine( addImageRequest.FileUpload.FileName), addImageRequest.Description);
+            var image = Image.Create(Path.Combine( addImageRequest.FileUpload.FileName), addImageRequest.Description);
             this.context.Images.Add(image);
             await this.context.SaveChangesAsync();
         }

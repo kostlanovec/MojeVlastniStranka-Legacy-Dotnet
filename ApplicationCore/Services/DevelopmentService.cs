@@ -19,7 +19,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// </summary>
 		public async Task<bool> AddIdeaToRelease(IdeaToReleaseRequest ideaToReleaseRequest)
 		{
-			var addingIdeaToRel = IdeaToRelease.Create(Guid.NewGuid(), ideaToReleaseRequest.Idea, DateTime.Now);
+			var addingIdeaToRel = IdeaToRelease.Create(ideaToReleaseRequest.Idea, DateTime.Now);
 
 			context.IdeaToReleases.Add(addingIdeaToRel);
 			context.SaveChangesAsync();
@@ -31,7 +31,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// </summary>
 		public async Task<bool> ReportBug(ReportedBugRequest reporetedBug)
 		{
-			var bug = ReportedBug.Create(Guid.NewGuid(), reporetedBug.Url, reporetedBug.Bug, DateTime.Now);
+			var bug = ReportedBug.Create(reporetedBug.Url, reporetedBug.Bug, DateTime.Now);
 			context.ReportedBugs.Add(bug);
 			context.SaveChangesAsync();
 			return true;

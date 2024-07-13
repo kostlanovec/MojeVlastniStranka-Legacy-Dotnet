@@ -33,11 +33,11 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			set;
 		}
 
-        public static BugReport Create(Guid id, string url, string report)
+        public static BugReport Create(string url, string report)
         {
             var bugReport = new BugReport()
             {
-                Id = id,
+                Id = Guid.NewGuid(),
                 Url = url,
                 Report = report
             };

@@ -38,7 +38,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
                 imagePath = await UploadImageAsync(blogPostRequest.FileUpload);
             }
 			var blogPost = BlogPost.Create(
-				Guid.NewGuid(),
 				blogPostRequest.Description,
 				blogPostRequest.Content,
 				blogPostRequest.Title,
@@ -322,7 +321,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
 			if (blogCategoryExist == null)
 			{
-				var newCategory = BlogCategory.Create(Guid.NewGuid(), CategoryNameAdd);
+				var newCategory = BlogCategory.Create(CategoryNameAdd);
 				context.BlogCategories.Add(newCategory);
 				await context.SaveChangesAsync();
 			}

@@ -20,7 +20,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		public void AddForm(ContactFormularDto contactForm)
 		{
 			var contactformular = ContactForm.Create(
-				Guid.NewGuid(),
 				contactForm.Email,
 				contactForm.PhoneNumber,
 				contactForm.Message,
