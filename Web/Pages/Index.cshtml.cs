@@ -10,12 +10,17 @@ namespace MojeVlastniStranka.Web.Pages
     {
 		private readonly DataContext context;
 		private readonly BlogService blogService;
+		private readonly MailService mailService;
 
 		public List<BlogPostSummary> Posts { get; set; }
-		public IndexModel(DataContext context, BlogService blogService)
+
+		[BindProperty]
+		public string email { get; set; }
+		public IndexModel(DataContext context, BlogService blogService, MailService mailService)
 		{
 			this.context = context;
 			this.blogService = blogService;
+			this.mailService = mailService;
 		}
 
 		public async Task OnGetAsync()
@@ -23,10 +28,10 @@ namespace MojeVlastniStranka.Web.Pages
 			Posts = await blogService.GetThreePost();
 		}
 
-		[HttpPost]
 		public async Task OnPostAsync()
 		{
 			Posts = await blogService.GetThreePost();
+			mailService.AddEmailForNewsLetter(email);
 		}
 	}
 }

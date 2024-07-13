@@ -13,7 +13,11 @@ namespace MojeVlastniStrankaFinanali.Web
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+#if Debug
+            builder.Configuration.AddJsonFile("appsettings.Development.json", optional: false, reloadOnChange: true);
+#elif Release
+            builder.Configuration.AddJsonFile("appsettings.Production.json", optional: false, reloadOnChange: true);
+#endif
 
             builder.Services.AddDbContext<DataContext>(options =>
                     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")),

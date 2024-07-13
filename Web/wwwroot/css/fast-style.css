@@ -675,9 +675,9 @@ input[type="text"] {
 		display: flex;
 	}
 
-		.service--layout > * {
-			width: 50%;
-		}
+	.service--layout > * {
+		width: 50%;
+	}
 
 	.input__form{
 		margin:0;
@@ -847,12 +847,6 @@ input[type="text"] {
 }
 
 @media screen and (max-width: 767px) {
-	.scrolling__article {
-		display: inline-block;
-		width: calc(50% - 10px);
-		vertical-align: top;
-		margin-left: 35px;
-	}
 
 	.menu-list.open {
 		display: flex;
@@ -876,7 +870,7 @@ input[type="text"] {
 
 	.scrolling__article {
 		display: inline-block;
-		width: calc(50% - 10px);
+		width: calc(80% - 10px);
 		margin-right: 10px;
 		vertical-align: top;
 	}

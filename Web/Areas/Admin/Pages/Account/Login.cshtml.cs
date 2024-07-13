@@ -93,6 +93,9 @@ namespace MojeVlastniStranka.Web.Areas.Identity.Pages.Account
                         return RedirectToPage("./Lockout");
                     }
                 }
+
+                _logger.LogInformation("Pokus o přihlášení {DT}",
+                    DateTime.UtcNow.ToLongTimeString());
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                 return Page();
             }

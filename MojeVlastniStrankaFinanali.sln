@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MojeVlastniStranka.Web", "W
 		{423EB7BC-0608-46D4-BEB2-94749BE90D15} = {423EB7BC-0608-46D4-BEB2-94749BE90D15}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MojeVlastniStranka.Common", "Common\MojeVlastniStranka.Common.csproj", "{981003D1-A7A4-4E69-BA9E-F6E7F56FC24B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MojeVlastniStranka.Common", "Common\MojeVlastniStranka.Common.csproj", "{981003D1-A7A4-4E69-BA9E-F6E7F56FC24B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

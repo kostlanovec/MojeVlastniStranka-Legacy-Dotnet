@@ -26,13 +26,13 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		}
 
 		/// <summary>
-		///  Vytváří instanci <see cref="NewsLetter"/> Vhodný pro uložení do databáze.
+		/// Vytváří instanci <see cref="NewsLetter"/> Vhodný pro uložení do databáze.
 		/// </summary>
-		public static NewsLetter Create(Guid id, string email)
+		public static NewsLetter Create(string email)
 		{
-			var newsLetter = new NewsLetter()
+			var newsLetter = new NewsLetter
 			{
-				Id = id,
+				Id = Guid.NewGuid(),
 				Email = email
 			};
 

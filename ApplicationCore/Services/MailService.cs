@@ -1,11 +1,21 @@
 ﻿using MailKit.Net.Smtp;
 using MimeKit;
 using MojeVlastniStranka.ApplicationCore.Requests;
+using MojeVlastniStranka.DataAccess.Entities;
+using MojeVlastniStranka.DataAccess;
 
 namespace MojeVlastniStranka.ApplicationCore.Services
 {
 	public class MailService
 	{
+
+		private readonly DataContext context;
+
+		public MailService(DataContext context)
+        {
+            this.context = context;
+        }
+
 		/// <summary>
 		/// Posílá newsletter.
 		/// </summary>
@@ -60,17 +70,23 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				{
 					client.Connect("mail.infifire.com", 465, true);
 				}
+
+				// todo čtení z jsonu
 				client.Authenticate("kostlan@kostlanovec.cz", "[REDACTED]");
 				client.Send(message);
 				client.Disconnect(true);
 			}
 		}
 
-		public void SendEmailForNewsLetter(string email)
+		/// <summary>
+		/// Přidá email pro newsletter.
+		/// </summary>
+		public void AddEmailForNewsLetter(string email)
 		{
-			// generate token and save to database with email
-			// send email with token
-			// user click on link with token
-		}
-	}
+            var newsLetterEmail = NewsLetter.Create(email);
+
+			context.NewsLetters.Add(newsLetterEmail);
+            context.SaveChanges();
+        }
+    }
 }

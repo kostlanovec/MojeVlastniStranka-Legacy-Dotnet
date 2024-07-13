@@ -20,7 +20,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		public void CreateMessage(string shortmessage)
 		{
 			var notification = Notification.Create(
-				Guid.NewGuid(), 
 				DateTime.Now,
 				shortmessage
 			);
