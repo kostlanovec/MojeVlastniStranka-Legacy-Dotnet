@@ -93,6 +93,10 @@ input[type="text"] {
 	margin-top: 5em;
 }
 
+.service__article{
+	margin-bottom: 5em;
+}
+
 .socials--buttons {
 	width: 100%;
 	display: flex;
@@ -635,6 +639,11 @@ input[type="text"] {
 	opacity: 1;
 	transform: translateY(0);
 }
+
+.footer__last__element > :first-child {
+	margin-right: 1em;
+}
+
 
 @keyframes stroke-animation {
 	0% {
