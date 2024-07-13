@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\images\sluzbyimages\**" />
+    <Content Remove="wwwroot\images\sluzbyimages\**" />
+    <EmbeddedResource Remove="wwwroot\images\sluzbyimages\**" />
+    <None Remove="wwwroot\images\sluzbyimages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\js\qr.js" />
     <Content Remove="wwwroot\lib\generatorqrcode\.gitignore" />
     <Content Remove="wwwroot\lib\generatorqrcode\index.svg" />
@@ -74,10 +81,6 @@
     <None Include="wwwroot\images\icons\megafon.svg" />
     <None Include="wwwroot\images\icons\youtubee.svg" />
     <None Include="wwwroot\images\react.svg" />
-    <None Include="wwwroot\images\sluzbyimages\application-coding-terminal-svgrepo-com.svg" />
-    <None Include="wwwroot\images\sluzbyimages\seo-graphic-thin-outline-in-a-circle-svgrepo-com.svg" />
-    <None Include="wwwroot\images\sluzbyimages\social-network-brand-svgrepo-com.svg" />
-    <None Include="wwwroot\images\sluzbyimages\website-program-svgrepo-com.svg" />
     <None Include="wwwroot\images\website_image.svg" />
     <None Include="wwwroot\js\qr.js" />
     <None Include="wwwroot\lib\generatorqrcode\.gitignore" />
