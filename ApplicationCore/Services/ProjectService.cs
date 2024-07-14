@@ -22,15 +22,12 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			return context.Projects.ToList();
 		}
 
-		/*
 		/// <summary>
-		/// Vrací nebo nastavuje projekty podle jeho statusu.
+		/// Vrací projekty podle jejich statusu.
 		/// </summary>
-		public async Task< List<Project>> GetProjectsByStatus(ProjectStatus status)
+		public async Task<List<Project>> GetProjectsByStatus(ProjectStatus status)
 		{
 			return context.Projects.Where(p => p.projectStatus == status).ToList();
-		}*/
-
-
+		}
 	}
 }
