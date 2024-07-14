@@ -25,7 +25,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			var result = new FormProcessingResult();
 			var validationResults = blogPostRequest.Validate(new ValidationContext(blogPostRequest)).ToList();
 
-            string imagePath = "images/default.jpg";
 			if (validationResults.Any())
 			{
 				result.IsSuccess = false;
@@ -33,10 +32,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				return result;
 			}
 
-            if (blogPostRequest.FileUpload != null)
-            {
-                imagePath = await UploadImageAsync(blogPostRequest.FileUpload);
-            }
+            string imagePath = await UploadImageAsync(blogPostRequest.FileUpload);
 			var blogPost = BlogPost.Create(
 				blogPostRequest.Description,
 				blogPostRequest.Content,
@@ -395,7 +391,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				await file.CopyToAsync(fileStream);
 			}
 
-			return ("images/blog/" + file.FileName);
+			return ("/images/blog/" + file.FileName);
 		}
 
 	}

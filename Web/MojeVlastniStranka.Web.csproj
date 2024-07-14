@@ -419,8 +419,4 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Pages\Project\" />
-  </ItemGroup>
-
 </Project>

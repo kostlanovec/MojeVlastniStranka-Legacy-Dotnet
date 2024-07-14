@@ -8,13 +8,13 @@
 }
 
 <main class="main">
-	<header class="header header--index">
+	<header class="header header--index reveal">
 		<figure class="header--figure">
 			<img class="header--figure--image" src="images/website_image.svg" alt="Kostlanovec">
 		</figure>
 		<div>
 			<h1>Jan Sebastián Kostlán</h1>
-			<p class="p--index">Tvůrce webů, her a student, který je zarytý "ajťák."</p>
+			<p class="p--index">Tvůrce webů, her, seo maestro a student, který je zarytým "ajťákem".</p>
 			<button id="scrollBtn" aria-label="Šipka pro scrollování" class="arrow"></button>
 		</div>
 	</header>
@@ -152,22 +152,6 @@
 				resetAutoAdvance();
 			});
 		});
-
-		const observer = new IntersectionObserver((entries, observer) => {
-			entries.forEach(entry => {
-				if (entry.isIntersecting) {
-					entry.target.classList.add('visible');
-					observer.unobserve(entry.target);
-				}
-			});
-		}, { threshold: 0.1 });
-
-		const revealElements = document.querySelectorAll('.reveal');
-		revealElements.forEach(element => {
-			observer.observe(element);
-		});
-
-
 		document.getElementById("scrollBtn").addEventListener("click", function () {
 			const targetElement = document.getElementById("target");
 			targetElement.scrollIntoView({ behavior: "smooth" });
@@ -240,6 +224,6 @@
 	}
 </style>
 <dialog id="myDialog">
-	<p>Zdravím, stránka je pořád ve vývoji. Ještě je to nehotová verze, ale budu rád za zpětnou vazbu.</p>
+	<p>Zdravím, stránka je pořád ve vývoji. Tohle není finální verze a dost věci se budu předělávat.</p>
 	<button class="btn-close" onclick="closeDialog()">Zavřít</button>
 </dialog>

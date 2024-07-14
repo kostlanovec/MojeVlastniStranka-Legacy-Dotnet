@@ -91,7 +91,7 @@
 </nav>
 @RenderBody()
 
-<footer class="footer">
+<footer class="footer reveal">
 	<p>2024 | Jan Sebastián Kostlán</p>
 	<div class="footer__last__element">
         <a class="white--a" asp-page="/gdpr">GDPR</a>
@@ -110,6 +110,20 @@
                 menu.classList.toggle('open', isOpen);
                 hamburger.classList.toggle('open', isOpen);
                 hamburger.setAttribute('aria-expanded', isOpen);
+            });
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            const revealElements = document.querySelectorAll('.reveal');
+            revealElements.forEach(element => {
+                observer.observe(element);
             });
         });
 

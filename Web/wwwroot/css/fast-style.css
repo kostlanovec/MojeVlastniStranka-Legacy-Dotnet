@@ -884,8 +884,9 @@ input[type="text"] {
 	}
 
 	.scrolling__container {
-		overflow-x: auto;
+		overflow-y: hidden;
 		white-space: nowrap;
+
 	}
 
 	.scrolling__article {
