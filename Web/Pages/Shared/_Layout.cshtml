@@ -27,9 +27,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewData["Title"] - Osobní stránka Jana Sebastiána Kostlána</title>
     <link rel="stylesheet" href="~/css/fast-style.css" asp-append-version="true" />
-    <meta name="description" content=@ViewData["Description"]>
-    <meta name="author" content=@ViewData["Author"]>
-    <meta name="keywords" content=@ViewData["Keywords"]>
+    <meta name="description" content="@ViewData["Description"]">
+    <meta name="author" content="@ViewData["Author"]">
+    <meta name="keywords" content="@ViewData["Keywords"]">
+
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -91,7 +92,7 @@
 </nav>
 @RenderBody()
 
-<footer class="footer reveal">
+<footer class="footer">
 	<p>2024 | Jan Sebastián Kostlán</p>
 	<div class="footer__last__element">
         <a class="white--a" asp-page="/gdpr">GDPR</a>

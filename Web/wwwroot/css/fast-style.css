@@ -919,10 +919,6 @@ input[type="text"] {
 		grid-template-columns: 1fr 1fr;
 	}
 
-	.p--index {
-		text-align: left;
-	}
-
 	.main {
 		max-width: 1300px;
 		margin: 0 auto;
