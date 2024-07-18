@@ -28,30 +28,12 @@
 	<div id="summernote"></div>
 	<button id="editSettingsBtn" class="btn btn-primary">Publikovat</button>
 </div>
-
-
- <style>
-	#settingsTable {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: rgba(0, 0, 0, 0.8);
-		z-index: 1030; 
-		display: none; 
-	}
-
-	#settingsForm {
-		padding: 20px;
-	}
-</style> 
 <div class="container d-flex justify-content-center">
 	<div id="settingsTable">
 		<div>
 			<div class="row">
-				<div class="col-md-4  mx-auto" style="margin-top:116px">
-					<form id="settingsForm" method="post" enctype="multipart/form-data">
+				<div class="col-md-4  mx-auto">
+					<form id="settingsForm" method="post" enctype="multipart/form-data" class="mt-2">
 						<h2>Vytvoření blog příspěvku.</h2>
 						<div class="form-group mt-2">
 							<label for="Name" class="text-white">Jméno blogu:</label>

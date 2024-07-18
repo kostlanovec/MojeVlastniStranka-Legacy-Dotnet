@@ -58,7 +58,6 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
             BlogCategory = await blogService.GetAllCategoriesTask();
         }
 
-		[HttpPost]
 		public async Task<IActionResult> OnPostUpdateBlogPostAsync()
 		{
 			EditBlogPostDto = await blogService.GetBlogPostById(Id);
@@ -79,7 +78,6 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
 
 		}
 
-		[HttpPost]
 		public async Task<ActionResult> OnPostDeleteBlogByIdAsync()
 		{
             EditBlogPostDto = await blogService.GetBlogPostById(Id);
