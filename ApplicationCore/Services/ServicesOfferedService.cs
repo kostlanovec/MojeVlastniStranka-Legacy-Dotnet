@@ -13,6 +13,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			this.context = context;
 		}
 
+		/// <summary>
+		/// Ukládá službu do databáze.
+		/// </summary>
 		public async Task AddServiceRequestAsync(ServiceRequestDto serviceRequestDto)
 		{
 			var serviceRequest = ServiceRequest.Create(
@@ -26,5 +29,13 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			context.ServiceRequests.Add(serviceRequest);
 			await context.SaveChangesAsync();
 		}
-	}
+
+		/// <summary>
+		/// Vrací list služeb.
+		/// </summary>
+        public List<ServiceRequest> getAllServicesRequests()
+        {
+            return context.ServiceRequests.ToList();
+        }
+    }
 }

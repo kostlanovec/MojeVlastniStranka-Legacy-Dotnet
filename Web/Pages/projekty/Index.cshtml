@@ -10,15 +10,15 @@
 }
 
 <main class="main main__project">
-    <h1>Projekty</h1>
-    <div class="projects__container">
+    <h1 class="reveal">Projekty</h1>
+    <div class="projects__container reveal">
         <button class="arrow--project" onclick="toggleSection('development-projects', this)"></button>
         <h2>Rozpracované projekty</h2>
     </div>
-    <section id="development-projects" class="projects__section">
+    <section id="development-projects" class="projects__section reveal">
         @foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatus.Development))
         {
-            <article class="article--project">
+            <article class="article--project zoom-effect">
                 <a class="article--project__a" href="/projekty/@project.Slug">
                     <img src="@project.ImagePath" alt="@project.Name" />
                     <h3 class="article--project__h3">@project.Name</h3>
@@ -28,11 +28,11 @@
             </article>
         }
     </section>
-    <div class="projects__container">
+    <div class="projects__container reveal">
         <button class="arrow--project" onclick="toggleSection('finalized-projects', this)"></button>
         <h2>Hotové projekty</h2>
     </div>
-    <section id="finalized-projects" class="projects__section">
+    <section id="finalized-projects" class="projects__section reveal">
         @foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatus.Finalized))
         {
             <article class="article--project">
@@ -44,11 +44,11 @@
             </article>
         }
     </section>
-    <div class="projects__container">
+    <div class="projects__container reveal">
         <button class="arrow--project" onclick="toggleSection('planning-projects', this)"></button>
         <h2>Plánované projekty</h2>
     </div>
-    <section id="planning-projects" class="projects__section">
+    <section id="planning-projects" class="projects__section reveal">
         @foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatus.Planning))
         {
             <article class="article--project">

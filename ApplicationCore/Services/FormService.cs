@@ -30,6 +30,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			context.SaveChanges();
 		}
 
+		/// <summary>
+		/// Vrací všechny formuláře, které někdo vyplnil.
+		/// </summary>
 		public List<ContactForm> GetAllForms()
 		{
 			return context.ContactForms.ToList();

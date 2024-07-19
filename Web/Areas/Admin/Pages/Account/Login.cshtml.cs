@@ -43,7 +43,7 @@ namespace MojeVlastniStranka.Web.Areas.Identity.Pages.Account
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
-            [Display(Name = "Remember me?")]
+            [Display(Name = "Pamatovat si mě?")]
             public bool RememberMe { get; set; }
         }
 
@@ -89,14 +89,14 @@ namespace MojeVlastniStranka.Web.Areas.Identity.Pages.Account
                     }
                     if (result.IsLockedOut)
                     {
-                        _logger.LogWarning("User account locked out.");
+                        _logger.LogWarning("Užívatel je deaktivovaný.");
                         return RedirectToPage("./Lockout");
                     }
                 }
 
                 _logger.LogInformation("Pokus o přihlášení {DT}",
                     DateTime.UtcNow.ToLongTimeString());
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                ModelState.AddModelError(string.Empty, "Neuúspěšné přihlášení.");
                 return Page();
             }
 

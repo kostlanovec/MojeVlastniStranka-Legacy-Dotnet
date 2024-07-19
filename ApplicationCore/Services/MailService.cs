@@ -16,12 +16,15 @@ namespace MojeVlastniStranka.ApplicationCore.Services
             this.context = context;
         }
 
+		// todo logování
+
 		/// <summary>
 		/// Posílá newsletter.
 		/// </summary>
 		public void SendMail(NewsLetterRequest newsLetterRequest)
 		{
 			var message = new MimeMessage();
+			// todo tohle předělat, možná číst z appsettings?
 			message.From.Add(new MailboxAddress("Jan Sebastián Kostlán", "kostlan@kostlanovec.cz"));
 			message.To.Add(new MailboxAddress("Jan Sebastián Kostlán", "info@kostlanovec.cz"));
 			message.Subject = newsLetterRequest.Subject;
@@ -31,20 +34,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				Text = newsLetterRequest.Body
 			};
 
-			using (var client = new SmtpClient())
-			{
-				try
-				{
-					client.Connect("mail.example.com", 587, false);
-				}
-				catch (Exception)
-				{
-					client.Connect("mail.infifire.com", 465, true);
-				}
-				client.Authenticate("kostlan@kostlanovec.cz", "[REDACTED]");
-				client.Send(message);
-				client.Disconnect(true);
-			}
+			Client(message, "", "");
 		}
 
 		public void SendVeritificationEmail()
@@ -58,8 +48,18 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			//{
 			//	Text = newsLetterRequest.Body
 			//};
-			
 
+			Client(message, "", "");
+		}
+
+		/// <summary>
+		/// Klient na připojení k webmailu a následného odeslání emailu s přihlášením.
+		/// </summary>
+		/// <param name="message">Zpráva</param>
+		/// <param name="email">emailová adresa.</param>
+		/// <param name="password">Heslo.</param>
+		private void Client(MimeMessage message, string email, string password)
+		{
 			using (var client = new SmtpClient())
 			{
 				try
