@@ -1,10 +1,13 @@
-﻿namespace MojeVlastniStranka.Common.Extension
+﻿using System.Globalization;
+
+namespace MojeVlastniStranka.Common.Extension
 {
     public static class CzechForrmatedDate
     {
         public static string ToCzechDate(this DateTime date)
         {
-            return date.ToString("dd.MM.yyyy");
+            var czechCulture = new CultureInfo("cs-CZ");
+            return date.ToString("dd.MM.yyyy", czechCulture);
         }
     }
 }

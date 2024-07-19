@@ -26,10 +26,10 @@ namespace MojeVlastniStranka.Web.Controllers
                 foreach (SitemapNode sitemapNode in sitemapNodes)
                 {
                     XElement content = new XElement(xnamespace + "url",
-                        new XElement(xnamespace + "loc", Uri.EscapeDataString(sitemapNode.Url)),
-                        !sitemapNode.LastModified.HasValue ? null : new XElement(xnamespace + "lastmod", sitemapNode.LastModified.Value.ToLocalTime().ToString("yyyy-MM-ddTHH:mm:sszzz")),
-                        !sitemapNode.Frequency.HasValue ? null : new XElement(xnamespace + "changefreq", sitemapNode.Frequency.Value.ToString().ToLowerInvariant()),
-                        !sitemapNode.Priority.HasValue ? null : new XElement(xnamespace + "priority", sitemapNode.Priority.Value.ToString("F1", CultureInfo.InvariantCulture))
+                        new XElement(xnamespace + "loc", sitemapNode.Url),
+                        sitemapNode.LastModified.HasValue ? new XElement(xnamespace + "lastmod", sitemapNode.LastModified.Value.ToString("yyyy-MM-ddTHH:mm:sszzz", CultureInfo.InvariantCulture)) : null,
+                        sitemapNode.Frequency.HasValue ? new XElement(xnamespace + "changefreq", sitemapNode.Frequency.Value.ToString().ToLowerInvariant()) : null,
+                        sitemapNode.Priority.HasValue ? new XElement(xnamespace + "priority", sitemapNode.Priority.Value.ToString("F1", CultureInfo.InvariantCulture)) : null
                     );
                     xelement.Add(content);
                 }
@@ -49,49 +49,48 @@ namespace MojeVlastniStranka.Web.Controllers
                     Frequency = SitemapFrequency.Monthly,
                     Priority = 1
                 },
-
-                new()
+                 new()
                 {
-					Url = "https://kostlanovec.cz/omne",
-					Frequency = SitemapFrequency.Monthly,
-					Priority = 0.9
-				},
-                new()
-                {
-                    Url = "https://kostlanovec.cz/sluzby/weby",
+                    Url = "https://kostlanovec.cz/kontakt",
                     Frequency = SitemapFrequency.Monthly,
                     Priority = 0.9
                 },
                 new()
                 {
-                    Url = "https://kostlanovec.cz/sluzby/aplikace",
-                    Frequency = SitemapFrequency.Monthly,
-                    Priority = 0.9
-                },
-                new()
-                {
-                    Url = "https://kostlanovec.cz/sluzby/socialnisite",
-                    Frequency = SitemapFrequency.Monthly,
-                    Priority = 0.9
-                },
-                new()
-                {
-                    Url = "https://kostlanovec.cz/sluzby/seo",
-                    Frequency = SitemapFrequency.Monthly,
+                    Url = "https://kostlanovec.cz/blog",
+                    Frequency = SitemapFrequency.Daily,
                     Priority = 0.9
                 },
                 new()
                 {
                     Url = "https://kostlanovec.cz/projekty",
+                    Frequency = SitemapFrequency.Weekly,
+                    Priority = 0.9
+                },
+                new()
+                {
+                    Url = "https://kostlanovec.cz/sluzby/webovestranky",
                     Frequency = SitemapFrequency.Monthly,
                     Priority = 0.8
                 },
                 new()
                 {
-                    Url = "https://kostlanovec.cz/blog",
-                    Frequency = SitemapFrequency.Always,
+                    Url = "https://kostlanovec.cz/sluzby/tvorbaher",
+                    Frequency = SitemapFrequency.Monthly,
                     Priority = 0.8
                 },
+                new()
+                {
+                    Url = "https://kostlanovec.cz/sluzby/socialnisite",
+                    Frequency = SitemapFrequency.Monthly,
+                    Priority = 0.8
+                },
+                new()
+                {
+                    Url = "https://kostlanovec.cz/sluzby/socialnisite",
+                    Frequency = SitemapFrequency.Monthly,
+                    Priority = 0.8
+                }
             };
 
             var blogPosts = context.BlogPosts.ToList();
