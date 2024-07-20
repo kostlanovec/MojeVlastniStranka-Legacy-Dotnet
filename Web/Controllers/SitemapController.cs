@@ -11,6 +11,7 @@ namespace MojeVlastniStranka.Web.Controllers
     {
         private readonly DataContext context;
 
+
         public SitemapController(DataContext context)
         {
             this.context = context;
@@ -73,15 +74,16 @@ namespace MojeVlastniStranka.Web.Controllers
                     Frequency = SitemapFrequency.Monthly,
                     Priority = 0.8
                 },
-                new()
+				  new()
+				{
+					Url = "https://kostlanovec.cz/sluzby/seo",
+					Frequency = SitemapFrequency.Monthly,
+					Priority = 0.8
+				},
+
+				new()
                 {
                     Url = "https://kostlanovec.cz/sluzby/tvorbaher",
-                    Frequency = SitemapFrequency.Monthly,
-                    Priority = 0.8
-                },
-                new()
-                {
-                    Url = "https://kostlanovec.cz/sluzby/socialnisite",
                     Frequency = SitemapFrequency.Monthly,
                     Priority = 0.8
                 },
@@ -93,6 +95,22 @@ namespace MojeVlastniStranka.Web.Controllers
                 }
             };
 
+            var projects = context.Projects.ToList();
+            foreach (var project in projects)
+            {
+                var url = $"{Request.Scheme}://{Request.Host}/projekty/{project.Slug}";
+
+                var node = new SitemapNode
+                {
+                    Url = url,
+                    LastModified = project.Date,
+                    Frequency = SitemapFrequency.Weekly,
+                    Priority = 0.7
+                };
+
+                nodes.Add(node);
+            }
+
             var blogPosts = context.BlogPosts.ToList();
             foreach (var post in blogPosts)
             {
@@ -103,7 +121,7 @@ namespace MojeVlastniStranka.Web.Controllers
                     Url = url,
                     LastModified = post.Date,
                     Frequency = SitemapFrequency.Always,
-                    Priority = 0.5
+                    Priority = 0.6
                 };
 
                 nodes.Add(node);
