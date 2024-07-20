@@ -20,6 +20,31 @@ figure {
 	box-sizing: border-box;
 }
 
+.figure__blog {
+	animation: slide-left 5s linear;
+	overflow: hidden;
+}
+
+@keyframes slide-left {
+	0% {
+		opacity: 0;
+	}
+
+	20% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+	90% {
+		transform: translateX(0);
+		opacity: 1;
+	}
+
+	100% {
+		transform: translateX(-50%);
+		opacity: 0;
+	}
+}
+
 h1 {
 	font-size: 3.5em;
 }
@@ -191,6 +216,8 @@ input[type="text"] {
 .ul__service {
 	list-style: none;
 	padding: 0;
+	font-size: 1.6em;
+	margin: auto;
 }
 
 .li--x::before {
@@ -355,6 +382,7 @@ input[type="text"] {
 .scrolling__container {
 	position: relative;
 }
+
 .scrolling__article--div{
 	position: absolute;
 	bottom: 0;
@@ -432,7 +460,6 @@ input[type="text"] {
 	position: absolute;
 	width: 50px;
 	transform: rotate( -27deg);
-	animation: fly-in 2s forwards;
 }
 
 .form__newsletter.visible .email__ikonka {
@@ -731,6 +758,33 @@ input[type="text"] {
 }
 
 @media screen and (min-width: 768px) {
+	.scrolling__article.visible {
+		opacity: 0;
+		transform: translateY(20px);
+		transition: opacity 0.4s ease, transform 0.4s ease;
+	}
+
+	.scrolling__article.visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	.scrolling__article.visible:nth-child(1) {
+		transition-delay: 0s;
+	}
+
+	.scrolling__article:nth-child(2){
+		transition-delay: 0.3s;
+	}
+
+	.scrolling__article:nth-child(3){
+		transition-delay: 0.6s;
+	}
+
+	.scrolling__article:nth-child(4){
+		transition-delay: 0.9s;
+	}
+
 	.service--layout {
 		display: flex;
 	}

@@ -15,7 +15,12 @@ namespace MojeVlastniStranka.Web.Pages
 		public List<BlogPostSummary> Posts { get; set; }
 
 		[BindProperty]
-		public string email { get; set; }
+		public string email
+		{
+			get;
+			set;
+		}
+
 		public IndexModel(DataContext context, BlogService blogService, MailService mailService)
 		{
 			this.context = context;

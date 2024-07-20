@@ -83,6 +83,12 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// </summary>
 		public void AddEmailForNewsLetter(string email)
 		{
+
+			bool emailExist = context.NewsLetters.Any(x => x.Email == email);
+			if (emailExist) {
+				return;
+			}
+
             var newsLetterEmail = NewsLetter.Create(email);
 
 			context.NewsLetters.Add(newsLetterEmail);
