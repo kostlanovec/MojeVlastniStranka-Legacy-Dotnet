@@ -5,6 +5,7 @@
     ViewData["Author"] = @Model.Author;
     ViewData["Keywords"] = @Model.Keywords;
     ViewData["Image"] = "https://kostlanovec.cz" + Model.ImagePath;
+    ViewData["SocialTitle"] = Model.Name;
 }
 <main class="main">
 @Html.Raw(Model.Content)
