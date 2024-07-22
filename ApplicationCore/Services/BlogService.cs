@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using MojeVlastniStranka.ApplicationCore.Dto;
+using MojeVlastniStranka.ApplicationCore.Dto.Blog;
+using MojeVlastniStranka.ApplicationCore.Dto.Project;
 using MojeVlastniStranka.ApplicationCore.Requests;
 using MojeVlastniStranka.DataAccess;
 using MojeVlastniStranka.DataAccess.Entities;
@@ -8,7 +10,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MojeVlastniStranka.ApplicationCore.Services
 {
-	public class BlogService
+    public class BlogService
 	{
 		private readonly DataContext context;
 
@@ -20,18 +22,8 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// <summary>
 		/// Přidání nového blog příspěvku.
 		/// </summary>
-		public async Task<FormProcessingResult> AddBlogPost(BlogPostRequest blogPostRequest)
+		public async Task AddBlogPost(BlogPostRequest blogPostRequest)
 		{
-			var result = new FormProcessingResult();
-			var validationResults = blogPostRequest.Validate(new ValidationContext(blogPostRequest)).ToList();
-
-			if (validationResults.Any())
-			{
-				result.IsSuccess = false;
-				result.Errors = validationResults;
-				return result;
-			}
-
             string imagePath = await UploadImageAsync(blogPostRequest.FileUpload);
 			var blogPost = BlogPost.Create(
 				blogPostRequest.Description,
@@ -48,8 +40,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
 			context.BlogPosts.Add(blogPost);
 			await context.SaveChangesAsync();
-			result.IsSuccess = true;
-			return result;
 		}
 
 		/// <summary>
@@ -395,4 +385,4 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		}
 
 	}
-	 }
+}

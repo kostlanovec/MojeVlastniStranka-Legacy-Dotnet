@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using MojeVlastniStranka.ApplicationCore.Dto;
+using MojeVlastniStranka.ApplicationCore.Dto.Blog;
 using MojeVlastniStranka.ApplicationCore.Requests;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
 
 namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
 {
-	[Authorize]
+    [Authorize]
 	public class WriteBlogModel : PageModel
 	{
 		private readonly DataContext context;
@@ -49,22 +49,9 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
 		public async Task<IActionResult> OnPost()
 		{
 			BlogCategory = await blogService.GetAllCategoriesTask();
-			var processingResult = await blogService.AddBlogPost(Input);
+			await blogService.AddBlogPost(Input);
 
-			if (processingResult.IsSuccess)
-			{
-				SuccessMessage = "Operace byla úspěšná.";
-
-				return Page();
-			}
-			else
-			{
-				foreach (var error in processingResult.Errors)
-				{
-					ModelState.AddModelError(string.Empty, error.ErrorMessage);
-				}
-				return Page();
-			}
+			return Page();
 		}
 	}
 }

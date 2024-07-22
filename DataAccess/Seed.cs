@@ -56,12 +56,12 @@ namespace Reservanto.NPS.DataAccess
             // Create and Seed Projects
             var projects = new List<Project>
             {
-                Project.Create("Description 1", "obsah", "Title 1", "Keywords 1", "Project 1", "/images/tvorbaher.jpg", "slug-1", DateTime.Now, ProjectStatus.Planning),
-                Project.Create("Description 2", "obsah", "Title 2", "Keywords 2", "Project 2", "/images/tvorbaher.jpg", "slug-2", DateTime.Now, ProjectStatus.Development),
-                Project.Create("Description 3", "obsah", "Title 3", "Keywords 3", "Project 3", "/images/tvorbaher.jpg", "slug-3", DateTime.Now, ProjectStatus.Finalized),
-                Project.Create("Description 4", "obsah", "Title 4", "Keywords 4", "Project 4", "/images/tvorbaher.jpg", "slug-4", DateTime.Now, ProjectStatus.Planning),
-                Project.Create("Description 5", "obsah", "Title 5", "Keywords 5", "Project 5", "/images/tvorbaher.jpg", "slug-5", DateTime.Now, ProjectStatus.Development),
-                Project.Create("Description 6", "obsah", "Title 6", "Keywords 6", "Project 6", "/images/tvorbaher.jpg", "slug-6", DateTime.Now, ProjectStatus.Finalized)
+                Project.Create("Description 1", "obsah", "Title 1", "Keywords 1", "Project 1", "/images/tvorbaher.jpg", "slug-1", DateTime.Now, ProjectStatusEnum.Planning),
+                Project.Create("Description 2", "obsah", "Title 2", "Keywords 2", "Project 2", "/images/tvorbaher.jpg", "slug-2", DateTime.Now, ProjectStatusEnum.Development),
+                Project.Create("Description 3", "obsah", "Title 3", "Keywords 3", "Project 3", "/images/tvorbaher.jpg", "slug-3", DateTime.Now, ProjectStatusEnum.Finalized),
+                Project.Create("Description 4", "obsah", "Title 4", "Keywords 4", "Project 4", "/images/tvorbaher.jpg", "slug-4", DateTime.Now, ProjectStatusEnum.Planning),
+                Project.Create("Description 5", "obsah", "Title 5", "Keywords 5", "Project 5", "/images/tvorbaher.jpg", "slug-5", DateTime.Now, ProjectStatusEnum.Development),
+                Project.Create("Description 6", "obsah", "Title 6", "Keywords 6", "Project 6", "/images/tvorbaher.jpg", "slug-6", DateTime.Now, ProjectStatusEnum.Finalized)
             };
 
             modelBuilder.Entity<Project>().HasData(projects);

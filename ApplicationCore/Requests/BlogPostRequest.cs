@@ -113,35 +113,5 @@ namespace MojeVlastniStranka.ApplicationCore.Requests
 			get;
 			set;
 		}
-
-
-		/// <summary>
-		/// Validace.
-		/// </summary>
-		public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-		{
-			// to-do validace, zda se jedna o html
-			if (Content == null)
-			{
-				yield return new ValidationResult(string.Format(Localization.Resource.ContactForm_Null_FirstName), new string[] { });
-			}
-
-			if (Description == null)
-			{
-				yield return new ValidationResult(string.Format(Localization.Resource.ContactForm_Null_LastName), new string[] { });
-			}
-
-			if (Title == null)
-			{
-				yield return new ValidationResult(string.Format(Localization.Resource.ContactForm_Null_Email), new string[] { });
-			}
-
-			if (Keywords == null)
-			{
-				yield return new ValidationResult(string.Format(Localization.Resource.ContactForm_Null_Email), new string[] { });
-
-			}
-
-		}
 	}
 }

@@ -6,6 +6,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 	public class IdeaToRelease: IEntities
 	{
 		protected IdeaToRelease() { }
+
 		/// <summary>
 		/// Vrací nebo nastavuje Id nápadu.
 		/// </summary>

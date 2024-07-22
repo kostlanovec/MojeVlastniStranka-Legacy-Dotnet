@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.RegularExpressions;
 
 namespace MojeVlastniStranka.ApplicationCore.Requests
 {
@@ -58,45 +57,6 @@ namespace MojeVlastniStranka.ApplicationCore.Requests
         {
 	        get;
 	        set;
-        }
-
-        /// <summary>
-        /// Validace
-        /// </summary>
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if (FirstName == null)
-            {
-                yield return new ValidationResult(string.Format(Localization.Resource.ContactForm_Null_FirstName), new string[] { });
-            }
-
-            if (LastName == null)
-            {
-                yield return new ValidationResult(string.Format(Localization.Resource.ContactForm_Null_LastName), new string[] { });
-            }
-
-            if (Email == null)
-            {
-                yield return new ValidationResult(string.Format(Localization.Resource.ContactForm_Null_Email), new string[] { });
-            }
-
-            else if (!new EmailAddressAttribute().IsValid(Email))
-            {
-                yield return new ValidationResult(string.Format(Localization.Resource.ContactForm_Bad_Email));
-            }
-
-			if (!new PhoneAttribute().IsValid(PhoneNumber) && !IsCzechPhoneNumber(PhoneNumber))
-			{
-				yield return new ValidationResult(string.Format(Localization.Resource.ContactForm_Bad_Phone));
-			}
-
-		}
-
-        private bool IsCzechPhoneNumber(string number)
-        {
-	        // Česká čísla mají 9 číslic a mohou začínat předvolbami +420 nebo 00420
-	        var regex = new Regex(@"^(\+420|00420)?\d{9}$");
-	        return regex.IsMatch(number);
         }
 	}
 }

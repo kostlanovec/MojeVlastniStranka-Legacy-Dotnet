@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using MojeVlastniStranka.DataAccess;
 
 namespace MojeVlastniStranka.Web.Controllers.api

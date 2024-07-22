@@ -5,6 +5,14 @@ namespace MojeVlastniStranka.DataAccess.Entities
 {
 	public class BugReport: IEntities
 	{
+		/// <summary>
+		/// chráněný konsruktor.
+		/// </summary>
+		protected BugReport() { }
+
+		/// <summary>
+		/// Vrací nebo nastavuje Id bug reportu.
+		/// </summary>
 		[Key]
 		public Guid Id
 		{

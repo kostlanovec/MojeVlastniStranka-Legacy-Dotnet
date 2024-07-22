@@ -4,8 +4,10 @@ namespace MojeVlastniStranka.ApplicationCore.Requests
 {
 	public class ReportedBugRequest
 	{
-		
-		[Required(ErrorMessage = "Url is required.")]
+		/// <summary>
+		/// Vrací nebo nastavuje Url stránky, kde se chyba vyskytla.
+		/// </summary>
+		[Required(ErrorMessage = "Url je povinná položka.")]
 		[Url]
 		public string Url
 		{
@@ -13,7 +15,7 @@ namespace MojeVlastniStranka.ApplicationCore.Requests
 			set;
 		}
 
-		[Required(ErrorMessage = "Bug is required.")]
+		[Required(ErrorMessage = "Chyba je povinná položka.")]
 		/// <summary>
 		/// Vrací nebo nastavuje nápad na vylepšení.
 		/// </summary>

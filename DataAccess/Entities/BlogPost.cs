@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MojeVlastniStranka.DataAccess.Entities
@@ -17,6 +16,9 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			set;
 		}
 
+		/// <summary>
+		/// Vrací nebo nastavuje jméno blogu.
+		/// </summary>
 		[Column(TypeName = "nvarchar(200)")]
 		public string Name
 		{
@@ -24,6 +26,9 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			set;
 		}
 
+		/// <summary>
+		/// Vrací nebo nastavuje jméno blogu pro url.
+		/// </summary>
 		[Column(TypeName = "nvarchar(200)")]
 		public string Slug
 		{

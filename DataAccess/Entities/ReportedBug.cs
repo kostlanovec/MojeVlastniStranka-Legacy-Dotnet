@@ -6,6 +6,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 	public class ReportedBug: IEntities
 	{
 		protected ReportedBug() { }
+
 		/// <summary>
 		/// Vrací nebo nastavuje Id nápadu.
 		/// </summary>

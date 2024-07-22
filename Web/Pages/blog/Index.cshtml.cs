@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using MojeVlastniStranka.ApplicationCore.Dto;
+using MojeVlastniStranka.ApplicationCore.Dto.Blog;
 using MojeVlastniStranka.ApplicationCore.Services;
 
 namespace MojeVlastniStranka.Web.Pages.blog
 {
-	public class IndexModel : PageModel
+    public class IndexModel : PageModel
 	{
 		private readonly BlogService blogService;
 

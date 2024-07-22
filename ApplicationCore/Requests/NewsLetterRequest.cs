@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Razor.TagHelpers;
-
-namespace MojeVlastniStranka.ApplicationCore.Requests
+﻿namespace MojeVlastniStranka.ApplicationCore.Requests
 {
 	public class NewsLetterRequest
 	{

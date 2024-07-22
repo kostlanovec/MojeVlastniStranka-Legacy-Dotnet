@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using MojeVlastniStranka.ApplicationCore.Dto;
+using MojeVlastniStranka.ApplicationCore.Dto.Blog;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
 namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
 {
-	[Authorize]
+    [Authorize]
 	public class BlogModel : PageModel
 	{
 		private readonly DataContext context;
 		private readonly BlogService blogService;
 
-	public List<BlogCategoryDto> BlogCategory
+	    public List<BlogCategoryDto> BlogCategory
         {
 	        get;
 	        set;

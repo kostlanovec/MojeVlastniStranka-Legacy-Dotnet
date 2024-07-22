@@ -5,9 +5,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 {
     public class Image: IEntities
     {
-        protected Image()
-        {
-        }
+        protected Image(){}
 
         /// <summary>
         /// Nastavení id obrázku.

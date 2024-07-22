@@ -180,7 +180,7 @@ input[type="text"] {
 }
 
 .aboutme__Card.visible .megafone {
-	animation: rotateMic 4s ease-in-out;
+	animation: rotateMic 3s ease-in-out;
 	animation-fill-mode: forwards;
 }
 

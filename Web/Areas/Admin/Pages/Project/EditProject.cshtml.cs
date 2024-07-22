@@ -1,42 +1,37 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using MojeVlastniStranka.ApplicationCore.Dto;
+using MojeVlastniStranka.ApplicationCore.Dto.Blog;
+using MojeVlastniStranka.ApplicationCore.Dto.Project;
 using MojeVlastniStranka.ApplicationCore.Requests;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
 
 namespace MojeVlastniStranka.User.Areas.Admin.Pages.Project
 {
-	[Authorize]
+    [Authorize]
 	public class EditProjectModel : PageModel
 	{
 		private readonly DataContext context;
-		private readonly BlogService blogService;
+		private readonly ProjectService projectService;
 
-		public EditBlogPostDto EditBlogPostDto
+		public ProjectEditDto ProjectEditDto
 		{
 			get;
 			set;
-		}
-
-		public List<BlogCategoryDto> BlogCategory
-		{
-			get;
-			set;
-
 		}
 
 		[BindProperty]
-		public EditBlogPostRequest Input
+		public UpdateProjectRequest Input
 		{
 			get;
 			set;
 		}
 
-		public EditProjectModel(BlogService blogService)
+		public EditProjectModel(ProjectService projectService, DataContext dataContext)
 		{
-			this.blogService = blogService;
+			this.projectService = projectService;
+			this.context = dataContext;
 		}
 
 		[BindProperty(SupportsGet = true)]
@@ -54,44 +49,21 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Project
 
 		public async Task OnGetAsync()
 		{
-			EditBlogPostDto = await blogService.GetBlogPostById(Id);
-			BlogCategory = await blogService.GetAllCategoriesTask();
+			ProjectEditDto = projectService.GetProjectById(Id);
 		}
 
-		[HttpPost]
 		public async Task<IActionResult> OnPostUpdateBlogPostAsync()
 		{
-			EditBlogPostDto = await blogService.GetBlogPostById(Id);
-			BlogCategory = await blogService.GetAllCategoriesTask();
-			var processingResult = await blogService.UpdateBlogPost(Input);
-
-			/* Zpráva má jít z applicationcore*/
-			if (processingResult.IsSuccess)
-			{
-				SuccessMessage = "Operace byla úsp?šná.";
-				return Page();
-
-			}
-			else
-			{
-				return Page();
-			}
+			ProjectEditDto = projectService.GetProjectById(Id);
+			projectService.UpdateProject(Input);
+			return Page();
 
 		}
 
-		[HttpPost]
-		public async Task<ActionResult> OnPostDeleteBlogByIdAsync()
+		public async Task<ActionResult> OnPostDeleteProjectByIdAsync()
 		{
-			EditBlogPostDto = await blogService.GetBlogPostById(Id);
-			BlogCategory = await blogService.GetAllCategoriesTask();
-			var processingResult = await blogService.DeleteBlogPost(Id);
-
-			if (processingResult.IsSuccess)
-			{
-				return RedirectToPage("/Account/Manage/Blog/BlogList");
-			}
-
-			return RedirectToPage("/Account/Manage/Blog/BlogList");
+			ProjectEditDto = projectService.GetProjectById(Id);
+			return RedirectToPage("/Account/Manage/Project/Index");
 		}
 	}
 }

@@ -16,7 +16,7 @@
         <h2>Rozpracované projekty</h2>
     </div>
     <section id="development-projects" class="projects__section reveal">
-        @foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatus.Development))
+        @foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatusEnum.Development))
         {
             <article class="article--project zoom-effect">
                 <a class="article--project__a" href="/projekty/@project.Slug">
@@ -33,7 +33,7 @@
         <h2>Hotové projekty</h2>
     </div>
     <section id="finalized-projects" class="projects__section reveal">
-        @foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatus.Finalized))
+        @foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatusEnum.Finalized))
         {
             <article class="article--project">
                 <a class="article--project__a" href="/projekty/@project.Slug">
@@ -49,7 +49,7 @@
         <h2>Plánované projekty</h2>
     </div>
     <section id="planning-projects" class="projects__section reveal">
-        @foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatus.Planning))
+        @foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatusEnum.Planning))
         {
             <article class="article--project">
                 <a class="article--project__a" href="/projekty/@project.Slug">

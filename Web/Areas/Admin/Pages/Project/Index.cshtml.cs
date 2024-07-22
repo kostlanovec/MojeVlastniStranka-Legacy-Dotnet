@@ -2,10 +2,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
 using MojeVlastniStranka.Common.Enums;
+using MojeVlastniStranka.ApplicationCore.Dto.Project;
 
 namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Project
 {
-	public class IndexModel : PageModel
+    public class IndexModel : PageModel
 	{
 		private readonly DataContext context;
 		private readonly ProjectService projectService;
@@ -15,11 +16,12 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Project
 			this.context = context;
 			this.projectService = projectService;
 		}
-		public List<DataAccess.Entities.Project> Projects { get; set; }
+		public List<ProjectSummaryDto> Projects { get; set; }
 
-		public void OnGet(string searchString, string author, string keyword, Guid category, DateTime? fromDate, DateTime? toDate)
+		public void OnGetAsync(DateTime? publicDate, string? search, ProjectStatusEnum? status)
 		{
-			Projects = projectService.GetAllProjects(); 
+			var kys = 5;
+			Projects = projectService.GetProjectsByStatusDateSearchString(status,  publicDate, search);
 
 		}
 	}

@@ -100,14 +100,14 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		/// Vracé nebo nastavuje status blogu.
 		/// </summary>
-		[EnumDataType(typeof(ProjectStatus))]
-		public ProjectStatus projectStatus
+		[EnumDataType(typeof(ProjectStatusEnum))]
+		public ProjectStatusEnum projectStatus
 		{
 			get;
 			set;
 		}
 
-		public static Project Create(string descriptions, string content, string title, string keywords, string name, string imagePath, string slug, DateTime date, ProjectStatus projectStatus)
+		public static Project Create(string descriptions, string content, string title, string keywords, string name, string imagePath, string slug, DateTime date, ProjectStatusEnum projectStatus)
 		{
 			var blogCategory = new Project()
 			{
