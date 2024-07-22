@@ -328,7 +328,7 @@ input[type="text"] {
 
 .header {
 	margin-top: 2em;
-	height: calc(100vh - 6.4em);
+	min-height: calc(100vh - 6.4em);
 }
 
 .header--other {
