@@ -86,7 +86,7 @@
 		</div>
 		<div class="aboutme__text">
 			<h2>Něco o mně</h2>
-			<p>Zdravím, jsem Jan Sebastián Kostlán, programátor a tvůrce webových aplikací. Nesmírně si užívám volnost při programování. Ve svém volnu, pokud neprogramuji, tak se věnuji fitness, protože věřím, že každý by měl se sebou něco dělat a to nejen fyzicky, ale i intelektuálně. Učit se každý den nových dovedností. Baví mě pracovat na věcech ve kterých věřím, že mají smysl a jsou prospěšné pro ostatní lidi a mne samotného.</p>
+			<p>Zdravím, jmenuji se Jan Sebastián Kostlán a jsem vášnivý tvůrce webových aplikací, her, SEO maestro a technologický nadšenec, Věřím, že technologie nám usnadňují každodenní život a jsou klíčové jako nástroj pro osobní a profesní růst a proto se zaměřuji na vytváření inovativních řešení. Při svém volnu, pokud netluču do klávesnice, tak se věnuji fitness převážně fitku a boxu. Mým cílem je vybudovat něco, co bude hojně používáno a usnadní spoustu práce, čímž zlepším kvalitu života mnoha lidí.</p>
 		</div>
 	</div>
 </main>
@@ -189,21 +189,4 @@
 	scrollContainer.addEventListener('mouseleave', function () {
 		isScrolling = false;
 	});
-
-	document.addEventListener('DOMContentLoaded', (event) => {
-		showDialog();
-	});
-
-	function showDialog() {
-		const dialog = document.getElementById('myDialog');
-		if (typeof dialog.showModal === "function") {
-			dialog.showModal();
-		} else {
-			alert("Dialog element is not supported in this browser.");
-		}
-	}
-
-	function closeDialog() {
-		document.getElementById('myDialog').close();
-	}
 </script>

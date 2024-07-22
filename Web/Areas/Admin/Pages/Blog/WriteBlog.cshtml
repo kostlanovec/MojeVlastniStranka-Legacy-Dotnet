@@ -10,6 +10,15 @@
 <script src="/js/summernote/Plugins/summernote-ext-addclass.js"></script>
 <script src="/js/summernote/Plugins/summernote-ownplugin.js"></script>
 <script src="/lib/typo-js/typo.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark-dimmed.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		hljs.highlightAll();
+	});
+</script>
+
 <div class="col-md-12">
 	@if (!string.IsNullOrEmpty(Model.SuccessMessage))
 	{
@@ -85,6 +94,13 @@
 </div>
 <script>
 
+	function applyHighlighting() {
+        // Apply Highlight.js to the code blocks within the Summernote content
+        $('#summernote').find('pre code').each(function(i, block) {
+            hljs.highlightElement(block);
+        });
+    }
+
 	$('#editSettingsBtn').click(function () {
 		$('#settingsTable').toggle();
 	});
@@ -122,6 +138,10 @@
 		callbacks: {
 			onInit: function () {
 				$('#summernote').summernote('code', defaultContent);
+				 applyHighlighting();
+			},
+			onChange: function (contents, $editable) {
+				 applyHighlighting();
 			}
 		}
 	});

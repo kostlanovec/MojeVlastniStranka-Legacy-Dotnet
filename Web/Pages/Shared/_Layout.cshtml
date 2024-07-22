@@ -1,23 +1,4 @@
 ﻿@{
-	var jsonLD = @"
-    {
-        ""@context"": ""http://schema.org"",
-        ""@type"": ""Person"",
-        ""name"": ""Jan Sebastián Kostlán"",
-        ""url"": ""https://www.kostlanovec.cz"",
-        ""sameAs"": [
-            ""https://www.linkedin.com/in/jan-kostlan-7a9bb4215"",
-            ""https://www.instagram.com/kostlan1/"",
-            ""https://github.com/kostlanovec"",
-            ""https://www.facebook.com/jan.sebastiankostlan.1""
-        ],
-        ""email"": ""info@kostlanovec.cz"",
-        ""description"": ""Osobní stránka Jana Sebastiána Kostlána. Tvůrce, programátor webů a desktopových aplikací."",
-        ""image"": ""https://kostlanovec.cz/images/profil-photo.jpg"",
-        ""jobTitle"": ""Programátor""
-
-    }";
-
 	string canonicalUrl = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}";
 }
 <!DOCTYPE html>
@@ -58,9 +39,6 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-SFNW32KZW0');
-    </script>
-    <script type="application/ld+json">
-    @Html.Raw(jsonLD)
     </script>
     @if (ViewData["nofollow"]?.ToString() == "true")
     {
