@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using MojeVlastniStranka.ApplicationCore.Dto.Blog;
 using MojeVlastniStranka.ApplicationCore.Requests;
 using MojeVlastniStranka.ApplicationCore.Services;
+using MojeVlastniStranka.Common.Models;
 using MojeVlastniStranka.DataAccess;
 
 namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
@@ -52,6 +53,11 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
 	        set;
         }
 
+		public ResponseViewModel responseViewModel
+		{
+			get;
+			set;
+		} = null;
 		public async Task<IActionResult> OnGetAsync()
 		{
 			EditBlogPostDto = await blogService.GetBlogPostById(Id);
@@ -68,36 +74,34 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
 
 		public async Task<IActionResult> OnPostUpdateBlogPostAsync()
 		{
+			if (!ModelState.IsValid)
+			{
+				responseViewModel = new ResponseViewModel
+				{
+					IsSuccess = false,
+					Errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList()
+				};
+
+				EditBlogPostDto = await blogService.GetBlogPostById(Id);
+				BlogCategory = await blogService.GetAllCategoriesTask();
+				return Page();
+			}
+
+			responseViewModel = await blogService.UpdateBlogPost(Input);
+
 			EditBlogPostDto = await blogService.GetBlogPostById(Id);
 			BlogCategory = await blogService.GetAllCategoriesTask();
-			var processingResult = await blogService.UpdateBlogPost(Input);
 
-			/* Zpráva má jít z applicationcore*/
-			if (processingResult.IsSuccess)
-			{
-				SuccessMessage = "Operace byla úspěšná.";
-				return Page();
-
-			}
-			else
-			{
-				return Page();
-			}
-
+			return Page();
 		}
 
 		public async Task<ActionResult> OnPostDeleteBlogByIdAsync()
 		{
-            EditBlogPostDto = await blogService.GetBlogPostById(Id);
-            BlogCategory = await blogService.GetAllCategoriesTask();
-			var processingResult = await blogService.DeleteBlogPost(Id);
+			await blogService.DeleteBlogPost(Id);
 
-			if (processingResult.IsSuccess)
-			{
-				return RedirectToPage("/Account/Manage/Blog/BlogList");
-			}
+			return RedirectToPage("/Blog/Bloglist", new { area = "Admin" });
 
-			return RedirectToPage("/Account/Manage/Blog/BlogList");
+
 		}
 	}
 }

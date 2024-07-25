@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using MojeVlastniStranka.ApplicationCore.Dto.Blog;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
-using System.Dynamic;
+using System.ComponentModel.DataAnnotations;
 
 namespace MojeVlastniStranka.Web.Pages
 {
@@ -18,6 +18,7 @@ namespace MojeVlastniStranka.Web.Pages
         public string JsonLD { get; set; }
 
         [BindProperty]
+		[EmailAddress]
 		public string email
 		{
 			get;
@@ -53,10 +54,31 @@ namespace MojeVlastniStranka.Web.Pages
 				}";
         }
 
-		public async Task OnPostAsync()
+		public async Task<IActionResult> OnPostAsync()
 		{
+            if (!ModelState.IsValid)
+            {
+				Posts = await blogService.GetThreePost();
+				ModelState.AddModelError(string.Empty, "Tohle není validní email.");
+				return Page();
+            }
+
+            bool isEmailAdded = mailService.AddEmailForNewsLetter(email);
+
+            if (!isEmailAdded)
+            {
+				Posts = await blogService.GetThreePost();
+				// Pokud email již existuje, nastavte chybu
+				ModelState.AddModelError(string.Empty, "Tento email je již zaregistrován.");
+                return Page();
+            }
+
+			TempData["SuccessMessage"] = "Email byl úsp?šn? p?idán.";
+
 			Posts = await blogService.GetThreePost();
-			mailService.AddEmailForNewsLetter(email);
+
+
+			return Page();
 		}
 	}
 }

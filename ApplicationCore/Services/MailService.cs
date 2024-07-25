@@ -78,21 +78,24 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			}
 		}
 
-		/// <summary>
-		/// Přidá email pro newsletter.
-		/// </summary>
-		public void AddEmailForNewsLetter(string email)
-		{
-
-			bool emailExist = context.NewsLetters.Any(x => x.Email == email);
-			if (emailExist) {
-				return;
-			}
+        /// <summary>
+        /// Přidá email pro newsletter.
+        /// </summary>
+        /// <param name="email">Emailová adresa</param>
+        /// <returns>Vrací true, pokud byl email úspěšně přidán, jinak false</returns>
+        public bool AddEmailForNewsLetter(string email)
+        {
+            bool emailExist = context.NewsLetters.Any(x => x.Email == email);
+            if (emailExist)
+            {
+                return false; // Email již existuje
+            }
 
             var newsLetterEmail = NewsLetter.Create(email);
-
-			context.NewsLetters.Add(newsLetterEmail);
+            context.NewsLetters.Add(newsLetterEmail);
             context.SaveChanges();
+            return true; // Email byl úspěšně přidán
         }
+
     }
 }

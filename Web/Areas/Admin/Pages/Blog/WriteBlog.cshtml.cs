@@ -6,6 +6,7 @@ using MojeVlastniStranka.ApplicationCore.Requests;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.Common.Models;
 using MojeVlastniStranka.DataAccess;
+using Newtonsoft.Json;
 
 namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
 {
@@ -64,14 +65,28 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
                     Errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList()
                 };
 
+				CookiesPostSave();
+
                 BlogCategory = await blogService.GetAllCategoriesTask();
                 return Page();
 			}
 
             responseViewModel = await blogService.AddBlogPost(Input);
+			Response.Cookies.Delete("blogFormData");
 
-            BlogCategory = await blogService.GetAllCategoriesTask();
+			BlogCategory = await blogService.GetAllCategoriesTask();
             return Page();
+		}
+
+		private void CookiesPostSave()
+		{
+			var formDataCookie = JsonConvert.SerializeObject(Input);
+			Response.Cookies.Append("blogFormData", formDataCookie, new CookieOptions
+			{
+				Expires = DateTimeOffset.UtcNow.AddDays(1),
+				HttpOnly = true,
+				Secure = true
+			});
 		}
 	}
 }

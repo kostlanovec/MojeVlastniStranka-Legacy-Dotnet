@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MojeVlastniStranka.ApplicationCore.Dto.Blog;
 using MojeVlastniStranka.ApplicationCore.Services;
+using MojeVlastniStranka.Common.Models;
 using MojeVlastniStranka.DataAccess;
 
 namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
@@ -26,6 +27,13 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
 			this.blogService = blogService;
 		}
 
+		public ResponseViewModel responseViewModel
+		{
+			get;
+			set;
+		} = null;
+
+
 		/// <summary>
 		/// Získá všechny blog kategorie z databáze.
 		/// </summary>
@@ -39,8 +47,8 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
 		/// </summary>
         public async Task<ActionResult> OnPostAddCategoryAsync(string CategoryNameAdd)
         {
-	        // Zde přistupujte k vaší službě pro přidání kategorie
-	        await blogService.AddBlogCategory(CategoryNameAdd);
+			// Zde přistupujte k vaší službě pro přidání kategorie
+			responseViewModel = await blogService.AddBlogCategory(CategoryNameAdd);
 
 	        BlogCategory = await blogService.GetAllCategoriesTask();
 	        return Page();
@@ -53,7 +61,7 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
         {
 	        BlogCategory = await blogService.GetAllCategoriesTask();
 	        
-			await blogService.DeleteBlogCategory(Id);
+			responseViewModel = await blogService.DeleteBlogCategory(Id);
 
 			return Page();
         }

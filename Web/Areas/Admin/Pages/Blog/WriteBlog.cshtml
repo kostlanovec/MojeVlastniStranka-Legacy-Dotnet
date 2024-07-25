@@ -163,7 +163,17 @@
 	}
 
 	document.getElementById('file').addEventListener('change', function () {
-		showImagePreview(this);
+		if (this.files && this.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				var img = document.createElement('img');
+				img.src = e.target.result;
+				var previewDiv = document.getElementById('image-preview');
+				previewDiv.innerHTML = '';
+				previewDiv.appendChild(img);
+			}
+			reader.readAsDataURL(this.files[0]);
+		}
 	});
 
 	// Speciální efekt pro moji stránku

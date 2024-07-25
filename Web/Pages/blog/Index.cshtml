@@ -11,8 +11,8 @@
 <main class="main">
 	<header class="reveal">
 		<h1>Blog</h1>
-			<input class="searchbar" type="text" placeholder="hledat" />
-		<div id="results"></div>
+        <input id="searchInput" class="searchbar" type="text" placeholder="hledat" />
+		<div class="results" id="results"></div>
 	</header>
     @foreach (var category in Model.CategoriesWithPosts)
     {
@@ -56,26 +56,38 @@
     }
 	</>
 </main>
-@*
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-	$(document).ready(function() {
-		$('#searchBox').keyup(function() {
-			var query = $(this).val();
-			if (query.length > 2) { // Vyhledávání začne po zadání 3 znaků
-				$.ajax({
-					url: '/api/search',
-					data: { 'query': query },
-					success: function(data) {
-						$('#results').empty();
-						data.forEach(function(article) {
-							$('#results').append('<p><strong>' + article.title + '</strong> - ' + article.content + '</p>');
-						});
-					}
-				});
-			} else {
-				$('#results').empty();
-			}
-		});
-	});*/
+    $(document).ready(function () {
+        $('#searchInput').keyup(function () {
+            var query = $(this).val();
+            if (query.length > 2) {
+                $.ajax({
+                    url: '@Url.Page("Index", "Search")',
+                    type: 'GET',
+                    data: { 'query': query },
+                    success: function (data) {
+                        $('#results').empty();
+                        if (data.length > 0) {
+                            data.forEach(function (post) {
+                                $('#results').append(
+                                    '<div>' +
+                                    '<a href="/Blog/' + post.slug + '">' +
+                                    '<h3>' + post.name + '</h3>' +
+                                    '<img src="' + post.filePath + '" alt="' + post.name + '" />' +
+                                    '<p>' + post.description + '</p>' +
+                                    '</a>' +
+                                    '</div>'
+                                );
+                            });
+                        } else {
+                            $('#results').append('<p>Žádné výsledky nenalezeny.</p>');
+                        }
+                    }
+                });
+            } else {
+                $('#results').empty();
+            }
+        });
+    });
 </script>
-*@

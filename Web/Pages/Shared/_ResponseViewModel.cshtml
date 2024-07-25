@@ -1,8 +1,15 @@
 ﻿@model MojeVlastniStranka.Common.Models.ResponseViewModel
+
 @if (Model != null)
 {
-    <div class="alert @(Model.IsSuccess ? "alert-success" : "alert-danger")">
-        <strong>@(Model.IsSuccess ? "Úspěch:" : "Chyby:")</strong>
+    var alertClass = Model.IsSuccess ? "alert-success" : "alert-danger";
+    var alertTitle = Model.IsSuccess ? "Úspěch:" : "Chyby:";
+
+    <div class="alert @alertClass alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>@alertTitle</strong>
 
         @if (Model.IsSuccess && !string.IsNullOrEmpty(Model.SuccessMessage))
         {

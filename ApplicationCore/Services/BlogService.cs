@@ -81,8 +81,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			return response;
 		}
 
-
-
 		/// <summary>
 		/// Získá všechny blog kategorie s příspěvky.
 		/// </summary>
@@ -254,36 +252,41 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			return blogCategoryList;
 		}
 
-		/// <summary>
+		// <summary>
 		/// Aktualizuje blog příspěvky.
 		/// </summary>
-		public async Task<FormProcessingResult> UpdateBlogPost(EditBlogPostRequest editBlogPostRequest)
+		public async Task<ResponseViewModel> UpdateBlogPost(EditBlogPostRequest editBlogPostRequest)
 		{
-			var result = new FormProcessingResult();
+			var response = new ResponseViewModel();
 			var existingBlogPost = await context.BlogPosts.SingleOrDefaultAsync(bp => bp.Id == editBlogPostRequest.Id);
 
-			if (existingBlogPost != null)
+			if (existingBlogPost == null)
 			{
-				if (editBlogPostRequest != null)
-				{
-					existingBlogPost.Description = editBlogPostRequest.Description;
-					existingBlogPost.Content = editBlogPostRequest.Content;
-					existingBlogPost.Title = editBlogPostRequest.Title;
-					existingBlogPost.Author = editBlogPostRequest.Author;
-					existingBlogPost.Keywords = editBlogPostRequest.Keywords;
-                    existingBlogPost.BlogCategoryId = editBlogPostRequest.BlogCategoryId;
-					existingBlogPost.Name = editBlogPostRequest.Name;
-
-					if (editBlogPostRequest.FileUpload != null)
-					{
-						existingBlogPost.ImagePath = await UploadImageAsync(editBlogPostRequest.FileUpload);
-					}
-				}
-
-				await context.SaveChangesAsync();
+				response.IsSuccess = false;
+				response.Errors.Add("Blog příspěvek nebyl nalezen.");
+				return response;
 			}
-			return result;
+
+			existingBlogPost.Description = editBlogPostRequest.Description;
+			existingBlogPost.Content = editBlogPostRequest.Content;
+			existingBlogPost.Title = editBlogPostRequest.Title;
+			existingBlogPost.Author = editBlogPostRequest.Author;
+			existingBlogPost.Keywords = editBlogPostRequest.Keywords;
+			existingBlogPost.BlogCategoryId = editBlogPostRequest.BlogCategoryId;
+			existingBlogPost.Name = editBlogPostRequest.Name;
+
+			if (editBlogPostRequest.FileUpload != null)
+			{
+				existingBlogPost.ImagePath = await UploadImageAsync(editBlogPostRequest.FileUpload);
+			}
+
+			await context.SaveChangesAsync();
+
+			response.IsSuccess = true;
+			response.SuccessMessage = "Blog příspěvek byl úspěšně aktualizován.";
+			return response;
 		}
+
 
 		/// <summary>
 		/// Získá filtrovaný blog příspěvky.
@@ -340,66 +343,82 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// <summary>
 		/// Přidání nové blog kategorie.
 		/// </summary>
-		public async Task<FormProcessingResult> AddBlogCategory(string CategoryNameAdd)
+		public async Task<ResponseViewModel> AddBlogCategory(string CategoryNameAdd)
 		{
-			var formProcessingResult = new FormProcessingResult();
+			var response = new ResponseViewModel();
 			var blogCategoryExist = await context.BlogCategories.SingleOrDefaultAsync(bp => bp.Name == CategoryNameAdd);
-			// todo Validace kategorie, zda existuje nebo ne
-			// todo Můžeme provést další validaci
 
-			if (blogCategoryExist == null)
+			if (blogCategoryExist != null)
 			{
-				var newCategory = BlogCategory.Create(CategoryNameAdd);
-				context.BlogCategories.Add(newCategory);
-				await context.SaveChangesAsync();
+				response.IsSuccess = false;
+				response.Errors.Add("Kategorie s tímto názvem již existuje.");
+				return response;
 			}
-			return formProcessingResult;
 
+			var newCategory = BlogCategory.Create(CategoryNameAdd);
+			context.BlogCategories.Add(newCategory);
+			await context.SaveChangesAsync();
+
+			response.IsSuccess = true;
+			response.SuccessMessage = "Kategorie byla úspěšně přidána.";
+			return response;
 		}
 
-        /// <summary>
-        /// Smazání blog kategorie podle jeho id.
-        /// </summary>
-        /// <param name="BlogCategoryId">Smazání blog kategorie.</param>
-        public async Task<FormProcessingResult> DeleteBlogCategory(Guid BlogCategoryId)
-        {
-            var formProcessingResult = new FormProcessingResult();
-            var existingBlogCategory = await context.BlogCategories.SingleOrDefaultAsync(bp => bp.Id == BlogCategoryId);
-
-            if (existingBlogCategory != null)
-            {
-                // Najít všechny blogy, které patří do kategorie, která má být smazána
-                var existingAllBlogWithDeleteBlogCategory = context.BlogPosts.Where(bp => bp.BlogCategoryId == BlogCategoryId);
-
-                if (existingAllBlogWithDeleteBlogCategory.Any())
-                {
-                    foreach (var blogPost in existingAllBlogWithDeleteBlogCategory)
-                    {
-                        // Nastavit BlogCategoryId na null
-                        blogPost.BlogCategoryId = null;
-                    }
-                }
-
-                context.Remove(existingBlogCategory);
-                await context.SaveChangesAsync();
-            }
-
-            return formProcessingResult;
-        }
-
-        /// <summary>
-        /// Smaže blog příspěvek podle jeho Id.
-        /// </summary>
-        public async Task<FormProcessingResult> DeleteBlogPost(Guid BlogId)
+		/// <summary>
+		/// Smazání blog kategorie podle jeho id.
+		/// </summary>
+		/// <param name="BlogCategoryId">Smazání blog kategorie.</param>
+		public async Task<ResponseViewModel> DeleteBlogCategory(Guid BlogCategoryId)
 		{
-			var formProcessingResult = new FormProcessingResult();
-			var existingBlog = await context.BlogPosts.SingleOrDefaultAsync(bp => bp.Id == BlogId);
-			if (existingBlog != null)
+			var response = new ResponseViewModel();
+			var existingBlogCategory = await context.BlogCategories.SingleOrDefaultAsync(bp => bp.Id == BlogCategoryId);
+
+			if (existingBlogCategory == null)
 			{
-				context.Remove(existingBlog);
-				await context.SaveChangesAsync(); ;
+				response.IsSuccess = false;
+				response.Errors.Add("Kategorie nebyla nalezena.");
+				return response;
 			}
-			return formProcessingResult;
+
+			var existingAllBlogWithDeleteBlogCategory = context.BlogPosts.Where(bp => bp.BlogCategoryId == BlogCategoryId);
+
+			if (existingAllBlogWithDeleteBlogCategory.Any())
+			{
+				foreach (var blogPost in existingAllBlogWithDeleteBlogCategory)
+				{
+					blogPost.BlogCategoryId = null;
+				}
+			}
+
+			context.Remove(existingBlogCategory);
+			await context.SaveChangesAsync();
+
+			response.IsSuccess = true;
+			response.SuccessMessage = "Kategorie byla úspěšně smazána.";
+			return response;
+		}
+
+		/// <summary>
+		/// Smaže blog příspěvek podle jeho Id.
+		/// </summary>
+		public async Task<ResponseViewModel> DeleteBlogPost(Guid BlogId)
+		{
+			var response = new ResponseViewModel();
+			var existingBlog = await context.BlogPosts.SingleOrDefaultAsync(bp => bp.Id == BlogId);
+
+			if (existingBlog == null)
+			{
+				response.IsSuccess = false;
+				response.Errors.Add("Blog příspěvek nebyl nalezen.");
+				return response;
+			}
+
+			context.Remove(existingBlog);
+			await context.SaveChangesAsync();
+
+			response.IsSuccess = true;
+			response.SuccessMessage = "Blog příspěvek byl úspěšně smazán.";
+			return response;
 		}
 
 		/// <summary>
@@ -424,6 +443,24 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			}
 
 			return ("/images/blog/" + file.FileName);
+		}
+
+
+		public async Task<List<BlogPostSummary>> SearchBlogPostsAsync(string query)
+		{
+			// Implementujte logiku vyhledávání, např. dotazování databáze podle klíčových slov
+			var results = await context.BlogPosts
+				.Where(p => p.Name.Contains(query) || p.Description.Contains(query))
+				.Select(p => new BlogPostSummary
+				{
+					Name = p.Name,
+					Slug = p.Slug,
+					FilePath = p.ImagePath,
+					Description = p.Description
+				})
+				.ToListAsync();
+
+			return results;
 		}
 
 	}
