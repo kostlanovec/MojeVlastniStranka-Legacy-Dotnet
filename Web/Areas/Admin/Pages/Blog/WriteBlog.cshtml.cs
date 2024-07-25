@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using MojeVlastniStranka.ApplicationCore.Dto.Blog;
 using MojeVlastniStranka.ApplicationCore.Requests;
 using MojeVlastniStranka.ApplicationCore.Services;
+using MojeVlastniStranka.Common.Models;
 using MojeVlastniStranka.DataAccess;
 
 namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
@@ -33,6 +34,12 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
 			set;
 		}
 
+		public ResponseViewModel responseViewModel
+		{
+			get;
+			set;
+		} = null;
+
 		public WriteBlogModel(DataContext context, BlogService blogService)
 		{
 			this.context = context;
@@ -43,15 +50,28 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
 		{
 			Input = new BlogPostRequest();
 			BlogCategory = await blogService.GetAllCategoriesTask();
+
+
 		}
 
-		[HttpPost]
 		public async Task<IActionResult> OnPost()
 		{
-			BlogCategory = await blogService.GetAllCategoriesTask();
-			await blogService.AddBlogPost(Input);
+			if (!ModelState.IsValid)
+			{
+                responseViewModel = new ResponseViewModel
+                {
+                    IsSuccess = false,
+                    Errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList()
+                };
 
-			return Page();
+                BlogCategory = await blogService.GetAllCategoriesTask();
+                return Page();
+			}
+
+            responseViewModel = await blogService.AddBlogPost(Input);
+
+            BlogCategory = await blogService.GetAllCategoriesTask();
+            return Page();
 		}
 	}
 }

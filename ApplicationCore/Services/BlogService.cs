@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using MojeVlastniStranka.ApplicationCore.Dto;
+using MojeVlastniStranka.Common.Models;
 using MojeVlastniStranka.ApplicationCore.Dto.Blog;
-using MojeVlastniStranka.ApplicationCore.Dto.Project;
 using MojeVlastniStranka.ApplicationCore.Requests;
 using MojeVlastniStranka.DataAccess;
 using MojeVlastniStranka.DataAccess.Entities;
-using System.ComponentModel.DataAnnotations;
 
 namespace MojeVlastniStranka.ApplicationCore.Services
 {
@@ -22,9 +21,44 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// <summary>
 		/// Přidání nového blog příspěvku.
 		/// </summary>
-		public async Task AddBlogPost(BlogPostRequest blogPostRequest)
+		public async Task<ResponseViewModel> AddBlogPost(BlogPostRequest blogPostRequest)
 		{
-            string imagePath = await UploadImageAsync(blogPostRequest.FileUpload);
+			var response = new ResponseViewModel();
+
+			if (string.IsNullOrEmpty(blogPostRequest.Description) ||
+				string.IsNullOrEmpty(blogPostRequest.Content) ||
+				string.IsNullOrEmpty(blogPostRequest.Title) ||
+				string.IsNullOrEmpty(blogPostRequest.Author) ||
+				string.IsNullOrEmpty(blogPostRequest.Keywords) ||
+				string.IsNullOrEmpty(blogPostRequest.Name) ||
+				string.IsNullOrEmpty(blogPostRequest.Slug))
+			{
+				response.IsSuccess = false;
+				response.Errors.Add("Všechna políčka jsou povinná krom přidání blog kategorie.");
+				return response;
+			}
+
+			bool slugExists = await context.BlogPosts.AnyAsync(bp => bp.Slug == blogPostRequest.Slug);
+			if (slugExists)
+			{
+				response.IsSuccess = false;
+				response.Errors.Add($"Blog příspěvek se slugem: '{blogPostRequest.Slug}' ¨již existuje.");
+			}
+
+			bool nameExists = await context.BlogPosts.AnyAsync(bp => bp.Name == blogPostRequest.Name);
+			if (nameExists)
+			{
+				response.IsSuccess = false;
+				response.Errors.Add($"Blog příspěvek s tímto názvem: '{blogPostRequest.Name}' již existuje..");
+			}
+
+			if (!response.IsSuccess)
+			{
+				return response;
+			}
+
+			string imagePath = await UploadImageAsync(blogPostRequest.FileUpload);
+
 			var blogPost = BlogPost.Create(
 				blogPostRequest.Description,
 				blogPostRequest.Content,
@@ -35,12 +69,19 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				blogPostRequest.Name,
 				imagePath,
 				blogPostRequest.Slug,
-				blogPostRequest.DatePublic =  DateTime.Now
+				// todo: udělat publikování v určitou dobu
+				DateTime.Now
 			);
 
 			context.BlogPosts.Add(blogPost);
 			await context.SaveChangesAsync();
+
+			response.IsSuccess = true;
+			response.SuccessMessage = "Blog příspěvek byl úspěšně přidaný.";
+			return response;
 		}
+
+
 
 		/// <summary>
 		/// Získá všechny blog kategorie s příspěvky.
@@ -62,6 +103,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 						TimePublic = bp.Date
 					}).ToList()
 				})
+				.Where(predicate => predicate.BlogPosts.Any())
 				.ToListAsync();
 			return result;
 		}

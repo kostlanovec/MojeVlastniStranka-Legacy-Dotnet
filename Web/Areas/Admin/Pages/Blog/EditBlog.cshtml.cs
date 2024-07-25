@@ -52,11 +52,19 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
 	        set;
         }
 
-		public async Task OnGetAsync()
-	    {
+		public async Task<IActionResult> OnGetAsync()
+		{
 			EditBlogPostDto = await blogService.GetBlogPostById(Id);
-            BlogCategory = await blogService.GetAllCategoriesTask();
-        }
+
+			if (EditBlogPostDto == null)
+			{
+				return NotFound();
+			}
+
+			BlogCategory = await blogService.GetAllCategoriesTask();
+			return Page();
+		}
+
 
 		public async Task<IActionResult> OnPostUpdateBlogPostAsync()
 		{

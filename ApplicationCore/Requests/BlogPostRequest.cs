@@ -99,7 +99,7 @@ namespace MojeVlastniStranka.ApplicationCore.Requests
 		/// <summary>
 		/// Vrací nebo nastavuje navigační vlastnost k blog kategorii.
 		/// </summary>
-		public BlogCategory BlogCategory
+		public BlogCategory? BlogCategory
 		{
 			get;
 			set;
