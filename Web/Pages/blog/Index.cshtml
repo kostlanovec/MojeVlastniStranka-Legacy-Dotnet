@@ -9,7 +9,7 @@
 @using MojeVlastniStranka.Common.Extension
 
 <main class="main">
-	<header class="reveal">
+    <header class="reveal header--relative">
 		<h1>Blog</h1>
         <input id="searchInput" class="searchbar" type="text" placeholder="hledat" />
 		<div class="results" id="results"></div>
@@ -71,13 +71,15 @@
                         if (data.length > 0) {
                             data.forEach(function (post) {
                                 $('#results').append(
+                                    '<a class="results__a" href="/Blog/' + post.slug + '">' +
                                     '<div>' +
-                                    '<a href="/Blog/' + post.slug + '">' +
-                                    '<h3>' + post.name + '</h3>' +
                                     '<img src="' + post.filePath + '" alt="' + post.name + '" />' +
+                                    '</div>' +
+                                    '<div>' +
+                                    '<h3>' + post.name + '</h3>' +
                                     '<p>' + post.description + '</p>' +
-                                    '</a>' +
-                                    '</div>'
+                                    '</div>' +
+                                    '</a>'
                                 );
                             });
                         } else {

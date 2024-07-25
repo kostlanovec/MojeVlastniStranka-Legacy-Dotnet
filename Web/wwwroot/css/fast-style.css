@@ -294,11 +294,24 @@ input[type="text"] {
 	flex-direction: column
 }
 
-.results{
+.results {
 	position: absolute;
-	top: 0;
+	top: 11em;
 	background-color: var(--white);
 	width: 100%;
+	max-width: 300px;
+	margin: 0;
+	display:flex;
+}
+
+.results__a{
+	text-decoration: none;
+	display: flex;
+}
+
+.header--relative{
+		position: relative;
+		z-index: 69;
 }
 
 .arrow {
