@@ -78,7 +78,7 @@ namespace Reservanto.NPS.DataAccess
                 EmailConfirmed = true,
                 NormalizedEmail = "INFO@KOSTLANOVEC.CZ",
                 SecurityStamp = Guid.NewGuid().ToString("D"),
-                PasswordHash = hasher.HashPassword(new User(), "[REDACTED]")
+                PasswordHash = hasher.HashPassword(new User(), "1je2protozebagr")
             });
 
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole

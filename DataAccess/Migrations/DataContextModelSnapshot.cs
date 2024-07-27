@@ -51,7 +51,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "baaf11c2-2086-4fad-aa77-72d7ce96fad1",
+                            Id = "cf94073e-2c38-45e5-8952-59cecba94639",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -180,17 +180,17 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e4d8ab61-d20b-4264-b378-5e31cbbee614"),
+                            Id = new Guid("3ac826f0-67b2-4685-bb52-7fd0796b1d5a"),
                             Name = "projekty"
                         },
                         new
                         {
-                            Id = new Guid("25a71538-7dc0-4049-8f63-053bf3494f1d"),
+                            Id = new Guid("08107970-908a-4603-96e1-38d0cd9543ab"),
                             Name = "základ"
                         },
                         new
                         {
-                            Id = new Guid("1a4b5e3d-ffc5-497c-9d6d-8a4720f452cb"),
+                            Id = new Guid("ad652250-e877-4864-b2af-d6818e13f525"),
                             Name = "blogpříspěvky"
                         });
                 });
@@ -248,11 +248,11 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("1d575e0f-6880-4621-bf7a-3b6a1e37a1fb"),
+                            Id = new Guid("34251d12-abaf-49ec-852b-a79361efe9c9"),
                             Author = "Pepek Námořník",
-                            BlogCategoryId = new Guid("e4d8ab61-d20b-4264-b378-5e31cbbee614"),
+                            BlogCategoryId = new Guid("3ac826f0-67b2-4685-bb52-7fd0796b1d5a"),
                             Content = "<h1>Ahoj</h1>",
-                            Date = new DateTime(2024, 7, 18, 12, 23, 29, 439, DateTimeKind.Local).AddTicks(2326),
+                            Date = new DateTime(2024, 7, 27, 12, 7, 21, 218, DateTimeKind.Local).AddTicks(1620),
                             Description = "moje klobasa",
                             ImagePath = "imaablogimages/boxing.jpg",
                             Keywords = "rohlík, klobása",
@@ -262,11 +262,11 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("50d872c1-e20b-4119-a2a8-876dbf738118"),
+                            Id = new Guid("d0ffc211-da62-43c1-8616-b7a4182246da"),
                             Author = "Chleba s marmeládou",
-                            BlogCategoryId = new Guid("e4d8ab61-d20b-4264-b378-5e31cbbee614"),
+                            BlogCategoryId = new Guid("3ac826f0-67b2-4685-bb52-7fd0796b1d5a"),
                             Content = "<h1>Projekt</h1>",
-                            Date = new DateTime(2024, 7, 18, 12, 23, 29, 439, DateTimeKind.Local).AddTicks(2382),
+                            Date = new DateTime(2024, 7, 27, 12, 7, 21, 218, DateTimeKind.Local).AddTicks(1662),
                             Description = "moje klobasa",
                             ImagePath = "blogimages/boxing.jpg",
                             Keywords = "Jsi slizký had, nemám tě rád",
@@ -303,16 +303,16 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("aa3b5672-8720-460f-8c47-988bbf212e0b"),
-                            Date = new DateTime(2024, 7, 18, 12, 23, 29, 439, DateTimeKind.Local).AddTicks(2484),
+                            Id = new Guid("2edd893d-26dd-47fa-ab90-0fc152723c55"),
+                            Date = new DateTime(2024, 7, 27, 12, 7, 21, 218, DateTimeKind.Local).AddTicks(1717),
                             Email = "jan.novak@example.com",
                             Message = "Dobrý den, rád bych se zeptal na možnost spolupráce.",
                             PhoneNumber = "123456789"
                         },
                         new
                         {
-                            Id = new Guid("176e1550-b0d2-4dcf-90cc-1b6a7b60388a"),
-                            Date = new DateTime(2024, 7, 18, 12, 23, 29, 439, DateTimeKind.Local).AddTicks(2492),
+                            Id = new Guid("b09c75e6-7ed3-4044-a68e-2041ada3c2f7"),
+                            Date = new DateTime(2024, 7, 27, 12, 7, 21, 218, DateTimeKind.Local).AddTicks(1733),
                             Email = "info@kostlanovec.cz",
                             Message = "Dobrý, mám zájem o nové stránky vámi vyrobené. Těším se, až mi ukážete, co všechno dokážete.",
                             PhoneNumber = "987654321"
@@ -339,8 +339,8 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c7eb93cd-91ca-4ccf-92b1-d361cc8efe98"),
-                            DatePosted = new DateTime(2024, 7, 18, 12, 23, 29, 439, DateTimeKind.Local).AddTicks(2527),
+                            Id = new Guid("78af141c-adfd-4919-9b4d-7157a54663b6"),
+                            DatePosted = new DateTime(2024, 7, 27, 12, 7, 21, 218, DateTimeKind.Local).AddTicks(1755),
                             Idea = "Chtěl bych vytvořit nějakou animaci na vytváření koblih"
                         });
                 });
@@ -366,13 +366,13 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("fbd1c4f8-d01e-451a-9d3e-d70a46da2cb6"),
+                            Id = new Guid("6f156e15-13b5-4bbf-8946-a1890e5000b7"),
                             Description = "konec světa",
                             FileName = "konecsveta.jpg"
                         },
                         new
                         {
-                            Id = new Guid("aaabbae3-c3e3-49a6-a4ef-cba65219319a"),
+                            Id = new Guid("7213b10c-c9c0-4cd1-9bb9-f0ce13f7e1fa"),
                             Description = "stín minulosti",
                             FileName = "stinminulosti.jpg"
                         });
@@ -480,9 +480,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("85b88a39-91ac-4822-aab4-be078e6860e9"),
+                            Id = new Guid("513db39e-87f3-4eed-84a0-8579244584d6"),
                             Content = "obsah",
-                            Date = new DateTime(2024, 7, 18, 0, 0, 0, 0, DateTimeKind.Local),
+                            Date = new DateTime(2024, 7, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Description = "Description 1",
                             ImagePath = "/images/tvorbaher.jpg",
                             Keywords = "Keywords 1",
@@ -493,9 +493,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("72b6324b-7e55-4f89-afd7-04a1cabfd4d7"),
+                            Id = new Guid("6d55a81f-fb3a-4b43-8abd-23cd47f55cd6"),
                             Content = "obsah",
-                            Date = new DateTime(2024, 7, 18, 0, 0, 0, 0, DateTimeKind.Local),
+                            Date = new DateTime(2024, 7, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Description = "Description 2",
                             ImagePath = "/images/tvorbaher.jpg",
                             Keywords = "Keywords 2",
@@ -506,9 +506,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2b505921-17a0-4598-837f-da2f9e20e578"),
+                            Id = new Guid("f2a6c6db-5a62-4f55-a4a0-8001504c2178"),
                             Content = "obsah",
-                            Date = new DateTime(2024, 7, 18, 0, 0, 0, 0, DateTimeKind.Local),
+                            Date = new DateTime(2024, 7, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Description = "Description 3",
                             ImagePath = "/images/tvorbaher.jpg",
                             Keywords = "Keywords 3",
@@ -519,9 +519,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("cc8b3dda-2e83-439e-8cf7-f7553d3c1e2a"),
+                            Id = new Guid("0e998f99-5789-4911-9d04-02114872e521"),
                             Content = "obsah",
-                            Date = new DateTime(2024, 7, 18, 0, 0, 0, 0, DateTimeKind.Local),
+                            Date = new DateTime(2024, 7, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Description = "Description 4",
                             ImagePath = "/images/tvorbaher.jpg",
                             Keywords = "Keywords 4",
@@ -532,9 +532,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("17ecf5ae-d0a5-44eb-bc9d-c4b346e0f057"),
+                            Id = new Guid("1b58c0f9-3231-4488-b42a-b37d6c98dc1f"),
                             Content = "obsah",
-                            Date = new DateTime(2024, 7, 18, 0, 0, 0, 0, DateTimeKind.Local),
+                            Date = new DateTime(2024, 7, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Description = "Description 5",
                             ImagePath = "/images/tvorbaher.jpg",
                             Keywords = "Keywords 5",
@@ -545,9 +545,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = new Guid("87838a73-7bae-46de-9811-42c549aed891"),
+                            Id = new Guid("a0f47cc8-115f-4624-8700-4f719c1745cd"),
                             Content = "obsah",
-                            Date = new DateTime(2024, 7, 18, 0, 0, 0, 0, DateTimeKind.Local),
+                            Date = new DateTime(2024, 7, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Description = "Description 6",
                             ImagePath = "/images/tvorbaher.jpg",
                             Keywords = "Keywords 6",
@@ -679,9 +679,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a73b0150-c165-4f0c-9773-71836730b035",
+                            Id = "972444f9-e1bc-4060-bc80-ed2679a073c7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "21d7fe94-092a-42d9-b561-159104da0a63",
+                            ConcurrencyStamp = "4a17a2bc-0f31-4e31-a4c0-aa887832b8da",
                             Email = "info@kostlanovec.cz",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -689,7 +689,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                             NormalizedUserName = "ADMIN",
                             PasswordHash = "[REDACTED_HASH]",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "18ed0f09-634f-4934-bb9d-f0d29b0dfbd6",
+                            SecurityStamp = "7b9db1b0-14d8-4f53-b3b5-9e5a0f54697a",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
