@@ -4,6 +4,9 @@ using MojeVlastniStranka.Common.Enums;
 using MojeVlastniStranka.ApplicationCore.Dto.Project;
 using MojeVlastniStranka.ApplicationCore.Requests;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using MojeVlastniStranka.Common.Models;
+using Org.BouncyCastle.Crypto.Prng;
 
 namespace MojeVlastniStranka.ApplicationCore.Services
 {
@@ -14,6 +17,64 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		public ProjectService(DataContext context)
 		{
 			this.context = context;
+		}
+
+		public async Task<ResponseViewModel> AddProject(AddProjectRequest projectRequest)
+		{
+			var response = new ResponseViewModel();
+
+			if (string.IsNullOrEmpty(projectRequest.Description) ||
+				string.IsNullOrEmpty(projectRequest.Content) ||
+				string.IsNullOrEmpty(projectRequest.Title) ||
+				string.IsNullOrEmpty(projectRequest.Keywords) ||
+				string.IsNullOrEmpty(projectRequest.Name) ||
+				Equals(projectRequest.projectStatus, null) ||
+				string.IsNullOrEmpty(projectRequest.Slug))
+			{
+				response.IsSuccess = false;
+				response.Errors.Add("Všechna políčka jsou povinná!");
+				return response;
+			}
+
+			bool slugExists = await context.BlogPosts.AnyAsync(bp => bp.Slug == projectRequest.Slug);
+			if (slugExists)
+			{
+				response.IsSuccess = false;
+				response.Errors.Add($"Projekt se slugem: '{projectRequest.Slug}' ¨již existuje.");
+			}
+
+			bool nameExists = await context.BlogPosts.AnyAsync(bp => bp.Name == projectRequest.Name);
+			if (nameExists)
+			{
+				response.IsSuccess = false;
+				response.Errors.Add($"Projekt s tímto názvem: '{projectRequest.Name}' již existuje..");
+			}
+
+			if (!response.IsSuccess)
+			{
+				return response;
+			}
+
+			string imagePath = await UploadImageAsync(projectRequest.File);
+
+			var blogPost = Project.Create(
+				projectRequest.Description,
+				projectRequest.Content,
+				projectRequest.Title,
+				projectRequest.Keywords,
+				projectRequest.Name,
+				imagePath,
+				projectRequest.Slug,
+				DateTime.Now,
+				projectRequest.projectStatus
+			);
+
+			context.Projects.Add(blogPost);
+			await context.SaveChangesAsync();
+
+			response.IsSuccess = true;
+			response.SuccessMessage = "Projekt byl úspěšně přidán.";
+			return response;
 		}
 
 		/// <summary>
@@ -58,9 +119,12 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				Id = project.Id,
 				Name = project.Name,
 				Description = project.Description,
+				Keywords = project.Keywords,
+				Content = project.Content,
 				Slug = project.Slug,
 				FileUpload = project.ImagePath,
 				ProjectStatus = project.projectStatus,
+				Title = project.Title,
 			};
 
 			return projectEditDto;
@@ -69,16 +133,21 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// <summary>
 		/// Ukládá projekt do databáze.
 		/// </summary>
-		public async Task UpdateProject(UpdateProjectRequest request)
+		public async Task<ResponseViewModel> UpdateProject(UpdateProjectRequest request)
 		{
+			var response = new ResponseViewModel();
 			var project = context.Projects.Find(request.Id);
 
 			if (project == null)
 			{
-				return;
+				response.IsSuccess = false;
+				response.Errors.Add("Blog příspěvek nebyl nalezen.");
+				return response;
 			}
-
-			project.ImagePath = await UploadImageAsync(request.FileUpload);
+			if (request.FileUpload != null)
+			{
+				project.ImagePath = await UploadImageAsync(request.FileUpload);
+			}
 
 			project.Name = request.Name;
 			project.Description = request.Description;
@@ -87,6 +156,10 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
 			context.Projects.Update(project);
 			await context.SaveChangesAsync();
+
+			response.IsSuccess = true;
+			response.SuccessMessage = "Blog příspěvek byl úspěšně aktualizován.";
+			return response;
 		}
 
 
@@ -134,12 +207,15 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		private async Task<string> UploadImageAsync(IFormFile file)
 		{
 			var currentDirectory = Directory.GetCurrentDirectory();
-
-			var uploadsDirectory = currentDirectory + "\\wwwroot\\images\\project";
+			var uploadsDirectory = Path.Combine(currentDirectory, "wwwroot", "images", "project");
 			var filePath = Path.Combine(uploadsDirectory, file.FileName);
 
-			if (!Directory.Exists(uploadsDirectory))
+			if (File.Exists(filePath))
+			{
+				return ("/images/project/" + file.FileName);
+			}
 
+			if (!Directory.Exists(uploadsDirectory))
 			{
 				Directory.CreateDirectory(uploadsDirectory);
 			}

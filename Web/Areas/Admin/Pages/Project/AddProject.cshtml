@@ -1,4 +1,173 @@
 ﻿@page
 @model MojeVlastniStranka.Web.Areas.Admin.Pages.Project.AddProjectModel
 @{
+	ViewData["Title"] = "Přidání blogů";
 }
+@using MojeVlastniStranka.Common.Enums
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<script src="/js/summernote/Plugins/summernote-ext-addclass.js"></script>
+<script src="/js/summernote/Plugins/summernote-ownplugin.js"></script>
+<script src="/lib/typo-js/typo.js"></script>
+
+
+<div class="col-md-12">
+	@await Html.PartialAsync("_ResponseViewModel", Model.responseViewModel)
+	<link rel="stylesheet" href="~/css/fast-style-blog.css" asp-append-version="true" />
+	<div id="summernote"></div>
+	<button id="editSettingsBtn" class="btn btn-primary">Publikovat</button>
+</div>
+<div class="container d-flex justify-content-center">
+	<div id="settingsTable">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 mx-auto" style="margin-top:80px">
+					<form id="settingsForm" method="post" enctype="multipart/form-data">
+						<h1>Editování blog příspěvku.</h1>
+						<div class="form-group mt-2">
+							<label for="Name" class="text-white">Jméno blogu:</label>
+							<input name="Name" type="text" class="form-control bg-white" required />
+						</div>
+						<div class="form-group mt-2">
+							<label for="Slug" class="text-white">Url blogu:</label>
+							<input name="Slug" type="text" class="form-control bg-white"  required />
+						</div>
+						<div class="form-group mt-2">
+							<label for="Title" class="text-white">Titulek:</label>
+							<input type="text" class="form-control bg-white" name="Title"  required />
+						</div>
+						<div class="form-group mt-2">
+							<label for="floatingTextarea" class="text-white">Popis:</label>
+							<textarea class="form-control bg-white" placeholder="Zanech vystižný popis" id="floatingTextarea" name="Description" required></textarea>
+						</div>
+						<div class="form-group mt-2">
+							<label for="Keywords" class="text-white">Klíčová slova:</label>
+							<input type="text" class="form-control bg-white" name="Keywords" required />
+						</div>
+						<div class="form-group mt-2">
+							<label for="file" class="text-white">Obrázek:</label>
+							<input type="file" class="form-control bg-white" name="File" id="file" required />
+							<div id="image-preview" class="mt-2">
+								<div id="image-preview"></div>
+							</div>
+						</div>
+						<div class="form-group mt-2">
+							<label for="ProjectStatus" class="text-white">Status projektu:</label>
+							<select class="form-select" name="projectStatus">
+								<option value="">Všechny statusy</option>
+								@foreach (ProjectStatusEnum status in Enum.GetValues(typeof(ProjectStatusEnum)))
+								{
+									<option value="@status">@status</option>
+								}
+							</select>
+						</div>
+						<input type="hidden" name="Content" id="hiddenContent" />
+						<div class="d-flex justify-content-between mt-2">
+							<button id="backBtn" class="btn btn-secondary">Zpátky</button>
+							<button type="submit" class="btn btn-primary">Přidat</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$('#editSettingsBtn').click(function () {
+		$('#settingsTable').toggle();
+	});
+
+	$('#backBtn').click(function () {
+		$('#settingsTable').hide();
+	});
+
+	// Definování základního textu pro snaží orientaci v editoru
+	var defaultContent = '<main class="main"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>';
+
+	// Inicializování summernote
+	$('#summernote').summernote({
+		lang: 'cs-CZ',
+		spellCheck: true,
+		addclass: {
+			debug: false,
+			classTags: [{ title: "Button", "value": "btn btn-success" }, "body", "red", "h2__div__article", "header__h1", "fadeInLeft", "header__other", "header__p", "main"]
+		},
+		focus: true,
+		height: 300,
+		toolbar: [
+			['structure', ['structurePlugin']],
+			['img', ['picture']],
+			['style', ['style', 'addclass', 'clear']],
+			['fontstyle', ['bold', 'italic', 'ul', 'ol', 'link', 'paragraph']],
+			['fontstyleextra', ['strikethrough', 'underline', 'hr', 'color', 'superscript', 'subscript']],
+			['extra', ['video', 'table', 'height']],
+			['misc', ['undo', 'redo', 'codeview', 'help']],
+			['fontname', ['fontname']],
+			['fullscreen', ['fullscreen']]
+		],
+		callbacks: {
+			onInit: function () {
+				$('#summernote').summernote('code', defaultContent);
+			}
+		}
+	});
+
+	// Odesílání formuláře
+	$('form').on('submit', function () {
+		var htmlContent = $('.note-editable').html().trim();
+		$('#hiddenContent').val(htmlContent);
+		if (htmlContent === '' || htmlContent === '<p><br></p>') {
+			return null;
+		}
+	});
+
+	// Ukazání obrázků po jeho odesláním
+	function showImagePreview(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+
+			reader.onload = function (e) {
+				var img = document.createElement('img');
+				img.src = e.target.result;
+
+				var previewDiv = document.getElementById('image-preview');
+				previewDiv.innerHTML = '';
+				previewDiv.appendChild(img);
+			}
+
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+
+	document.getElementById('file').addEventListener('change', function () {
+		if (this.files && this.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				var img = document.createElement('img');
+				img.src = e.target.result;
+				var previewDiv = document.getElementById('image-preview');
+				previewDiv.innerHTML = '';
+				previewDiv.appendChild(img);
+			}
+			reader.readAsDataURL(this.files[0]);
+		}
+	});
+
+	// Speciální efekt pro moji stránku
+	$(document).ready(function () {
+		$('.note-editable').addClass('body');
+		$(window).scroll(function () {
+			$('.fadeIn, .fadeInUp, .fadeInDown, .fadeInRight, .fadeInLeft').each(function () {
+				let position = $(this).offset().top;
+				let topPosition = $(window).scrollTop() + $(window).height();
+				if (position < topPosition) {
+					$(this).addClass('visible');
+				}
+			});
+		});
+	});
+</script>

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.Common.Models;
 using MojeVlastniStranka.ApplicationCore.Dto.Blog;
 using MojeVlastniStranka.ApplicationCore.Requests;
@@ -426,13 +425,16 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// </summary>
 		private async Task<string> UploadImageAsync(IFormFile file)
 		{
-            var currentDirectory = Directory.GetCurrentDirectory();
-
-            var uploadsDirectory = currentDirectory + "\\wwwroot\\images\\blog";
+			var currentDirectory = Directory.GetCurrentDirectory();
+			var uploadsDirectory = Path.Combine(currentDirectory, "wwwroot", "images", "blog");
 			var filePath = Path.Combine(uploadsDirectory, file.FileName);
 
-			if (!Directory.Exists(uploadsDirectory))
+			if (File.Exists(filePath))
+			{
+				return ("/images/blog/" + file.FileName);
+			}
 
+			if (!Directory.Exists(uploadsDirectory))
 			{
 				Directory.CreateDirectory(uploadsDirectory);
 			}
@@ -444,7 +446,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
 			return ("/images/blog/" + file.FileName);
 		}
-
 
 		public async Task<List<BlogPostSummary>> SearchBlogPostsAsync(string query)
 		{

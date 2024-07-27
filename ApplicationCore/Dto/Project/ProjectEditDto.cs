@@ -77,6 +77,9 @@ namespace MojeVlastniStranka.ApplicationCore.Dto.Project
             set;
         }
 
+        /// <summary>
+        /// Vrací nebo nastavuje status projektů.
+        /// </summary>
         public ProjectStatusEnum ProjectStatus
 		{
 			get;

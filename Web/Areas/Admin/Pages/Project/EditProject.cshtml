@@ -1,8 +1,8 @@
 ﻿@page
 @model MojeVlastniStranka.User.Areas.Admin.Pages.Project.EditProjectModel
 @{
-	ViewData["Title"] = "Editování blogu";
 }
+@using MojeVlastniStranka.Common.Enums
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
@@ -12,22 +12,9 @@
 <script src="/lib/typo-js/typo.js"></script>
 
 
-<link rel="stylesheet" href="~/css/fast-style-blog.css" asp-append-version="true" />
 <div class="col-md-12">
-	@if (!string.IsNullOrEmpty(Model.SuccessMessage))
-	{
-		<div class="alert alert-success">
-			@Model.SuccessMessage
-		</div>
-	}
-
-	else if (!ViewData.ModelState.IsValid)
-	{
-		<div class="alert alert-danger">
-			@Html.ValidationSummary(false, "", new { @class = "text-danger" })
-		</div>
-	}
-
+	@await Html.PartialAsync("_ResponseViewModel", Model.responseViewModel)
+	<link rel="stylesheet" href="~/css/fast-style-blog.css" asp-append-version="true" />
 	<div id="summernote"></div>
 	<button id="editSettingsBtn" class="btn btn-primary">Publikovat</button>
 </div>
@@ -35,7 +22,7 @@
 	<div id="settingsTable">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-4  mx-auto" style="margin-top:80px">
+				<div class="col-md-4 mx-auto" style="margin-top:80px">
 					<form id="settingsForm" method="post" enctype="multipart/form-data">
 						<h1>Editování blog příspěvku.</h1>
 						<div class="form-group mt-2">
@@ -50,26 +37,51 @@
 							<label for="Title" class="text-white">Titulek:</label>
 							<input type="text" class="form-control bg-white" name="Title" value="@Model.ProjectEditDto.Title" required />
 						</div>
-						<div class="form-floating mt-2">
+						<div class="form-group mt-2">
+							<label for="floatingTextarea" class="text-white">Popis:</label>
 							<textarea class="form-control bg-white" placeholder="Zanech vystižný popis" id="floatingTextarea" name="Description" required>@Model.ProjectEditDto.Description</textarea>
-							<label for="floatingTextarea">Popis:</label>
 						</div>
 						<div class="form-group mt-2">
-							<label for="Keywords" class="text-white bg-white">Klíčová slova:</label>
-							<input type="text" class="form-control" name="Keywords" value="@Model.ProjectEditDto.Keywords" required />
+							<label for="Keywords" class="text-white">Klíčová slova:</label>
+							<input type="text" class="form-control bg-white" name="Keywords" value="@Model.ProjectEditDto.Keywords" required />
 						</div>
 						<div class="form-group mt-2">
-							<label for="file" class="text-white bg-white">Obrázek:</label>
-							<input type="file" class="form-control bg-dark" name="File" id="file" />
-							<div id="image-preview">
-								<img src="@Model.ProjectEditDto.FileUpload" />
+							<label for="file" class="text-white">Obrázek:</label>
+							<input type="file" class="form-control bg-white" name="File" id="file" />
+							<div id="image-preview" class="mt-2">
+								<img src="@Model.ProjectEditDto.FileUpload" class="img-fluid" />
 							</div>
 						</div>
+						<div class="form-group mt-2">
+							<label for="ProjectStatus" class="text-white">Status projektu:</label>
+						<div class="form-group mt-2">
+							<label for="ProjectStatus" class="text-white">Status projektu:</label>
+							<select class="form-select bg-white" name="ProjectStatus" id="ProjectStatus" required>
+								<option value="">Všechny statusy</option>
+								@foreach (ProjectStatusEnum status in Enum.GetValues(typeof(ProjectStatusEnum)))
+								{
+										if (status == Model.ProjectEditDto.ProjectStatus)
+										{
+											<option value="@status" selected>@status</option>
+										}
+										else
+										{
+											<option value="@status">@status</option>
+										}
+								}
+							</select>
+						</div>
+
+						</div>
+
+
 						<input type="hidden" name="Content" id="hiddenContent" />
 						<input type="hidden" asp-for="Id" />
-						<button type="submit" asp-page-handler="DeleteBlogById" class="btn btn-danger mt-2">Odstranit</button>
-						<button id="backBtn" class="btn btn-secondary mt-2">Zpátky</button>
-						<button type="submit" asp-page-handler="UpdateBlogPost" class="btn btn-primary mt-2">Aktualizovat</button>
+						<div class="d-flex justify-content-between mt-2">
+							<button type="submit" asp-page-handler="DeleteProjectById" class="btn btn-danger">Odstranit</button>
+							<button id="backBtn" class="btn btn-secondary">Zpátky</button>
+							<button type="submit" asp-page-handler="UpdateProject" class="btn btn-primary">Aktualizovat</button>
+						</div>
 					</form>
 				</div>
 			</div>

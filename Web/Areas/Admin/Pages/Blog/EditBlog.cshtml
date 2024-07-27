@@ -27,10 +27,10 @@
 	<button id="editSettingsBtn" class="btn btn-primary">Publikovat</button>
 </div> 
 <div class="container d-flex justify-content-center">
-<div id="settingsTable">
-	<div class="container">
-		<div class="row">
-				<div class="col-md-4  mx-auto">
+	<div id="settingsTable">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 mx-auto">
 					<form id="settingsForm" method="post" enctype="multipart/form-data" class="mt-2">
 						<h1>Editování blog příspěvku.</h1>
 						<div class="form-group mt-2">
@@ -45,29 +45,37 @@
 							<label for="Title" class="text-white">Titulek:</label>
 							<input type="text" class="form-control bg-white" name="Title" value="@Model.EditBlogPostDto.Title" required />
 						</div>
-						<div class="form-floating mt-2">
+						<div class="form-group mt-2">
+							<label for="floatingTextarea" class="text-white">Popis:</label>
 							<textarea class="form-control bg-white" placeholder="Zanech vystižný popis" id="floatingTextarea" name="Description" required>@Model.EditBlogPostDto.Description</textarea>
-							<label for="floatingTextarea">Popis:</label>
-						</div>
-
-						<div class="form-group mt-2">
-							<label for="Author" class="text-white bg-white">Autor:</label>
-							<input type="text" class="form-control" name="Author" value="@Model.EditBlogPostDto.Author" required/>
 						</div>
 						<div class="form-group mt-2">
-							<label for="Keywords" class="text-white bg-white">Klíčová slova:</label>
-							<input type="text" class="form-control" name="Keywords" value="@Model.EditBlogPostDto.Keywords" required/>
+							<label for="Author" class="text-white">Autor:</label>
+							<input type="text" class="form-control bg-white" name="Author" value="@Model.EditBlogPostDto.Author" required />
 						</div>
 						<div class="form-group mt-2">
-							<label for="file" class="text-white bg-white">Obrázek:</label>
+							<label for="Keywords" class="text-white">Klíčová slova:</label>
+							<input type="text" class="form-control bg-white" name="Keywords" value="@Model.EditBlogPostDto.Keywords" required />
+						</div>
+						<div class="form-group mt-2">
+							<label for="file" class="text-white">Obrázek:</label>
 							<input type="file" class="form-control bg-dark" name="File" id="file" />
 							<div id="image-preview">
-								<img src="@Model.EditBlogPostDto.FileUpload"/>
+								<img src="@Model.EditBlogPostDto.FileUpload" />
 							</div>
 						</div>
 						<div class="form-group mt-2">
-							<label for="BlogCategoryId" class="text-white bg-white">Kategorie blogů:</label>
+							<label for="BlogCategoryId" class="text-white">Kategorie blogů:</label>
 							<select class="form-select bg-white" name="BlogCategoryId">
+								@if (Model.EditBlogPostDto.BlogCategoryId == null)
+								{
+									<option value="" selected>Bez kategorie</option>
+								}
+								else
+								{
+									<option value="">Bez kategorie</option>
+								}
+
 								@foreach (var category in Model.BlogCategory)
 								{
 									if (category.Id == Model.EditBlogPostDto.BlogCategoryId)
@@ -82,17 +90,18 @@
 							</select>
 
 						</div>
-						<input type="hidden" name="Content" id="hiddenContent"/>
+						<input type="hidden" name="Content" id="hiddenContent" />
 						<input type="hidden" asp-for="Id" />
 						<button type="submit" asp-page-handler="DeleteBlogById" class="btn btn-danger mt-2">Odstranit</button>
 						<button id="backBtn" type="button" class="btn btn-secondary mt-2">Zpátky</button>
 						<button type="submit" asp-page-handler="UpdateBlogPost" class="btn btn-primary mt-2">Aktualizovat</button>
 					</form>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
-</div>
+
 
 <script>
 	$('#editSettingsBtn').click(function () {
