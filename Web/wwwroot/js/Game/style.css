@@ -2,12 +2,14 @@
   color: #fff;
   background: #17A2B8;
 }
-.wrapper{
-  width: 770px;
-  padding: 35px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+
+.wrapper {
+    color: rgba(6, 11, 39);
+    width: 770px;
+    padding: 35px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.05);
 }
 .wrapper .input-field{
   opacity: 0;
@@ -37,6 +39,10 @@
 }
 .typing-text p span.correct{
   color: #56964f;
+}
+
+span {
+    color: rgba(6, 11, 39, 0.3);
 }
 .typing-text p span.incorrect{
   color: #cb3439;

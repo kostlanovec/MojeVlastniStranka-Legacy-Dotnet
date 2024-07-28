@@ -291,7 +291,9 @@ input[type="text"] {
 
 .figure__blog {
 	display: flex;
-	flex-direction: column
+	flex-direction: column;
+	text-decoration: none;
+	color: var(--white);
 }
 
 .results {

@@ -63,13 +63,13 @@
 			<div class="slide">
 				@foreach (var post in Model.Posts)
 				{
-					<figure class="figure__blog">
+					<a href="/blog/@post.Slug" class="figure__blog">
 						<img src="@post.FilePath" alt="Blog">
 						<div class="figure__blog__div">
 							<h3>@post.Name</h3>
 							<p>@post.Description</p>
 						</div>
-					</figure>
+					</a>
 				}
 			</div>
 			<div class="pagination">
