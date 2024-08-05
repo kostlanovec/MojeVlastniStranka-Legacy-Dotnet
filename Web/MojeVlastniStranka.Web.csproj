@@ -60,6 +60,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
     <PackageReference Include="SimpleMvcSitemap" Version="4.0.1" />
+    <PackageReference Include="TimeZoneConverter" Version="6.1.0" />
   </ItemGroup>
 
   <ItemGroup>
