@@ -165,7 +165,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			return response;
 		}
 
-
 		/// <summary>
 		/// Vrací projekty podle jejich statusu.
 		/// </summary>
