@@ -1,8 +1,6 @@
 ﻿@page
 @model MojeVlastniStranka.Web.Areas.Admin.Pages.Project.IndexModel
 @using MojeVlastniStranka.Common.Enums
-@{
-}
 
 <div class="bg-secondary rounded h-100 p-4">
     <form method="get">
@@ -11,7 +9,7 @@
                 <input type="text" class="form-control" placeholder="Hledat podle názvu" name="search" />
             </div>
             <div class="col-md-3 mb-3">
-                <select class="form-select" name="projectStatus">
+                <select class="form-select" name="projectStatusEnum">
                     <option value="">Všechny statusy</option>
                     @foreach (ProjectStatusEnum status in Enum.GetValues(typeof(ProjectStatusEnum)))
 					{

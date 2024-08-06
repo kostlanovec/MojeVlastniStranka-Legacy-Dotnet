@@ -16,12 +16,16 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Project
 			this.context = context;
 			this.projectService = projectService;
 		}
-		public List<ProjectSummaryDto> Projects { get; set; }
 
-		public void OnGetAsync(DateTime? publicDate, string? search, ProjectStatusEnum? status)
+		public List<ProjectSummaryDto> Projects
 		{
-			var kys = 5;
-			Projects = projectService.GetProjectsByStatusDateSearchString(status,  publicDate, search);
+			get;
+			set;
+		}
+
+		public void OnGetAsync(string? search, ProjectStatusEnum? projectStatusEnum)
+		{
+			Projects = projectService.GetProjectsByStatusDateSearchString(projectStatusEnum, search);
 
 		}
 	}

@@ -169,18 +169,13 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// <summary>
 		/// Vrací projekty podle jejich statusu.
 		/// </summary>
-		public List<ProjectSummaryDto> GetProjectsByStatusDateSearchString(ProjectStatusEnum? status, DateTime? timePublic, string? searchString)
+		public List<ProjectSummaryDto> GetProjectsByStatusDateSearchString(ProjectStatusEnum? status, string? searchString)
 		{
 			var query = context.Projects.AsQueryable();
 
 			if (status.HasValue)
 			{
 				query = query.Where(p => p.projectStatus == status.Value);
-			}
-
-			if (timePublic.HasValue)
-			{
-				query = query.Where(p => p.Date.Date == timePublic.Value.Date);
 			}
 
 			if (!string.IsNullOrEmpty(searchString))
