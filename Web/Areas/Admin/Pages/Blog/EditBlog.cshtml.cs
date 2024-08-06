@@ -100,8 +100,6 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
 			await blogService.DeleteBlogPost(Id);
 
 			return RedirectToPage("/Blog/Bloglist", new { area = "Admin" });
-
-
 		}
 	}
 }

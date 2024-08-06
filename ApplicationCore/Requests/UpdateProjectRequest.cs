@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using MojeVlastniStranka.Common.Enums;
 using System.ComponentModel.DataAnnotations;
 namespace MojeVlastniStranka.ApplicationCore.Requests
@@ -19,6 +20,15 @@ namespace MojeVlastniStranka.ApplicationCore.Requests
 		/// Vrací nebo nastavuje název projektu.
 		/// </summary>
 		public string Name
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Vrací nebo nastavuje title.
+		/// </summary>
+		public string Title
 		{
 			get;
 			set;
@@ -51,6 +61,23 @@ namespace MojeVlastniStranka.ApplicationCore.Requests
 			set;
 		}
 
+		/// <summary>
+		/// Vrací nebo nastavuje obsah projektů.
+		/// </summary>
+		public string Content
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Vrací nebo nastavuje klíčová slova.y
+		/// </summary>
+		public string Keywords
+		{
+			get;
+			set;
+		}
 
 		/// <summary>
 		/// Url cesta k obrázku.

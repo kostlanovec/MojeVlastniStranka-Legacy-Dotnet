@@ -54,8 +54,6 @@
 						</div>
 						<div class="form-group mt-2">
 							<label for="ProjectStatus" class="text-white">Status projektu:</label>
-						<div class="form-group mt-2">
-							<label for="ProjectStatus" class="text-white">Status projektu:</label>
 							<select class="form-select bg-white" name="ProjectStatus" id="ProjectStatus" required>
 								<option value="">Všechny statusy</option>
 								@foreach (ProjectStatusEnum status in Enum.GetValues(typeof(ProjectStatusEnum)))
@@ -71,10 +69,6 @@
 								}
 							</select>
 						</div>
-
-						</div>
-
-
 						<input type="hidden" name="Content" id="hiddenContent" />
 						<input type="hidden" asp-for="Id" />
 						<div class="d-flex justify-content-between mt-2">

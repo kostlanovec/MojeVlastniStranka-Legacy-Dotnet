@@ -6,7 +6,6 @@ using MojeVlastniStranka.ApplicationCore.Requests;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.Common.Models;
 using MojeVlastniStranka.DataAccess;
-using MojeVlastniStranka.DataAccess.Entities;
 
 namespace MojeVlastniStranka.User.Areas.Admin.Pages.Project
 {

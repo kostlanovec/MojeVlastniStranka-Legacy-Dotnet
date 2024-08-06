@@ -6,7 +6,6 @@ using MojeVlastniStranka.ApplicationCore.Requests;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using MojeVlastniStranka.Common.Models;
-using Org.BouncyCastle.Crypto.Prng;
 
 namespace MojeVlastniStranka.ApplicationCore.Services
 {
@@ -153,6 +152,10 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			project.Description = request.Description;
 			project.Slug = request.Slug;
 			project.projectStatus = request.Status;
+			project.Content = request.Content;
+			project.Date = DateTime.Now;
+			project.Title = request.Title;
+			project.Keywords = request.Keywords;
 
 			context.Projects.Update(project);
 			await context.SaveChangesAsync();
