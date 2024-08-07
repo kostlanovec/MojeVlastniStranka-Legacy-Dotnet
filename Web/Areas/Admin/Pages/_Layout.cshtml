@@ -9,7 +9,6 @@
 @functions {
 	 public Task<List<NotificationDto>> GetDataFromDatabase()
 	 {
-	 // Zde získejte data z databáze
 		 var data = notificationService.GetThreeNotification();
 		 return data;
 	 }
@@ -19,7 +18,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Admin</title>
+	<title>@ViewData["Title"] - Admin</title>
 	<link href="/img/IconHeader.svg" rel="icon">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">

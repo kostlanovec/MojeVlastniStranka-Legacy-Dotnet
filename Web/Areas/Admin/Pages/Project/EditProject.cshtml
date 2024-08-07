@@ -1,8 +1,9 @@
 ﻿@page
 @model MojeVlastniStranka.User.Areas.Admin.Pages.Project.EditProjectModel
-@{
-}
 @using MojeVlastniStranka.Common.Enums
+@{
+	ViewData["Title"] = "Editování projektu příspěvku";
+}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
@@ -47,14 +48,14 @@
 						</div>
 						<div class="form-group mt-2">
 							<label for="file" class="text-white">Obrázek:</label>
-							<input type="file" class="form-control bg-white" name="File" id="file" />
+							<input type="file" class="form-control bg-white" name="FileUpload" id="file" />
 							<div id="image-preview" class="mt-2">
 								<img src="@Model.ProjectEditDto.FileUpload" class="img-fluid" />
 							</div>
 						</div>
 						<div class="form-group mt-2">
 							<label for="ProjectStatus" class="text-white">Status projektu:</label>
-							<select class="form-select bg-white" name="ProjectStatus" id="ProjectStatus" required>
+							<select class="form-select bg-white" name="Status" id="ProjectStatus" required>
 								<option value="">Všechny statusy</option>
 								@foreach (ProjectStatusEnum status in Enum.GetValues(typeof(ProjectStatusEnum)))
 								{
