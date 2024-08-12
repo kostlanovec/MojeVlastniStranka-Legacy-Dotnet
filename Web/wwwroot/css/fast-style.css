@@ -311,11 +311,6 @@ input[type="text"] {
 	display: flex;
 }
 
-.header--relative{
-		position: relative;
-		z-index: 69;
-}
-
 .arrow {
 	border: none;
 	background-color: transparent;

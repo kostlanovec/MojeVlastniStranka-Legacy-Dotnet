@@ -3,7 +3,7 @@
 	public class NewsLetterRequest
 	{
 		/// <summary>
-		/// Vrací nebo nastavuje subject v emailu.
+		/// Vrací nebo nastavuje subject emailů.
 		/// </summary>
 		public string Subject
 		{

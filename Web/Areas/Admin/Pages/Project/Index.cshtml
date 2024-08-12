@@ -39,7 +39,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                     <a class="btn btn-sm btn-outline-secondary" asp-page="./EditProject" asp-route-id="@project.Id">Edit</a>
-                                    <a class="btn btn-sm btn-outline-secondary" asp-page="./@project.Slug/">Pohled</a>
+                                    <a class="btn btn-sm btn-outline-secondary" asp-page="/projekty/@project.Slug" asp-area="">Pohled</a>
                                 </div>
                                 <small class="text-muted">@project.PublicDate</small>
                             </div>

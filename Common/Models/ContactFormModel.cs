@@ -1,4 +1,4 @@
-﻿namespace MojeVlastniStranka.Web.Models
+﻿namespace MojeVlastniStranka.Common.Models
 {
 	public class ContactFormModel
 	{

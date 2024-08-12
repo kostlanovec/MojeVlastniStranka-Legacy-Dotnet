@@ -16,26 +16,32 @@ namespace MojeVlastniStranka.ApplicationCore.Services
             this.context = context;
         }
 
-		// todo logování
-
 		/// <summary>
 		/// Posílá newsletter.
 		/// </summary>
-		public void SendMail(NewsLetterRequest newsLetterRequest)
+		public async Task SendMail(NewsLetterRequest newsLetterRequest)
 		{
 			var message = new MimeMessage();
-			// todo tohle předělat, možná číst z appsettings?
-			message.From.Add(new MailboxAddress("Jan Sebastián Kostlán", "kostlan@kostlanovec.cz"));
-			message.To.Add(new MailboxAddress("Jan Sebastián Kostlán", "info@kostlanovec.cz"));
-			message.Subject = newsLetterRequest.Subject;
+			var emails = await GetAllNewsletterEmails();
 
-			message.Body = new TextPart("html")
+			if (emails != null)
 			{
-				Text = newsLetterRequest.Body
-			};
+				foreach (var email in emails)
+				{
+					message.From.Add(new MailboxAddress("Jan Sebastián Kostlán", "kostlan@kostlanovec.cz"));
+					message.To.Add(new MailboxAddress(email.Email, email.Email)); 
+					message.Subject = newsLetterRequest.Subject;
 
-			Client(message, "", "");
+					message.Body = new TextPart("html")
+					{
+						Text = newsLetterRequest.Body
+					};
+
+					Client(message, "kostlan@kostlanovec.cz", "[REMOVED]"); 
+				}
+			}
 		}
+
 
 		public void SendVeritificationEmail()
 		{
@@ -49,14 +55,14 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			//	Text = newsLetterRequest.Body
 			//};
 
-			Client(message, "", "");
+			Client(message, "kostlan@kostlanovec.cz", "[REMOVED]");
 		}
 
 		/// <summary>
 		/// Klient na připojení k webmailu a následného odeslání emailu s přihlášením.
 		/// </summary>
 		/// <param name="message">Zpráva</param>
-		/// <param name="email">emailová adresa.</param>
+		/// <param name="email">Emailová adresa.</param>
 		/// <param name="password">Heslo.</param>
 		private void Client(MimeMessage message, string email, string password)
 		{
@@ -64,26 +70,44 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			{
 				try
 				{
-					client.Connect("mail.example.com", 587, false);
+					// Připojení k hlavnímu SMTP serveru
+					client.Connect("smtp.example.com", 587, false);  // Port 587 pro TLS
 				}
-				catch (Exception)
+				catch (Exception ex)
 				{
-					client.Connect("mail.infifire.com", 465, true);
+					// Zpracování chyby připojení
+					Console.WriteLine("Chyba připojení k SMTP serveru: " + ex.Message);
+					return;
 				}
 
-				// todo čtení z jsonu
-				client.Authenticate("kostlan@kostlanovec.cz", "[REDACTED]");
-				client.Send(message);
-				client.Disconnect(true);
+				try
+				{
+					// Autentizace pomocí poskytnutých přihlašovacích údajů
+					client.Authenticate(email, password);
+
+					// Odeslání zprávy
+					client.Send(message);
+				}
+				catch (Exception ex)
+				{
+					// Zpracování chyby při odesílání
+					Console.WriteLine("Chyba při odesílání emailu: " + ex.Message);
+				}
+				finally
+				{
+					// Odpojení od serveru
+					client.Disconnect(true);
+				}
 			}
 		}
 
-        /// <summary>
-        /// Přidá email pro newsletter.
-        /// </summary>
-        /// <param name="email">Emailová adresa</param>
-        /// <returns>Vrací true, pokud byl email úspěšně přidán, jinak false</returns>
-        public bool AddEmailForNewsLetter(string email)
+
+		/// <summary>
+		/// Přidá email pro newsletter.
+		/// </summary>
+		/// <param name="email">Emailová adresa</param>
+		/// <returns>Vrací true, pokud byl email úspěšně přidán, jinak false</returns>
+		public bool AddEmailForNewsLetter(string email)
         {
             bool emailExist = context.NewsLetters.Any(x => x.Email == email);
             if (emailExist)
@@ -97,5 +121,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
             return true; // Email byl úspěšně přidán
         }
 
-    }
+		public async Task<List<NewsLetter>> GetAllNewsletterEmails()
+		{
+			return context.NewsLetters.ToList();
+		}
+	}
 }

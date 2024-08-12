@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+Ôªøusing Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MojeVlastniStranka.ApplicationCore.Dto.Blog;
 using MojeVlastniStranka.ApplicationCore.Services;
@@ -39,7 +39,7 @@ namespace MojeVlastniStranka.Web.Pages
 				{
 					""@context"": ""http://schema.org"",
 					""@type"": ""Person"",
-					""name"": ""Jan Sebasti·n Kostl·n"",
+					""name"": ""Jan Sebasti√°n Kostl√°n"",
 					""url"": ""https://www.kostlanovec.cz"",
 					""sameAs"": [
 						""https://www.linkedin.com/in/jan-kostlan-7a9bb4215"",
@@ -48,9 +48,9 @@ namespace MojeVlastniStranka.Web.Pages
 						""https://www.facebook.com/jan.sebastiankostlan.1""
 					],
 					""email"": ""kostlan@kostlanovec.cz"",
-					""description"": ""OsobnÌ str·nka Jana Sebasti·na Kostl·na. Tv?rce, program·tor web? a desktopov˝ch aplikacÌ."",
+					""description"": ""Osobn√≠ str√°nka Jana Sebasti√°na Kostl√°na. Tv?rce, program√°tor web? a desktopov√Ωch aplikac√≠."",
 					""image"": ""https://kostlanovec.cz/images/profil-photo.jpg"",
-					""jobTitle"": ""Program·tor""
+					""jobTitle"": ""Program√°tor""
 				}";
         }
 
@@ -59,7 +59,7 @@ namespace MojeVlastniStranka.Web.Pages
             if (!ModelState.IsValid)
             {
 				Posts = await blogService.GetThreePost();
-				ModelState.AddModelError(string.Empty, "Tohle nenÌ validnÌ email.");
+				ModelState.AddModelError(string.Empty, "Tohle nen√≠ validn√≠ email.");
 				return Page();
             }
 
@@ -68,12 +68,12 @@ namespace MojeVlastniStranka.Web.Pages
             if (!isEmailAdded)
             {
 				Posts = await blogService.GetThreePost();
-				// Pokud email jiû existuje, nastavte chybu
-				ModelState.AddModelError(string.Empty, "Tento email je jiû zaregistrov·n.");
+				// Pokud email ji≈æ existuje, nastavte chybu
+				ModelState.AddModelError(string.Empty, "Tento email je ji≈æ zaregistrov√°n.");
                 return Page();
             }
 
-			TempData["SuccessMessage"] = "Email byl ˙sp?ön? p?id·n.";
+			TempData["SuccessMessage"] = "Email byl √∫spƒõ≈°nƒõ p≈ôid√°n.";
 
 			Posts = await blogService.GetThreePost();
 

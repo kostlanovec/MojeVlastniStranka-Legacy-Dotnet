@@ -22,7 +22,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			var addingIdeaToRel = IdeaToRelease.Create(ideaToReleaseRequest.Idea, DateTime.Now);
 
 			context.IdeaToReleases.Add(addingIdeaToRel);
-			context.SaveChangesAsync();
+			context.SaveChanges();
 			return true;
 		}
 
@@ -81,7 +81,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			if (bugToRemove != null)
 			{
 				context.ReportedBugs.Remove(bugToRemove);
-				await context.SaveChangesAsync();
+				context.SaveChanges();
 			}
 		}
 

@@ -1,5 +1,7 @@
 ﻿using MojeVlastniStranka.DataAccess;
 using Microsoft.EntityFrameworkCore;
+using MojeVlastniStranka.Common.Enums;
+using Microsoft.Identity.Client;
 
 namespace MojeVlastniStranka.ApplicationCore.Services
 {
@@ -26,6 +28,48 @@ namespace MojeVlastniStranka.ApplicationCore.Services
         public async Task<int> NumberOfBlogPosts()
         {
             return await context.BlogPosts.CountAsync();
+        }
+
+        /// <summary>
+        /// Vrací nebo nastavuje počet požadavků na službu.
+        /// </summary>
+        public async Task<int> NumberOfServices()
+        {
+            return await context.ServiceRequests.CountAsync();
+        }
+
+        // todo jak udělat, získavání služeb
+        public async Task<List<GraphMainServices>> NumberOfServicesPerMainServices()
+        {
+            var result = new List<GraphMainServices>();
+            // dynamicky získávat hlavní služby
+            foreach (MainServiceEnum mainService in Enum.GetValues(typeof(MainServiceEnum)))
+            {
+                int servicesRequestNumber = context.ServiceRequests.Where(n => n.MainService == mainService).Count();
+
+                var GraphMainServices = new GraphMainServices()
+                {
+                    NameOfService = mainService.ToString(),
+                    NumberOfServices = servicesRequestNumber
+                };
+                result.Add(GraphMainServices);
+            }
+            return result;
+        }
+
+        public class GraphMainServices
+        {
+            public string NameOfService
+            {
+                get;
+                set;
+            }
+
+            public int NumberOfServices
+            {
+                get;
+                set;
+            }
         }
     }
 }

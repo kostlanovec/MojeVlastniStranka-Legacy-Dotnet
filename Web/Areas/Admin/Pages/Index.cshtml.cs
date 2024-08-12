@@ -1,7 +1,8 @@
-using Microsoft.AspNetCore.Authorization;
+ï»¿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
+using static MojeVlastniStranka.ApplicationCore.Services.DashboardService;
 
 namespace MojeVlastniStranka.User.Areas.Admin.Pages.Account.Manage
 {
@@ -18,7 +19,7 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Account.Manage
         }
 
         /// <summary>
-        /// Získá poèet vyplìnıch kontaktních formuláøù
+        /// ZÃ­skÃ¡ poÃ¨et vyplÃ¬nÃ½ch kontaktnÃ­ch formulÃ¡Ã¸Ã¹
         /// </summary>
         public int NumberOfContactForms
         {
@@ -27,7 +28,7 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Account.Manage
         }
 
         /// <summary>
-        /// Získá poèet blogovıch pøíspìvkù.
+        /// ZÃ­skÃ¡ poÃ¨et blogovÃ½ch pÃ¸Ã­spÃ¬vkÃ¹.
         /// </summary>
         public int NumberOfBlogPosts
         {
@@ -35,14 +36,29 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Account.Manage
             set;
         }
 
+        public int NumberOfServicesRequest
+        {
+            get;
+            set;
+        }
+
+        public List<GraphMainServices> MainServicesData
+        {
+            get;
+            set;
+        }
+
         /// <summary>
-        /// Získá poèet vyplìnıch kontaktních formuláøù a poèet blogovıch pøíspìvkù.
+        /// ZÃ­skÃ¡ poÃ¨et vyplÃ¬nÃ½ch kontaktnÃ­ch formulÃ¡Ã¸Ã¹ a poÃ¨et blogovÃ½ch pÃ¸Ã­spÃ¬vkÃ¹.
         /// </summary>
         /// <returns></returns>
         public async Task OnGetAsync()
         {
             NumberOfContactForms = await dashboardService.NumberOfContactForms();
             NumberOfBlogPosts = await dashboardService.NumberOfBlogPosts();
+            NumberOfServicesRequest = await dashboardService.NumberOfServices();
+            MainServicesData = await dashboardService.NumberOfServicesPerMainServices();
+            // todo vzÃ­t data pro graf pro nÃ¡vÅ¡tÄ›vnost z api.
         }
     }
 }
