@@ -5,10 +5,10 @@
     var alertClass = Model.IsSuccess ? "alert-success" : "alert-danger";
     var alertTitle = Model.IsSuccess ? "Úspěch:" : "Chyby:";
 
-    <div class="alert @alertClass alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+    <div class="alert @alertClass alert-dismissible face show" role="alert" bin_skin_checked="1">
+        <i class="fa fa-exclamation-circle me-2"></i>
+
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         <strong>@alertTitle</strong>
 
         @if (Model.IsSuccess && !string.IsNullOrEmpty(Model.SuccessMessage))
@@ -25,5 +25,6 @@
                 }
             </ul>
         }
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }

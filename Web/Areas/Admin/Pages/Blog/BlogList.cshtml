@@ -50,7 +50,7 @@
 						<div class="d-flex justify-content-between align-items-center">
 							<div class="btn-group">
 								<a class="btn btn-sm btn-outline-secondary" asp-page="./EditBlog" asp-route-id="@post.Id">Edit</a>
-								<a class="btn btn-sm btn-outline-secondary" asp-page="./blog/@post.Slug/">Pohled</a>
+								<a class="btn btn-sm btn-outline-secondary" target="_blank" href="/blog/@post.Slug/">Pohled</a>
 							</div>
 							<small class="text-muted">@post.TimePublic</small>
 						</div>

@@ -13,7 +13,6 @@
 <script src="/js/summernote/Plugins/summernote-ownplugin.js"></script>
 <script src="/lib/typo-js/typo.js"></script>
 
-
 <div class="col-md-12">
 	@await Html.PartialAsync("_ResponseViewModel", Model.responseViewModel)
 	<link rel="stylesheet" href="~/css/fast-style-blog.css" asp-append-version="true" />
@@ -28,11 +27,11 @@
 					<form id="settingsForm" method="post" enctype="multipart/form-data">
 						<h1>Editování blog příspěvku.</h1>
 						<div class="form-group mt-2">
-							<label for="Name" class="text-white">Jméno blogu:</label>
+							<label for="Name" class="text-white">Jméno projektu:</label>
 							<input name="Name" type="text" class="form-control bg-white" required />
 						</div>
 						<div class="form-group mt-2">
-							<label for="Slug" class="text-white">Url blogu:</label>
+							<label for="Slug" class="text-white">Url projektu:</label>
 							<input name="Slug" type="text" class="form-control bg-white"  required />
 						</div>
 						<div class="form-group mt-2">
