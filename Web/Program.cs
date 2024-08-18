@@ -4,7 +4,6 @@ using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
 using MojeVlastniStranka.DataAccess.Entities;
 
-
 namespace MojeVlastniStrankaFinanali.Web
 {
     public class Program

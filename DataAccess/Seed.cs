@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using MojeVlastniStranka.DataAccess.Entities;
 using MojeVlastniStranka.Common.Enums;
@@ -27,13 +25,14 @@ namespace Reservanto.NPS.DataAccess
                 new { blogCategoryBlogPripsevky.Id, blogCategoryBlogPripsevky.Name }
             );
 
+
             // Create BlogPosts
             var blogPost1 = BlogPost.Create(
-                "moje klobasa", "<h1>Ahoj</h1>", "Deset malých švestek", "Pepek Námořník",
+                "moje klobasa", "<main class=\"main blog--post\"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>", "Deset malých švestek", "Pepek Námořník",
                 "rohlík, klobása", blogCategoryProjekty.Id, "Jak mit obri pero", "imaablogimages/boxing.jpg", "Jak-mit-obri-pero", DateTime.Now);
 
             var blogPost2 = BlogPost.Create(
-                "moje klobasa", "<h1>Projekt</h1>", "Pět malých kačátek", "Chleba s marmeládou",
+                "moje klobasa", "<main class=\"main blog--post\"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>", "Pět malých kačátek", "Chleba s marmeládou",
                 "Jsi slizký had, nemám tě rád", blogCategoryProjekty.Id, "deset malych cernousku", "blogimages/boxing.jpg", "deset-malych-cernousku", DateTime.Now);
 
             // Seed BlogPosts
@@ -56,12 +55,12 @@ namespace Reservanto.NPS.DataAccess
             // Create and Seed Projects
             var projects = new List<Project>
             {
-                Project.Create("Description 1", "obsah", "Title 1", "Keywords 1", "Project 1", "/images/tvorbaher.jpg", "slug-1", DateTime.Now, ProjectStatusEnum.Planning),
-                Project.Create("Description 2", "obsah", "Title 2", "Keywords 2", "Project 2", "/images/tvorbaher.jpg", "slug-2", DateTime.Now, ProjectStatusEnum.Development),
-                Project.Create("Description 3", "obsah", "Title 3", "Keywords 3", "Project 3", "/images/tvorbaher.jpg", "slug-3", DateTime.Now, ProjectStatusEnum.Finalized),
-                Project.Create("Description 4", "obsah", "Title 4", "Keywords 4", "Project 4", "/images/tvorbaher.jpg", "slug-4", DateTime.Now, ProjectStatusEnum.Planning),
-                Project.Create("Description 5", "obsah", "Title 5", "Keywords 5", "Project 5", "/images/tvorbaher.jpg", "slug-5", DateTime.Now, ProjectStatusEnum.Development),
-                Project.Create("Description 6", "obsah", "Title 6", "Keywords 6", "Project 6", "/images/tvorbaher.jpg", "slug-6", DateTime.Now, ProjectStatusEnum.Finalized)
+                Project.Create("Description 1", "<main class=\"main blog--post\"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>", "Title 1", "Keywords 1", "Project 1", "/images/tvorbaher.jpg", "slug-1", DateTime.Now, ProjectStatusEnum.Planning),
+                Project.Create("Description 2", "<main class=\"main blog--post\"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>", "Title 2", "Keywords 2", "Project 2", "/images/tvorbaher.jpg", "slug-2", DateTime.Now, ProjectStatusEnum.Development),
+                Project.Create("Description 3", "<main class=\"main blog--post\"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>", "Title 3", "Keywords 3", "Project 3", "/images/tvorbaher.jpg", "slug-3", DateTime.Now, ProjectStatusEnum.Finalized),
+                Project.Create("Description 4", "<main class=\"main blog--post\"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>", "Title 4", "Keywords 4", "Project 4", "/images/tvorbaher.jpg", "slug-4", DateTime.Now, ProjectStatusEnum.Planning),
+                Project.Create("Description 5", "<main class=\"main blog--post\"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>", "Title 5", "Keywords 5", "Project 5", "/images/tvorbaher.jpg", "slug-5", DateTime.Now, ProjectStatusEnum.Development),
+                Project.Create("Description 6", "<main class=\"main blog--post\"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>", "Title 6", "Keywords 6", "Project 6", "/images/tvorbaher.jpg", "slug-6", DateTime.Now, ProjectStatusEnum.Finalized)
             };
 
             modelBuilder.Entity<Project>().HasData(projects);

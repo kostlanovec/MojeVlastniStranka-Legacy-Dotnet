@@ -16,8 +16,8 @@ using Microsoft.Extensions.Logging;
 
 namespace MojeVlastniStranka.Web.Areas.Identity.Pages.Account
 {
-    [AllowAnonymous]
-    public class RegisterModel : PageModel
+	[Authorize]
+	public class RegisterModel : PageModel
     {
         private readonly SignInManager<DataAccess.Entities.User> _signInManager;
         private readonly UserManager<DataAccess.Entities.User> _userManager;
