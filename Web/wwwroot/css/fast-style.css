@@ -16,6 +16,11 @@ figure {
 	overflow: hidden;
 }
 
+.header__relative{
+	position: relative;
+	z-index: 2;
+}
+
 *, *::before, *::after {
 	box-sizing: border-box;
 }
