@@ -307,12 +307,12 @@ input[type="text"] {
 
 .results {
 	position: absolute;
-	top: 11em;
 	background-color: var(--white);
 	width: 100%;
 	max-width: 300px;
 	margin: 0;
 	display:flex;
+	z-index: 5;
 }
 
 .results__a{

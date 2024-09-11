@@ -10,11 +10,11 @@
 @using MojeVlastniStranka.Common.Extension
 
 <main class="main">
-    <header class="reveal header__relative">
+    <header class="reveal">
 		<h1>Blog</h1>
         <input id="searchInput" class="searchbar" type="text" placeholder="hledat" />
-		<div class="results" id="results"></div>
 	</header>
+    <div class="results" id="results"></div>
     @foreach (var category in Model.CategoriesWithPosts)
     {
         <section class="reveal">
