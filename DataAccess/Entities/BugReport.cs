@@ -24,7 +24,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// Vrací nebo nastavuje URL, na které byl bug nalezen.
 		/// </summary>
 		[Url]
-        [Column(TypeName = "nvarchar(1000)")]
+        [Column(TypeName = "text")]
         public string Url
 		{
 			get;
@@ -34,7 +34,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		/// Vrací nebo nastavuje report o nalezeném bugu.
 		/// </summary>
-        [Column(TypeName = "nvarchar(1000)")]
+        [Column(TypeName = "text")]
         public string Report
 		{
 			get;

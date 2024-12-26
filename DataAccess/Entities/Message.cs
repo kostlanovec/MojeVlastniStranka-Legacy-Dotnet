@@ -18,6 +18,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		/// Vrací nebo nastavuje, kdy byla notifikace odeslaná.
 		/// </summary>
+		[Column(TypeName = "timestamp")]
 		public DateTime TimePublish
 		{
 			get;
@@ -27,7 +28,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// <summary>
         /// Vrací nebo nastavuje krátkou zprávu.
         /// </summary>
-        [Column(TypeName = "nvarchar(100)")]
+        [Column(TypeName = "text")]
         public string ShortMessage
 		{
 			get;
@@ -37,7 +38,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// <summary>
         /// Vrací nebo nastavuje dlouhou zprávu.
         /// </summary>
-        [Column(TypeName = "nvarchar(1000)")]
+        [Column(TypeName = "text")]
         public string LongMessage
 		{
 			get;

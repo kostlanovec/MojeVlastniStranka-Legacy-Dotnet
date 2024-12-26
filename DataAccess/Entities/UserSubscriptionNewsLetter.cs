@@ -15,21 +15,21 @@ namespace MojeVlastniStranka.DataAccess.Entities
             set;
         }
 
-        /// <summary>
-        /// Vrací nebo nastavuje Email odběrovatele.
-        /// </summary>
-        [Column(TypeName = "nvarchar(1000)")]
-        public string email
+		/// <summary>
+		/// Vrací nebo nastavuje Email odběrovatele.
+		/// </summary>
+		[Column(TypeName = "text")]
+		public string email
         {
             get;
             set;
         }
 
-        /// <summary>
-        /// Vrací nebo nastavuje has uživatelovi.
-        /// </summary>
-        [Column(TypeName = "nvarchar(1000)")]
-        public string Hastag
+		/// <summary>
+		/// Vrací nebo nastavuje has uživatelovi.
+		/// </summary>
+		[Column(TypeName = "text")]
+		public string Hastag
 		{
 			get;
 			set;

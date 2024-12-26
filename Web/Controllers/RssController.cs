@@ -14,7 +14,7 @@ namespace MojeVlastniStranka.Web.Controllers
 			this.context = context;
 		}
 
-		//zlepšit rss na jinou úroveň
+		//todo zlepšit rss na jinou úroveň
 		public class RssDocument
 		{
 			public XDocument CreateRssXML(IEnumerable<XElement> rssItems)

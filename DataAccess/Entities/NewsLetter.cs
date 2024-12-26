@@ -18,7 +18,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// <summary>
         /// Vrací nebo nastavuje email NewLetteru.
         /// </summary>
-        [Column(TypeName = "nvarchar(1000)")]
+        [Column(TypeName = "text")]
         public string Email
 		{
 			get;

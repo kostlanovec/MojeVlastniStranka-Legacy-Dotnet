@@ -11,8 +11,8 @@
 
 <main class="main main__project">
     <h1 class="reveal">Projekty</h1>
-    <div class="projects__container reveal">
-        <button class="arrow--project rotated" onclick="toggleSection('development-projects', this)"></button>
+    <div class="projects__container reveal" onclick="toggleSection('development-projects', this)">
+        <button class="arrow--project rotated"></button>
         <h2>Rozpracované projekty</h2>
     </div>
     <section id="development-projects" style="display:grid" class="projects__section reveal">
@@ -28,8 +28,8 @@
             </article>
         }
     </section>
-    <div class="projects__container reveal">
-        <button class="arrow--project" onclick="toggleSection('finalized-projects', this)"></button>
+    <div class="projects__container reveal" onclick="toggleSection('finalized-projects', this)">
+        <button class="arrow--project"></button>
         <h2>Hotové projekty</h2>
     </div>
     <section id="finalized-projects" class="projects__section reveal">
@@ -44,8 +44,8 @@
             </article>
         }
     </section>
-    <div class="projects__container reveal">
-        <button class="arrow--project" onclick="toggleSection('planning-projects', this)"></button>
+    <div class="projects__container reveal" onclick="toggleSection('planning-projects', this)">
+        <button class="arrow--project"></button>
         <h2>Plánované projekty</h2>
     </div>
     <section id="planning-projects" class="projects__section reveal">
@@ -62,8 +62,10 @@
     </section>
 </main>
 <script>
-    function toggleSection(sectionId, button) {
+    function toggleSection(sectionId, container) {
         var section = document.getElementById(sectionId);
+        var button = container.querySelector('.arrow--project');
+
         if (section.style.display === 'none' || section.style.display === '') {
             section.style.display = 'grid';
         } else {

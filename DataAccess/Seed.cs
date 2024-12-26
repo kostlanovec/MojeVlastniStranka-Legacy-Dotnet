@@ -25,7 +25,6 @@ namespace Reservanto.NPS.DataAccess
                 new { blogCategoryBlogPripsevky.Id, blogCategoryBlogPripsevky.Name }
             );
 
-
             // Create BlogPosts
             var blogPost1 = BlogPost.Create(
                 "moje klobasa", "<main class=\"main blog--post\"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>", "Deset malých švestek", "Pepek Námořník",

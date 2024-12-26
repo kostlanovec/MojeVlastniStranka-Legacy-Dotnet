@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
 using MojeVlastniStranka.DataAccess.Entities;
+using Npgsql;
 
 namespace MojeVlastniStrankaFinanali.Web
 {
@@ -19,7 +20,7 @@ namespace MojeVlastniStrankaFinanali.Web
 #endif
 
             builder.Services.AddDbContext<DataContext>(options =>
-                    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")),
+                    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")),
                 ServiceLifetime.Scoped);
 
 			builder.Services.AddDefaultIdentity<User>(options =>
@@ -105,7 +106,19 @@ namespace MojeVlastniStrankaFinanali.Web
                 name: "api",
                 pattern: "api/{controller}/{action}/{id?}");
 
-            app.Run();
+
+			using (var scope = app.Services.CreateScope())
+			{
+				var services = scope.ServiceProvider;
+				var context = services.GetRequiredService<DataContext>();
+
+
+				context.Database.EnsureDeleted();
+				context.Database.EnsureCreated();
+
+			}
+
+			app.Run();
         }
     }
 }

@@ -17,7 +17,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		}
 
 		[Url]
-        [Column(TypeName = "nvarchar(1000)")]
+        [Column(TypeName = "text")]
         public string Url
 		{
 			get;
@@ -27,7 +27,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// <summary>
         /// Vrací nebo nastavuje nápad na vylepšení.
         /// </summary>
-        [Column(TypeName = "nvarchar(1000)")]
+        [Column(TypeName = "text")]
         public string Bug
 		{
 			get;
@@ -37,6 +37,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		/// Vrací nebo nastavuje datum přidání nápadu.
 		/// </summary>
+		[Column(TypeName = "timestamp")]
 		public DateTime DatePosted
 		{
 			get;

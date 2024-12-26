@@ -20,18 +20,22 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// <summary>
         /// Jméno souboru.
         /// </summary>
-        [Column(TypeName = "nvarchar(1000)")]
+        [Column(TypeName = "text")]
         public string FileName
         {
 	        get;
 	        set;
         }
 
-        /// <summary>
-        /// Nastavení alt atributu pro obrázek.
-        /// </summary>
-        [Column(TypeName = "nvarchar(1000)")]
-        public string Description { get; set; }
+		/// <summary>
+		/// Nastavení alt atributu pro obrázek.
+		/// </summary>
+		[Column(TypeName = "text")]
+		public string Description
+        {
+            get;
+            set;
+        }
 
         public static Image Create(string fileName, string description)
         {

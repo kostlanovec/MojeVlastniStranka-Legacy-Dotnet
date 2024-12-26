@@ -182,6 +182,7 @@ input[type="text"] {
 
 .projects__container {
 	display: flex;
+	cursor: pointer;
 }
 
 .megafone {

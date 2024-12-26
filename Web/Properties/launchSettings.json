@@ -1,55 +1,66 @@
 {
-	"iisSettings": {
-		"windowsAuthentication": false,
-		"anonymousAuthentication": true,
-		"iisExpress": {
-			"applicationUrl": "http://kostlanovec.local:5001",
-			"sslPort": 44397
-		}
-	},
-	"profiles": {
-		"Development": {
-			"commandName": "Project",
-			"dotnetRunMessages": true,
-			"launchBrowser": true,
-			"applicationUrl": "http://0.0.0.0:5266",
-			"environmentVariables": {
-				"ASPNETCORE_ENVIRONMENT": "Development"
-			}
-		},
-		"Production": {
-			"commandName": "Project",
-			"dotnetRunMessages": false,
-			"launchBrowser": true,
-			"applicationUrl": "https://0.0.0.0:443;http://0.0.0.0:80",
-			"environmentVariables": {
-				"ASPNETCORE_ENVIRONMENT": "Production"
-			}
-		},
-		"Debug": {
-			"commandName": "Project",
-			"dotnetRunMessages": true,
-			"launchBrowser": true,
-			"applicationUrl": "https://0.0.0.0:7207;http://0.0.0.0:5266",
-			"environmentVariables": {
-				"ASPNETCORE_ENVIRONMENT": "Debug"
-			}
-		},
-		"Release": {
-			"commandName": "Project",
-			"dotnetRunMessages": false,
-			"launchBrowser": true,
-			"applicationUrl": "https://0.0.0.0:443;http://0.0.0.0:80",
-			"environmentVariables": {
-				"ASPNETCORE_ENVIRONMENT": "Release"
-			}
-		},
-		"IIS Express": {
-			"commandName": "IISExpress",
-			"launchBrowser": true,
-			"environmentVariables": {
-				"ASPNETCORE_ENVIRONMENT": "Development"
-			}
-		}
-	}
+  "profiles": {
+    "Development": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "http://0.0.0.0:5266"
+    },
+    "Production": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      },
+      "dotnetRunMessages": false,
+      "applicationUrl": "https://0.0.0.0:443;http://0.0.0.0:80"
+    },
+    "Debug": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Debug"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://0.0.0.0:7207;http://0.0.0.0:5266"
+    },
+    "Release": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Release"
+      },
+      "dotnetRunMessages": false,
+      "applicationUrl": "https://0.0.0.0:443;http://0.0.0.0:80"
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "environmentVariables": {
+        "ASPNETCORE_HTTPS_PORTS": "8081",
+        "ASPNETCORE_HTTP_PORTS": "8080"
+      },
+      "publishAllPorts": true,
+      "useSSL": true
+    }
+  },
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://kostlanovec.local:5001",
+      "sslPort": 44397
+    }
+  }
 }

@@ -1,4 +1,6 @@
 ﻿using MojeVlastniStranka.Common.Enums;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace MojeVlastniStranka.DataAccess.Entities
 {
 	public class ServiceRequest: IEntities
@@ -35,6 +37,8 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		/// Vrací nebo nastauje email.
 		/// </summary>
+		[Column(TypeName = "text")]
+		[EmailAddress]
 		public string Email
 		{
 			get;
@@ -53,6 +57,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		/// Vrací nebo nastavuje zprávu.
 		/// </summary>
+		[Column(TypeName = "text")]
 		public string Message
 		{
 			get;
@@ -62,6 +67,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		/// Vrací nebo nastavuje datum vytvoření.
 		/// </summary>
+		[Column(TypeName = "timestamp")]
 		public DateTime CreatedAt
 		{
 			get;

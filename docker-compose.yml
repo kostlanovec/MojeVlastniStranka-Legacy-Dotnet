@@ -1,0 +1,6 @@
+services:
+  mojevlastnistranka.web:
+    image: ${DOCKER_REGISTRY-}mojevlastnistrankaweb
+    build:
+      context: .
+      dockerfile: Web/Dockerfile

@@ -21,7 +21,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// <summary>
         /// Vrací nebo nastavuje název blog příspěvku.
         /// </summary>
-        [Column(TypeName = "nvarchar(200)")]
+        [Column(TypeName = "text")]
         public string Name
 		{
 			get;
@@ -31,7 +31,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// <summary>
         /// Vrací nebo nastavuje slug blog příspěvku.
         /// </summary>
-        [Column(TypeName = "nvarchar(200)")]
+        [Column(TypeName = "text")]
         public string Slug
 		{
 			get;
@@ -41,7 +41,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// <summary>
         /// Vrací nebo nastavuje popisek k blog příspěvku.
         /// </summary>
-        [Column(TypeName = "nvarchar(1000)")]
+        [Column(TypeName = "text")]
         public string Description
 		{
 			get;
@@ -51,7 +51,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// <summary>
         /// Vrací nebo nastavuje obsah v html
         /// </summary>
-        [Column(TypeName = "nvarchar(max)")]
+        [Column(TypeName = "text")]
         public string Content
 		{
 			get;
@@ -61,7 +61,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// <summary>
         /// Vrací nebo nastavuje titulek blog příspěvku. 
         /// </summary>
-        [Column(TypeName = "nvarchar(200)")]
+        [Column(TypeName = "text")]
         public string Title
 		{
 			get;
@@ -71,7 +71,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// <summary>
         /// Vrací nebo nastavuje klíčová slova blog příspěvku.
         /// </summary>
-        [Column(TypeName = "nvarchar(1000)")]
+        [Column(TypeName = "text")]
         public string Keywords
 		{
 			get;
@@ -81,7 +81,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// <summary>
         /// Vrací nebo nastavuje cestu k obrázku.
         /// </summary>
-        [Column(TypeName = "nvarchar(1000)")]
+        [Column(TypeName = "text")]
         public string ImagePath
 		{
 			get;
@@ -91,6 +91,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		/// Vrací nebo nastavuje čas blogu.
 		/// </summary>
+		[Column(TypeName = "timestamp")]
 		public DateTime Date
 		{
 			get;

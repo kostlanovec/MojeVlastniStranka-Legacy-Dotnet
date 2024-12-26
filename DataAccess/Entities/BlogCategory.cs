@@ -20,7 +20,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// <summary>
         /// Vrací nebo nastavuje jméno kategorie blogu.
         /// </summary>
-        [Column(TypeName = "nvarchar(100)")]
+        [Column(TypeName = "text")]
         public string Name
         { 
             get;
@@ -30,7 +30,11 @@ namespace MojeVlastniStranka.DataAccess.Entities
         /// <summary>
         /// Vrací nebo nastavuje kolekci blog příspěvku.
         /// </summary>
-        public ICollection<BlogPost> BlogPosts { get; set; }
+        public ICollection<BlogPost> BlogPosts
+        {
+            get;
+            set;
+        }
 
         public static BlogCategory Create(string name)
         {

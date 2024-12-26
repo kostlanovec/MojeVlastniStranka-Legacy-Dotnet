@@ -11,7 +11,6 @@ namespace MojeVlastniStranka.Web.Controllers
     {
         private readonly DataContext context;
 
-
         public SitemapController(DataContext context)
         {
             this.context = context;

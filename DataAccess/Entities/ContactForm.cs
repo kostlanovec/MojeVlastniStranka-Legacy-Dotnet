@@ -24,7 +24,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		/// Vrací nebo nastavuje email pro odeslání reakce.
 		/// </summary>
-		[Column(TypeName = "nvarchar(1000)")]
+		[Column(TypeName = "text")]
 		public string Email
 		{
 			get;
@@ -35,7 +35,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// Vrací nebo nastavuje telefonní číslo.
 		/// </summary>
 		[Phone]
-		[Column(TypeName = "varchar(20)")]
+		[Column(TypeName = "text")]
 		public string? PhoneNumber
 		{
 			get;
@@ -45,7 +45,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		/// Vrací nebo nastavuje text od zákazníka.
 		/// </summary>
-		[Column(TypeName = "nvarchar(1000)")]
+		[Column(TypeName = "text")]
 		public string Message
 		{
 			get;
@@ -55,6 +55,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		/// Vrací nebo nastavuje čas.
 		/// </summary>
+		[Column(TypeName = "timestamp")]
 		public DateTime Date
 		{
 			get;

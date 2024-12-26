@@ -22,7 +22,7 @@ namespace MojeVlastniStranka.DataAccess
 			var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
 
             // Nastavuje spojení na SQL Server pomocí řetězce připojení z konfiguračních dat.
-            optionsBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            optionsBuilder.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
 
             // Vytváří novou instanci DataContextu s nastavenými možnostmi.
             DataContext context = new DataContext(optionsBuilder.Options);
