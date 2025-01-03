@@ -4,7 +4,7 @@
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
     <DockerPublishLocally>False</DockerPublishLocally>
-    <ProjectGuid>2d6a1a7e-7267-4ed7-9b0c-ed11eb1e28a1</ProjectGuid>
+    <ProjectGuid>26952ca0-18cc-438f-82c1-894a9d9b3718</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
     <DockerServiceName>mojevlastnistranka.web</DockerServiceName>
