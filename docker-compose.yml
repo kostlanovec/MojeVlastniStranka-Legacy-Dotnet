@@ -1,7 +1,13 @@
 volumes:
   local_postgres_data: {}
 services:
+
   mojevlastnistranka.web:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+      - "127.0.0.1:8080"
     build:
       context: .
       dockerfile: Web/Dockerfile
