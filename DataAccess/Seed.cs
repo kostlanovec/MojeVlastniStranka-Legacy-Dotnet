@@ -28,11 +28,11 @@ namespace Reservanto.NPS.DataAccess
 			// Create BlogPosts
 			var blogPost1 = BlogPost.Create(
 				 "moje klobasa", "<main class=\"main blog--post\"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>", "Deset malých švestek", "Pepek Námořník",
-				 "rohlík, klobása", blogCategoryProjekty.Id, "Jak mit obri pero", "imaablogimages/boxing.jpg", "Jak-mit-obri-pero", DateTime.Now);
+				 "rohlík, klobása", blogCategoryProjekty.Id, "nene", "images/psychologie.jpg", "nene", DateTime.Now);
 
 			var blogPost2 = BlogPost.Create(
 				 "moje klobasa", "<main class=\"main blog--post\"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>", "Pět malých kačátek", "Chleba s marmeládou",
-				 "Jsi slizký had, nemám tě rád", blogCategoryProjekty.Id, "deset malych cernousku", "blogimages/boxing.jpg", "deset-malych-cernousku", DateTime.Now);
+				 "Jsi slizký had, nemám tě rád", blogCategoryProjekty.Id, "testovani", "images/psychologie.jpg", "deset-malych-cernousku", DateTime.Now);
 
 			// Seed BlogPosts
 			modelBuilder.Entity<BlogPost>().HasData(blogPost1, blogPost2);

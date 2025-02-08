@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
 using MojeVlastniStranka.DataAccess.Entities;
-using Npgsql;
 
 namespace MojeVlastniStrankaFinanali.Web
 {

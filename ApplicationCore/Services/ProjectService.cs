@@ -3,7 +3,6 @@ using MojeVlastniStranka.DataAccess.Entities;
 using MojeVlastniStranka.Common.Enums;
 using MojeVlastniStranka.ApplicationCore.Dto.Project;
 using MojeVlastniStranka.ApplicationCore.Requests;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using MojeVlastniStranka.Common.Models;
 
@@ -12,10 +11,12 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 	public class ProjectService
 	{
 		private readonly DataContext context;
+		private readonly ImageService imageService;
 
-		public ProjectService(DataContext context)
+		public ProjectService(DataContext context, ImageService imageService)
 		{
 			this.context = context;
+			this.imageService = imageService;
 		}
 
 		public async Task<ResponseViewModel> AddProject(AddProjectRequest projectRequest)
@@ -54,7 +55,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				return response;
 			}
 
-			string imagePath = await UploadImageAsync(projectRequest.File);
+			string imagePath = await imageService.UploadImageAsync(projectRequest.File);
 
 			var blogPost = Project.Create(
 				projectRequest.Description,
@@ -146,7 +147,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
 			if (request.FileUpload != null)
 			{
-				project.ImagePath = await UploadImageAsync(request.FileUpload);
+				project.ImagePath = await imageService.UploadImageAsync(request.FileUpload);
 			}
 
 			project.Name = request.Name;
@@ -197,33 +198,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				.ToList();
 
 			return projects;
-		}
-
-		/// <summary>
-		/// Ukládá obrázků do složky images/project.
-		/// </summary>)
-		private async Task<string> UploadImageAsync(IFormFile file)
-		{
-			var currentDirectory = Directory.GetCurrentDirectory();
-			var uploadsDirectory = Path.Combine(currentDirectory, "wwwroot", "images", "project");
-			var filePath = Path.Combine(uploadsDirectory, file.FileName);
-
-			if (File.Exists(filePath))
-			{
-				return ("/images/project/" + file.FileName);
-			}
-
-			if (!Directory.Exists(uploadsDirectory))
-			{
-				Directory.CreateDirectory(uploadsDirectory);
-			}
-
-			using (var fileStream = new FileStream(filePath, FileMode.Create))
-			{
-				await file.CopyToAsync(fileStream);
-			}
-
-			return ("/images/project/" + file.FileName);
 		}
 	}
 }

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MojeVlastniStranka.Common.Models;
 using MojeVlastniStranka.ApplicationCore.Dto.Blog;
 using MojeVlastniStranka.ApplicationCore.Requests;
@@ -11,10 +10,12 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 	public class BlogService
 	{
 		private readonly DataContext context;
+		private readonly ImageService imageService;
 
-		public BlogService(DataContext context)
+		public BlogService(DataContext context, ImageService imageService)
 		{
 			this.context = context;
+			this.imageService = imageService;
 		}
 
 		/// <summary>
@@ -56,7 +57,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				return response;
 			}
 
-			string imagePath = await UploadImageAsync(blogPostRequest.FileUpload);
+			string imagePath = await imageService.UploadImageAsync(blogPostRequest.FileUpload);
 
 			var blogPost = BlogPost.Create(
 				blogPostRequest.Description,
@@ -276,7 +277,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
 			if (editBlogPostRequest.FileUpload != null)
 			{
-				existingBlogPost.ImagePath = await UploadImageAsync(editBlogPostRequest.FileUpload);
+				existingBlogPost.ImagePath = await imageService.UploadImageAsync(editBlogPostRequest.FileUpload);
 			}
 
 			await context.SaveChangesAsync();
@@ -418,33 +419,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			response.IsSuccess = true;
 			response.SuccessMessage = "Blog příspěvek byl úspěšně smazán.";
 			return response;
-		}
-
-		/// <summary>
-		/// Uloží obrázek do určeného úložiště.
-		/// </summary>
-		private async Task<string> UploadImageAsync(IFormFile file)
-		{
-			var currentDirectory = Directory.GetCurrentDirectory();
-			var uploadsDirectory = Path.Combine(currentDirectory, "wwwroot", "images", "blog");
-			var filePath = Path.Combine(uploadsDirectory, file.FileName);
-
-			if (File.Exists(filePath))
-			{
-				return ("/images/blog/" + file.FileName);
-			}
-
-			if (!Directory.Exists(uploadsDirectory))
-			{
-				Directory.CreateDirectory(uploadsDirectory);
-			}
-
-			using (var fileStream = new FileStream(filePath, FileMode.Create))
-			{
-				await file.CopyToAsync(fileStream);
-			}
-
-			return ("/images/blog/" + file.FileName);
 		}
 
 		public async Task<List<BlogPostSummary>> SearchBlogPostsAsync(string query)

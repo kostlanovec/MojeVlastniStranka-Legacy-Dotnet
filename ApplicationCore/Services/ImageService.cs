@@ -1,13 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using MojeVlastniStranka.ApplicationCore.Dto;
-using MojeVlastniStranka.ApplicationCore.Requests;
 using MojeVlastniStranka.DataAccess;
-using MojeVlastniStranka.DataAccess.Entities;
 
 namespace MojeVlastniStranka.ApplicationCore.Services
 {
-	internal class ImageService
+	public class ImageService
 	{
 		private readonly IHostEnvironment environment;
 		private readonly DataContext context;
@@ -19,15 +18,18 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		}
 
 		/// <summary>
-		/// Uploudování obrázků do wwwrootu.
+		/// Uloží obrázek do určeného úložiště.
 		/// </summary>
-		public async Task UploadImageAsync(AddImageRequest addImageRequest)
+		public async Task<string> UploadImageAsync(IFormFile file)
 		{
 			var currentDirectory = Directory.GetCurrentDirectory();
+			var uploadsDirectory = Path.Combine(currentDirectory, "wwwroot", "images", "blog");
+			var filePath = Path.Combine(uploadsDirectory, file.FileName);
 
-			var modifiedPath = Path.Combine(currentDirectory, "Web", "wwwroot");
-			var uploadsDirectory = modifiedPath + "\\images\\blog";
-			var filePath = Path.Combine(uploadsDirectory, addImageRequest.FileUpload.Name);
+			if (File.Exists(filePath))
+			{
+				return ("/images/blog/" + file.FileName);
+			}
 
 			if (!Directory.Exists(uploadsDirectory))
 			{
@@ -36,12 +38,10 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
 			using (var fileStream = new FileStream(filePath, FileMode.Create))
 			{
-				await addImageRequest.FileUpload.CopyToAsync(fileStream);
+				await file.CopyToAsync(fileStream);
 			}
 
-			var image = Image.Create(Path.Combine(addImageRequest.FileUpload.FileName), addImageRequest.Description);
-			this.context.Images.Add(image);
-			await this.context.SaveChangesAsync();
+			return ("/images/blog/" + file.FileName);
 		}
 
 		/// <summary>

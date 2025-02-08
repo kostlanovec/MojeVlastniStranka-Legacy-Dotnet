@@ -49,7 +49,6 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
                 return Page();
             }
 
-            await imageService.UploadImageAsync(Input);
             return Page();
         }
 
