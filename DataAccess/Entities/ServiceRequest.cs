@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace MojeVlastniStranka.DataAccess.Entities
 {
-	public class ServiceRequest: IEntities
+	public class ServiceRequest : IEntities
 	{
-		protected ServiceRequest(){}
+		protected ServiceRequest() { }
 
 		/// <summary>
 		/// Vrací nebo nastavuje Id Služby.
@@ -77,8 +77,8 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		{
 			var serviceRequest = new ServiceRequest()
 			{
-                Id = Guid.NewGuid(),
-                MainService = mainService,
+				Id = Guid.NewGuid(),
+				MainService = mainService,
 				SubService = subService,
 				Email = email,
 				PhoneNumber = phoneNumber,

@@ -5,92 +5,92 @@
 	ViewData["Description"] = "Blog příspěvky Jana Sebastiána Kostlána. Tvůrce, webdesigner, programátor a marketing maestro skrz SEO.";
 	ViewData["Author"] = "Jan Sebastián Kostlán";
 	ViewData["Keywords"] = "blog, osobní";
-    ViewData["SocialTitle"] = "Kostlanovec - seznam blog příspěvků.";
+	ViewData["SocialTitle"] = "Kostlanovec - seznam blog příspěvků.";
 }
 @using MojeVlastniStranka.Common.Extension
 
 <main class="main">
-    <header class="reveal">
+	<header class="reveal">
 		<h1>Blog</h1>
-        <input id="searchInput" class="searchbar" type="text" placeholder="hledat" />
+		<input id="searchInput" class="searchbar" type="text" placeholder="hledat" />
 	</header>
-    <div class="results" id="results"></div>
-    @foreach (var category in Model.CategoriesWithPosts)
-    {
-        <section class="reveal">
-            <h2 class="blog__h2">@category.Name</h2>
-            <div class="div--blog--articles">
-                @{
-                    bool isFirstPost = true;
-                }
-                @foreach (var post in category.BlogPosts)
-                {
-                    if (isFirstPost)
-                    {
-                        <article class="article--first--post zoom-effect">
-                            <a class="blog--a" href="/Blog/@post.Slug">
-                                <h3 class="blog__first__h3">@post.Name</h3>
-                                <img src="@post.FilePath" alt="@post.Name" />
-                            </a>
-                        </article>
-                        isFirstPost = false;
-                    }
-                    else
-                    {
-                        <article class="article--post zoom-effect">
-                            <a class="blog--a blog--a--other" href="/Blog/@post.Slug">
-                                <img src="@post.FilePath" alt="@post.Name" />
-                                <div class="blog--div">
-                                    <h3 class="blog__h3">@post.Name</h3>
-                                    <div class="blog--data">
-                                        <p>@post.Description</p>
-                                        <p>@post.TimePublic.ToCzechDate()</p>
-                                    </div>
-                                </div>
+	<div class="results" id="results"></div>
+	@foreach (var category in Model.CategoriesWithPosts)
+	{
+		<section class="reveal">
+			<h2 class="blog__h2">@category.Name</h2>
+			<div class="div--blog--articles">
+				@{
+					bool isFirstPost = true;
+				}
+				@foreach (var post in category.BlogPosts)
+				{
+					if (isFirstPost)
+					{
+						<article class="article--first--post zoom-effect">
+							<a class="blog--a" href="/Blog/@post.Slug">
+								<h3 class="blog__first__h3">@post.Name</h3>
+								<img src="@post.FilePath" alt="@post.Name" />
+							</a>
+						</article>
+						isFirstPost = false;
+					}
+					else
+					{
+						<article class="article--post zoom-effect">
+							<a class="blog--a blog--a--other" href="/Blog/@post.Slug">
+								<img src="@post.FilePath" alt="@post.Name" />
+								<div class="blog--div">
+									<h3 class="blog__h3">@post.Name</h3>
+									<div class="blog--data">
+										<p>@post.Description</p>
+										<p>@post.TimePublic.ToCzechDate()</p>
+									</div>
+								</div>
 
-                            </a>
-                        </article>
-                    }
-                }
-            </div>
-        </section>
-    }
+							</a>
+						</article>
+					}
+				}
+			</div>
+		</section>
+	}
 	</>
 </main>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $('#searchInput').keyup(function () {
-            var query = $(this).val();
-            if (query.length > 2) {
-                $.ajax({
-                    url: '@Url.Page("Index", "Search")',
-                    type: 'GET',
-                    data: { 'query': query },
-                    success: function (data) {
-                        $('#results').empty();
-                        if (data.length > 0) {
-                            data.forEach(function (post) {
-                                $('#results').append(
-                                    '<a class="results__a" href="/Blog/' + post.slug + '">' +
-                                    '<div>' +
-                                    '<img src="' + post.filePath + '" alt="' + post.name + '" />' +
-                                    '</div>' +
-                                    '<div>' +
-                                    '<h3>' + post.name + '</h3>' +
-                                    '<p>' + post.description + '</p>' +
-                                    '</div>' +
-                                    '</a>'
-                                );
-                            });
-                        } else {
-                            $('#results').append('<p>Žádné výsledky nenalezeny.</p>');
-                        }
-                    }
-                });
-            } else {
-                $('#results').empty();
-            }
-        });
-    });
+	$(document).ready(function () {
+		 $('#searchInput').keyup(function () {
+			  var query = $(this).val();
+			  if (query.length > 2) {
+					$.ajax({
+						 url: '@Url.Page("Index", "Search")',
+						 type: 'GET',
+						 data: { 'query': query },
+						 success: function (data) {
+							  $('#results').empty();
+							  if (data.length > 0) {
+									data.forEach(function (post) {
+										 $('#results').append(
+											  '<a class="results__a" href="/Blog/' + post.slug + '">' +
+											  '<div>' +
+											  '<img src="' + post.filePath + '" alt="' + post.name + '" />' +
+											  '</div>' +
+											  '<div>' +
+											  '<h3>' + post.name + '</h3>' +
+											  '<p>' + post.description + '</p>' +
+											  '</div>' +
+											  '</a>'
+										 );
+									});
+							  } else {
+									$('#results').append('<p>Žádné výsledky nenalezeny.</p>');
+							  }
+						 }
+					});
+			  } else {
+					$('#results').empty();
+			  }
+		 });
+	});
 </script>

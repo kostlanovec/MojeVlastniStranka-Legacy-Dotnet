@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using MojeVlastniStranka.Common.Enums;
 using System.ComponentModel.DataAnnotations;
+
 namespace MojeVlastniStranka.ApplicationCore.Requests
 {
 	public class UpdateProjectRequest

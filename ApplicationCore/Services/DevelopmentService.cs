@@ -20,7 +20,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		public async Task<bool> AddIdeaToRelease(IdeaToReleaseRequest ideaToReleaseRequest)
 		{
 			var addingIdeaToRel = IdeaToRelease.Create(ideaToReleaseRequest.Idea, DateTime.Now);
-
 			context.IdeaToReleases.Add(addingIdeaToRel);
 			context.SaveChanges();
 			return true;
@@ -33,7 +32,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		{
 			var bug = ReportedBug.Create(reporetedBug.Url, reporetedBug.Bug, DateTime.Now);
 			context.ReportedBugs.Add(bug);
-			context.SaveChangesAsync();
+			context.SaveChanges();
 			return true;
 		}
 
@@ -49,7 +48,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				Id = cf.Id,
 				Url = cf.Url,
 				Bug = cf.Bug
-				
+
 			}).ToList();
 
 			return contactFormDtos;
@@ -97,8 +96,5 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				await context.SaveChangesAsync();
 			}
 		}
-
 	}
-
-
 }

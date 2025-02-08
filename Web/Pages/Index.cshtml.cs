@@ -7,17 +7,25 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MojeVlastniStranka.Web.Pages
 {
-    public class IndexModel : PageModel
-    {
+	public class IndexModel : PageModel
+	{
 		private readonly DataContext context;
 		private readonly BlogService blogService;
 		private readonly MailService mailService;
 
-		public List<BlogPostSummary> Posts { get; set; }
+		public List<BlogPostSummary> Posts
+		{
+			get;
+			set;
+		}
 
-        public string JsonLD { get; set; }
+		public string JsonLD
+		{
+			get;
+			set;
+		}
 
-        [BindProperty]
+		[BindProperty]
 		[EmailAddress]
 		public string email
 		{
@@ -35,7 +43,7 @@ namespace MojeVlastniStranka.Web.Pages
 		public async Task OnGetAsync()
 		{
 			Posts = await blogService.GetThreePost();
-            JsonLD = @"
+			JsonLD = @"
 				{
 					""@context"": ""http://schema.org"",
 					""@type"": ""Person"",
@@ -52,26 +60,26 @@ namespace MojeVlastniStranka.Web.Pages
 					""image"": ""https://kostlanovec.cz/images/profil-photo.jpg"",
 					""jobTitle"": ""Programátor""
 				}";
-        }
+		}
 
 		public async Task<IActionResult> OnPostAsync()
 		{
-            if (!ModelState.IsValid)
-            {
+			if (!ModelState.IsValid)
+			{
 				Posts = await blogService.GetThreePost();
 				ModelState.AddModelError(string.Empty, "Tohle není validní email.");
 				return Page();
-            }
+			}
 
-            bool isEmailAdded = mailService.AddEmailForNewsLetter(email);
+			bool isEmailAdded = mailService.AddEmailForNewsLetter(email);
 
-            if (!isEmailAdded)
-            {
+			if (!isEmailAdded)
+			{
 				Posts = await blogService.GetThreePost();
 				// Pokud email již existuje, nastavte chybu
 				ModelState.AddModelError(string.Empty, "Tento email je již zaregistrován.");
-                return Page();
-            }
+				return Page();
+			}
 
 			TempData["SuccessMessage"] = "Email byl úspěšně přidán.";
 

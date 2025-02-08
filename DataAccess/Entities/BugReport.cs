@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MojeVlastniStranka.DataAccess.Entities
 {
-	public class BugReport: IEntities
+	public class BugReport : IEntities
 	{
 		/// <summary>
 		/// chráněný konsruktor.
@@ -24,8 +24,8 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// Vrací nebo nastavuje URL, na které byl bug nalezen.
 		/// </summary>
 		[Url]
-        [Column(TypeName = "text")]
-        public string Url
+		[Column(TypeName = "text")]
+		public string Url
 		{
 			get;
 			set;
@@ -34,23 +34,23 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		/// Vrací nebo nastavuje report o nalezeném bugu.
 		/// </summary>
-        [Column(TypeName = "text")]
-        public string Report
+		[Column(TypeName = "text")]
+		public string Report
 		{
 			get;
 			set;
 		}
 
-        public static BugReport Create(string url, string report)
-        {
-            var bugReport = new BugReport()
-            {
-                Id = Guid.NewGuid(),
-                Url = url,
-                Report = report
-            };
+		public static BugReport Create(string url, string report)
+		{
+			var bugReport = new BugReport()
+			{
+				Id = Guid.NewGuid(),
+				Url = url,
+				Report = report
+			};
 
-            return bugReport;
-        }
-    }
+			return bugReport;
+		}
+	}
 }

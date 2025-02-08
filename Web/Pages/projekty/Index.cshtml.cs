@@ -5,8 +5,8 @@ using MojeVlastniStranka.DataAccess.Entities;
 
 namespace MojeVlastniStranka.Web.Pages.projekty
 {
-    public class IndexModel : PageModel
-    {
+	public class IndexModel : PageModel
+	{
 		private readonly DataContext context;
 		private readonly ProjectService projectService;
 
@@ -16,30 +16,34 @@ namespace MojeVlastniStranka.Web.Pages.projekty
 			this.projectService = blogService;
 		}
 
-        public List<Project> AllProjects { get; set; }
+		public List<Project> AllProjects
+		{
+			get;
+			set;
+		}
 
-        public async Task OnGetAsync()
-        {
-            AllProjects = projectService.GetAllProjects();
-        }
+		public async Task OnGetAsync()
+		{
+			AllProjects = projectService.GetAllProjects();
+		}
 
-        /*
-        [HttpGet("projekty/{status}")]
-        public async Task<IActionResult> GetProjectsByStatus(string status)
-        {
-            IEnumerable<Project> projects;
+		/*
+		[HttpGet("projekty/{status}")]
+		public async Task<IActionResult> GetProjectsByStatus(string status)
+		{
+			 IEnumerable<Project> projects;
 
-            if (Enum.TryParse(status, out ProjectStatus projectStatus))
-            {
-                projects = await projectService.GetProjectsByStatus(projectStatus);
-            }
-            else
-            {
-                projects = Enumerable.Empty<Project>();
-            }
+			 if (Enum.TryParse(status, out ProjectStatus projectStatus))
+			 {
+				  projects = await projectService.GetProjectsByStatus(projectStatus);
+			 }
+			 else
+			 {
+				  projects = Enumerable.Empty<Project>();
+			 }
 
-            return new JsonResult(projects);
-        }
-        */
-    }
+			 return new JsonResult(projects);
+		}
+		*/
+	}
 }

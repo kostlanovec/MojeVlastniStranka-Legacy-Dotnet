@@ -9,7 +9,11 @@ namespace MojeVlastniStranka.Web.Pages.sluzby
 		private readonly ServicesOfferedService servicesOfferedService;
 
 		[BindProperty]
-		public ServiceRequestDto ServiceRequestDto { get; set; }
+		public ServiceRequestDto ServiceRequestDto
+		{
+			get;
+			set;
+		}
 
 		public webovestrankyModel(ServicesOfferedService servicesOfferedService)
 		{

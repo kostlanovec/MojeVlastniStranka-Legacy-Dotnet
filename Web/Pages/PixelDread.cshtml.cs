@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MojeVlastniStranka.Web.Pages
 {
-    public class PixelDreadModel : PageModel
-    {
-        public void OnGet()
-        {
-        }
-    }
+	public class PixelDreadModel : PageModel
+	{
+		public void OnGet()
+		{
+		}
+	}
 }

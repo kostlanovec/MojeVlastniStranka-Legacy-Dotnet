@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MojeVlastniStranka.DataAccess.Entities
 {
-	public class ReportedBug: IEntities
+	public class ReportedBug : IEntities
 	{
 		protected ReportedBug() { }
 
@@ -17,18 +17,18 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		}
 
 		[Url]
-        [Column(TypeName = "text")]
-        public string Url
+		[Column(TypeName = "text")]
+		public string Url
 		{
 			get;
 			set;
 		}
 
-        /// <summary>
-        /// Vrací nebo nastavuje nápad na vylepšení.
-        /// </summary>
-        [Column(TypeName = "text")]
-        public string Bug
+		/// <summary>
+		/// Vrací nebo nastavuje nápad na vylepšení.
+		/// </summary>
+		[Column(TypeName = "text")]
+		public string Bug
 		{
 			get;
 			set;
@@ -48,8 +48,8 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		{
 			var reportedBug = new ReportedBug()
 			{
-                Id = Guid.NewGuid(),
-                Url = url,
+				Id = Guid.NewGuid(),
+				Url = url,
 				Bug = bug,
 				DatePosted = datePosted
 			};

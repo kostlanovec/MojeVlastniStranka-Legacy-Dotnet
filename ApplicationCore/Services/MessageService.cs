@@ -5,7 +5,7 @@ using MojeVlastniStranka.DataAccess.Entities;
 
 namespace MojeVlastniStranka.ApplicationCore.Services
 {
-	public class MessageService
+	internal class MessageService
 	{
 		private readonly DataContext context;
 

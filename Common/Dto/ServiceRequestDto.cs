@@ -14,7 +14,7 @@ namespace MojeVlastniStranka.Common.Dto
 
 		[Required]
 		[EmailAddress]
-		public string Email 
+		public string Email
 		{
 			get;
 			set;
@@ -27,8 +27,8 @@ namespace MojeVlastniStranka.Common.Dto
 		}
 
 		[Required]
-		public string Message 
-		{ 
+		public string Message
+		{
 			get;
 			set;
 		}

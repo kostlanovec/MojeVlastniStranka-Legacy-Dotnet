@@ -2,10 +2,10 @@
 
 namespace MojeVlastniStranka.DataAccess.Entities
 {
-    public interface IEntities
-    {
-        [Key]
-        public Guid Id { get; set; }
+	public interface IEntities
+	{
+		[Key]
+		public Guid Id { get; set; }
 
-    }
+	}
 }

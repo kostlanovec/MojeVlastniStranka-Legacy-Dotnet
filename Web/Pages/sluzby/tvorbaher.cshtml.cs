@@ -5,12 +5,16 @@ using MojeVlastniStranka.ApplicationCore.Services;
 
 namespace MojeVlastniStranka.Web.Pages.sluzby
 {
-    public class tvorbaherModel : PageModel
-    {
+	public class tvorbaherModel : PageModel
+	{
 		private readonly ServicesOfferedService servicesOfferedService;
 
 		[BindProperty]
-		public ServiceRequestDto ServiceRequestDto { get; set; }
+		public ServiceRequestDto ServiceRequestDto 
+		{
+			get;
+			set;
+		}
 
 		public tvorbaherModel(ServicesOfferedService servicesOfferedService)
 		{

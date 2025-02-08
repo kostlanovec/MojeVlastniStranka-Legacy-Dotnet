@@ -40,7 +40,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		/// <summary>
 		/// Vrací nebo nastavuje popisek k blog příspěvku.
 		/// </summary>
-		
+
 		public string Description
 		{
 			get;
@@ -127,8 +127,8 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		{
 			var blogPost = new BlogPost()
 			{
-                Id = Guid.NewGuid(),
-                Description = description,
+				Id = Guid.NewGuid(),
+				Description = description,
 				Content = content,
 				Title = title,
 				Author = author,

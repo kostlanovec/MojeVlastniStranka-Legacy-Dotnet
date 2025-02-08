@@ -2,7 +2,7 @@
 
 namespace MojeVlastniStranka.DataAccess.Entities
 {
-	public class ImportantNotification: IEntities
+	public class ImportantNotification : IEntities
 	{
 		protected ImportantNotification() { }
 
@@ -25,11 +25,11 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			set;
 		}
 
-        /// <summary>
-        /// Vrací nebo nastavuje krátkou zprávu.
-        /// </summary>
-        [Column(TypeName = "text")]
-        public string ShortMessage
+		/// <summary>
+		/// Vrací nebo nastavuje krátkou zprávu.
+		/// </summary>
+		[Column(TypeName = "text")]
+		public string ShortMessage
 		{
 			get;
 			set;
@@ -42,12 +42,12 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		{
 			var notification = new ImportantNotification()
 			{
-                Id = Guid.NewGuid(),
-                TimePublish = timePublish,
+				Id = Guid.NewGuid(),
+				TimePublish = timePublish,
 				ShortMessage = shortMessage
 			};
 
 			return notification;
 		}
-    }
+	}
 }

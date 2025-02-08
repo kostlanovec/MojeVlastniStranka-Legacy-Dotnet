@@ -18,71 +18,71 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			set;
 		}
 
-        /// <summary>
-        /// Vrací nebo nastavuje název blog příspěvku.
-        /// </summary>
-        [Column(TypeName = "text")]
-        public string Name
+		/// <summary>
+		/// Vrací nebo nastavuje název blog příspěvku.
+		/// </summary>
+		[Column(TypeName = "text")]
+		public string Name
 		{
 			get;
 			set;
 		}
 
-        /// <summary>
-        /// Vrací nebo nastavuje slug blog příspěvku.
-        /// </summary>
-        [Column(TypeName = "text")]
-        public string Slug
+		/// <summary>
+		/// Vrací nebo nastavuje slug blog příspěvku.
+		/// </summary>
+		[Column(TypeName = "text")]
+		public string Slug
 		{
 			get;
 			set;
 		}
 
-        /// <summary>
-        /// Vrací nebo nastavuje popisek k blog příspěvku.
-        /// </summary>
-        [Column(TypeName = "text")]
-        public string Description
+		/// <summary>
+		/// Vrací nebo nastavuje popisek k blog příspěvku.
+		/// </summary>
+		[Column(TypeName = "text")]
+		public string Description
 		{
 			get;
 			set;
 		}
 
-        /// <summary>
-        /// Vrací nebo nastavuje obsah v html
-        /// </summary>
-        [Column(TypeName = "text")]
-        public string Content
+		/// <summary>
+		/// Vrací nebo nastavuje obsah v html
+		/// </summary>
+		[Column(TypeName = "text")]
+		public string Content
 		{
 			get;
 			set;
 		}
 
-        /// <summary>
-        /// Vrací nebo nastavuje titulek blog příspěvku. 
-        /// </summary>
-        [Column(TypeName = "text")]
-        public string Title
+		/// <summary>
+		/// Vrací nebo nastavuje titulek blog příspěvku. 
+		/// </summary>
+		[Column(TypeName = "text")]
+		public string Title
 		{
 			get;
 			set;
 		}
 
-        /// <summary>
-        /// Vrací nebo nastavuje klíčová slova blog příspěvku.
-        /// </summary>
-        [Column(TypeName = "text")]
-        public string Keywords
+		/// <summary>
+		/// Vrací nebo nastavuje klíčová slova blog příspěvku.
+		/// </summary>
+		[Column(TypeName = "text")]
+		public string Keywords
 		{
 			get;
 			set;
 		}
 
-        /// <summary>
-        /// Vrací nebo nastavuje cestu k obrázku.
-        /// </summary>
-        [Column(TypeName = "text")]
-        public string ImagePath
+		/// <summary>
+		/// Vrací nebo nastavuje cestu k obrázku.
+		/// </summary>
+		[Column(TypeName = "text")]
+		public string ImagePath
 		{
 			get;
 			set;
@@ -112,8 +112,8 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		{
 			var blogCategory = new Project()
 			{
-                Id = Guid.NewGuid(),
-                Description = descriptions,
+				Id = Guid.NewGuid(),
+				Description = descriptions,
 				Content = content,
 				Title = title,
 				Keywords = keywords,

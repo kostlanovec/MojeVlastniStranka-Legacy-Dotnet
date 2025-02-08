@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MojeVlastniStranka.ApplicationCore.Dto
+﻿namespace MojeVlastniStranka.ApplicationCore.Dto
 {
 	public class IdeaToReleaseDto
 	{
@@ -13,7 +7,7 @@ namespace MojeVlastniStranka.ApplicationCore.Dto
 		/// </summary>
 		public Guid Id
 		{
-			get; 
+			get;
 			set;
 		}
 

@@ -7,7 +7,7 @@
 		/// </summary>
 		public Guid Id
 		{
-			get; 
+			get;
 			set;
 		}
 

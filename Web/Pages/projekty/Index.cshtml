@@ -2,76 +2,76 @@
 @model MojeVlastniStranka.Web.Pages.projekty.IndexModel
 @using MojeVlastniStranka.Common.Enums
 @{
-    ViewData["Title"] = "Moje projekty";
-    ViewData["Description"] = "Seznam projektů, které dělám, jsem vytvořil nebo plánuji uskutečnit";
-    ViewData["Keywords"] = "projekt";
-    ViewData["Author"] = "Jan Sebastián Kostlán";
-    ViewData["SocialTitle"] = "Kostlanovec - seznam projektů.";
+	ViewData["Title"] = "Moje projekty";
+	ViewData["Description"] = "Seznam projektů, které dělám, jsem vytvořil nebo plánuji uskutečnit";
+	ViewData["Keywords"] = "projekt";
+	ViewData["Author"] = "Jan Sebastián Kostlán";
+	ViewData["SocialTitle"] = "Kostlanovec - seznam projektů.";
 }
 
 <main class="main main__project">
-    <h1 class="reveal">Projekty</h1>
-    <div class="projects__container reveal" onclick="toggleSection('development-projects', this)">
-        <button class="arrow--project rotated"></button>
-        <h2>Rozpracované projekty</h2>
-    </div>
-    <section id="development-projects" style="display:grid" class="projects__section reveal">
-        @foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatusEnum.Development))
-        {
-            <article class="article--project zoom-effect">
-                <a class="article--project__a" href="/projekty/@project.Slug">
-                    <img src="@project.ImagePath" alt="@project.Name" />
-                    <h3 class="article--project__h3">@project.Name</h3>
-                    @*<p>@project.Description</p>*@
+	<h1 class="reveal">Projekty</h1>
+	<div class="projects__container reveal" onclick="toggleSection('development-projects', this)">
+		<button class="arrow--project rotated"></button>
+		<h2>Rozpracované projekty</h2>
+	</div>
+	<section id="development-projects" style="display:grid" class="projects__section reveal">
+		@foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatusEnum.Development))
+		{
+			<article class="article--project zoom-effect">
+				<a class="article--project__a" href="/projekty/@project.Slug">
+					<img src="@project.ImagePath" alt="@project.Name" />
+					<h3 class="article--project__h3">@project.Name</h3>
+					@*<p>@project.Description</p>*@
 
-                </a>
-            </article>
-        }
-    </section>
-    <div class="projects__container reveal" onclick="toggleSection('finalized-projects', this)">
-        <button class="arrow--project"></button>
-        <h2>Hotové projekty</h2>
-    </div>
-    <section id="finalized-projects" class="projects__section reveal">
-        @foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatusEnum.Finalized))
-        {
-            <article class="article--project zoom-effect">
-                <a class="article--project__a" href="/projekty/@project.Slug">
-                    <img src="@project.ImagePath" alt="@project.Name" />
-                    <h3 class="article--project__h3">@project.Name</h3>
-                    @*<p>@project.Description</p>*@
-                </a>
-            </article>
-        }
-    </section>
-    <div class="projects__container reveal" onclick="toggleSection('planning-projects', this)">
-        <button class="arrow--project"></button>
-        <h2>Plánované projekty</h2>
-    </div>
-    <section id="planning-projects" class="projects__section reveal">
-        @foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatusEnum.Planning))
-        {
-            <article class="article--project zoom-effect">
-                <a class="article--project__a" href="/projekty/@project.Slug">
-                    <img src="@project.ImagePath" alt="@project.Name" />
-                    <h3 class="article--project__h3">@project.Name</h3>
-                    @*<p>@project.Description</p>*@
-                </a>
-            </article>
-        }
-    </section>
+				</a>
+			</article>
+		}
+	</section>
+	<div class="projects__container reveal" onclick="toggleSection('finalized-projects', this)">
+		<button class="arrow--project"></button>
+		<h2>Hotové projekty</h2>
+	</div>
+	<section id="finalized-projects" class="projects__section reveal">
+		@foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatusEnum.Finalized))
+		{
+			<article class="article--project zoom-effect">
+				<a class="article--project__a" href="/projekty/@project.Slug">
+					<img src="@project.ImagePath" alt="@project.Name" />
+					<h3 class="article--project__h3">@project.Name</h3>
+					@*<p>@project.Description</p>*@
+				</a>
+			</article>
+		}
+	</section>
+	<div class="projects__container reveal" onclick="toggleSection('planning-projects', this)">
+		<button class="arrow--project"></button>
+		<h2>Plánované projekty</h2>
+	</div>
+	<section id="planning-projects" class="projects__section reveal">
+		@foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatusEnum.Planning))
+		{
+			<article class="article--project zoom-effect">
+				<a class="article--project__a" href="/projekty/@project.Slug">
+					<img src="@project.ImagePath" alt="@project.Name" />
+					<h3 class="article--project__h3">@project.Name</h3>
+					@*<p>@project.Description</p>*@
+				</a>
+			</article>
+		}
+	</section>
 </main>
 <script>
-    function toggleSection(sectionId, container) {
-        var section = document.getElementById(sectionId);
-        var button = container.querySelector('.arrow--project');
+	function toggleSection(sectionId, container) {
+		 var section = document.getElementById(sectionId);
+		 var button = container.querySelector('.arrow--project');
 
-        if (section.style.display === 'none' || section.style.display === '') {
-            section.style.display = 'grid';
-        } else {
-            section.style.display = 'none';
-        }
+		 if (section.style.display === 'none' || section.style.display === '') {
+			  section.style.display = 'grid';
+		 } else {
+			  section.style.display = 'none';
+		 }
 
-        button.classList.toggle('rotated');
-    }
+		 button.classList.toggle('rotated');
+	}
 </script>

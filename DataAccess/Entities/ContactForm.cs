@@ -69,8 +69,8 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		{
 			var contactForm = new ContactForm()
 			{
-                Id = Guid.NewGuid(),
-                Email = email,
+				Id = Guid.NewGuid(),
+				Email = email,
 				PhoneNumber = phoneNumber,
 				Message = message,
 				Date = date

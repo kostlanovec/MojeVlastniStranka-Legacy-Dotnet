@@ -2,9 +2,9 @@
 
 namespace MojeVlastniStranka.DataAccess.Entities
 {
-	public class Notification: IEntities
+	public class Notification : IEntities
 	{
-		protected Notification () { }
+		protected Notification() { }
 
 		/// <summary>
 		/// Vrací nebo nastavuje id.
@@ -25,11 +25,11 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			set;
 		}
 
-        /// <summary>
-        /// Vrací nebo nastavuje krátkou zprávu.
-        /// </summary>
-        [Column(TypeName = "text")]
-        public string ShortMessage
+		/// <summary>
+		/// Vrací nebo nastavuje krátkou zprávu.
+		/// </summary>
+		[Column(TypeName = "text")]
+		public string ShortMessage
 		{
 			get;
 			set;

@@ -2,9 +2,9 @@
 
 namespace MojeVlastniStranka.DataAccess.Entities
 {
-	public class Message: IEntities
+	public class Message : IEntities
 	{
-		protected Message () { }
+		protected Message() { }
 
 		/// <summary>
 		/// Vrací nebo nastavuje id.
@@ -25,21 +25,21 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			set;
 		}
 
-        /// <summary>
-        /// Vrací nebo nastavuje krátkou zprávu.
-        /// </summary>
-        [Column(TypeName = "text")]
-        public string ShortMessage
+		/// <summary>
+		/// Vrací nebo nastavuje krátkou zprávu.
+		/// </summary>
+		[Column(TypeName = "text")]
+		public string ShortMessage
 		{
 			get;
 			set;
 		}
 
-        /// <summary>
-        /// Vrací nebo nastavuje dlouhou zprávu.
-        /// </summary>
-        [Column(TypeName = "text")]
-        public string LongMessage
+		/// <summary>
+		/// Vrací nebo nastavuje dlouhou zprávu.
+		/// </summary>
+		[Column(TypeName = "text")]
+		public string LongMessage
 		{
 			get;
 			set;
@@ -52,7 +52,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		{
 			var message = new Message()
 			{
-                Id = Guid.NewGuid(),
+				Id = Guid.NewGuid(),
 				TimePublish = timePublish,
 				ShortMessage = shortMessage,
 				LongMessage = longMessage

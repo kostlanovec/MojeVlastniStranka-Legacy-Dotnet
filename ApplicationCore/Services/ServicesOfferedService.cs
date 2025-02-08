@@ -2,6 +2,7 @@
 using MojeVlastniStranka.DataAccess;
 using MojeVlastniStranka.DataAccess.Entities;
 using MojeVlastniStranka.Common.Enums;
+
 namespace MojeVlastniStranka.ApplicationCore.Services
 {
 	public class ServicesOfferedService
@@ -33,9 +34,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// <summary>
 		/// Vrací list služeb.
 		/// </summary>
-        public List<ServiceRequest> getAllServicesRequests()
-        {
-            return context.ServiceRequests.ToList();
-        }
-    }
+		public List<ServiceRequest> getAllServicesRequests()
+		{
+			return context.ServiceRequests.ToList();
+		}
+	}
 }

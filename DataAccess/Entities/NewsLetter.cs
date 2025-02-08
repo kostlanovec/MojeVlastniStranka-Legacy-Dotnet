@@ -2,7 +2,7 @@
 
 namespace MojeVlastniStranka.DataAccess.Entities
 {
-	public class NewsLetter: IEntities
+	public class NewsLetter : IEntities
 	{
 		protected NewsLetter() { }
 
@@ -15,11 +15,11 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			set;
 		}
 
-        /// <summary>
-        /// Vrací nebo nastavuje email NewLetteru.
-        /// </summary>
-        [Column(TypeName = "text")]
-        public string Email
+		/// <summary>
+		/// Vrací nebo nastavuje email NewLetteru.
+		/// </summary>
+		[Column(TypeName = "text")]
+		public string Email
 		{
 			get;
 			set;

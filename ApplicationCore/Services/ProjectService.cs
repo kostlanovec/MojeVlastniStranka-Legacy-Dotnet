@@ -9,7 +9,7 @@ using MojeVlastniStranka.Common.Models;
 
 namespace MojeVlastniStranka.ApplicationCore.Services
 {
-    public class ProjectService
+	public class ProjectService
 	{
 		private readonly DataContext context;
 
@@ -143,6 +143,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				response.Errors.Add("Blog příspěvek nebyl nalezen.");
 				return response;
 			}
+
 			if (request.FileUpload != null)
 			{
 				project.ImagePath = await UploadImageAsync(request.FileUpload);

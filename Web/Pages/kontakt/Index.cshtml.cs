@@ -7,12 +7,12 @@ using MojeVlastniStranka.ApplicationCore.Dto;
 
 namespace MojeVlastniStranka.Web.Pages.kontakt
 {
-    public class kontaktModel : PageModel
-    {
-        private readonly DataContext context;
+	public class kontaktModel : PageModel
+	{
+		private readonly DataContext context;
 		private readonly FormService formService;
 
-        public kontaktModel(DataContext context, FormService formService)
+		public kontaktModel(DataContext context, FormService formService)
 		{
 			this.context = context;
 			this.formService = formService;
@@ -29,7 +29,7 @@ namespace MojeVlastniStranka.Web.Pages.kontakt
 		/// Odeslání formuláøe.
 		/// </summary>
 		public void OnPost()
-        {
+		{
 			Form.SendTime = DateTime.Now;
 			if (ModelState.IsValid)
 			{
@@ -39,6 +39,6 @@ namespace MojeVlastniStranka.Web.Pages.kontakt
 			{
 				ModelState.AddModelError("Form", "Formuláø není validní.");
 			}
-        }
-    }
+		}
+	}
 }

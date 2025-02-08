@@ -7,104 +7,104 @@ using Npgsql;
 
 namespace MojeVlastniStrankaFinanali.Web
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+	public class Program
+	{
+		public static void Main(string[] args)
+		{
+			var builder = WebApplication.CreateBuilder(args);
 
 #if Debug
             builder.Configuration.AddJsonFile("appsettings.Development.json", optional: false, reloadOnChange: true);
-#elif Release
-            builder.Configuration.AddJsonFile("appsettings.Production.json", optional: false, reloadOnChange: true);
+#else
+			builder.Configuration.AddJsonFile("appsettings.Production.json", optional: false, reloadOnChange: true);
 #endif
 
-            builder.Services.AddDbContext<DataContext>(options =>
-                    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")),
-                ServiceLifetime.Scoped);
+			builder.Services.AddDbContext<DataContext>(options =>
+						  options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")),
+					 ServiceLifetime.Scoped);
 
 			builder.Services.AddDefaultIdentity<User>(options =>
-                {
-                    // Heslo nastavení.
-                    options.Password.RequireDigit = true;
-                    options.Password.RequireLowercase = true;
-                    options.Password.RequireNonAlphanumeric = true;
-                    options.Password.RequireUppercase = true;
-                    options.Password.RequiredLength = 6;
-                    options.Password.RequiredUniqueChars = 1;
+					 {
+						 // Heslo nastavení.
+						 options.Password.RequireDigit = true;
+						 options.Password.RequireLowercase = true;
+						 options.Password.RequireNonAlphanumeric = true;
+						 options.Password.RequireUppercase = true;
+						 options.Password.RequiredLength = 6;
+						 options.Password.RequiredUniqueChars = 1;
 
-                    // Lockout settings.
-                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                    options.Lockout.MaxFailedAccessAttempts = 5;
-                    options.Lockout.AllowedForNewUsers = true;
+						 // Lockout settings.
+						 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+						 options.Lockout.MaxFailedAccessAttempts = 5;
+						 options.Lockout.AllowedForNewUsers = true;
 
-                    // Uživatelské nastavení.
-                    options.User.AllowedUserNameCharacters =
-                        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-                    options.User.RequireUniqueEmail = false;
-                })
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<DataContext>();
+						 // Uživatelské nastavení.
+						 options.User.AllowedUserNameCharacters =
+							  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+						 options.User.RequireUniqueEmail = false;
+					 })
+					 .AddRoles<IdentityRole>()
+					 .AddEntityFrameworkStores<DataContext>();
 
-            builder.Services.ConfigureApplicationCookie(options =>
-            {
-                // Cookie settings
-                options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+			builder.Services.ConfigureApplicationCookie(options =>
+			{
+				// Cookie settings
+				options.Cookie.HttpOnly = true;
+				options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
 
-                options.LoginPath = "/Admin/Account/Login";
-                options.AccessDeniedPath = "/Admin/Account/AccessDenied";
-                options.SlidingExpiration = true;
-            });
+				options.LoginPath = "/Admin/Account/Login";
+				options.AccessDeniedPath = "/Admin/Account/AccessDenied";
+				options.SlidingExpiration = true;
+			});
 
-            builder.Services.AddScoped<NotificationService>();
-            builder.Services.AddScoped<BlogService>();
-            builder.Services.AddScoped<ProjectService>();
-            builder.Services.AddScoped<ImageService>();
-            builder.Services.AddScoped<DevelopmentService>();
-            builder.Services.AddScoped<DashboardService>();
-            builder.Services.AddScoped<MailService>();
-            builder.Services.AddScoped<FormService>();
-            builder.Services.AddScoped<ServicesOfferedService>();
+			builder.Services.AddScoped<NotificationService>();
+			builder.Services.AddScoped<BlogService>();
+			builder.Services.AddScoped<ProjectService>();
+			builder.Services.AddScoped<ImageService>();
+			builder.Services.AddScoped<DevelopmentService>();
+			builder.Services.AddScoped<DashboardService>();
+			builder.Services.AddScoped<MailService>();
+			builder.Services.AddScoped<FormService>();
+			builder.Services.AddScoped<ServicesOfferedService>();
 
-            builder.Services.AddRazorPages();
-            builder.Services.AddControllers();
+			builder.Services.AddRazorPages();
+			builder.Services.AddControllers();
 
-            var app = builder.Build();
+			var app = builder.Build();
 
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/Error");
+			if (!app.Environment.IsDevelopment())
+			{
+				app.UseExceptionHandler("/Error");
 
 				app.UseStatusCodePagesWithReExecute("/StatusCode/{0}");
-                app.UseHsts();
-            }
+				app.UseHsts();
+			}
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
+			app.UseHttpsRedirection();
+			app.UseStaticFiles();
 
-            app.UseRouting();
+			app.UseRouting();
 
-            app.UseAuthorization();
+			app.UseAuthorization();
 
-            app.MapRazorPages();
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+			app.MapRazorPages();
+			app.MapControllerRoute(
+				 name: "default",
+				 pattern: "{controller=Home}/{action=Index}/{id?}");
 
-            app.MapControllerRoute(
-                name: "blog",
-                pattern: "blog/{Slug}",
-                defaults: new { controller = "ShowBlogPost", action = "Blog" });
+			app.MapControllerRoute(
+				 name: "blog",
+				 pattern: "blog/{Slug}",
+				 defaults: new { controller = "ShowBlogPost", action = "Blog" });
 
-             app.MapControllerRoute(
-                 name: "projekty",
-                 pattern: "projekty/{Slug}",
-                 defaults: new { controller = "Projekty", action = "ShowProject" });
+			app.MapControllerRoute(
+				 name: "projekty",
+				 pattern: "projekty/{Slug}",
+				 defaults: new { controller = "Projekty", action = "ShowProject" });
 
-             app.MapControllerRoute(
-                name: "api",
-                pattern: "api/{controller}/{action}/{id?}");
+			app.MapControllerRoute(
+				name: "api",
+				pattern: "api/{controller}/{action}/{id?}");
 
 
 			using (var scope = app.Services.CreateScope())
@@ -112,13 +112,11 @@ namespace MojeVlastniStrankaFinanali.Web
 				var services = scope.ServiceProvider;
 				var context = services.GetRequiredService<DataContext>();
 
-
 				context.Database.EnsureDeleted();
 				context.Database.EnsureCreated();
-
 			}
 
 			app.Run();
-        }
-    }
+		}
+	}
 }

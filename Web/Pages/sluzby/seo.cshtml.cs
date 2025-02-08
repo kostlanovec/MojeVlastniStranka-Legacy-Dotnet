@@ -5,8 +5,8 @@ using MojeVlastniStranka.ApplicationCore.Services;
 
 namespace MojeVlastniStranka.Web.Pages.sluzby
 {
-    public class seoModel : PageModel
-    {
+	public class seoModel : PageModel
+	{
 		private readonly ServicesOfferedService servicesOfferedService;
 
 		[BindProperty]

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MojeVlastniStranka.DataAccess.Entities
 {
-	public class IdeaToRelease: IEntities
+	public class IdeaToRelease : IEntities
 	{
 		protected IdeaToRelease() { }
 
@@ -17,11 +17,11 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			set;
 		}
 
-        /// <summary>
-        /// Vrací nebo nastavuje nápad na vylepšení.
-        /// </summary>
-        [Column(TypeName = "text")]
-        public string Idea
+		/// <summary>
+		/// Vrací nebo nastavuje nápad na vylepšení.
+		/// </summary>
+		[Column(TypeName = "text")]
+		public string Idea
 		{
 			get;
 			set;

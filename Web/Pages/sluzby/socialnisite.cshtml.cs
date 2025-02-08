@@ -5,14 +5,18 @@ using MojeVlastniStranka.ApplicationCore.Services;
 
 namespace MojeVlastniStranka.Web.Pages.sluzby
 {
-    public class socialnisiteModel : PageModel
-    {
+	public class socialnisiteModel : PageModel
+	{
 		private readonly ServicesOfferedService servicesOfferedService;
 
 		[BindProperty]
-		public ServiceRequestDto ServiceRequestDto { get; set; }
+		public ServiceRequestDto ServiceRequestDto 
+		{
+			get;
+			set;
+		}
 
-        public socialnisiteModel(ServicesOfferedService servicesOfferedService)
+		public socialnisiteModel(ServicesOfferedService servicesOfferedService)
 		{
 			this.servicesOfferedService = servicesOfferedService;
 		}
@@ -28,5 +32,5 @@ namespace MojeVlastniStranka.Web.Pages.sluzby
 
 			return Page();
 		}
-    }
+	}
 }

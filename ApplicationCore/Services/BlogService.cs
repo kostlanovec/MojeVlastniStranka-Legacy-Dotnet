@@ -8,7 +8,7 @@ using MojeVlastniStranka.DataAccess.Entities;
 
 namespace MojeVlastniStranka.ApplicationCore.Services
 {
-    public class BlogService
+	public class BlogService
 	{
 		private readonly DataContext context;
 
@@ -119,9 +119,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				BlogPosts = fourNewerPosts
 			};
 
-            blogcategorylist.Insert(0, specialCategory);
+			blogcategorylist.Insert(0, specialCategory);
 
-            return blogcategorylist;
+			return blogcategorylist;
 		}
 
 		/// <summary>

@@ -12,9 +12,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		private readonly DataContext context;
 
 		public MailService(DataContext context)
-        {
-            this.context = context;
-        }
+		{
+			this.context = context;
+		}
 
 		/// <summary>
 		/// Posílá newsletter.
@@ -29,7 +29,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				foreach (var email in emails)
 				{
 					message.From.Add(new MailboxAddress("Jan Sebastián Kostlán", "kostlan@kostlanovec.cz"));
-					message.To.Add(new MailboxAddress(email.Email, email.Email)); 
+					message.To.Add(new MailboxAddress(email.Email, email.Email));
 					message.Subject = newsLetterRequest.Subject;
 
 					message.Body = new TextPart("html")
@@ -37,7 +37,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 						Text = newsLetterRequest.Body
 					};
 
-					Client(message, "kostlan@kostlanovec.cz", "[REMOVED]"); 
+					Client(message, "kostlan@kostlanovec.cz", "[REMOVED]");
 				}
 			}
 		}
@@ -108,18 +108,18 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// <param name="email">Emailová adresa</param>
 		/// <returns>Vrací true, pokud byl email úspěšně přidán, jinak false</returns>
 		public bool AddEmailForNewsLetter(string email)
-        {
-            bool emailExist = context.NewsLetters.Any(x => x.Email == email);
-            if (emailExist)
-            {
-                return false; // Email již existuje
-            }
+		{
+			bool emailExist = context.NewsLetters.Any(x => x.Email == email);
+			if (emailExist)
+			{
+				return false; // Email již existuje
+			}
 
-            var newsLetterEmail = NewsLetter.Create(email);
-            context.NewsLetters.Add(newsLetterEmail);
-            context.SaveChanges();
-            return true; // Email byl úspěšně přidán
-        }
+			var newsLetterEmail = NewsLetter.Create(email);
+			context.NewsLetters.Add(newsLetterEmail);
+			context.SaveChanges();
+			return true; // Email byl úspěšně přidán
+		}
 
 		public async Task<List<NewsLetter>> GetAllNewsletterEmails()
 		{

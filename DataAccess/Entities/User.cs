@@ -2,10 +2,10 @@
 
 namespace MojeVlastniStranka.DataAccess.Entities
 {
-    /// <summary>
-    /// Definuje třídu reprezentující uživatele.
-    /// </summary>
-    public class User: IdentityUser
-    {
-    }
+	/// <summary>
+	/// Definuje třídu reprezentující uživatele.
+	/// </summary>
+	public class User : IdentityUser
+	{
+	}
 }
