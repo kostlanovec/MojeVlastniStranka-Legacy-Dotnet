@@ -6,7 +6,7 @@ using MojeVlastniStranka.ApplicationCore.Dto.Project;
 
 namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Project
 {
-    public class IndexModel : PageModel
+	public class IndexModel : PageModel
 	{
 		private readonly DataContext context;
 		private readonly ProjectService projectService;

@@ -9,7 +9,7 @@ using MojeVlastniStranka.DataAccess;
 
 namespace MojeVlastniStranka.User.Areas.Admin.Pages.Project
 {
-    [Authorize]
+	[Authorize]
 	public class EditProjectModel : PageModel
 	{
 		private readonly DataContext context;

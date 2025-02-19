@@ -105,7 +105,6 @@ namespace MojeVlastniStrankaFinanali.Web
 				name: "api",
 				pattern: "api/{controller}/{action}/{id?}");
 
-
 			using (var scope = app.Services.CreateScope())
 			{
 				var services = scope.ServiceProvider;

@@ -12,7 +12,6 @@
 <script src="/js/summernote/Plugins/summernote-ownplugin.js"></script>
 <script src="/lib/typo-js/typo.js"></script>
 
-
 <div class="col-md-12">
 	@await Html.PartialAsync("_ResponseViewModel", Model.responseViewModel)
 	<link rel="stylesheet" href="~/css/fast-style-blog.css" asp-append-version="true" />
@@ -59,14 +58,14 @@
 								<option value="">Všechny statusy</option>
 								@foreach (ProjectStatusEnum status in Enum.GetValues(typeof(ProjectStatusEnum)))
 								{
-										if (status == Model.ProjectEditDto.ProjectStatus)
-										{
-											<option value="@status" selected>@status</option>
-										}
-										else
-										{
-											<option value="@status">@status</option>
-										}
+									if (status == Model.ProjectEditDto.ProjectStatus)
+									{
+										<option value="@status" selected>@status</option>
+									}
+									else
+									{
+										<option value="@status">@status</option>
+									}
 								}
 							</select>
 						</div>
@@ -148,7 +147,6 @@
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
-
 
 	document.getElementById('file').addEventListener('change', function () {
 		showImagePreview(this);

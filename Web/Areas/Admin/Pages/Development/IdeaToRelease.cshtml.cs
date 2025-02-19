@@ -9,15 +9,15 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Development
 {
 	[Authorize]
 	public class IdeaToReleaseModel : PageModel
-    {
-	    private readonly DataContext context;
-	    private readonly DevelopmentService developmentService;
+	{
+		private readonly DataContext context;
+		private readonly DevelopmentService developmentService;
 
-        public IdeaToReleaseModel(DataContext context, DevelopmentService developmentService)
-        {
-	        this.context = context;
-	        this.developmentService = developmentService;
-        }
+		public IdeaToReleaseModel(DataContext context, DevelopmentService developmentService)
+		{
+			this.context = context;
+			this.developmentService = developmentService;
+		}
 
 		[BindProperty]
 		public IdeaToReleaseRequest IdeaToReleaseRequestBinding
@@ -32,8 +32,8 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Development
 			set;
 		}
 
-        public async Task<IActionResult> OnPostAsync()
-        {
+		public async Task<IActionResult> OnPostAsync()
+		{
 			var processingResult = await developmentService.AddIdeaToRelease(IdeaToReleaseRequestBinding);
 
 			if (processingResult == true)
@@ -49,5 +49,5 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Development
 			}
 		}
 
-    }
+	}
 }

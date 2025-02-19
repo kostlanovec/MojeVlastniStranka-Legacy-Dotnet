@@ -7,7 +7,7 @@
 	@await Html.PartialAsync("_ResponseViewModel", Model.responseViewModel)
 	<form method="post" class="mb-4">
 		<label for="CategoryNameAdd">Nová kategorie:</label>
-		<input class="form-control" name="CategoryNameAdd" id="CategoryNameAdd"/>
+		<input class="form-control" name="CategoryNameAdd" id="CategoryNameAdd" />
 		<button class="btn btn-success mt-2" type="submit" asp-page-handler="AddCategory">Přidat kategorii</button>
 	</form>
 

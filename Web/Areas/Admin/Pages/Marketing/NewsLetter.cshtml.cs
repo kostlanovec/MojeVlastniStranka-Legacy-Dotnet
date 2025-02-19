@@ -8,24 +8,24 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Marketing
 {
 	[Authorize]
 	public class NewsLetterModel : PageModel
-    {
-        private readonly MailService mailService;
+	{
+		private readonly MailService mailService;
 
-        [BindProperty]
-        public NewsLetterRequest NewsLetterRequest
-        {
+		[BindProperty]
+		public NewsLetterRequest NewsLetterRequest
+		{
 			get;
 			set;
 		}
 
-	    public NewsLetterModel(MailService mailService)
-	    {
+		public NewsLetterModel(MailService mailService)
+		{
 			this.mailService = mailService;
 		}
 
-        public void OnPost()
-        {
-            mailService.SendMail(NewsLetterRequest);
+		public void OnPost()
+		{
+			mailService.SendMail(NewsLetterRequest);
 		}
-    }
+	}
 }

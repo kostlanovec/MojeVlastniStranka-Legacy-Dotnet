@@ -11,36 +11,36 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace MojeVlastniStranka.Web.Areas.Identity.Pages.Account
 {
-    [AllowAnonymous]
-    public class ConfirmEmailModel : PageModel
-    {
-        private readonly UserManager<DataAccess.Entities.User> _userManager;
+	[AllowAnonymous]
+	public class ConfirmEmailModel : PageModel
+	{
+		private readonly UserManager<DataAccess.Entities.User> _userManager;
 
-        public ConfirmEmailModel(UserManager<DataAccess.Entities.User> userManager)
-        {
-            _userManager = userManager;
-        }
+		public ConfirmEmailModel(UserManager<DataAccess.Entities.User> userManager)
+		{
+			_userManager = userManager;
+		}
 
-        [TempData]
-        public string StatusMessage { get; set; }
+		[TempData]
+		public string StatusMessage { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string userId, string code)
-        {
-            if (userId == null || code == null)
-            {
-                return RedirectToPage("/Index");
-            }
+		public async Task<IActionResult> OnGetAsync(string userId, string code)
+		{
+			if (userId == null || code == null)
+			{
+				return RedirectToPage("/Index");
+			}
 
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
-            {
-                return NotFound($"Unable to load user with ID '{userId}'.");
-            }
+			var user = await _userManager.FindByIdAsync(userId);
+			if (user == null)
+			{
+				return NotFound($"Unable to load user with ID '{userId}'.");
+			}
 
-            code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
-            var result = await _userManager.ConfirmEmailAsync(user, code);
-            StatusMessage = result.Succeeded ? "Thank you for confirming your email." : "Error confirming your email.";
-            return Page();
-        }
-    }
+			code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
+			var result = await _userManager.ConfirmEmailAsync(user, code);
+			StatusMessage = result.Succeeded ? "Thank you for confirming your email." : "Error confirming your email.";
+			return Page();
+		}
+	}
 }

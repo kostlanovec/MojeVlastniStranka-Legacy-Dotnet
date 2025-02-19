@@ -9,10 +9,10 @@ using MojeVlastniStranka.DataAccess;
 
 namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
 {
-    [Authorize]
+	[Authorize]
 	public class EditBlogPostModel : PageModel
-    {
-	    private readonly DataContext context;
+	{
+		private readonly DataContext context;
 		private readonly BlogService blogService;
 
 		public EditBlogPostDto EditBlogPostDto
@@ -21,37 +21,37 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
 			set;
 		}
 
-        public List<BlogCategoryDto> BlogCategory
-        {
-            get;
-            set;
+		public List<BlogCategoryDto> BlogCategory
+		{
+			get;
+			set;
 
-        }
+		}
 
-        [BindProperty]
-        public EditBlogPostRequest Input
-        {
-	        get;
-	        set;
-        }
+		[BindProperty]
+		public EditBlogPostRequest Input
+		{
+			get;
+			set;
+		}
 
-        public EditBlogPostModel(BlogService blogService)
-	    {
+		public EditBlogPostModel(BlogService blogService)
+		{
 			this.blogService = blogService;
-	    }
+		}
 
-        [BindProperty(SupportsGet = true)]
-        public Guid Id
-        {
-            get;
-            set;
-        }
+		[BindProperty(SupportsGet = true)]
+		public Guid Id
+		{
+			get;
+			set;
+		}
 
-        public string SuccessMessage
-        {
-	        get;
-	        set;
-        }
+		public string SuccessMessage
+		{
+			get;
+			set;
+		}
 
 		public ResponseViewModel responseViewModel
 		{

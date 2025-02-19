@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MojeVlastniStranka.Web.Areas.Identity.Pages.Account
 {
-    [AllowAnonymous]
-    public class ForgotPasswordConfirmation : PageModel
-    {
-        public void OnGet()
-        {
-        }
-    }
+	[AllowAnonymous]
+	public class ForgotPasswordConfirmation : PageModel
+	{
+		public void OnGet()
+		{
+		}
+	}
 }

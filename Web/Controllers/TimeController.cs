@@ -1,13 +1,11 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using Microsoft.AspNetCore.Mvc;
+using TimeZoneConverter;
 
 namespace MojeVlastniStranka.Web.Controllers
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Globalization;
-	using Microsoft.AspNetCore.Mvc;
-	using TimeZoneConverter;
-
 	public class TimeController : Controller
 	{
 		[Route("convert-timestamps")]
@@ -59,5 +57,4 @@ namespace MojeVlastniStranka.Web.Controllers
 			}
 		}
 	}
-
 }

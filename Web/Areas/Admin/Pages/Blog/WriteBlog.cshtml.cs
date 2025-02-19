@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
 {
-    [Authorize]
+	[Authorize]
 	public class WriteBlogModel : PageModel
 	{
 		private readonly DataContext context;
@@ -31,7 +31,7 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
 
 		public string SuccessMessage
 		{
-			get; 
+			get;
 			set;
 		}
 
@@ -59,23 +59,23 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
 		{
 			if (!ModelState.IsValid)
 			{
-                responseViewModel = new ResponseViewModel
-                {
-                    IsSuccess = false,
-                    Errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList()
-                };
+				responseViewModel = new ResponseViewModel
+				{
+					IsSuccess = false,
+					Errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList()
+				};
 
 				CookiesPostSave();
 
-                BlogCategory = await blogService.GetAllCategoriesTask();
-                return Page();
+				BlogCategory = await blogService.GetAllCategoriesTask();
+				return Page();
 			}
 
-            responseViewModel = await blogService.AddBlogPost(Input);
+			responseViewModel = await blogService.AddBlogPost(Input);
 			Response.Cookies.Delete("blogFormData");
 
 			BlogCategory = await blogService.GetAllCategoriesTask();
-            return Page();
+			return Page();
 		}
 
 		private void CookiesPostSave()

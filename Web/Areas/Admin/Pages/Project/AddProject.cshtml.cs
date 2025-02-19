@@ -7,8 +7,8 @@ using MojeVlastniStranka.DataAccess;
 
 namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Project
 {
-    public class AddProjectModel : PageModel
-    {
+	public class AddProjectModel : PageModel
+	{
 		private readonly DataContext context;
 		private readonly ProjectService projectService;
 

@@ -4,7 +4,7 @@ using MojeVlastniStranka.ApplicationCore.Services;
 
 namespace MojeVlastniStranka.Web.Controllers
 {
-    [ApiController]
+	[ApiController]
 	[Route("[controller][action]")]
 	public class BlogController : BaseController
 	{

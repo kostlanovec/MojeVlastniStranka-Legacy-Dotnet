@@ -7,12 +7,12 @@
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 @functions {
-	 public Task<List<NotificationDto>> GetDataFromDatabase()
-	 {
-		 var data = notificationService.GetThreeNotification();
-		 return data;
-	 }
- }
+	public Task<List<NotificationDto>> GetDataFromDatabase()
+	{
+		var data = notificationService.GetThreeNotification();
+		return data;
+	}
+}
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -30,7 +30,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&amp;family=Roboto:wght@500;700&amp;display=swap" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&amp;family=Roboto:wght@500;700&amp;display=swap" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 	<link href="/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
@@ -43,45 +43,45 @@
 </head>
 <body>
 
-<div class="container-fluid position-relative d-flex p-0" style="margin-top:-24px">
-	<partial name="_Navbar" />
-	<div class="content">
-		<nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
-			<a asp-page="" class="navbar-brand d-flex d-lg-none me-4">
-				<h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
-			</a>
-			<a href="#" class="sidebar-toggler flex-shrink-0">
-				<i class="fa fa-bars"></i>
-			</a>
-			<!--todo Přidat něco skrz vyhledavání?-->
-			<form class="d-none d-md-flex ms-4">
-				<input class="form-control bg-dark border-0" type="search" placeholder="Vyhledat">
-			</form>
-			<!--todo Implementování oznámení na určité eventy.-->
-			<div class="navbar-nav align-items-center ms-auto">
-				<div class="nav-item dropdown">
-					<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-						<i class="fa fa-envelope me-lg-2"></i>
-						<span class="d-none d-lg-inline-flex">Zprávy</span>
-					</a>
-					<div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-						@foreach (var notification in await GetDataFromDatabase())
-						{
-							<a href="#" class="dropdown-item">
-								<div class="d-flex align-items-center">
-									<img class="rounded-circle" src="/images/osobnifotka.png" alt="" style="width: 40px; height: 40px;">
-									<div class="ms-2">
-										<h6 class="fw-normal mb-0">@notification.ShortMessage</h6>
-										<small>@notification.TimePublish.ToString(CultureInfo.CurrentCulture)</small>
+	<div class="container-fluid position-relative d-flex p-0" style="margin-top:-24px">
+		<partial name="_Navbar" />
+		<div class="content">
+			<nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
+				<a asp-page="" class="navbar-brand d-flex d-lg-none me-4">
+					<h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
+				</a>
+				<a href="#" class="sidebar-toggler flex-shrink-0">
+					<i class="fa fa-bars"></i>
+				</a>
+				<!--todo Přidat něco skrz vyhledavání?-->
+				<form class="d-none d-md-flex ms-4">
+					<input class="form-control bg-dark border-0" type="search" placeholder="Vyhledat">
+				</form>
+				<!--todo Implementování oznámení na určité eventy.-->
+				<div class="navbar-nav align-items-center ms-auto">
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+							<i class="fa fa-envelope me-lg-2"></i>
+							<span class="d-none d-lg-inline-flex">Zprávy</span>
+						</a>
+						<div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+							@foreach (var notification in await GetDataFromDatabase())
+							{
+								<a href="#" class="dropdown-item">
+									<div class="d-flex align-items-center">
+										<img class="rounded-circle" src="/images/osobnifotka.png" alt="" style="width: 40px; height: 40px;">
+										<div class="ms-2">
+											<h6 class="fw-normal mb-0">@notification.ShortMessage</h6>
+											<small>@notification.TimePublish.ToString(CultureInfo.CurrentCulture)</small>
+										</div>
 									</div>
-								</div>
-							</a>
-							<hr class="dropdown-divider">
-						}
-						<a asp-page="/Marketing/AllNotification" class="dropdown-item text-center">Vidět všechny zprávy</a>
+								</a>
+								<hr class="dropdown-divider">
+							}
+							<a asp-page="/Marketing/AllNotification" class="dropdown-item text-center">Vidět všechny zprávy</a>
+						</div>
 					</div>
 				</div>
-			</div>
 				<!--todo Implementování zpráv o změnách na profilu.-->
 				<div class="nav-item dropdown">
 					<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
@@ -109,30 +109,30 @@
 						</form>
 					</div>
 				</div>
-			</>
-		</nav>
-		<div class="container-fluid pt-4 px-4 mt-4">
-			@RenderBody()
+				</>
+			</nav>
+			<div class="container-fluid pt-4 px-4 mt-4">
+				@RenderBody()
+			</div>
 		</div>
 	</div>
-</div>
-<script>
-	document.addEventListener("DOMContentLoaded", function () {
-		var sidebarToggler = document.querySelector('.sidebar-toggler');
-		var sidebar = document.querySelector('.sidebar');
-		var contentDiv = document.querySelector('.content');
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			var sidebarToggler = document.querySelector('.sidebar-toggler');
+			var sidebar = document.querySelector('.sidebar');
+			var contentDiv = document.querySelector('.content');
 
-		sidebarToggler.addEventListener('click', function () {
-			if (sidebar.classList.contains('open')) {
-				sidebar.classList.remove('open');
-				contentDiv.classList.remove('open');
-			} else {
-				sidebar.classList.add('open');
-				contentDiv.classList.add('open');
-			}
+			sidebarToggler.addEventListener('click', function () {
+				if (sidebar.classList.contains('open')) {
+					sidebar.classList.remove('open');
+					contentDiv.classList.remove('open');
+				} else {
+					sidebar.classList.add('open');
+					contentDiv.classList.add('open');
+				}
+			});
 		});
-	});
-</script>
+	</script>
 	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

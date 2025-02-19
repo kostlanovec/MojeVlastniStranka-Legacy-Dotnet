@@ -8,7 +8,7 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Marketing
 {
 	[Authorize]
 	public class AllNotificationModel : PageModel
-    {
+	{
 		private readonly DataContext context;
 		private readonly NotificationService notificationService;
 
@@ -26,6 +26,6 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Marketing
 		public async Task OnGetAsync()
 		{
 			notificationDtos = await notificationService.GetAllNotification();
-        }
-    }
+		}
+	}
 }

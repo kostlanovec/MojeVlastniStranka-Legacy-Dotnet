@@ -5,7 +5,7 @@ using MojeVlastniStranka.DataAccess;
 
 namespace MojeVlastniStranka.Web.Controllers
 {
-    [ApiController]
+	[ApiController]
 	[Route("[controller]")]
 	public class ProjectController : BaseController
 	{

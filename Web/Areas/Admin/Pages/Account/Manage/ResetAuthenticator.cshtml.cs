@@ -12,51 +12,51 @@ namespace MojeVlastniStranka.Web.Areas.Identity.Pages.Account.Manage
 {
 	[Authorize]
 	public class ResetAuthenticatorModel : PageModel
-    {
-        UserManager<DataAccess.Entities.User> _userManager;
-        private readonly SignInManager<DataAccess.Entities.User> _signInManager;
-        ILogger<ResetAuthenticatorModel> _logger;
+	{
+		UserManager<DataAccess.Entities.User> _userManager;
+		private readonly SignInManager<DataAccess.Entities.User> _signInManager;
+		ILogger<ResetAuthenticatorModel> _logger;
 
-        public ResetAuthenticatorModel(
-            UserManager<DataAccess.Entities.User> userManager,
-            SignInManager<DataAccess.Entities.User> signInManager,
-            ILogger<ResetAuthenticatorModel> logger)
-        {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _logger = logger;
-        }
+		public ResetAuthenticatorModel(
+			 UserManager<DataAccess.Entities.User> userManager,
+			 SignInManager<DataAccess.Entities.User> signInManager,
+			 ILogger<ResetAuthenticatorModel> logger)
+		{
+			_userManager = userManager;
+			_signInManager = signInManager;
+			_logger = logger;
+		}
 
-        [TempData]
-        public string StatusMessage { get; set; }
+		[TempData]
+		public string StatusMessage { get; set; }
 
-        public async Task<IActionResult> OnGet()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return NotFound($"Unable to load user with ID '{user.Id}'.");
-            }
+		public async Task<IActionResult> OnGet()
+		{
+			var user = await _userManager.GetUserAsync(User);
+			if (user == null)
+			{
+				return NotFound($"Unable to load user with ID '{user.Id}'.");
+			}
 
-            return Page();
-        }
+			return Page();
+		}
 
-        public async Task<IActionResult> OnPostAsync()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return NotFound($"Unable to load user with ID 'user.Id'.");
-            }
+		public async Task<IActionResult> OnPostAsync()
+		{
+			var user = await _userManager.GetUserAsync(User);
+			if (user == null)
+			{
+				return NotFound($"Unable to load user with ID 'user.Id'.");
+			}
 
-            await _userManager.SetTwoFactorEnabledAsync(user, false);
-            await _userManager.ResetAuthenticatorKeyAsync(user);
-            _logger.LogInformation("User with ID '{UserId}' has reset their authentication app key.", user.Id);
+			await _userManager.SetTwoFactorEnabledAsync(user, false);
+			await _userManager.ResetAuthenticatorKeyAsync(user);
+			_logger.LogInformation("User with ID '{UserId}' has reset their authentication app key.", user.Id);
 
-            await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your authenticator app key has been reset, you will need to configure your authenticator app using the new key.";
+			await _signInManager.RefreshSignInAsync(user);
+			StatusMessage = "Your authenticator app key has been reset, you will need to configure your authenticator app using the new key.";
 
-            return RedirectToPage("./EnableAuthenticator");
-        }
-    }
+			return RedirectToPage("./EnableAuthenticator");
+		}
+	}
 }

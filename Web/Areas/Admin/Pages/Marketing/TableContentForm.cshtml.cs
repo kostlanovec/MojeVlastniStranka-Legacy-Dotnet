@@ -8,11 +8,11 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Marketing
 	{
 		private readonly FormService formService;
 
-        public List<ContactForm> ViewModel
-        {
-            get;
-            set;
-        }
+		public List<ContactForm> ViewModel
+		{
+			get;
+			set;
+		}
 
 		public TableContentFormModelPage(FormService formService)
 		{
