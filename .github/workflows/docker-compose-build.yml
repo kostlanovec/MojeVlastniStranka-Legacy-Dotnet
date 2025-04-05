@@ -2,7 +2,7 @@ name: Build & Deploy ASP.NET App with Docker Compose
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   build-and-deploy:
