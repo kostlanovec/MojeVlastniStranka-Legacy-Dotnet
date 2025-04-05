@@ -1,11 +1,11 @@
-name: Build & Push ASP.NET App with Docker Compose
+name: Build & Deploy ASP.NET App with Docker Compose
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,14 +21,25 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USER }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Build image using docker-compose
+    - name: Build image using docker-compose.build.yml
       run: |
-        docker compose -f docker-compose.yml build
+        docker compose -f docker-compose.build.yml build
 
-    - name: Tag image
+    - name: Tag image for Docker Hub
       run: |
         docker tag mojevlastnistranka-web ${{ secrets.DOCKERHUB_USER }}/mojevlastnistranka:latest
 
     - name: Push image to Docker Hub
       run: |
         docker push ${{ secrets.DOCKERHUB_USER }}/mojevlastnistranka:latest
+
+    - name: Deploy to VPS via SSH
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd ~/mojevlastnistranka
+          docker compose -f docker-compose.deploy.yml pull
+          docker compose -f docker-compose.deploy.yml up -d

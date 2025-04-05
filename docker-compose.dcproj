@@ -10,7 +10,8 @@
     <DockerServiceName>mojevlastnistranka.web</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="docker-compose.yml" />
+    <None Include="docker-compose.deploy.yml" />
+    <None Include="docker-compose.build.yml" />
     <None Include=".dockerignore" />
   </ItemGroup>
 </Project>

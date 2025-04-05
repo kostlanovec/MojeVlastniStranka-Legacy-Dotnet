@@ -1,18 +1,11 @@
-volumes:
-  local_postgres_data: {}
 services:
-
   mojevlastnistranka.web:
-    image: mojevlastnistranka-web
+    image: kostlanovec/mojevlastnistranka:latest
     environment:
-
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_HTTP_PORTS=8080
     ports:
       - "127.0.0.1:8080:8080"
-    build:
-      context: .
-      dockerfile: Web/Dockerfile
 
   db:
     image: postgres:17.2
@@ -21,3 +14,6 @@ services:
       POSTGRES_USERNAME: postgres
     volumes:
       - local_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  local_postgres_data: {}
