@@ -1,0 +1,34 @@
+name: Build & Push ASP.NET App with Docker Compose
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USER }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build image using docker-compose
+      run: |
+        docker compose -f docker-compose.yml build
+
+    - name: Tag image
+      run: |
+        docker tag mojevlastnistranka-web ${{ secrets.DOCKERHUB_USER }}/mojevlastnistranka:latest
+
+    - name: Push image to Docker Hub
+      run: |
+        docker push ${{ secrets.DOCKERHUB_USER }}/mojevlastnistranka:latest

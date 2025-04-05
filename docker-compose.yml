@@ -3,7 +3,9 @@ volumes:
 services:
 
   mojevlastnistranka.web:
+    image: mojevlastnistranka-web
     environment:
+
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_HTTP_PORTS=8080
     ports:
