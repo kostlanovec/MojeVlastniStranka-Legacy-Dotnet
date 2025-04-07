@@ -8,44 +8,47 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 {
 	public class ImageService
 	{
-		private readonly IHostEnvironment environment;
 		private readonly DataContext context;
 
-		public ImageService(DataContext context, IHostEnvironment environment)
+		public ImageService(DataContext context)
 		{
-			this.environment = environment;
 			this.context = context;
 		}
 
 		/// <summary>
-		/// Uloží obrázek do určeného úložiště.
+		/// Uloží obrázek do zadané podsložky (např. "blog", "profile", "general").
 		/// </summary>
-		public async Task<string> UploadImageAsync(IFormFile file)
+		public async Task<string> UploadImageAsync(IFormFile file, string subfolder = "general")
 		{
-			var currentDirectory = Directory.GetCurrentDirectory();
-			var uploadsDirectory = Path.Combine(currentDirectory, "wwwroot", "images", "blog");
-			var filePath = Path.Combine(uploadsDirectory, file.FileName);
+			if (file == null || file.Length == 0)
+				throw new ArgumentException("No file uploaded.");
 
-			if (File.Exists(filePath))
-			{
-				return ("/images/blog/" + file.FileName);
-			}
+			var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".webp" };
+			var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+
+			if (!allowedExtensions.Contains(extension))
+				throw new InvalidOperationException("Unsupported file type.");
+
+			var uploadsRoot = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+			var uploadsDirectory = Path.Combine(uploadsRoot, subfolder);
 
 			if (!Directory.Exists(uploadsDirectory))
-			{
 				Directory.CreateDirectory(uploadsDirectory);
-			}
 
-			using (var fileStream = new FileStream(filePath, FileMode.Create))
+			var uniqueFileName = $"{Guid.NewGuid()}{extension}";
+			var filePath = Path.Combine(uploadsDirectory, uniqueFileName);
+
+			using (var stream = new FileStream(filePath, FileMode.Create))
 			{
-				await file.CopyToAsync(fileStream);
+				await file.CopyToAsync(stream);
 			}
 
-			return ("/images/blog/" + file.FileName);
+			// Vrací cestu použitelnou jako <img src="...">
+			return $"/images/{subfolder}/{uniqueFileName}";
 		}
 
 		/// <summary>
-		/// Získání všech obrázku.
+		/// Získání všech obrázků.
 		/// </summary>
 		public async Task<List<ImageDto>> GetImagesAsync()
 		{
@@ -73,7 +76,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		}
 
 		/// <summary>
-		/// Vymazání obrázku.
+		/// Vymazání obrázku (pouze z databáze – můžeš doplnit i mazání fyzického souboru).
 		/// </summary>
 		public async Task DeleteImageAsync(int imageId)
 		{
