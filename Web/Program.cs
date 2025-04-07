@@ -109,9 +109,6 @@ namespace MojeVlastniStrankaFinanali.Web
 			{
 				var services = scope.ServiceProvider;
 				var context = services.GetRequiredService<DataContext>();
-
-				context.Database.EnsureDeleted();
-				context.Database.EnsureCreated();
 			}
 
 			app.Run();

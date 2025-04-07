@@ -44,6 +44,13 @@
 	{
 		<meta name="robots" content="nofollow">
 	}
+
+	@if (ViewData["JsonLD"] != null)
+	{
+		<script type="application/ld+json">
+			@Html.Raw(ViewData["JsonLD"])
+		</script>
+	}
 	<link rel="canonical" href="@canonicalUrl" />
 </head>
 <body class="body">
@@ -71,7 +78,7 @@
 	@RenderBody()
 
 	<footer class="footer">
-		<p>2024 | Jan Sebastián Kostlán</p>
+		<p>2024 - 2025 | Made by Jan Sebastián Kostlán</p>
 		<div class="footer__last__element">
 			<a class="white--a" asp-page="/gdpr">GDPR</a>
 			<a class="white--a" asp-page="/zasadycookies">Cookies</a>
