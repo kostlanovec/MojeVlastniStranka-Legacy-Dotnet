@@ -55,7 +55,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				return response;
 			}
 
-			string imagePath = await imageService.UploadImageAsync(projectRequest.File);
+			string imagePath = await imageService.UploadImageAsync(projectRequest.File, "project");
 
 			var blogPost = Project.Create(
 				projectRequest.Description,
@@ -147,7 +147,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
 			if (request.FileUpload != null)
 			{
-				project.ImagePath = await imageService.UploadImageAsync(request.FileUpload);
+				project.ImagePath = await imageService.UploadImageAsync(request.FileUpload, "project");
 			}
 
 			project.Name = request.Name;

@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MojeVlastniStranka.ApplicationCore.Dto
 {
+	/// <summary>
+	/// Request na žádost o konkrétní službu.
+	/// </summary>
 	public class ServiceRequestDto
 	{
 		[Required]

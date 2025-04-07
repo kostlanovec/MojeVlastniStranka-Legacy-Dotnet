@@ -3,113 +3,113 @@
 }
 <!DOCTYPE html>
 <html lang="cs">
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>@ViewData["Title"] - Osobní stránka Jana Sebastiána Kostlána</title>
-	<link rel="stylesheet" href="~/css/fast-style.css" asp-append-version="true" />
-	<meta name="description" content="@ViewData["Description"]">
-	<meta name="author" content="@ViewData["Author"]">
-	<meta name="keywords" content="@ViewData["Keywords"]">
-	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-	<link rel="manifest" href="/site.webmanifest">
-	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-	<meta name="msapplication-TileColor" content="#2b5797">
-	<meta name="msapplication-TileImage" content="/mstile-144x144.png">
-	<meta name="theme-color" content="#ffffff">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<meta property="og:locale" content="cs_CZ">
-	<meta property="og:site_name" content="Kostlanovec">
-	<meta property="og:type" content="website">
-	<meta property="og:url" content="@canonicalUrl">
-	<meta property="og:title" content="@ViewData["SocialTitle"]">
-	<meta property="og:description" content="@ViewData["Description"]">
-	<meta property="og:image" content="@ViewData["Image"]">
-	<meta property="twitter:card" content="@ViewData["Image"]">
-	<meta property="twitter:url" content="@canonicalUrl">
-	<meta property="twitter:title" content="@ViewData["SocialTitle"]">
-	<meta property="twitter:description" content="@ViewData["Description"]">
-	<meta property="twitter:image" content="@ViewData["Image"]">
-	<script src="/lib/jquery/dist/jquery.min.js"></script>
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-SFNW32KZW0"></script>
-	<script type="text/plain" data-cookiecategory="analytics">
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-		gtag('config', 'G-SFNW32KZW0');
-	</script>
-	@if (ViewData["nofollow"]?.ToString() == "true")
-	{
-		<meta name="robots" content="nofollow">
-	}
-	<link rel="canonical" href="@canonicalUrl" />
-</head>
-<body class="body">
-	<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-		<symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 40" id="menu">
-			<path d="M48.33,45.6H18a14.17,14.17,0,0,1,0-28.34H78.86a17.37,17.37,0,0,1,0,34.74H42.33l-21-21.26L47.75,4" />
-		</symbol>
-	</svg>
-	<nav class="menu reveal" id="menu">
-		<div class="menu-basic">
-			<a class="a-index" asp-page="/Index">Kostlanovec</a>
-			<button aria-label="Hamburger menu" class="hamburger">
-				<svg class="svg--hamburger">
-					<use xlink:href="#menu" />
-					<use xlink:href="#menu" />
-				</svg>
-			</button>
-		</div>
-		<ul class="menu-list">
-			<li class="menu-item"><a asp-page="/blog/index">Blog</a></li>
-			<li class="menu-item"><a asp-page="/projekty/index">Projekty</a></li>
-			<li class="menu-item"><a asp-page="/kontakt/index">Kontakt</a></li>
-		</ul>
-	</nav>
-	@RenderBody()
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>@ViewData["Title"] - Osobní stránka Jana Sebastiána Kostlána</title>
+		<link rel="stylesheet" href="~/css/fast-style.css" asp-append-version="true" />
+		<meta name="description" content="@ViewData["Description"]">
+		<meta name="author" content="@ViewData["Author"]">
+		<meta name="keywords" content="@ViewData["Keywords"]">
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+		<link rel="manifest" href="/site.webmanifest">
+		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+		<meta name="msapplication-TileColor" content="#2b5797">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<meta property="og:locale" content="cs_CZ">
+		<meta property="og:site_name" content="Kostlanovec">
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="@canonicalUrl">
+		<meta property="og:title" content="@ViewData["SocialTitle"]">
+		<meta property="og:description" content="@ViewData["Description"]">
+		<meta property="og:image" content="@ViewData["Image"]">
+		<meta property="twitter:card" content="@ViewData["Image"]">
+		<meta property="twitter:url" content="@canonicalUrl">
+		<meta property="twitter:title" content="@ViewData["SocialTitle"]">
+		<meta property="twitter:description" content="@ViewData["Description"]">
+		<meta property="twitter:image" content="@ViewData["Image"]">
+		<script src="/lib/jquery/dist/jquery.min.js"></script>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-SFNW32KZW0"></script>
+		<script type="text/plain" data-cookiecategory="analytics">
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'G-SFNW32KZW0');
+		</script>
+		@if (ViewData["nofollow"]?.ToString() == "true")
+		{
+			<meta name="robots" content="nofollow">
+		}
+		<link rel="canonical" href="@canonicalUrl" />
+	</head>
+	<body class="body">
+		<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+			<symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 40" id="menu">
+				<path d="M48.33,45.6H18a14.17,14.17,0,0,1,0-28.34H78.86a17.37,17.37,0,0,1,0,34.74H42.33l-21-21.26L47.75,4" />
+			</symbol>
+		</svg>
+		<nav class="menu reveal" id="menu">
+			<div class="menu-basic">
+				<a class="a-index" asp-page="/Index">Kostlanovec</a>
+				<button aria-label="Hamburger menu" class="hamburger">
+					<svg class="svg--hamburger">
+						<use xlink:href="#menu" />
+						<use xlink:href="#menu" />
+					</svg>
+				</button>
+			</div>
+			<ul class="menu-list">
+				<li class="menu-item"><a asp-page="/blog/index">Blog</a></li>
+				<li class="menu-item"><a asp-page="/projekty/index">Projekty</a></li>
+				<li class="menu-item"><a asp-page="/kontakt/index">Kontakt</a></li>
+			</ul>
+		</nav>
+		@RenderBody()
 
-	<footer class="footer">
-		<p>2024 | Jan Sebastián Kostlán</p>
-		<div class="footer__last__element">
-			<a class="white--a" asp-page="/gdpr">GDPR</a>
-			<a class="white--a" asp-page="/zasadycookies">Cookies</a>
-		</div>
-	</footer>
+		<footer class="footer">
+			<p>2024 | Jan Sebastián Kostlán</p>
+			<div class="footer__last__element">
+				<a class="white--a" asp-page="/gdpr">GDPR</a>
+				<a class="white--a" asp-page="/zasadycookies">Cookies</a>
+			</div>
+		</footer>
 
-	<script>
-		document.addEventListener('DOMContentLoaded', function () {
-			 var hamburger = document.querySelector('.hamburger');
-			 var menu = document.querySelector('.menu');
-			 var menuList = document.querySelector('.menu-list');
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+				 var hamburger = document.querySelector('.hamburger');
+				 var menu = document.querySelector('.menu');
+				 var menuList = document.querySelector('.menu-list');
 
-			 hamburger.addEventListener('click', function () {
-				  var isOpen = menuList.classList.toggle('open');
-				  menu.classList.toggle('open', isOpen);
-				  hamburger.classList.toggle('open', isOpen);
-				  hamburger.setAttribute('aria-expanded', isOpen);
-			 });
+				 hamburger.addEventListener('click', function () {
+					  var isOpen = menuList.classList.toggle('open');
+					  menu.classList.toggle('open', isOpen);
+					  hamburger.classList.toggle('open', isOpen);
+					  hamburger.setAttribute('aria-expanded', isOpen);
+				 });
 
-			 const observer = new IntersectionObserver((entries, observer) => {
-				  entries.forEach(entry => {
-						if (entry.isIntersecting) {
-							 entry.target.classList.add('visible');
-							 observer.unobserve(entry.target);
-						}
-				  });
-			 }, { threshold: 0.1 });
+				 const observer = new IntersectionObserver((entries, observer) => {
+					  entries.forEach(entry => {
+							if (entry.isIntersecting) {
+								 entry.target.classList.add('visible');
+								 observer.unobserve(entry.target);
+							}
+					  });
+				 }, { threshold: 0.1 });
 
-			 const revealElements = document.querySelectorAll('.reveal');
-			 revealElements.forEach(element => {
-				  observer.observe(element);
-			 });
-		});
-	</script>
-	<link rel="stylesheet" href="/lib/vanilla-cookieconsent/src/cookieconsent.css" media="print" onload="this.media='all'">
-	<script defer src="/lib/vanilla-cookieconsent/src/cookieconsent.js" onload="this.media='all'"></script>
-	<script defer src="Scripts/cookieconsent-init.js" onload="this.media='all'"></script>
+				 const revealElements = document.querySelectorAll('.reveal');
+				 revealElements.forEach(element => {
+					  observer.observe(element);
+				 });
+			});
+		</script>
+		<link rel="stylesheet" href="/lib/vanilla-cookieconsent/src/cookieconsent.css" media="print" onload="this.media='all'">
+		<script defer src="/lib/vanilla-cookieconsent/src/cookieconsent.js" onload="this.media='all'"></script>
+		<script defer src="Scripts/cookieconsent-init.js" onload="this.media='all'"></script>
 
-	@await RenderSectionAsync("Scripts", required: false)
-</body>
+		@await RenderSectionAsync("Scripts", required: false)
+	</body>
 </html>

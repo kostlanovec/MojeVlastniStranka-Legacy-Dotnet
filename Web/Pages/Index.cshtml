@@ -174,34 +174,27 @@
 			targetElement.scrollIntoView({ behavior: "smooth" });
 		});
 	});
-
-
 </script>
 
 <script>
 	const scrollContainer = document.getElementById('scrollContainer');
-
 	let isScrolling = false;
 	let startX;
 	let scrollLeft;
-
 	scrollContainer.addEventListener('mousedown', function (e) {
 		isScrolling = true;
 		startX = e.pageX - scrollContainer.offsetLeft;
 		scrollLeft = scrollContainer.scrollLeft;
 	});
-
 	scrollContainer.addEventListener('mousemove', function (e) {
 		if (!isScrolling) return;
 		const x = e.pageX - scrollContainer.offsetLeft;
 		const scrollBy = x - startX;
 		scrollContainer.scrollLeft = scrollLeft - scrollBy;
 	});
-
 	scrollContainer.addEventListener('mouseup', function () {
 		isScrolling = false;
 	});
-
 	scrollContainer.addEventListener('mouseleave', function () {
 		isScrolling = false;
 	});

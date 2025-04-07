@@ -39,21 +39,22 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		}
 
 		// todo jak udělat, získavání služeb
-		public async Task<List<GraphMainServices>> NumberOfServicesPerMainServices()
+		public async Task<List<GraphMainServicesModel>> NumberOfServicesPerMainServices()
 		{
-			var result = new List<GraphMainServices>();
+			var result = new List<GraphMainServicesModel>();
 			// dynamicky získávat hlavní služby
 			foreach (MainServiceEnum mainService in Enum.GetValues(typeof(MainServiceEnum)))
 			{
 				int servicesRequestNumber = context.ServiceRequests.Where(n => n.MainService == mainService).Count();
 
-				var GraphMainServices = new GraphMainServices()
+				var GraphMainServices = new GraphMainServicesModel()
 				{
 					NameOfService = mainService.ToString(),
 					NumberOfServices = servicesRequestNumber
 				};
 				result.Add(GraphMainServices);
 			}
+
 			return result;
 		}
 	}

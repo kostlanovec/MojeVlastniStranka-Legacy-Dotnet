@@ -22,5 +22,4 @@ namespace MojeVlastniStranka.ApplicationCore.Dto
 			set;
 		}
 	}
-
 }

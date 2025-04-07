@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using MojeVlastniStranka.DataAccess.Entities;
 using MojeVlastniStranka.Common.Enums;
-using System.Reflection.Emit;
 using MojeVlastniStranka.DataAccess;
 
 namespace Reservanto.NPS.DataAccess
@@ -83,12 +82,12 @@ namespace Reservanto.NPS.DataAccess
 			if (!context.Projects.Any())
 			{
 				var projects = new List<Project>
-		{
-			Project.Create("Description 1", "<main>...</main>", "Title 1", "Keywords 1", "Project 1", "/images/tvorbaher.jpg", "slug-1", DateTime.Now, ProjectStatusEnum.Planning),
-			Project.Create("Description 2", "<main>...</main>", "Title 2", "Keywords 2", "Project 2", "/images/tvorbaher.jpg", "slug-2", DateTime.Now, ProjectStatusEnum.Development),
-			Project.Create("Description 3", "<main>...</main>", "Title 3", "Keywords 3", "Project 3", "/images/tvorbaher.jpg", "slug-3", DateTime.Now, ProjectStatusEnum.Finalized),
-			// další projekty...
-		};
+				{
+					Project.Create("Description 1", "<main>...</main>", "Title 1", "Keywords 1", "Project 1", "/images/tvorbaher.jpg", "slug-1", DateTime.Now, ProjectStatusEnum.Planning),
+					Project.Create("Description 2", "<main>...</main>", "Title 2", "Keywords 2", "Project 2", "/images/tvorbaher.jpg", "slug-2", DateTime.Now, ProjectStatusEnum.Development),
+					Project.Create("Description 3", "<main>...</main>", "Title 3", "Keywords 3", "Project 3", "/images/tvorbaher.jpg", "slug-3", DateTime.Now, ProjectStatusEnum.Finalized),
+					// další projekty...
+				};
 
 				context.Projects.AddRange(projects);
 				context.SaveChanges();
@@ -121,7 +120,3 @@ namespace Reservanto.NPS.DataAccess
 		}
 	}
 }
-
-
-
-

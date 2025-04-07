@@ -42,7 +42,7 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Account.Manage
 			set;
 		}
 
-		public List<GraphMainServices> MainServicesData
+		public List<GraphMainServicesModel> MainServicesDataModel
 		{
 			get;
 			set;
@@ -57,7 +57,7 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Account.Manage
 			NumberOfContactForms = await dashboardService.NumberOfContactForms();
 			NumberOfBlogPosts = await dashboardService.NumberOfBlogPosts();
 			NumberOfServicesRequest = await dashboardService.NumberOfServices();
-			MainServicesData = await dashboardService.NumberOfServicesPerMainServices();
+			MainServicesDataModel = await dashboardService.NumberOfServicesPerMainServices();
 			// todo vzít data pro graf pro návštěvnost z api.
 		}
 	}

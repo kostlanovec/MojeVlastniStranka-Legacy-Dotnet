@@ -1,6 +1,6 @@
 ﻿namespace MojeVlastniStranka.Common.Models
 {
-	public class GraphMainServices
+	public class GraphMainServicesModel
 	{
 		public string NameOfService
 		{

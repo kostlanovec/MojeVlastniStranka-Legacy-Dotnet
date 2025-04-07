@@ -17,7 +17,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// <summary>
 		/// Uloží obrázek do zadané podsložky (např. "blog", "profile", "general").
 		/// </summary>
-		public async Task<string> UploadImageAsync(IFormFile file, string subfolder = "general")
+		public async Task<string> UploadImageAsync(IFormFile file, string subfolder)
 		{
 			if (file == null || file.Length == 0)
 				throw new ArgumentException("No file uploaded.");

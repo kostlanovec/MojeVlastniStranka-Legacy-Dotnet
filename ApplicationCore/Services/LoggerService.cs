@@ -1,6 +1,6 @@
 ﻿namespace MojeVlastniStranka.ApplicationCore.Services
 {
-	internal class LoggerService
+	public class LoggerService
 	{
 
 	}
