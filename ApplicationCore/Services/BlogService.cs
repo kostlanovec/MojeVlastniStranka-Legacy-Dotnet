@@ -57,7 +57,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				return response;
 			}
 
-			string imagePath = await imageService.UploadImageAsync(blogPostRequest.FileUpload);
+			string imagePath = await imageService.UploadImageAsync(blogPostRequest.FileUpload, "blog");
 
 			var blogPost = BlogPost.Create(
 				blogPostRequest.Description,
@@ -233,6 +233,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				blogCategory = existingBlogPost.BlogCategory,
 				FileUpload = existingBlogPost.ImagePath
 			};
+
 			return editBlogPostDto;
 		}
 
@@ -277,7 +278,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
 			if (editBlogPostRequest.FileUpload != null)
 			{
-				existingBlogPost.ImagePath = await imageService.UploadImageAsync(editBlogPostRequest.FileUpload);
+				existingBlogPost.ImagePath = await imageService.UploadImageAsync(editBlogPostRequest.FileUpload, "blog");
 			}
 
 			await context.SaveChangesAsync();

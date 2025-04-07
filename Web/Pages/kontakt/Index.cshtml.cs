@@ -1,7 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
+Ôªøusing Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MojeVlastniStranka.DataAccess;
-using MojeVlastniStranka.DataAccess.Entities;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.ApplicationCore.Dto;
 
@@ -11,6 +10,13 @@ namespace MojeVlastniStranka.Web.Pages.kontakt
 	{
 		private readonly DataContext context;
 		private readonly FormService formService;
+
+		[BindProperty]
+		public string Honeypot
+		{
+			get;
+			set;
+		}
 
 		public kontaktModel(DataContext context, FormService formService)
 		{
@@ -26,18 +32,25 @@ namespace MojeVlastniStranka.Web.Pages.kontakt
 		}
 
 		/// <summary>
-		/// Odesl·nÌ formul·¯e.
+		/// Odesl√°n√≠ formul√°√∏e.
 		/// </summary>
 		public void OnPost()
 		{
 			Form.SendTime = DateTime.Now;
+
+			if (!string.IsNullOrWhiteSpace(Honeypot))
+			{
+				ModelState.AddModelError("Form", "Neplatn√Ω pokus o odesl√°n√≠ formul√°≈ôe.");
+				return;
+			}
+
 			if (ModelState.IsValid)
 			{
 				formService.AddForm(Form);
 			}
 			else
 			{
-				ModelState.AddModelError("Form", "Formul·¯ nenÌ validnÌ.");
+				ModelState.AddModelError("Form", "Formul√°≈ô nen√≠ validn√≠.");
 			}
 		}
 	}

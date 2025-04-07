@@ -1,5 +1,8 @@
 ﻿namespace MojeVlastniStranka.Common.Enums
 {
+	/// <summary>
+	/// Podslužby.
+	/// </summary>
 	public enum SubServiceEnum
 	{
 		BasicWeb,

@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MojeVlastniStranka.DataAccess.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20241225124525_Initial")]
-    partial class Initial
+    [Migration("20250407163228_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,7 +53,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "300fb496-b9db-4a36-b005-d23d523e56d9",
+                            Id = "89e04b6f-0640-46f0-8d9c-27181481c533",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -178,23 +178,6 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("BlogCategories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("ccca5aa9-9b5f-497f-8a58-ca3845cc5db2"),
-                            Name = "projekty"
-                        },
-                        new
-                        {
-                            Id = new Guid("9a8c5196-fcd5-4d53-98e9-1eedab0991e3"),
-                            Name = "základ"
-                        },
-                        new
-                        {
-                            Id = new Guid("6a86b114-540d-4d89-a2df-62bb45ec97e7"),
-                            Name = "blogpříspěvky"
-                        });
                 });
 
             modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.BlogPost", b =>
@@ -246,36 +229,6 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasIndex("BlogCategoryId");
 
                     b.ToTable("BlogPosts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("7d40d486-280c-4a8d-a9df-630c36dda719"),
-                            Author = "Pepek Námořník",
-                            BlogCategoryId = new Guid("ccca5aa9-9b5f-497f-8a58-ca3845cc5db2"),
-                            Content = "<main class=\"main blog--post\"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>",
-                            Date = new DateTime(2024, 12, 25, 13, 45, 25, 157, DateTimeKind.Local).AddTicks(8954),
-                            Description = "moje klobasa",
-                            ImagePath = "imaablogimages/boxing.jpg",
-                            Keywords = "rohlík, klobása",
-                            Name = "Jak mit obri pero",
-                            Slug = "Jak-mit-obri-pero",
-                            Title = "Deset malých švestek"
-                        },
-                        new
-                        {
-                            Id = new Guid("c337d257-7f9f-4639-9a9b-e5180e254db7"),
-                            Author = "Chleba s marmeládou",
-                            BlogCategoryId = new Guid("ccca5aa9-9b5f-497f-8a58-ca3845cc5db2"),
-                            Content = "<main class=\"main blog--post\"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>",
-                            Date = new DateTime(2024, 12, 25, 13, 45, 25, 157, DateTimeKind.Local).AddTicks(9001),
-                            Description = "moje klobasa",
-                            ImagePath = "blogimages/boxing.jpg",
-                            Keywords = "Jsi slizký had, nemám tě rád",
-                            Name = "deset malych cernousku",
-                            Slug = "deset-malych-cernousku",
-                            Title = "Pět malých kačátek"
-                        });
                 });
 
             modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.ContactForm", b =>
@@ -301,24 +254,6 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ContactForm");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("1a9e888a-71f6-492b-8d04-2f112411066b"),
-                            Date = new DateTime(2024, 12, 25, 13, 45, 25, 157, DateTimeKind.Local).AddTicks(9055),
-                            Email = "jan.novak@example.com",
-                            Message = "Dobrý den, rád bych se zeptal na možnost spolupráce.",
-                            PhoneNumber = "123456789"
-                        },
-                        new
-                        {
-                            Id = new Guid("a538e090-cf8b-48c7-a8b6-d17b151cc691"),
-                            Date = new DateTime(2024, 12, 25, 13, 45, 25, 157, DateTimeKind.Local).AddTicks(9075),
-                            Email = "info@kostlanovec.cz",
-                            Message = "Dobrý, mám zájem o nové stránky vámi vyrobené. Těším se, až mi ukážete, co všechno dokážete.",
-                            PhoneNumber = "987654321"
-                        });
                 });
 
             modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.IdeaToRelease", b =>
@@ -337,14 +272,6 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("IdeaToReleases");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("ccf76533-3654-4ab2-aa67-e453ac5f8bcc"),
-                            DatePosted = new DateTime(2024, 12, 25, 13, 45, 25, 157, DateTimeKind.Local).AddTicks(9096),
-                            Idea = "Chtěl bych vytvořit nějakou animaci na vytváření koblih"
-                        });
                 });
 
             modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.Image", b =>
@@ -364,20 +291,6 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Images");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("31a86bd3-beb3-4881-8c4d-c2adf1df97fb"),
-                            Description = "konec světa",
-                            FileName = "konecsveta.jpg"
-                        },
-                        new
-                        {
-                            Id = new Guid("87a1fee6-bb5d-4148-9f03-7d523716344d"),
-                            Description = "stín minulosti",
-                            FileName = "stinminulosti.jpg"
-                        });
                 });
 
             modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.Message", b =>
@@ -478,86 +391,6 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Projects");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("815c776e-1117-44ad-bf1b-08f923143cb1"),
-                            Content = "<main class=\"main blog--post\"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>",
-                            Date = new DateTime(2024, 12, 25, 0, 0, 0, 0, DateTimeKind.Local),
-                            Description = "Description 1",
-                            ImagePath = "/images/tvorbaher.jpg",
-                            Keywords = "Keywords 1",
-                            Name = "Project 1",
-                            Slug = "slug-1",
-                            Title = "Title 1",
-                            projectStatus = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("fd1ac414-e35e-4332-a620-20bcd4036509"),
-                            Content = "<main class=\"main blog--post\"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>",
-                            Date = new DateTime(2024, 12, 25, 0, 0, 0, 0, DateTimeKind.Local),
-                            Description = "Description 2",
-                            ImagePath = "/images/tvorbaher.jpg",
-                            Keywords = "Keywords 2",
-                            Name = "Project 2",
-                            Slug = "slug-2",
-                            Title = "Title 2",
-                            projectStatus = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("c9d9a4b5-a33a-47c9-85c0-2f1a68511d25"),
-                            Content = "<main class=\"main blog--post\"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>",
-                            Date = new DateTime(2024, 12, 25, 0, 0, 0, 0, DateTimeKind.Local),
-                            Description = "Description 3",
-                            ImagePath = "/images/tvorbaher.jpg",
-                            Keywords = "Keywords 3",
-                            Name = "Project 3",
-                            Slug = "slug-3",
-                            Title = "Title 3",
-                            projectStatus = 2
-                        },
-                        new
-                        {
-                            Id = new Guid("a80797d0-4e6b-4e23-a927-635797653d89"),
-                            Content = "<main class=\"main blog--post\"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>",
-                            Date = new DateTime(2024, 12, 25, 0, 0, 0, 0, DateTimeKind.Local),
-                            Description = "Description 4",
-                            ImagePath = "/images/tvorbaher.jpg",
-                            Keywords = "Keywords 4",
-                            Name = "Project 4",
-                            Slug = "slug-4",
-                            Title = "Title 4",
-                            projectStatus = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("b6b7e5a2-c10a-4c41-8780-bfffc5b131d2"),
-                            Content = "<main class=\"main blog--post\"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>",
-                            Date = new DateTime(2024, 12, 25, 0, 0, 0, 0, DateTimeKind.Local),
-                            Description = "Description 5",
-                            ImagePath = "/images/tvorbaher.jpg",
-                            Keywords = "Keywords 5",
-                            Name = "Project 5",
-                            Slug = "slug-5",
-                            Title = "Title 5",
-                            projectStatus = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("2e7166ab-69f5-4269-bb3f-43ae8498d49e"),
-                            Content = "<main class=\"main blog--post\"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>",
-                            Date = new DateTime(2024, 12, 25, 0, 0, 0, 0, DateTimeKind.Local),
-                            Description = "Description 6",
-                            ImagePath = "/images/tvorbaher.jpg",
-                            Keywords = "Keywords 6",
-                            Name = "Project 6",
-                            Slug = "slug-6",
-                            Title = "Title 6",
-                            projectStatus = 2
-                        });
                 });
 
             modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.ReportedBug", b =>
@@ -680,9 +513,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2a082bcb-8c10-4b60-9bb3-34ebd82cf46e",
+                            Id = "d785cfbb-ac25-454e-893e-61c5cc3d47c9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8366ae3d-8781-4262-a44d-13b7b5ab718e",
+                            ConcurrencyStamp = "208baf6f-e8c5-4096-a45c-55e7497c3816",
                             Email = "info@kostlanovec.cz",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -690,7 +523,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                             NormalizedUserName = "ADMIN",
                             PasswordHash = "[REDACTED_HASH]",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "39b181e8-277e-4309-807e-2f3777048d20",
+                            SecurityStamp = "f35b716a-4186-4276-8ebc-a91ff8edbbe3",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });

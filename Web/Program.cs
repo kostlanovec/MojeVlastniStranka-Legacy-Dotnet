@@ -13,41 +13,38 @@ namespace MojeVlastniStrankaFinanali.Web
 			var builder = WebApplication.CreateBuilder(args);
 
 #if Debug
-            builder.Configuration.AddJsonFile("appsettings.Development.json", optional: false, reloadOnChange: true);
+				builder.Configuration.AddJsonFile("appsettings.Development.json", optional: false, reloadOnChange: true);
 #else
 			builder.Configuration.AddJsonFile("appsettings.Production.json", optional: false, reloadOnChange: true);
 #endif
 
 			builder.Services.AddDbContext<DataContext>(options =>
-						  options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")),
-					 ServiceLifetime.Scoped);
+				options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")),
+				ServiceLifetime.Scoped);
 
 			builder.Services.AddDefaultIdentity<User>(options =>
-					 {
-						 // Heslo nastavení.
-						 options.Password.RequireDigit = true;
-						 options.Password.RequireLowercase = true;
-						 options.Password.RequireNonAlphanumeric = true;
-						 options.Password.RequireUppercase = true;
-						 options.Password.RequiredLength = 6;
-						 options.Password.RequiredUniqueChars = 1;
+			{
+				options.Password.RequireDigit = true;
+				options.Password.RequireLowercase = true;
+				options.Password.RequireNonAlphanumeric = true;
+				options.Password.RequireUppercase = true;
+				options.Password.RequiredLength = 6;
+				options.Password.RequiredUniqueChars = 1;
 
-						 // Lockout settings.
-						 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-						 options.Lockout.MaxFailedAccessAttempts = 5;
-						 options.Lockout.AllowedForNewUsers = true;
+				// Lockout settings.
+				options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+				options.Lockout.MaxFailedAccessAttempts = 5;
+				options.Lockout.AllowedForNewUsers = true;
 
-						 // Uživatelské nastavení.
-						 options.User.AllowedUserNameCharacters =
-							  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-						 options.User.RequireUniqueEmail = false;
-					 })
-					 .AddRoles<IdentityRole>()
-					 .AddEntityFrameworkStores<DataContext>();
+				// Uživatelské nastavení.
+				options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+				options.User.RequireUniqueEmail = false;
+			})
+			.AddRoles<IdentityRole>()
+			.AddEntityFrameworkStores<DataContext>();
 
 			builder.Services.ConfigureApplicationCookie(options =>
 			{
-				// Cookie settings
 				options.Cookie.HttpOnly = true;
 				options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
 
@@ -56,6 +53,7 @@ namespace MojeVlastniStrankaFinanali.Web
 				options.SlidingExpiration = true;
 			});
 
+			builder.Services.AddScoped<LoggerService>();
 			builder.Services.AddScoped<NotificationService>();
 			builder.Services.AddScoped<BlogService>();
 			builder.Services.AddScoped<ProjectService>();
@@ -105,13 +103,17 @@ namespace MojeVlastniStrankaFinanali.Web
 				name: "api",
 				pattern: "api/{controller}/{action}/{id?}");
 
+			app.Run();
+		}
+
+		public static void EnsureLatestDatabase(WebApplication app)
+		{
 			using (var scope = app.Services.CreateScope())
 			{
 				var services = scope.ServiceProvider;
 				var context = services.GetRequiredService<DataContext>();
+				context.ApplyMigrations(context);
 			}
-
-			app.Run();
 		}
 	}
 }

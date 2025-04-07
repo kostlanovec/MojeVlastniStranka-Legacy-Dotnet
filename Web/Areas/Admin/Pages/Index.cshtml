@@ -61,7 +61,7 @@
 	<script>
 		document.addEventListener('DOMContentLoaded', function () {
 			 var ctx = document.getElementById('pie-chart').getContext('2d');
-			 var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.MainServicesData));
+			 var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.MainServicesDataModel));
 
 			 var labels = data.map(service => service.NameOfService);
 			 var values = data.map(service => service.NumberOfServices);
