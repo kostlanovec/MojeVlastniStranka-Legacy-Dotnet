@@ -33,6 +33,8 @@ namespace MojeVlastniStranka.DataAccess
 		/// </summary>
 		public void ApplyMigrations(DataContext context)
 		{
+			this.Database.EnsureDeleted();
+			this.Database.EnsureCreated();
 			if (this.Database.GetPendingMigrations().Any())
 			{
 				this.Database.Migrate();
