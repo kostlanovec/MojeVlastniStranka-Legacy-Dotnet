@@ -38,10 +38,8 @@ namespace MojeVlastniStranka.Web.Pages.kontakt
 		{
 			Form.SendTime = DateTime.Now;
 
-			// 🛡️ Kontrola honeypotu
 			if (!string.IsNullOrWhiteSpace(Honeypot))
 			{
-				// Spam bot to vyplnil -> ignorujeme
 				ModelState.AddModelError("Form", "Neplatný pokus o odeslání formuláře.");
 				return;
 			}
