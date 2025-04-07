@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
 using MojeVlastniStranka.DataAccess.Entities;
+using Reservanto.NPS.DataAccess;
 
 namespace MojeVlastniStrankaFinanali.Web
 {
@@ -13,7 +14,7 @@ namespace MojeVlastniStrankaFinanali.Web
 			var builder = WebApplication.CreateBuilder(args);
 
 #if Debug
-            builder.Configuration.AddJsonFile("appsettings.Development.json", optional: false, reloadOnChange: true);
+				builder.Configuration.AddJsonFile("appsettings.Development.json", optional: false, reloadOnChange: true);
 #else
 			builder.Configuration.AddJsonFile("appsettings.Production.json", optional: false, reloadOnChange: true);
 #endif
@@ -105,16 +106,17 @@ namespace MojeVlastniStrankaFinanali.Web
 				name: "api",
 				pattern: "api/{controller}/{action}/{id?}");
 
+			app.Run();
+		}
+
+		public static void EnsureLatestDatabase(WebApplication app)
+		{
 			using (var scope = app.Services.CreateScope())
 			{
 				var services = scope.ServiceProvider;
 				var context = services.GetRequiredService<DataContext>();
-
-				context.Database.EnsureDeleted();
-				context.Database.EnsureCreated();
+				context.ApplyMigrations(context);
 			}
-
-			app.Run();
 		}
 	}
 }

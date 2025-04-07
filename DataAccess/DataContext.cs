@@ -23,9 +23,33 @@ namespace MojeVlastniStranka.DataAccess
 				entity.Property(e => e.Id).ValueGeneratedOnAdd();
 			});
 
-			Seed.Initialize(modelBuilder);
+			Seed.InitializeAdmin(modelBuilder);
 
 			base.OnModelCreating(modelBuilder);
+		}
+
+		/// <summary>
+		/// Aplikuje všechny potřebné migrace, aby databáze byla aktuální.
+		/// </summary>
+		public void ApplyMigrations(DataContext context)
+		{
+			if (this.Database.GetPendingMigrations().Any())
+			{
+				this.Database.Migrate();
+			}
+
+			// Na testování na testweb je potřeba to odkomentovat.
+#if DEBUG
+			try
+			{
+				Seed.InitializeTestData(context);
+			}
+
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex);
+			}
+#endif
 		}
 
 		// Definice DbSetů pro každou třídu, kterou chceme mapovat na databázovou tabulku.

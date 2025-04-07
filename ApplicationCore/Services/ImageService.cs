@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
 using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.DataAccess;
 
