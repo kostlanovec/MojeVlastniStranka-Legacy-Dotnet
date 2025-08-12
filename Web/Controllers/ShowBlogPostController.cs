@@ -21,7 +21,7 @@ namespace MojeVlastniStranka.Web.Controllers
 				return NotFound();
 			}
 
-			return View("Muchomurka", blogPost);
+			return View("/Pages/Shared/Muchomurka.cshtml", blogPost);
 		}
 	}
 }

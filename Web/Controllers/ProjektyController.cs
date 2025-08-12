@@ -21,7 +21,7 @@ namespace MojeVlastniStranka.Web.Controllers
 				return NotFound();
 			}
 
-			return View("ProjectLayout", project);
+			return View("/Pages/Shared/ProjectLayout.cshtml", project);
 		}
 	}
 }
