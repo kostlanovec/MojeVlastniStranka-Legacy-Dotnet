@@ -1,30 +1,23 @@
 ﻿services:
-  web:
+  mojevlastnistranka.web:
     image: kostlanovec/mojevlastnistranka:latest
-    container_name: mojevlastnistranka-web
-    restart: unless-stopped
     environment:
-      ASPNETCORE_ENVIRONMENT: "Production"
-      ASPNETCORE_HTTP_PORTS: "8080"
-    user: "1000:1000"                   # sedí s USER 1000 v Dockerfile
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_HTTP_PORTS=8080
+      - APP_UID=1000
     ports:
       - "127.0.0.1:8080:8080"
+    user: "1000:1000"
     volumes:
       - /var/uploads/images:/app/wwwroot/images
-    depends_on:
-      - db
 
   db:
     image: postgres:17.2
-    container_name: mojevlastnistranka-db
-    restart: unless-stopped
     environment:
-      POSTGRES_USER: "postgres"         # ← správný název proměnné
-      POSTGRES_PASSWORD: "[REDACTED]"
-      POSTGRES_DB: "mojevlastnistranka"
+      POSTGRES_PASSWORD: [REDACTED]
+      POSTGRES_USERNAME: postgres
     volumes:
       - local_postgres_data:/var/lib/postgresql/data
-    # žádné porty ven — není nutné, pokud DB nepřistupuješ z hosta
 
 volumes:
   local_postgres_data: {}
