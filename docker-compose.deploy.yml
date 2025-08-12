@@ -21,3 +21,5 @@ services:
 
 volumes:
   local_postgres_data: {}
+
+
