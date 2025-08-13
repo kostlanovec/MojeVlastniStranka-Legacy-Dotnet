@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting; // IWebHostEnvironment
 using Microsoft.EntityFrameworkCore;
 using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.DataAccess;
@@ -8,83 +9,58 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 	public class ImageService
 	{
 		private readonly DataContext context;
+		private readonly string webRootPath;
 
-		public ImageService(DataContext context)
+		public ImageService(DataContext context, IWebHostEnvironment env)
 		{
 			this.context = context;
+			this.webRootPath = env.WebRootPath; // typicky /app/wwwroot v dockeru
 		}
 
-		/// <summary>
-		/// Uloží obrázek do zadané podsložky (např. "blog", "profile", "general").
-		/// </summary>
 		public async Task<string> UploadImageAsync(IFormFile file, string subfolder)
 		{
 			if (file == null || file.Length == 0)
 				throw new ArgumentException("No file uploaded.");
 
-			var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".webp" };
-			var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
-
-			if (!allowedExtensions.Contains(extension))
+			var allowed = new[] { ".jpg", ".jpeg", ".png", ".gif", ".webp" };
+			var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
+			if (!allowed.Contains(ext))
 				throw new InvalidOperationException("Unsupported file type.");
 
-			var uploadsRoot = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
-			var uploadsDirectory = Path.Combine(uploadsRoot, subfolder);
+			var uploadsRoot = Path.Combine(webRootPath, "user-uploads", subfolder ?? string.Empty);
+			Directory.CreateDirectory(uploadsRoot);
 
-			if (!Directory.Exists(uploadsDirectory))
-				Directory.CreateDirectory(uploadsDirectory);
+			var fileName = $"{Guid.NewGuid()}{ext}";
+			var filePath = Path.Combine(uploadsRoot, fileName);
 
-			var uniqueFileName = $"{Guid.NewGuid()}{extension}";
-			var filePath = Path.Combine(uploadsDirectory, uniqueFileName);
+			using var stream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None, 64 * 1024, useAsync: true);
+			await file.CopyToAsync(stream);
 
-			using (var stream = new FileStream(filePath, FileMode.Create))
-			{
-				await file.CopyToAsync(stream);
-			}
-
-			// Vrací cestu použitelnou jako <img src="...">
-			return $"/images/{subfolder}/{uniqueFileName}";
+			// veřejná URL pro <img src="...">
+			return $"/user-uploads/{subfolder}/{fileName}";
 		}
 
-		/// <summary>
-		/// Získání všech obrázků.
-		/// </summary>
 		public async Task<List<ImageDto>> GetImagesAsync()
 		{
-			return await this.context.Images
-				.Select(image => new ImageDto
-				{
-					Id = image.Id,
-					FileName = image.FileName,
-					Description = image.Description
-				})
+			return await context.Images
+				.Select(i => new ImageDto { Id = i.Id, FileName = i.FileName, Description = i.Description })
 				.ToListAsync();
 		}
 
-		/// <summary>
-		/// Aktualizování popisku obrázku.
-		/// </summary>
 		public async Task UpdateImageDescriptionAsync(int imageId, string newDescription)
 		{
-			var image = await this.context.Images.FindAsync(imageId);
-			if (image != null)
-			{
-				image.Description = newDescription;
-				await this.context.SaveChangesAsync();
-			}
+			var image = await context.Images.FindAsync(imageId);
+			if (image is null) return;
+			image.Description = newDescription;
+			await context.SaveChangesAsync();
 		}
 
-		/// <summary>
-		/// Vymazání obrázku (pouze z databáze – můžeš doplnit i mazání fyzického souboru).
-		/// </summary>
 		public async Task DeleteImageAsync(int imageId)
 		{
-			var image = await this.context.Images.FindAsync(imageId);
-			if (image != null)
-			{
-				this.context.Images.Remove(image);
-				await this.context.SaveChangesAsync();
-			}
+			var image = await context.Images.FindAsync(imageId);
+			if (image is null) return;
+			context.Images.Remove(image);
+			await context.SaveChangesAsync();
 		}
 	}
 }

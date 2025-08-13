@@ -84,7 +84,6 @@ namespace MojeVlastniStrankaFinanali.Web
 			app.UseHttpsRedirection();
 
 			app.MapStaticAssets();
-			app.UseStaticFiles();
 
 			app.UseRouting();
 

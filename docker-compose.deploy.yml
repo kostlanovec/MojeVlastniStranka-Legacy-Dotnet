@@ -9,8 +9,7 @@ services:
       - "127.0.0.1:8080:8080"
     user: "1000:1000"
     volumes:
-      - /var/uploads/images:/app/wwwroot/images:rw
-
+     - /var/uploads/user-uploads:/app/wwwroot/user-uploads:rw
   db:
     image: postgres:17.2
     restart: unless-stopped
