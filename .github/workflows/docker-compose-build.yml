@@ -23,17 +23,16 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Print all files in tree
       run: find .
-    - name: Build image using docker-compose.build.yml
-      run: |
-        docker compose -f docker-compose.build.yml build
+    - name: Sestavení a nahrání kontejnerového obrazu
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USER }}/mojevlastnistranka:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
 
-    - name: Tag image for Docker Hub
-      run: |
-        docker tag mojevlastnistranka-web ${{ secrets.DOCKERHUB_USER }}/mojevlastnistranka:latest
-
-    - name: Push image to Docker Hub
-      run: |
-        docker push ${{ secrets.DOCKERHUB_USER }}/mojevlastnistranka:latest
 
     - name: Deploy to VPS via SSH
       uses: appleboy/ssh-action@v1.0.0
