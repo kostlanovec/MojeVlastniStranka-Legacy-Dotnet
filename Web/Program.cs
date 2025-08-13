@@ -83,8 +83,20 @@ namespace MojeVlastniStrankaFinanali.Web
 			}
 
 			app.UseHttpsRedirection();
-			app.UseStaticFiles();
-
+			app.MapRazorPages().WithStaticAssets();
+			app.MapDefaultControllerRoute().WithStaticAssets();
+			app.UseStaticFiles(new StaticFileOptions
+			{
+				OnPrepareResponse = ctx =>
+				{
+					if (ctx.File.Name.EndsWith(".html"))
+					{
+						ctx.Context.Response.Headers.Append("Cache-Control", "no-cache, no-store, must-revalidate");
+						ctx.Context.Response.Headers.Append("Pragma", "no-cache");
+						ctx.Context.Response.Headers.Append("Expires", "0");
+					}
+				}
+			});
 			app.UseRouting();
 			app.UseAuthentication();
 			app.UseAuthorization();
