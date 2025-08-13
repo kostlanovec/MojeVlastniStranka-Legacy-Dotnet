@@ -14,7 +14,7 @@ namespace MojeVlastniStranka.Web
 
 			services.AddHealthChecksUI(opt =>
 			{
-				opt.SetEvaluationTimeInSeconds(10); // time in seconds between check    
+				opt.SetEvaluationTimeInSeconds(100); // time in seconds between check    
 				opt.MaximumHistoryEntriesPerEndpoint(60); // maximum history of checks    
 				opt.SetApiMaxActiveRequests(1); // api requests concurrency    
 				opt.AddHealthCheckEndpoint("feedback api", "/api/health"); // map health check api    
