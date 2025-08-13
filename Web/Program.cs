@@ -68,8 +68,8 @@ namespace MojeVlastniStrankaFinanali.Web
 			builder.Services.AddScoped<ServicesOfferedService>();
 
 			builder.Services.AddRazorPages();
-			builder.Services.AddControllers();
-			//Congiguring Health Ckeck
+			builder.Services.AddControllersWithViews(); 
+
 			builder.Services.ConfigureHealthChecks(builder.Configuration);
 
 			var app = builder.Build();
@@ -77,31 +77,21 @@ namespace MojeVlastniStrankaFinanali.Web
 			if (!app.Environment.IsDevelopment())
 			{
 				app.UseExceptionHandler("/Error");
-
 				app.UseStatusCodePagesWithReExecute("/StatusCode/{0}");
 				app.UseHsts();
 			}
 
 			app.UseHttpsRedirection();
-			app.MapRazorPages().WithStaticAssets();
-			app.MapDefaultControllerRoute().WithStaticAssets();
-			app.UseStaticFiles(new StaticFileOptions
-			{
-				OnPrepareResponse = ctx =>
-				{
-					if (ctx.File.Name.EndsWith(".html"))
-					{
-						ctx.Context.Response.Headers.Append("Cache-Control", "no-cache, no-store, must-revalidate");
-						ctx.Context.Response.Headers.Append("Pragma", "no-cache");
-						ctx.Context.Response.Headers.Append("Expires", "0");
-					}
-				}
-			});
+
+			app.UseStaticFiles();
+
 			app.UseRouting();
+
 			app.UseAuthentication();
 			app.UseAuthorization();
 
-			app.MapRazorPages();
+			app.MapRazorPages().WithStaticAssets();
+
 			app.MapControllerRoute(
 				 name: "default",
 				 pattern: "{controller=Home}/{action=Index}/{id?}");
@@ -120,13 +110,12 @@ namespace MojeVlastniStrankaFinanali.Web
 				name: "api",
 				pattern: "api/{controller}/{action}/{id?}");
 
-
-			//HealthCheck Middleware
 			app.MapHealthChecks("/api/health", new HealthCheckOptions()
 			{
 				Predicate = _ => true,
 				ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 			});
+
 			app.MapHealthChecksUI(options =>
 			{
 				options.UIPath = "/healthcheck-ui";
@@ -134,7 +123,6 @@ namespace MojeVlastniStrankaFinanali.Web
 
 			app.Run();
 		}
-
 
 		public static void EnsureLatestDatabase(WebApplication app)
 		{
