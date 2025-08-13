@@ -16,7 +16,7 @@ namespace MojeVlastniStrankaFinanali.Web
 			var builder = WebApplication.CreateBuilder(args);
 
 #if Debug
-				builder.Configuration.AddJsonFile("appsettings.Development.json", optional: false, reloadOnChange: true);
+			builder.Configuration.AddJsonFile("appsettings.Development.json", optional: false, reloadOnChange: true);
 #else
 			builder.Configuration.AddJsonFile("appsettings.Production.json", optional: false, reloadOnChange: true);
 #endif
@@ -68,7 +68,7 @@ namespace MojeVlastniStrankaFinanali.Web
 			builder.Services.AddScoped<ServicesOfferedService>();
 
 			builder.Services.AddRazorPages();
-			builder.Services.AddControllersWithViews(); 
+			builder.Services.AddControllersWithViews();
 
 			builder.Services.ConfigureHealthChecks(builder.Configuration);
 
@@ -83,6 +83,7 @@ namespace MojeVlastniStrankaFinanali.Web
 
 			app.UseHttpsRedirection();
 
+			app.MapStaticAssets();
 			app.UseStaticFiles();
 
 			app.UseRouting();
@@ -90,7 +91,7 @@ namespace MojeVlastniStrankaFinanali.Web
 			app.UseAuthentication();
 			app.UseAuthorization();
 
-			app.MapRazorPages().WithStaticAssets();
+			app.MapRazorPages();
 
 			app.MapControllerRoute(
 				 name: "default",
