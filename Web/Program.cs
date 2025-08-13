@@ -118,7 +118,6 @@ namespace MojeVlastniStrankaFinanali.Web
 			app.MapHealthChecksUI(options =>
 			{
 				options.UIPath = "/healthcheck-ui";
-				options.AddCustomStylesheet("HealthCheck/Custom.css");
 			});
 
 			app.Run();

@@ -8,19 +8,6 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="wwwroot\images\sluzbyimages\**" />
-    <Content Remove="wwwroot\images\sluzbyimages\**" />
-    <EmbeddedResource Remove="wwwroot\images\sluzbyimages\**" />
-    <None Remove="wwwroot\images\sluzbyimages\**" />
-  </ItemGroup>
-	<ItemGroup>
-		<Content Include="HealthCheck/Custom.css">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-			<CopyToPublishDirectory>Always</CopyToPublishDirectory>
-		</Content>
-	</ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\browserconfig.xml" />
     <Content Remove="wwwroot\js\qr.js" />
