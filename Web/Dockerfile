@@ -17,7 +17,9 @@ COPY ["DataAccess/MojeVlastniStranka.DataAccess.csproj", "DataAccess/"]
 RUN dotnet restore "./Web/MojeVlastniStranka.Web.csproj"
 COPY . .
 WORKDIR "/src/Web"
-RUN dotnet build "./MojeVlastniStranka.Web.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet publish "./MojeVlastniStranka.Web.csproj" -c $BUILD_CONFIGURATION -o /app/publish \
+    /p:UseAppHost=false \
+    /p:PublishTrimmed=false
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
