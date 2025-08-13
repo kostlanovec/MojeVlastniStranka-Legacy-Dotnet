@@ -27,7 +27,7 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         context: .
-        file: ./Dockerfile
+        file: ./Web/Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USER }}/mojevlastnistranka:latest
         cache-from: type=gha
