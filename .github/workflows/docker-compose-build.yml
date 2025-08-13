@@ -5,7 +5,6 @@ on:
     branches: [ master ]
 
 jobs:
-  
   build-and-deploy:
     runs-on: ubuntu-latest
 
@@ -32,7 +31,6 @@ jobs:
         tags: ${{ secrets.DOCKERHUB_USER }}/mojevlastnistranka:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
-
 
     - name: Deploy to VPS via SSH
       uses: appleboy/ssh-action@v1.0.0

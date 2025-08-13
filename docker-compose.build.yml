@@ -15,6 +15,7 @@
 
   db:
     image: postgres:17.2
+    restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: [REDACTED]
       POSTGRES_USERNAME: postgres
