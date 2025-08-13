@@ -69,6 +69,8 @@ namespace MojeVlastniStrankaFinanali.Web
 
 			builder.Services.AddRazorPages();
 			builder.Services.AddControllers();
+			//Congiguring Health Ckeck
+			builder.Services.ConfigureHealthChecks(builder.Configuration);
 
 			var app = builder.Build();
 
@@ -106,8 +108,6 @@ namespace MojeVlastniStrankaFinanali.Web
 				name: "api",
 				pattern: "api/{controller}/{action}/{id?}");
 
-			//Congiguring Health Ckeck
-			builder.Services.ConfigureHealthChecks(builder.Configuration);
 
 			//HealthCheck Middleware
 			app.MapHealthChecks("/api/health", new HealthCheckOptions()
