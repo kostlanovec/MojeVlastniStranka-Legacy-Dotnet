@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Identity;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
 using MojeVlastniStranka.DataAccess.Entities;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using MojeVlastniStranka.Web;
 
 namespace MojeVlastniStrankaFinanali.Web
 {
@@ -102,6 +105,21 @@ namespace MojeVlastniStrankaFinanali.Web
 			app.MapControllerRoute(
 				name: "api",
 				pattern: "api/{controller}/{action}/{id?}");
+
+			//Congiguring Health Ckeck
+			builder.Services.ConfigureHealthChecks(builder.Configuration);
+
+			//HealthCheck Middleware
+			app.MapHealthChecks("/api/health", new HealthCheckOptions()
+			{
+				Predicate = _ => true,
+				ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+			});
+			app.MapHealthChecksUI(options =>
+			{
+				options.UIPath = "/healthcheck-ui";
+				options.AddCustomStylesheet("HealthCheck/Custom.css");
+			});
 
 			app.Run();
 		}
