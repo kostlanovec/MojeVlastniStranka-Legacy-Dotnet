@@ -106,6 +106,7 @@ namespace MojeVlastniStrankaFinanali.Web
 			app.Run();
 		}
 
+
 		public static void EnsureLatestDatabase(WebApplication app)
 		{
 			using (var scope = app.Services.CreateScope())
