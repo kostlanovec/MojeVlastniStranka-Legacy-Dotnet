@@ -7,17 +7,24 @@ namespace MojeVlastniStranka.Web
 		public static void ConfigureHealthChecks(this IServiceCollection services, IConfiguration configuration)
 		{
 			services.AddHealthChecks()
-				 .AddSqlServer(configuration["ConnectionStrings:Feedback"], healthQuery: "select 1", name: "SQL servere", failureStatus: HealthStatus.Unhealthy, tags: new[] { "Feedback", "Database" })
+				  .AddNpgSql(
+					  connectionString: configuration.GetConnectionString("DefaultConnection"),
+					  healthQuery: "SELECT 1",
+					  name: "Postgres DB",
+					  failureStatus: HealthStatus.Unhealthy,
+					  tags: new[] { "Database" })
 				 .AddCheck<RemoteHealthCheck>("Remote endpoints Health Check", failureStatus: HealthStatus.Unhealthy)
-				 .AddCheck<MemoryHealthCheck>($"Feedback Service Memory Check", failureStatus: HealthStatus.Unhealthy, tags: new[] { "Feedback Service" })
-				 .AddUrlGroup(new Uri("https://localhost:44333/api/v1/heartbeats/ping"), name: "base URL", failureStatus: HealthStatus.Unhealthy);
+				 .AddCheck<MemoryHealthCheck>("Feedback Service Memory Check", failureStatus: HealthStatus.Unhealthy, tags: new[] { "Feedback Service" });
 
 			services.AddHealthChecksUI(opt =>
 			{
-				opt.SetEvaluationTimeInSeconds(100); // time in seconds between check    
-				opt.MaximumHistoryEntriesPerEndpoint(60); // maximum history of checks    
-				opt.SetApiMaxActiveRequests(1); // api requests concurrency    
-				opt.AddHealthCheckEndpoint("feedback api", "/api/health"); // map health check api    
+				opt.SetEvaluationTimeInSeconds(100);
+				opt.MaximumHistoryEntriesPerEndpoint(60);
+				opt.SetApiMaxActiveRequests(1);
+
+				// ABSOLUTNÍ adresa na vlastní health endpoint:
+				var baseUrl = configuration["SELF_BASE_URL"] ?? "http://127.0.0.1:8080";
+				opt.AddHealthCheckEndpoint("self", $"{baseUrl}/api/health");
 			})
 			.AddInMemoryStorage();
 		}
