@@ -49,7 +49,7 @@ namespace MojeVlastniStrankaFinanali.Web
 			builder.Services.ConfigureApplicationCookie(options =>
 			{
 				options.Cookie.HttpOnly = true;
-				options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+				options.ExpireTimeSpan = TimeSpan.FromDays(90);
 
 				options.LoginPath = "/Admin/Account/Login";
 				options.AccessDeniedPath = "/Admin/Account/AccessDenied";
