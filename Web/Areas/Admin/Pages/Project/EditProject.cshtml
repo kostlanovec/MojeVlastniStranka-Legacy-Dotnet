@@ -115,8 +115,9 @@
 		],
 		callbacks: {
 			onInit: function () {
-				var htmlContent = '@Html.Raw(Model.ProjectEditDto.Content)';
+				var htmlContent = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.ProjectEditDto.Content));
 				$('#summernote').summernote('code', htmlContent);
+
 			}
 		}
 	});
