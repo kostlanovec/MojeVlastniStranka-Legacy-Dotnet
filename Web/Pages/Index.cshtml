@@ -7,6 +7,45 @@
 	ViewData["Keywords"] = "Weby, aplikace, Jan, Sebastián, Kostlán, SEO, webových, tvůrce, sociální, sítě, sociálních, sítí";
 	ViewData["Image"] = "https://kostlanovec.cz/images/basicimage.png";
 	ViewData["SocialTitle"] = "Osobní stránka Jana Sebastiána Kostlána";
+	ViewData["JsonLD"] = @"
+    {
+      ""@context"": ""https://schema.org"",
+      ""@graph"": [
+        {
+          ""@type"": ""WebSite"",
+          ""@id"": ""https://kostlanovec.cz/#website"",
+          ""url"": ""https://kostlanovec.cz/"",
+          ""name"": ""Osobní stránka Jana Sebastiána Kostlána"",
+          ""description"": ""Osobní web Jana Sebastiána Kostlána – tvůrce webů, aplikací, her a SEO specialista."",
+          ""publisher"": { ""@id"": ""https://kostlanovec.cz/#person"" },
+          ""inLanguage"": ""cs""
+        },
+        {
+          ""@type"": ""Person"",
+          ""@id"": ""https://kostlanovec.cz/#person"",
+          ""name"": ""Jan Sebastián Kostlán"",
+          ""url"": ""https://kostlanovec.cz/"",
+          ""image"": ""https://kostlanovec.cz/images/basicimage.png"",
+          ""description"": ""Tvůrce webových stránek, her, SEO maestro a student IT. Nadšenec do technologií, fitness a boxu."",
+          ""jobTitle"": ""Webdeveloper, programátor, marketing & SEO"",
+          ""sameAs"": [
+            ""https://www.instagram.com/kostlan1"",
+            ""https://www.linkedin.com/in/kostlan"",
+            ""https://www.youtube.com/@kostlanovec"",
+            ""https://discord.gg/VdSEt8qUXE"",
+            ""https://www.facebook.com/jan.sebastiankostlan.1/""
+          ]
+        },
+        {
+          ""@type"": ""ContactPage"",
+          ""@id"": ""https://kostlanovec.cz/kontakt#contact"",
+          ""url"": ""https://kostlanovec.cz/kontakt"",
+          ""inLanguage"": ""cs"",
+          ""name"": ""Kontakt – Jan Sebastián Kostlán"",
+          ""about"": { ""@id"": ""https://kostlanovec.cz/#person"" }
+        }
+      ]
+    }";
 }
 
 <main class="main">

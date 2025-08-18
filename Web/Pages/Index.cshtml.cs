@@ -21,12 +21,6 @@ namespace MojeVlastniStranka.Web.Pages
 			set;
 		}
 
-		public string JsonLD
-		{
-			get;
-			set;
-		}
-
 		[BindProperty]
 		[EmailAddress]
 		public string email
@@ -45,23 +39,7 @@ namespace MojeVlastniStranka.Web.Pages
 		public async Task OnGetAsync()
 		{
 			Posts = await blogService.GetThreePost();
-			JsonLD = @"
-				{
-					""@context"": ""http://schema.org"",
-					""@type"": ""Person"",
-					""name"": ""Jan Sebastián Kostlán"",
-					""url"": ""https://www.kostlanovec.cz"",
-					""sameAs"": [
-						""https://www.linkedin.com/in/jan-kostlan-7a9bb4215"",
-						""https://www.instagram.com/kostlan1/"",
-						""https://github.com/kostlanovec"",
-						""https://www.facebook.com/jan.sebastiankostlan.1""
-					],
-					""email"": ""kostlan@kostlanovec.cz"",
-					""description"": ""Osobní stránka Jana Sebastiána Kostlána. Tv?rce, programátor web? a desktopových aplikací."",
-					""image"": ""https://kostlanovec.cz/images/profil-photo.jpg"",
-					""jobTitle"": ""Programátor""
-				}";
+
 		}
 
 		public async Task<IActionResult> OnPostAsync()
