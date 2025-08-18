@@ -870,7 +870,7 @@ input[type="text"] {
 		gap: 2em;
 	}
 
-	.aboutme__Card__images {
+	.aboutme__Card__images > img{
 		width: 200px;
 	}
 
