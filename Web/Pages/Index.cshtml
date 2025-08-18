@@ -64,30 +64,68 @@
 	</div>
 	<div class="menu--blogposts reveal">
 		<h2>Blog příspěvky</h2>
-		<div class="wrapper">
-			<div class="slide">
-				@foreach (var post in Model.Posts)
-				{
-					<a href="/blog/@post.Slug" class="figure__blog">
-						<img src="@post.FilePath" alt="Blog" loading="lazy" decoding="async">
-						<div class="figure__blog__div">
-							<h3>@post.Name</h3>
-							<p>@post.Description</p>
-						</div>
-					</a>
-				}
-			</div>
-			<div class="pagination">
+		<div class="wrapper" aria-roledescription="carousel" aria-label="Blog příspěvky">
+			<div class="slides">
 				@for (int i = 0; i < Model.Posts.Count(); i++)
 				{
-					<span class="behind--dot" role="tab"
-							aria-selected="@(i==0 ? "true" : "false")"
-							aria-controls="blog-slide-@i"
-							aria-label="Zobrazit článek @(i+1)"><span class="dot"></span></span>
+					var post = Model.Posts.ElementAt(i);
+
+					if (i == 0)
+					{
+						<div id="blog-slide-@i"
+							  role="tabpanel"
+							  aria-labelledby="blog-tab-@i"
+							  tabindex="0">
+							<a href="/blog/@post.Slug" class="figure__blog">
+								<img src="@post.FilePath"
+									  alt="@post.Name"
+									  loading="lazy" decoding="async" />
+
+								<div class="figure__blog__div">
+									<h3>@post.Name</h3>
+									<p>@post.Description</p>
+								</div>
+							</a>
+						</div>
+					}
+					else
+					{
+						<div id="blog-slide-@i"
+							  role="tabpanel"
+							  aria-labelledby="blog-tab-@i"
+							  tabindex="0"
+							  hidden>
+							<a href="/blog/@post.Slug" class="figure__blog">
+								<img src="@post.FilePath"
+									  alt="@post.Name"
+									  loading="lazy" decoding="async" />
+
+								<div class="figure__blog__div">
+									<h3>@post.Name</h3>
+									<p>@post.Description</p>
+								</div>
+							</a>
+						</div>
+					}
+				}
+			</div>
+
+			<div class="pagination" role="tablist" aria-label="Přepínače článků">
+				@for (int i = 0; i < Model.Posts.Count(); i++)
+				{
+					<button class="behind--dot"
+							  id="blog-tab-@i"
+							  role="tab"
+							  type="button"
+							  aria-selected="@(i == 0 ? "true" : "false")"
+							  aria-controls="blog-slide-@i">
+						<span class="dot" aria-hidden="true"></span>
+						<span class="sr-only">Zobrazit článek @(i + 1)</span>
+					</button>
 				}
 			</div>
 		</div>
-	</div>
+</div>
 	<div class="aboutme__Card reveal">
 		<div class="aboutme__Card__images">
 			<img src="images/osobnifotka.png" alt="Blog" loading="lazy" decoding="async">
@@ -124,61 +162,43 @@
 
 <script>
 	document.addEventListener("DOMContentLoaded", function () {
-		let currentIndex = 0;
-		const figures = document.querySelectorAll(".figure__blog");
-		const dots = document.querySelectorAll(".dot");
-		let autoAdvanceTimer;
+	  let currentIndex = 0;
+	  const panels = document.querySelectorAll('[role="tabpanel"]');
+	  const tabs = document.querySelectorAll('[role="tab"]');
+	  let autoAdvanceTimer;
 
-		function hideAllFigures() {
-			figures.forEach(function (figure) {
-				figure.style.display = "none";
-			});
-		}
-
-		function removeActiveClassFromDots() {
-			dots.forEach(function (dot) {
-				dot.classList.remove("active");
-			});
-		}
-
-		function showFigure(index) {
-			hideAllFigures();
-			removeActiveClassFromDots();
-			figures[index].style.display = "flex";
-			dots[index].classList.add("active");
-		}
-
-		function toggleFigure() {
-			currentIndex++;
-			if (currentIndex >= figures.length) {
-				currentIndex = 0;
+	  function show(index) {
+		 panels.forEach((p, i) => {
+			if (i === index) {
+			  p.removeAttribute('hidden');
+			} else {
+			  p.setAttribute('hidden', '');
 			}
-			showFigure(currentIndex);
-		}
+		 });
+		 tabs.forEach((t, i) => {
+			t.setAttribute('aria-selected', i === index ? 'true' : 'false');
+			t.tabIndex = i === index ? 0 : -1;
+		 });
+		 currentIndex = index;
+	  }
 
-		function startAutoAdvance() {
-			autoAdvanceTimer = setInterval(toggleFigure, 5000);
-		}
+	  function next() {
+		 show((currentIndex + 1) % panels.length);
+	  }
 
-		function resetAutoAdvance() {
-			clearInterval(autoAdvanceTimer);
-			startAutoAdvance();
-		}
+	  function startAuto() { autoAdvanceTimer = setInterval(next, 5000); }
+	  function resetAuto() { clearInterval(autoAdvanceTimer); startAuto(); }
 
-		showFigure(0);
-		startAutoAdvance();
+	  show(0);
+	  startAuto();
 
-		dots.forEach(function (dot, index) {
-			dot.addEventListener('click', function () {
-				currentIndex = index;
-				showFigure(currentIndex);
-				resetAutoAdvance();
-			});
-		});
-		document.getElementById("scrollBtn").addEventListener("click", function () {
-			const targetElement = document.getElementById("target");
-			targetElement.scrollIntoView({ behavior: "smooth" });
-		});
+	  tabs.forEach((tab, i) => {
+		 tab.addEventListener('click', () => { show(i); resetAuto(); });
+		 tab.addEventListener('keydown', (e) => {
+			if (e.key === 'ArrowRight') { show((i + 1) % tabs.length); e.preventDefault(); }
+			if (e.key === 'ArrowLeft') { show((i - 1 + tabs.length) % tabs.length); e.preventDefault(); }
+		 });
+	  });
 	});
 </script>
 

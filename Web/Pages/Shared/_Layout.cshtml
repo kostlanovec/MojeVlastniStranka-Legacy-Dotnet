@@ -8,7 +8,6 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>@ViewData["Title"] - Osobní stránka Jana Sebastiána Kostlána</title>
-	<link rel="stylesheet" href="~/css/fast-style.css" asp-append-version="true" />
 	<meta name="description" content="@ViewData["Description"]">
 	<meta name="author" content="@ViewData["Author"]">
 	<meta name="keywords" content="@ViewData["Keywords"]">
@@ -33,7 +32,9 @@
 	<meta property="twitter:title" content="@ViewData["SocialTitle"]">
 	<meta property="twitter:description" content="@ViewData["Description"]">
 	<meta property="twitter:image" content="@ViewData["Image"]">
-	<script src="/lib/jquery/dist/jquery.min.js"></script>
+	<link rel="preload" as="style" href="~/css/fast-style.min.css" asp-append-version="true">
+	<link rel="stylesheet" href="~/css/fast-style.min.css" asp-append-version="true" media="print" onload="this.media='all'">
+	<noscript><link rel="stylesheet" href="~/css/fast-style.min.css" asp-append-version="true"></noscript>
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-SFNW32KZW0"></script>
 	<script type="text/plain" data-cookiecategory="analytics">
 		window.dataLayer = window.dataLayer || [];
@@ -41,6 +42,7 @@
 		gtag('js', new Date());
 		gtag('config', 'G-SFNW32KZW0');
 	</script>
+
 	@if (ViewData["nofollow"]?.ToString() == "true")
 	{
 		<meta name="robots" content="nofollow">
@@ -62,7 +64,7 @@
 	<nav class="menu reveal" id="menu">
 		<div class="menu-basic">
 			<a class="a-index" asp-page="/Index">Kostlanovec</a>
-			<button aria-label="Hamburger menu" class="hamburger" aria-label="Hamburger menu" aria-controls="menu-list" aria-expanded="false">
+			<button class="hamburger" aria-label="Hamburger menu" aria-controls="menu-list" aria-expanded="false">
 				<svg class="svg--hamburger">
 					<use xlink:href="#menu" />
 					<use xlink:href="#menu" />
