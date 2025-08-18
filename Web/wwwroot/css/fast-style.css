@@ -871,7 +871,7 @@ input[type="text"] {
 	}
 
 	.aboutme__Card__images {
-		flex-grow: 1;
+		width: 50%;
 	}
 
 	.aboutme__text {
