@@ -87,7 +87,6 @@
     <None Include="wwwroot\images\icons\megafon.svg" />
     <None Include="wwwroot\images\icons\youtubee.svg" />
     <None Include="wwwroot\images\react.svg" />
-    <None Include="wwwroot\images\website_image.svg" />
     <None Include="wwwroot\js\qr.js" />
     <None Include="wwwroot\lib\generatorqrcode\.gitignore" />
     <None Include="wwwroot\lib\generatorqrcode\index.svg" />
