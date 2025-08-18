@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.OutputCaching;
 using MojeVlastniStranka.ApplicationCore.Dto.Blog;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
@@ -7,6 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MojeVlastniStranka.Web.Pages
 {
+	[OutputCache(Duration = 6000)]
 	public class IndexModel : PageModel
 	{
 		private readonly DataContext context;

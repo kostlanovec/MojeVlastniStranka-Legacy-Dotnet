@@ -11,8 +11,13 @@
 
 <main class="main">
 	<header class="header header--index reveal">
+		<link rel="preload" as="image" href="/images/website_image.svg" type="image/svg+xml">
 		<figure class="header--figure">
-			<img class="header--figure--image" src="images/website_image.svg" alt="Kostlanovec">
+			<img class="header--figure--image"
+				  src="/images/website_image.svg"
+				  alt="Kostlanovec – osobní web Jana Sebastiána Kostlána"
+				  width="1200" height="400"
+				  fetchpriority="high" decoding="async">
 		</figure>
 		<div>
 			<h1>Jan Sebastián Kostlán</h1>

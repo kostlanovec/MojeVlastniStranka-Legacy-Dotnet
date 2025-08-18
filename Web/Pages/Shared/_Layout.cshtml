@@ -1,5 +1,6 @@
 ﻿@{
-	string canonicalUrl = $"https://{Context.Request.Host}{Context.Request.Path}";
+	var path = Context.Request.Path.Value?.TrimEnd('/');
+	string canonicalUrl = $"https://{Context.Request.Host}{path}";
 }
 <!DOCTYPE html>
 <html lang="cs">
@@ -61,14 +62,14 @@
 	<nav class="menu reveal" id="menu">
 		<div class="menu-basic">
 			<a class="a-index" asp-page="/Index">Kostlanovec</a>
-			<button aria-label="Hamburger menu" class="hamburger">
+			<button aria-label="Hamburger menu" class="hamburger" aria-label="Hamburger menu" aria-controls="menu-list" aria-expanded="false">
 				<svg class="svg--hamburger">
 					<use xlink:href="#menu" />
 					<use xlink:href="#menu" />
 				</svg>
 			</button>
 		</div>
-		<ul class="menu-list">
+		<ul id="menu-list" class="menu-list">
 			<li class="menu-item"><a asp-page="/blog/index">Blog</a></li>
 			<li class="menu-item"><a asp-page="/projekty/index">Projekty</a></li>
 			<li class="menu-item"><a asp-page="/kontakt/index">Kontakt</a></li>

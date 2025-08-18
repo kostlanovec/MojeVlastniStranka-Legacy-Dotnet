@@ -69,6 +69,7 @@ namespace MojeVlastniStrankaFinanali.Web
 
 			builder.Services.AddRazorPages();
 			builder.Services.AddControllersWithViews();
+			builder.Services.AddOutputCache();
 
 			builder.Services.ConfigureHealthChecks(builder.Configuration);
 
@@ -81,12 +82,14 @@ namespace MojeVlastniStrankaFinanali.Web
 				app.UseHsts();
 			}
 
+
 			app.UseHttpsRedirection();
 
 			app.MapStaticAssets();
 			app.UseStaticFiles();
 
 			app.UseRouting();
+			app.UseOutputCache();
 
 			app.UseAuthentication();
 			app.UseAuthorization();
