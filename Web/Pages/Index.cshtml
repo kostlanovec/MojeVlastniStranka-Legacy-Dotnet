@@ -1,12 +1,17 @@
 ﻿@page
 @model MojeVlastniStranka.Web.Pages.IndexModel
 @{
-	ViewData["Title"] = "Hlavní stránka";
-	ViewData["Description"] = "Osobní stránka Jana Sebastiána Kostlána. Tvůrce, webdesigner, programátor a marketing maestro skrz SEO.";
+	// TITLE – vyhne se opakováním a obsahuje klíčová slova
+	ViewData["Title"] = "Jan Sebastián Kostlán – webdeveloper, programátor & SEO specialista";
+
+	// META DESCRIPTION – 150–160 znaků
+	ViewData["Description"] = "Osobní web Jana Sebastiána Kostlána: webdeveloper, programátor a SEO specialista. Tvořím weby, hry a aplikace, propojuji marketing se špičkovou technikou.";
+
 	ViewData["Author"] = "Jan Sebastián Kostlán";
-	ViewData["Keywords"] = "Weby, aplikace, Jan, Sebastián, Kostlán, SEO, webových, tvůrce, sociální, sítě, sociálních, sítí";
+	ViewData["Keywords"] = "Jan Sebastián Kostlán, webdeveloper, programátor, webdesigner, SEO, marketing, projekty, blog, hry, aplikace, vývoj webu, optimalizace";
 	ViewData["Image"] = "https://kostlanovec.cz/images/basicimage.png";
-	ViewData["SocialTitle"] = "Osobní stránka Jana Sebastiána Kostlána";
+	ViewData["SocialTitle"] = "Jan Sebastián Kostlán – webdeveloper & SEO";
+
 	ViewData["JsonLD"] = @"
     {
       ""@context"": ""https://schema.org"",
@@ -15,8 +20,8 @@
           ""@type"": ""WebSite"",
           ""@id"": ""https://kostlanovec.cz/#website"",
           ""url"": ""https://kostlanovec.cz/"",
-          ""name"": ""Osobní stránka Jana Sebastiána Kostlána"",
-          ""description"": ""Osobní web Jana Sebastiána Kostlána – tvůrce webů, aplikací, her a SEO specialista."",
+          ""name"": ""Jan Sebastián Kostlán – webdeveloper & SEO"",
+          ""description"": ""Osobní web Jana Sebastiána Kostlána – webdeveloper, programátor, webdesigner a SEO specialista. Projekty, blog a kontakt."",
           ""publisher"": { ""@id"": ""https://kostlanovec.cz/#person"" },
           ""inLanguage"": ""cs""
         },
@@ -26,7 +31,7 @@
           ""name"": ""Jan Sebastián Kostlán"",
           ""url"": ""https://kostlanovec.cz/"",
           ""image"": ""https://kostlanovec.cz/images/basicimage.png"",
-          ""description"": ""Tvůrce webových stránek, her, SEO maestro a student IT. Nadšenec do technologií, fitness a boxu."",
+          ""description"": ""Webdeveloper, programátor, webdesigner a SEO specialista. Tvořím weby, hry a aplikace – s důrazem na výkon, přístupnost a marketing."",
           ""jobTitle"": ""Webdeveloper, programátor, marketing & SEO"",
           ""sameAs"": [
             ""https://www.instagram.com/kostlan1"",
@@ -54,22 +59,23 @@
 		<figure class="header--figure">
 			<img class="header--figure--image"
 				  src="/images/website_image.svg"
-				  alt="Kostlanovec – osobní web Jana Sebastiána Kostlána"
+				  alt="Ilustrační grafika webu Kostlanovec"
 				  width="400" height="400"
 				  fetchpriority="high" decoding="async">
 		</figure>
 		<div>
 			<h1>Jan Sebastián Kostlán</h1>
-			<p class="p--index">Tvůrce webů, her, seo maestro a student, který je zarytým "ajťákem".</p>
-			<button id="scrollBtn" aria-label="Šipka pro scrollování" class="arrow"></button>
+			<p class="p--index">Webdeveloper, programátor, webdesigner a SEO specialista. Tvořím rychlé a přístupné weby, hry a aplikace.</p>
+			<button id="scrollBtn" aria-label="Přejít na služby" class="arrow"></button>
 		</div>
 	</header>
+
 	<div id="target" class="services reveal">
-		<h2>Nabízené služby</h2>
+		<h2>Služby</h2>
 		<section class="scrolling__container" id="scrollContainer">
 			<article class="scrolling__article reveal">
 				<a class="scrolling__article__a" asp-page="./sluzby/webovestranky">
-					<img src="images/webovestranky.jpg" alt="Webové stránky" loading="lazy" decoding="async">
+					<img src="/images/webovestranky.jpg" alt="Tvorba webových stránek" loading="lazy" decoding="async">
 					<div class="scrolling__article--div">
 						<h3>Webové stránky</h3>
 					</div>
@@ -77,7 +83,7 @@
 			</article>
 			<article class="scrolling__article reveal">
 				<a class="scrolling__article__a" asp-page="./sluzby/tvorbaher">
-					<img src="images/tvorbaher.jpg" alt="Unity logo" loading="lazy" decoding="async">
+					<img src="/images/tvorbaher.jpg" alt="Vývoj her v Unity" loading="lazy" decoding="async">
 					<div class="scrolling__article--div">
 						<h3>Tvorba her</h3>
 					</div>
@@ -85,7 +91,7 @@
 			</article>
 			<article class="scrolling__article reveal">
 				<a class="scrolling__article__a" asp-page="./sluzby/socialnisite">
-					<img src="images/socialnisite.jpg" alt="Obrázek planety skrz sociální sítě" loading="lazy" decoding="async">
+					<img src="/images/socialnisite.jpg" alt="Správa sociálních sítí" loading="lazy" decoding="async">
 					<div class="scrolling__article--div">
 						<h3>Správa sociálních sítí</h3>
 					</div>
@@ -93,7 +99,7 @@
 			</article>
 			<article class="scrolling__article reveal">
 				<a class="scrolling__article__a" asp-page="./sluzby/seo">
-					<img src="images/seo.jpg" alt="text seo s lupou" loading="lazy" decoding="async">
+					<img src="/images/seo.jpg" alt="Optimalizace pro vyhledávače (SEO)" loading="lazy" decoding="async">
 					<div class="scrolling__article--div">
 						<h3>Optimalizace SEO</h3>
 					</div>
@@ -101,8 +107,9 @@
 			</article>
 		</section>
 	</div>
-	<div class="menu--blogposts reveal">
-		<h2>Blog příspěvky</h2>
+
+	<section class="menu--blogposts reveal" aria-labelledby="blog-title">
+		<h2 id="blog-title">Blog</h2>
 		<div class="wrapper" aria-roledescription="carousel" aria-label="Blog příspěvky">
 			<div class="slides">
 				@for (int i = 0; i < Model.Posts.Count(); i++)
@@ -119,7 +126,6 @@
 								<img src="@post.FilePath"
 									  alt="@post.Name"
 									  loading="lazy" decoding="async" />
-
 								<div class="figure__blog__div">
 									<h3>@post.Name</h3>
 									<p>@post.Description</p>
@@ -138,7 +144,6 @@
 								<img src="@post.FilePath"
 									  alt="@post.Name"
 									  loading="lazy" decoding="async" />
-
 								<div class="figure__blog__div">
 									<h3>@post.Name</h3>
 									<p>@post.Description</p>
@@ -164,26 +169,33 @@
 				}
 			</div>
 		</div>
-</div>
-	<div class="aboutme__Card reveal">
+	</section>
+
+	<section class="aboutme__Card reveal" aria-labelledby="about-title">
 		<div class="aboutme__Card__images">
-			<img src="images/osobnifotka.jpg" alt="Blog" loading="lazy" decoding="async" class="profilepicture">
-			<img class="megafone" src="images/icons/megafon.svg" aria-hidden="true" alt="Megafon" loading="lazy" decoding="async">
+			<img src="/images/osobnifotka.jpg" alt="Jan Sebastián Kostlán – profilová fotografie" loading="lazy" decoding="async" class="profilepicture">
+			<img class="megafone" src="/images/icons/megafon.svg" aria-hidden="true" alt="Megafon" loading="lazy" decoding="async">
 		</div>
 		<div class="aboutme__text">
-			<h2>Něco o mně</h2>
-			<p>Zdravím, jmenuji se <strong>Jan Sebastián Kostlán</strong>, též známý pod přezdívkou kostík. Jsem vášnivý tvůrce webových aplikací, tvůrce her, SEO maestro a technologický nadšenec. Věřím, že technologie nám usnadňují každodenní život a jsou klíčové jako nástroj pro osobní a profesní růst, a proto se zaměřuji na vytváření inovativních řešení. Při svém volnu, pokud netluču do klávesnice, tak se věnuji fitness převážně fitness. Mým cílem je budovat aplikace, hry, a celkově všechno možné, čemu věřím, že má smysl se tím zabývat a je v mém okruhu zájmu. Pokud vás zajímavý konkrétní projekty, kterým se momentálně věnuji, tak doporučuji navštívit sekci <a href="/projekty" target="_blank" rel="noopener">Projekty</a>. Zároveň chci vytvořit něco v každém okruhu věcí, co mě zajímají.</p>
+			<h2 id="about-title">O mně</h2>
+			<p>Jmenuji se <strong>Jan Sebastián Kostlán</strong> a věnuji se hlavně <em>vývoji webů, programování, webdesignu a SEO</em>. Baví mě hledat spojení mezi technickým řešením a reálnými výsledky. Tvořím <strong>rychlé, přístupné a bezpečné webové stránky</strong>, vyvíjím <strong>hry a aplikace</strong> a k tomu řeším <strong>online marketing</strong>, aby projekty nebyly jen hezké, ale i dobře viditelné a efektivní.</p>
+			<p>V praxi pracuji s .NET/ASP.NET Core a moderními frontend technologiemi, rád automatizuji nasazování přes Docker a CI/CD a hlídám kvalitu – od Core Web Vitals po přístupnost. Díky zkušenostem s <strong>SEO</strong> a analýzou dat umím navrhnout obsah i strukturu webu tak, aby měl co nejlepší výkon ve vyhledávačích.</p>
+			<p>Mám také specifické okruhy zájmů, kterým se aktivně věnuji. Patří mezi ně především <strong>vývoj her v Unity</strong> – od menších prototypů až po multiplayer projekty. Zajímá mě čistá architektura, dobrý uživatelský zážitek a to, aby každá aplikace nebo hra měla měřitelný přínos.</p>
+			<p>Ve volném čase se věnuji hlavně <strong>fitness a silovému tréninku</strong>, který mi pomáhá vyvážit práci u počítače a zároveň mě motivuje posouvat vlastní hranice. Stejně jako v IT, i ve sportu mě baví sledovat svůj postup a hledat způsoby, jak být každý den o krok dál.</p>
+			<p>Mým cílem je <strong>zanechat stopu v každém z okruhů, které mě baví</strong> – od <em>webů a aplikací</em>, přes <em>hry a SEO</em>, až po <em>osobní rozvoj</em>. Chci tvořit věci, které mají hodnotu a dlouhodobý smysl, a ukazovat, že kombinace techniky, kreativity a vytrvalosti dokáže posunout hranice.</p>
+			<p>Chceš vidět, na čem zrovna pracuji? Podívej se na moje <a href="/projekty">projekty</a> nebo si přečti <a href="/blog">blog</a>. Pokud máš zájem o spolupráci na webu, hře nebo o konzultaci k SEO, ozvi se mi přes <a href="/kontakt">kontakt</a>. Rád proberu tvůj nápad a navrhnu řešení.</p>
 		</div>
-	</div>
+	</section>
 </main>
 
 <form class="form__newsletter reveal" method="post">
 	<h2>Buď v obraze</h2>
-	<img class="email__ikonka" src="images/icons/emailikonka.svg" alt="Email ikona" aria-hidden="true" loading="lazy" decoding="async">
-	<p>Chceš dostávat pravidelné newslettery o tom, co plánuji a co píšu. Nezapomeň vyplnit email.</p>
+	<img class="email__ikonka" src="/images/icons/emailikonka.svg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+	<p>Přihlas se k odběru novinek o nových projektech, článcích a užitečných tipech. Stačí e-mail níže.</p>
 	<input type="email" asp-for="email" placeholder="E-mail" required class="input__email" aria-describedby="newsletter-help">
+	<span id="newsletter-help" class="sr-only">Zadej svůj e-mail, abys mohl(a) odebírat novinky.</span>
 	<span asp-validation-for="email" class="text-danger"></span>
-	<button aria-label="Tlačítko odeslání" class="button" type="submit">Odeslat</button>
+	<button aria-label="Odeslat přihlášení do newsletteru" class="button" type="submit">Odeslat</button>
 
 	@if (TempData["SuccessMessage"] != null)
 	{
@@ -209,11 +221,7 @@
 
 	  function show(index) {
 		 panels.forEach((p, i) => {
-			if (i === index) {
-			  p.removeAttribute('hidden');
-			} else {
-			  p.setAttribute('hidden', '');
-			}
+			if (i === index) { p.removeAttribute('hidden'); } else { p.setAttribute('hidden', ''); }
 		 });
 		 tabs.forEach((t, i) => {
 			t.setAttribute('aria-selected', i === index ? 'true' : 'false');
@@ -222,10 +230,7 @@
 		 currentIndex = index;
 	  }
 
-	  function next() {
-		 show((currentIndex + 1) % panels.length);
-	  }
-
+	  function next() { show((currentIndex + 1) % panels.length); }
 	  function startAuto() { autoAdvanceTimer = setInterval(next, 5000); }
 	  function resetAuto() { clearInterval(autoAdvanceTimer); startAuto(); }
 
@@ -236,31 +241,30 @@
 		 tab.addEventListener('click', () => { show(i); resetAuto(); });
 		 tab.addEventListener('keydown', (e) => {
 			if (e.key === 'ArrowRight') { show((i + 1) % tabs.length); e.preventDefault(); }
-			if (e.key === 'ArrowLeft') { show((i - 1 + tabs.length) % tabs.length); e.preventDefault(); }
+			if (e.key === 'ArrowLeft')  { show((i - 1 + tabs.length) % tabs.length); e.preventDefault(); }
 		 });
 	  });
 	});
 </script>
+
 <script>
 	const scrollContainer = document.getElementById('scrollContainer');
 	let isScrolling = false;
 	let startX;
 	let scrollLeft;
-	scrollContainer.addEventListener('mousedown', function (e) {
-		isScrolling = true;
-		startX = e.pageX - scrollContainer.offsetLeft;
-		scrollLeft = scrollContainer.scrollLeft;
-	});
-	scrollContainer.addEventListener('mousemove', function (e) {
-		if (!isScrolling) return;
-		const x = e.pageX - scrollContainer.offsetLeft;
-		const scrollBy = x - startX;
-		scrollContainer.scrollLeft = scrollLeft - scrollBy;
-	});
-	scrollContainer.addEventListener('mouseup', function () {
-		isScrolling = false;
-	});
-	scrollContainer.addEventListener('mouseleave', function () {
-		isScrolling = false;
-	});
+	if (scrollContainer) {
+	  scrollContainer.addEventListener('mousedown', function (e) {
+		 isScrolling = true;
+		 startX = e.pageX - scrollContainer.offsetLeft;
+		 scrollLeft = scrollContainer.scrollLeft;
+	  });
+	  scrollContainer.addEventListener('mousemove', function (e) {
+		 if (!isScrolling) return;
+		 const x = e.pageX - scrollContainer.offsetLeft;
+		 const scrollBy = x - startX;
+		 scrollContainer.scrollLeft = scrollLeft - scrollBy;
+	  });
+	  scrollContainer.addEventListener('mouseup', function () { isScrolling = false; });
+	  scrollContainer.addEventListener('mouseleave', function () { isScrolling = false; });
+	}
 </script>
