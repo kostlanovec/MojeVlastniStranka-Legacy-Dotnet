@@ -68,38 +68,33 @@ namespace MojeVlastniStrankaFinanali.Web
 			builder.Services.AddScoped<FormService>();
 			builder.Services.AddScoped<ServicesOfferedService>();
 
-			// --- MVC / Razor / Caching / Compression ---
 			builder.Services.AddRazorPages();
 			builder.Services.AddControllersWithViews();
 			builder.Services.AddOutputCache();
 
 			builder.Services.AddResponseCompression(options =>
 			{
-				options.EnableForHttps = true; // komprimuj i přes HTTPS
-														 // (výchozí poskytovatelé: Brotli + Gzip)
+				options.EnableForHttps = true;
 			});
 
-			builder.Services.AddResponseCaching(); // cacheování odpovědí dle hlaviček
+			builder.Services.AddResponseCaching();
 
-			// --- Health checks ---
 			builder.Services.ConfigureHealthChecks(builder.Configuration);
 
 			var app = builder.Build();
 
-			// --- Error handling + HSTS v produkci ---
+
 			if (!app.Environment.IsDevelopment())
 			{
 				app.UseExceptionHandler("/Error");
 				app.UseStatusCodePagesWithReExecute("/StatusCode/{0}");
-				app.UseHsts(); // přidá Strict-Transport-Security
+				app.UseHsts();
 			}
 
 			app.UseHttpsRedirection();
 
-			// --- Komprese musí být před middlewarem, který zapisuje odpověď (statika, MVC) ---
 			app.UseResponseCompression();
 
-			// --- Bezpečnostní hlavičky (platí pro vše, vč. statiky) ---
 			app.Use(async (ctx, next) =>
 			{
 				var h = ctx.Response.Headers;
@@ -110,7 +105,6 @@ namespace MojeVlastniStrankaFinanali.Web
 				await next();
 			});
 
-			// --- Statická obsah + Cache-Control ---
 			app.MapStaticAssets();
 
 			var oneYear = TimeSpan.FromDays(365);
@@ -139,14 +133,12 @@ namespace MojeVlastniStrankaFinanali.Web
 
 			app.UseRouting();
 
-			// ResponseCaching / OutputCache patří před endpointy
 			app.UseResponseCaching();
 			app.UseOutputCache();
 
 			app.UseAuthentication();
 			app.UseAuthorization();
 
-			// --- Endpoints ---
 			app.MapRazorPages();
 
 			app.MapControllerRoute(
