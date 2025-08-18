@@ -25,7 +25,7 @@
 		<section class="scrolling__container" id="scrollContainer">
 			<article class="scrolling__article reveal">
 				<a class="scrolling__article__a" asp-page="./sluzby/webovestranky">
-					<img src="images/webovestranky.jpg" alt="Webové stránky">
+					<img src="images/webovestranky.jpg" alt="Webové stránky" loading="lazy" decoding="async">
 					<div class="scrolling__article--div">
 						<h3>Webové stránky</h3>
 					</div>
@@ -33,7 +33,7 @@
 			</article>
 			<article class="scrolling__article reveal">
 				<a class="scrolling__article__a" asp-page="./sluzby/tvorbaher">
-					<img src="images/tvorbaher.jpg" alt="Unity logo">
+					<img src="images/tvorbaher.jpg" alt="Unity logo" loading="lazy" decoding="async">
 					<div class="scrolling__article--div">
 						<h3>Tvorba her</h3>
 					</div>
@@ -41,7 +41,7 @@
 			</article>
 			<article class="scrolling__article reveal">
 				<a class="scrolling__article__a" asp-page="./sluzby/socialnisite">
-					<img src="images/socialnisite.jpg" alt="Obrázek planety skrz sociální sítě">
+					<img src="images/socialnisite.jpg" alt="Obrázek planety skrz sociální sítě" loading="lazy" decoding="async">
 					<div class="scrolling__article--div">
 						<h3>Správa sociálních sítí</h3>
 					</div>
@@ -49,7 +49,7 @@
 			</article>
 			<article class="scrolling__article reveal">
 				<a class="scrolling__article__a" asp-page="./sluzby/seo">
-					<img src="images/seo.jpg" alt="text seo s lupou">
+					<img src="images/seo.jpg" alt="text seo s lupou" loading="lazy" decoding="async">
 					<div class="scrolling__article--div">
 						<h3>Optimalizace SEO</h3>
 					</div>
@@ -64,7 +64,7 @@
 				@foreach (var post in Model.Posts)
 				{
 					<a href="/blog/@post.Slug" class="figure__blog">
-						<img src="@post.FilePath" alt="Blog">
+						<img src="@post.FilePath" alt="Blog" loading="lazy" decoding="async">
 						<div class="figure__blog__div">
 							<h3>@post.Name</h3>
 							<p>@post.Description</p>
@@ -75,27 +75,30 @@
 			<div class="pagination">
 				@for (int i = 0; i < Model.Posts.Count(); i++)
 				{
-					<span class="behind--dot"><span class="dot"></span></span>
+					<span class="behind--dot" role="tab"
+							aria-selected="@(i==0 ? "true" : "false")"
+							aria-controls="blog-slide-@i"
+							aria-label="Zobrazit článek @(i+1)"><span class="dot"></span></span>
 				}
 			</div>
 		</div>
 	</div>
 	<div class="aboutme__Card reveal">
 		<div class="aboutme__Card__images">
-			<img src="images/osobnifotka.png" alt="Blog">
-			<img class="megafone" src="images/icons/megafon.svg" aria-hidden="true" alt="Megafon">
+			<img src="images/osobnifotka.png" alt="Blog" loading="lazy" decoding="async">
+			<img class="megafone" src="images/icons/megafon.svg" aria-hidden="true" alt="Megafon" loading="lazy" decoding="async">
 		</div>
 		<div class="aboutme__text">
 			<h2>Něco o mně</h2>
-			<p>Zdravím, jmenuji se <strong>Jan Sebastián Kostlán</strong> a jsem vášnivý tvůrce webových aplikací, her, SEO maestro a technologický nadšenec, Věřím, že technologie nám usnadňují každodenní život a jsou klíčové jako nástroj pro osobní a profesní růst , a proto se zaměřuji na vytváření inovativních řešení. Při svém volnu, pokud netluču do klávesnice, tak se věnuji fitness převážně fitku a boxu. Mým cílem je budovat aplikace, hry, a celkově všechno možné, čemu věřím, že má smysl se tím zabývat. Pokud vás zajímavý konkrétní projekty, kterým se momentálně věnuji, tak doporučuji navštívit sekci <a href="/projekty" target="_blank">Projekty</a>.</p>
+			<p>Zdravím, jmenuji se <strong>Jan Sebastián Kostlán</strong> a jsem vášnivý tvůrce webových aplikací, her, SEO maestro a technologický nadšenec, Věřím, že technologie nám usnadňují každodenní život a jsou klíčové jako nástroj pro osobní a profesní růst , a proto se zaměřuji na vytváření inovativních řešení. Při svém volnu, pokud netluču do klávesnice, tak se věnuji fitness převážně fitku a boxu. Mým cílem je budovat aplikace, hry, a celkově všechno možné, čemu věřím, že má smysl se tím zabývat. Pokud vás zajímavý konkrétní projekty, kterým se momentálně věnuji, tak doporučuji navštívit sekci <a href="/projekty" target="_blank" rel="noopener">Projekty</a>.</p>
 		</div>
 	</div>
 </main>
 <form class="form__newsletter reveal" method="post">
 	<h2>Buď v obraze</h2>
-	<img class="email__ikonka" src="images/icons/emailikonka.svg" alt="Email ikona" aria-hidden="true">
+	<img class="email__ikonka" src="images/icons/emailikonka.svg" alt="Email ikona" aria-hidden="true" loading="lazy" decoding="async">
 	<p>Chceš dostávat pravidelné newslettery o tom, co plánuji a co píšu. Nezapomeň vyplnit email.</p>
-	<input type="email" asp-for="email" placeholder="E-mail" required class="input__email">
+	<input type="email" asp-for="email" placeholder="E-mail" required class="input__email" aria-describedby="newsletter-help">
 	<span asp-validation-for="email" class="text-danger"></span>
 	<button aria-label="Tlačítko odeslání" class="button" type="submit">Odeslat</button>
 
