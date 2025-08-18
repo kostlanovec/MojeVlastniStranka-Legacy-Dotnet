@@ -58,7 +58,7 @@
 <body class="body">
 	<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
 		<symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 40" id="menu">
-			<path d="M48.33,45.6H18a14.17,14.17,0,0,1,0-28.34H78.86a17.37,17.37,0,0,1,0,34.74H42.33l-21-21.26L47.75,4" />
+			<path d="M48.33,45.6 H18 a14.17,14.17,0,0,1,0-28.34 H78.86 a17.37,17.37,0,0,1,0,34.74 H78.86 l-21-21.26 L47.75,4" />
 		</symbol>
 	</svg>
 	<nav class="menu reveal" id="menu">
@@ -78,7 +78,6 @@
 		</ul>
 	</nav>
 	@RenderBody()
-
 	<footer class="footer">
 		<p>2025 | Made by Jan Sebastián Kostlán</p>
 		<div class="footer__last__element">
@@ -86,7 +85,6 @@
 			<a class="white--a" asp-page="/zasadycookies">Cookies</a>
 		</div>
 	</footer>
-
 	<script>
 		document.addEventListener('DOMContentLoaded', function () {
 			 var hamburger = document.querySelector('.hamburger');
@@ -118,7 +116,6 @@
 	<link rel="stylesheet" href="/lib/vanilla-cookieconsent/src/cookieconsent.css" media="print" onload="this.media='all'">
 	<script defer src="/lib/vanilla-cookieconsent/src/cookieconsent.js" onload="this.media='all'"></script>
 	<script defer src="Scripts/cookieconsent-init.js" onload="this.media='all'"></script>
-
 	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

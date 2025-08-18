@@ -1,6 +1,5 @@
 ﻿@page
 @model MojeVlastniStranka.Web.Pages.sluzby.seoModel
-
 @{
 	ViewData["Title"] = "SEO";
 	ViewData["Description"] = "Optimalizování stránek na míru jako je On page a off page. Jan Sebastián Kostlán - Tvůrce, webdesigner, programátor a marketing maestro skrz SEO.";
@@ -9,7 +8,6 @@
 	ViewData["Image"] = "https://kostlanovec.cz/images/tvorbaher.jpg";
 	ViewData["SocialTitle"] = "Služba optimalizace SEO";
 }
-
 <main class="main">
 	<header class="header header-service reveal">
 		<div>
@@ -72,7 +70,6 @@
 				@TempData["SuccessMessage"]
 			</div>
 		}
-
 		@if (ModelState.ErrorCount > 0)
 		{
 			<div class="error-message">
