@@ -611,7 +611,7 @@ input[type="text"] {
 }
 
 .dot {
-	background-color: white;
+	background-color: var(--darkblue);
 	border-radius: 360px;
 	width: 16px;
 	height: 16px;
@@ -1058,10 +1058,12 @@ input[type="text"] {
 		grid-template-rows: repeat(7, 1fr);
 		gap: 10px;
 	}
+
 	.div--blog--articles > * {
 		grid-column: span 5;
 		grid-row: span 2;
 	}
+
 	.article--first--post {
 		grid-column: span 7;
 		grid-row: span 7;
