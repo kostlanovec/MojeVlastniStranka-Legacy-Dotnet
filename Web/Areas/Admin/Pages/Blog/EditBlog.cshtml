@@ -132,7 +132,7 @@
 		],
 		callbacks: {
 			onInit: function () {
-				var htmlContent = '@Html.Raw(Model.EditBlogPostDto.Content)';
+					var htmlContent = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.EditBlogPostDto.Content));
 				$('#summernote').summernote('code', htmlContent);
 			}
 		}

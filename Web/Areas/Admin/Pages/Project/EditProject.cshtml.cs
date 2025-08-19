@@ -76,7 +76,6 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Project
 			ProjectEditDto = projectService.GetProjectById(Id);
 
 			return Page();
-
 		}
 
 		public async Task<ActionResult> OnPostDeleteProjectByIdAsync()
