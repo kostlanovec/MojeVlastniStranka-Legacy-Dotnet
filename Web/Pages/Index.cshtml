@@ -222,10 +222,18 @@
 		 panels.forEach((p, i) => {
 			if (i === index) { p.removeAttribute('hidden'); } else { p.setAttribute('hidden', ''); }
 		 });
+
 		 tabs.forEach((t, i) => {
 			t.setAttribute('aria-selected', i === index ? 'true' : 'false');
 			t.tabIndex = i === index ? 0 : -1;
+
+			const dot = t.querySelector('.dot');
+			if (dot) {
+			  if (i === index) dot.classList.add('active');
+			  else dot.classList.remove('active');
+			}
 		 });
+
 		 currentIndex = index;
 	  }
 
@@ -245,6 +253,7 @@
 	  });
 	});
 </script>
+
 
 <script>
 	const scrollContainer = document.getElementById('scrollContainer');

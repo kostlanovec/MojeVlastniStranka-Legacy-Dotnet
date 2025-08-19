@@ -611,7 +611,7 @@ input[type="text"] {
 }
 
 .dot {
-	background-color: var(--darkblue);
+	background-color: var(--white);
 	border-radius: 360px;
 	width: 16px;
 	height: 16px;
@@ -631,7 +631,7 @@ input[type="text"] {
 }
 
 .active {
-	background-color: blue;
+	background-color: var(--bluegradient--start--color);
 }
 
 .blog--a{
