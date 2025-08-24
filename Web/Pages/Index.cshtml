@@ -5,7 +5,7 @@
 	ViewData["Title"] = "Jan Sebastián Kostlán – webdeveloper, programátor & SEO specialista";
 
 	// META DESCRIPTION – 150–160 znaků
-	ViewData["Description"] = "Osobní web Jana Sebastiána Kostlána: webdeveloper, programátor a SEO specialista. Tvořím weby, hry a aplikace, propojuji marketing se špičkovou technikou.";
+	ViewData["Description"] = "Osobní web Jana Sebastiána Kostlána: webdeveloper, programátor a SEO specialista. Spojuji tvorbu webů, her a aplikací s chytrým marketingem.";
 
 	ViewData["Author"] = "Jan Sebastián Kostlán";
 	ViewData["Keywords"] = "Jan Sebastián Kostlán, webdeveloper, programátor, webdesigner, SEO, marketing, projekty, blog, hry, aplikace, vývoj webu, optimalizace";
@@ -73,7 +73,7 @@
 	<div id="target" class="services reveal">
 		<h2>Služby</h2>
 		<section class="scrolling__container" id="scrollContainer">
-			<article class="scrolling__article reveal">W
+			<article class="scrolling__article reveal">
 				<a class="scrolling__article__a" asp-page="./sluzby/webovestranky">
 					<img src="/images/webovestranky.jpg" alt="Tvorba webových stránek" loading="lazy" decoding="async">
 					<div class="scrolling__article--div">
@@ -212,67 +212,276 @@
 </form>
 
 <script>
-	document.addEventListener("DOMContentLoaded", function () {
-	  let currentIndex = 0;
-	  const panels = document.querySelectorAll('[role="tabpanel"]');
-	  const tabs = document.querySelectorAll('[role="tab"]');
-	  let autoAdvanceTimer;
+    /* ====== CONFIG ====== */
+    const AUTOPLAY_MS = 5000;      // interval autoplay
+    const SWIPE_THRESHOLD = 40;     // px pro uznání swipe
+    const WHEEL_COOLDOWN = 600;     // ms mezi wheel posuny
+    const LOOP = true;              // nekonečná smyčka
+    /* ==================== */
 
-	  function show(index) {
-		 panels.forEach((p, i) => {
-			if (i === index) { p.removeAttribute('hidden'); } else { p.setAttribute('hidden', ''); }
-		 });
+    document.addEventListener("DOMContentLoaded", () => {
+      let currentIndex = 0;
+      const panels = Array.from(document.querySelectorAll('[role="tabpanel"]'));
+      const tabs   = Array.from(document.querySelectorAll('[role="tab"]'));
+      if (!panels.length || !tabs.length) return;
 
-		 tabs.forEach((t, i) => {
-			t.setAttribute('aria-selected', i === index ? 'true' : 'false');
-			t.tabIndex = i === index ? 0 : -1;
+      // Oblast pro gesta – můžeš přidat data-swipe-area na konkrétní wrapper
+      const swipeArea = document.querySelector('[data-swipe-area]') || panels[0].parentElement;
 
-			const dot = t.querySelector('.dot');
-			if (dot) {
-			  if (i === index) dot.classList.add('active');
-			  else dot.classList.remove('active');
-			}
-		 });
+      let autoplayTimer = null;
+      let wheelLocked = false;
 
-		 currentIndex = index;
-	  }
+      // Volitelné live region pro čtečky
+      let live = document.querySelector('[aria-live="polite"]');
+      if (!live) {
+        live = document.createElement('div');
+        live.setAttribute('aria-live', 'polite');
+        live.className = 'sr-only';
+        live.style.position='absolute'; live.style.width='1px'; live.style.height='1px'; live.style.overflow='hidden'; live.style.clip='rect(1px,1px,1px,1px)';
+        document.body.appendChild(live);
+      }
 
-	  function next() { show((currentIndex + 1) % panels.length); }
-	  function startAuto() { autoAdvanceTimer = setInterval(next, 5000); }
-	  function resetAuto() { clearInterval(autoAdvanceTimer); startAuto(); }
+      function show(index) {
+        if (!LOOP) {
+          index = Math.max(0, Math.min(index, panels.length - 1));
+        } else {
+          // wrap kolem
+          index = (index + panels.length) % panels.length;
+        }
 
-	  show(0);
-	  startAuto();
+        panels.forEach((p, i) => {
+          if (i === index) p.removeAttribute('hidden');
+          else p.setAttribute('hidden', '');
+        });
 
-	  tabs.forEach((tab, i) => {
-		 tab.addEventListener('click', () => { show(i); resetAuto(); });
-		 tab.addEventListener('keydown', (e) => {
-			if (e.key === 'ArrowRight') { show((i + 1) % tabs.length); e.preventDefault(); }
-			if (e.key === 'ArrowLeft')  { show((i - 1 + tabs.length) % tabs.length); e.preventDefault(); }
-		 });
-	  });
-	});
+        tabs.forEach((t, i) => {
+          const selected = i === index;
+          t.setAttribute('aria-selected', selected ? 'true' : 'false');
+          t.tabIndex = selected ? 0 : -1;
+          const dot = t.querySelector('.dot');
+          if (dot) dot.classList.toggle('active', selected);
+        });
+
+        currentIndex = index;
+        // oznam pro čtečky
+        const currentTab = tabs[currentIndex];
+        if (currentTab) live.textContent = currentTab.getAttribute('aria-label') || currentTab.textContent || `Slide ${currentIndex+1}`;
+      }
+
+      function next() { show(currentIndex + 1); }
+      function prev() { show(currentIndex - 1); }
+
+      function startAutoplay() {
+        stopAutoplay();
+        autoplayTimer = setInterval(next, AUTOPLAY_MS);
+      }
+      function stopAutoplay() {
+        if (autoplayTimer) clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+      function userInteracted() {
+        stopAutoplay();
+        // po interakci znovu nastartuj s malým “cooldownem”
+        setTimeout(startAutoplay, 2000);
+      }
+
+      // Init
+      show(0);
+      startAutoplay();
+
+      // Kliky na taby
+      tabs.forEach((tab, i) => {
+        tab.addEventListener('click', () => { show(i); userInteracted(); });
+        tab.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowRight') { show(i + 1); e.preventDefault(); userInteracted(); }
+          if (e.key === 'ArrowLeft')  { show(i - 1); e.preventDefault(); userInteracted(); }
+          if (e.key === 'Home') { show(0); e.preventDefault(); userInteracted(); }
+          if (e.key === 'End')  { show(panels.length - 1); e.preventDefault(); userInteracted(); }
+        });
+      });
+
+      // Wheel (horizontální posun jako ve Swiperu)
+      const onWheel = (e) => {
+        // preferuj horizontální delta, fallback na vertikální
+        const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+        if (Math.abs(delta) < 5 || wheelLocked) return;
+        wheelLocked = true;
+        if (delta > 0) next(); else prev();
+        userInteracted();
+        setTimeout(() => wheelLocked = false, WHEEL_COOLDOWN);
+        e.preventDefault();
+      };
+      (swipeArea || document).addEventListener('wheel', onWheel, { passive: false });
+
+      // Swipe/drag gesta (Pointer Events – funguje myš i touch)
+      let isPointerDown = false;
+      let startX = 0;
+      let lastX = 0;
+      let moved = 0;
+
+      const onPointerDown = (e) => {
+        isPointerDown = true;
+        startX = lastX = (e.clientX ?? e.touches?.[0]?.clientX ?? 0);
+        moved = 0;
+      };
+      const onPointerMove = (e) => {
+        if (!isPointerDown) return;
+        const x = (e.clientX ?? e.touches?.[0]?.clientX ?? lastX);
+        moved = x - startX;
+        lastX = x;
+        // vizuální náhled drag efektu můžeš přidat přes CSS (např. posouvat track),
+        // tady jen detekujeme gesto a pustíme snímek po uvolnění
+        e.preventDefault();
+      };
+      const onPointerUp = () => {
+        if (!isPointerDown) return;
+        isPointerDown = false;
+        if (Math.abs(moved) > SWIPE_THRESHOLD) {
+          if (moved < 0) next(); else prev();
+          userInteracted();
+        }
+        moved = 0;
+      };
+
+      const area = swipeArea || document;
+      area.addEventListener('pointerdown', onPointerDown, { passive: true });
+      area.addEventListener('pointermove', onPointerMove, { passive: false });
+      area.addEventListener('pointerup', onPointerUp, { passive: true });
+      area.addEventListener('pointercancel', onPointerUp, { passive: true });
+      area.addEventListener('touchstart', onPointerDown, { passive: true });
+      area.addEventListener('touchmove', onPointerMove, { passive: false });
+      area.addEventListener('touchend', onPointerUp, { passive: true });
+
+      // Pauza autoplay na hover/focus/visibility
+      const root = swipeArea || document;
+      root.addEventListener('mouseenter', stopAutoplay);
+      root.addEventListener('mouseleave', startAutoplay);
+      root.addEventListener('focusin', stopAutoplay);
+      root.addEventListener('focusout', startAutoplay);
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) stopAutoplay(); else startAutoplay();
+      });
+    });
 </script>
 
-
+<!-- ===== ScrollContainer: drag + inertia + snap ===== -->
 <script>
-	const scrollContainer = document.getElementById('scrollContainer');
-	let isScrolling = false;
-	let startX;
-	let scrollLeft;
-	if (scrollContainer) {
-	  scrollContainer.addEventListener('mousedown', function (e) {
-		 isScrolling = true;
-		 startX = e.pageX - scrollContainer.offsetLeft;
-		 scrollLeft = scrollContainer.scrollLeft;
-	  });
-	  scrollContainer.addEventListener('mousemove', function (e) {
-		 if (!isScrolling) return;
-		 const x = e.pageX - scrollContainer.offsetLeft;
-		 const scrollBy = x - startX;
-		 scrollContainer.scrollLeft = scrollLeft - scrollBy;
-	  });
-	  scrollContainer.addEventListener('mouseup', function () { isScrolling = false; });
-	  scrollContainer.addEventListener('mouseleave', function () { isScrolling = false; });
-	}
+    document.addEventListener('DOMContentLoaded', () => {
+      const sc = document.getElementById('scrollContainer');
+      if (!sc) return;
+
+      // CSS tip (doporučeno): nastav na sc -> scroll-snap-type:x mandatory; a na děti -> scroll-snap-align:center;
+      // Tady děláme JS snap pro případy bez CSS.
+
+      let isDown = false;
+      let startX = 0;
+      let scrollStart = 0;
+      let lastX = 0;
+      let lastT = 0;
+      let vx = 0; // rychlost pro “inertia”
+
+      const now = () => performance.now();
+
+      const onDown = (e) => {
+        isDown = true;
+        startX = (e.pageX ?? e.clientX) - sc.offsetLeft;
+        scrollStart = sc.scrollLeft;
+        lastX = startX;
+        lastT = now();
+        vx = 0;
+        sc.classList.add('grabbing'); // můžeš si styly přidat (cursor: grabbing)
+      };
+      const onMove = (e) => {
+        if (!isDown) return;
+        const x = (e.pageX ?? e.clientX) - sc.offsetLeft;
+        const delta = x - startX;
+        sc.scrollLeft = scrollStart - delta;
+
+        // odhad rychlosti
+        const t = now();
+        const dt = t - lastT;
+        if (dt > 0) {
+          vx = (x - lastX) / dt; // px/ms
+          lastX = x; lastT = t;
+        }
+        e.preventDefault();
+      };
+      const onUp = () => {
+        if (!isDown) return;
+        isDown = false;
+        sc.classList.remove('grabbing');
+
+        // Inertia (exponenciální dojezd)
+        const decay = 0.0045; // čím větší, tím kratší dojezd
+        let velocity = -vx * 600; // přepočet na px/s, invert (směr scrollu)
+        let start = null;
+        const startLeft = sc.scrollLeft;
+
+        function step(ts) {
+          if (!start) start = ts;
+          const t = (ts - start) / 1000; // s
+          const displacement = (velocity / decay) * (1 - Math.exp(-decay * t));
+          sc.scrollLeft = startLeft + displacement;
+          if (Math.abs(velocity) > 0.1) {
+            requestAnimationFrame(step);
+          } else {
+            snapToChild();
+          }
+          // exponenciálně zmenšuj “rychlost”
+          velocity *= Math.exp(-decay * (ts - (start + t*1000)));
+        }
+        requestAnimationFrame(step);
+      };
+
+      sc.addEventListener('mousedown', onDown);
+      sc.addEventListener('mousemove', onMove);
+      sc.addEventListener('mouseup', onUp);
+      sc.addEventListener('mouseleave', () => { if (isDown) onUp(); });
+
+      // Touch (pro jistotu, i když většina mobilů zvládne nativně)
+      sc.addEventListener('touchstart', (e) => {
+        const touch = e.touches[0];
+        onDown({ pageX: touch.pageX, clientX: touch.clientX });
+      }, { passive: true });
+      sc.addEventListener('touchmove', (e) => {
+        const touch = e.touches[0];
+        onMove({ pageX: touch.pageX, clientX: touch.clientX, preventDefault: () => e.preventDefault() });
+      }, { passive: false });
+      sc.addEventListener('touchend', onUp, { passive: true });
+
+      // Snap na nejbližší item (střed kontejneru)
+      function snapToChild() {
+        const children = Array.from(sc.children).filter(el => el.offsetWidth > 0);
+        if (!children.length) return;
+        const center = sc.scrollLeft + sc.clientWidth / 2;
+        let best = { el: null, dist: Infinity };
+        children.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          const elCenter = rect.left + window.scrollX - sc.offsetLeft + el.offsetWidth / 2 + sc.scrollLeft;
+          const dist = Math.abs(elCenter - center);
+          if (dist < best.dist) best = { el, dist };
+        });
+        if (best.el) {
+          const targetCenter = (best.el.offsetLeft + best.el.offsetWidth / 2);
+          const targetScrollLeft = targetCenter - sc.clientWidth / 2;
+          sc.scrollTo({ left: targetScrollLeft, behavior: 'smooth' });
+        }
+      }
+
+      // Wheel – převod na vodorovný drag + snap
+      let wheelTimer = null;
+      sc.addEventListener('wheel', (e) => {
+        const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+        sc.scrollLeft += delta;
+        clearTimeout(wheelTimer);
+        wheelTimer = setTimeout(snapToChild, 140);
+        e.preventDefault();
+      }, { passive: false });
+
+      // Snap po resize (layout se mohl změnit)
+      window.addEventListener('resize', () => {
+        clearTimeout(wheelTimer);
+        wheelTimer = setTimeout(snapToChild, 100);
+      });
+    });
 </script>

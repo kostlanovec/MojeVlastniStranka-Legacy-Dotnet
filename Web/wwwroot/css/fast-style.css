@@ -10,6 +10,20 @@
 	color: var(--white);
 }
 
+#scrollContainer {
+	scroll-snap-type: x mandatory;
+	overflow-x: auto;
+}
+
+	#scrollContainer > * {
+		scroll-snap-align: center;
+	}
+
+	#scrollContainer.grabbing {
+		cursor: grabbing;
+	}
+
+
 figure {
 	margin: 0;
 	padding: 0;
@@ -259,9 +273,11 @@ input[type="text"] {
 }
 
 .behind--dot {
-	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	background-color: var(--white);
-	border-radius: 360px;
+	border-radius: 50%;
 	width: 20px;
 	height: 20px;
 }
@@ -611,10 +627,10 @@ input[type="text"] {
 }
 
 .dot {
-	background-color: var(--white);
-	border-radius: 360px;
-	width: 16px;
-	height: 16px;
+	background-color: var(--black);
+	border-radius: 50%;
+	width: 15px;
+	height: 15px;
 	position: absolute;
 	top: 50%;
 	left: 50%;
