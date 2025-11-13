@@ -66,7 +66,7 @@
 		<div>
 			<h1>Jan Sebastián Kostlán</h1>
 			<p class="p--index">Webdeveloper, programátor, webdesigner a SEO specialista. Tvořím rychlé a přístupné weby, hry a aplikace.</p>
-			<button id="scrollBtn" aria-label="Přejít na služby" class="arrow"></button>
+			<a id="scrollBtn" aria-label="Přejít na služby" class="arrow"></a>
 		</div>
 	</header>
 
@@ -212,12 +212,10 @@
 </form>
 
 <script>
-    /* ====== CONFIG ====== */
-    const AUTOPLAY_MS = 5000;      // interval autoplay
-    const SWIPE_THRESHOLD = 40;     // px pro uznání swipe
-    const WHEEL_COOLDOWN = 600;     // ms mezi wheel posuny
-    const LOOP = true;              // nekonečná smyčka
-    /* ==================== */
+    const AUTOPLAY_MS = 5000;
+    const SWIPE_THRESHOLD = 40; 
+    const WHEEL_COOLDOWN = 600;
+    const LOOP = true;
 
     document.addEventListener("DOMContentLoaded", () => {
       let currentIndex = 0;
@@ -225,13 +223,11 @@
       const tabs   = Array.from(document.querySelectorAll('[role="tab"]'));
       if (!panels.length || !tabs.length) return;
 
-      // Oblast pro gesta – můžeš přidat data-swipe-area na konkrétní wrapper
       const swipeArea = document.querySelector('[data-swipe-area]') || panels[0].parentElement;
 
       let autoplayTimer = null;
       let wheelLocked = false;
 
-      // Volitelné live region pro čtečky
       let live = document.querySelector('[aria-live="polite"]');
       if (!live) {
         live = document.createElement('div');
@@ -245,7 +241,6 @@
         if (!LOOP) {
           index = Math.max(0, Math.min(index, panels.length - 1));
         } else {
-          // wrap kolem
           index = (index + panels.length) % panels.length;
         }
 
@@ -263,7 +258,6 @@
         });
 
         currentIndex = index;
-        // oznam pro čtečky
         const currentTab = tabs[currentIndex];
         if (currentTab) live.textContent = currentTab.getAttribute('aria-label') || currentTab.textContent || `Slide ${currentIndex+1}`;
       }
@@ -281,15 +275,12 @@
       }
       function userInteracted() {
         stopAutoplay();
-        // po interakci znovu nastartuj s malým “cooldownem”
         setTimeout(startAutoplay, 2000);
       }
 
-      // Init
       show(0);
       startAutoplay();
 
-      // Kliky na taby
       tabs.forEach((tab, i) => {
         tab.addEventListener('click', () => { show(i); userInteracted(); });
         tab.addEventListener('keydown', (e) => {
@@ -300,9 +291,7 @@
         });
       });
 
-      // Wheel (horizontální posun jako ve Swiperu)
       const onWheel = (e) => {
-        // preferuj horizontální delta, fallback na vertikální
         const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
         if (Math.abs(delta) < 5 || wheelLocked) return;
         wheelLocked = true;
@@ -313,7 +302,6 @@
       };
       (swipeArea || document).addEventListener('wheel', onWheel, { passive: false });
 
-      // Swipe/drag gesta (Pointer Events – funguje myš i touch)
       let isPointerDown = false;
       let startX = 0;
       let lastX = 0;
@@ -329,8 +317,6 @@
         const x = (e.clientX ?? e.touches?.[0]?.clientX ?? lastX);
         moved = x - startX;
         lastX = x;
-        // vizuální náhled drag efektu můžeš přidat přes CSS (např. posouvat track),
-        // tady jen detekujeme gesto a pustíme snímek po uvolnění
         e.preventDefault();
       };
       const onPointerUp = () => {
@@ -352,7 +338,6 @@
       area.addEventListener('touchmove', onPointerMove, { passive: false });
       area.addEventListener('touchend', onPointerUp, { passive: true });
 
-      // Pauza autoplay na hover/focus/visibility
       const root = swipeArea || document;
       root.addEventListener('mouseenter', stopAutoplay);
       root.addEventListener('mouseleave', startAutoplay);
@@ -364,21 +349,17 @@
     });
 </script>
 
-<!-- ===== ScrollContainer: drag + inertia + snap ===== -->
 <script>
     document.addEventListener('DOMContentLoaded', () => {
       const sc = document.getElementById('scrollContainer');
       if (!sc) return;
-
-      // CSS tip (doporučeno): nastav na sc -> scroll-snap-type:x mandatory; a na děti -> scroll-snap-align:center;
-      // Tady děláme JS snap pro případy bez CSS.
 
       let isDown = false;
       let startX = 0;
       let scrollStart = 0;
       let lastX = 0;
       let lastT = 0;
-      let vx = 0; // rychlost pro “inertia”
+      let vx = 0;
 
       const now = () => performance.now();
 
@@ -389,7 +370,7 @@
         lastX = startX;
         lastT = now();
         vx = 0;
-        sc.classList.add('grabbing'); // můžeš si styly přidat (cursor: grabbing)
+        sc.classList.add('grabbing');
       };
       const onMove = (e) => {
         if (!isDown) return;
@@ -397,11 +378,10 @@
         const delta = x - startX;
         sc.scrollLeft = scrollStart - delta;
 
-        // odhad rychlosti
         const t = now();
         const dt = t - lastT;
         if (dt > 0) {
-          vx = (x - lastX) / dt; // px/ms
+          vx = (x - lastX) / dt;
           lastX = x; lastT = t;
         }
         e.preventDefault();
@@ -411,9 +391,8 @@
         isDown = false;
         sc.classList.remove('grabbing');
 
-        // Inertia (exponenciální dojezd)
-        const decay = 0.0045; // čím větší, tím kratší dojezd
-        let velocity = -vx * 600; // přepočet na px/s, invert (směr scrollu)
+        const decay = 0.0045;
+        let velocity = -vx * 600;
         let start = null;
         const startLeft = sc.scrollLeft;
 
@@ -427,7 +406,6 @@
           } else {
             snapToChild();
           }
-          // exponenciálně zmenšuj “rychlost”
           velocity *= Math.exp(-decay * (ts - (start + t*1000)));
         }
         requestAnimationFrame(step);
@@ -438,7 +416,6 @@
       sc.addEventListener('mouseup', onUp);
       sc.addEventListener('mouseleave', () => { if (isDown) onUp(); });
 
-      // Touch (pro jistotu, i když většina mobilů zvládne nativně)
       sc.addEventListener('touchstart', (e) => {
         const touch = e.touches[0];
         onDown({ pageX: touch.pageX, clientX: touch.clientX });
@@ -449,7 +426,6 @@
       }, { passive: false });
       sc.addEventListener('touchend', onUp, { passive: true });
 
-      // Snap na nejbližší item (střed kontejneru)
       function snapToChild() {
         const children = Array.from(sc.children).filter(el => el.offsetWidth > 0);
         if (!children.length) return;
@@ -468,7 +444,6 @@
         }
       }
 
-      // Wheel – převod na vodorovný drag + snap
       let wheelTimer = null;
       sc.addEventListener('wheel', (e) => {
         const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
@@ -478,7 +453,6 @@
         e.preventDefault();
       }, { passive: false });
 
-      // Snap po resize (layout se mohl změnit)
       window.addEventListener('resize', () => {
         clearTimeout(wheelTimer);
         wheelTimer = setTimeout(snapToChild, 100);

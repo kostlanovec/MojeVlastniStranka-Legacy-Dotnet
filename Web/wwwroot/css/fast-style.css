@@ -15,14 +15,13 @@
 	overflow-x: auto;
 }
 
-	#scrollContainer > * {
-		scroll-snap-align: center;
-	}
+#scrollContainer > * {
+	scroll-snap-align: center;
+}
 
-	#scrollContainer.grabbing {
-		cursor: grabbing;
-	}
-
+#scrollContainer.grabbing {
+	cursor: grabbing;
+}
 
 figure {
 	margin: 0;
@@ -627,7 +626,6 @@ input[type="text"] {
 }
 
 .dot {
-	background-color: var(--black);
 	border-radius: 50%;
 	width: 15px;
 	height: 15px;
@@ -803,7 +801,7 @@ input[type="text"] {
 }
 
 @media screen and (min-width: 768px) {
-	.scrolling__article.visible {
+	.scrolling__article {
 		opacity: 0;
 		transform: translateY(20px);
 		transition: opacity 0.4s ease, transform 0.4s ease;
