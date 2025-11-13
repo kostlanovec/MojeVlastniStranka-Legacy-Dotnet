@@ -1,18 +1,14 @@
 ﻿@page
 @model MojeVlastniStranka.Web.Pages.IndexModel
 @{
-	// TITLE – vyhne se opakováním a obsahuje klíčová slova
-	ViewData["Title"] = "Jan Sebastián Kostlán – webdeveloper, programátor & SEO specialista";
+    ViewData["Title"] = "Jan Sebastián Kostlán – webdeveloper, programátor & SEO specialista";
+    ViewData["Description"] = "Osobní web Jana Sebastiána Kostlána: webdeveloper, programátor a SEO specialista. Spojuji tvorbu webů, her a aplikací s chytrým marketingem.";
+    ViewData["Author"] = "Jan Sebastián Kostlán";
+    ViewData["Keywords"] = "Jan Sebastián Kostlán, webdeveloper, programátor, webdesigner, SEO, marketing, projekty, blog, hry, aplikace, vývoj webu, optimalizace";
+    ViewData["Image"] = "https://kostlanovec.cz/images/basicimage.png";
+    ViewData["SocialTitle"] = "Jan Sebastián Kostlán – webdeveloper & SEO";
 
-	// META DESCRIPTION – 150–160 znaků
-	ViewData["Description"] = "Osobní web Jana Sebastiána Kostlána: webdeveloper, programátor a SEO specialista. Spojuji tvorbu webů, her a aplikací s chytrým marketingem.";
-
-	ViewData["Author"] = "Jan Sebastián Kostlán";
-	ViewData["Keywords"] = "Jan Sebastián Kostlán, webdeveloper, programátor, webdesigner, SEO, marketing, projekty, blog, hry, aplikace, vývoj webu, optimalizace";
-	ViewData["Image"] = "https://kostlanovec.cz/images/basicimage.png";
-	ViewData["SocialTitle"] = "Jan Sebastián Kostlán – webdeveloper & SEO";
-
-	ViewData["JsonLD"] = @"
+    ViewData["JsonLD"] = @"
     {
       ""@context"": ""https://schema.org"",
       ""@graph"": [
@@ -54,408 +50,281 @@
 }
 
 <main class="main">
-	<header class="header header--index reveal">
-		<link rel="preload" as="image" href="/images/website_image.svg" type="image/svg+xml">
-		<figure class="header--figure">
-			<img class="header--figure--image"
-				  src="/images/website_image.svg"
-				  alt="Ilustrační grafika webu Kostlanovec"
-				  width="400" height="400"
-				  fetchpriority="high" decoding="async">
-		</figure>
-		<div>
-			<h1>Jan Sebastián Kostlán</h1>
-			<p class="p--index">Webdeveloper, programátor, webdesigner a SEO specialista. Tvořím rychlé a přístupné weby, hry a aplikace.</p>
-			<a id="scrollBtn" aria-label="Přejít na služby" class="arrow"></a>
-		</div>
-	</header>
+    <header class="header header--index reveal">
+        <link rel="preload" as="image" href="/images/website_image.svg" type="image/svg+xml">
+        <figure class="header--figure">
+            <img class="header--figure--image"
+                 src="/images/website_image.svg"
+                 alt="Ilustrační grafika webu Kostlanovec"
+                 width="400" height="400"
+                 fetchpriority="high" decoding="async">
+        </figure>
+        <div>
+            <h1>Jan Sebastián Kostlán</h1>
+            <p class="p--index">Webdeveloper, programátor, webdesigner a SEO specialista. Tvořím rychlé a přístupné weby, hry a aplikace.</p>
+            <button id="scrollBtn" aria-label="Přejít na služby" class="arrow"></button>
+        </div>
+    </header>
 
-	<div id="target" class="services reveal">
-		<h2>Služby</h2>
-		<section class="scrolling__container" id="scrollContainer">
-			<article class="scrolling__article reveal">
-				<a class="scrolling__article__a" asp-page="./sluzby/webovestranky">
-					<img src="/images/webovestranky.jpg" alt="Tvorba webových stránek" loading="lazy" decoding="async">
-					<div class="scrolling__article--div">
-						<h3>Webové stránky</h3>
-					</div>
-				</a>
-			</article>
-			<article class="scrolling__article reveal">
-				<a class="scrolling__article__a" asp-page="./sluzby/tvorbaher">
-					<img src="/images/tvorbaher.jpg" alt="Vývoj her v Unity" loading="lazy" decoding="async">
-					<div class="scrolling__article--div">
-						<h3>Tvorba her</h3>
-					</div>
-				</a>
-			</article>
-			<article class="scrolling__article reveal">
-				<a class="scrolling__article__a" asp-page="./sluzby/socialnisite">
-					<img src="/images/socialnisite.jpg" alt="Správa sociálních sítí" loading="lazy" decoding="async">
-					<div class="scrolling__article--div">
-						<h3>Správa sociálních sítí</h3>
-					</div>
-				</a>
-			</article>
-			<article class="scrolling__article reveal">
-				<a class="scrolling__article__a" asp-page="./sluzby/seo">
-					<img src="/images/seo.jpg" alt="Optimalizace pro vyhledávače (SEO)" loading="lazy" decoding="async">
-					<div class="scrolling__article--div">
-						<h3>Optimalizace SEO</h3>
-					</div>
-				</a>
-			</article>
-		</section>
-	</div>
+    <div id="target" class="services reveal">
+        <h2>Služby</h2>
+        <section class="scrolling__container" id="scrollContainer">
+            <article class="scrolling__article reveal">
+                <a class="scrolling__article__a" asp-page="./sluzby/webovestranky">
+                    <img src="/images/webovestranky.jpg" alt="Tvorba webových stránek" loading="lazy" decoding="async">
+                    <div class="scrolling__article--div">
+                        <h3>Webové stránky</h3>
+                    </div>
+                </a>
+            </article>
+            <article class="scrolling__article reveal">
+                <a class="scrolling__article__a" asp-page="./sluzby/tvorbaher">
+                    <img src="/images/tvorbaher.jpg" alt="Vývoj her v Unity" loading="lazy" decoding="async">
+                    <div class="scrolling__article--div">
+                        <h3>Tvorba her</h3>
+                    </div>
+                </a>
+            </article>
+            <article class="scrolling__article reveal">
+                <a class="scrolling__article__a" asp-page="./sluzby/socialnisite">
+                    <img src="/images/socialnisite.jpg" alt="Správa sociálních sítí" loading="lazy" decoding="async">
+                    <div class="scrolling__article--div">
+                        <h3>Správa sociálních sítí</h3>
+                    </div>
+                </a>
+            </article>
+            <article class="scrolling__article reveal">
+                <a class="scrolling__article__a" asp-page="./sluzby/seo">
+                    <img src="/images/seo.jpg" alt="Optimalizace pro vyhledávače (SEO)" loading="lazy" decoding="async">
+                    <div class="scrolling__article--div">
+                        <h3>Optimalizace SEO</h3>
+                    </div>
+                </a>
+            </article>
+        </section>
+    </div>
 
-	<section class="menu--blogposts reveal" aria-labelledby="blog-title">
-		<h2 id="blog-title">Blog</h2>
-		<div class="wrapper" aria-roledescription="carousel" aria-label="Blog příspěvky">
-			<div class="slides">
-				@for (int i = 0; i < Model.Posts.Count(); i++)
-				{
-					var post = Model.Posts.ElementAt(i);
+    <section class="menu--blogposts reveal" aria-labelledby="blog-title">
+        <h2 id="blog-title">Blog</h2>
+        <div class="wrapper" aria-roledescription="carousel" aria-label="Blog příspěvky">
+            <div class="slides">
+                @for (int i = 0; i < Model.Posts.Count(); i++)
+                {
+                    var post = Model.Posts.ElementAt(i);
 
-					if (i == 0)
-					{
-						<div id="blog-slide-@i"
-							  role="tabpanel"
-							  aria-labelledby="blog-tab-@i"
-							  tabindex="0">
-							<a href="/blog/@post.Slug" class="figure__blog">
-								<img src="@post.FilePath"
-									  alt="@post.Name"
-									  loading="lazy" decoding="async" />
-								<div class="figure__blog__div">
-									<h3>@post.Name</h3>
-									<p>@post.Description</p>
-								</div>
-							</a>
-						</div>
-					}
-					else
-					{
-						<div id="blog-slide-@i"
-							  role="tabpanel"
-							  aria-labelledby="blog-tab-@i"
-							  tabindex="0"
-							  hidden>
-							<a href="/blog/@post.Slug" class="figure__blog">
-								<img src="@post.FilePath"
-									  alt="@post.Name"
-									  loading="lazy" decoding="async" />
-								<div class="figure__blog__div">
-									<h3>@post.Name</h3>
-									<p>@post.Description</p>
-								</div>
-							</a>
-						</div>
-					}
-				}
-			</div>
+                    if (i == 0)
+                    {
+                        <div id="blog-slide-@i"
+                             role="tabpanel"
+                             aria-labelledby="blog-tab-@i"
+                             tabindex="0">
+                            <a href="/blog/@post.Slug" class="figure__blog">
+                                <img src="@post.FilePath"
+                                     alt="@post.Name"
+                                     loading="lazy" decoding="async" />
+                                <div class="figure__blog__div">
+                                    <h3>@post.Name</h3>
+                                    <p>@post.Description</p>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div id="blog-slide-@i"
+                             role="tabpanel"
+                             aria-labelledby="blog-tab-@i"
+                             tabindex="0"
+                             hidden>
+                            <a href="/blog/@post.Slug" class="figure__blog">
+                                <img src="@post.FilePath"
+                                     alt="@post.Name"
+                                     loading="lazy" decoding="async" />
+                                <div class="figure__blog__div">
+                                    <h3>@post.Name</h3>
+                                    <p>@post.Description</p>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                }
+            </div>
 
-			<div class="pagination" role="tablist" aria-label="Přepínače článků">
-				@for (int i = 0; i < Model.Posts.Count(); i++)
-				{
-					<button class="behind--dot"
-							  id="blog-tab-@i"
-							  role="tab"
-							  type="button"
-							  aria-selected="@(i == 0 ? "true" : "false")"
-							  aria-controls="blog-slide-@i">
-						<span class="dot" aria-hidden="true"></span>
-					</button>
-				}
-			</div>
-		</div>
-	</section>
+            <div class="pagination" role="tablist" aria-label="Přepínače článků">
+                @for (int i = 0; i < Model.Posts.Count(); i++)
+                {
+                    <button class="behind--dot"
+                            id="blog-tab-@i"
+                            role="tab"
+                            type="button"
+                            aria-selected="@(i == 0 ? "true" : "false")"
+                            aria-controls="blog-slide-@i">
+                        <span class="dot" aria-hidden="true"></span>
+                    </button>
+                }
+            </div>
+        </div>
+    </section>
 
-	<section class="aboutme__Card reveal" aria-labelledby="about-title">
-		<div class="aboutme__Card__images">
-			<img src="/images/osobnifotka.jpg" alt="Jan Sebastián Kostlán – profilová fotografie" loading="lazy" decoding="async" class="profilepicture">
-			<img class="megafone" src="/images/icons/megafon.svg" aria-hidden="true" alt="Megafon" loading="lazy" decoding="async">
-		</div>
-		<div class="aboutme__text">
-			<h2 id="about-title">O mně</h2>
-			<p>Jmenuji se <strong>Jan Sebastián Kostlán</strong> a věnuji se hlavně <em>vývoji webů, programování, webdesignu a SEO</em>. Baví mě hledat spojení mezi technickým řešením a reálnými výsledky. Tvořím <strong>rychlé, přístupné a bezpečné webové stránky</strong>, vyvíjím <strong>hry a aplikace</strong> a k tomu řeším <strong>online marketing</strong>, aby projekty nebyly jen hezké, ale i dobře viditelné a efektivní.</p>
-			<p>V praxi pracuji s .NET/ASP.NET Core a moderními frontend technologiemi, rád automatizuji nasazování přes Docker a CI/CD a hlídám kvalitu – od Core Web Vitals po přístupnost. Díky zkušenostem s <strong>SEO</strong> a analýzou dat umím navrhnout obsah i strukturu webu tak, aby měl co nejlepší výkon ve vyhledávačích.</p>
-			<p>Mám také specifické okruhy zájmů, kterým se aktivně věnuji. Patří mezi ně především <strong>vývoj her v Unity</strong> – od menších prototypů až po multiplayer projekty. Zajímá mě čistá architektura, dobrý uživatelský zážitek a to, aby každá aplikace nebo hra měla měřitelný přínos.</p>
-			<p>Ve volném čase se věnuji hlavně <strong>fitness a silovému tréninku</strong>, který mi pomáhá vyvážit práci u počítače a zároveň mě motivuje posouvat vlastní hranice. Stejně jako v IT, i ve sportu mě baví sledovat svůj postup a hledat způsoby, jak být každý den o krok dál.</p>
-			<p>Mým cílem je <strong>zanechat stopu v každém z okruhů, které mě baví</strong> – od <em>webů a aplikací</em>, přes <em>hry a SEO</em>, až po <em>osobní rozvoj</em>. Chci tvořit věci, které mají hodnotu a dlouhodobý smysl, a ukazovat, že kombinace techniky, kreativity a vytrvalosti dokáže posunout hranice.</p>
-			<p>Chceš vidět, na čem zrovna pracuji? Podívej se na moje <a href="/projekty">projekty</a> nebo si přečti <a href="/blog">blog</a>. Pokud máš zájem o spolupráci na webu, hře nebo o konzultaci k SEO, ozvi se mi přes <a href="/kontakt">kontakt</a>. Rád proberu tvůj nápad a navrhnu řešení.</p>
-		</div>
-	</section>
+    <section class="aboutme__Card reveal" aria-labelledby="about-title">
+        <div class="aboutme__Card__images">
+            <img src="/images/osobnifotka.jpg" alt="Jan Sebastián Kostlán – profilová fotografie" loading="lazy" decoding="async" class="profilepicture">
+            <img class="megafone" src="/images/icons/megafon.svg" aria-hidden="true" alt="Megafon" loading="lazy" decoding="async">
+        </div>
+        <div class="aboutme__text">
+            <h2 id="about-title">O mně</h2>
+            <p>Jmenuji se <strong>Jan Sebastián Kostlán</strong> a věnuji se hlavně <em>vývoji webů, programování, webdesignu a SEO</em>. Baví mě hledat spojení mezi technickým řešením a reálnými výsledky. Tvořím <strong>rychlé, přístupné a bezpečné webové stránky</strong>, vyvíjím <strong>hry a aplikace</strong> a k tomu řeším <strong>online marketing</strong>, aby projekty nebyly jen hezké, ale i dobře viditelné a efektivní.</p>
+            <p>V praxi pracuji s .NET/ASP.NET Core a moderními frontend technologiemi, rád automatizuji nasazování přes Docker a CI/CD a hlídám kvalitu – od Core Web Vitals po přístupnost. Díky zkušenostem s <strong>SEO</strong> a analýzou dat umím navrhnout obsah i strukturu webu tak, aby měl co nejlepší výkon ve vyhledávačích.</p>
+            <p>Mám také specifické okruhy zájmů, kterým se aktivně věnuji. Patří mezi ně především <strong>vývoj her v Unity</strong> – od menších prototypů až po multiplayer projekty. Zajímá mě čistá architektura, dobrý uživatelský zážitek a to, aby každá aplikace nebo hra měla měřitelný přínos.</p>
+            <p>Ve volném čase se věnuji hlavně <strong>fitness a silovému tréninku</strong>, který mi pomáhá vyvážit práci u počítače a zároveň mě motivuje posouvat vlastní hranice. Stejně jako v IT, i ve sportu mě baví sledovat svůj postup a hledat způsoby, jak být každý den o krok dál.</p>
+            <p>Mým cílem je <strong>zanechat stopu v každém z okruhů, které mě baví</strong> – od <em>webů a aplikací</em>, přes <em>hry a SEO</em>, až po <em>osobní rozvoj</em>. Chci tvořit věci, které mají hodnotu a dlouhodobý smysl, a ukazovat, že kombinace techniky, kreativity a vytrvalosti dokáže posunout hranice.</p>
+            <p>Chceš vidět, na čem zrovna pracuji? Podívej se na moje <a href="/projekty">projekty</a> nebo si přečti <a href="/blog">blog</a>. Pokud máš zájem o spolupráci na webu, hře nebo o konzultaci k SEO, ozvi se mi přes <a href="/kontakt">kontakt</a>. Rád proberu tvůj nápad a navrhnu řešení.</p>
+        </div>
+    </section>
 </main>
 
 <form class="form__newsletter reveal" method="post">
-	<h2>Buď v obraze</h2>
-	<img class="email__ikonka" src="/images/icons/emailikonka.svg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-	<p>Přihlas se k odběru novinek o nových projektech, článcích a užitečných tipech. Stačí e-mail níže.</p>
-	<input type="email" asp-for="email" placeholder="E-mail" required class="input__email" aria-describedby="newsletter-help">
-	<span id="newsletter-help" class="sr-only">Zadej svůj e-mail, abys mohl(a) odebírat novinky.</span>
-	<span asp-validation-for="email" class="text-danger"></span>
-	<button aria-label="Odeslat přihlášení do newsletteru" class="button" type="submit">Odeslat</button>
+    <h2>Buď v obraze</h2>
+    <img class="email__ikonka" src="/images/icons/emailikonka.svg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    <p>Přihlas se k odběru novinek o nových projektech, článcích a užitečných tipech. Stačí e-mail níže.</p>
+    <input type="email" asp-for="email" placeholder="E-mail" required class="input__email" aria-describedby="newsletter-help">
+    <span id="newsletter-help" class="sr-only">Zadej svůj e-mail, abys mohl(a) odebírat novinky.</span>
+    <span asp-validation-for="email" class="text-danger"></span>
+    <button aria-label="Odeslat přihlášení do newsletteru" class="button" type="submit">Odeslat</button>
 
-	@if (TempData["SuccessMessage"] != null)
-	{
-		<div class="success-message">
-			@TempData["SuccessMessage"]
-		</div>
-	}
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="success-message">
+            @TempData["SuccessMessage"]
+        </div>
+    }
 
-	@if (ModelState.ErrorCount > 0)
-	{
-		<div class="error-message">
-			@ModelState.Values.SelectMany(v => v.Errors).FirstOrDefault()?.ErrorMessage
-		</div>
-	}
+    @if (ModelState.ErrorCount > 0)
+    {
+        <div class="error-message">
+            @ModelState.Values.SelectMany(v => v.Errors).FirstOrDefault()?.ErrorMessage
+        </div>
+    }
 </form>
 
 <script>
-    const AUTOPLAY_MS = 5000;
-    const SWIPE_THRESHOLD = 40; 
-    const WHEEL_COOLDOWN = 600;
-    const LOOP = true;
-
     document.addEventListener("DOMContentLoaded", () => {
-      let currentIndex = 0;
-      const panels = Array.from(document.querySelectorAll('[role="tabpanel"]'));
-      const tabs   = Array.from(document.querySelectorAll('[role="tab"]'));
-      if (!panels.length || !tabs.length) return;
+        const AUTOPLAY_MS = 5000;
+        const SWIPE_THRESHOLD = 40;
+        const panels = Array.from(document.querySelectorAll('[role="tabpanel"]'));
+        const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
+        if (!panels.length || !tabs.length) return;
 
-      const swipeArea = document.querySelector('[data-swipe-area]') || panels[0].parentElement;
+        let currentIndex = 0;
+        let autoplayTimer = null;
+        const swipeArea = document.querySelector(".slides");
 
-      let autoplayTimer = null;
-      let wheelLocked = false;
-
-      let live = document.querySelector('[aria-live="polite"]');
-      if (!live) {
-        live = document.createElement('div');
-        live.setAttribute('aria-live', 'polite');
-        live.className = 'sr-only';
-        live.style.position='absolute'; live.style.width='1px'; live.style.height='1px'; live.style.overflow='hidden'; live.style.clip='rect(1px,1px,1px,1px)';
-        document.body.appendChild(live);
-      }
-
-      function show(index) {
-        if (!LOOP) {
-          index = Math.max(0, Math.min(index, panels.length - 1));
-        } else {
-          index = (index + panels.length) % panels.length;
+        function show(i) {
+            i = (i + panels.length) % panels.length;
+            panels.forEach((p, x) => p.hidden = x !== i);
+            tabs.forEach((t, x) => {
+                const sel = x === i;
+                t.setAttribute("aria-selected", sel);
+                t.tabIndex = sel ? 0 : -1;
+                const dot = t.querySelector(".dot");
+                if (dot) dot.classList.toggle("active", sel);
+            });
+            currentIndex = i;
         }
 
-        panels.forEach((p, i) => {
-          if (i === index) p.removeAttribute('hidden');
-          else p.setAttribute('hidden', '');
-        });
+        function next() { show(currentIndex + 1); }
+        function prev() { show(currentIndex - 1); }
 
-        tabs.forEach((t, i) => {
-          const selected = i === index;
-          t.setAttribute('aria-selected', selected ? 'true' : 'false');
-          t.tabIndex = selected ? 0 : -1;
-          const dot = t.querySelector('.dot');
-          if (dot) dot.classList.toggle('active', selected);
-        });
-
-        currentIndex = index;
-        const currentTab = tabs[currentIndex];
-        if (currentTab) live.textContent = currentTab.getAttribute('aria-label') || currentTab.textContent || `Slide ${currentIndex+1}`;
-      }
-
-      function next() { show(currentIndex + 1); }
-      function prev() { show(currentIndex - 1); }
-
-      function startAutoplay() {
-        stopAutoplay();
-        autoplayTimer = setInterval(next, AUTOPLAY_MS);
-      }
-      function stopAutoplay() {
-        if (autoplayTimer) clearInterval(autoplayTimer);
-        autoplayTimer = null;
-      }
-      function userInteracted() {
-        stopAutoplay();
-        setTimeout(startAutoplay, 2000);
-      }
-
-      show(0);
-      startAutoplay();
-
-      tabs.forEach((tab, i) => {
-        tab.addEventListener('click', () => { show(i); userInteracted(); });
-        tab.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowRight') { show(i + 1); e.preventDefault(); userInteracted(); }
-          if (e.key === 'ArrowLeft')  { show(i - 1); e.preventDefault(); userInteracted(); }
-          if (e.key === 'Home') { show(0); e.preventDefault(); userInteracted(); }
-          if (e.key === 'End')  { show(panels.length - 1); e.preventDefault(); userInteracted(); }
-        });
-      });
-
-      const onWheel = (e) => {
-        const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-        if (Math.abs(delta) < 5 || wheelLocked) return;
-        wheelLocked = true;
-        if (delta > 0) next(); else prev();
-        userInteracted();
-        setTimeout(() => wheelLocked = false, WHEEL_COOLDOWN);
-        e.preventDefault();
-      };
-      (swipeArea || document).addEventListener('wheel', onWheel, { passive: false });
-
-      let isPointerDown = false;
-      let startX = 0;
-      let lastX = 0;
-      let moved = 0;
-
-      const onPointerDown = (e) => {
-        isPointerDown = true;
-        startX = lastX = (e.clientX ?? e.touches?.[0]?.clientX ?? 0);
-        moved = 0;
-      };
-      const onPointerMove = (e) => {
-        if (!isPointerDown) return;
-        const x = (e.clientX ?? e.touches?.[0]?.clientX ?? lastX);
-        moved = x - startX;
-        lastX = x;
-        e.preventDefault();
-      };
-      const onPointerUp = () => {
-        if (!isPointerDown) return;
-        isPointerDown = false;
-        if (Math.abs(moved) > SWIPE_THRESHOLD) {
-          if (moved < 0) next(); else prev();
-          userInteracted();
+        function startAutoplay() {
+            clearInterval(autoplayTimer);
+            autoplayTimer = setInterval(next, AUTOPLAY_MS);
         }
-        moved = 0;
-      };
 
-      const area = swipeArea || document;
-      area.addEventListener('pointerdown', onPointerDown, { passive: true });
-      area.addEventListener('pointermove', onPointerMove, { passive: false });
-      area.addEventListener('pointerup', onPointerUp, { passive: true });
-      area.addEventListener('pointercancel', onPointerUp, { passive: true });
-      area.addEventListener('touchstart', onPointerDown, { passive: true });
-      area.addEventListener('touchmove', onPointerMove, { passive: false });
-      area.addEventListener('touchend', onPointerUp, { passive: true });
+        function userInteracted() {
+            clearInterval(autoplayTimer);
+            setTimeout(startAutoplay, 2000);
+        }
 
-      const root = swipeArea || document;
-      root.addEventListener('mouseenter', stopAutoplay);
-      root.addEventListener('mouseleave', startAutoplay);
-      root.addEventListener('focusin', stopAutoplay);
-      root.addEventListener('focusout', startAutoplay);
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden) stopAutoplay(); else startAutoplay();
-      });
+        show(0);
+        startAutoplay();
+
+        tabs.forEach((tab, i) => {
+            tab.addEventListener("click", () => { show(i); userInteracted(); });
+            tab.addEventListener("keydown", (e) => {
+                if (e.key === "ArrowRight") { next(); e.preventDefault(); }
+                if (e.key === "ArrowLeft") { prev(); e.preventDefault(); }
+            });
+        });
+
+        let down = false, startX = 0, moved = 0;
+        swipeArea.addEventListener("pointerdown", e => {
+            down = true;
+            startX = e.clientX;
+            moved = 0;
+        }, { passive: true });
+
+        swipeArea.addEventListener("pointermove", e => {
+            if (!down) return;
+            moved = e.clientX - startX;
+        }, { passive: true });
+
+        swipeArea.addEventListener("pointerup", () => {
+            if (!down) return;
+            down = false;
+            if (Math.abs(moved) > SWIPE_THRESHOLD) {
+                if (moved < 0) next(); else prev();
+                userInteracted();
+            }
+        }, { passive: true });
     });
 </script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const sc = document.getElementById('scrollContainer');
-      if (!sc) return;
+    document.addEventListener("DOMContentLoaded", () => {
+        const sc = document.getElementById("scrollContainer");
+        if (!sc) return;
 
-      let isDown = false;
-      let startX = 0;
-      let scrollStart = 0;
-      let lastX = 0;
-      let lastT = 0;
-      let vx = 0;
+        let down = false, startX = 0, scrollStart = 0;
 
-      const now = () => performance.now();
+        sc.addEventListener("pointerdown", e => {
+            down = true;
+            startX = e.clientX;
+            scrollStart = sc.scrollLeft;
+            sc.classList.add("grabbing");
+        }, { passive: true });
 
-      const onDown = (e) => {
-        isDown = true;
-        startX = (e.pageX ?? e.clientX) - sc.offsetLeft;
-        scrollStart = sc.scrollLeft;
-        lastX = startX;
-        lastT = now();
-        vx = 0;
-        sc.classList.add('grabbing');
-      };
-      const onMove = (e) => {
-        if (!isDown) return;
-        const x = (e.pageX ?? e.clientX) - sc.offsetLeft;
-        const delta = x - startX;
-        sc.scrollLeft = scrollStart - delta;
+        sc.addEventListener("pointermove", e => {
+            if (!down) return;
+            const x = e.clientX;
+            sc.scrollLeft = scrollStart - (x - startX);
+        }, { passive: true });
 
-        const t = now();
-        const dt = t - lastT;
-        if (dt > 0) {
-          vx = (x - lastX) / dt;
-          lastX = x; lastT = t;
-        }
-        e.preventDefault();
-      };
-      const onUp = () => {
-        if (!isDown) return;
-        isDown = false;
-        sc.classList.remove('grabbing');
+        sc.addEventListener("pointerup", () => {
+            down = false;
+            sc.classList.remove("grabbing");
+        }, { passive: true });
 
-        const decay = 0.0045;
-        let velocity = -vx * 600;
-        let start = null;
-        const startLeft = sc.scrollLeft;
+        sc.addEventListener("pointerleave", () => {
+            down = false;
+            sc.classList.remove("grabbing");
+        }, { passive: true });
 
-        function step(ts) {
-          if (!start) start = ts;
-          const t = (ts - start) / 1000; // s
-          const displacement = (velocity / decay) * (1 - Math.exp(-decay * t));
-          sc.scrollLeft = startLeft + displacement;
-          if (Math.abs(velocity) > 0.1) {
-            requestAnimationFrame(step);
-          } else {
-            snapToChild();
-          }
-          velocity *= Math.exp(-decay * (ts - (start + t*1000)));
-        }
-        requestAnimationFrame(step);
-      };
+        sc.addEventListener("wheel", e => {
+            if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+                sc.scrollLeft += e.deltaX;
+                e.preventDefault();
+            }
+        }, { passive: false });
+    });
+</script>
 
-      sc.addEventListener('mousedown', onDown);
-      sc.addEventListener('mousemove', onMove);
-      sc.addEventListener('mouseup', onUp);
-      sc.addEventListener('mouseleave', () => { if (isDown) onUp(); });
-
-      sc.addEventListener('touchstart', (e) => {
-        const touch = e.touches[0];
-        onDown({ pageX: touch.pageX, clientX: touch.clientX });
-      }, { passive: true });
-      sc.addEventListener('touchmove', (e) => {
-        const touch = e.touches[0];
-        onMove({ pageX: touch.pageX, clientX: touch.clientX, preventDefault: () => e.preventDefault() });
-      }, { passive: false });
-      sc.addEventListener('touchend', onUp, { passive: true });
-
-      function snapToChild() {
-        const children = Array.from(sc.children).filter(el => el.offsetWidth > 0);
-        if (!children.length) return;
-        const center = sc.scrollLeft + sc.clientWidth / 2;
-        let best = { el: null, dist: Infinity };
-        children.forEach(el => {
-          const rect = el.getBoundingClientRect();
-          const elCenter = rect.left + window.scrollX - sc.offsetLeft + el.offsetWidth / 2 + sc.scrollLeft;
-          const dist = Math.abs(elCenter - center);
-          if (dist < best.dist) best = { el, dist };
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const btn = document.getElementById("scrollBtn");
+        const target = document.getElementById("target");
+        if (!btn || !target) return;
+        btn.addEventListener("click", () => {
+            target.scrollIntoView({ behavior: "smooth" });
         });
-        if (best.el) {
-          const targetCenter = (best.el.offsetLeft + best.el.offsetWidth / 2);
-          const targetScrollLeft = targetCenter - sc.clientWidth / 2;
-          sc.scrollTo({ left: targetScrollLeft, behavior: 'smooth' });
-        }
-      }
-
-      let wheelTimer = null;
-      sc.addEventListener('wheel', (e) => {
-        const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-        sc.scrollLeft += delta;
-        clearTimeout(wheelTimer);
-        wheelTimer = setTimeout(snapToChild, 140);
-        e.preventDefault();
-      }, { passive: false });
-
-      window.addEventListener('resize', () => {
-        clearTimeout(wheelTimer);
-        wheelTimer = setTimeout(snapToChild, 100);
-      });
     });
 </script>
