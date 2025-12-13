@@ -106,7 +106,7 @@
 
     <section class="menu--blogposts reveal" aria-labelledby="blog-title">
         <h2 id="blog-title">Blog</h2>
-        <div class="wrapper" aria-roledescription="carousel" aria-label="Blog příspěvky">
+        <div class="wrapper" role="region" aria-roledescription="carousel" aria-label="Blog příspěvky">
             <div class="slides">
                 @for (int i = 0; i < Model.Posts.Count(); i++)
                 {
@@ -149,7 +149,6 @@
                     }
                 }
             </div>
-
             <div class="pagination" role="tablist" aria-label="Přepínače článků">
                 @for (int i = 0; i < Model.Posts.Count(); i++)
                 {
