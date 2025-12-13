@@ -28,6 +28,7 @@ jobs:
         context: .
         file: ./Web/Dockerfile
         push: true
+        platforms: linux/amd64
         tags: ${{ secrets.DOCKERHUB_USER }}/mojevlastnistranka:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
