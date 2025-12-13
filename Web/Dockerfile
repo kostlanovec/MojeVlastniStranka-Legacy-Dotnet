@@ -22,8 +22,7 @@ RUN dotnet publish "./MojeVlastniStranka.Web.csproj" \
     -o /app/publish \
     --no-restore \
      /p:SelfContained=false \
-    /p:UseAppHost=false \
-    /p:PublishTrimmed=true
+    /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
