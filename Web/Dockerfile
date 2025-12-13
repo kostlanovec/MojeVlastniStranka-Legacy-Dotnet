@@ -21,6 +21,7 @@ RUN dotnet publish "./MojeVlastniStranka.Web.csproj" \
     -c $BUILD_CONFIGURATION \
     -o /app/publish \
     --no-restore \
+     /p:SelfContained=false \
     /p:UseAppHost=false \
     /p:PublishTrimmed=true
 
