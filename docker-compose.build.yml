@@ -9,8 +9,8 @@
       - ASPNETCORE_HTTP_PORTS=8080
       - APP_UID=1000
       - SELF_BASE_URL=http://127.0.0.1:8080
-    ports:
-      - "127.0.0.1:8080:8080"
+    expose:
+      - "8080"
     volumes:
      - /var/uploads/user-uploads:/app/wwwroot/user-uploads:rw
 
@@ -22,6 +22,10 @@
       POSTGRES_USERNAME: postgres
     volumes:
       - local_postgres_data:/var/lib/postgresql/data
+
+networks:
+  monitoring:
+    external: true
 
 volumes:
   local_postgres_data: {}
