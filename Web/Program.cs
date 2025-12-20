@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using HealthChecks.UI.Client;
-
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
 using MojeVlastniStranka.DataAccess.Entities;
 using MojeVlastniStranka.Web;
+using Prometheus;
 
 namespace MojeVlastniStrankaFinanali.Web
 {
@@ -170,7 +170,10 @@ namespace MojeVlastniStrankaFinanali.Web
 				options.UIPath = "/healthcheck-ui";
 			});
 
-			app.Run();
+            app.MapMetrics("/metrics");
+
+
+            app.Run();
 		}
 
 		public static void EnsureLatestDatabase(WebApplication app)

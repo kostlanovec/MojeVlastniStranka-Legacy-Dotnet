@@ -89,7 +89,11 @@ h3, .service--price {
 	font-size: 1.4em;
 }
 
-.header--index{
+sr-only{
+	margin-top: 1em;
+}
+
+.header--index {
 	text-align: center;
 }
 
