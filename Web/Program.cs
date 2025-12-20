@@ -95,16 +95,6 @@ namespace MojeVlastniStrankaFinanali.Web
 
 			app.UseResponseCompression();
 
-			app.Use(async (ctx, next) =>
-			{
-				var h = ctx.Response.Headers;
-				h["X-Content-Type-Options"] = "nosniff";
-				h["Referrer-Policy"] = "strict-origin-when-cross-origin";
-				h["X-Frame-Options"] = "DENY";
-				h["Permissions-Policy"] = "geolocation=(), camera=(), microphone=()";
-				await next();
-			});
-
 			app.MapStaticAssets();
 
 			var oneYear = TimeSpan.FromDays(365);
@@ -171,7 +161,6 @@ namespace MojeVlastniStrankaFinanali.Web
 			});
 
             app.MapMetrics("/metrics");
-
 
             app.Run();
 		}
