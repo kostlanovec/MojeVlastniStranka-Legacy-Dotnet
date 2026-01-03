@@ -276,6 +276,7 @@ input[type="text"] {
 }
 
 .behind--dot {
+	border: none;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -550,14 +551,15 @@ input[type="text"] {
 }
 
 .input__email {
-	width: 280px;
-	height: 44px;
-	background-color: var(--white);
-	color: var(--darkblue);
-	border: none;
-	border-radius: 8px;
-	margin-top: 2em;
-	padding: 1em;
+    width: 280px;
+    height: 44px;
+    background-color: var(--white);
+    color: var(--darkblue);
+    border: none;
+    border-radius: 8px;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    padding: 1em;
 }
 
 .h1--index {
@@ -866,6 +868,7 @@ input[type="text"] {
 		display: flex;
 		justify-content: space-between;
 		margin: 2em;
+		user-select:none;
 	}
 
 	.menu-list {
