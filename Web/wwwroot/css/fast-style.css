@@ -276,14 +276,18 @@ input[type="text"] {
 }
 
 .behind--dot {
-	border: none;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: var(--white);
-	border-radius: 50%;
-	width: 20px;
-	height: 20px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--white);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .behind--dot:hover{

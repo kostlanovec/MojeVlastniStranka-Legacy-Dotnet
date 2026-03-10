@@ -33,10 +33,8 @@ namespace MojeVlastniStranka.DataAccess
 		/// </summary>
 		public void ApplyMigrations(DataContext context)
 		{
-			if (this.Database.GetPendingMigrations().Any())
-			{
-				this.Database.Migrate();
-			}
+
+			this.Database.Migrate();
 
 #if DEBUG
 			try

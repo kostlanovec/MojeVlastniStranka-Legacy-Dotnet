@@ -1,0 +1,29 @@
+﻿services:
+  mojevlastnistranka.web:
+    build:
+      context: .
+      dockerfile: Web/Dockerfile
+    image: mojevlastnistranka-web
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_HTTP_PORTS=8080
+      - APP_UID=1000
+      - SELF_BASE_URL=http://127.0.0.1:8080
+    ports:
+      - "8080:8080"
+    volumes:
+      - /var/uploads/user-uploads:/app/wwwroot/user-uploads:rw
+
+  db:
+    image: postgres:17.2
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: [REDACTED]
+      POSTGRES_USER: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  local_postgres_data: {}
