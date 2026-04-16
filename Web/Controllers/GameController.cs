@@ -10,7 +10,7 @@ namespace MojeVlastniStranka.Web.Controllers
     public class GameController : BaseController
     {
         // Aktualizuj tuto konstantu při každém novém vydání hry.
-        private const string CurrentVersion = "0.1.0";
+        private const string CurrentVersion = "0.9.3";
 
         /// <summary>
         /// GET /api/game/version
