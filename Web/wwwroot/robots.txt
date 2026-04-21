@@ -1,2 +1,5 @@
 User-agent: *
-Disallow: /
+Disallow: /gdpr
+Disallow: /zasadycookies
+Disallow: /images/
+Sitemap: https://kostlanovec.cz/sitemap.xml

@@ -3,19 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 namespace MojeVlastniStranka.Web.Controllers
 {
     /// <summary>
-    /// API pro hru CaffeCash.
+    /// API for CaffeeCash game. Provides endpoints for game-related operations, such as retrieving the current game version.
     /// </summary>
     [Route("api/game")]
     [ApiController]
     public class GameController : BaseController
     {
-        // Aktualizuj tuto konstantu při každém novém vydání hry.
-        private const string CurrentVersion = "0.9.3";
+        private const string CurrentVersion = "0.9.4";
 
-        /// <summary>
-        /// GET /api/game/version
-        /// Vrátí aktuální verzi hry jako JSON.
-        /// </summary>
         [HttpGet("version")]
         public IActionResult GetVersion()
         {
