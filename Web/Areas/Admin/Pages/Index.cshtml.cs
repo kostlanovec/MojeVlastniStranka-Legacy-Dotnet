@@ -5,7 +5,7 @@ using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.Common.Models;
 using MojeVlastniStranka.DataAccess;
 
-namespace MojeVlastniStranka.User.Areas.Admin.Pages.Account.Manage
+namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Account.Manage
 {
 	[Authorize]
 	public class IndexModel : PageModel

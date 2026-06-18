@@ -7,7 +7,7 @@ using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
 using MojeVlastniStranka.DataAccess.Entities;
 
-namespace MojeVlastniStranka.User.Areas.Admin.Pages.Development
+namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Development
 {
 	[Authorize]
 	public class DevelopmentNotesModel : PageModel

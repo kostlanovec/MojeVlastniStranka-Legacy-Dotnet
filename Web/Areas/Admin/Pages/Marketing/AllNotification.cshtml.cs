@@ -5,7 +5,7 @@ using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
 
-namespace MojeVlastniStranka.User.Areas.Admin.Pages.Marketing
+namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Marketing
 {
 	[Authorize]
 	public class AllNotificationModel : PageModel

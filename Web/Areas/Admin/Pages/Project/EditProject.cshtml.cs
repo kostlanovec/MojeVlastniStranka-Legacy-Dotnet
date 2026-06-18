@@ -8,7 +8,7 @@ using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.Common.Models;
 using MojeVlastniStranka.DataAccess;
 
-namespace MojeVlastniStranka.User.Areas.Admin.Pages.Project
+namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Project
 {
 	[Authorize]
 	public class EditProjectModel : PageModel

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using MojeVlastniStranka.ApplicationCore.Dto.Blog;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
-namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
+namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Blog
 {
 	[Authorize]
 	public class BlogModel : PageModel

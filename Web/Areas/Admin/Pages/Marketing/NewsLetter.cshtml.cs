@@ -7,7 +7,7 @@ using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.ApplicationCore.Requests;
 using Microsoft.AspNetCore.Authorization;
 
-namespace MojeVlastniStranka.User.Areas.Admin.Pages.Marketing
+namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Marketing
 {
 	[Authorize]
 	public class NewsLetterModel : PageModel

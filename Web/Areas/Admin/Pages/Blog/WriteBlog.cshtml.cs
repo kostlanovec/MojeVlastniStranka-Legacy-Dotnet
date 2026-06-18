@@ -9,7 +9,7 @@ using MojeVlastniStranka.Common.Models;
 using MojeVlastniStranka.DataAccess;
 using Newtonsoft.Json;
 
-namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
+namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Blog
 {
 	[Authorize]
 	public class WriteBlogModel : PageModel

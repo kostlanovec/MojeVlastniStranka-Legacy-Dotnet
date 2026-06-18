@@ -6,7 +6,7 @@ using MojeVlastniStranka.ApplicationCore.Requests;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
 
-namespace MojeVlastniStranka.User.Areas.Admin.Pages.Development
+namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Development
 {
 	[Authorize]
 	public class ReportBugModel : PageModel
