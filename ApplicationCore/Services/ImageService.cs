@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting; // IWebHostEnvironment
 using Microsoft.EntityFrameworkCore;
 using MojeVlastniStranka.ApplicationCore.Dto;
@@ -38,6 +38,18 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
 			// veřejná URL pro <img src="...">
 			return $"/user-uploads/{subfolder}/{fileName}";
+		}
+
+		public async Task UploadGalleryImageAsync(MojeVlastniStranka.ApplicationCore.Requests.AddImageRequest request)
+		{
+			string filePath = await UploadImageAsync(request.FileUpload, "gallery");
+			var image = new MojeVlastniStranka.DataAccess.Entities.Image
+			{
+				FileName = filePath,
+				Description = request.Description
+			};
+			context.Images.Add(image);
+			await context.SaveChangesAsync();
 		}
 
 		public async Task<List<ImageDto>> GetImagesAsync()

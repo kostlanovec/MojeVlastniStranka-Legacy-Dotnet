@@ -50,7 +50,8 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Blog
 				return Page();
 			}
 
-			return Page();
+			await imageService.UploadGalleryImageAsync(Input);
+			return RedirectToPage();
 		}
 
 		public async Task<IActionResult> OnPostDeleteAsync(int imageId)
