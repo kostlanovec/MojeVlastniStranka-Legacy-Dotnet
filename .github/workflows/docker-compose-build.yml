@@ -33,6 +33,15 @@ jobs:
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
+    - name: Copy docker-compose to VPS
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        source: "docker-compose.deploy.yml"
+        target: "~/mojevlastnistranka"
+
     - name: Deploy to VPS via SSH
       uses: appleboy/ssh-action@v1.0.0
       with:
