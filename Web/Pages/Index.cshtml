@@ -11,27 +11,34 @@
     ViewData["Image"] = "https://kostlanovec.cz/images/basicimage.png";
     ViewData["SocialTitle"] = SharedLocalizer["IndexSocialTitle"];
 
+    var indexSocialTitle = SharedLocalizer["IndexSocialTitle"].Value;
+    var indexDesc = SharedLocalizer["IndexDesc"].Value;
+    var subTitle = SharedLocalizer["SubTitle"].Value;
+    var indexTitle = SharedLocalizer["IndexTitle"].Value;
+    var kontakt = SharedLocalizer["Kontakt"].Value;
+    var cultureName = System.Globalization.CultureInfo.CurrentCulture.Name;
+
     ViewData["JsonLD"] = $@"
-    {
+    {{
       ""@context"": ""https://schema.org"",
       ""@graph"": [
-        {
+        {{
           ""@type"": ""WebSite"",
           ""@id"": ""https://kostlanovec.cz/#website"",
           ""url"": ""https://kostlanovec.cz/"",
-          ""name"": ""{SharedLocalizer["IndexSocialTitle"]}"",
-          ""description"": ""{SharedLocalizer["IndexDesc"]}"",
+          ""name"": ""{indexSocialTitle}"",
+          ""description"": ""{indexDesc}"",
           ""publisher"": {{ ""@id"": ""https://kostlanovec.cz/#person"" }},
-          ""inLanguage"": ""{System.Globalization.CultureInfo.CurrentCulture.Name}""
-        },
-        {
+          ""inLanguage"": ""{cultureName}""
+        }},
+        {{
           ""@type"": ""Person"",
           ""@id"": ""https://kostlanovec.cz/#person"",
           ""name"": ""Jan Sebastián Kostlán"",
           ""url"": ""https://kostlanovec.cz/"",
           ""image"": ""https://kostlanovec.cz/images/basicimage.png"",
-          ""description"": ""{SharedLocalizer["SubTitle"]}"",
-          ""jobTitle"": ""{SharedLocalizer["IndexTitle"]}"",
+          ""description"": ""{subTitle}"",
+          ""jobTitle"": ""{indexTitle}"",
           ""sameAs"": [
             ""https://www.instagram.com/kostlan1"",
             ""https://www.linkedin.com/in/kostlan"",
@@ -39,17 +46,17 @@
             ""https://discord.gg/VdSEt8qUXE"",
             ""https://www.facebook.com/jan.sebastiankostlan.1/""
           ]
-        },
-        {
+        }},
+        {{
           ""@type"": ""ContactPage"",
           ""@id"": ""https://kostlanovec.cz/kontakt#contact"",
           ""url"": ""https://kostlanovec.cz/kontakt"",
-          ""inLanguage"": ""{System.Globalization.CultureInfo.CurrentCulture.Name}"",
-          ""name"": ""{SharedLocalizer["Kontakt"]} – Jan Sebastián Kostlán"",
+          ""inLanguage"": ""{cultureName}"",
+          ""name"": ""{kontakt} – Jan Sebastián Kostlán"",
           ""about"": {{ ""@id"": ""https://kostlanovec.cz/#person"" }}
-        }
+        }}
       ]
-    }";
+    }}";
 }
 
 <main class="main">

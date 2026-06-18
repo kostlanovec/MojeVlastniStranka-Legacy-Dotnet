@@ -43,11 +43,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		public async Task UploadGalleryImageAsync(MojeVlastniStranka.ApplicationCore.Requests.AddImageRequest request)
 		{
 			string filePath = await UploadImageAsync(request.FileUpload, "gallery");
-			var image = new MojeVlastniStranka.DataAccess.Entities.Image
-			{
-				FileName = filePath,
-				Description = request.Description
-			};
+			var image = MojeVlastniStranka.DataAccess.Entities.Image.Create(filePath, request.Description ?? string.Empty);
 			context.Images.Add(image);
 			await context.SaveChangesAsync();
 		}
