@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using MojeVlastniStranka.DataAccess.Entities;
 using MojeVlastniStranka.Common.Enums;
@@ -25,28 +25,28 @@ namespace Reservanto.NPS.DataAccess
 				var category = context.BlogCategories.First(); // nebo vyhledat podle jména
 
 				var blogPost1 = BlogPost.Create(
-					"moje klobasa",
-					"<main class=\"main blog--post\"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>",
-					"Deset malých švestek",
-					"Pepek Námořník",
-					"rohlík, klobása",
+					"Vyhody-modernich-technologii",
+					"<main class=\"main blog--post\"><header><h1>Proč používat moderní frameworky?</h1></header><p>V dnešní době se vývoj velmi zrychlil díky novým nástrojům a umělé inteligenci.</p></main>",
+					"Základy programování pro začátečníky",
+					"Jan Novák",
+					"technologie, vývoj",
 					category.Id,
-					"nene",
+					"popis obrazku",
 					"images/psychologie.jpg",
-					"nene",
+					"zaklady-programovani",
 					DateTime.Now
 				);
 
 				var blogPost2 = BlogPost.Create(
-					"moje klobasa",
-					"<main class=\"main blog--post\"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>",
-					"Pět malých kačátek",
-					"Chleba s marmeládou",
-					"Jsi slizký had, nemám tě rád",
+					"Cisty-kod",
+					"<main class=\"main blog--post\"><header><h1>Jak psát čistý kód?</h1></header><p>Udržovat čistý kód je klíčové pro dlouhodobou udržitelnost každého projektu.</p></main>",
+					"Architektura webových aplikací",
+					"Petr Svoboda",
+					"architektura, kod",
 					category.Id,
-					"testovani",
+					"ukazka kodu",
 					"images/psychologie.jpg",
-					"deset-malych-cernousku",
+					"architektura-webu",
 					DateTime.Now
 				);
 
@@ -65,7 +65,7 @@ namespace Reservanto.NPS.DataAccess
 
 			if (!context.ContactForms.Any())
 			{
-				var contact1 = ContactForm.Create("jan.novak@example.com", "123456789", "Dobrý den, rád bych se zeptal na možnost spolupráce.", DateTime.Now);
+				var contact1 = ContactForm.Create("jan.novak@example.com", "123456789", "Dobrý den, rád bych se zeptal na možnost spolupráce na novém projektu.", DateTime.Now);
 				var contact2 = ContactForm.Create("info@kostlanovec.cz", "987654321", "Dobrý, mám zájem o nové stránky vámi vyrobené. Těším se, až mi ukážete, co všechno dokážete.", DateTime.Now);
 
 				context.ContactForms.AddRange(contact1, contact2);
@@ -74,7 +74,7 @@ namespace Reservanto.NPS.DataAccess
 
 			if (!context.IdeaToReleases.Any())
 			{
-				var idea = IdeaToRelease.Create("Chtěl bych vytvořit nějakou animaci na vytváření koblih", DateTime.Now);
+				var idea = IdeaToRelease.Create("Přidat podporu pro vícejazyčný systém na blogu", DateTime.Now);
 				context.IdeaToReleases.Add(idea);
 				context.SaveChanges();
 			}
@@ -94,29 +94,28 @@ namespace Reservanto.NPS.DataAccess
 			}
 		}
 
-		public static void InitializeAdmin(ModelBuilder modelBuilder)
+				public static void InitializeAdmin(ModelBuilder modelBuilder)
 		{
 			// Identity Seed Users and Roles
-			var hasher = new PasswordHasher<User>();
-
 			modelBuilder.Entity<User>().HasData(new User
 			{
-				Id = Guid.NewGuid().ToString(),
+				Id = "00000000-0000-0000-0000-000000000001",
 				UserName = "admin",
 				NormalizedUserName = "ADMIN",
 				Email = "info@kostlanovec.cz",
 				EmailConfirmed = true,
 				NormalizedEmail = "INFO@KOSTLANOVEC.CZ",
-				SecurityStamp = Guid.NewGuid().ToString("D"),
-				PasswordHash = hasher.HashPassword(new User(), "1je2protozebagr")
+				SecurityStamp = "00000000-0000-0000-0000-000000000002",
+				ConcurrencyStamp = "00000000-0000-0000-0000-000000000004",
+				PasswordHash = "[REDACTED_HASH]"
 			});
 
 			modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
 			{
-				Id = Guid.NewGuid().ToString(),
+				Id = "00000000-0000-0000-0000-000000000003",
 				Name = "admin",
-				NormalizedName = "ADMIN"
+				NormalizedName = "ADMIN",
+				ConcurrencyStamp = "00000000-0000-0000-0000-000000000005"
 			});
-		}
-	}
+		}	}
 }

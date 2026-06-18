@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+#nullable disable
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using HealthChecks.UI.Client;
@@ -16,7 +17,7 @@ namespace MojeVlastniStrankaFinanali.Web
 		{
 			var builder = WebApplication.CreateBuilder(args);
 
-#if Debug
+#if DEBUG
             builder.Configuration.AddJsonFile("appsettings.Development.json", optional: false, reloadOnChange: true);
 #else
 			builder.Configuration.AddJsonFile("appsettings.Production.json", optional: false, reloadOnChange: true);
@@ -68,8 +69,24 @@ namespace MojeVlastniStrankaFinanali.Web
 			builder.Services.AddScoped<FormService>();
 			builder.Services.AddScoped<ServicesOfferedService>();
 
-			builder.Services.AddRazorPages();
-			builder.Services.AddControllersWithViews();
+			builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+			builder.Services.AddRazorPages(options =>
+			{
+				options.Conventions.AddFolderRouteModelConvention("/", model =>
+				{
+					foreach (var selector in model.Selectors)
+					{
+						var template = selector.AttributeRouteModel.Template;
+						selector.AttributeRouteModel.Template = Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteModel.CombineTemplates("{culture:regex(^(cs|en)$)?}", template);
+					}
+				});
+			})
+				.AddViewLocalization()
+				.AddDataAnnotationsLocalization();
+			builder.Services.AddControllersWithViews()
+				.AddViewLocalization()
+				.AddDataAnnotationsLocalization();
 			builder.Services.AddOutputCache();
 
 			builder.Services.AddResponseCompression(options =>
@@ -121,7 +138,17 @@ namespace MojeVlastniStrankaFinanali.Web
 				}
 			});
 
+			var supportedCultures = new[] { "cs", "en" };
+			var localizationOptions = new RequestLocalizationOptions()
+				.SetDefaultCulture("cs")
+				.AddSupportedCultures(supportedCultures)
+				.AddSupportedUICultures(supportedCultures);
+
+			localizationOptions.RequestCultureProviders.Insert(0, new Microsoft.AspNetCore.Localization.Routing.RouteDataRequestCultureProvider() { Options = localizationOptions });
+
 			app.UseRouting();
+
+			app.UseRequestLocalization(localizationOptions);
 
 			app.UseResponseCaching();
 			app.UseOutputCache();
@@ -133,16 +160,16 @@ namespace MojeVlastniStrankaFinanali.Web
 
 			app.MapControllerRoute(
 				 name: "default",
-				 pattern: "{controller=Home}/{action=Index}/{id?}");
+				 pattern: "{culture:regex(^(cs|en)$)?}/{controller=Home}/{action=Index}/{id?}");
 
 			app.MapControllerRoute(
 				 name: "blog",
-				 pattern: "blog/{Slug}",
+				 pattern: "{culture:regex(^(cs|en)$)?}/blog/{Slug}",
 				 defaults: new { controller = "ShowBlogPost", action = "Blog" });
 
 			app.MapControllerRoute(
 				 name: "projekty",
-				 pattern: "projekty/{Slug}",
+				 pattern: "{culture:regex(^(cs|en)$)?}/projekty/{Slug}",
 				 defaults: new { controller = "Projekty", action = "ShowProject" });
 
 			app.MapControllerRoute(
@@ -161,6 +188,8 @@ namespace MojeVlastniStrankaFinanali.Web
 			});
 
             app.MapMetrics("/metrics");
+
+            EnsureLatestDatabase(app);
 
             app.Run();
 		}

@@ -1,0 +1,99 @@
+<?xml version="1.0" ?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Kostlanovec" xml:space="preserve">
+    <value>Kostlanovec</value>
+  </data>
+  <data name="Blog" xml:space="preserve">
+    <value>Blog</value>
+  </data>
+  <data name="Projekty" xml:space="preserve">
+    <value>Projekty</value>
+  </data>
+  <data name="Kontakt" xml:space="preserve">
+    <value>Kontakt</value>
+  </data>
+  <data name="MadeBy" xml:space="preserve">
+    <value>Made by Jan Sebastián Kostlán</value>
+  </data>
+  <data name="GDPR" xml:space="preserve">
+    <value>GDPR</value>
+  </data>
+  <data name="Cookies" xml:space="preserve">
+    <value>Cookies</value>
+  </data>
+  <data name="SubTitle" xml:space="preserve">
+    <value>Webdeveloper, programátor, webdesigner a SEO specialista. Tvořím rychlé a přístupné weby, hry a aplikace.</value>
+  </data>
+  <data name="Services" xml:space="preserve">
+    <value>Služby</value>
+  </data>
+  <data name="WebDevelopment" xml:space="preserve">
+    <value>Webové stránky</value>
+  </data>
+  <data name="GameDevelopment" xml:space="preserve">
+    <value>Tvorba her</value>
+  </data>
+  <data name="SocialMedia" xml:space="preserve">
+    <value>Správa sociálních sítí</value>
+  </data>
+  <data name="SEO" xml:space="preserve">
+    <value>Optimalizace SEO</value>
+  </data>
+  <data name="AboutMeTitle" xml:space="preserve">
+    <value>O mně</value>
+  </data>
+  <data name="AboutMeP1" xml:space="preserve">
+    <value>Jmenuji se &lt;strong&gt;Jan Sebastián Kostlán&lt;/strong&gt; a věnuji se hlavně &lt;em&gt;vývoji webů, programování, webdesignu a SEO&lt;/em&gt;. Baví mě hledat spojení mezi technickým řešením a reálnými výsledky. Tvořím &lt;strong&gt;rychlé, přístupné a bezpečné webové stránky&lt;/strong&gt;, vyvíjím &lt;strong&gt;hry a aplikace&lt;/strong&gt; a k tomu řeším &lt;strong&gt;online marketing&lt;/strong&gt;, aby projekty nebyly jen hezké, ale i dobře viditelné a efektivní.</value>
+  </data>
+  <data name="AboutMeP2" xml:space="preserve">
+    <value>V praxi pracuji s .NET/ASP.NET Core a moderními frontend technologiemi, rád automatizuji nasazování přes Docker a CI/CD a hlídám kvalitu – od Core Web Vitals po přístupnost. Díky zkušenostem s &lt;strong&gt;SEO&lt;/strong&gt; a analýzou dat umím navrhnout obsah i strukturu webu tak, aby měl co nejlepší výkon ve vyhledávačích.</value>
+  </data>
+  <data name="AboutMeP3" xml:space="preserve">
+    <value>Mám také specifické okruhy zájmů, kterým se aktivně věnuji. Patří mezi ně především &lt;strong&gt;vývoj her v Unity&lt;/strong&gt; – od menších prototypů až po multiplayer projekty. Zajímá mě čistá architektura, dobrý uživatelský zážitek a to, aby každá aplikace nebo hra měla měřitelný přínos.</value>
+  </data>
+  <data name="AboutMeP4" xml:space="preserve">
+    <value>Ve volném čase se věnuji hlavně &lt;strong&gt;fitness a silovému tréninku&lt;/strong&gt;, který mi pomáhá vyvážit práci u počítače a zároveň mě motivuje posouvat vlastní hranice. Stejně jako v IT, i ve sportu mě baví sledovat svůj postup a hledat způsoby, jak být každý den o krok dál.</value>
+  </data>
+  <data name="AboutMeP5" xml:space="preserve">
+    <value>Mým cílem je &lt;strong&gt;zanechat stopu v každém z okruhů, které mě baví&lt;/strong&gt; – od &lt;em&gt;webů a aplikací&lt;/em&gt;, přes &lt;em&gt;hry a SEO&lt;/em&gt;, až po &lt;em&gt;osobní rozvoj&lt;/em&gt;. Chci tvořit věci, které mají hodnotu a dlouhodobý smysl, a ukazovat, že kombinace techniky, kreativity a vytrvalosti dokáže posunout hranice.</value>
+  </data>
+  <data name="AboutMeP6" xml:space="preserve">
+    <value>Chceš vidět, na čem zrovna pracuji? Podívej se na moje &lt;a href="/projekty"&gt;projekty&lt;/a&gt; nebo si přečti &lt;a href="/blog"&gt;blog&lt;/a&gt;. Pokud máš zájem o spolupráci na webu, hře nebo o konzultaci k SEO, ozvi se mi přes &lt;a href="/kontakt"&gt;kontakt&lt;/a&gt;. Rád proberu tvůj nápad a navrhnu řešení.</value>
+  </data>
+  <data name="NewsletterTitle" xml:space="preserve">
+    <value>Buď v obraze</value>
+  </data>
+  <data name="NewsletterDesc" xml:space="preserve">
+    <value>Přihlas se k odběru novinek o nových projektech, článcích a užitečných tipech. Stačí e-mail níže.</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Odeslat</value>
+  </data>
+  <data name="EmailPlaceholder" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="IndexTitle" xml:space="preserve">
+    <value>Webdeveloper, programátor &amp; SEO specialista</value>
+  </data>
+  <data name="IndexDesc" xml:space="preserve">
+    <value>Tvořím rychlé webové stránky, aplikace a SEO řešení. Webdeveloper a SEO specialista zaměřený na výkon, použitelnost a výsledky.</value>
+  </data>
+  <data name="IndexKeywords" xml:space="preserve">
+    <value>Jan Sebastián Kostlán, webdeveloper, SEO specialista, tvorba webových stránek, optimalizace webu, výkonné weby</value>
+  </data>
+  <data name="IndexSocialTitle" xml:space="preserve">
+    <value>Jan Sebastián Kostlán – webdeveloper &amp; SEO</value>
+  </data>
+</root>

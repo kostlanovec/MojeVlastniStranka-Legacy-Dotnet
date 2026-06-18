@@ -1,0 +1,99 @@
+<?xml version="1.0" ?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Kostlanovec" xml:space="preserve">
+    <value>Kostlanovec</value>
+  </data>
+  <data name="Blog" xml:space="preserve">
+    <value>Blog</value>
+  </data>
+  <data name="Projekty" xml:space="preserve">
+    <value>Projects</value>
+  </data>
+  <data name="Kontakt" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="MadeBy" xml:space="preserve">
+    <value>Made by Jan Sebastián Kostlán</value>
+  </data>
+  <data name="GDPR" xml:space="preserve">
+    <value>GDPR</value>
+  </data>
+  <data name="Cookies" xml:space="preserve">
+    <value>Cookies</value>
+  </data>
+  <data name="SubTitle" xml:space="preserve">
+    <value>Web developer, programmer, web designer, and SEO specialist. I create fast, accessible websites, games, and apps.</value>
+  </data>
+  <data name="Services" xml:space="preserve">
+    <value>Services</value>
+  </data>
+  <data name="WebDevelopment" xml:space="preserve">
+    <value>Web Development</value>
+  </data>
+  <data name="GameDevelopment" xml:space="preserve">
+    <value>Game Development</value>
+  </data>
+  <data name="SocialMedia" xml:space="preserve">
+    <value>Social Media Management</value>
+  </data>
+  <data name="SEO" xml:space="preserve">
+    <value>SEO Optimization</value>
+  </data>
+  <data name="AboutMeTitle" xml:space="preserve">
+    <value>About Me</value>
+  </data>
+  <data name="AboutMeP1" xml:space="preserve">
+    <value>My name is &lt;strong&gt;Jan Sebastián Kostlán&lt;/strong&gt;, and I focus primarily on &lt;em&gt;web development, programming, web design, and SEO&lt;/em&gt;. I enjoy finding the connection between technical solutions and real-world results. I create &lt;strong&gt;fast, accessible, and secure websites&lt;/strong&gt;, develop &lt;strong&gt;games and apps&lt;/strong&gt;, and manage &lt;strong&gt;online marketing&lt;/strong&gt; to ensure projects aren't just good-looking, but also visible and effective.</value>
+  </data>
+  <data name="AboutMeP2" xml:space="preserve">
+    <value>In practice, I work with .NET/ASP.NET Core and modern frontend technologies. I enjoy automating deployments using Docker and CI/CD, and ensuring quality—from Core Web Vitals to accessibility. Thanks to my experience with &lt;strong&gt;SEO&lt;/strong&gt; and data analysis, I can design website content and structure for the best search engine performance.</value>
+  </data>
+  <data name="AboutMeP3" xml:space="preserve">
+    <value>I also have specific areas of interest that I actively pursue. Chief among these is &lt;strong&gt;game development in Unity&lt;/strong&gt;—from small prototypes to multiplayer projects. I care about clean architecture, great user experience, and ensuring that every app or game has measurable value.</value>
+  </data>
+  <data name="AboutMeP4" xml:space="preserve">
+    <value>In my free time, I focus on &lt;strong&gt;fitness and strength training&lt;/strong&gt;, which helps me balance computer work and motivates me to push my boundaries. Just like in IT, I enjoy tracking my progress in sports and finding ways to be one step further every day.</value>
+  </data>
+  <data name="AboutMeP5" xml:space="preserve">
+    <value>My goal is to &lt;strong&gt;leave a mark in every field I enjoy&lt;/strong&gt;—from &lt;em&gt;websites and apps&lt;/em&gt;, to &lt;em&gt;games and SEO&lt;/em&gt;, to &lt;em&gt;personal growth&lt;/em&gt;. I want to build things that hold long-term value and prove that the combination of technology, creativity, and perseverance can push boundaries.</value>
+  </data>
+  <data name="AboutMeP6" xml:space="preserve">
+    <value>Want to see what I'm working on right now? Check out my &lt;a href="/projekty"&gt;projects&lt;/a&gt; or read my &lt;a href="/blog"&gt;blog&lt;/a&gt;. If you're interested in collaborating on a website, game, or need SEO consultation, reach out via &lt;a href="/kontakt"&gt;contact&lt;/a&gt;. I'd love to discuss your idea and propose a solution.</value>
+  </data>
+  <data name="NewsletterTitle" xml:space="preserve">
+    <value>Stay Updated</value>
+  </data>
+  <data name="NewsletterDesc" xml:space="preserve">
+    <value>Subscribe to get news about new projects, articles, and useful tips. Just enter your email below.</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="EmailPlaceholder" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="IndexTitle" xml:space="preserve">
+    <value>Web Developer, Programmer &amp; SEO Specialist</value>
+  </data>
+  <data name="IndexDesc" xml:space="preserve">
+    <value>I create fast websites, applications, and SEO solutions. Web developer and SEO specialist focused on performance, usability, and results.</value>
+  </data>
+  <data name="IndexKeywords" xml:space="preserve">
+    <value>Jan Sebastián Kostlán, web developer, SEO specialist, website creation, web optimization, high-performance websites</value>
+  </data>
+  <data name="IndexSocialTitle" xml:space="preserve">
+    <value>Jan Sebastián Kostlán – Web Developer &amp; SEO</value>
+  </data>
+</root>

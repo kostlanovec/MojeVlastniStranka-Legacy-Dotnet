@@ -1,3 +1,4 @@
+#nullable disable
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MojeVlastniStrankaFinal.Web.Pages

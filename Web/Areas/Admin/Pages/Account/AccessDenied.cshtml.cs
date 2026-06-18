@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿#nullable disable
+#nullable disable
+#nullable disable
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MojeVlastniStranka.Web.Areas.Identity.Pages.Account
 {

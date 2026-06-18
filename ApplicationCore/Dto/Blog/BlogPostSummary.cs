@@ -29,6 +29,10 @@
 			set;
 		}
 
+		public string? NameEn { get; set; }
+		public string? DescriptionEn { get; set; }
+
+
 		/// <summary>
 		/// Vrací nebo nastavuje cestu k obrázku potřebný pro hlavní blog.
 		/// </summary>

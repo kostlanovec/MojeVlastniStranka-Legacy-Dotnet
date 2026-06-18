@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿#nullable disable
+#nullable disable
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MojeVlastniStranka.DataAccess;
 using MojeVlastniStranka.ApplicationCore.Services;

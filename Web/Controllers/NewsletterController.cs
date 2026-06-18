@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+#nullable disable
+using Microsoft.AspNetCore.Mvc;
 using MojeVlastniStranka.ApplicationCore.Services;
 
 namespace MojeVlastniStranka.Web.Controllers
 {
-	public class NewsLetter : BaseController
+	public class NewsletterController : BaseController
 	{
-		private readonly MailService mailService;
-
 		public IActionResult Index()
 		{
 			return View();

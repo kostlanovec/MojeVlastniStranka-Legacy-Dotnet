@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
+﻿#nullable disable
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace MojeVlastniStranka.Web
 {

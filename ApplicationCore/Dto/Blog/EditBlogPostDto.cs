@@ -78,6 +78,13 @@ namespace MojeVlastniStranka.ApplicationCore.Dto.Blog
 			set;
 		}
 
+		public string? NameEn { get; set; }
+		public string? DescriptionEn { get; set; }
+		public string? ContentEn { get; set; }
+		public string? TitleEn { get; set; }
+		public string? KeywordsEn { get; set; }
+
+
 		/// <summary>
 		/// Vrací nebo nastavuje Id kategorie.
 		/// </summary>

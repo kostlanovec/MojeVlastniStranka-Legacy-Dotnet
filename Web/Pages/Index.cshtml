@@ -1,14 +1,17 @@
-﻿@page
+@page
 @model MojeVlastniStranka.Web.Pages.IndexModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@using MojeVlastniStranka.Web
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
 @{
-    ViewData["Title"] = "Webdeveloper, programátor & SEO specialista";
-    ViewData["Description"] = "Tvořím rychlé webové stránky, aplikace a SEO řešení. Webdeveloper a SEO specialista zaměřený na výkon, použitelnost a výsledky.";
+    ViewData["Title"] = SharedLocalizer["IndexTitle"];
+    ViewData["Description"] = SharedLocalizer["IndexDesc"];
     ViewData["Author"] = "Jan Sebastián Kostlán";
-    ViewData["Keywords"] ="Jan Sebastián Kostlán, webdeveloper, SEO specialista, tvorba webových stránek, optimalizace webu, výkonné weby";
+    ViewData["Keywords"] = SharedLocalizer["IndexKeywords"];
     ViewData["Image"] = "https://kostlanovec.cz/images/basicimage.png";
-    ViewData["SocialTitle"] = "Jan Sebastián Kostlán – webdeveloper & SEO";
+    ViewData["SocialTitle"] = SharedLocalizer["IndexSocialTitle"];
 
-    ViewData["JsonLD"] = @"
+    ViewData["JsonLD"] = $@"
     {
       ""@context"": ""https://schema.org"",
       ""@graph"": [
@@ -16,10 +19,10 @@
           ""@type"": ""WebSite"",
           ""@id"": ""https://kostlanovec.cz/#website"",
           ""url"": ""https://kostlanovec.cz/"",
-          ""name"": ""Jan Sebastián Kostlán – webdeveloper & SEO"",
-          ""description"": ""Osobní web Jana Sebastiána Kostlána – webdeveloper, programátor, webdesigner a SEO specialista. Projekty, blog a kontakt."",
-          ""publisher"": { ""@id"": ""https://kostlanovec.cz/#person"" },
-          ""inLanguage"": ""cs""
+          ""name"": ""{SharedLocalizer["IndexSocialTitle"]}"",
+          ""description"": ""{SharedLocalizer["IndexDesc"]}"",
+          ""publisher"": {{ ""@id"": ""https://kostlanovec.cz/#person"" }},
+          ""inLanguage"": ""{System.Globalization.CultureInfo.CurrentCulture.Name}""
         },
         {
           ""@type"": ""Person"",
@@ -27,8 +30,8 @@
           ""name"": ""Jan Sebastián Kostlán"",
           ""url"": ""https://kostlanovec.cz/"",
           ""image"": ""https://kostlanovec.cz/images/basicimage.png"",
-          ""description"": ""Webdeveloper, programátor, webdesigner a SEO specialista. Tvořím weby, hry a aplikace – s důrazem na výkon, přístupnost a marketing."",
-          ""jobTitle"": ""Webdeveloper, programátor, marketing & SEO"",
+          ""description"": ""{SharedLocalizer["SubTitle"]}"",
+          ""jobTitle"": ""{SharedLocalizer["IndexTitle"]}"",
           ""sameAs"": [
             ""https://www.instagram.com/kostlan1"",
             ""https://www.linkedin.com/in/kostlan"",
@@ -41,9 +44,9 @@
           ""@type"": ""ContactPage"",
           ""@id"": ""https://kostlanovec.cz/kontakt#contact"",
           ""url"": ""https://kostlanovec.cz/kontakt"",
-          ""inLanguage"": ""cs"",
-          ""name"": ""Kontakt – Jan Sebastián Kostlán"",
-          ""about"": { ""@id"": ""https://kostlanovec.cz/#person"" }
+          ""inLanguage"": ""{System.Globalization.CultureInfo.CurrentCulture.Name}"",
+          ""name"": ""{SharedLocalizer["Kontakt"]} – Jan Sebastián Kostlán"",
+          ""about"": {{ ""@id"": ""https://kostlanovec.cz/#person"" }}
         }
       ]
     }";
@@ -55,49 +58,49 @@
         <figure class="header--figure">
             <img class="header--figure--image"
                  src="/images/website_image.svg"
-                 alt="Ilustrační grafika webu Kostlanovec"
+                 alt="@SharedLocalizer["IndexSocialTitle"]"
                  width="400" height="400"
                  fetchpriority="high" decoding="async">
         </figure>
         <div>
             <h1>Jan Sebastián Kostlán</h1>
-            <p class="p--index">Webdeveloper, programátor, webdesigner a SEO specialista. Tvořím rychlé a přístupné weby, hry a aplikace.</p>
+            <p class="p--index">@SharedLocalizer["SubTitle"]</p>
             <button id="scrollBtn" aria-label="Přejít na služby" class="arrow"></button>
         </div>
     </header>
 
     <div id="target" class="services reveal">
-        <h2>Služby</h2>
+        <h2>@SharedLocalizer["Services"]</h2>
         <section class="scrolling__container" id="scrollContainer">
             <article class="scrolling__article reveal">
                 <a class="scrolling__article__a" asp-page="./sluzby/webovestranky">
-                    <img src="/images/webovestranky.jpg" alt="Tvorba webových stránek" loading="lazy" decoding="async">
+                    <img src="/images/webovestranky.jpg" alt="@SharedLocalizer["WebDevelopment"]" loading="lazy" decoding="async">
                     <div class="scrolling__article--div">
-                        <h3>Webové stránky</h3>
+                        <h3>@SharedLocalizer["WebDevelopment"]</h3>
                     </div>
                 </a>
             </article>
             <article class="scrolling__article reveal">
                 <a class="scrolling__article__a" asp-page="./sluzby/tvorbaher">
-                    <img src="/images/tvorbaher.jpg" alt="Vývoj her v Unity" loading="lazy" decoding="async">
+                    <img src="/images/tvorbaher.jpg" alt="@SharedLocalizer["GameDevelopment"]" loading="lazy" decoding="async">
                     <div class="scrolling__article--div">
-                        <h3>Tvorba her</h3>
+                        <h3>@SharedLocalizer["GameDevelopment"]</h3>
                     </div>
                 </a>
             </article>
             <article class="scrolling__article reveal">
                 <a class="scrolling__article__a" asp-page="./sluzby/socialnisite">
-                    <img src="/images/socialnisite.jpg" alt="Správa sociálních sítí" loading="lazy" decoding="async">
+                    <img src="/images/socialnisite.jpg" alt="@SharedLocalizer["SocialMedia"]" loading="lazy" decoding="async">
                     <div class="scrolling__article--div">
-                        <h3>Správa sociálních sítí</h3>
+                        <h3>@SharedLocalizer["SocialMedia"]</h3>
                     </div>
                 </a>
             </article>
             <article class="scrolling__article reveal">
                 <a class="scrolling__article__a" asp-page="./sluzby/seo">
-                    <img src="/images/seo.jpg" alt="Optimalizace pro vyhledávače (SEO)" loading="lazy" decoding="async">
+                    <img src="/images/seo.jpg" alt="@SharedLocalizer["SEO"]" loading="lazy" decoding="async">
                     <div class="scrolling__article--div">
-                        <h3>Optimalizace SEO</h3>
+                        <h3>@SharedLocalizer["SEO"]</h3>
                     </div>
                 </a>
             </article>
@@ -105,7 +108,7 @@
     </div>
 
     <section class="menu--blogposts reveal" aria-labelledby="blog-title">
-        <h2 id="blog-title">Blog</h2>
+        <h2 id="blog-title">@SharedLocalizer["Blog"]</h2>
         <div class="wrapper" role="region" aria-roledescription="carousel" aria-label="Blog příspěvky">
             <div class="slides">
                 @for (int i = 0; i < Model.Posts.Count; i++)
@@ -167,7 +170,7 @@
 
     <section class="aboutme__Card reveal" aria-labelledby="about-title">
         <div class="aboutme__Card__images">
-            <img src="/images/osobnifotka.jpg" alt="Jan Sebastián Kostlán – profilová fotografie" loading="lazy" decoding="async" class="profilepicture">
+            <img src="/images/osobnifotka.jpg" alt="@SharedLocalizer["IndexSocialTitle"]" loading="lazy" decoding="async" class="profilepicture">
             <img class="megafone"
                  src="/images/icons/megafon.svg"
                  alt=""
@@ -176,25 +179,25 @@
                  decoding="async">
         </div>
         <div class="aboutme__text">
-            <h2 id="about-title">O mně</h2>
-            <p>Jmenuji se <strong>Jan Sebastián Kostlán</strong> a věnuji se hlavně <em>vývoji webů, programování, webdesignu a SEO</em>. Baví mě hledat spojení mezi technickým řešením a reálnými výsledky. Tvořím <strong>rychlé, přístupné a bezpečné webové stránky</strong>, vyvíjím <strong>hry a aplikace</strong> a k tomu řeším <strong>online marketing</strong>, aby projekty nebyly jen hezké, ale i dobře viditelné a efektivní.</p>
-            <p>V praxi pracuji s .NET/ASP.NET Core a moderními frontend technologiemi, rád automatizuji nasazování přes Docker a CI/CD a hlídám kvalitu – od Core Web Vitals po přístupnost. Díky zkušenostem s <strong>SEO</strong> a analýzou dat umím navrhnout obsah i strukturu webu tak, aby měl co nejlepší výkon ve vyhledávačích.</p>
-            <p>Mám také specifické okruhy zájmů, kterým se aktivně věnuji. Patří mezi ně především <strong>vývoj her v Unity</strong> – od menších prototypů až po multiplayer projekty. Zajímá mě čistá architektura, dobrý uživatelský zážitek a to, aby každá aplikace nebo hra měla měřitelný přínos.</p>
-            <p>Ve volném čase se věnuji hlavně <strong>fitness a silovému tréninku</strong>, který mi pomáhá vyvážit práci u počítače a zároveň mě motivuje posouvat vlastní hranice. Stejně jako v IT, i ve sportu mě baví sledovat svůj postup a hledat způsoby, jak být každý den o krok dál.</p>
-            <p>Mým cílem je <strong>zanechat stopu v každém z okruhů, které mě baví</strong> – od <em>webů a aplikací</em>, přes <em>hry a SEO</em>, až po <em>osobní rozvoj</em>. Chci tvořit věci, které mají hodnotu a dlouhodobý smysl, a ukazovat, že kombinace techniky, kreativity a vytrvalosti dokáže posunout hranice.</p>
-            <p>Chceš vidět, na čem zrovna pracuji? Podívej se na moje <a href="/projekty">projekty</a> nebo si přečti <a href="/blog">blog</a>. Pokud máš zájem o spolupráci na webu, hře nebo o konzultaci k SEO, ozvi se mi přes <a href="/kontakt">kontakt</a>. Rád proberu tvůj nápad a navrhnu řešení.</p>
+            <h2 id="about-title">@SharedLocalizer["AboutMeTitle"]</h2>
+            <p>@SharedLocalizer["AboutMeP1"]</p>
+            <p>@SharedLocalizer["AboutMeP2"]</p>
+            <p>@SharedLocalizer["AboutMeP3"]</p>
+            <p>@SharedLocalizer["AboutMeP4"]</p>
+            <p>@SharedLocalizer["AboutMeP5"]</p>
+            <p>@SharedLocalizer["AboutMeP6"]</p>
         </div>
     </section>
 </main>
 
 <form class="form__newsletter reveal" method="post">
-    <h2>Buď v obraze</h2>
+    <h2>@SharedLocalizer["NewsletterTitle"]</h2>
     <img class="email__ikonka" src="/images/icons/emailikonka.svg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-    <p>Přihlas se k odběru novinek o nových projektech, článcích a užitečných tipech. Stačí e-mail níže.</p>
-    <input type="email" asp-for="email" placeholder="E-mail" required class="input__email" aria-describedby="newsletter-help">
+    <p>@SharedLocalizer["NewsletterDesc"]</p>
+    <input type="email" asp-for="email" placeholder="@SharedLocalizer["EmailPlaceholder"]" required class="input__email" aria-describedby="newsletter-help">
     <span id="newsletter-help" class="sr-only">Zadej svůj e-mail, abys mohl(a) odebírat novinky.</span>
     <span asp-validation-for="email" class="text-danger"></span>
-    <button aria-label="Odeslat přihlášení do newsletteru" class="button" type="submit">Odeslat</button>
+    <button aria-label="Odeslat přihlášení do newsletteru" class="button" type="submit">@SharedLocalizer["Submit"]</button>
 
     @if (TempData["SuccessMessage"] != null)
     {

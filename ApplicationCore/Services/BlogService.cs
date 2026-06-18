@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MojeVlastniStranka.Common.Models;
 using MojeVlastniStranka.ApplicationCore.Dto.Blog;
 using MojeVlastniStranka.ApplicationCore.Requests;
@@ -69,8 +69,12 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				blogPostRequest.Name,
 				imagePath,
 				blogPostRequest.Slug,
-				// todo: udělat publikování v určitou dobu
-				DateTime.Now
+				blogPostRequest.DatePublic == default ? DateTime.Now : blogPostRequest.DatePublic,
+				blogPostRequest.NameEn,
+				blogPostRequest.DescriptionEn,
+				blogPostRequest.ContentEn,
+				blogPostRequest.TitleEn,
+				blogPostRequest.KeywordsEn
 			);
 
 			context.BlogPosts.Add(blogPost);
@@ -98,8 +102,10 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 						Description = bp.Description,
 						FilePath = bp.ImagePath,
 						Slug = bp.Slug,
-						TimePublic = bp.Date
-					}).ToList()
+						TimePublic = bp.Date,
+					NameEn = bp.NameEn,
+					DescriptionEn = bp.DescriptionEn
+				}).ToList()
 				})
 				.Where(predicate => predicate.BlogPosts.Any())
 				.ToListAsync();
@@ -140,7 +146,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 					Description = bp.Description,
 					FilePath = bp.ImagePath,
 					Slug = bp.Slug,
-					TimePublic = bp.Date
+					TimePublic = bp.Date,
+					NameEn = bp.NameEn,
+					DescriptionEn = bp.DescriptionEn
 				})
 				.ToListAsync();
 
@@ -160,7 +168,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 					Description = bp.Description,
 					FilePath = bp.ImagePath,
 					Slug = bp.Slug,
-					TimePublic = bp.Date
+					TimePublic = bp.Date,
+					NameEn = bp.NameEn,
+					DescriptionEn = bp.DescriptionEn
 				})
 
 				.ToListAsync();
@@ -168,11 +178,12 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		}
 
 		/// <summary>
-		/// Získá všechny blog příspěvky s id 2 neboli získá všechny projekty.
+		/// Získá všechny blog příspěvky, které patří do kategorie projektů.
 		/// </summary>
 		public async Task<List<BlogPostSummary>> GetAllProject()
 		{
 			var result = await context.BlogPosts
+				.Where(bp => bp.BlogCategory.Name.ToLower().Contains("projekt"))
 				.Select(bp => new BlogPostSummary
 				{
 					Id = bp.Id,
@@ -180,19 +191,21 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 					Description = bp.Description,
 					FilePath = bp.ImagePath,
 					Slug = bp.Slug,
-					TimePublic = bp.Date
+					TimePublic = bp.Date,
+					NameEn = bp.NameEn,
+					DescriptionEn = bp.DescriptionEn
 				})
 				.ToListAsync();
 			return result;
 		}
 
 		/// <summary>
-		/// Získá tři blog příspěvky pro hlavní stránku.
+		/// Získá tři nejnovější blog příspěvky pro hlavní stránku.
 		/// </summary>
 		public async Task<List<BlogPostSummary>> GetThreePost()
 		{
 			var result = await context.BlogPosts
-				.OrderBy(bp => bp.Id)
+				.OrderByDescending(bp => bp.Date)
 				.Take(3)
 				.Select(bp => new BlogPostSummary
 				{
@@ -201,6 +214,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 					Description = bp.Description,
 					FilePath = bp.ImagePath,
 					Slug = bp.Slug,
+				
+					NameEn = bp.NameEn,
+					DescriptionEn = bp.DescriptionEn
 				})
 				.ToListAsync();
 			return result;
@@ -231,7 +247,12 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				Keywords = existingBlogPost.Keywords,
 				BlogCategoryId = existingBlogPost.BlogCategoryId,
 				blogCategory = existingBlogPost.BlogCategory,
-				FileUpload = existingBlogPost.ImagePath
+				FileUpload = existingBlogPost.ImagePath,
+				NameEn = existingBlogPost.NameEn,
+				DescriptionEn = existingBlogPost.DescriptionEn,
+				ContentEn = existingBlogPost.ContentEn,
+				TitleEn = existingBlogPost.TitleEn,
+				KeywordsEn = existingBlogPost.KeywordsEn
 			};
 
 			return editBlogPostDto;
@@ -275,6 +296,11 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			existingBlogPost.Keywords = editBlogPostRequest.Keywords;
 			existingBlogPost.BlogCategoryId = editBlogPostRequest.BlogCategoryId;
 			existingBlogPost.Name = editBlogPostRequest.Name;
+			existingBlogPost.NameEn = editBlogPostRequest.NameEn;
+			existingBlogPost.DescriptionEn = editBlogPostRequest.DescriptionEn;
+			existingBlogPost.ContentEn = editBlogPostRequest.ContentEn;
+			existingBlogPost.TitleEn = editBlogPostRequest.TitleEn;
+			existingBlogPost.KeywordsEn = editBlogPostRequest.KeywordsEn;
 
 			if (editBlogPostRequest.FileUpload != null)
 			{
@@ -295,50 +321,51 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		public async Task<List<BlogPostSummary>> GetFilteredBlogPosts(string searchString, string author,
 			string keyword, Guid category, DateTime? fromDate, DateTime? toDate)
 		{
-			var allPosts = await context.BlogPosts.ToListAsync(); ;
-			var filteredPosts = allPosts;
+			var query = context.BlogPosts.AsQueryable();
 
 			if (!string.IsNullOrEmpty(searchString))
 			{
-				filteredPosts = filteredPosts.Where(p =>
-					p.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
-					p.Description.Contains(searchString, StringComparison.OrdinalIgnoreCase)).ToList();
+				query = query.Where(p =>
+					p.Name.Contains(searchString) ||
+					p.Description.Contains(searchString));
 			}
 
 			if (!string.IsNullOrEmpty(author))
 			{
-				filteredPosts = filteredPosts.Where(p => p.Author == author).ToList();
+				query = query.Where(p => p.Author == author);
 			}
 
 			if (!string.IsNullOrEmpty(keyword))
 			{
-				filteredPosts = filteredPosts.Where(p => p.Keywords == keyword).ToList();
+				query = query.Where(p => p.Keywords == keyword);
 			}
 
 			if (category != Guid.Empty)
 			{
-				filteredPosts = filteredPosts.Where(p => p.BlogCategoryId == category).ToList();
+				query = query.Where(p => p.BlogCategoryId == category);
 			}
 
 			if (fromDate.HasValue)
 			{
-				filteredPosts = filteredPosts.Where(p => p.Date >= fromDate.Value).ToList();
+				query = query.Where(p => p.Date >= fromDate.Value);
 			}
 
 			if (toDate.HasValue)
 			{
-				filteredPosts = filteredPosts.Where(p => p.Date <= toDate.Value).ToList();
+				query = query.Where(p => p.Date <= toDate.Value);
 			}
 
-			return filteredPosts.Select(p => new BlogPostSummary
+			return await query.Select(p => new BlogPostSummary
 			{
 				Id = p.Id,
 				Name = p.Name,
 				Description = p.Description,
 				FilePath = p.ImagePath,
 				Slug = p.Slug,
-				TimePublic = p.Date
-			}).ToList();
+				TimePublic = p.Date,
+				NameEn = p.NameEn,
+				DescriptionEn = p.DescriptionEn
+			}).ToListAsync();
 		}
 
 		/// <summary>

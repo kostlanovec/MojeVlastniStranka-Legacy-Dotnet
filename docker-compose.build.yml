@@ -1,4 +1,4 @@
-﻿services:
+services:
   mojevlastnistranka.web:
     build:
       context: .
@@ -20,6 +20,8 @@
     environment:
       POSTGRES_PASSWORD: [REDACTED]
       POSTGRES_USERNAME: postgres
+    ports:
+      - "5432:5432"
     volumes:
       - local_postgres_data:/var/lib/postgresql/data
 

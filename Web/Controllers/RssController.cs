@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿#nullable disable
+using Microsoft.AspNetCore.Mvc;
 using MojeVlastniStranka.DataAccess;
 using System.Globalization;
 using System.Xml.Linq;

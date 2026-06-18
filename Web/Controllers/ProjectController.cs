@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+#nullable disable
+using Microsoft.AspNetCore.Mvc;
 using MojeVlastniStranka.ApplicationCore.Dto.Blog;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
@@ -12,7 +13,6 @@ namespace MojeVlastniStranka.Web.Controllers
 		private readonly DataContext context;
 		private readonly BlogService blogService;
 
-		public List<BlogPostSummary> Posts { get; set; }
 		public ProjectController(DataContext context, BlogService blogService)
 		{
 			this.context = context;

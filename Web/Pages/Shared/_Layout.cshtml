@@ -1,9 +1,12 @@
-﻿@{
+@using Microsoft.AspNetCore.Mvc.Localization
+@using MojeVlastniStranka.Web
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@{
 	var path = Context.Request.Path.Value?.TrimEnd('/');
 	string canonicalUrl = $"https://{Context.Request.Host}{path}";
 }
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="@System.Globalization.CultureInfo.CurrentCulture.Name">
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,7 +23,7 @@
 	<meta name="msapplication-TileImage" content="/mstile-144x144.png">
 	<meta name="theme-color" content="#ffffff">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<meta property="og:locale" content="cs_CZ">
+	<meta property="og:locale" content="@(System.Globalization.CultureInfo.CurrentCulture.Name == "en" ? "en_US" : "cs_CZ")">
 	<meta property="og:site_name" content="Kostlanovec">
 	<meta property="og:type" content="website">
 	<meta property="og:url" content="@canonicalUrl">
@@ -64,7 +67,7 @@
 	</svg>
 	<nav class="menu reveal" id="menu">
 		<div class="menu-basic">
-			<a class="a-index" asp-page="/Index">Kostlanovec</a>
+			<a class="a-index" asp-page="/Index">@SharedLocalizer["Kostlanovec"]</a>
 			<button class="hamburger" aria-label="Hamburger menu" aria-controls="menu-list" aria-expanded="false">
 				<svg class="svg--hamburger">
 					<use xlink:href="#icon-menu" />
@@ -73,17 +76,22 @@
 			</button>
 		</div>
 		<ul id="menu-list" class="menu-list">
-			<li class="menu-item"><a asp-page="/blog/index">Blog</a></li>
-			<li class="menu-item"><a asp-page="/projekty/index">Projekty</a></li>
-			<li class="menu-item"><a asp-page="/kontakt/index">Kontakt</a></li>
+			<li class="menu-item"><a asp-page="/blog/index">@SharedLocalizer["Blog"]</a></li>
+			<li class="menu-item"><a asp-page="/projekty/index">@SharedLocalizer["Projekty"]</a></li>
+			<li class="menu-item"><a asp-page="/kontakt/index">@SharedLocalizer["Kontakt"]</a></li>
+			<li class="menu-item" style="display: flex; gap: 0.5rem; justify-content: center; align-items: center;">
+				<a asp-route-culture="cs" style="padding: 0; min-width: auto;">CS</a> 
+				<span style="color: var(--primary-color);">|</span> 
+				<a asp-route-culture="en" style="padding: 0; min-width: auto;">EN</a>
+			</li>
 		</ul>
 	</nav>
 	@RenderBody()
 	<footer class="footer">
-		<p>2025 | Made by Jan Sebastián Kostlán</p>
+		<p>2025 | @SharedLocalizer["MadeBy"]</p>
 		<div class="footer__last__element">
-			<a class="white--a" asp-page="/gdpr">GDPR</a>
-			<a class="white--a" asp-page="/zasadycookies">Cookies</a>
+			<a class="white--a" asp-page="/gdpr">@SharedLocalizer["GDPR"]</a>
+			<a class="white--a" asp-page="/zasadycookies">@SharedLocalizer["Cookies"]</a>
 		</div>
 	</footer>
 	<script>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+#nullable disable
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.OutputCaching;
 using MojeVlastniStranka.ApplicationCore.Dto.Blog;
@@ -8,7 +9,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MojeVlastniStranka.Web.Pages
 {
-	[OutputCache(Duration = 6000)]
 	public class IndexModel : PageModel
 	{
 		private readonly DataContext context;
@@ -44,9 +44,10 @@ namespace MojeVlastniStranka.Web.Pages
 
 		public async Task<IActionResult> OnPostAsync()
 		{
+			Posts = await blogService.GetThreePost();
+
 			if (!ModelState.IsValid)
 			{
-				Posts = await blogService.GetThreePost();
 				ModelState.AddModelError(string.Empty, "Tohle není validní email.");
 				return Page();
 			}
@@ -55,16 +56,12 @@ namespace MojeVlastniStranka.Web.Pages
 
 			if (!isEmailAdded)
 			{
-				Posts = await blogService.GetThreePost();
 				// Pokud email již existuje, nastavte chybu
 				ModelState.AddModelError(string.Empty, "Tento email je již zaregistrován.");
 				return Page();
 			}
 
 			TempData["SuccessMessage"] = "Email byl úspěšně přidán.";
-
-			Posts = await blogService.GetThreePost();
-
 
 			return Page();
 		}

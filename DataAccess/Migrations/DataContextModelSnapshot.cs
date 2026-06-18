@@ -17,7 +17,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.10")
+                .HasAnnotation("ProductVersion", "9.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -50,7 +50,8 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "89e04b6f-0640-46f0-8d9c-27181481c533",
+                            Id = "00000000-0000-0000-0000-000000000003",
+                            ConcurrencyStamp = "00000000-0000-0000-0000-000000000005",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -194,11 +195,17 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("ContentEn")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp");
 
                     b.Property<string>("Description")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("DescriptionEn")
                         .HasColumnType("text");
 
                     b.Property<string>("ImagePath")
@@ -209,8 +216,14 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("KeywordsEn")
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("NameEn")
                         .HasColumnType("text");
 
                     b.Property<string>("Slug")
@@ -219,6 +232,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("TitleEn")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -510,9 +526,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d785cfbb-ac25-454e-893e-61c5cc3d47c9",
+                            Id = "00000000-0000-0000-0000-000000000001",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "208baf6f-e8c5-4096-a45c-55e7497c3816",
+                            ConcurrencyStamp = "00000000-0000-0000-0000-000000000004",
                             Email = "info@kostlanovec.cz",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -520,7 +536,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                             NormalizedUserName = "ADMIN",
                             PasswordHash = "[REDACTED_HASH]",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f35b716a-4186-4276-8ebc-a91ff8edbbe3",
+                            SecurityStamp = "00000000-0000-0000-0000-000000000002",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });

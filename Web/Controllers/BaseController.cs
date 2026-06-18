@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿#nullable disable
+using Microsoft.AspNetCore.Mvc;
 
 namespace MojeVlastniStranka.Web.Controllers
 {

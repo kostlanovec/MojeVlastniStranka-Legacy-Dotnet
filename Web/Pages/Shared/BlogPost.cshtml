@@ -1,13 +1,21 @@
-﻿@model MojeVlastniStranka.DataAccess.Entities.BlogPost
+﻿@using System.Threading
+@model MojeVlastniStranka.DataAccess.Entities.BlogPost
 @{
-	ViewData["Title"] = @Model.Title;
-	ViewData["Description"] = @Model.Description;
-	ViewData["Keywords"] = @Model.Keywords;
+	bool isEn = Thread.CurrentThread.CurrentCulture.Name.StartsWith("en");
+	string title = isEn && !string.IsNullOrEmpty(Model.TitleEn) ? Model.TitleEn : Model.Title;
+	string desc = isEn && !string.IsNullOrEmpty(Model.DescriptionEn) ? Model.DescriptionEn : Model.Description;
+	string keys = isEn && !string.IsNullOrEmpty(Model.KeywordsEn) ? Model.KeywordsEn : Model.Keywords;
+	string name = isEn && !string.IsNullOrEmpty(Model.NameEn) ? Model.NameEn : Model.Name;
+	string content = isEn && !string.IsNullOrEmpty(Model.ContentEn) ? Model.ContentEn : Model.Content;
+
+	ViewData["Title"] = title;
+	ViewData["Description"] = desc;
+	ViewData["Keywords"] = keys;
 	ViewData["Author"] = @Model.Author;
 	ViewData["Image"] = "https://kostlanovec.cz" + Model.ImagePath;
-	ViewData["SocialTitle"] = Model.Name;
+	ViewData["SocialTitle"] = name;
 }
-@Html.Raw(Model.Content)
+@Html.Raw(content)
 <script src="https://kit.fontawesome.com/704ff50790.js" crossorigin="anonymous"></script>
 <div class="shared--buttons">
 	<p>Budeme rádi za sdílení!</p>

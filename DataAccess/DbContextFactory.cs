@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
@@ -22,7 +22,8 @@ namespace MojeVlastniStranka.DataAccess
 			var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
 
 			// Nastavuje spojení na SQL Server pomocí řetězce připojení z konfiguračních dat.
-			optionsBuilder.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
+			var connectionString = Configuration.GetConnectionString("DefaultConnection") ?? "Host=127.0.0.1;Port=5432;Database=postgres;User Id=postgres;Password=[REDACTED]";
+			optionsBuilder.UseNpgsql(connectionString);
 
 			// Vytváří novou instanci DataContextu s nastavenými možnostmi.
 			DataContext context = new DataContext(optionsBuilder.Options);

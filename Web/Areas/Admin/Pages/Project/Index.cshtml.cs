@@ -1,3 +1,4 @@
+#nullable disable
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;

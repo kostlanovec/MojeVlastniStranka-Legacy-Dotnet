@@ -87,6 +87,21 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			set;
 		}
 
+		[Column(TypeName = "text")]
+		public string? NameEn { get; set; }
+
+		public string? DescriptionEn { get; set; }
+
+		[Column(TypeName = "text")]
+		public string? ContentEn { get; set; }
+
+		[Column(TypeName = "text")]
+		public string? TitleEn { get; set; }
+
+		[Column(TypeName = "text")]
+		public string? KeywordsEn { get; set; }
+
+
 		/// <summary>
 		/// Vrací nebo nastavuje Id kategorie.
 		/// </summary>
@@ -123,7 +138,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			set;
 		}
 
-		public static BlogPost Create(string description, string content, string title, string author, string keywords, Guid? blogCategoryId, string name, string imagePath, string slug, DateTime date)
+		public static BlogPost Create(string description, string content, string title, string author, string keywords, Guid? blogCategoryId, string name, string imagePath, string slug, DateTime date, string? nameEn = null, string? descriptionEn = null, string? contentEn = null, string? titleEn = null, string? keywordsEn = null)
 		{
 			var blogPost = new BlogPost()
 			{
@@ -137,7 +152,12 @@ namespace MojeVlastniStranka.DataAccess.Entities
 				Name = name,
 				ImagePath = imagePath,
 				Slug = slug,
-				Date = date
+				Date = date,
+				NameEn = nameEn,
+				DescriptionEn = descriptionEn,
+				ContentEn = contentEn,
+				TitleEn = titleEn,
+				KeywordsEn = keywordsEn
 			};
 
 			return blogPost;

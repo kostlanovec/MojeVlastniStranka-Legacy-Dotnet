@@ -1,4 +1,4 @@
-﻿using MojeVlastniStranka.DataAccess;
+using MojeVlastniStranka.DataAccess;
 using MojeVlastniStranka.DataAccess.Entities;
 using MojeVlastniStranka.Common.Enums;
 using MojeVlastniStranka.ApplicationCore.Dto.Project;
@@ -141,7 +141,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			if (project == null)
 			{
 				response.IsSuccess = false;
-				response.Errors.Add("Blog příspěvek nebyl nalezen.");
+				response.Errors.Add("Projekt nebyl nalezen.");
 				return response;
 			}
 
@@ -163,7 +163,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			await context.SaveChangesAsync();
 
 			response.IsSuccess = true;
-			response.SuccessMessage = "Blog příspěvek byl úspěšně aktualizován.";
+			response.SuccessMessage = "Projekt byl úspěšně aktualizován.";
 			return response;
 		}
 

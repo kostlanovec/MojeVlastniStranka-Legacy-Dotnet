@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+#nullable disable
+using Microsoft.AspNetCore.Mvc;
 using MojeVlastniStranka.DataAccess;
 
 namespace MojeVlastniStranka.Web.Controllers
@@ -21,7 +22,7 @@ namespace MojeVlastniStranka.Web.Controllers
 				return NotFound();
 			}
 
-			return View("Muchomurka", blogPost);
+			return View("BlogPost", blogPost);
 		}
 	}
 }

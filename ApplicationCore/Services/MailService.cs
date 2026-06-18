@@ -1,4 +1,4 @@
-﻿using MailKit.Net.Smtp;
+using MailKit.Net.Smtp;
 using MimeKit;
 using MojeVlastniStranka.ApplicationCore.Requests;
 using MojeVlastniStranka.DataAccess.Entities;
@@ -10,10 +10,12 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 	{
 
 		private readonly DataContext context;
+		private readonly Microsoft.Extensions.Configuration.IConfiguration configuration;
 
-		public MailService(DataContext context)
+		public MailService(DataContext context, Microsoft.Extensions.Configuration.IConfiguration configuration)
 		{
 			this.context = context;
+			this.configuration = configuration;
 		}
 
 		/// <summary>
@@ -37,7 +39,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 						Text = newsLetterRequest.Body
 					};
 
-					Client(message, "kostlan@kostlanovec.cz", "[REMOVED]");
+					var emailAddress = configuration["EmailSettings:Username"] ?? "kostlan@kostlanovec.cz";
+					var password = configuration["EmailSettings:Password"] ?? "HESLO-Z-APPSETTINGS";
+					Client(message, emailAddress, password);
 				}
 			}
 		}
@@ -55,7 +59,9 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			//	Text = newsLetterRequest.Body
 			//};
 
-			Client(message, "kostlan@kostlanovec.cz", "[REMOVED]");
+			var emailAddress = configuration["EmailSettings:Username"] ?? "kostlan@kostlanovec.cz";
+			var password = configuration["EmailSettings:Password"] ?? "HESLO-Z-APPSETTINGS";
+			Client(message, emailAddress, password);
 		}
 
 		/// <summary>
@@ -123,7 +129,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
 		public async Task<List<NewsLetter>> GetAllNewsletterEmails()
 		{
-			return context.NewsLetters.ToList();
+			return await Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync(context.NewsLetters);
 		}
 	}
 }

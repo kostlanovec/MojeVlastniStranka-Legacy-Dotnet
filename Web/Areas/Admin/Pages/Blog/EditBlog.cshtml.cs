@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+#nullable disable
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MojeVlastniStranka.ApplicationCore.Dto.Blog;
@@ -12,7 +13,6 @@ namespace MojeVlastniStranka.User.Areas.Admin.Pages.Blog
 	[Authorize]
 	public class EditBlogPostModel : PageModel
 	{
-		private readonly DataContext context;
 		private readonly BlogService blogService;
 
 		public EditBlogPostDto EditBlogPostDto

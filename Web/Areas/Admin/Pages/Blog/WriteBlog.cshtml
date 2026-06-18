@@ -22,7 +22,10 @@
 <div class="col-md-12">
 	@await Html.PartialAsync("_ResponseViewModel", Model.responseViewModel)
 	<link rel="stylesheet" href="~/css/fast-style-blog.css" asp-append-version="true" />
+	<h3>Český obsah</h3>
 	<div id="summernote"></div>
+	<h3 class="mt-4">Anglický obsah</h3>
+	<div id="summernote-en"></div>
 	<button id="editSettingsBtn" class="btn btn-primary">Publikovat</button>
 </div>
 <div class="container d-flex justify-content-center">
@@ -35,6 +38,8 @@
 						<div class="form-group mt-2">
 							<label for="Name" class="text-white">Jméno blogu:</label>
 							<input name="Name" type="text" class="form-control bg-white" required />
+							<label for="NameEn" class="text-white mt-2">Jméno blogu (EN):</label>
+							<input name="NameEn" type="text" class="form-control bg-white" />
 						</div>
 						<div class="form-group mt-2">
 							<label for="Slug" class="text-white">Url blogu:</label>
@@ -43,10 +48,14 @@
 						<div class="form-group mt-2">
 							<label for="Title" class="text-white">Titulek:</label>
 							<input type="text" class="form-control bg-white" name="Title" required />
+							<label for="TitleEn" class="text-white mt-2">Titulek (EN):</label>
+							<input type="text" class="form-control bg-white" name="TitleEn" />
 						</div>
 						<div class="form-group mt-2">
 							<label for="Description" class="text-white">Popis:</label>
 							<input type="text" class="form-control bg-white" name="Description" required />
+							<label for="DescriptionEn" class="text-white mt-2">Popis (EN):</label>
+							<input type="text" class="form-control bg-white" name="DescriptionEn" />
 						</div>
 						<div class="form-group mt-2">
 							<label for="Author" class="text-white">Autor:</label>
@@ -55,6 +64,8 @@
 						<div class="form-group mt-2">
 							<label for="Keywords" class="text-white">Klíčová slova:</label>
 							<input type="text" class="form-control bg-white" name="Keywords" id="keywords" required />
+							<label for="KeywordsEn" class="text-white mt-2">Klíčová slova (EN):</label>
+							<input type="text" class="form-control bg-white" name="KeywordsEn" />
 						</div>
 						<div class="form-group mt-2">
 							<label for="file" class="text-white">Obrázek:</label>
@@ -72,6 +83,7 @@
 							</select>
 						</div>
 						<input type="hidden" name="Content" id="hiddenContent" />
+						<input type="hidden" name="ContentEn" id="hiddenContentEn" />
 						<button type="submit" class="btn btn-primary mt-2">Publikovat</button>
 						<button id="backBtn" class="btn btn-secondary mt-2">Zpátky</button>
 					</form>
@@ -102,6 +114,30 @@
 	var defaultContent = '<main class="main blog--post"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>';
 
 	// Inicializování summernote
+	
+	$('#summernote-en').summernote({
+		lang: 'en-US',
+		dialogsInBody: true,
+		spellCheck: true,
+		addclass: {
+			debug: false,
+			classTags: [{ title: "Button", "value": "btn btn-success" }, "body", "red", "h2__div__article", "header__h1", "fadeInLeft", "header__other", "header__p", "main" ]
+		},
+		focus: false,
+		height: 300,
+		toolbar: [
+			['structure', ['structurePlugin']],
+			['img', ['picture']],
+			['style', ['style', 'addclass', 'clear']],
+			['fontstyle', ['bold', 'italic', 'ul', 'ol', 'link', 'paragraph']],
+			['fontstyleextra', ['strikethrough', 'underline', 'hr', 'color', 'superscript', 'subscript']],
+			['extra', ['video', 'table', 'height']],
+			['misc', ['undo', 'redo', 'codeview', 'help']],
+			['fontname', ['fontname']],
+			['fullscreen', ['fullscreen']]
+		]
+	});
+
 	$('#summernote').summernote({
 		lang: 'cs-CZ',
 		dialogsInBody: true,
@@ -126,6 +162,7 @@
 		callbacks: {
 			onInit: function () {
 				$('#summernote').summernote('code', defaultContent);
+				$('#summernote-en').summernote('code', defaultContent);
 				 applyHighlighting();
 			},
 			onChange: function (contents, $editable) {
@@ -139,6 +176,8 @@
 		var htmlContent = $('.note-editable').html().trim();
 
 		$('#hiddenContent').val(htmlContent);
+		var htmlContentEn = $('#summernote-en').summernote('code');
+		$('#hiddenContentEn').val(htmlContentEn);
 		if (htmlContent === '' || htmlContent === '<p><br></p>') {
 			return null;
 		}

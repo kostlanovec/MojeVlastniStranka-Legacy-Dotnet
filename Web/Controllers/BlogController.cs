@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+#nullable disable
+using Microsoft.AspNetCore.Mvc;
 using MojeVlastniStranka.ApplicationCore.Dto.Blog;
 using MojeVlastniStranka.ApplicationCore.Services;
 
@@ -12,7 +13,7 @@ namespace MojeVlastniStranka.Web.Controllers
 
 		public BlogController(BlogService blogService)
 		{
-			blogService = blogService;
+			this.blogService = blogService;
 		}
 
 		[HttpGet]

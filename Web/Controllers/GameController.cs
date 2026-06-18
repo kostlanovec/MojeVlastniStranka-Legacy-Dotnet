@@ -1,3 +1,4 @@
+#nullable disable
 using Microsoft.AspNetCore.Mvc;
 
 namespace MojeVlastniStranka.Web.Controllers
@@ -9,7 +10,7 @@ namespace MojeVlastniStranka.Web.Controllers
     [ApiController]
     public class GameController : BaseController
     {
-        private const string CurrentVersion = "0.9.4";
+        private const string CurrentVersion = "1.0.0";
 
         [HttpGet("version")]
         public IActionResult GetVersion()
