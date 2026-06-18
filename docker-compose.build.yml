@@ -18,10 +18,8 @@ services:
     image: postgres:17.2
     restart: unless-stopped
     environment:
-      POSTGRES_PASSWORD: [REDACTED]
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-[REDACTED]}
       POSTGRES_USERNAME: postgres
-    ports:
-      - "5432:5432"
     volumes:
       - local_postgres_data:/var/lib/postgresql/data
 

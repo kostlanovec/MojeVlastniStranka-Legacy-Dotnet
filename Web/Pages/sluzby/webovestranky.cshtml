@@ -74,5 +74,18 @@
 		<input class="input__form" type="text" name="ServiceRequestDto.PhoneNumber" placeholder="Telefon">
 		<textarea class="textarea__form" name="ServiceRequestDto.Message" cols="30" rows="10" placeholder="Dobrý den, mám zájem o / mám dotaz na" required></textarea>
 		<button class="button form--button" type="submit">Odeslat</button>
+
+		@if (TempData["SuccessMessage"] != null)
+		{
+			<div class="success-message">
+				@TempData["SuccessMessage"]
+			</div>
+		}
+		@if (ModelState.ErrorCount > 0)
+		{
+			<div class="error-message">
+				@ModelState.Values.SelectMany(v => v.Errors).FirstOrDefault()?.ErrorMessage
+			</div>
+		}
 	</form>
 </main>

@@ -31,7 +31,8 @@ namespace MojeVlastniStranka.Web.Pages.sluzby
 
 			await servicesOfferedService.AddServiceRequestAsync(ServiceRequestDto);
 
-			return Page();
+			TempData["SuccessMessage"] = "Vaše žádost byla úspěšně odeslána. Brzy se Vám ozveme.";
+			return RedirectToPage();
 		}
 	}
 }
