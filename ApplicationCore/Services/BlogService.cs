@@ -91,6 +91,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		public async Task<List<BlogCategoryWithPostsDto>> GetAllCategoriesWithPosts()
 		{
 			var result = await context.BlogCategories
+				.AsNoTracking()
 				.Include(bc => bc.BlogPosts)
 				.Select(bc => new BlogCategoryWithPostsDto
 				{
@@ -137,6 +138,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		public async Task<List<BlogPostSummary>> GetFourNewerPosts()
 		{
 			var result = await context.BlogPosts
+				.AsNoTracking()
 				.OrderByDescending(bp => bp.Date)
 				.Take(4)
 				.Select(bp => new BlogPostSummary
@@ -161,6 +163,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		public async Task<List<BlogPostSummary>> GetAllBlogPost()
 		{
 			var result = await context.BlogPosts
+				.AsNoTracking()
 				.Select(bp => new BlogPostSummary
 				{
 					Id = bp.Id,
@@ -183,6 +186,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		public async Task<List<BlogPostSummary>> GetAllProject()
 		{
 			var result = await context.BlogPosts
+				.AsNoTracking()
 				.Where(bp => bp.BlogCategory.Name.ToLower().Contains("projekt"))
 				.Select(bp => new BlogPostSummary
 				{
@@ -205,6 +209,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		public async Task<List<BlogPostSummary>> GetThreePost()
 		{
 			var result = await context.BlogPosts
+				.AsNoTracking()
 				.OrderByDescending(bp => bp.Date)
 				.Take(3)
 				.Select(bp => new BlogPostSummary
@@ -225,7 +230,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// <summary>
 		/// Získá blog příspěvek podle jeho id.
 		/// </summary>
-		public async Task<EditBlogPostDto> GetBlogPostById(Guid id)
+		public async Task<EditBlogPostDto?> GetBlogPostById(Guid id)
 		{
 			var existingBlogPost = await context.BlogPosts
 				.SingleOrDefaultAsync(bp => bp.Id == id);
@@ -263,7 +268,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// </summary>
 		public async Task<List<BlogCategoryDto>> GetAllCategoriesTask()
 		{
-			var blogCategory = await context.BlogCategories.ToListAsync();
+			var blogCategory = await context.BlogCategories.AsNoTracking().ToListAsync();
 
 			var blogCategoryList = blogCategory.Select(e => new BlogCategoryDto()
 			{
@@ -321,7 +326,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		public async Task<List<BlogPostSummary>> GetFilteredBlogPosts(string searchString, string author,
 			string keyword, Guid category, DateTime? fromDate, DateTime? toDate)
 		{
-			var query = context.BlogPosts.AsQueryable();
+			var query = context.BlogPosts.AsNoTracking().AsQueryable();
 
 			if (!string.IsNullOrEmpty(searchString))
 			{
@@ -453,6 +458,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		{
 			// Implementujte logiku vyhledávání, např. dotazování databáze podle klíčových slov
 			var results = await context.BlogPosts
+				.AsNoTracking()
 				.Where(p => p.Name.Contains(query) || p.Description.Contains(query))
 				.Select(p => new BlogPostSummary
 				{

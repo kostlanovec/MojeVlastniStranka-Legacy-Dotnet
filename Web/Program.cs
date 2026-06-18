@@ -1,5 +1,6 @@
 #nullable disable
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using HealthChecks.UI.Client;
@@ -98,6 +99,11 @@ namespace MojeVlastniStrankaFinanali.Web
 
 			builder.Services.ConfigureHealthChecks(builder.Configuration);
 
+			builder.Services.Configure<ForwardedHeadersOptions>(options =>
+			{
+				options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+			});
+
 			var app = builder.Build();
 
 
@@ -107,6 +113,8 @@ namespace MojeVlastniStrankaFinanali.Web
 				app.UseStatusCodePagesWithReExecute("/StatusCode/{0}");
 				app.UseHsts();
 			}
+
+			app.UseForwardedHeaders();
 
 			app.UseHttpsRedirection();
 

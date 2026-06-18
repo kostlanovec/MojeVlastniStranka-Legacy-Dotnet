@@ -83,7 +83,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// <returns></returns>
 		public List<Project> GetAllProjects()
 		{
-			return context.Projects.ToList();
+			return context.Projects.AsNoTracking().ToList();
 		}
 
 		/// <summary>
@@ -105,7 +105,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// <summary>
 		/// Vrací projekt podle jeho ID.
 		/// </summary>
-		public ProjectEditDto GetProjectById(Guid id)
+		public ProjectEditDto? GetProjectById(Guid id)
 		{
 			var project = context.Projects.Find(id);
 
@@ -172,7 +172,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// </summary>
 		public List<ProjectSummaryDto> GetProjectsByStatusDateSearchString(ProjectStatusEnum? status, string? searchString)
 		{
-			var query = context.Projects.AsQueryable();
+			var query = context.Projects.AsNoTracking().AsQueryable();
 
 			if (status.HasValue)
 			{
