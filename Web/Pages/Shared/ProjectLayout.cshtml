@@ -1,5 +1,10 @@
+@using System.Threading
 @model MojeVlastniStranka.DataAccess.Entities.Project
 @{
+	bool isEn = Thread.CurrentThread.CurrentCulture.Name.StartsWith("en");
+	string culturePfx = isEn ? "/en" : "";
+	string projectUrl = $"https://kostlanovec.cz{culturePfx}/projekty/{Model.Slug}";
+
 	ViewData["Title"] = @Model.Title;
 	ViewData["Description"] = @Model.Description;
 	ViewData["Keywords"] = @Model.Keywords;
@@ -11,15 +16,15 @@
 
 <script src="https://kit.fontawesome.com/704ff50790.js" crossorigin="anonymous"></script>
 <div class="shared--buttons">
-	<p>Budeme rádi za sdílení!</p>
+	<p>@SharedLocalizer["ShareTitle"]</p>
 	<div class="share-buttons">
-		<a href="https://www.facebook.com/dialog/share?app_id=1552041721475989&display=popup&href=https://kostlanovec.cz/projekty/@Model.Slug&redirect_uri=https://kostlanovec.cz/projekty/@Model.Slug" class="share-button facebook" target="_blank" rel="noopener noreferrer">
+		<a href="https://www.facebook.com/dialog/share?app_id=1552041721475989&display=popup&href=@projectUrl&redirect_uri=@projectUrl" class="share-button facebook" target="_blank" rel="noopener noreferrer">
 			<i class="fab fa-facebook-f"></i>
 		</a>
-		<a href="https://x.com/intent/tweet?title=@Model.Name&related=Kostlanovec&url=https://kostlanovec.cz/projekty/@Model.Slug" class="share-button twitter" target="_blank" rel="noopener noreferrer">
+		<a href="https://x.com/intent/tweet?title=@Uri.EscapeDataString(Model.Name)&related=Kostlanovec&url=@projectUrl" class="share-button twitter" target="_blank" rel="noopener noreferrer">
 			<i class="fab fa-x-twitter"></i>
 		</a>
-		<a href="https://www.linkedin.com/shareArticle?mini=true&url=https://kostlanovec.cz/projekty/@Model.Slug" class="share-button linkedin" target="_blank" rel="noopener noreferrer">
+		<a href="https://www.linkedin.com/shareArticle?mini=true&url=@projectUrl" class="share-button linkedin" target="_blank" rel="noopener noreferrer">
 			<i class="fab fa-linkedin-in"></i>
 		</a>
 	</div>

@@ -487,4 +487,7 @@
   <data name="Social_SelectCollaboration" xml:space="preserve">
     <value>Dlouhodobá spolupráce</value>
   </data>
+  <data name="ShareTitle" xml:space="preserve">
+    <value>Budeme rádi za sdílení!</value>
+  </data>
 </root>

@@ -42,89 +42,41 @@ namespace MojeVlastniStranka.Web.Controllers
 		[Route("sitemap.xml")]
 		public IActionResult GenerateSitemap()
 		{
-			var nodes = new List<SitemapNode>
-				{
-					 new()
-					 {
-						  Url = "https://kostlanovec.cz",
-						  Frequency = SitemapFrequency.Monthly,
-						  Priority = 1
-					 },
-					  new()
-					 {
-						  Url = "https://kostlanovec.cz/kontakt",
-						  Frequency = SitemapFrequency.Monthly,
-						  Priority = 0.9
-					 },
-					 new()
-					 {
-						  Url = "https://kostlanovec.cz/blog",
-						  Frequency = SitemapFrequency.Daily,
-						  Priority = 0.9
-					 },
-					 new()
-					 {
-						  Url = "https://kostlanovec.cz/projekty",
-						  Frequency = SitemapFrequency.Weekly,
-						  Priority = 0.9
-					 },
-					 new()
-					 {
-						  Url = "https://kostlanovec.cz/sluzby/webovestranky",
-						  Frequency = SitemapFrequency.Monthly,
-						  Priority = 0.8
-					 },
-				  new()
-				{
-					Url = "https://kostlanovec.cz/sluzby/seo",
-					Frequency = SitemapFrequency.Monthly,
-					Priority = 0.8
-				},
+			var baseUrl = "https://kostlanovec.cz";
 
-				new()
-					 {
-						  Url = "https://kostlanovec.cz/sluzby/tvorbaher",
-						  Frequency = SitemapFrequency.Monthly,
-						  Priority = 0.8
-					 },
-					 new()
-					 {
-						  Url = "https://kostlanovec.cz/sluzby/socialnisite",
-						  Frequency = SitemapFrequency.Monthly,
-						  Priority = 0.8
-					 }
-				};
+			var staticPages = new[]
+			{
+				new { Path = "",                         Freq = SitemapFrequency.Monthly, Pri = 1.0  },
+				new { Path = "/kontakt",                 Freq = SitemapFrequency.Monthly, Pri = 0.9  },
+				new { Path = "/blog",                    Freq = SitemapFrequency.Daily,   Pri = 0.9  },
+				new { Path = "/projekty",                Freq = SitemapFrequency.Weekly,  Pri = 0.9  },
+				new { Path = "/sluzby/webovestranky",    Freq = SitemapFrequency.Monthly, Pri = 0.8  },
+				new { Path = "/sluzby/seo",              Freq = SitemapFrequency.Monthly, Pri = 0.8  },
+				new { Path = "/sluzby/tvorbaher",        Freq = SitemapFrequency.Monthly, Pri = 0.8  },
+				new { Path = "/sluzby/socialnisite",     Freq = SitemapFrequency.Monthly, Pri = 0.8  },
+			};
+
+			var nodes = new List<SitemapNode>();
+
+			foreach (var page in staticPages)
+			{
+				nodes.Add(new SitemapNode { Url = baseUrl + page.Path, Frequency = page.Freq, Priority = page.Pri });
+				nodes.Add(new SitemapNode { Url = baseUrl + "/en" + (page.Path == "" ? "" : page.Path), Frequency = page.Freq, Priority = page.Pri });
+			}
 
 			var projects = context.Projects.ToList();
 			foreach (var project in projects)
 			{
-				var url = $"{Request.Scheme}://{Request.Host}/projekty/{project.Slug}";
-
-				var node = new SitemapNode
-				{
-					Url = url,
-					LastModified = project.Date,
-					Frequency = SitemapFrequency.Weekly,
-					Priority = 0.7
-				};
-
-				nodes.Add(node);
+				nodes.Add(new SitemapNode { Url = $"{baseUrl}/projekty/{project.Slug}", LastModified = project.Date, Frequency = SitemapFrequency.Weekly, Priority = 0.7 });
+				nodes.Add(new SitemapNode { Url = $"{baseUrl}/en/projekty/{project.Slug}", LastModified = project.Date, Frequency = SitemapFrequency.Weekly, Priority = 0.7 });
 			}
 
 			var blogPosts = context.BlogPosts.ToList();
 			foreach (var post in blogPosts)
 			{
-				var url = $"{Request.Scheme}://{Request.Host}/blog/{post.Slug}";
-
-				var node = new SitemapNode
-				{
-					Url = url,
-					LastModified = post.Date,
-					Frequency = SitemapFrequency.Always,
-					Priority = 0.6
-				};
-
-				nodes.Add(node);
+				nodes.Add(new SitemapNode { Url = $"{baseUrl}/blog/{post.Slug}", LastModified = post.Date, Frequency = SitemapFrequency.Always, Priority = 0.6 });
+				if (!string.IsNullOrEmpty(post.ContentEn))
+					nodes.Add(new SitemapNode { Url = $"{baseUrl}/en/blog/{post.Slug}", LastModified = post.Date, Frequency = SitemapFrequency.Always, Priority = 0.6 });
 			}
 
 			var sitemapDocument = new SitemapDocument();

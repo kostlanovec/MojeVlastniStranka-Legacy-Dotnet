@@ -487,4 +487,7 @@
   <data name="Social_SelectCollaboration" xml:space="preserve">
     <value>Long-term Collaboration</value>
   </data>
+  <data name="ShareTitle" xml:space="preserve">
+    <value>We'd love for you to share!</value>
+  </data>
 </root>

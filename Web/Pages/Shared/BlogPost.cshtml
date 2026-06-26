@@ -7,6 +7,8 @@
 	string keys = isEn && !string.IsNullOrEmpty(Model.KeywordsEn) ? Model.KeywordsEn : Model.Keywords;
 	string name = isEn && !string.IsNullOrEmpty(Model.NameEn) ? Model.NameEn : Model.Name;
 	string content = isEn && !string.IsNullOrEmpty(Model.ContentEn) ? Model.ContentEn : Model.Content;
+	string culturePfx = isEn ? "/en" : "";
+	string blogUrl = $"https://kostlanovec.cz{culturePfx}/blog/{Model.Slug}";
 
 	ViewData["Title"] = title;
 	ViewData["Description"] = desc;
@@ -18,15 +20,15 @@
 @Html.Raw(content)
 <script src="https://kit.fontawesome.com/704ff50790.js" crossorigin="anonymous"></script>
 <div class="shared--buttons">
-	<p>Budeme rádi za sdílení!</p>
+	<p>@SharedLocalizer["ShareTitle"]</p>
 	<div class="share-buttons">
-		<a href="https://www.facebook.com/dialog/share?app_id=1552041721475989&display=popup&href=https://kostlanovec.cz/blog/@Model.Slug&redirect_uri=https://kostlanovec.cz/blog/@Model.Slug" class="share-button facebook" target="_blank" rel="noopener noreferrer">
+		<a href="https://www.facebook.com/dialog/share?app_id=1552041721475989&display=popup&href=@blogUrl&redirect_uri=@blogUrl" class="share-button facebook" target="_blank" rel="noopener noreferrer">
 			<i class="fab fa-facebook-f"></i>
 		</a>
-		<a href="https://x.com/intent/tweet?title=@Model.Name&related=Kostlanovec&url=https://kostlanovec.cz/blog/@Model.Slug" class="share-button twitter" target="_blank" rel="noopener noreferrer">
+		<a href="https://x.com/intent/tweet?title=@Uri.EscapeDataString(name)&related=Kostlanovec&url=@blogUrl" class="share-button twitter" target="_blank" rel="noopener noreferrer">
 			<i class="fab fa-x-twitter"></i>
 		</a>
-		<a href="https://www.linkedin.com/shareArticle?mini=true&url=https://kostlanovec.cz/blog/@Model.Slug" class="share-button linkedin" target="_blank" rel="noopener noreferrer">
+		<a href="https://www.linkedin.com/shareArticle?mini=true&url=@blogUrl" class="share-button linkedin" target="_blank" rel="noopener noreferrer">
 			<i class="fab fa-linkedin-in"></i>
 		</a>
 	</div>
