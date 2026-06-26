@@ -1,29 +1,24 @@
-﻿namespace MojeVlastniStranka.ApplicationCore.Dto
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MojeVlastniStranka.ApplicationCore.Dto
 {
 	public class ContactFormularDto
 	{
-
-		/// <summary>
-		/// Vrací nebo nastavuje email zákazníka.
-		/// </summary>
+		[Required]
+		[EmailAddress]
 		public string Email
 		{
 			get;
 			set;
 		}
 
-		/// <summary>
-		/// Vrací nebo nastavuje telefonní číslo zákazníka.
-		/// </summary>
 		public string PhoneNumber
 		{
 			get;
 			set;
 		}
 
-		/// <summary>
-		/// Vrací nebo nastavuje zprávu od zákazníka.
-		/// </summary>
+		[Required]
 		public string Message
 		{
 			get;
