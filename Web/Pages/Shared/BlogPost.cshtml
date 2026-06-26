@@ -17,7 +17,9 @@
 	ViewData["Image"] = "https://kostlanovec.cz" + Model.ImagePath;
 	ViewData["SocialTitle"] = name;
 }
+<main class="main">
 @Html.Raw(content)
+</main>
 <script src="https://kit.fontawesome.com/704ff50790.js" crossorigin="anonymous"></script>
 <div class="shared--buttons">
 	<p>@SharedLocalizer["ShareTitle"]</p>

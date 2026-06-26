@@ -12,8 +12,9 @@
 	ViewData["SocialTitle"] = Model.Name;
 }
 
+<main class="main">
 @Html.Raw(Model.Content)
-
+</main>
 <script src="https://kit.fontawesome.com/704ff50790.js" crossorigin="anonymous"></script>
 <div class="shared--buttons">
 	<p>@SharedLocalizer["ShareTitle"]</p>

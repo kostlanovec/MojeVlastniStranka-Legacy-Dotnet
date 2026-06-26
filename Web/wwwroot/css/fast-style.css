@@ -128,7 +128,7 @@ input[type="text"] {
 }
 
 .main__project {
-	min-height: 87vh;
+	min-height: 0;
 }
 
 .div--blog--articles{
@@ -309,6 +309,13 @@ input[type="text"] {
 	background: linear-gradient(45deg, var(--darkblue) 0%, var(--purple) 100%);
 	padding: 0;
 	margin: 0;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.main {
+	flex: 1;
 }
 
 .hamburger {
