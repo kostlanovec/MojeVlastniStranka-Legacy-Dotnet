@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using HealthChecks.UI.Client;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
 using MojeVlastniStranka.DataAccess.Entities;
@@ -188,13 +187,7 @@ namespace MojeVlastniStrankaFinanali.Web
 
 			app.MapHealthChecks("/api/health", new HealthCheckOptions
 			{
-				Predicate = _ => true,
-				ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-			});
-
-			app.MapHealthChecksUI(options =>
-			{
-				options.UIPath = "/healthcheck-ui";
+				Predicate = _ => true
 			});
 
             app.MapMetrics("/metrics");

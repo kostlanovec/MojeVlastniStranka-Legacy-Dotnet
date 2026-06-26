@@ -17,17 +17,6 @@ namespace MojeVlastniStranka.Web
 				 .AddCheck<RemoteHealthCheck>("Remote endpoints Health Check", failureStatus: HealthStatus.Unhealthy)
 				 .AddCheck<MemoryHealthCheck>("Feedback Service Memory Check", failureStatus: HealthStatus.Unhealthy, tags: new[] { "Feedback Service" });
 
-			services.AddHealthChecksUI(opt =>
-			{
-				opt.SetEvaluationTimeInSeconds(100);
-				opt.MaximumHistoryEntriesPerEndpoint(60);
-				opt.SetApiMaxActiveRequests(1);
-
-				// ABSOLUTNÍ adresa na vlastní health endpoint:
-				var baseUrl = configuration["SELF_BASE_URL"] ?? "http://127.0.0.1:8080";
-				opt.AddHealthCheckEndpoint("self", $"{baseUrl}/api/health");
-			})
-			.AddInMemoryStorage();
 		}
 	}
 }
