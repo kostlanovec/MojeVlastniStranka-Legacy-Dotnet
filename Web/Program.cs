@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using HealthChecks.UI.Client;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess;
@@ -26,7 +27,8 @@ namespace MojeVlastniStrankaFinanali.Web
 
 			// --- DB + Identity ---
 			builder.Services.AddDbContext<DataContext>(options =>
-				 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")),
+				 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
+						.ConfigureWarnings(w => w.Ignore(RelationalEventId.PendingModelChangesWarning)),
 				 ServiceLifetime.Scoped);
 
 			builder.Services
