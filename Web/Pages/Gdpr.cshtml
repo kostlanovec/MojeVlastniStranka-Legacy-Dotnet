@@ -6,6 +6,7 @@
 	ViewData["Author"] = "Jan Sebastián Kostlán";
 	ViewData["Keywords"] = "GDPR, ochrana údajů, soukromí";
 	ViewData["nofollow"] = true;
+	var culturePfx = System.Globalization.CultureInfo.CurrentCulture.Name == "en" ? "/en" : "";
 }
 
 <main class="main">
@@ -34,7 +35,7 @@
 
 	<h2>Politika Cookies </h2>
 	<p>
-		Používáme soubory cookies ke zlepšení vašeho prohlížení. Používáním našeho webu souhlasíte s používáním cookies v souladu s naší <a class="red" href="/zasadycookies">Politikou Cookies</a>.
+		Používáme soubory cookies ke zlepšení vašeho prohlížení. Používáním našeho webu souhlasíte s používáním cookies v souladu s naší <a class="red" href="@culturePfx/zasadycookies">Politikou Cookies</a>.
 	</p>
 	<h2 class="h2__div__article red">Kontaktujte Nás</h2>
 	<p>

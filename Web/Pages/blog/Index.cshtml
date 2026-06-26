@@ -1,18 +1,21 @@
-﻿@page
+@page
 @model MojeVlastniStranka.Web.Pages.blog.IndexModel
 @{
-	ViewData["Title"] = "Blog";
-	ViewData["Description"] = "Blog příspěvky Jana Sebastiána Kostlána. Tvůrce, webdesigner, programátor a marketing maestro skrz SEO.";
+	ViewData["Title"] = SharedLocalizer["Blog"];
+	ViewData["Description"] = SharedLocalizer["Blog_Desc"];
 	ViewData["Author"] = "Jan Sebastián Kostlán";
-	ViewData["Keywords"] = "blog, osobní";
-	ViewData["SocialTitle"] = "Kostlanovec - seznam blog příspěvků.";
+	ViewData["Keywords"] = SharedLocalizer["Blog_Keywords"];
+	ViewData["SocialTitle"] = SharedLocalizer["Blog_SocialTitle"];
 }
 @using MojeVlastniStranka.Common.Extension
+@{
+	var culturePfx = System.Globalization.CultureInfo.CurrentCulture.Name == "en" ? "/en" : "";
+}
 
 <main class="main">
 	<header class="reveal">
-		<h1>Blog</h1>
-		<input id="searchInput" class="searchbar" type="text" placeholder="hledat" />
+		<h1>@SharedLocalizer["Blog"]</h1>
+		<input id="searchInput" class="searchbar" type="text" placeholder="@SharedLocalizer["Blog_SearchPlaceholder"]" />
 	</header>
 	<div class="results" id="results"></div>
 	@foreach (var category in Model.CategoriesWithPosts)
@@ -28,7 +31,7 @@
 					if (isFirstPost)
 					{
 						<article class="article--first--post zoom-effect">
-							<a class="blog--a" href="/Blog/@post.Slug">
+							<a class="blog--a" href="@culturePfx/blog/@post.Slug">
 								<h3 class="blog__first__h3">@post.Name</h3>
 								<img src="@post.FilePath" alt="@post.Name" />
 							</a>
@@ -38,7 +41,7 @@
 					else
 					{
 						<article class="article--post zoom-effect">
-							<a class="blog--a blog--a--other" href="/Blog/@post.Slug">
+							<a class="blog--a blog--a--other" href="@culturePfx/blog/@post.Slug">
 								<img src="@post.FilePath" alt="@post.Name" />
 								<div class="blog--div">
 									<h3 class="blog__h3">@post.Name</h3>
@@ -55,7 +58,6 @@
 			</div>
 		</section>
 	}
-	</>
 </main>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -72,7 +74,7 @@
 							  if (data.length > 0) {
 									data.forEach(function (post) {
 										 $('#results').append(
-											  '<a class="results__a" href="/Blog/' + post.slug + '">' +
+											  '<a class="results__a" href="@culturePfx/blog/' + post.slug + '">' +
 											  '<div>' +
 											  '<img src="' + post.filePath + '" alt="' + post.name + '" />' +
 											  '</div>' +
@@ -84,7 +86,7 @@
 										 );
 									});
 							  } else {
-									$('#results').append('<p>Žádné výsledky nenalezeny.</p>');
+									$('#results').append('<p>@SharedLocalizer["Blog_NoResults"]</p>');
 							  }
 						 }
 					});

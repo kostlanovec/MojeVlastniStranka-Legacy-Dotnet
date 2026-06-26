@@ -1,8 +1,5 @@
 @page
 @model MojeVlastniStranka.Web.Pages.IndexModel
-@using Microsoft.AspNetCore.Mvc.Localization
-@using MojeVlastniStranka.Web
-@inject IHtmlLocalizer<SharedResource> SharedLocalizer
 @{
     ViewData["Title"] = SharedLocalizer["IndexTitle"];
     ViewData["Description"] = SharedLocalizer["IndexDesc"];
@@ -17,6 +14,8 @@
     var indexTitle = SharedLocalizer["IndexTitle"].Value;
     var kontakt = SharedLocalizer["Kontakt"].Value;
     var cultureName = System.Globalization.CultureInfo.CurrentCulture.Name;
+    var culturePfx = cultureName == "en" ? "/en" : "";
+    var cultureRouteVal = cultureName == "en" ? "en" : (string?)null;
 
     ViewData["JsonLD"] = $@"
     {{
@@ -80,7 +79,7 @@
         <h2>@SharedLocalizer["Services"]</h2>
         <section class="scrolling__container" id="scrollContainer">
             <article class="scrolling__article reveal">
-                <a class="scrolling__article__a" asp-page="./sluzby/webovestranky">
+                <a class="scrolling__article__a" asp-page="/sluzby/webovestranky" asp-route-culture="@cultureRouteVal">
                     <img src="/images/webovestranky.jpg" alt="@SharedLocalizer["WebDevelopment"]" loading="lazy" decoding="async">
                     <div class="scrolling__article--div">
                         <h3>@SharedLocalizer["WebDevelopment"]</h3>
@@ -88,7 +87,7 @@
                 </a>
             </article>
             <article class="scrolling__article reveal">
-                <a class="scrolling__article__a" asp-page="./sluzby/tvorbaher">
+                <a class="scrolling__article__a" asp-page="/sluzby/tvorbaher" asp-route-culture="@cultureRouteVal">
                     <img src="/images/tvorbaher.jpg" alt="@SharedLocalizer["GameDevelopment"]" loading="lazy" decoding="async">
                     <div class="scrolling__article--div">
                         <h3>@SharedLocalizer["GameDevelopment"]</h3>
@@ -96,7 +95,7 @@
                 </a>
             </article>
             <article class="scrolling__article reveal">
-                <a class="scrolling__article__a" asp-page="./sluzby/socialnisite">
+                <a class="scrolling__article__a" asp-page="/sluzby/socialnisite" asp-route-culture="@cultureRouteVal">
                     <img src="/images/socialnisite.jpg" alt="@SharedLocalizer["SocialMedia"]" loading="lazy" decoding="async">
                     <div class="scrolling__article--div">
                         <h3>@SharedLocalizer["SocialMedia"]</h3>
@@ -104,7 +103,7 @@
                 </a>
             </article>
             <article class="scrolling__article reveal">
-                <a class="scrolling__article__a" asp-page="./sluzby/seo">
+                <a class="scrolling__article__a" asp-page="/sluzby/seo" asp-route-culture="@cultureRouteVal">
                     <img src="/images/seo.jpg" alt="@SharedLocalizer["SEO"]" loading="lazy" decoding="async">
                     <div class="scrolling__article--div">
                         <h3>@SharedLocalizer["SEO"]</h3>
@@ -128,7 +127,7 @@
                              role="tabpanel"
                              aria-labelledby="blog-tab-@i"
                              tabindex="0">
-                            <a href="/blog/@post.Slug" class="figure__blog">
+                            <a href="@culturePfx/blog/@post.Slug" class="figure__blog">
                                 <img src="@post.FilePath"
                                      alt="@post.Name"
                                      loading="lazy" decoding="async" />
@@ -146,7 +145,7 @@
                              aria-labelledby="blog-tab-@i"
                              tabindex="0"
                              hidden>
-                            <a href="/blog/@post.Slug" class="figure__blog">
+                            <a href="@culturePfx/blog/@post.Slug" class="figure__blog">
                                 <img src="@post.FilePath"
                                      alt="@post.Name"
                                      loading="lazy" decoding="async" />

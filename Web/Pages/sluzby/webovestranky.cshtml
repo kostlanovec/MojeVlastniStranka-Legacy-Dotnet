@@ -1,79 +1,79 @@
 @page
 @model MojeVlastniStranka.Web.Pages.sluzby.webovestrankyModel
 @{
-	ViewData["Title"] = "Weby";
-	ViewData["Description"] = "Tvorba webu na míru, kdy si společně definujeme, co chcete od webu a vytvoříme Vám ho na míru. Jan Sebastián Kostlán - Tvůrce, webdesigner, programátor a marketing maestro skrz SEO.";
+	ViewData["Title"] = SharedLocalizer["Web_Title"];
+	ViewData["Description"] = SharedLocalizer["Web_Desc"];
 	ViewData["Author"] = "Jan Sebastián Kostlán";
-	ViewData["Keywords"] = "blog, osobní";
+	ViewData["Keywords"] = SharedLocalizer["Web_Keywords"];
 	ViewData["Image"] = "https://kostlanovec.cz/images/webovestranky.jpg";
-	ViewData["SocialTitle"] = "Služba webové stránky";
+	ViewData["SocialTitle"] = SharedLocalizer["Web_SocialTitle"];
 }
 <main class="main">
 	<header class="header header-service reveal">
 		<div>
-			<h1>Webové stránky na míru</h1>
-			<p>Tvořím webové stránky na míru Vaším potřebám. Stránka je vybavená všemu potřebnému jako je optimalizace SEO (aby lehce byla viditelná ve vyhledávačích), možnosti blog systému, admin panelu, kde se dá trackovat chování uživatelů a přizpůsobonení stránky Vaším potřebám.</p>
+			<h1>@SharedLocalizer["Web_H1"]</h1>
+			<p>@SharedLocalizer["Web_Intro"]</p>
 		</div>
 		<img src="~/images/sluzby/SluzbaStranka.svg" />
 	</header>
 	<article class="service__article reveal">
-		<h2 class="service--h2">Basic Web</h2>
+		<h2 class="service--h2">@SharedLocalizer["Web_BasicH2"]</h2>
 		<div class="service--layout">
 			<img src="~/images/sluzby/BasicWeb.svg" />
 			<ul class="ul__service">
-				<li>Jednostránková stránka</li>
-				<li>Základní optimalizace SEO</li>
-				<li>Grafický návrh</li>
-				<li class="li--x">Admin panel</li>
+				<li>@SharedLocalizer["Web_BasicUL1"]</li>
+				<li>@SharedLocalizer["Web_BasicUL2"]</li>
+				<li>@SharedLocalizer["Web_BasicUL3"]</li>
+				<li class="li--x">@SharedLocalizer["Web_BasicULX"]</li>
 			</ul>
 		</div>
 		<div>
-			<h3>Popis</h3>
-			<p class="service--p">Jednoduchá jednostránková stránka se základními informace pro vaší potřebu. Nejprve probereme spolu požadavky a podle toho toho se sestaví grafický návrh, který se změní podle potřeby, vytvoří se stránka, která se nahraje na nějaký hosting.</p>
+			<h3>@SharedLocalizer["DescriptionLabel"]</h3>
+			<p class="service--p">@SharedLocalizer["Web_BasicDesc"]</p>
 		</div>
 		<div class="serivce--price--div">
-			<p class="service--price">Cena: Individuální kalkulace</p>
-			<p class="service--p">Není započítaná cena domény a hostingu</p>
+			<p class="service--price">@SharedLocalizer["Web_Price"]</p>
+			<p class="service--p">@SharedLocalizer["Web_PriceNote"]</p>
 		</div>
 	</article>
 	<article class="service__article reveal">
-		<h2 class="service--h2">Advanced Web</h2>
+		<h2 class="service--h2">@SharedLocalizer["Web_AdvancedH2"]</h2>
 		<div class="service--layout">
 			<ul class="ul__service">
-				<li>Vícestránková stránka</li>
-				<li>Pokročila optimalizace SEO</li>
-				<li>Grafický návrh</li>
-				<li>Admin panel</li>
+				<li>@SharedLocalizer["Web_AdvancedUL1"]</li>
+				<li>@SharedLocalizer["Web_AdvancedUL2"]</li>
+				<li>@SharedLocalizer["Web_AdvancedUL3"]</li>
+				<li>@SharedLocalizer["Web_AdvancedUL4"]</li>
 			</ul>
 			<img src="~/images/sluzby/AdvancedWeb.svg" />
 		</div>
 		<div>
-			<h3>Popis</h3>
-			<p class="service--p">Vícestránkový web vhodný pro firmy a pokročilejší prezentace. Nad rámec základního webu nabízí detailnější strukturu, pokročilou SEO optimalizaci a vlastní administrační panel pro jednoduchou správu obsahu.</p>
+			<h3>@SharedLocalizer["DescriptionLabel"]</h3>
+			<p class="service--p">@SharedLocalizer["Web_AdvancedDesc"]</p>
 		</div>
 		<div class="serivce--price--div">
-			<p class="service--price">Cena: Individuální kalkulace</p>
-			<p class="service--p">Není započítaná cena domény a hostingu</p>
+			<p class="service--price">@SharedLocalizer["Web_Price"]</p>
+			<p class="service--p">@SharedLocalizer["Web_PriceNote"]</p>
 		</div>
 	</article>
 	<article class="service__article reveal">
-		<h2 class="service--h2">Na míru</h2>
+		<h2 class="service--h2">@SharedLocalizer["Web_CustomH2"]</h2>
 		<div class="service--layout">
 			<img src="~/images/sluzby/MegaWeb.svg" />
-			<p>Stránka na míru přesně podle vaších potřebách. Společně uděláme odhad, diskuzi ohledně ceny a definujeme si cíle, kterých chceme stránkou - projektem dosáhnout.</p>
+			<p>@SharedLocalizer["Web_CustomDesc"]</p>
 		</div>
 	</article>
-	<h2 class="center__text reveal">Mám zájem o web</h2>
+	<h2 class="center__text reveal">@SharedLocalizer["Web_CTAH2"]</h2>
 	<form class="contact__form reveal" method="post">
 		<select class="input__form" name="ServiceRequestDto.SubService">
-			<option value="BasicWeb">Basic Web</option>
-			<option value="AdvancedWeb">Advanced Web</option>
-			<option value="CustomisedWeb">Na míru</option>
+			<option value="BasicWeb">@SharedLocalizer["Web_SelectBasic"]</option>
+			<option value="AdvancedWeb">@SharedLocalizer["Web_SelectAdvanced"]</option>
+			<option value="CustomisedWeb">@SharedLocalizer["Web_SelectCustom"]</option>
 		</select>
-		<input class="input__form" type="email" name="ServiceRequestDto.Email" placeholder="Email" required>
-		<input class="input__form" type="text" name="ServiceRequestDto.PhoneNumber" placeholder="Telefon">
-		<textarea class="textarea__form" name="ServiceRequestDto.Message" cols="30" rows="10" placeholder="Dobrý den, mám zájem o / mám dotaz na" required></textarea>
-		<button class="button form--button" type="submit">Odeslat</button>
+		<input class="input__form" type="email" name="ServiceRequestDto.Email" placeholder="@SharedLocalizer["EmailPlaceholder"]" required>
+		<input class="input__form" type="text" name="ServiceRequestDto.PhoneNumber" placeholder="@SharedLocalizer["PhonePlaceholder"]">
+		<textarea class="textarea__form" name="ServiceRequestDto.Message" cols="30" rows="10" placeholder="@SharedLocalizer["MessagePlaceholder"]" required></textarea>
+		<button class="button form--button" type="submit">@SharedLocalizer["Submit"]</button>
 
 		@if (TempData["SuccessMessage"] != null)
 		{

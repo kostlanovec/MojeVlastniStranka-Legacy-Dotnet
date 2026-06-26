@@ -1,69 +1,69 @@
-﻿@page
+@page
 @model MojeVlastniStranka.Web.Pages.sluzby.seoModel
 @{
-	ViewData["Title"] = "SEO";
-	ViewData["Description"] = "Optimalizování stránek na míru jako je On page a off page. Jan Sebastián Kostlán - Tvůrce, webdesigner, programátor a marketing maestro skrz SEO.";
+	ViewData["Title"] = SharedLocalizer["Seo_Title"];
+	ViewData["Description"] = SharedLocalizer["Seo_Desc"];
 	ViewData["Author"] = "Jan Sebastián Kostlán";
-	ViewData["Keywords"] = "SEO, optimalizace, analytics";
+	ViewData["Keywords"] = SharedLocalizer["Seo_Keywords"];
 	ViewData["Image"] = "https://kostlanovec.cz/images/tvorbaher.jpg";
-	ViewData["SocialTitle"] = "Služba optimalizace SEO";
+	ViewData["SocialTitle"] = SharedLocalizer["Seo_SocialTitle"];
 }
 <main class="main">
 	<header class="header header-service reveal">
 		<div>
-			<h1>SEO Optimalizace</h1>
-			<p>Nabízíme profesionální služby SEO optimalizace pro zlepšení viditelnosti vašich webových stránek ve vyhledávačích. Zajistíme, aby váš web byl snadno nalezitelný a přilákal více návštěvníků.</p>
+			<h1>@SharedLocalizer["Seo_H1"]</h1>
+			<p>@SharedLocalizer["Seo_Intro"]</p>
 		</div>
 		<img src="~/images/sluzby/SeoService.svg" />
 	</header>
 	<article class="service__article reveal">
-		<h2 class="service--h2">Základní SEO Optimalizace</h2>
+		<h2 class="service--h2">@SharedLocalizer["Seo_BasicH2"]</h2>
 		<div class="service--layout">
 			<img src="~/images/sluzby/SeoBasic.svg" />
 			<ul class="ul__service">
-				<li>On-page optimalizace</li>
-				<li>Základní analýza klíčových slov</li>
-				<li>Optimalizace rychlosti načítání stránky</li>
-				<li class="li--x">Pokročilé reportování</li>
+				<li>@SharedLocalizer["Seo_BasicUL1"]</li>
+				<li>@SharedLocalizer["Seo_BasicUL2"]</li>
+				<li>@SharedLocalizer["Seo_BasicUL3"]</li>
+				<li class="li--x">@SharedLocalizer["Seo_BasicULX"]</li>
 			</ul>
 		</div>
 		<div>
-			<h3>Popis</h3>
-			<p class="service--p">Poskytneme základní SEO optimalizaci, která zahrnuje on-page optimalizaci, analýzu klíčových slov a optimalizaci rychlosti načítání stránky. Tato služba je ideální pro menší webové stránky a začínající projekty.</p>
+			<h3>@SharedLocalizer["DescriptionLabel"]</h3>
+			<p class="service--p">@SharedLocalizer["Seo_BasicDesc"]</p>
 		</div>
 		<div class="serivce--price--div">
-			<p class="service--price">Cena 4000 Kč</p>
+			<p class="service--price">@SharedLocalizer["Seo_BasicPrice"]</p>
 		</div>
 	</article>
 	<article class="service__article reveal">
-		<h2 class="service--h2">Pokročilá SEO Optimalizace</h2>
+		<h2 class="service--h2">@SharedLocalizer["Seo_AdvancedH2"]</h2>
 		<div class="service--layout">
 			<ul class="ul__service">
-				<li>Pokročilá on-page a off-page optimalizace</li>
-				<li>Hloubková analýza klíčových slov</li>
-				<li>Optimalizace rychlosti načítání stránky</li>
-				<li>Pokročilé reportování a sledování výkonu</li>
+				<li>@SharedLocalizer["Seo_AdvancedUL1"]</li>
+				<li>@SharedLocalizer["Seo_AdvancedUL2"]</li>
+				<li>@SharedLocalizer["Seo_AdvancedUL3"]</li>
+				<li>@SharedLocalizer["Seo_AdvancedUL4"]</li>
 			</ul>
 			<img src="~/images/sluzby/SeoAdvanced.svg" />
 		</div>
 		<div>
-			<h3>Popis</h3>
-			<p class="service--p">Pokročilá SEO optimalizace zahrnuje detailní on-page a off-page optimalizaci, hloubkovou analýzu klíčových slov, optimalizaci rychlosti načítání stránky a pokročilé reportování. Tato služba je vhodná pro větší webové stránky a e-shopy.</p>
+			<h3>@SharedLocalizer["DescriptionLabel"]</h3>
+			<p class="service--p">@SharedLocalizer["Seo_AdvancedDesc"]</p>
 		</div>
 		<div class="serivce--price--div">
-			<p class="service--price">Cena 8000 Kč</p>
+			<p class="service--price">@SharedLocalizer["Seo_AdvancedPrice"]</p>
 		</div>
 	</article>
-	<h2 class="center__text reveal">Mám zájem o SEO optimalizaci</h2>
+	<h2 class="center__text reveal">@SharedLocalizer["Seo_CTAH2"]</h2>
 	<form class="contact__form reveal" method="post">
 		<select class="input__form" name="ServiceRequestDto.SubService">
-			<option value="BasicSeo">Základní SEO Optimalizace</option>
-			<option value="Advanced">Pokročilá SEO Optimalizace</option>
+			<option value="BasicSeo">@SharedLocalizer["Seo_SelectBasic"]</option>
+			<option value="Advanced">@SharedLocalizer["Seo_SelectAdvanced"]</option>
 		</select>
-		<input class="input__form" type="email" name="ServiceRequestDto.Email" placeholder="Email" required>
-		<input class="input__form" type="text" name="ServiceRequestDto.PhoneNumber" placeholder="Telefon">
-		<textarea class="textarea__form" name="ServiceRequestDto.Message" cols="30" rows="10" placeholder="Dobrý den, mám zájem o / mám dotaz na" required></textarea>
-		<button class="button form--button" type="submit">Odeslat</button>
+		<input class="input__form" type="email" name="ServiceRequestDto.Email" placeholder="@SharedLocalizer["EmailPlaceholder"]" required>
+		<input class="input__form" type="text" name="ServiceRequestDto.PhoneNumber" placeholder="@SharedLocalizer["PhonePlaceholder"]">
+		<textarea class="textarea__form" name="ServiceRequestDto.Message" cols="30" rows="10" placeholder="@SharedLocalizer["MessagePlaceholder"]" required></textarea>
+		<button class="button form--button" type="submit">@SharedLocalizer["Submit"]</button>
 		@if (TempData["SuccessMessage"] != null)
 		{
 			<div class="success-message">

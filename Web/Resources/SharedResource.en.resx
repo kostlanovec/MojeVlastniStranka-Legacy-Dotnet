@@ -70,7 +70,7 @@
     <value>My goal is to &lt;strong&gt;leave a mark in every field I enjoy&lt;/strong&gt;—from &lt;em&gt;websites and apps&lt;/em&gt;, to &lt;em&gt;games and SEO&lt;/em&gt;, to &lt;em&gt;personal growth&lt;/em&gt;. I want to build things that hold long-term value and prove that the combination of technology, creativity, and perseverance can push boundaries.</value>
   </data>
   <data name="AboutMeP6" xml:space="preserve">
-    <value>Want to see what I'm working on right now? Check out my &lt;a href="/projekty"&gt;projects&lt;/a&gt; or read my &lt;a href="/blog"&gt;blog&lt;/a&gt;. If you're interested in collaborating on a website, game, or need SEO consultation, reach out via &lt;a href="/kontakt"&gt;contact&lt;/a&gt;. I'd love to discuss your idea and propose a solution.</value>
+    <value>Want to see what I'm working on right now? Check out my &lt;a href="/en/projekty"&gt;projects&lt;/a&gt; or read my &lt;a href="/en/blog"&gt;blog&lt;/a&gt;. If you're interested in collaborating on a website, game, or need SEO consultation, reach out via &lt;a href="/en/kontakt"&gt;contact&lt;/a&gt;. I'd love to discuss your idea and propose a solution.</value>
   </data>
   <data name="NewsletterTitle" xml:space="preserve">
     <value>Stay Updated</value>
@@ -95,5 +95,396 @@
   </data>
   <data name="IndexSocialTitle" xml:space="preserve">
     <value>Jan Sebastián Kostlán – Web Developer &amp; SEO</value>
+  </data>
+
+  <!-- Shared form -->
+  <data name="PhonePlaceholder" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="MessagePlaceholder" xml:space="preserve">
+    <value>Hello, I'm interested in / I have a question about</value>
+  </data>
+  <data name="DescriptionLabel" xml:space="preserve">
+    <value>Description</value>
+  </data>
+
+  <!-- Blog -->
+  <data name="Blog_SearchPlaceholder" xml:space="preserve">
+    <value>search</value>
+  </data>
+  <data name="Blog_NoResults" xml:space="preserve">
+    <value>No results found.</value>
+  </data>
+  <data name="Blog_Desc" xml:space="preserve">
+    <value>Blog posts by Jan Sebastián Kostlán. Web developer, programmer, and SEO specialist.</value>
+  </data>
+  <data name="Blog_Keywords" xml:space="preserve">
+    <value>blog, programming, webdev, SEO</value>
+  </data>
+  <data name="Blog_SocialTitle" xml:space="preserve">
+    <value>Kostlanovec – blog posts</value>
+  </data>
+
+  <!-- Kontakt -->
+  <data name="Kontakt_Desc" xml:space="preserve">
+    <value>Contact me via form or social networks. Happy to advise on your project.</value>
+  </data>
+  <data name="Kontakt_Keywords" xml:space="preserve">
+    <value>contact, form, social networks, Jan Sebastián Kostlán</value>
+  </data>
+  <data name="Kontakt_SocialTitle" xml:space="preserve">
+    <value>Kostlanovec – contact</value>
+  </data>
+  <data name="Kontakt_H1Social" xml:space="preserve">
+    <value>Social Networks</value>
+  </data>
+  <data name="Kontakt_H1Form" xml:space="preserve">
+    <value>Contact Form</value>
+  </data>
+  <data name="Kontakt_FormDesc" xml:space="preserve">
+    <value>Interested in collaboration or have a question? Feel free to write to me!</value>
+  </data>
+
+  <!-- Projekty -->
+  <data name="Projekty_PageTitle" xml:space="preserve">
+    <value>My Projects</value>
+  </data>
+  <data name="Projekty_H1" xml:space="preserve">
+    <value>Projects</value>
+  </data>
+  <data name="Projekty_Desc" xml:space="preserve">
+    <value>A list of projects I'm working on, have created, or plan to build.</value>
+  </data>
+  <data name="Projekty_Keywords" xml:space="preserve">
+    <value>project, development, portfolio</value>
+  </data>
+  <data name="Projekty_SocialTitle" xml:space="preserve">
+    <value>Kostlanovec – project list</value>
+  </data>
+  <data name="Projekty_Development" xml:space="preserve">
+    <value>Work in Progress</value>
+  </data>
+  <data name="Projekty_Finalized" xml:space="preserve">
+    <value>Completed Projects</value>
+  </data>
+  <data name="Projekty_Planning" xml:space="preserve">
+    <value>Planned Projects</value>
+  </data>
+
+  <!-- Web sluzby -->
+  <data name="Web_Title" xml:space="preserve">
+    <value>Websites</value>
+  </data>
+  <data name="Web_Desc" xml:space="preserve">
+    <value>Custom website development tailored to your needs. Jan Sebastián Kostlán – web developer and SEO specialist.</value>
+  </data>
+  <data name="Web_Keywords" xml:space="preserve">
+    <value>web development, custom websites, SEO</value>
+  </data>
+  <data name="Web_SocialTitle" xml:space="preserve">
+    <value>Custom Websites – Jan Sebastián Kostlán</value>
+  </data>
+  <data name="Web_H1" xml:space="preserve">
+    <value>Custom Websites</value>
+  </data>
+  <data name="Web_Intro" xml:space="preserve">
+    <value>I create websites tailored to your needs, fully equipped with SEO optimization, a blog system, an admin panel for tracking user behavior, and customization to match your requirements.</value>
+  </data>
+  <data name="Web_BasicH2" xml:space="preserve">
+    <value>Basic Web</value>
+  </data>
+  <data name="Web_BasicUL1" xml:space="preserve">
+    <value>Single-page website</value>
+  </data>
+  <data name="Web_BasicUL2" xml:space="preserve">
+    <value>Basic SEO optimization</value>
+  </data>
+  <data name="Web_BasicUL3" xml:space="preserve">
+    <value>Graphic design</value>
+  </data>
+  <data name="Web_BasicULX" xml:space="preserve">
+    <value>Admin panel</value>
+  </data>
+  <data name="Web_BasicDesc" xml:space="preserve">
+    <value>A simple single-page website with essential information. We discuss requirements together, create a graphic design, build the site, and deploy it to hosting.</value>
+  </data>
+  <data name="Web_Price" xml:space="preserve">
+    <value>Price: Individual quote</value>
+  </data>
+  <data name="Web_PriceNote" xml:space="preserve">
+    <value>Domain and hosting costs not included</value>
+  </data>
+  <data name="Web_AdvancedH2" xml:space="preserve">
+    <value>Advanced Web</value>
+  </data>
+  <data name="Web_AdvancedUL1" xml:space="preserve">
+    <value>Multi-page website</value>
+  </data>
+  <data name="Web_AdvancedUL2" xml:space="preserve">
+    <value>Advanced SEO optimization</value>
+  </data>
+  <data name="Web_AdvancedUL3" xml:space="preserve">
+    <value>Graphic design</value>
+  </data>
+  <data name="Web_AdvancedUL4" xml:space="preserve">
+    <value>Admin panel</value>
+  </data>
+  <data name="Web_AdvancedDesc" xml:space="preserve">
+    <value>A multi-page website for businesses and advanced presentations. Offers a more detailed structure, advanced SEO optimization, and a custom admin panel for easy content management.</value>
+  </data>
+  <data name="Web_CustomH2" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="Web_CustomDesc" xml:space="preserve">
+    <value>A website tailored exactly to your needs. We estimate scope together, discuss pricing, and define the project goals.</value>
+  </data>
+  <data name="Web_CTAH2" xml:space="preserve">
+    <value>I'm interested in a website</value>
+  </data>
+  <data name="Web_SelectBasic" xml:space="preserve">
+    <value>Basic Web</value>
+  </data>
+  <data name="Web_SelectAdvanced" xml:space="preserve">
+    <value>Advanced Web</value>
+  </data>
+  <data name="Web_SelectCustom" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+
+  <!-- Hry sluzby -->
+  <data name="Hry_Title" xml:space="preserve">
+    <value>Game Development</value>
+  </data>
+  <data name="Hry_Desc" xml:space="preserve">
+    <value>Custom game development using Unity. Jan Sebastián Kostlán – developer and programmer.</value>
+  </data>
+  <data name="Hry_Keywords" xml:space="preserve">
+    <value>games, Unity, game development</value>
+  </data>
+  <data name="Hry_SocialTitle" xml:space="preserve">
+    <value>Game Development – Jan Sebastián Kostlán</value>
+  </data>
+  <data name="Hry_H1" xml:space="preserve">
+    <value>Custom Game Development</value>
+  </data>
+  <data name="Hry_Intro" xml:space="preserve">
+    <value>I offer professional custom game development using Unity. Whether you have an idea for a simple game or a complex project, I'm here to help bring your vision to life.</value>
+  </data>
+  <data name="Hry_CustomH2" xml:space="preserve">
+    <value>Custom Game</value>
+  </data>
+  <data name="Hry_CustomUL1" xml:space="preserve">
+    <value>Complete game development</value>
+  </data>
+  <data name="Hry_CustomUL2" xml:space="preserve">
+    <value>Graphic design</value>
+  </data>
+  <data name="Hry_CustomUL3" xml:space="preserve">
+    <value>Game mechanics implementation</value>
+  </data>
+  <data name="Hry_CustomUL4" xml:space="preserve">
+    <value>Optimization and testing</value>
+  </data>
+  <data name="Hry_CustomDesc" xml:space="preserve">
+    <value>A game built exactly to your vision — from initial concept through design and mechanics implementation to optimization and testing. Price by agreement.</value>
+  </data>
+  <data name="Hry_CompleteH2" xml:space="preserve">
+    <value>Complete Game Development</value>
+  </data>
+  <data name="Hry_CompleteUL1" xml:space="preserve">
+    <value>Game analysis and design</value>
+  </data>
+  <data name="Hry_CompleteUL2" xml:space="preserve">
+    <value>Development of all game elements</value>
+  </data>
+  <data name="Hry_CompleteUL3" xml:space="preserve">
+    <value>Graphics and sound effects</value>
+  </data>
+  <data name="Hry_CompleteUL4" xml:space="preserve">
+    <value>Testing and optimization</value>
+  </data>
+  <data name="Hry_CompleteUL5" xml:space="preserve">
+    <value>Post-launch support</value>
+  </data>
+  <data name="Hry_CompleteDesc" xml:space="preserve">
+    <value>Full game development from start to finish — analysis, design, all game elements, graphics, sound, testing, optimization, and post-launch support. Price by agreement.</value>
+  </data>
+  <data name="Hry_PriceByAgreement" xml:space="preserve">
+    <value>Price by agreement</value>
+  </data>
+  <data name="Hry_CTAH2" xml:space="preserve">
+    <value>I'm interested in game development</value>
+  </data>
+  <data name="Hry_SelectCustom" xml:space="preserve">
+    <value>Custom Game</value>
+  </data>
+  <data name="Hry_SelectComplete" xml:space="preserve">
+    <value>Complete Game Development</value>
+  </data>
+
+  <!-- SEO sluzby -->
+  <data name="Seo_Title" xml:space="preserve">
+    <value>SEO</value>
+  </data>
+  <data name="Seo_Desc" xml:space="preserve">
+    <value>Custom SEO optimization — on-page and off-page. Jan Sebastián Kostlán – web developer and SEO specialist.</value>
+  </data>
+  <data name="Seo_Keywords" xml:space="preserve">
+    <value>SEO, optimization, analytics, search engines</value>
+  </data>
+  <data name="Seo_SocialTitle" xml:space="preserve">
+    <value>SEO Optimization – Jan Sebastián Kostlán</value>
+  </data>
+  <data name="Seo_H1" xml:space="preserve">
+    <value>SEO Optimization</value>
+  </data>
+  <data name="Seo_Intro" xml:space="preserve">
+    <value>I offer professional SEO optimization to improve your website's visibility in search engines. I'll ensure your site is easily discoverable and attracts more visitors.</value>
+  </data>
+  <data name="Seo_BasicH2" xml:space="preserve">
+    <value>Basic SEO Optimization</value>
+  </data>
+  <data name="Seo_BasicUL1" xml:space="preserve">
+    <value>On-page optimization</value>
+  </data>
+  <data name="Seo_BasicUL2" xml:space="preserve">
+    <value>Basic keyword analysis</value>
+  </data>
+  <data name="Seo_BasicUL3" xml:space="preserve">
+    <value>Page load speed optimization</value>
+  </data>
+  <data name="Seo_BasicULX" xml:space="preserve">
+    <value>Advanced reporting</value>
+  </data>
+  <data name="Seo_BasicDesc" xml:space="preserve">
+    <value>Basic SEO optimization covering on-page optimization, keyword analysis, and page load speed. Ideal for smaller websites and early-stage projects.</value>
+  </data>
+  <data name="Seo_BasicPrice" xml:space="preserve">
+    <value>Price: 4,000 CZK</value>
+  </data>
+  <data name="Seo_AdvancedH2" xml:space="preserve">
+    <value>Advanced SEO Optimization</value>
+  </data>
+  <data name="Seo_AdvancedUL1" xml:space="preserve">
+    <value>Advanced on-page and off-page optimization</value>
+  </data>
+  <data name="Seo_AdvancedUL2" xml:space="preserve">
+    <value>In-depth keyword analysis</value>
+  </data>
+  <data name="Seo_AdvancedUL3" xml:space="preserve">
+    <value>Page load speed optimization</value>
+  </data>
+  <data name="Seo_AdvancedUL4" xml:space="preserve">
+    <value>Advanced reporting and performance tracking</value>
+  </data>
+  <data name="Seo_AdvancedDesc" xml:space="preserve">
+    <value>Advanced SEO covering detailed on-page and off-page optimization, in-depth keyword analysis, and advanced reporting. Suitable for larger websites and e-commerce stores.</value>
+  </data>
+  <data name="Seo_AdvancedPrice" xml:space="preserve">
+    <value>Price: 8,000 CZK</value>
+  </data>
+  <data name="Seo_CTAH2" xml:space="preserve">
+    <value>I'm interested in SEO optimization</value>
+  </data>
+  <data name="Seo_SelectBasic" xml:space="preserve">
+    <value>Basic SEO Optimization</value>
+  </data>
+  <data name="Seo_SelectAdvanced" xml:space="preserve">
+    <value>Advanced SEO Optimization</value>
+  </data>
+
+  <!-- Social media sluzby -->
+  <data name="Social_Title" xml:space="preserve">
+    <value>Social Media</value>
+  </data>
+  <data name="Social_Desc" xml:space="preserve">
+    <value>Custom social media management for Instagram, Facebook, TikTok, and more. Jan Sebastián Kostlán.</value>
+  </data>
+  <data name="Social_Keywords" xml:space="preserve">
+    <value>social media, management, marketing, Instagram, Facebook</value>
+  </data>
+  <data name="Social_SocialTitle" xml:space="preserve">
+    <value>Social Media Management – Jan Sebastián Kostlán</value>
+  </data>
+  <data name="Social_H1" xml:space="preserve">
+    <value>Social Media Management</value>
+  </data>
+  <data name="Social_Intro" xml:space="preserve">
+    <value>I offer professional social media management so you can focus on your business. I'll ensure your profiles are attractive and engaging, attracting and retaining your target audience.</value>
+  </data>
+  <data name="Social_BasicH2" xml:space="preserve">
+    <value>Basic Management</value>
+  </data>
+  <data name="Social_BasicUL1" xml:space="preserve">
+    <value>Post creation and scheduling</value>
+  </data>
+  <data name="Social_BasicUL2" xml:space="preserve">
+    <value>Basic performance analysis</value>
+  </data>
+  <data name="Social_BasicUL3" xml:space="preserve">
+    <value>Comment and message management</value>
+  </data>
+  <data name="Social_BasicULX" xml:space="preserve">
+    <value>Advanced ad campaigns</value>
+  </data>
+  <data name="Social_BasicDesc" xml:space="preserve">
+    <value>Basic management includes post creation and scheduling, basic performance analysis, and comment management. Ideal for small businesses that want to stay active on social media.</value>
+  </data>
+  <data name="Social_BasicPrice" xml:space="preserve">
+    <value>Price: 3,000 CZK</value>
+  </data>
+  <data name="Social_AdvancedH2" xml:space="preserve">
+    <value>Advanced Management</value>
+  </data>
+  <data name="Social_AdvancedUL1" xml:space="preserve">
+    <value>Post creation and scheduling</value>
+  </data>
+  <data name="Social_AdvancedUL2" xml:space="preserve">
+    <value>In-depth performance analysis</value>
+  </data>
+  <data name="Social_AdvancedUL3" xml:space="preserve">
+    <value>Comment and message management</value>
+  </data>
+  <data name="Social_AdvancedUL4" xml:space="preserve">
+    <value>Advanced ad campaigns</value>
+  </data>
+  <data name="Social_AdvancedDesc" xml:space="preserve">
+    <value>Advanced management includes everything in basic, plus in-depth performance analysis and advanced ad campaigns. Suitable for medium and large businesses.</value>
+  </data>
+  <data name="Social_AdvancedPrice" xml:space="preserve">
+    <value>Price: 6,000 CZK</value>
+  </data>
+  <data name="Social_LongH2" xml:space="preserve">
+    <value>Long-term Collaboration</value>
+  </data>
+  <data name="Social_LongUL1" xml:space="preserve">
+    <value>Complete social media management</value>
+  </data>
+  <data name="Social_LongUL2" xml:space="preserve">
+    <value>Strategic content planning</value>
+  </data>
+  <data name="Social_LongUL3" xml:space="preserve">
+    <value>Advanced ad campaigns</value>
+  </data>
+  <data name="Social_LongUL4" xml:space="preserve">
+    <value>Regular reports and consultations</value>
+  </data>
+  <data name="Social_LongDesc" xml:space="preserve">
+    <value>Long-term collaboration includes complete social media management, strategic content planning, advanced ad campaigns, and regular reports. Ideal for companies seeking sustained growth.</value>
+  </data>
+  <data name="Social_LongPrice" xml:space="preserve">
+    <value>Price by agreement</value>
+  </data>
+  <data name="Social_CTAH2" xml:space="preserve">
+    <value>I'm interested in social media management</value>
+  </data>
+  <data name="Social_SelectBasic" xml:space="preserve">
+    <value>Basic Management</value>
+  </data>
+  <data name="Social_SelectAdvanced" xml:space="preserve">
+    <value>Advanced Management</value>
+  </data>
+  <data name="Social_SelectCollaboration" xml:space="preserve">
+    <value>Long-term Collaboration</value>
   </data>
 </root>

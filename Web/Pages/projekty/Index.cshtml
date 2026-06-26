@@ -1,29 +1,28 @@
-﻿@page
+@page
 @model MojeVlastniStranka.Web.Pages.projekty.IndexModel
 @using MojeVlastniStranka.Common.Enums
 @{
-	ViewData["Title"] = "Moje projekty";
-	ViewData["Description"] = "Seznam projektů, které dělám, jsem vytvořil nebo plánuji uskutečnit";
-	ViewData["Keywords"] = "projekt";
+	var culturePfx = System.Globalization.CultureInfo.CurrentCulture.Name == "en" ? "/en" : "";
+	ViewData["Title"] = SharedLocalizer["Projekty_PageTitle"];
+	ViewData["Description"] = SharedLocalizer["Projekty_Desc"];
+	ViewData["Keywords"] = SharedLocalizer["Projekty_Keywords"];
 	ViewData["Author"] = "Jan Sebastián Kostlán";
-	ViewData["SocialTitle"] = "Kostlanovec - seznam projektů.";
+	ViewData["SocialTitle"] = SharedLocalizer["Projekty_SocialTitle"];
 }
 
 <main class="main main__project">
-	<h1 class="reveal">Projekty</h1>
+	<h1 class="reveal">@SharedLocalizer["Projekty_H1"]</h1>
 	<div class="projects__container reveal" onclick="toggleSection('development-projects', this)">
 		<button class="arrow--project rotated"></button>
-		<h2>Rozpracované projekty</h2>
+		<h2>@SharedLocalizer["Projekty_Development"]</h2>
 	</div>
 	<section id="development-projects" style="display:grid" class="projects__section reveal">
 		@foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatusEnum.Development))
 		{
 			<article class="article--project zoom-effect">
-				<a class="article--project__a" href="/projekty/@project.Slug">
+				<a class="article--project__a" href="@culturePfx/projekty/@project.Slug">
 					<img src="@project.ImagePath" alt="@project.Name" />
 					<h3 class="article--project__h3">@project.Name</h3>
-					@*<p>@project.Description</p>*@
-
 				</a>
 			</article>
 		}
@@ -31,32 +30,30 @@
 
 	<div class="projects__container reveal" onclick="toggleSection('finalized-projects', this)">
 		<button class="arrow--project"></button>
-		<h2>Hotové projekty</h2>
+		<h2>@SharedLocalizer["Projekty_Finalized"]</h2>
 	</div>
 	<section id="finalized-projects" class="projects__section reveal">
 		@foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatusEnum.Finalized))
 		{
 			<article class="article--project zoom-effect">
-				<a class="article--project__a" href="/projekty/@project.Slug">
+				<a class="article--project__a" href="@culturePfx/projekty/@project.Slug">
 					<img src="@project.ImagePath" alt="@project.Name" />
 					<h3 class="article--project__h3">@project.Name</h3>
-					@*<p>@project.Description</p>*@
 				</a>
 			</article>
 		}
 	</section>
 	<div class="projects__container reveal" onclick="toggleSection('planning-projects', this)">
 		<button class="arrow--project"></button>
-		<h2>Plánované projekty</h2>
+		<h2>@SharedLocalizer["Projekty_Planning"]</h2>
 	</div>
 	<section id="planning-projects" class="projects__section reveal">
 		@foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatusEnum.Planning))
 		{
 			<article class="article--project zoom-effect">
-				<a class="article--project__a" href="/projekty/@project.Slug">
+				<a class="article--project__a" href="@culturePfx/projekty/@project.Slug">
 					<img src="@project.ImagePath" alt="@project.Name" />
 					<h3 class="article--project__h3">@project.Name</h3>
-					@*<p>@project.Description</p>*@
 				</a>
 			</article>
 		}
