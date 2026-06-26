@@ -117,6 +117,24 @@ namespace MojeVlastniStrankaFinanali.Web
 
 			app.UseForwardedHeaders();
 
+			app.Use(async (context, next) =>
+			{
+				var path = context.Request.Path.Value ?? "/";
+				var skip = path == "/" || path.StartsWith("/cs") || path.StartsWith("/en")
+					|| path.StartsWith("/api") || path.StartsWith("/metrics")
+					|| path.StartsWith("/css") || path.StartsWith("/js") || path.StartsWith("/lib")
+					|| path.StartsWith("/images") || path.StartsWith("/Admin")
+					|| path.StartsWith("/favicon") || path.StartsWith("/site.webmanifest")
+					|| path.StartsWith("/apple-touch-icon") || path.StartsWith("/safari-pinned")
+					|| path.StartsWith("/healthcheck") || path.StartsWith("/_framework");
+				if (!skip)
+				{
+					context.Response.Redirect("/cs" + path, permanent: false);
+					return;
+				}
+				await next(context);
+			});
+
 			app.UseHttpsRedirection();
 
 			app.UseResponseCompression();
