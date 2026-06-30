@@ -1,4 +1,4 @@
-﻿#nullable disable
+#nullable disable
 #nullable disable
 #nullable disable
 using Microsoft.AspNetCore.Mvc;
@@ -26,9 +26,16 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Marketing
 			this.mailService = mailService;
 		}
 
-		public void OnPost()
+		public async Task<IActionResult> OnPostAsync()
 		{
-			mailService.SendMail(NewsLetterRequest);
+			if (!ModelState.IsValid)
+			{
+				return Page();
+			}
+
+			await mailService.SendMail(NewsLetterRequest);
+			TempData["SuccessMessage"] = "Newsletter byl úspěšně rozeslán všem odběratelům.";
+			return RedirectToPage();
 		}
 	}
 }

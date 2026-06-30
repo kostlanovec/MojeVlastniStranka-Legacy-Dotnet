@@ -1,4 +1,4 @@
-﻿@page
+@page
 @model MojeVlastniStranka.Web.Areas.Admin.Pages.Marketing.NewsLetterModel
 @{
 	ViewData["Title"] = "NewsLetter";
@@ -12,12 +12,19 @@
 <script src="/lib/typo-js/typo.js"></script>
 <link rel="stylesheet" href="~/css/fast-style-blog.css" asp-append-version="true" />
 
+@if (TempData["SuccessMessage"] != null)
+{
+	<div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
+		@TempData["SuccessMessage"]
+	</div>
+}
+
 <h1>Newsletter</h1>
 <div id="summernote"></div>
 <form method="post">
-	<input class="control" name="Subject" />
-	<input type="hidden" name="Body" id="hiddenContent" />
-	<button type="submit" class="btn btn-primary">Poslat newsletter</button>
+	<input class="form-control mb-3" asp-for="NewsLetterRequest.Subject" placeholder="Předmět e-mailu" required />
+	<input type="hidden" asp-for="NewsLetterRequest.Body" id="hiddenContent" required />
+	<button type="submit" class="btn btn-primary mt-2">Poslat newsletter</button>
 </form>
 <script>
 	// Show/hide settings table on button click
