@@ -23,13 +23,16 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// </summary>
 		public async Task SendMail(NewsLetterRequest newsLetterRequest)
 		{
-			var message = new MimeMessage();
 			var emails = await GetAllNewsletterEmails();
 
 			if (emails != null)
 			{
+				var emailAddress = configuration["EmailSettings:Username"] ?? "kostlan@kostlanovec.cz";
+				var password = configuration["EmailSettings:Password"] ?? "HESLO-Z-APPSETTINGS";
+
 				foreach (var email in emails)
 				{
+					var message = new MimeMessage();
 					message.From.Add(new MailboxAddress("Jan Sebastián Kostlán", "kostlan@kostlanovec.cz"));
 					message.To.Add(new MailboxAddress(email.Email, email.Email));
 					message.Subject = newsLetterRequest.Subject;
@@ -39,8 +42,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 						Text = newsLetterRequest.Body
 					};
 
-					var emailAddress = configuration["EmailSettings:Username"] ?? "kostlan@kostlanovec.cz";
-					var password = configuration["EmailSettings:Password"] ?? "HESLO-Z-APPSETTINGS";
 					Client(message, emailAddress, password);
 				}
 			}

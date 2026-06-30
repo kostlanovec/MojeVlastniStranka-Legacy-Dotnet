@@ -490,4 +490,25 @@
   <data name="ShareTitle" xml:space="preserve">
     <value>Budeme rádi za sdílení!</value>
   </data>
+  <data name="ServiceRequest_Success" xml:space="preserve">
+    <value>Vaše žádost byla úspěšně odeslána. Brzy se Vám ozveme.</value>
+  </data>
+  <data name="Contact_Success" xml:space="preserve">
+    <value>Zpráva byla úspěšně odeslána. Brzy se Vám ozveme.</value>
+  </data>
+  <data name="Contact_Error_Honeypot" xml:space="preserve">
+    <value>Neplatný pokus o odeslání formuláře.</value>
+  </data>
+  <data name="Contact_Error_Invalid" xml:space="preserve">
+    <value>Formulář není validní.</value>
+  </data>
+  <data name="Newsletter_Error_Invalid" xml:space="preserve">
+    <value>Tohle není validní email.</value>
+  </data>
+  <data name="Newsletter_Error_Exists" xml:space="preserve">
+    <value>Tento email je již zaregistrován.</value>
+  </data>
+  <data name="Newsletter_Success" xml:space="preserve">
+    <value>Email byl úspěšně přidán.</value>
+  </data>
 </root>

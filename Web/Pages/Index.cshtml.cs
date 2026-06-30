@@ -14,6 +14,7 @@ namespace MojeVlastniStranka.Web.Pages
 		private readonly DataContext context;
 		private readonly BlogService blogService;
 		private readonly MailService mailService;
+		private readonly Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> localizer;
 
 		public List<BlogPostSummary> Posts
 		{
@@ -29,11 +30,12 @@ namespace MojeVlastniStranka.Web.Pages
 			set;
 		}
 
-		public IndexModel(DataContext context, BlogService blogService, MailService mailService)
+		public IndexModel(DataContext context, BlogService blogService, MailService mailService, Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> localizer)
 		{
 			this.context = context;
 			this.blogService = blogService;
 			this.mailService = mailService;
+			this.localizer = localizer;
 		}
 
 		public async Task OnGetAsync()
@@ -48,7 +50,7 @@ namespace MojeVlastniStranka.Web.Pages
 
 			if (!ModelState.IsValid)
 			{
-				ModelState.AddModelError(string.Empty, "Tohle není validní email.");
+				ModelState.AddModelError(string.Empty, localizer["Newsletter_Error_Invalid"]);
 				return Page();
 			}
 
@@ -57,11 +59,11 @@ namespace MojeVlastniStranka.Web.Pages
 			if (!isEmailAdded)
 			{
 				// Pokud email již existuje, nastavte chybu
-				ModelState.AddModelError(string.Empty, "Tento email je již zaregistrován.");
+				ModelState.AddModelError(string.Empty, localizer["Newsletter_Error_Exists"]);
 				return Page();
 			}
 
-			TempData["SuccessMessage"] = "Email byl úspěšně přidán.";
+			TempData["SuccessMessage"] = localizer["Newsletter_Success"].Value;
 
 			return Page();
 		}

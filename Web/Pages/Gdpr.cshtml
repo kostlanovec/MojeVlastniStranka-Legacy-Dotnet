@@ -1,44 +1,82 @@
-﻿@page
+@page
 @model MojeVlastniStranka.Web.Pages.GdprModel
 @{
-	ViewData["Title"] = "Ochrana osobních údajů GDPR";
-	ViewData["Description"] = "Informace o souladu s GDPR na osobním webu Jana Sebastiána Kostlána.";
+	var isEn = System.Globalization.CultureInfo.CurrentCulture.Name == "en";
+	ViewData["Title"] = isEn ? "GDPR Privacy Policy" : "Ochrana osobních údajů GDPR";
+	ViewData["Description"] = isEn ? "GDPR compliance information on Jan Sebastián Kostlán's personal website." : "Informace o souladu s GDPR na osobním webu Jana Sebastiána Kostlána.";
 	ViewData["Author"] = "Jan Sebastián Kostlán";
-	ViewData["Keywords"] = "GDPR, ochrana údajů, soukromí";
+	ViewData["Keywords"] = isEn ? "GDPR, data protection, privacy" : "GDPR, ochrana údajů, soukromí";
 	ViewData["nofollow"] = true;
-	var culturePfx = System.Globalization.CultureInfo.CurrentCulture.Name == "en" ? "/en" : "";
+	var culturePfx = isEn ? "/en" : "";
 }
 
 <main class="main">
-	<header class="header__other">
-		<h1 class="header__h1">GDPR</h1>
-		<p class="header__p">Prohlášení o souhlasu s GDPR.</p>
-	</header>
+	@if (isEn)
+	{
+		<header class="header__other">
+			<h1 class="header__h1">GDPR</h1>
+			<p class="header__p">GDPR compliance statement.</p>
+		</header>
 
-	<h2 class="h2__div__article red">Vaše údaje, Vaše práva</h2>
-	<p>
-		Vítejte na stránce věnované souladu s GDPR na osobním webu Jana Sebastiána Kostlána. Toto prohlášení popisuje naše závazky chránit vaše soukromí a zajišťovat bezpečnost vašich osobních údajů v souladu s Nařízením o ochraně osobních údajů (GDPR).
-	</p>
-	<p>
-		Respektujeme vaše právo na soukromí a kontrolu nad vašimi osobními údaji. Jako návštěvník našeho webu máte podle GDPR následující práva:
-	</p>
-	<ul>
-		<li>Právo na přístup: Můžete požadovat přístup k vašim osobním údajům, které zpracováváme.</li>
-		<li>Právo na opravu: Pokud jsou vaše osobní údaje nepřesné nebo neúplné, máte právo na jejich opravu nebo doplnění.</li>
-		<li>Právo na výmaz: Můžete požadovat smazání svých osobních údajů za určitých okolností.</li>
-		<li>Právo na námitku: Máte právo vznést námitku proti zpracování vašich osobních údajů pro určité účely.</li>
-	</ul>
-	<h2 class="h2__div__article red">Sběr a Použití Údajů</h2>
-	<p>
-		Naše webové stránky sbírají a zpracovávají osobní údaje pouze pro explicitně uvedené účely. Vaše údaje nebudou bez vašeho souhlasu sdíleny s třetími stranami, s výjimkou případů, kdy to vyžaduje zákon.
-	</p>
+		<h2 class="h2__div__article red">Your Data, Your Rights</h2>
+		<p>
+			Welcome to the GDPR compliance page of Jan Sebastián Kostlán's personal website. This statement outlines our commitment to protecting your privacy and ensuring the security of your personal data in accordance with the General Data Protection Regulation (GDPR).
+		</p>
+		<p>
+			We respect your right to privacy and control over your personal data. As a visitor to our website, you have the following rights under GDPR:
+		</p>
+		<ul>
+			<li>Right to access: You can request access to the personal data we process about you.</li>
+			<li>Right to rectification: If your personal data is inaccurate or incomplete, you have the right to have it corrected or completed.</li>
+			<li>Right to erasure: You can request the deletion of your personal data under certain circumstances.</li>
+			<li>Right to object: You have the right to object to the processing of your personal data for specific purposes.</li>
+		</ul>
+		<h2 class="h2__div__article red">Data Collection and Use</h2>
+		<p>
+			Our website collects and processes personal data only for explicitly stated purposes. Your data will not be shared with third parties without your consent, except where required by law.
+		</p>
 
-	<h2>Politika Cookies </h2>
-	<p>
-		Používáme soubory cookies ke zlepšení vašeho prohlížení. Používáním našeho webu souhlasíte s používáním cookies v souladu s naší <a class="red" href="@culturePfx/zasadycookies">Politikou Cookies</a>.
-	</p>
-	<h2 class="h2__div__article red">Kontaktujte Nás</h2>
-	<p>
-		Pokud máte nějaké dotazy nebo obavy ohledně našeho souladu s GDPR nebo zpracování vašich osobních údajů, kontaktujte nás na <a class="red" href="mailto:info@kostlanovec.cz">info@kostlanovec.cz</a>.
-	</p>
+		<h2>Cookie Policy</h2>
+		<p>
+			We use cookies to improve your browsing experience. By using our website, you agree to the use of cookies in accordance with our <a class="red" href="@culturePfx/zasadycookies">Cookie Policy</a>.
+		</p>
+		<h2 class="h2__div__article red">Contact Us</h2>
+		<p>
+			If you have any questions or concerns regarding our GDPR compliance or the processing of your personal data, contact us at <a class="red" href="mailto:info@kostlanovec.cz">info@kostlanovec.cz</a>.
+		</p>
+	}
+	else
+	{
+		<header class="header__other">
+			<h1 class="header__h1">GDPR</h1>
+			<p class="header__p">Prohlášení o souhlasu s GDPR.</p>
+		</header>
+
+		<h2 class="h2__div__article red">Vaše údaje, Vaše práva</h2>
+		<p>
+			Vítejte na stránce věnované souladu s GDPR na osobním webu Jana Sebastiána Kostlána. Toto prohlášení popisuje naše závazky chránit vaše soukromí a zajišťovat bezpečnost vašich osobních údajů v souladu s Nařízením o ochraně osobních údajů (GDPR).
+		</p>
+		<p>
+			Respektujeme vaše právo na soukromí a kontrolu nad vašimi osobními údaji. Jako návštěvník našeho webu máte podle GDPR následující práva:
+		</p>
+		<ul>
+			<li>Právo na přístup: Můžete požadovat přístup k vašim osobním údajům, které zpracováváme.</li>
+			<li>Právo na opravu: Pokud jsou vaše osobní údaje nepřesné nebo neúplné, máte právo na jejich opravu nebo doplnění.</li>
+			<li>Právo na výmaz: Můžete požadovat smazání svých osobních údajů za určitých okolností.</li>
+			<li>Právo na námitku: Máte právo vznést námitku proti zpracování vašich osobních údajů pro určité účely.</li>
+		</ul>
+		<h2 class="h2__div__article red">Sběr a Použití Údajů</h2>
+		<p>
+			Naše webové stránky sbírají a zpracovávají osobní údaje pouze pro explicitně uvedené účely. Vaše údaje nebudou bez vašeho souhlasu sdíleny s třetími stranami, s výjimkem případů, kdy to vyžaduje zákon.
+		</p>
+
+		<h2>Politika Cookies </h2>
+		<p>
+			Používáme soubory cookies ke zlepšení vašeho prohlížení. Používáním našeho webu souhlasíte s používáním cookies v souladu s naší <a class="red" href="@culturePfx/zasadycookies">Politikou Cookies</a>.
+		</p>
+		<h2 class="h2__div__article red">Kontaktujte Nás</h2>
+		<p>
+			Pokud máte nějaké dotazy nebo obavy ohledně našeho souladu s GDPR nebo zpracování vašich osobních údajů, kontaktujte nás na <a class="red" href="mailto:info@kostlanovec.cz">info@kostlanovec.cz</a>.
+		</p>
+	}
 </main>

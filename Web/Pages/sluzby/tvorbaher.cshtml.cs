@@ -9,6 +9,7 @@ namespace MojeVlastniStranka.Web.Pages.sluzby
 	public class tvorbaherModel : PageModel
 	{
 		private readonly ServicesOfferedService servicesOfferedService;
+		private readonly Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> localizer;
 
 		[BindProperty]
 		public ServiceRequestDto ServiceRequestDto 
@@ -17,9 +18,10 @@ namespace MojeVlastniStranka.Web.Pages.sluzby
 			set;
 		}
 
-		public tvorbaherModel(ServicesOfferedService servicesOfferedService)
+		public tvorbaherModel(ServicesOfferedService servicesOfferedService, Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> localizer)
 		{
 			this.servicesOfferedService = servicesOfferedService;
+			this.localizer = localizer;
 		}
 
 		public async Task<IActionResult> OnPostAsync()
@@ -31,7 +33,7 @@ namespace MojeVlastniStranka.Web.Pages.sluzby
 
 			await servicesOfferedService.AddServiceRequestAsync(ServiceRequestDto);
 
-			TempData["SuccessMessage"] = "Vaše žádost byla úspěšně odeslána. Brzy se Vám ozveme.";
+			TempData["SuccessMessage"] = localizer["ServiceRequest_Success"].Value;
 			return RedirectToPage();
 		}
 	}

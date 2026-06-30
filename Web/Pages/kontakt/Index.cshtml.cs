@@ -12,6 +12,7 @@ namespace MojeVlastniStranka.Web.Pages.kontakt
 	{
 		private readonly DataContext context;
 		private readonly FormService formService;
+		private readonly Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> localizer;
 
 		[BindProperty]
 		public string Honeypot
@@ -20,10 +21,11 @@ namespace MojeVlastniStranka.Web.Pages.kontakt
 			set;
 		}
 
-		public kontaktModel(DataContext context, FormService formService)
+		public kontaktModel(DataContext context, FormService formService, Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> localizer)
 		{
 			this.context = context;
 			this.formService = formService;
+			this.localizer = localizer;
 		}
 
 		[BindProperty]
@@ -42,19 +44,19 @@ namespace MojeVlastniStranka.Web.Pages.kontakt
 
 			if (!string.IsNullOrWhiteSpace(Honeypot))
 			{
-				ModelState.AddModelError("Form", "Neplatný pokus o odeslání formuláře.");
+				ModelState.AddModelError("Form", localizer["Contact_Error_Honeypot"]);
 				return Page();
 			}
 
 			if (ModelState.IsValid)
 			{
 				formService.AddForm(Form);
-				TempData["SuccessMessage"] = "Zpráva byla úspěšně odeslána. Brzy se Vám ozveme.";
+				TempData["SuccessMessage"] = localizer["Contact_Success"].Value;
 				return RedirectToPage();
 			}
 			else
 			{
-				ModelState.AddModelError("Form", "Formulář není validní.");
+				ModelState.AddModelError("Form", localizer["Contact_Error_Invalid"]);
 				return Page();
 			}
 		}

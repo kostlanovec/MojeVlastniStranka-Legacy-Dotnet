@@ -58,7 +58,7 @@
 
 	@if (ViewData["nofollow"]?.ToString() == "true")
 	{
-		<meta name="robots" content="nofollow">
+		<meta name="robots" content="noindex, nofollow">
 	}
 
 	@if (ViewData["JsonLD"] != null)

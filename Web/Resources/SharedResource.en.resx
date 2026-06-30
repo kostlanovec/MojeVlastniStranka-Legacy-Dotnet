@@ -490,4 +490,25 @@
   <data name="ShareTitle" xml:space="preserve">
     <value>We'd love for you to share!</value>
   </data>
+  <data name="ServiceRequest_Success" xml:space="preserve">
+    <value>Your request has been successfully submitted. We will contact you soon.</value>
+  </data>
+  <data name="Contact_Success" xml:space="preserve">
+    <value>Your message has been successfully sent. We will contact you soon.</value>
+  </data>
+  <data name="Contact_Error_Honeypot" xml:space="preserve">
+    <value>Invalid form submission attempt.</value>
+  </data>
+  <data name="Contact_Error_Invalid" xml:space="preserve">
+    <value>The form is not valid.</value>
+  </data>
+  <data name="Newsletter_Error_Invalid" xml:space="preserve">
+    <value>This is not a valid email address.</value>
+  </data>
+  <data name="Newsletter_Error_Exists" xml:space="preserve">
+    <value>This email is already registered.</value>
+  </data>
+  <data name="Newsletter_Success" xml:space="preserve">
+    <value>Email has been successfully added.</value>
+  </data>
 </root>
