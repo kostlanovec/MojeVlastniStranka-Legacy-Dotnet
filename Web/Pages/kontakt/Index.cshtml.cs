@@ -13,6 +13,7 @@ namespace MojeVlastniStranka.Web.Pages.kontakt
 		private readonly DataContext context;
 		private readonly FormService formService;
 		private readonly Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> localizer;
+		private readonly RecaptchaService recaptchaService;
 
 		[BindProperty]
 		public string Honeypot
@@ -21,11 +22,12 @@ namespace MojeVlastniStranka.Web.Pages.kontakt
 			set;
 		}
 
-		public kontaktModel(DataContext context, FormService formService, Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> localizer)
+		public kontaktModel(DataContext context, FormService formService, Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> localizer, RecaptchaService recaptchaService)
 		{
 			this.context = context;
 			this.formService = formService;
 			this.localizer = localizer;
+			this.recaptchaService = recaptchaService;
 		}
 
 		[BindProperty]
@@ -38,9 +40,16 @@ namespace MojeVlastniStranka.Web.Pages.kontakt
 		/// <summary>
 		/// Odeslání formuláøe.
 		/// </summary>
-		public IActionResult OnPost()
+		public async Task<IActionResult> OnPostAsync()
 		{
 			Form.SendTime = DateTime.Now;
+
+			var recaptchaToken = Request.Form["RecaptchaToken"];
+			if (!await recaptchaService.VerifyAsync(recaptchaToken))
+			{
+				ModelState.AddModelError("Form", localizer["Recaptcha_Error"]);
+				return Page();
+			}
 
 			if (!string.IsNullOrWhiteSpace(Honeypot))
 			{

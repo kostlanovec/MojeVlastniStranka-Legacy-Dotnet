@@ -15,6 +15,7 @@ namespace MojeVlastniStranka.Web.Pages
 		private readonly BlogService blogService;
 		private readonly MailService mailService;
 		private readonly Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> localizer;
+		private readonly RecaptchaService recaptchaService;
 
 		public List<BlogPostSummary> Posts
 		{
@@ -30,12 +31,13 @@ namespace MojeVlastniStranka.Web.Pages
 			set;
 		}
 
-		public IndexModel(DataContext context, BlogService blogService, MailService mailService, Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> localizer)
+		public IndexModel(DataContext context, BlogService blogService, MailService mailService, Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> localizer, RecaptchaService recaptchaService)
 		{
 			this.context = context;
 			this.blogService = blogService;
 			this.mailService = mailService;
 			this.localizer = localizer;
+			this.recaptchaService = recaptchaService;
 		}
 
 		public async Task OnGetAsync()
@@ -47,6 +49,13 @@ namespace MojeVlastniStranka.Web.Pages
 		public async Task<IActionResult> OnPostAsync()
 		{
 			Posts = await blogService.GetThreePost();
+
+			var recaptchaToken = Request.Form["RecaptchaToken"];
+			if (!await recaptchaService.VerifyAsync(recaptchaToken))
+			{
+				ModelState.AddModelError(string.Empty, localizer["Recaptcha_Error"]);
+				return Page();
+			}
 
 			if (!ModelState.IsValid)
 			{

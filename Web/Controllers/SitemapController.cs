@@ -1,4 +1,4 @@
-﻿#nullable disable
+#nullable disable
 using Microsoft.AspNetCore.Mvc;
 using MojeVlastniStranka.DataAccess;
 using SitemapNode = AspNetCore.SEOHelper.Sitemap.SitemapNode;
@@ -60,21 +60,21 @@ namespace MojeVlastniStranka.Web.Controllers
 
 			foreach (var page in staticPages)
 			{
-				nodes.Add(new SitemapNode { Url = baseUrl + page.Path, Frequency = page.Freq, Priority = page.Pri });
+				nodes.Add(new SitemapNode { Url = baseUrl + (page.Path == "" ? "" : "/cs" + page.Path), Frequency = page.Freq, Priority = page.Pri });
 				nodes.Add(new SitemapNode { Url = baseUrl + "/en" + (page.Path == "" ? "" : page.Path), Frequency = page.Freq, Priority = page.Pri });
 			}
 
 			var projects = context.Projects.ToList();
 			foreach (var project in projects)
 			{
-				nodes.Add(new SitemapNode { Url = $"{baseUrl}/projekty/{project.Slug}", LastModified = project.Date, Frequency = SitemapFrequency.Weekly, Priority = 0.7 });
+				nodes.Add(new SitemapNode { Url = $"{baseUrl}/cs/projekty/{project.Slug}", LastModified = project.Date, Frequency = SitemapFrequency.Weekly, Priority = 0.7 });
 				nodes.Add(new SitemapNode { Url = $"{baseUrl}/en/projekty/{project.Slug}", LastModified = project.Date, Frequency = SitemapFrequency.Weekly, Priority = 0.7 });
 			}
 
 			var blogPosts = context.BlogPosts.ToList();
 			foreach (var post in blogPosts)
 			{
-				nodes.Add(new SitemapNode { Url = $"{baseUrl}/blog/{post.Slug}", LastModified = post.Date, Frequency = SitemapFrequency.Always, Priority = 0.6 });
+				nodes.Add(new SitemapNode { Url = $"{baseUrl}/cs/blog/{post.Slug}", LastModified = post.Date, Frequency = SitemapFrequency.Always, Priority = 0.6 });
 				if (!string.IsNullOrEmpty(post.ContentEn))
 					nodes.Add(new SitemapNode { Url = $"{baseUrl}/en/blog/{post.Slug}", LastModified = post.Date, Frequency = SitemapFrequency.Always, Priority = 0.6 });
 			}

@@ -511,4 +511,7 @@
   <data name="Newsletter_Success" xml:space="preserve">
     <value>Email has been successfully added.</value>
   </data>
+  <data name="Recaptcha_Error" xml:space="preserve">
+    <value>reCAPTCHA verification failed. Please try again.</value>
+  </data>
 </root>

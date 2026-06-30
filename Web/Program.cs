@@ -70,6 +70,7 @@ namespace MojeVlastniStrankaFinanali.Web
 			builder.Services.AddScoped<MailService>();
 			builder.Services.AddScoped<FormService>();
 			builder.Services.AddScoped<ServicesOfferedService>();
+			builder.Services.AddHttpClient<RecaptchaService>();
 
 			builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 

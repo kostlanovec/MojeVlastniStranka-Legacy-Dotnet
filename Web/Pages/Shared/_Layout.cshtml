@@ -138,6 +138,31 @@
 	<link rel="stylesheet" href="/lib/vanilla-cookieconsent/src/cookieconsent.css" media="print" onload="this.media='all'">
 	<script defer src="/lib/vanilla-cookieconsent/src/cookieconsent.js" onload="this.media='all'"></script>
 	<script defer src="Scripts/cookieconsent-init.js" onload="this.media='all'"></script>
+	@if (!string.IsNullOrEmpty(Configuration["GoogleRecaptcha:Sitekey"]) && Configuration["GoogleRecaptcha:Sitekey"] != "YOUR-GOOGLE-SITEKEY-HERE")
+	{
+		<script src="https://www.google.com/recaptcha/api.js?render=@Configuration["GoogleRecaptcha:Sitekey"]"></script>
+		<script>
+			document.addEventListener("submit", function(e) {
+				var form = e.target;
+				if (form.classList.contains("contact__form") || form.classList.contains("form__newsletter")) {
+					e.preventDefault();
+					grecaptcha.ready(function() {
+						grecaptcha.execute('@Configuration["GoogleRecaptcha:Sitekey"]', { action: 'submit' }).then(function(token) {
+							var hiddenInput = form.querySelector('input[name="RecaptchaToken"]');
+							if (!hiddenInput) {
+								hiddenInput = document.createElement('input');
+								hiddenInput.type = 'hidden';
+								hiddenInput.name = 'RecaptchaToken';
+								form.appendChild(hiddenInput);
+							}
+							hiddenInput.value = token;
+							form.submit();
+						});
+					});
+				}
+			});
+		</script>
+	}
 	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

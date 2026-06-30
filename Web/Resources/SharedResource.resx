@@ -511,4 +511,7 @@
   <data name="Newsletter_Success" xml:space="preserve">
     <value>Email byl úspěšně přidán.</value>
   </data>
+  <data name="Recaptcha_Error" xml:space="preserve">
+    <value>Ověření reCAPTCHA selhalo. Zkuste to prosím znovu.</value>
+  </data>
 </root>

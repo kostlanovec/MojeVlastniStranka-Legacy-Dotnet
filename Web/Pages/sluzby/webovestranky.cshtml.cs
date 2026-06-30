@@ -9,6 +9,7 @@ namespace MojeVlastniStranka.Web.Pages.sluzby
 	{
 		private readonly ServicesOfferedService servicesOfferedService;
 		private readonly Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> localizer;
+		private readonly RecaptchaService recaptchaService;
 
 		[BindProperty]
 		public ServiceRequestDto ServiceRequestDto
@@ -17,14 +18,22 @@ namespace MojeVlastniStranka.Web.Pages.sluzby
 			set;
 		}
 
-		public webovestrankyModel(ServicesOfferedService servicesOfferedService, Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> localizer)
+		public webovestrankyModel(ServicesOfferedService servicesOfferedService, Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> localizer, RecaptchaService recaptchaService)
 		{
 			this.servicesOfferedService = servicesOfferedService;
 			this.localizer = localizer;
+			this.recaptchaService = recaptchaService;
 		}
 
 		public async Task<IActionResult> OnPostAsync()
 		{
+			var recaptchaToken = Request.Form["RecaptchaToken"];
+			if (!await recaptchaService.VerifyAsync(recaptchaToken))
+			{
+				ModelState.AddModelError(string.Empty, localizer["Recaptcha_Error"]);
+				return Page();
+			}
+
 			if (!ModelState.IsValid)
 			{
 				return Page();
