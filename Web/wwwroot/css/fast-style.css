@@ -78,6 +78,10 @@ h2 {
 	text-align: center;
 }
 
+.size--h1 {
+	font-size: 3.5em;
+}
+
 .contact__form {
 	display: flex;
 	flex-direction: column;
