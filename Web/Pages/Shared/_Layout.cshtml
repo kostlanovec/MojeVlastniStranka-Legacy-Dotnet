@@ -12,7 +12,8 @@
     {
         pathNoCulture = pathNoCulture.Length == 3 ? "/" : pathNoCulture[3..];
     }
-    var csHref = string.IsNullOrEmpty(pathNoCulture) ? "/" : pathNoCulture;
+    if (string.IsNullOrEmpty(pathNoCulture)) pathNoCulture = "/";
+    var csHref = pathNoCulture;
     var enHref = "/en" + (pathNoCulture == "/" ? "" : pathNoCulture);
 
     // The homepage alone is reachable both bare ("/") and prefixed ("/cs") with
