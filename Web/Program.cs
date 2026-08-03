@@ -194,7 +194,8 @@ namespace MojeVlastniStrankaFinanali.Web
 				.AddSupportedCultures(supportedCultures)
 				.AddSupportedUICultures(supportedCultures);
 
-			localizationOptions.RequestCultureProviders.Insert(0, new Microsoft.AspNetCore.Localization.Routing.RouteDataRequestCultureProvider() { Options = localizationOptions });
+			localizationOptions.RequestCultureProviders.Clear();
+			localizationOptions.RequestCultureProviders.Add(new Microsoft.AspNetCore.Localization.Routing.RouteDataRequestCultureProvider() { Options = localizationOptions });
 
 			app.UseRouting();
 
