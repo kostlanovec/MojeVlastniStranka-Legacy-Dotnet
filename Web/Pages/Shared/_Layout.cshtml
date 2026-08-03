@@ -76,9 +76,11 @@
 
     @if (ViewData[ViewDataKeys.JsonLD] != null)
     {
-        <script type="application/ld+json">
-            @Html.Raw(ViewData[ViewDataKeys.JsonLD])
-        </script>
+        @* Emitted as one raw string, not markup: the built-in ScriptTagHelper
+           re-serializes <script> attributes and mangles "+" in type="application/ld+json"
+           into "&#x2B;" otherwise (still spec-valid once entity-decoded, but some
+           naive JSON-LD scrapers do a raw string match and would miss it). *@
+        @Html.Raw($"<script type=\"application/ld+json\">{ViewData[ViewDataKeys.JsonLD]}</script>")
     }
     <link rel="canonical" href="@canonicalUrl" />
     <link rel="alternate" hreflang="cs" href="https://@Context.Request.Host@csHref" />
