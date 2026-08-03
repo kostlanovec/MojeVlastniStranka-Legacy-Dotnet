@@ -1,100 +1,101 @@
 ﻿@page
+@using MojeVlastniStranka.ApplicationCore.Constants
 @model MojeVlastniStranka.Web.Areas.Admin.Pages.Blog.AddImageModel
 @{
-	ViewData["Title"] = "Přidání obrázků";
+    ViewData[ViewDataKeys.Title] = "Přidání obrázků";
 }
 <div class="bg-secondary rounded h-100 p-4">
-	<div class="modal" id="confirmDeleteModal" tabindex="2" role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">Potvrzení odstranění</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					Opravdu chcete tento obrázek odstranit?
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
-					<form method="post">
-						<input type="hidden" name="imageId" id="imageId" value="" />
-						<button type="submit" asp-page-handler="Delete" class="btn btn-danger">Odstranit</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="modal" id="confirmDeleteModal" tabindex="2" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Potvrzení odstranění</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Opravdu chcete tento obrázek odstranit?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
+                    <form method="post">
+                        <input type="hidden" name="imageId" id="imageId" value="" />
+                        <button type="submit" asp-page-handler="Delete" class="btn btn-danger">Odstranit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<form method="post" enctype="multipart/form-data">
-		<div class="form-group">
-			<label for="FileUpload">Vyberte obrázek k nahrání:</label>
-			<input class="form-control bg-dark" type="file" id="FileUpload" name="FileUpload" id="file" required />
-			<div id="image-preview"></div>
-		</div>
-		<div class="form-group">
-			<label for="description">Popis:</label>
-			<input class="form-control" type="text" id="description" name="Description" required />
-		</div>
-		<button type="submit" class="btn btn-primary">Nahrát obrázek</button>
-	</form>
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="FileUpload">Vyberte obrázek k nahrání:</label>
+            <input class="form-control bg-dark" type="file" id="FileUpload" name="FileUpload" id="file" required />
+            <div id="image-preview"></div>
+        </div>
+        <div class="form-group">
+            <label for="description">Popis:</label>
+            <input class="form-control" type="text" id="description" name="Description" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Nahrát obrázek</button>
+    </form>
 
 
-	<h2>Seznam obrázku v galerii</h2>
-	<div class="row">
-		@foreach (var image in Model.Images)
-		{
-			<div class="col-md-4">
-				<img class="card-img-top" src="@image.FileName" alt="@image.Description" />
-				<div class="card-body">
-					<h5 class="card-title">@image.Description</h5>
-					<form method="post">
-						<input type="hidden" name="imageId" value="@image.Id" />
-						<div class="form-group">
-							<label for="newDescription">Nový popis:</label>
-							<input class="form-control" type="text" id="newDescription" name="newDescription" value="@image.Description" required />
-						</div>
-						<div class="btn-group" role="group" aria-label="Obrázek akce">
-							<button type="submit" asp-page-handler="UpdateDescription" class="btn btn-primary">Aktualizovat popis</button>
-							<button type="button" class="btn btn-danger" onclick="setDeleteImageId('@image.Id')" data-toggle="modal" data-target="#confirmDeleteModal" data-backdrop="false">Odstranit obrázek</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		}
-	</div>
+    <h2>Seznam obrázku v galerii</h2>
+    <div class="row">
+        @foreach (var image in Model.Images)
+        {
+            <div class="col-md-4">
+                <img class="card-img-top" src="@image.FileName" alt="@image.Description" />
+                <div class="card-body">
+                    <h5 class="card-title">@image.Description</h5>
+                    <form method="post">
+                        <input type="hidden" name="imageId" value="@image.Id" />
+                        <div class="form-group">
+                            <label for="newDescription">Nový popis:</label>
+                            <input class="form-control" type="text" id="newDescription" name="newDescription" value="@image.Description" required />
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Obrázek akce">
+                            <button type="submit" asp-page-handler="UpdateDescription" class="btn btn-primary">Aktualizovat popis</button>
+                            <button type="button" class="btn btn-danger" onclick="setDeleteImageId('@image.Id')" data-toggle="modal" data-target="#confirmDeleteModal" data-backdrop="false">Odstranit obrázek</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
 </div>
 
 <script>
-	function setDeleteImageId(imageId) {
-		 document.getElementById('imageId').value = imageId;
-	}
+    function setDeleteImageId(imageId) {
+         document.getElementById('imageId').value = imageId;
+    }
 
-	function showImagePreview(input) {
-		 if (input.files && input.files[0]) {
-			  var reader = new FileReader();
+    function showImagePreview(input) {
+         if (input.files && input.files[0]) {
+              var reader = new FileReader();
 
-			  reader.onload = function (e) {
-					var img = document.createElement('img');
-					img.src = e.target.result;
-					img.classList.add('img-fluid');
+              reader.onload = function (e) {
+                    var img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.classList.add('img-fluid');
 
-					var previewDiv = document.getElementById('image-preview');
-					previewDiv.innerHTML = '';
-					previewDiv.appendChild(img);
-			  }
+                    var previewDiv = document.getElementById('image-preview');
+                    previewDiv.innerHTML = '';
+                    previewDiv.appendChild(img);
+              }
 
-			  reader.readAsDataURL(input.files[0]);
-		 }
-	}
+              reader.readAsDataURL(input.files[0]);
+         }
+    }
 
-	document.addEventListener('DOMContentLoaded', function () {
-		 var fileInput = document.getElementById('FileUpload');
-		 if (fileInput) {
-			  fileInput.addEventListener('change', function () {
-					showImagePreview(this);
-			  });
-		 }
-	});
+    document.addEventListener('DOMContentLoaded', function () {
+         var fileInput = document.getElementById('FileUpload');
+         if (fileInput) {
+              fileInput.addEventListener('change', function () {
+                    showImagePreview(this);
+              });
+         }
+    });
 </script>

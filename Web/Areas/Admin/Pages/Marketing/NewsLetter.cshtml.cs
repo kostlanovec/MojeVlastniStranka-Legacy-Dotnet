@@ -1,3 +1,4 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 #nullable disable
 #nullable disable
 #nullable disable
@@ -12,7 +13,7 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Marketing
 	[Authorize]
 	public class NewsLetterModel : PageModel
 	{
-		private readonly MailService mailService;
+		private readonly IMailService mailService;
 
 		[BindProperty]
 		public NewsLetterRequest NewsLetterRequest
@@ -21,7 +22,7 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Marketing
 			set;
 		}
 
-		public NewsLetterModel(MailService mailService)
+		public NewsLetterModel(IMailService mailService)
 		{
 			this.mailService = mailService;
 		}
@@ -33,8 +34,8 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Marketing
 				return Page();
 			}
 
-			await mailService.SendMail(NewsLetterRequest);
-			TempData["SuccessMessage"] = "Newsletter byl úspěšně rozeslán všem odběratelům.";
+			Hangfire.BackgroundJob.Enqueue<IMailService>(m => m.SendMail(NewsLetterRequest));
+			TempData["SuccessMessage"] = "Newsletter byl úspěšně přidán do fronty k rozeslání všem odběratelům.";
 			return RedirectToPage();
 		}
 	}

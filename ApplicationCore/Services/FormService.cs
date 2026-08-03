@@ -1,10 +1,12 @@
-﻿using MojeVlastniStranka.ApplicationCore.Dto;
+using Microsoft.EntityFrameworkCore;
+using MojeVlastniStranka.ApplicationCore.Interfaces;
+using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.DataAccess;
 using MojeVlastniStranka.DataAccess.Entities;
 
 namespace MojeVlastniStranka.ApplicationCore.Services
 {
-	public class FormService
+	public class FormService : IFormService
 	{
 		private readonly DataContext context;
 
@@ -34,7 +36,20 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// </summary>
 		public List<ContactForm> GetAllForms()
 		{
-			return context.ContactForms.ToList();
+			return context.ContactForms.AsNoTracking().ToList();
+		}
+
+		/// <summary>
+		/// Smaže formulář podle Id.
+		/// </summary>
+		public void DeleteForm(Guid id)
+		{
+			var contactForm = context.ContactForms.Find(id);
+			if (contactForm != null)
+			{
+				context.ContactForms.Remove(contactForm);
+				context.SaveChanges();
+			}
 		}
 	}
 }

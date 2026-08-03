@@ -1,138 +1,140 @@
-﻿@using MojeVlastniStranka.ApplicationCore.Dto
+@using MojeVlastniStranka.ApplicationCore.Constants
+@using MojeVlastniStranka.ApplicationCore.Dto
 @using MojeVlastniStranka.ApplicationCore.Services
+@using MojeVlastniStranka.ApplicationCore.Interfaces
 @using System.Globalization
 @using MojeVlastniStranka.DataAccess.Entities
 
-@inject NotificationService notificationService
+@inject INotificationService notificationService
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 @functions {
-	public Task<List<NotificationDto>> GetDataFromDatabase()
-	{
-		var data = notificationService.GetThreeNotification();
-		return data;
-	}
+    public Task<List<NotificationDto>> GetDataFromDatabase()
+    {
+        var data = notificationService.GetThreeNotification();
+        return data;
+    }
 }
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>@ViewData["Title"] - Admin</title>
-	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-	<link rel="manifest" href="/site.webmanifest">
-	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-	<meta name="msapplication-TileColor" content="#2b5797">
-	<meta name="msapplication-TileImage" content="/mstile-144x144.png">
-	<meta name="theme-color" content="#ffffff">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&amp;family=Roboto:wght@500;700&amp;display=swap" rel="stylesheet">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-	<link href="/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-	<link href="/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet">
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/css/style.css" rel="stylesheet" />
-	<script src="lib/jquery/dist/jquery.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<meta name="robots" content="nofollow" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData[ViewDataKeys.Title] - Admin</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&amp;family=Roboto:wght@500;700&amp;display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet" />
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta name="robots" content="nofollow" />
 </head>
 <body>
 
-	<div class="container-fluid position-relative d-flex p-0" style="margin-top:-24px">
-		<partial name="_Navbar" />
-		<div class="content">
-			<nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
-				<a asp-page="" class="navbar-brand d-flex d-lg-none me-4">
-					<h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
-				</a>
-				<a href="#" class="sidebar-toggler flex-shrink-0">
-					<i class="fa fa-bars"></i>
-				</a>
-				<!--todo Přidat něco skrz vyhledavání?-->
-				<form class="d-none d-md-flex ms-4">
-					<input class="form-control bg-dark border-0" type="search" placeholder="Vyhledat">
-				</form>
-				<!--todo Implementování oznámení na určité eventy.-->
-				<div class="navbar-nav align-items-center ms-auto">
-					<div class="nav-item dropdown">
-						<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-							<i class="fa fa-envelope me-lg-2"></i>
-							<span class="d-none d-lg-inline-flex">Zprávy</span>
-						</a>
-						<div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-							@foreach (var notification in await GetDataFromDatabase())
-							{
-								<a href="#" class="dropdown-item">
-									<div class="d-flex align-items-center">
-										<img class="rounded-circle" src="/images/osobnifotka.png" alt="" style="width: 40px; height: 40px;">
-										<div class="ms-2">
-											<h6 class="fw-normal mb-0">@notification.ShortMessage</h6>
-											<small>@notification.TimePublish.ToString(CultureInfo.CurrentCulture)</small>
-										</div>
-									</div>
-								</a>
-								<hr class="dropdown-divider">
-							}
-							<a asp-page="/Marketing/AllNotification" class="dropdown-item text-center">Vidět všechny zprávy</a>
-						</div>
-					</div>
-				</div>
-				<!--todo Implementování zpráv o změnách na profilu.-->
-				<div class="nav-item dropdown">
-					<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-						<i class="fa fa-bell me-lg-2"></i>
-						<span class="d-none d-lg-inline-flex">Oznámení</span>
-					</a>
-					<div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-						<a href="#" class="dropdown-item">
-							<h6 class="fw-normal mb-0">Profile updated</h6>
-							<small>15 minutes ago</small>
-						</a>
-						<hr class="dropdown-divider">
-						<a href="#" class="dropdown-item text-center">Vidět všechny zprávy</a>
-					</div>
-				</div>
-				<div class="nav-item dropdown">
-					<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-						<img class="rounded-circle me-lg-2" src="/images/osobnifotka.png" alt="" style="width: 40px; height: 40px;">
-						<span class="d-none d-lg-inline-flex">Jan Sebastián Kostlán</span>
-					</a>
-					<div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-						<a asp-page="./Settings" class="dropdown-item">Nastavení profilu</a>
-						<form class="class=" dropdown-item"" asp-area="Admin" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index")" method="post">
-							<button class="dropdown-item" type="submit">Odhlásit se</button>
-						</form>
-					</div>
-				</div>
-				</>
-			</nav>
-			<div class="container-fluid pt-4 px-4 mt-4">
-				@RenderBody()
-			</div>
-		</div>
-	</div>
-	<script>
-		document.addEventListener("DOMContentLoaded", function () {
-			var sidebarToggler = document.querySelector('.sidebar-toggler');
-			var sidebar = document.querySelector('.sidebar');
-			var contentDiv = document.querySelector('.content');
+    <div class="container-fluid position-relative d-flex p-0" style="margin-top:-24px">
+        <partial name="_Navbar" />
+        <div class="content">
+            <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
+                <a asp-page="" class="navbar-brand d-flex d-lg-none me-4">
+                    <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
+                </a>
+                <a href="#" class="sidebar-toggler flex-shrink-0">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <!--todo Přidat něco skrz vyhledavání?-->
+                <form class="d-none d-md-flex ms-4">
+                    <input class="form-control bg-dark border-0" type="search" placeholder="Vyhledat">
+                </form>
+                <!--todo Implementování oznámení na určité eventy.-->
+                <div class="navbar-nav align-items-center ms-auto">
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fa fa-envelope me-lg-2"></i>
+                            <span class="d-none d-lg-inline-flex">Zprávy</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                            @foreach (var notification in await GetDataFromDatabase())
+                            {
+                                <a href="#" class="dropdown-item">
+                                    <div class="d-flex align-items-center">
+                                        <img class="rounded-circle" src="/images/osobnifotka.png" alt="" style="width: 40px; height: 40px;">
+                                        <div class="ms-2">
+                                            <h6 class="fw-normal mb-0">@notification.ShortMessage</h6>
+                                            <small>@notification.TimePublish.ToString(CultureInfo.CurrentCulture)</small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <hr class="dropdown-divider">
+                            }
+                            <a asp-page="/Marketing/AllNotification" class="dropdown-item text-center">Vidět všechny zprávy</a>
+                        </div>
+                    </div>
+                </div>
+                <!--todo Implementování zpráv o změnách na profilu.-->
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fa fa-bell me-lg-2"></i>
+                        <span class="d-none d-lg-inline-flex">Oznámení</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                        <a href="#" class="dropdown-item">
+                            <h6 class="fw-normal mb-0">Profile updated</h6>
+                            <small>15 minutes ago</small>
+                        </a>
+                        <hr class="dropdown-divider">
+                        <a href="#" class="dropdown-item text-center">Vidět všechny zprávy</a>
+                    </div>
+                </div>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <img class="rounded-circle me-lg-2" src="/images/osobnifotka.png" alt="" style="width: 40px; height: 40px;">
+                        <span class="d-none d-lg-inline-flex">Jan Sebastián Kostlán</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                        <a asp-page="./Settings" class="dropdown-item">Nastavení profilu</a>
+                        <form class="class=" dropdown-item"" asp-area="Admin" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index")" method="post">
+                            <button class="dropdown-item" type="submit">Odhlásit se</button>
+                        </form>
+                    </div>
+                </div>
+                </>
+            </nav>
+            <div class="container-fluid pt-4 px-4 mt-4">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var sidebarToggler = document.querySelector('.sidebar-toggler');
+            var sidebar = document.querySelector('.sidebar');
+            var contentDiv = document.querySelector('.content');
 
-			sidebarToggler.addEventListener('click', function () {
-				if (sidebar.classList.contains('open')) {
-					sidebar.classList.remove('open');
-					contentDiv.classList.remove('open');
-				} else {
-					sidebar.classList.add('open');
-					contentDiv.classList.add('open');
-				}
-			});
-		});
-	</script>
-	@await RenderSectionAsync("Scripts", required: false)
+            sidebarToggler.addEventListener('click', function () {
+                if (sidebar.classList.contains('open')) {
+                    sidebar.classList.remove('open');
+                    contentDiv.classList.remove('open');
+                } else {
+                    sidebar.classList.add('open');
+                    contentDiv.classList.add('open');
+                }
+            });
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

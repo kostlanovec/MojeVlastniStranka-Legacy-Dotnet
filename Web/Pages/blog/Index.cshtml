@@ -1,98 +1,99 @@
 @page
+@using MojeVlastniStranka.ApplicationCore.Constants
 @model MojeVlastniStranka.Web.Pages.blog.IndexModel
 @{
-	ViewData["Title"] = SharedLocalizer["Blog"];
-	ViewData["Description"] = SharedLocalizer["Blog_Desc"];
-	ViewData["Author"] = "Jan Sebastián Kostlán";
-	ViewData["Keywords"] = SharedLocalizer["Blog_Keywords"];
-	ViewData["SocialTitle"] = SharedLocalizer["Blog_SocialTitle"];
+    ViewData[ViewDataKeys.Title] = SharedLocalizer["Blog"];
+    ViewData[ViewDataKeys.Description] = SharedLocalizer["Blog_Desc"];
+    ViewData[ViewDataKeys.Author] = "Jan Sebastián Kostlán";
+    ViewData[ViewDataKeys.Keywords] = SharedLocalizer["Blog_Keywords"];
+    ViewData[ViewDataKeys.SocialTitle] = SharedLocalizer["Blog_SocialTitle"];
 }
 @using MojeVlastniStranka.Common.Extension
 @{
-	var culturePfx = System.Globalization.CultureInfo.CurrentCulture.Name == "en" ? "/en" : "";
+    var culturePfx = System.Globalization.CultureInfo.CurrentCulture.Name == "en" ? "/en" : "";
 }
 
 <main class="main">
-	<header class="reveal">
-		<h1>@SharedLocalizer["Blog"]</h1>
-		<input id="searchInput" class="searchbar" type="text" placeholder="@SharedLocalizer["Blog_SearchPlaceholder"]" />
-	</header>
-	<div class="results" id="results"></div>
-	@foreach (var category in Model.CategoriesWithPosts)
-	{
-		<section class="reveal">
-			<h2 class="blog__h2">@category.Name</h2>
-			<div class="div--blog--articles">
-				@{
-					bool isFirstPost = true;
-				}
-				@foreach (var post in category.BlogPosts)
-				{
-					if (isFirstPost)
-					{
-						<article class="article--first--post zoom-effect">
-							<a class="blog--a" href="@culturePfx/blog/@post.Slug">
-								<h3 class="blog__first__h3">@post.Name</h3>
-								<img src="@post.FilePath" alt="@post.Name" />
-							</a>
-						</article>
-						isFirstPost = false;
-					}
-					else
-					{
-						<article class="article--post zoom-effect">
-							<a class="blog--a blog--a--other" href="@culturePfx/blog/@post.Slug">
-								<img src="@post.FilePath" alt="@post.Name" />
-								<div class="blog--div">
-									<h3 class="blog__h3">@post.Name</h3>
-									<div class="blog--data">
-										<p>@post.Description</p>
-										<p class="blog__date">@post.TimePublic.ToCzechDate()</p>
-									</div>
-								</div>
+    <header class="reveal">
+        <h1>@SharedLocalizer["Blog"]</h1>
+        <input id="searchInput" class="searchbar" type="text" placeholder="@SharedLocalizer["Blog_SearchPlaceholder"]" />
+    </header>
+    <div class="results" id="results"></div>
+    @foreach (var category in Model.CategoriesWithPosts)
+    {
+        <section class="reveal">
+            <h2 class="blog__h2">@category.Name</h2>
+            <div class="div--blog--articles">
+                @{
+                    bool isFirstPost = true;
+                }
+                @foreach (var post in category.BlogPosts)
+                {
+                    if (isFirstPost)
+                    {
+                        <article class="article--first--post zoom-effect">
+                            <a class="blog--a" href="@culturePfx/blog/@post.Slug">
+                                <h3 class="blog__first__h3">@post.Name</h3>
+                                <img src="@post.FilePath" alt="@post.Name" />
+                            </a>
+                        </article>
+                        isFirstPost = false;
+                    }
+                    else
+                    {
+                        <article class="article--post zoom-effect">
+                            <a class="blog--a blog--a--other" href="@culturePfx/blog/@post.Slug">
+                                <img src="@post.FilePath" alt="@post.Name" />
+                                <div class="blog--div">
+                                    <h3 class="blog__h3">@post.Name</h3>
+                                    <div class="blog--data">
+                                        <p>@post.Description</p>
+                                        <p class="blog__date">@post.TimePublic.ToCzechDate()</p>
+                                    </div>
+                                </div>
 
-							</a>
-						</article>
-					}
-				}
-			</div>
-		</section>
-	}
+                            </a>
+                        </article>
+                    }
+                }
+            </div>
+        </section>
+    }
 </main>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-	$(document).ready(function () {
-		 $('#searchInput').keyup(function () {
-			  var query = $(this).val();
-			  if (query.length > 2) {
-					$.ajax({
-						 url: '@Url.Page("Index", "Search")',
-						 type: 'GET',
-						 data: { 'query': query },
-						 success: function (data) {
-							  $('#results').empty();
-							  if (data.length > 0) {
-									data.forEach(function (post) {
-										 $('#results').append(
-											  '<a class="results__a" href="@culturePfx/blog/' + post.slug + '">' +
-											  '<div>' +
-											  '<img src="' + post.filePath + '" alt="' + post.name + '" />' +
-											  '</div>' +
-											  '<div>' +
-											  '<h3>' + post.name + '</h3>' +
-											  '<p>' + post.description + '</p>' +
-											  '</div>' +
-											  '</a>'
-										 );
-									});
-							  } else {
-									$('#results').append('<p>@SharedLocalizer["Blog_NoResults"]</p>');
-							  }
-						 }
-					});
-			  } else {
-					$('#results').empty();
-			  }
-		 });
-	});
+    $(document).ready(function () {
+         $('#searchInput').keyup(function () {
+              var query = $(this).val();
+              if (query.length > 2) {
+                    $.ajax({
+                         url: '@Url.Page("Index", "Search")',
+                         type: 'GET',
+                         data: { 'query': query },
+                         success: function (data) {
+                              $('#results').empty();
+                              if (data.length > 0) {
+                                    data.forEach(function (post) {
+                                         $('#results').append(
+                                              '<a class="results__a" href="@culturePfx/blog/' + post.slug + '">' +
+                                              '<div>' +
+                                              '<img src="' + post.filePath + '" alt="' + post.name + '" />' +
+                                              '</div>' +
+                                              '<div>' +
+                                              '<h3>' + post.name + '</h3>' +
+                                              '<p>' + post.description + '</p>' +
+                                              '</div>' +
+                                              '</a>'
+                                         );
+                                    });
+                              } else {
+                                    $('#results').append('<p>@SharedLocalizer["Blog_NoResults"]</p>');
+                              }
+                         }
+                    });
+              } else {
+                    $('#results').empty();
+              }
+         });
+    });
 </script>

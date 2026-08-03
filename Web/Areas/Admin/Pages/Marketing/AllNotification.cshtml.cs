@@ -1,3 +1,4 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 #nullable disable
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,14 +12,14 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Marketing
 	public class AllNotificationModel : PageModel
 	{
 		private readonly DataContext context;
-		private readonly NotificationService notificationService;
+		private readonly INotificationService notificationService;
 
 		public List<NotificationDto> notificationDtos
 		{
 			get;
 			set;
 		}
-		public AllNotificationModel(DataContext context, NotificationService notificationService)
+		public AllNotificationModel(DataContext context, INotificationService notificationService)
 		{
 			this.context = context;
 			this.notificationService = notificationService;

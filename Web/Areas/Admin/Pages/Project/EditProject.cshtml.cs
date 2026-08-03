@@ -1,3 +1,4 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 #nullable disable
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +15,7 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Project
 	public class EditProjectModel : PageModel
 	{
 		private readonly DataContext context;
-		private readonly ProjectService projectService;
+		private readonly IProjectService projectService;
 
 		public ProjectEditDto ProjectEditDto
 		{
@@ -29,7 +30,7 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Project
 			set;
 		}
 
-		public EditProjectModel(ProjectService projectService, DataContext dataContext)
+		public EditProjectModel(IProjectService projectService, DataContext dataContext)
 		{
 			this.projectService = projectService;
 			this.context = dataContext;

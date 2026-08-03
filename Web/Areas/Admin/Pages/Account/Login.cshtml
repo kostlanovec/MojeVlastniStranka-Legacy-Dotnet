@@ -1,77 +1,78 @@
 @page
+@using MojeVlastniStranka.ApplicationCore.Constants
 @model LoginModel
 
 @{
-	ViewData["Title"] = "Log in";
+    ViewData[ViewDataKeys.Title] = "Log in";
 }
 
 <div class="container-fluid">
-	<div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
-		<div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
-			<div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
-				<div class="d-flex align-items-center justify-content-between mb-3">
-					<h3 class="text-primary text-primary">Kostlanovec</h3>
-					<h3>Přihlášení</h3>
-				</div>
-				<form id="account" method="post">
-					<div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-					<div class="form-floating mb-3">
-						<input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="info@kostlanovec.cz" />
-						<label asp-for="Input.Email">Email</label>
-						<span asp-validation-for="Input.Email" class="text-danger"></span>
-					</div>
-					<div class="form-floating mb-4">
-						<input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="[REDACTED]" />
-						<label asp-for="Input.Password">Password</label>
-						<span asp-validation-for="Input.Password" class="text-dandger"></span>
-					</div>
-					<div class="mb-4 form-check">
-						<input class="form-check-input" asp-for="Input.RememberMe" />
-						<label class="form-check-label" asp-for="Input.RememberMe">Pamatovat si mě</label>
-					</div>
-					<div class="mb-4">
-						<a id="forgot-password" asp-page="./ForgotPassword">Zapomenuté heslo?</a>
-					</div>
-					<button type="submit" class="btn btn-primary w-100 mb-4">Přihlášení</button>
-					<p class="text-center mb-0">
-						<a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Odeslání emailového potvrzení</a>
-					</p>
-				</form>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-6 col-md-offset-2">
-		<section>
-			<h4>Use another service to log in.</h4>
-			<hr />
-			@{
-				if ((Model.ExternalLogins?.Count ?? 0) == 0)
-				{
-					<div>
-						<p>
-							There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-							for details on setting up this ASP.NET application to support logging in via external services.
-						</p>
-					</div>
-				}
-				else
-				{
-					<form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-						<div>
-							<p>
-								@foreach (var provider in Model.ExternalLogins!)
-								{
-									<button type="submit" class="btn btn-default" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-								}
-							</p>
-						</div>
-					</form>
-				}
-			}
-		</section>
-	</div>
+    <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+            <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h3 class="text-primary text-primary">Kostlanovec</h3>
+                    <h3>Přihlášení</h3>
+                </div>
+                <form id="account" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="info@kostlanovec.cz" />
+                        <label asp-for="Input.Email">Email</label>
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-4">
+                        <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="[REDACTED]" />
+                        <label asp-for="Input.Password">Password</label>
+                        <span asp-validation-for="Input.Password" class="text-dandger"></span>
+                    </div>
+                    <div class="mb-4 form-check">
+                        <input class="form-check-input" asp-for="Input.RememberMe" />
+                        <label class="form-check-label" asp-for="Input.RememberMe">Pamatovat si mě</label>
+                    </div>
+                    <div class="mb-4">
+                        <a id="forgot-password" asp-page="./ForgotPassword">Zapomenuté heslo?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 mb-4">Přihlášení</button>
+                    <p class="text-center mb-0">
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Odeslání emailového potvrzení</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+            <h4>Use another service to log in.</h4>
+            <hr />
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <div>
+                        <p>
+                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                            for details on setting up this ASP.NET application to support logging in via external services.
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in Model.ExternalLogins!)
+                                {
+                                    <button type="submit" class="btn btn-default" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+        </section>
+    </div>
 </div>
 
 @section Scripts {
-	<partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
 }

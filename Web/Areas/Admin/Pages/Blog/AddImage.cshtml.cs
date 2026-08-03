@@ -1,3 +1,4 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 #nullable disable
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +13,9 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Blog
 	[Authorize]
 	public class AddImageModel : PageModel
 	{
-		//todo logování, jak se s tím pracuje
+		//todo logovÃ¡nÃ­, jak se s tÃ­m pracuje
 		private readonly DataContext context;
-		private readonly ImageService imageService;
+		private readonly IImageService imageService;
 
 		[BindProperty]
 		public AddImageRequest Input
@@ -29,7 +30,7 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Blog
 			set;
 		}
 
-		public AddImageModel(DataContext dataContext, ImageService imageService)
+		public AddImageModel(DataContext dataContext, IImageService imageService)
 		{
 			context = dataContext;
 			this.imageService = imageService;
@@ -46,7 +47,7 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Blog
 			Images = await imageService.GetImagesAsync();
 			if (Input.FileUpload == null || Input.FileUpload.Length == 0)
 			{
-				ModelState.AddModelError(string.Empty, "Neplatný soubor.");
+				ModelState.AddModelError(string.Empty, "NeplatnÃ½ soubor.");
 				return Page();
 			}
 

@@ -1,3 +1,4 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 #nullable disable
 using Microsoft.AspNetCore.Mvc;
 using MojeVlastniStranka.ApplicationCore.Dto.Blog;
@@ -11,9 +12,9 @@ namespace MojeVlastniStranka.Web.Controllers
 	public class ProjectController : BaseController
 	{
 		private readonly DataContext context;
-		private readonly BlogService blogService;
+		private readonly IBlogService blogService;
 
-		public ProjectController(DataContext context, BlogService blogService)
+		public ProjectController(DataContext context, IBlogService blogService)
 		{
 			this.context = context;
 			this.blogService = blogService;

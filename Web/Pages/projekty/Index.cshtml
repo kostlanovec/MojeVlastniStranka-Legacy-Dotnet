@@ -1,76 +1,77 @@
 @page
+@using MojeVlastniStranka.ApplicationCore.Constants
 @model MojeVlastniStranka.Web.Pages.projekty.IndexModel
 @using MojeVlastniStranka.Common.Enums
 @{
-	var culturePfx = System.Globalization.CultureInfo.CurrentCulture.Name == "en" ? "/en" : "";
-	ViewData["Title"] = SharedLocalizer["Projekty_PageTitle"];
-	ViewData["Description"] = SharedLocalizer["Projekty_Desc"];
-	ViewData["Keywords"] = SharedLocalizer["Projekty_Keywords"];
-	ViewData["Author"] = "Jan Sebastián Kostlán";
-	ViewData["SocialTitle"] = SharedLocalizer["Projekty_SocialTitle"];
+    var culturePfx = System.Globalization.CultureInfo.CurrentCulture.Name == "en" ? "/en" : "";
+    ViewData[ViewDataKeys.Title] = SharedLocalizer["Projekty_PageTitle"];
+    ViewData[ViewDataKeys.Description] = SharedLocalizer["Projekty_Desc"];
+    ViewData[ViewDataKeys.Keywords] = SharedLocalizer["Projekty_Keywords"];
+    ViewData[ViewDataKeys.Author] = "Jan Sebastián Kostlán";
+    ViewData[ViewDataKeys.SocialTitle] = SharedLocalizer["Projekty_SocialTitle"];
 }
 
 <main class="main main__project">
-	<h1 class="reveal">@SharedLocalizer["Projekty_H1"]</h1>
-	<div class="projects__container reveal" onclick="toggleSection('development-projects', this)">
-		<button class="arrow--project rotated"></button>
-		<h2>@SharedLocalizer["Projekty_Development"]</h2>
-	</div>
-	<section id="development-projects" style="display:grid" class="projects__section reveal">
-		@foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatusEnum.Development))
-		{
-			<article class="article--project zoom-effect">
-				<a class="article--project__a" href="@culturePfx/projekty/@project.Slug">
-					<img src="@project.ImagePath" alt="@project.Name" />
-					<h3 class="article--project__h3">@project.Name</h3>
-				</a>
-			</article>
-		}
-	</section>
+    <h1 class="reveal">@SharedLocalizer["Projekty_H1"]</h1>
+    <div class="projects__container reveal" onclick="toggleSection('development-projects', this)">
+        <button class="arrow--project rotated"></button>
+        <h2>@SharedLocalizer["Projekty_Development"]</h2>
+    </div>
+    <section id="development-projects" style="display:grid" class="projects__section reveal">
+        @foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatusEnum.Development))
+        {
+            <article class="article--project zoom-effect">
+                <a class="article--project__a" href="@culturePfx/projekty/@project.Slug">
+                    <img src="@project.ImagePath" alt="@project.Name" />
+                    <h3 class="article--project__h3">@project.Name</h3>
+                </a>
+            </article>
+        }
+    </section>
 
-	<div class="projects__container reveal" onclick="toggleSection('finalized-projects', this)">
-		<button class="arrow--project"></button>
-		<h2>@SharedLocalizer["Projekty_Finalized"]</h2>
-	</div>
-	<section id="finalized-projects" class="projects__section reveal">
-		@foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatusEnum.Finalized))
-		{
-			<article class="article--project zoom-effect">
-				<a class="article--project__a" href="@culturePfx/projekty/@project.Slug">
-					<img src="@project.ImagePath" alt="@project.Name" />
-					<h3 class="article--project__h3">@project.Name</h3>
-				</a>
-			</article>
-		}
-	</section>
-	<div class="projects__container reveal" onclick="toggleSection('planning-projects', this)">
-		<button class="arrow--project"></button>
-		<h2>@SharedLocalizer["Projekty_Planning"]</h2>
-	</div>
-	<section id="planning-projects" class="projects__section reveal">
-		@foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatusEnum.Planning))
-		{
-			<article class="article--project zoom-effect">
-				<a class="article--project__a" href="@culturePfx/projekty/@project.Slug">
-					<img src="@project.ImagePath" alt="@project.Name" />
-					<h3 class="article--project__h3">@project.Name</h3>
-				</a>
-			</article>
-		}
-	</section>
+    <div class="projects__container reveal" onclick="toggleSection('finalized-projects', this)">
+        <button class="arrow--project"></button>
+        <h2>@SharedLocalizer["Projekty_Finalized"]</h2>
+    </div>
+    <section id="finalized-projects" class="projects__section reveal">
+        @foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatusEnum.Finalized))
+        {
+            <article class="article--project zoom-effect">
+                <a class="article--project__a" href="@culturePfx/projekty/@project.Slug">
+                    <img src="@project.ImagePath" alt="@project.Name" />
+                    <h3 class="article--project__h3">@project.Name</h3>
+                </a>
+            </article>
+        }
+    </section>
+    <div class="projects__container reveal" onclick="toggleSection('planning-projects', this)">
+        <button class="arrow--project"></button>
+        <h2>@SharedLocalizer["Projekty_Planning"]</h2>
+    </div>
+    <section id="planning-projects" class="projects__section reveal">
+        @foreach (var project in Model.AllProjects.Where(p => p.projectStatus == ProjectStatusEnum.Planning))
+        {
+            <article class="article--project zoom-effect">
+                <a class="article--project__a" href="@culturePfx/projekty/@project.Slug">
+                    <img src="@project.ImagePath" alt="@project.Name" />
+                    <h3 class="article--project__h3">@project.Name</h3>
+                </a>
+            </article>
+        }
+    </section>
 </main>
 
 <script>
-	function toggleSection(sectionId, container) {
-		 var section = document.getElementById(sectionId);
-		 var button = container.querySelector('.arrow--project');
+    function toggleSection(sectionId, container) {
+         var section = document.getElementById(sectionId);
+         var button = container.querySelector('.arrow--project');
 
-		 if (section.style.display === 'none' || section.style.display === '') {
-			  section.style.display = 'grid';
-		 } else {
-			  section.style.display = 'none';
-		 }
+         if (section.style.display === 'none' || section.style.display === '') {
+              section.style.display = 'grid';
+         } else {
+              section.style.display = 'none';
+         }
 
-		 button.classList.toggle('rotated');
-	}
+         button.classList.toggle('rotated');
+    }
 </script>

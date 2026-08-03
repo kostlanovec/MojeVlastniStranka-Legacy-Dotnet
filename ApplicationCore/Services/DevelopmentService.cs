@@ -1,3 +1,4 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 ﻿using Microsoft.EntityFrameworkCore;
 using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.ApplicationCore.Requests;
@@ -6,7 +7,7 @@ using MojeVlastniStranka.DataAccess.Entities;
 
 namespace MojeVlastniStranka.ApplicationCore.Services
 {
-	public class DevelopmentService
+	public class DevelopmentService : IDevelopmentService
 	{
 		private readonly DataContext context;
 		public DevelopmentService(DataContext context)
@@ -41,7 +42,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// </summary>
 		public async Task<List<ReportedBugDto>> GetAllReports()
 		{
-			var listReports = await context.ReportedBugs.ToListAsync();
+			var listReports = await context.ReportedBugs.AsNoTracking().ToListAsync();
 
 			var contactFormDtos = listReports.Select(cf => new ReportedBugDto()
 			{
@@ -59,7 +60,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// </summary>
 		public async Task<List<IdeaToReleaseDto>> GetAllIdeas()
 		{
-			var listideacontext = await context.IdeaToReleases.ToListAsync();
+			var listideacontext = await context.IdeaToReleases.AsNoTracking().ToListAsync();
 
 			var ideatoReleaseDtos = listideacontext.Select(cf => new IdeaToReleaseDto()
 			{

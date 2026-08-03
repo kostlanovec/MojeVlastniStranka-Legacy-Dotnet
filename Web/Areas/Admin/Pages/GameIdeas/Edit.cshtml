@@ -1,0 +1,111 @@
+@page
+@using MojeVlastniStranka.ApplicationCore.Constants
+@model MojeVlastniStranka.Web.Areas.Admin.Pages.GameIdeas.EditModel
+@{
+    ViewData[ViewDataKeys.Title] = "Upravit námět na hru";
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<script src="/js/summernote/Plugins/summernote-ext-addclass.js"></script>
+<script src="/js/summernote/Plugins/summernote-ownplugin.js"></script>
+<script src="/lib/typo-js/typo.js"></script>
+
+<div class="col-md-12">
+    <link rel="stylesheet" href="~/css/fast-style-blog.css" asp-append-version="true" />
+    <h3>Český popis</h3>
+    <div id="summernote"></div>
+    <h3 class="mt-4">Anglický popis</h3>
+    <div id="summernote-en"></div>
+    <button id="editSettingsBtn" class="btn btn-primary mt-2">Nastavení</button>
+</div>
+<div class="container d-flex justify-content-center">
+    <div id="settingsTable" style="@(!ViewData.ModelState.IsValid ? "display:block;" : "")">
+        <div>
+            <div class="row">
+                <div class="col-md-4 mx-auto" style="margin-top:80px">
+                    <form id="settingsForm" method="post" enctype="multipart/form-data" class="mt-2">
+                        <input type="hidden" asp-for="Input.Id" />
+                        <input type="hidden" asp-for="Input.ExistingImageUrl" />
+                        <h2 class="text-white">Námět na hru</h2>
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+
+                        <div class="form-group mt-2">
+                            <label asp-for="Input.TitleCs" class="text-white">Titulek (CS):</label>
+                            <input asp-for="Input.TitleCs" class="form-control bg-white" required />
+                            
+                            <label asp-for="Input.TitleEn" class="text-white mt-2">Titulek (EN):</label>
+                            <input asp-for="Input.TitleEn" class="form-control bg-white" required />
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label asp-for="Input.ImageUpload" class="text-white">Obrázek (pokud chcete změnit):</label>
+                            <input asp-for="Input.ImageUpload" type="file" class="form-control bg-white" accept="image/*" />
+                        </div>
+
+                        <input type="hidden" asp-for="Input.DescriptionCs" id="hiddenContent" />
+                        <input type="hidden" asp-for="Input.DescriptionEn" id="hiddenContentEn" />
+                        
+                        <div class="d-flex justify-content-between mt-4">
+                            <a asp-page="./Index" class="btn btn-secondary">Zpátky</a>
+                            <button type="submit" class="btn btn-primary">Uložit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#editSettingsBtn').click(function () {
+        $('#settingsTable').toggle();
+    });
+
+    // We don't hide settings on back button anymore because we use an anchor tag to go back.
+    
+    var initialCs = @Html.Raw(Json.Serialize(Model.Input.DescriptionCs));
+    var initialEn = @Html.Raw(Json.Serialize(Model.Input.DescriptionEn));
+
+    $('#summernote').summernote({
+        lang: 'cs-CZ',
+        spellCheck: true,
+        height: 300,
+        toolbar: [
+            ['style', ['style', 'clear']],
+            ['fontstyle', ['bold', 'italic', 'ul', 'ol', 'link', 'paragraph']],
+            ['misc', ['undo', 'redo', 'codeview']]
+        ],
+        callbacks: {
+            onInit: function () {
+                $('#summernote').summernote('code', initialCs);
+            }
+        }
+    });
+
+    $('#summernote-en').summernote({
+        lang: 'en-US',
+        spellCheck: true,
+        height: 300,
+        toolbar: [
+            ['style', ['style', 'clear']],
+            ['fontstyle', ['bold', 'italic', 'ul', 'ol', 'link', 'paragraph']],
+            ['misc', ['undo', 'redo', 'codeview']]
+        ],
+        callbacks: {
+            onInit: function () {
+                $('#summernote-en').summernote('code', initialEn);
+            }
+        }
+    });
+
+    $('form').on('submit', function () {
+        var htmlContent = $('#summernote').summernote('code').trim();
+        var htmlContentEn = $('#summernote-en').summernote('code').trim();
+        
+        $('#hiddenContent').val(htmlContent);
+        $('#hiddenContentEn').val(htmlContentEn);
+    });
+</script>

@@ -169,6 +169,9 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<bool>("IsProjectCategory")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -267,6 +270,39 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ContactForm");
+                });
+
+            modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.GameIdea", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("DescriptionCs")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("DescriptionEn")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TitleCs")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("TitleEn")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GameIdeas");
                 });
 
             modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.IdeaToRelease", b =>

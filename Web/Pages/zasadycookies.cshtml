@@ -1,55 +1,57 @@
 @page
+@using MojeVlastniStranka.ApplicationCore.Constants
+@model MojeVlastniStrankaFinal.Web.Pages.ZasadyCookiesModel
 @{
-	var isEn = System.Globalization.CultureInfo.CurrentCulture.Name == "en";
-	ViewData["Title"] = isEn ? "Cookie Policy" : "Cookies";
-	ViewData["Description"] = isEn ? "Cookies are important nowadays." : "Cookies jsou v dnešní době důležité.";
-	ViewData["Author"] = "Jan Sebastián Kostlán";
-	ViewData["Keywords"] = "cookies";
-	ViewData["nofollow"] = true;
+    var isEn = System.Globalization.CultureInfo.CurrentCulture.Name == "en";
+    ViewData[ViewDataKeys.Title] = isEn ? "Cookie Policy" : "Cookies";
+    ViewData[ViewDataKeys.Description] = isEn ? "Cookies are important nowadays." : "Cookies jsou v dnešní době důležité.";
+    ViewData[ViewDataKeys.Author] = "Jan Sebastián Kostlán";
+    ViewData[ViewDataKeys.Keywords] = "cookies";
+    ViewData[ViewDataKeys.NoFollow] = true;
 }
 <main class="main">
-	@if (isEn)
-	{
-		<header class="header__other fadeInLeft visible">
-			<h1 class="header__h1">Cookie Policy</h1>
-			<p class="header__p">This website uses cookies. Cookies are files stored on your device when you visit a website. These files help the website identify you and your preferences, allowing the website to adapt to your needs.</p>
-		</header>
-		<h2 class="h2__div__article red">What cookies do we use?</h2>
-		<p>On this website, we use cookies to store your preferences and improve website performance. We also use cookies to track website usage and improve our services.</p>
-		<p>Types of cookies we use:</p>
-		<h3 class="red">1. Essential cookies</h3>
-		<p>These cookies are necessary for the proper functioning of the website. Without them, you would not be able to use the basic functions of the website.</p>
-		<h3 class="red">2. Analytical cookies</h3>
-		<p>Analytical cookies allow us to track website usage and improve our services. These cookies collect information about how our website is used so we can improve the user experience.</p>
-		<h3 class="red">3. Personalized cookies</h3>
-		<p>Personalized cookies are used to provide personalized content and advertisements. These cookies may be created by third parties and are used to analyze your usage of the website and show tailored ads.</p>
-		<h2 class="red h2__div__article">Your Consent</h2>
-		<p>By using this website, you express your consent to the processing of your data in accordance with our cookie policy. You have the option to restrict <button class="button" type="button" aria-label="View cookie settings" data-cc="c-settings">Cookies</button>. However, disabling cookies may limit the functionality of the website and restrict your browsing experience.</p>
-		<h2 class="red h2__div__article">Changes to Our Cookie Policy</h2>
-		<p>We may update our cookie policy in the future. If any changes occur, we will post them on this page. We recommend checking this page regularly for updates to the cookie policy.</p>
-		<h2 class="red h2__div__article">Contact</h2>
-		<p>If you have any questions regarding our cookies, feel free to contact me via email at <a class="red" href="mailto:info@kostlanovec.cz">info@kostlanovec.cz</a></p>
-	}
-	else
-	{
-		<header class="header__other fadeInLeft visible">
-			<h1 class="header__h1">Zásady cookies</h1>
-			<p class="header__p">Tato webová stránka používá cookies. Cookies jsou soubory, které jsou uloženy na vašem zařízení, když navštívíte webovou stránku. Tyto soubory pomáhají webové stránce identifikovat vás a vaše preference, což umožňuje webové stránce přizpůsobit se vašim potřebám.</p>
-		</header>
-		<h2 class="h2__div__article red">Jaké cookies používáme?</h2>
-		<p>Na této webové stránce používáme cookies k ukládání vašich předvoleb a zlepšení výkonu webové stránky. Využíváme také cookies pro sledování používání webové stránky a zlepšení našich služeb.</p>
-		<p>Typy cookies, které používáme:</p>
-		<h3 class="red">1. Nezbytné cookies</h3>
-		<p>Tyto cookies jsou nezbytné pro správné fungování webové stránky. Bez nich byste nemohli využívat základní funkce webové stránky.</p>
-		<h3 class="red">2. Analytické cookies</h3>
-		<p>Analytické cookies nám umožňují sledovat používání webové stránky a zlepšovat naše služby. Tyto cookies shromažďují informace o tom, jak se naše webová stránka používá, abychom mohli zlepšovat uživatelskou zkušenost.</p>
-		<h3 class="red">3. Personalizované cookies</h3>
-		<p>Personalizované cookies slouží k poskytování personalizovaného obsahu a reklam. Tyto cookies mohou být vytvořeny třetími stranami a používají se k analýze vašeho používání webové stránky a zobrazování reklam na míru.</p>
-		<h2 class="red h2__div__article">Váš souhlas</h2>
-		<p>Používáním této webové stránky vyjadřujete souhlas se zpracováním vašich údajů v souladu s našimi zásadami cookies. Možnost omezit <button class="button" type="button" aria-label="Podívat se na nastavení cookies" data-cc="c-settings">Cookies</button>. Pokud však zakážete cookies, může to omezit funkčnost webové stránky a omezit vaše zážitky z prohlížení webové stránky.</p>
-		<h2 class="red h2__div__article">Změny v našich zásadách cookies</h2>
-		<p>Můžeme aktualizovat naše zásady cookies v budoucnu. Pokud dojde k nějakým změnám, budeme tyto změny zveřejňovat na této stránce. Doporučujeme vám pravidelně kontrolovat tuto stránku pro aktualizace zásad cookies.</p>
-		<h2 class="red h2__div__article">Kontakt</h2>
-		<p>Pokud máte jakékoliv dotazy ohledně našich cookies, neváhejte mě kontaktovat prostřednictvím emailu <a class="red" href="mailto:info@kostlanovec.cz">info@kostlanovec.cz</a></p>
-	}
+    @if (isEn)
+    {
+        <header class="header__other fadeInLeft visible">
+            <h1 class="header__h1">Cookie Policy</h1>
+            <p class="header__p">This website uses cookies. Cookies are files stored on your device when you visit a website. These files help the website identify you and your preferences, allowing the website to adapt to your needs.</p>
+        </header>
+        <h2 class="h2__div__article red">What cookies do we use?</h2>
+        <p>On this website, we use cookies to store your preferences and improve website performance. We also use cookies to track website usage and improve our services.</p>
+        <p>Types of cookies we use:</p>
+        <h3 class="red">1. Essential cookies</h3>
+        <p>These cookies are necessary for the proper functioning of the website. Without them, you would not be able to use the basic functions of the website.</p>
+        <h3 class="red">2. Analytical cookies</h3>
+        <p>Analytical cookies allow us to track website usage and improve our services. These cookies collect information about how our website is used so we can improve the user experience.</p>
+        <h3 class="red">3. Personalized cookies</h3>
+        <p>Personalized cookies are used to provide personalized content and advertisements. These cookies may be created by third parties and are used to analyze your usage of the website and show tailored ads.</p>
+        <h2 class="red h2__div__article">Your Consent</h2>
+        <p>By using this website, you express your consent to the processing of your data in accordance with our cookie policy. You have the option to restrict <button class="button" type="button" aria-label="View cookie settings" data-cc="c-settings">Cookies</button>. However, disabling cookies may limit the functionality of the website and restrict your browsing experience.</p>
+        <h2 class="red h2__div__article">Changes to Our Cookie Policy</h2>
+        <p>We may update our cookie policy in the future. If any changes occur, we will post them on this page. We recommend checking this page regularly for updates to the cookie policy.</p>
+        <h2 class="red h2__div__article">Contact</h2>
+        <p>If you have any questions regarding our cookies, feel free to contact me via email at <a class="red" href="mailto:info@kostlanovec.cz">info@kostlanovec.cz</a></p>
+    }
+    else
+    {
+        <header class="header__other fadeInLeft visible">
+            <h1 class="header__h1">Zásady cookies</h1>
+            <p class="header__p">Tato webová stránka používá cookies. Cookies jsou soubory, které jsou uloženy na vašem zařízení, když navštívíte webovou stránku. Tyto soubory pomáhají webové stránce identifikovat vás a vaše preference, což umožňuje webové stránce přizpůsobit se vašim potřebám.</p>
+        </header>
+        <h2 class="h2__div__article red">Jaké cookies používáme?</h2>
+        <p>Na této webové stránce používáme cookies k ukládání vašich předvoleb a zlepšení výkonu webové stránky. Využíváme také cookies pro sledování používání webové stránky a zlepšení našich služeb.</p>
+        <p>Typy cookies, které používáme:</p>
+        <h3 class="red">1. Nezbytné cookies</h3>
+        <p>Tyto cookies jsou nezbytné pro správné fungování webové stránky. Bez nich byste nemohli využívat základní funkce webové stránky.</p>
+        <h3 class="red">2. Analytické cookies</h3>
+        <p>Analytické cookies nám umožňují sledovat používání webové stránky a zlepšovat naše služby. Tyto cookies shromažďují informace o tom, jak se naše webová stránka používá, abychom mohli zlepšovat uživatelskou zkušenost.</p>
+        <h3 class="red">3. Personalizované cookies</h3>
+        <p>Personalizované cookies slouží k poskytování personalizovaného obsahu a reklam. Tyto cookies mohou být vytvořeny třetími stranami a používají se k analýze vašeho používání webové stránky a zobrazování reklam na míru.</p>
+        <h2 class="red h2__div__article">Váš souhlas</h2>
+        <p>Používáním této webové stránky vyjadřujete souhlas se zpracováním vašich údajů v souladu s našimi zásadami cookies. Možnost omezit <button class="button" type="button" aria-label="Podívat se na nastavení cookies" data-cc="c-settings">Cookies</button>. Pokud však zakážete cookies, může to omezit funkčnost webové stránky a omezit vaše zážitky z prohlížení webové stránky.</p>
+        <h2 class="red h2__div__article">Změny v našich zásadách cookies</h2>
+        <p>Můžeme aktualizovat naše zásady cookies v budoucnu. Pokud dojde k nějakým změnám, budeme tyto změny zveřejňovat na této stránce. Doporučujeme vám pravidelně kontrolovat tuto stránku pro aktualizace zásad cookies.</p>
+        <h2 class="red h2__div__article">Kontakt</h2>
+        <p>Pokud máte jakékoliv dotazy ohledně našich cookies, neváhejte mě kontaktovat prostřednictvím emailu <a class="red" href="mailto:info@kostlanovec.cz">info@kostlanovec.cz</a></p>
+    }
 </main>

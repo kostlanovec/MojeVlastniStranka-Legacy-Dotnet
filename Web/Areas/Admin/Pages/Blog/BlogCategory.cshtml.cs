@@ -1,3 +1,4 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 #nullable disable
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,7 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Blog
 
 	public class BlogCategoryModel : PageModel
 	{
-		private readonly BlogService blogService;
+		private readonly IBlogService blogService;
 		private readonly DataContext context;
 
 		public List<BlogCategoryDto> BlogCategory
@@ -22,7 +23,7 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Blog
 			set;
 		}
 
-		public BlogCategoryModel(DataContext context, BlogService blogService)
+		public BlogCategoryModel(DataContext context, IBlogService blogService)
 		{
 			this.context = context;
 			this.blogService = blogService;

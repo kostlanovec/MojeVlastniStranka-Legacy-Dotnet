@@ -1,3 +1,4 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 #nullable disable
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -7,9 +8,9 @@ namespace MojeVlastniStranka.Web.Pages.sluzby
 {
 	public class webovestrankyModel : PageModel
 	{
-		private readonly ServicesOfferedService servicesOfferedService;
+		private readonly IServicesOfferedService servicesOfferedService;
 		private readonly Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> localizer;
-		private readonly RecaptchaService recaptchaService;
+		private readonly IRecaptchaService recaptchaService;
 
 		[BindProperty]
 		public ServiceRequestDto ServiceRequestDto
@@ -18,7 +19,7 @@ namespace MojeVlastniStranka.Web.Pages.sluzby
 			set;
 		}
 
-		public webovestrankyModel(ServicesOfferedService servicesOfferedService, Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> localizer, RecaptchaService recaptchaService)
+		public webovestrankyModel(IServicesOfferedService servicesOfferedService, Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> localizer, IRecaptchaService recaptchaService)
 		{
 			this.servicesOfferedService = servicesOfferedService;
 			this.localizer = localizer;

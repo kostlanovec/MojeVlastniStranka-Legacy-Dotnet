@@ -1,55 +1,56 @@
 @page
+@using MojeVlastniStranka.ApplicationCore.Constants
 @model MojeVlastniStranka.Web.Pages.kontakt.kontaktModel
 @{
-	ViewData["Title"] = SharedLocalizer["Kontakt"];
-	ViewData["Description"] = SharedLocalizer["Kontakt_Desc"];
-	ViewData["Author"] = "Jan Sebastián Kostlán";
-	ViewData["Keywords"] = SharedLocalizer["Kontakt_Keywords"];
-	ViewData["SocialTitle"] = SharedLocalizer["Kontakt_SocialTitle"];
+    ViewData[ViewDataKeys.Title] = SharedLocalizer["Kontakt"];
+    ViewData[ViewDataKeys.Description] = SharedLocalizer["Kontakt_Desc"];
+    ViewData[ViewDataKeys.Author] = "Jan Sebastián Kostlán";
+    ViewData[ViewDataKeys.Keywords] = SharedLocalizer["Kontakt_Keywords"];
+    ViewData[ViewDataKeys.SocialTitle] = SharedLocalizer["Kontakt_SocialTitle"];
 }
 <main class="main">
-	<h1 class="center__text reveal">@SharedLocalizer["Kontakt_H1Social"]</h1>
-	<div class="socials--buttons reveal">
-		<a href="https://www.instagram.com/kostlan1" class="socials--button zoom-effect" target="_blank" rel="noopener noreferrer">
-			<img aria-hidden="true" class="social--image" src="/images/icons/instagram.svg" />
-			<p class="social--text">@@kostlan</p>
-		</a>
-		<a href="https://www.linkedin.com/in/kostlan" class="socials--button zoom-effect" target="_blank" rel="noopener noreferrer">
-			<img aria-hidden ="true" class="social--image" src="/images/icons/linkedin.svg" />
-			<p class="social--text">kostlan</p>
-		</a>
-		<a href="https://www.youtube.com/@@kostlanovec" class="socials--button zoom-effect" target="_blank" rel="noopener noreferrer">
-			<img aria-hidden="true" class="social--image" src="/images/icons/youtubee.svg" />
-			<p class="social--text">Kostlanovec</p>
-		</a>
-		<a href="https://discord.gg/VdSEt8qUXE" class="socials--button zoom-effect" target="_blank" rel="noopener noreferrer">
-			<img aria-hidden="true" class="social--image" src="/images/icons/discord.svg" />
-			<p class="social--text">Kostlanovec - server</p>
-		</a>
-		<a href="https://www.facebook.com/jan.sebastiankostlan.1/" class="socials--button zoom-effect" target="_blank" rel="noopener noreferrer">
-			<img aria-hidden="true" class="social--image" src="/images/icons/facebook.svg" />
-			<p class="social--text">Jan Sebastián Kostlán</p>
-		</a>
-	</div>
-	<h1 class="center__text reveal">@SharedLocalizer["Kontakt_H1Form"]</h1>
-	<p class="form--text reveal">@SharedLocalizer["Kontakt_FormDesc"]</p>
-	<form class="contact__form reveal" method="post">
-		<input class="input__form" type="email" name="Form.Email" placeholder="@SharedLocalizer["EmailPlaceholder"]" required><br>
-		<input class="input__form" type="text" name="Form.PhoneNumber" placeholder="@SharedLocalizer["PhonePlaceholder"]"><br>
-		<textarea class="textarea__form" name="Form.Message" cols="30" rows="10" placeholder="@SharedLocalizer["MessagePlaceholder"]" required></textarea><br>
-		<input type="text" name="Honeypot" style="display:none" tabindex="-1" autocomplete="off"><br>
-		<button class="button form--button" type="submit">@SharedLocalizer["Submit"]</button>
-		@if (TempData["SuccessMessage"] != null)
-		{
-			<div class="success-message">
-				@TempData["SuccessMessage"]
-			</div>
-		}
-		@if (ModelState.ErrorCount > 0)
-		{
-			<div class="error-message">
-				@ModelState.Values.SelectMany(v => v.Errors).FirstOrDefault()?.ErrorMessage
-			</div>
-		}
-	</form>
+    <h1 class="center__text reveal">@SharedLocalizer["Kontakt_H1Social"]</h1>
+    <div class="socials--buttons reveal">
+        <a href="https://www.instagram.com/kostlan1" class="socials--button zoom-effect" target="_blank" rel="noopener noreferrer">
+            <img aria-hidden="true" class="social--image" src="/images/icons/instagram.svg" />
+            <p class="social--text">@@kostlan</p>
+        </a>
+        <a href="https://www.linkedin.com/in/kostlan" class="socials--button zoom-effect" target="_blank" rel="noopener noreferrer">
+            <img aria-hidden ="true" class="social--image" src="/images/icons/linkedin.svg" />
+            <p class="social--text">kostlan</p>
+        </a>
+        <a href="https://www.youtube.com/@@kostlanovec" class="socials--button zoom-effect" target="_blank" rel="noopener noreferrer">
+            <img aria-hidden="true" class="social--image" src="/images/icons/youtubee.svg" />
+            <p class="social--text">Kostlanovec</p>
+        </a>
+        <a href="https://discord.gg/VdSEt8qUXE" class="socials--button zoom-effect" target="_blank" rel="noopener noreferrer">
+            <img aria-hidden="true" class="social--image" src="/images/icons/discord.svg" />
+            <p class="social--text">Kostlanovec - server</p>
+        </a>
+        <a href="https://www.facebook.com/jan.sebastiankostlan.1/" class="socials--button zoom-effect" target="_blank" rel="noopener noreferrer">
+            <img aria-hidden="true" class="social--image" src="/images/icons/facebook.svg" />
+            <p class="social--text">Jan Sebastián Kostlán</p>
+        </a>
+    </div>
+    <h1 class="center__text reveal">@SharedLocalizer["Kontakt_H1Form"]</h1>
+    <p class="form--text reveal">@SharedLocalizer["Kontakt_FormDesc"]</p>
+    <form class="contact__form reveal" method="post">
+        <input class="input__form" type="email" name="Form.Email" placeholder="@SharedLocalizer["EmailPlaceholder"]" required><br>
+        <input class="input__form" type="text" name="Form.PhoneNumber" placeholder="@SharedLocalizer["PhonePlaceholder"]"><br>
+        <textarea class="textarea__form" name="Form.Message" cols="30" rows="10" placeholder="@SharedLocalizer["MessagePlaceholder"]" required></textarea><br>
+        <input type="text" name="Honeypot" style="display:none" tabindex="-1" autocomplete="off"><br>
+        <button class="button form--button" type="submit">@SharedLocalizer["Submit"]</button>
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="success-message">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+        @if (ModelState.ErrorCount > 0)
+        {
+            <div class="error-message">
+                @ModelState.Values.SelectMany(v => v.Errors).FirstOrDefault()?.ErrorMessage
+            </div>
+        }
+    </form>
 </main>

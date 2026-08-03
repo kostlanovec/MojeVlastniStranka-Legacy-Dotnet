@@ -1,24 +1,25 @@
 ﻿@page
+@using MojeVlastniStranka.ApplicationCore.Constants
 @model MojeVlastniStranka.Web.Areas.Admin.Pages.Development.ReportBugModel
 @{
-	ViewData["Title"] = "Nahlášení chyby";
+    ViewData[ViewDataKeys.Title] = "Nahlášení chyby";
 }
 <form class="col-sm-12" method="post">
-	<div class="bg-secondary rounded h-100 p-4">
-		<h6 class="mb-4">Nahlášení chyby</h6>
-		<div class="mb-3">
-			<label for="exampleInputEmail1" class="form-label">Stránka s chybou</label>
-			<input type="text" name="Url" class="form-control" id="exampleInputEmail1">
-			<span asp-validation-for="ReportedBugRequestBinding.Url" class="text-danger"></span>
-			<div id="emailHelp" class="form-text">Pokud se jedna o chybu, která je patrná na více stránkách, tak je prosím všechny vypište v textovém poli.</div>
-		</div>
-		<div class="form-floating">
-			<textarea name="Bug" class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 200px;"></textarea>
-			<label for="floatingTextarea">Comments</label>
-			<span asp-validation-for="ReportedBugRequestBinding.Bug" class="text-danger"></span>
-		</div>
-		<!--Jméno a přijmení a další kontaktní údaje by se přidávaly automaticky, ale to zatím necháme být-->
-		<div asp-validation-summary="All" class="text-danger"></div>
-		<button type="submit" class="btn btn-primary">Odeslat</button>
-	</div>
+    <div class="bg-secondary rounded h-100 p-4">
+        <h6 class="mb-4">Nahlášení chyby</h6>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Stránka s chybou</label>
+            <input type="text" name="Url" class="form-control" id="exampleInputEmail1">
+            <span asp-validation-for="ReportedBugRequestBinding.Url" class="text-danger"></span>
+            <div id="emailHelp" class="form-text">Pokud se jedna o chybu, která je patrná na více stránkách, tak je prosím všechny vypište v textovém poli.</div>
+        </div>
+        <div class="form-floating">
+            <textarea name="Bug" class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 200px;"></textarea>
+            <label for="floatingTextarea">Comments</label>
+            <span asp-validation-for="ReportedBugRequestBinding.Bug" class="text-danger"></span>
+        </div>
+        <!--Jméno a přijmení a další kontaktní údaje by se přidávaly automaticky, ale to zatím necháme být-->
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <button type="submit" class="btn btn-primary">Odeslat</button>
+    </div>
 </form>

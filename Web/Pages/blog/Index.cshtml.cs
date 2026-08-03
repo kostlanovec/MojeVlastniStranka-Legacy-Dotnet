@@ -1,3 +1,4 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 #nullable disable
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -8,9 +9,9 @@ namespace MojeVlastniStranka.Web.Pages.blog
 {
 	public class IndexModel : PageModel
 	{
-		private readonly BlogService blogService;
+		private readonly IBlogService blogService;
 
-		public IndexModel(BlogService blogService)
+		public IndexModel(IBlogService blogService)
 		{
 			this.blogService = blogService;
 		}

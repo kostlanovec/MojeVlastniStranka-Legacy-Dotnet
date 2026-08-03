@@ -1,14 +1,15 @@
 ﻿@page
+@using MojeVlastniStranka.ApplicationCore.Constants
 @model LockoutModel
 @{
-	ViewData["Title"] = "Locked out";
+    ViewData[ViewDataKeys.Title] = "Locked out";
 }
 
 <div class="container-fluid">
 
-	<header>
-		<h1 class="text-danger">@ViewData["Title"]</h1>
-		<p class="text-danger">This account has been locked out, please try again later.</p>
-	</header>
+    <header>
+        <h1 class="text-danger">@ViewData[ViewDataKeys.Title]</h1>
+        <p class="text-danger">This account has been locked out, please try again later.</p>
+    </header>
 
 </div>

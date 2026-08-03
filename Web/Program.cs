@@ -5,10 +5,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using MojeVlastniStranka.ApplicationCore.Services;
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 using MojeVlastniStranka.DataAccess;
 using MojeVlastniStranka.DataAccess.Entities;
 using MojeVlastniStranka.Web;
 using Prometheus;
+using Hangfire;
+using Hangfire.PostgreSql;
 
 namespace MojeVlastniStrankaFinanali.Web
 {
@@ -29,6 +32,14 @@ namespace MojeVlastniStrankaFinanali.Web
 				 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
 						.ConfigureWarnings(w => w.Ignore(RelationalEventId.PendingModelChangesWarning)),
 				 ServiceLifetime.Scoped);
+
+			builder.Services.AddHangfire(configuration => configuration
+				.SetDataCompatibilityLevel(Hangfire.CompatibilityLevel.Version_180)
+				.UseSimpleAssemblyNameTypeSerializer()
+				.UseRecommendedSerializerSettings()
+				.UsePostgreSqlStorage(options => options.UseNpgsqlConnection(builder.Configuration.GetConnectionString("DefaultConnection"))));
+
+			builder.Services.AddHangfireServer();
 
 			builder.Services
 				 .AddDefaultIdentity<User>(options =>
@@ -57,20 +68,22 @@ namespace MojeVlastniStrankaFinanali.Web
 				options.LoginPath = "/Admin/Account/Login";
 				options.AccessDeniedPath = "/Admin/Account/AccessDenied";
 				options.SlidingExpiration = true;
+				options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
 			});
 
 			// --- App services ---
-			builder.Services.AddScoped<LoggerService>();
-			builder.Services.AddScoped<NotificationService>();
-			builder.Services.AddScoped<BlogService>();
-			builder.Services.AddScoped<ProjectService>();
-			builder.Services.AddScoped<ImageService>();
-			builder.Services.AddScoped<DevelopmentService>();
-			builder.Services.AddScoped<DashboardService>();
-			builder.Services.AddScoped<MailService>();
-			builder.Services.AddScoped<FormService>();
-			builder.Services.AddScoped<ServicesOfferedService>();
-			builder.Services.AddHttpClient<RecaptchaService>();
+			builder.Services.AddScoped<ILoggerService, LoggerService>();
+			builder.Services.AddScoped<INotificationService, NotificationService>();
+			builder.Services.AddScoped<IBlogService, BlogService>();
+			builder.Services.AddScoped<IProjectService, ProjectService>();
+			builder.Services.AddScoped<IImageService, ImageService>();
+			builder.Services.AddScoped<IDevelopmentService, DevelopmentService>();
+			builder.Services.AddScoped<IDashboardService, DashboardService>();
+			builder.Services.AddScoped<IMailService, MailService>();
+			builder.Services.AddScoped<IFormService, FormService>();
+			builder.Services.AddScoped<IServicesOfferedService, ServicesOfferedService>();
+			builder.Services.AddScoped<IGameIdeaService, GameIdeaService>();
+			builder.Services.AddHttpClient<IRecaptchaService, RecaptchaService>();
 
 			builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
@@ -97,8 +110,6 @@ namespace MojeVlastniStrankaFinanali.Web
 				options.EnableForHttps = true;
 			});
 
-			builder.Services.AddResponseCaching();
-
 			builder.Services.ConfigureHealthChecks(builder.Configuration);
 
 			builder.Services.Configure<ForwardedHeadersOptions>(options =>
@@ -120,6 +131,12 @@ namespace MojeVlastniStrankaFinanali.Web
 
 			app.Use(async (context, next) =>
 			{
+				context.Response.Headers.Append("X-Frame-Options", "DENY");
+				context.Response.Headers.Append("X-Xss-Protection", "1; mode=block");
+				context.Response.Headers.Append("X-Content-Type-Options", "nosniff");
+				context.Response.Headers.Append("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; frame-src 'self' https://www.google.com;");
+				context.Response.Headers.Append("Referrer-Policy", "strict-origin-when-cross-origin");
+				
 				var path = context.Request.Path.Value ?? "/";
 				var skip = path == "/" || path.StartsWith("/cs") || path.StartsWith("/en")
 					|| path.StartsWith("/api") || path.StartsWith("/metrics")
@@ -137,6 +154,11 @@ namespace MojeVlastniStrankaFinanali.Web
 			});
 
 			app.UseHttpsRedirection();
+
+			app.UseHangfireDashboard("/hangfire", new DashboardOptions
+			{
+				Authorization = new[] { new HangfireAuthorizationFilter() }
+			});
 
 			app.UseResponseCompression();
 
@@ -178,7 +200,6 @@ namespace MojeVlastniStrankaFinanali.Web
 
 			app.UseRequestLocalization(localizationOptions);
 
-			app.UseResponseCaching();
 			app.UseOutputCache();
 
 			app.UseAuthentication();

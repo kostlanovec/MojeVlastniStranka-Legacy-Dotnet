@@ -1,3 +1,4 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 #nullable disable
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MojeVlastniStranka.ApplicationCore.Services;
@@ -9,9 +10,9 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Marketing
 	public class ServicesTableModel : PageModel
 	{
 		private readonly DataContext context;
-		private readonly ServicesOfferedService offeredService;
+		private readonly IServicesOfferedService offeredService;
 
-		public ServicesTableModel(DataContext context, ServicesOfferedService offeredService)
+		public ServicesTableModel(DataContext context, IServicesOfferedService offeredService)
 		{
 			this.context = context;
 			this.offeredService = offeredService;

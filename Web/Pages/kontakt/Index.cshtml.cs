@@ -1,3 +1,4 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 #nullable disable
 #nullable disable
 using Microsoft.AspNetCore.Mvc;
@@ -11,9 +12,9 @@ namespace MojeVlastniStranka.Web.Pages.kontakt
 	public class kontaktModel : PageModel
 	{
 		private readonly DataContext context;
-		private readonly FormService formService;
+		private readonly IFormService formService;
 		private readonly Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> localizer;
-		private readonly RecaptchaService recaptchaService;
+		private readonly IRecaptchaService recaptchaService;
 
 		[BindProperty]
 		public string Honeypot
@@ -22,7 +23,7 @@ namespace MojeVlastniStranka.Web.Pages.kontakt
 			set;
 		}
 
-		public kontaktModel(DataContext context, FormService formService, Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> localizer, RecaptchaService recaptchaService)
+		public kontaktModel(DataContext context, IFormService formService, Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> localizer, IRecaptchaService recaptchaService)
 		{
 			this.context = context;
 			this.formService = formService;

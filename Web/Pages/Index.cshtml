@@ -1,12 +1,13 @@
 @page
+@using MojeVlastniStranka.ApplicationCore.Constants
 @model MojeVlastniStranka.Web.Pages.IndexModel
 @{
-    ViewData["Title"] = SharedLocalizer["IndexTitle"];
-    ViewData["Description"] = SharedLocalizer["IndexDesc"];
-    ViewData["Author"] = "Jan Sebastián Kostlán";
-    ViewData["Keywords"] = SharedLocalizer["IndexKeywords"];
-    ViewData["Image"] = "https://kostlanovec.cz/images/basicimage.png";
-    ViewData["SocialTitle"] = SharedLocalizer["IndexSocialTitle"];
+    ViewData[ViewDataKeys.Title] = SharedLocalizer["IndexTitle"];
+    ViewData[ViewDataKeys.Description] = SharedLocalizer["IndexDesc"];
+    ViewData[ViewDataKeys.Author] = "Jan Sebastián Kostlán";
+    ViewData[ViewDataKeys.Keywords] = SharedLocalizer["IndexKeywords"];
+    ViewData[ViewDataKeys.Image] = "https://kostlanovec.cz/images/basicimage.png";
+    ViewData[ViewDataKeys.SocialTitle] = SharedLocalizer["IndexSocialTitle"];
 
     var indexSocialTitle = SharedLocalizer["IndexSocialTitle"].Value;
     var indexDesc = SharedLocalizer["IndexDesc"].Value;
@@ -17,7 +18,7 @@
     var culturePfx = cultureName == "en" ? "/en" : "";
     var cultureRouteVal = cultureName == "en" ? "en" : (string?)null;
 
-    ViewData["JsonLD"] = $@"
+    ViewData[ViewDataKeys.JsonLD] = $@"
     {{
       ""@context"": ""https://schema.org"",
       ""@graph"": [

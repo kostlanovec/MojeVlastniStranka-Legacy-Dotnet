@@ -1,3 +1,4 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 #nullable disable
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MojeVlastniStranka.ApplicationCore.Services;
@@ -10,9 +11,9 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Project
 	public class IndexModel : PageModel
 	{
 		private readonly DataContext context;
-		private readonly ProjectService projectService;
+		private readonly IProjectService projectService;
 
-		public IndexModel(DataContext context, ProjectService projectService)
+		public IndexModel(DataContext context, IProjectService projectService)
 		{
 			this.context = context;
 			this.projectService = projectService;

@@ -1,3 +1,4 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 using MojeVlastniStranka.DataAccess;
 using MojeVlastniStranka.DataAccess.Entities;
 using MojeVlastniStranka.Common.Enums;
@@ -8,12 +9,12 @@ using MojeVlastniStranka.Common.Models;
 
 namespace MojeVlastniStranka.ApplicationCore.Services
 {
-	public class ProjectService
+	public class ProjectService : IProjectService
 	{
 		private readonly DataContext context;
-		private readonly ImageService imageService;
+		private readonly IImageService imageService;
 
-		public ProjectService(DataContext context, ImageService imageService)
+		public ProjectService(DataContext context, IImageService imageService)
 		{
 			this.context = context;
 			this.imageService = imageService;
@@ -57,9 +58,11 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
 			string imagePath = await imageService.UploadImageAsync(projectRequest.File, "project");
 
+			var sanitizer = new Ganss.Xss.HtmlSanitizer();
+
 			var blogPost = Project.Create(
 				projectRequest.Description,
-				projectRequest.Content,
+				sanitizer.Sanitize(projectRequest.Content ?? ""),
 				projectRequest.Title,
 				projectRequest.Keywords,
 				projectRequest.Name,
@@ -150,11 +153,13 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				project.ImagePath = await imageService.UploadImageAsync(request.FileUpload, "project");
 			}
 
+			var sanitizer = new Ganss.Xss.HtmlSanitizer();
+
 			project.Name = request.Name;
 			project.Description = request.Description;
 			project.Slug = request.Slug;
 			project.projectStatus = request.Status;
-			project.Content = request.Content;
+			project.Content = sanitizer.Sanitize(request.Content ?? "");
 			project.Date = DateTime.Now;
 			project.Title = request.Title;
 			project.Keywords = request.Keywords;

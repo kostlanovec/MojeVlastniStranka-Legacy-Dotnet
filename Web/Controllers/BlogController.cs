@@ -1,3 +1,4 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 #nullable disable
 using Microsoft.AspNetCore.Mvc;
 using MojeVlastniStranka.ApplicationCore.Dto.Blog;
@@ -9,9 +10,9 @@ namespace MojeVlastniStranka.Web.Controllers
 	[Route("[controller][action]")]
 	public class BlogController : BaseController
 	{
-		private readonly BlogService blogService;
+		private readonly IBlogService blogService;
 
-		public BlogController(BlogService blogService)
+		public BlogController(IBlogService blogService)
 		{
 			this.blogService = blogService;
 		}

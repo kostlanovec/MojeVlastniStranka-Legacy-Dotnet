@@ -1,3 +1,4 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 #nullable disable
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,9 +12,9 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Account.Manage
 	public class IndexModel : PageModel
 	{
 		private readonly DataContext context;
-		private readonly DashboardService dashboardService;
+		private readonly IDashboardService dashboardService;
 
-		public IndexModel(DataContext context, DashboardService dashboardService)
+		public IndexModel(DataContext context, IDashboardService dashboardService)
 		{
 			this.context = context;
 			this.dashboardService = dashboardService;

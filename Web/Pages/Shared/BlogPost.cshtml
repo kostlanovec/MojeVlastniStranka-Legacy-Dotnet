@@ -1,37 +1,38 @@
+@using MojeVlastniStranka.ApplicationCore.Constants
 @using System.Threading
 @model MojeVlastniStranka.DataAccess.Entities.BlogPost
 @{
-	bool isEn = Thread.CurrentThread.CurrentCulture.Name.StartsWith("en");
-	string title = isEn && !string.IsNullOrEmpty(Model.TitleEn) ? Model.TitleEn : Model.Title;
-	string desc = isEn && !string.IsNullOrEmpty(Model.DescriptionEn) ? Model.DescriptionEn : Model.Description;
-	string keys = isEn && !string.IsNullOrEmpty(Model.KeywordsEn) ? Model.KeywordsEn : Model.Keywords;
-	string name = isEn && !string.IsNullOrEmpty(Model.NameEn) ? Model.NameEn : Model.Name;
-	string content = isEn && !string.IsNullOrEmpty(Model.ContentEn) ? Model.ContentEn : Model.Content;
-	string culturePfx = isEn ? "/en" : "";
-	string blogUrl = $"https://kostlanovec.cz{culturePfx}/blog/{Model.Slug}";
+    bool isEn = Thread.CurrentThread.CurrentCulture.Name.StartsWith("en");
+    string title = isEn && !string.IsNullOrEmpty(Model.TitleEn) ? Model.TitleEn : Model.Title;
+    string desc = isEn && !string.IsNullOrEmpty(Model.DescriptionEn) ? Model.DescriptionEn : Model.Description;
+    string keys = isEn && !string.IsNullOrEmpty(Model.KeywordsEn) ? Model.KeywordsEn : Model.Keywords;
+    string name = isEn && !string.IsNullOrEmpty(Model.NameEn) ? Model.NameEn : Model.Name;
+    string content = isEn && !string.IsNullOrEmpty(Model.ContentEn) ? Model.ContentEn : Model.Content;
+    string culturePfx = isEn ? "/en" : "";
+    string blogUrl = $"https://kostlanovec.cz{culturePfx}/blog/{Model.Slug}";
 
-	ViewData["Title"] = title;
-	ViewData["Description"] = desc;
-	ViewData["Keywords"] = keys;
-	ViewData["Author"] = @Model.Author;
-	ViewData["Image"] = "https://kostlanovec.cz" + Model.ImagePath;
-	ViewData["SocialTitle"] = name;
+    ViewData[ViewDataKeys.Title] = title;
+    ViewData[ViewDataKeys.Description] = desc;
+    ViewData[ViewDataKeys.Keywords] = keys;
+    ViewData[ViewDataKeys.Author] = @Model.Author;
+    ViewData[ViewDataKeys.Image] = "https://kostlanovec.cz" + Model.ImagePath;
+    ViewData[ViewDataKeys.SocialTitle] = name;
 }
 <main class="main">
 @Html.Raw(content)
 </main>
 <script src="https://kit.fontawesome.com/704ff50790.js" crossorigin="anonymous"></script>
 <div class="shared--buttons">
-	<p>@SharedLocalizer["ShareTitle"]</p>
-	<div class="share-buttons">
-		<a href="https://www.facebook.com/dialog/share?app_id=1552041721475989&display=popup&href=@blogUrl&redirect_uri=@blogUrl" class="share-button facebook" target="_blank" rel="noopener noreferrer">
-			<i class="fab fa-facebook-f"></i>
-		</a>
-		<a href="https://x.com/intent/tweet?title=@Uri.EscapeDataString(name)&related=Kostlanovec&url=@blogUrl" class="share-button twitter" target="_blank" rel="noopener noreferrer">
-			<i class="fab fa-x-twitter"></i>
-		</a>
-		<a href="https://www.linkedin.com/shareArticle?mini=true&url=@blogUrl" class="share-button linkedin" target="_blank" rel="noopener noreferrer">
-			<i class="fab fa-linkedin-in"></i>
-		</a>
-	</div>
+    <p>@SharedLocalizer["ShareTitle"]</p>
+    <div class="share-buttons">
+        <a href="https://www.facebook.com/dialog/share?app_id=1552041721475989&display=popup&href=@blogUrl&redirect_uri=@blogUrl" class="share-button facebook" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://x.com/intent/tweet?title=@Uri.EscapeDataString(name)&related=Kostlanovec&url=@blogUrl" class="share-button twitter" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-x-twitter"></i>
+        </a>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=@blogUrl" class="share-button linkedin" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-linkedin-in"></i>
+        </a>
+    </div>
 </div>

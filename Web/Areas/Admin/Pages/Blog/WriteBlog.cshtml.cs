@@ -1,3 +1,4 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 #nullable disable
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +16,7 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Blog
 	public class WriteBlogModel : PageModel
 	{
 		private readonly DataContext context;
-		private readonly BlogService blogService;
+		private readonly IBlogService blogService;
 
 		[BindProperty]
 		public BlogPostRequest Input
@@ -42,7 +43,7 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Blog
 			set;
 		} = null;
 
-		public WriteBlogModel(DataContext context, BlogService blogService)
+		public WriteBlogModel(DataContext context, IBlogService blogService)
 		{
 			this.context = context;
 			this.blogService = blogService;

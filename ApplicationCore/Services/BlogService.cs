@@ -1,3 +1,4 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using MojeVlastniStranka.Common.Models;
 using MojeVlastniStranka.ApplicationCore.Dto.Blog;
@@ -7,12 +8,12 @@ using MojeVlastniStranka.DataAccess.Entities;
 
 namespace MojeVlastniStranka.ApplicationCore.Services
 {
-	public class BlogService
+	public class BlogService : IBlogService
 	{
 		private readonly DataContext context;
-		private readonly ImageService imageService;
+		private readonly IImageService imageService;
 
-		public BlogService(DataContext context, ImageService imageService)
+		public BlogService(DataContext context, IImageService imageService)
 		{
 			this.context = context;
 			this.imageService = imageService;
@@ -59,9 +60,11 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 
 			string imagePath = await imageService.UploadImageAsync(blogPostRequest.FileUpload, "blog");
 
+			var sanitizer = new Ganss.Xss.HtmlSanitizer();
+
 			var blogPost = BlogPost.Create(
 				blogPostRequest.Description,
-				blogPostRequest.Content,
+				sanitizer.Sanitize(blogPostRequest.Content ?? ""),
 				blogPostRequest.Title,
 				blogPostRequest.Author,
 				blogPostRequest.Keywords,
@@ -72,7 +75,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				blogPostRequest.DatePublic == default ? DateTime.Now : blogPostRequest.DatePublic,
 				blogPostRequest.NameEn,
 				blogPostRequest.DescriptionEn,
-				blogPostRequest.ContentEn,
+				sanitizer.Sanitize(blogPostRequest.ContentEn ?? ""),
 				blogPostRequest.TitleEn,
 				blogPostRequest.KeywordsEn
 			);
@@ -93,6 +96,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			var result = await context.BlogCategories
 				.AsNoTracking()
 				.Include(bc => bc.BlogPosts)
+				.Where(bc => bc.BlogPosts.Any())
 				.Select(bc => new BlogCategoryWithPostsDto
 				{
 					Name = bc.Name,
@@ -108,7 +112,6 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 					DescriptionEn = bp.DescriptionEn
 				}).ToList()
 				})
-				.Where(predicate => predicate.BlogPosts.Any())
 				.ToListAsync();
 			return result;
 		}
@@ -187,7 +190,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		{
 			var result = await context.BlogPosts
 				.AsNoTracking()
-				.Where(bp => bp.BlogCategory.Name.ToLower().Contains("projekt"))
+				.Where(bp => bp.BlogCategory.IsProjectCategory)
 				.Select(bp => new BlogPostSummary
 				{
 					Id = bp.Id,
@@ -294,8 +297,10 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				return response;
 			}
 
+			var sanitizer = new Ganss.Xss.HtmlSanitizer();
+
 			existingBlogPost.Description = editBlogPostRequest.Description;
-			existingBlogPost.Content = editBlogPostRequest.Content;
+			existingBlogPost.Content = sanitizer.Sanitize(editBlogPostRequest.Content ?? "");
 			existingBlogPost.Title = editBlogPostRequest.Title;
 			existingBlogPost.Author = editBlogPostRequest.Author;
 			existingBlogPost.Keywords = editBlogPostRequest.Keywords;
@@ -303,7 +308,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			existingBlogPost.Name = editBlogPostRequest.Name;
 			existingBlogPost.NameEn = editBlogPostRequest.NameEn;
 			existingBlogPost.DescriptionEn = editBlogPostRequest.DescriptionEn;
-			existingBlogPost.ContentEn = editBlogPostRequest.ContentEn;
+			existingBlogPost.ContentEn = sanitizer.Sanitize(editBlogPostRequest.ContentEn ?? "");
 			existingBlogPost.TitleEn = editBlogPostRequest.TitleEn;
 			existingBlogPost.KeywordsEn = editBlogPostRequest.KeywordsEn;
 

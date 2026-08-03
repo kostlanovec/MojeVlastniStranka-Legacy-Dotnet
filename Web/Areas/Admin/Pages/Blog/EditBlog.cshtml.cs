@@ -1,3 +1,4 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 #nullable disable
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,7 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Blog
 	[Authorize]
 	public class EditBlogPostModel : PageModel
 	{
-		private readonly BlogService blogService;
+		private readonly IBlogService blogService;
 
 		public EditBlogPostDto EditBlogPostDto
 		{
@@ -35,7 +36,7 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Blog
 			set;
 		}
 
-		public EditBlogPostModel(BlogService blogService)
+		public EditBlogPostModel(IBlogService blogService)
 		{
 			this.blogService = blogService;
 		}

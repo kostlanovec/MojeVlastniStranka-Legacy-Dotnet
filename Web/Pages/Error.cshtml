@@ -1,9 +1,10 @@
 ﻿@page
+@using MojeVlastniStranka.ApplicationCore.Constants
 @model ErrorModel
 @{
-	ViewData["Title"] = "Error";
-	Layout = null;
-	ViewData["nofollow"] = true;
+    ViewData[ViewDataKeys.Title] = "Error";
+    Layout = null;
+    ViewData[ViewDataKeys.NoFollow] = true;
 }
 
 <h1 class="text-danger">Chyba :(</h1>

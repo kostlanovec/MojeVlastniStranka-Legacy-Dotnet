@@ -24,6 +24,24 @@
   <data name="Kontakt" xml:space="preserve">
     <value>Kontakt</value>
   </data>
+  <data name="NametyNaHry" xml:space="preserve">
+    <value>Náměty na hru</value>
+  </data>
+  <data name="NametyNaHry_H1" xml:space="preserve">
+    <value>Náměty na hru</value>
+  </data>
+  <data name="NametyNaHry_Desc" xml:space="preserve">
+    <value>Náměty na hry, na kterých pracuji nebo o kterých přemýšlím.</value>
+  </data>
+  <data name="NametyNaHry_Keywords" xml:space="preserve">
+    <value>náměty na hru, herní vývoj, gamedev</value>
+  </data>
+  <data name="NametyNaHry_SocialTitle" xml:space="preserve">
+    <value>Kostlanovec – náměty na hru</value>
+  </data>
+  <data name="NametyNaHry_Empty" xml:space="preserve">
+    <value>Zatím zde nejsou žádné náměty.</value>
+  </data>
   <data name="MadeBy" xml:space="preserve">
     <value>Made by Jan Sebastián Kostlán</value>
   </data>

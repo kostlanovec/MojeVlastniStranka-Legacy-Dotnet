@@ -1,11 +1,12 @@
 ﻿@page
+@using MojeVlastniStranka.ApplicationCore.Constants
 @model ConfirmEmailModel
 @{
-	ViewData["Title"] = "Confirm email";
+    ViewData[ViewDataKeys.Title] = "Confirm email";
 }
 
 <div class="container-fluid">
 
-	<h2>@ViewData["Title"]</h2>
-	<partial name="_StatusMessage" model="Model.StatusMessage" />
+    <h2>@ViewData[ViewDataKeys.Title]</h2>
+    <partial name="_StatusMessage" model="Model.StatusMessage" />
 </div>

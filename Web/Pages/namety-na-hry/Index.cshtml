@@ -1,0 +1,40 @@
+@page
+@using MojeVlastniStranka.ApplicationCore.Constants
+@model MojeVlastniStranka.Web.Pages.namety_na_hry.IndexModel
+@{
+    ViewData[ViewDataKeys.Title] = SharedLocalizer["NametyNaHry"];
+    ViewData[ViewDataKeys.Description] = SharedLocalizer["NametyNaHry_Desc"];
+    ViewData[ViewDataKeys.Author] = "Jan Sebastián Kostlán";
+    ViewData[ViewDataKeys.Keywords] = SharedLocalizer["NametyNaHry_Keywords"];
+    ViewData[ViewDataKeys.SocialTitle] = SharedLocalizer["NametyNaHry_SocialTitle"];
+    var isEn = System.Globalization.CultureInfo.CurrentCulture.Name == "en";
+}
+
+<main class="main">
+    <header class="reveal">
+        <h1>@SharedLocalizer["NametyNaHry_H1"]</h1>
+    </header>
+    <section class="reveal">
+        <div class="div--blog--articles">
+            @foreach (var idea in Model.GameIdeas)
+            {
+                <article class="article--post zoom-effect">
+                    @if (!string.IsNullOrEmpty(idea.ImageUrl))
+                    {
+                        <img src="@idea.ImageUrl" alt="@(isEn ? idea.TitleEn : idea.TitleCs)" />
+                    }
+                    <div class="blog--div">
+                        <h3 class="blog__h3">@(isEn ? idea.TitleEn : idea.TitleCs)</h3>
+                        <div class="blog--data">
+                            <p>@Html.Raw(isEn ? idea.DescriptionEn : idea.DescriptionCs)</p>
+                        </div>
+                    </div>
+                </article>
+            }
+            @if (!Model.GameIdeas.Any())
+            {
+                <p>@SharedLocalizer["NametyNaHry_Empty"]</p>
+            }
+        </div>
+    </section>
+</main>

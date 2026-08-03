@@ -1,3 +1,4 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 #nullable disable
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +13,9 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Development
 	public class ReportBugModel : PageModel
 	{
 		private readonly DataContext context;
-		private readonly DevelopmentService developmentService;
+		private readonly IDevelopmentService developmentService;
 
-		public ReportBugModel(DataContext context, DevelopmentService developmentService)
+		public ReportBugModel(DataContext context, IDevelopmentService developmentService)
 		{
 			this.context = context;
 			this.developmentService = developmentService;

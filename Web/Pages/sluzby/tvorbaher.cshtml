@@ -1,84 +1,85 @@
 @page
+@using MojeVlastniStranka.ApplicationCore.Constants
 @model MojeVlastniStranka.Web.Pages.sluzby.tvorbaherModel
 
 @{
-	ViewData["Title"] = SharedLocalizer["Hry_Title"];
-	ViewData["Description"] = SharedLocalizer["Hry_Desc"];
-	ViewData["Author"] = "Jan Sebastián Kostlán";
-	ViewData["Keywords"] = SharedLocalizer["Hry_Keywords"];
-	ViewData["Image"] = "https://kostlanovec.cz/images/tvorbaher.jpg";
-	ViewData["SocialTitle"] = SharedLocalizer["Hry_SocialTitle"];
+    ViewData[ViewDataKeys.Title] = SharedLocalizer["Hry_Title"];
+    ViewData[ViewDataKeys.Description] = SharedLocalizer["Hry_Desc"];
+    ViewData[ViewDataKeys.Author] = "Jan Sebastián Kostlán";
+    ViewData[ViewDataKeys.Keywords] = SharedLocalizer["Hry_Keywords"];
+    ViewData[ViewDataKeys.Image] = "https://kostlanovec.cz/images/tvorbaher.jpg";
+    ViewData[ViewDataKeys.SocialTitle] = SharedLocalizer["Hry_SocialTitle"];
 }
 
 <main class="main">
-	<header class="header header-service reveal">
-		<div>
-			<h1>@SharedLocalizer["Hry_H1"]</h1>
-			<p>@SharedLocalizer["Hry_Intro"]</p>
-		</div>
-		<img src="~/images/sluzby/ProductionGame.svg" />
-	</header>
-	<article class="service__article reveal">
-		<h2 class="service--h2">@SharedLocalizer["Hry_CustomH2"]</h2>
-		<div class="service--layout">
-			<img src="~/images/sluzby/BasicGame.svg" />
-			<ul class="ul__service">
-				<li>@SharedLocalizer["Hry_CustomUL1"]</li>
-				<li>@SharedLocalizer["Hry_CustomUL2"]</li>
-				<li>@SharedLocalizer["Hry_CustomUL3"]</li>
-				<li>@SharedLocalizer["Hry_CustomUL4"]</li>
-			</ul>
-		</div>
-		<div>
-			<h3>@SharedLocalizer["DescriptionLabel"]</h3>
-			<p class="service--p">@SharedLocalizer["Hry_CustomDesc"]</p>
-		</div>
-		<div class="serivce--price--div">
-			<p class="service--price">@SharedLocalizer["Hry_PriceByAgreement"]</p>
-		</div>
-	</article>
-	<article class="service__article reveal">
-		<h2 class="service--h2">@SharedLocalizer["Hry_CompleteH2"]</h2>
-		<div class="service--layout">
-			<ul class="ul__service">
-				<li>@SharedLocalizer["Hry_CompleteUL1"]</li>
-				<li>@SharedLocalizer["Hry_CompleteUL2"]</li>
-				<li>@SharedLocalizer["Hry_CompleteUL3"]</li>
-				<li>@SharedLocalizer["Hry_CompleteUL4"]</li>
-				<li>@SharedLocalizer["Hry_CompleteUL5"]</li>
-			</ul>
-			<img src="~/images/sluzby/GameAdvanced.svg" />
-		</div>
-		<div>
-			<h3>@SharedLocalizer["DescriptionLabel"]</h3>
-			<p class="service--p">@SharedLocalizer["Hry_CompleteDesc"]</p>
-		</div>
-		<div class="serivce--price--div">
-			<p class="service--price">@SharedLocalizer["Hry_PriceByAgreement"]</p>
-		</div>
-	</article>
-	<h2 class="center__text reveal">@SharedLocalizer["Hry_CTAH2"]</h2>
-	<form class="contact__form reveal" method="post">
-		<select class="input__form" name="ServiceRequestDto.SubService">
-			<option value="CustomizedGame">@SharedLocalizer["Hry_SelectCustom"]</option>
-			<option value="CompleteDevelopmentGame">@SharedLocalizer["Hry_SelectComplete"]</option>
-		</select>
-		<input class="input__form" type="email" name="ServiceRequestDto.Email" placeholder="@SharedLocalizer["EmailPlaceholder"]" required>
-		<input class="input__form" type="text" name="ServiceRequestDto.PhoneNumber" placeholder="@SharedLocalizer["PhonePlaceholder"]">
-		<textarea class="textarea__form" name="ServiceRequestDto.Message" cols="30" rows="10" placeholder="@SharedLocalizer["MessagePlaceholder"]" required></textarea>
-		<button class="button form--button" type="submit">@SharedLocalizer["Submit"]</button>
+    <header class="header header-service reveal">
+        <div>
+            <h1>@SharedLocalizer["Hry_H1"]</h1>
+            <p>@SharedLocalizer["Hry_Intro"]</p>
+        </div>
+        <img src="~/images/sluzby/ProductionGame.svg" />
+    </header>
+    <article class="service__article reveal">
+        <h2 class="service--h2">@SharedLocalizer["Hry_CustomH2"]</h2>
+        <div class="service--layout">
+            <img src="~/images/sluzby/BasicGame.svg" />
+            <ul class="ul__service">
+                <li>@SharedLocalizer["Hry_CustomUL1"]</li>
+                <li>@SharedLocalizer["Hry_CustomUL2"]</li>
+                <li>@SharedLocalizer["Hry_CustomUL3"]</li>
+                <li>@SharedLocalizer["Hry_CustomUL4"]</li>
+            </ul>
+        </div>
+        <div>
+            <h3>@SharedLocalizer["DescriptionLabel"]</h3>
+            <p class="service--p">@SharedLocalizer["Hry_CustomDesc"]</p>
+        </div>
+        <div class="serivce--price--div">
+            <p class="service--price">@SharedLocalizer["Hry_PriceByAgreement"]</p>
+        </div>
+    </article>
+    <article class="service__article reveal">
+        <h2 class="service--h2">@SharedLocalizer["Hry_CompleteH2"]</h2>
+        <div class="service--layout">
+            <ul class="ul__service">
+                <li>@SharedLocalizer["Hry_CompleteUL1"]</li>
+                <li>@SharedLocalizer["Hry_CompleteUL2"]</li>
+                <li>@SharedLocalizer["Hry_CompleteUL3"]</li>
+                <li>@SharedLocalizer["Hry_CompleteUL4"]</li>
+                <li>@SharedLocalizer["Hry_CompleteUL5"]</li>
+            </ul>
+            <img src="~/images/sluzby/GameAdvanced.svg" />
+        </div>
+        <div>
+            <h3>@SharedLocalizer["DescriptionLabel"]</h3>
+            <p class="service--p">@SharedLocalizer["Hry_CompleteDesc"]</p>
+        </div>
+        <div class="serivce--price--div">
+            <p class="service--price">@SharedLocalizer["Hry_PriceByAgreement"]</p>
+        </div>
+    </article>
+    <h2 class="center__text reveal">@SharedLocalizer["Hry_CTAH2"]</h2>
+    <form class="contact__form reveal" method="post">
+        <select class="input__form" name="ServiceRequestDto.SubService">
+            <option value="CustomizedGame">@SharedLocalizer["Hry_SelectCustom"]</option>
+            <option value="CompleteDevelopmentGame">@SharedLocalizer["Hry_SelectComplete"]</option>
+        </select>
+        <input class="input__form" type="email" name="ServiceRequestDto.Email" placeholder="@SharedLocalizer["EmailPlaceholder"]" required>
+        <input class="input__form" type="text" name="ServiceRequestDto.PhoneNumber" placeholder="@SharedLocalizer["PhonePlaceholder"]">
+        <textarea class="textarea__form" name="ServiceRequestDto.Message" cols="30" rows="10" placeholder="@SharedLocalizer["MessagePlaceholder"]" required></textarea>
+        <button class="button form--button" type="submit">@SharedLocalizer["Submit"]</button>
 
-		@if (TempData["SuccessMessage"] != null)
-		{
-			<div class="success-message">
-				@TempData["SuccessMessage"]
-			</div>
-		}
-		@if (ModelState.ErrorCount > 0)
-		{
-			<div class="error-message">
-				@ModelState.Values.SelectMany(v => v.Errors).FirstOrDefault()?.ErrorMessage
-			</div>
-		}
-	</form>
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="success-message">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+        @if (ModelState.ErrorCount > 0)
+        {
+            <div class="error-message">
+                @ModelState.Values.SelectMany(v => v.Errors).FirstOrDefault()?.ErrorMessage
+            </div>
+        }
+    </form>
 </main>

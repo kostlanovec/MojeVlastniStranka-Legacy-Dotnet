@@ -1,3 +1,4 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 #nullable disable
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,7 +11,7 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Blog
 	public class BlogModel : PageModel
 	{
 		private readonly DataContext context;
-		private readonly BlogService blogService;
+		private readonly IBlogService blogService;
 
 		public List<BlogCategoryDto> BlogCategory
 		{
@@ -24,7 +25,7 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Blog
 			set;
 		}
 
-		public BlogModel(DataContext context, BlogService blogService)
+		public BlogModel(DataContext context, IBlogService blogService)
 		{
 			this.context = context;
 			this.blogService = blogService;

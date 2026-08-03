@@ -1,3 +1,4 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 #nullable disable
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,7 +12,7 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Project
 	public class AddProjectModel : PageModel
 	{
 		private readonly DataContext context;
-		private readonly ProjectService projectService;
+		private readonly IProjectService projectService;
 
 		[BindProperty]
 		public AddProjectRequest Input
@@ -32,7 +33,7 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Project
 			set;
 		} = null;
 
-		public AddProjectModel(DataContext context, ProjectService projectService)
+		public AddProjectModel(DataContext context, IProjectService projectService)
 		{
 			this.context = context;
 			this.projectService = projectService;

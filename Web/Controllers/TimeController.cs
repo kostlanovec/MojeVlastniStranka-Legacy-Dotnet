@@ -1,4 +1,4 @@
-﻿#nullable disable
+#nullable disable
 using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using TimeZoneConverter;
@@ -52,7 +52,7 @@ namespace MojeVlastniStranka.Web.Controllers
 			}
 			catch (Exception ex)
 			{
-				return StatusCode(500, $"Internal server error: {ex.Message}");
+				return StatusCode(500, "Internal server error occurred while processing timestamps.");
 			}
 		}
 	}

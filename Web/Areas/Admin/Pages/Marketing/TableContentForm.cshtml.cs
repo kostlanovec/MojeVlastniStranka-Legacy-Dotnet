@@ -1,6 +1,6 @@
-﻿#nullable disable
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 #nullable disable
-#nullable disable
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MojeVlastniStranka.ApplicationCore.Services;
 using MojeVlastniStranka.DataAccess.Entities;
@@ -9,7 +9,7 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Marketing
 {
 	public class TableContentFormModelPage : PageModel
 	{
-		private readonly FormService formService;
+		private readonly IFormService formService;
 
 		public List<ContactForm> ViewModel
 		{
@@ -17,7 +17,7 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Marketing
 			set;
 		}
 
-		public TableContentFormModelPage(FormService formService)
+		public TableContentFormModelPage(IFormService formService)
 		{
 			this.formService = formService;
 		}
@@ -27,10 +27,10 @@ namespace MojeVlastniStranka.Admin.Areas.Identity.Pages.Account.Manage.Marketing
 			ViewModel = formService.GetAllForms();
 		}
 
-		// todo přidej tam odstranění data z tabulky.
-		public async Task OnPostAsync()
+		public IActionResult OnPostDeleteAsync(Guid id)
 		{
-
+			formService.DeleteForm(id);
+			return RedirectToPage();
 		}
 	}
 }

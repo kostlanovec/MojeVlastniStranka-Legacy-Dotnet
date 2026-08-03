@@ -3,134 +3,146 @@ using MimeKit;
 using MojeVlastniStranka.ApplicationCore.Requests;
 using MojeVlastniStranka.DataAccess.Entities;
 using MojeVlastniStranka.DataAccess;
+using MojeVlastniStranka.ApplicationCore.Interfaces;
+using Microsoft.Extensions.Logging;
+using MailKit.Security;
+using Microsoft.EntityFrameworkCore;
 
 namespace MojeVlastniStranka.ApplicationCore.Services
 {
-	public class MailService
+	public class MailService : IMailService
 	{
+		private readonly DataContext _context;
+		private readonly Microsoft.Extensions.Configuration.IConfiguration _configuration;
+		private readonly ILogger<MailService> _logger;
 
-		private readonly DataContext context;
-		private readonly Microsoft.Extensions.Configuration.IConfiguration configuration;
-
-		public MailService(DataContext context, Microsoft.Extensions.Configuration.IConfiguration configuration)
+		public MailService(DataContext context, Microsoft.Extensions.Configuration.IConfiguration configuration, ILogger<MailService> logger)
 		{
-			this.context = context;
-			this.configuration = configuration;
+			_context = context;
+			_configuration = configuration;
+			_logger = logger;
 		}
 
 		/// <summary>
-		/// Posílá newsletter.
+		/// Posílá newsletter asynchronně a optimalizovaně bez opakovaného připojování.
 		/// </summary>
 		public async Task SendMail(NewsLetterRequest newsLetterRequest)
 		{
 			var emails = await GetAllNewsletterEmails();
 
-			if (emails != null)
+			if (emails != null && emails.Any())
 			{
-				var emailAddress = configuration["EmailSettings:Username"] ?? "kostlan@kostlanovec.cz";
-				var password = configuration["EmailSettings:Password"] ?? "HESLO-Z-APPSETTINGS";
+				var emailAddress = _configuration["EmailSettings:Username"];
+				var password = _configuration["EmailSettings:Password"];
 
-				foreach (var email in emails)
+				if (string.IsNullOrEmpty(emailAddress) || string.IsNullOrEmpty(password))
 				{
-					var message = new MimeMessage();
-					message.From.Add(new MailboxAddress("Jan Sebastián Kostlán", "kostlan@kostlanovec.cz"));
-					message.To.Add(new MailboxAddress(email.Email, email.Email));
-					message.Subject = newsLetterRequest.Subject;
-
-					message.Body = new TextPart("html")
-					{
-						Text = newsLetterRequest.Body
-					};
-
-					Client(message, emailAddress, password);
-				}
-			}
-		}
-
-
-		public void SendVeritificationEmail()
-		{
-			var message = new MimeMessage();
-			message.From.Add(new MailboxAddress("Jan Sebastián Kostlán", "kostlan@kostlanovec.cz"));
-			message.To.Add(new MailboxAddress("Jan Sebastián Kostlán", "info@kostlanovec.cz"));
-			//message.Subject = newsLetterRequest.Subject;
-
-			//message.Body = new TextPart("html")
-			//{
-			//	Text = newsLetterRequest.Body
-			//};
-
-			var emailAddress = configuration["EmailSettings:Username"] ?? "kostlan@kostlanovec.cz";
-			var password = configuration["EmailSettings:Password"] ?? "HESLO-Z-APPSETTINGS";
-			Client(message, emailAddress, password);
-		}
-
-		/// <summary>
-		/// Klient na připojení k webmailu a následného odeslání emailu s přihlášením.
-		/// </summary>
-		/// <param name="message">Zpráva</param>
-		/// <param name="email">Emailová adresa.</param>
-		/// <param name="password">Heslo.</param>
-		private void Client(MimeMessage message, string email, string password)
-		{
-			using (var client = new SmtpClient())
-			{
-				try
-				{
-					// Připojení k hlavnímu SMTP serveru
-					client.Connect("smtp.example.com", 587, false);  // Port 587 pro TLS
-				}
-				catch (Exception ex)
-				{
-					// Zpracování chyby připojení
-					Console.WriteLine("Chyba připojení k SMTP serveru: " + ex.Message);
+					_logger.LogError("Chybí konfigurace EmailSettings:Username nebo EmailSettings:Password.");
 					return;
 				}
 
+				using var client = new SmtpClient();
 				try
 				{
-					// Autentizace pomocí poskytnutých přihlašovacích údajů
-					client.Authenticate(email, password);
+					await client.ConnectAsync("smtp.example.com", 587, SecureSocketOptions.StartTls);
+					await client.AuthenticateAsync(emailAddress, password);
 
-					// Odeslání zprávy
-					client.Send(message);
+					foreach (var email in emails)
+					{
+						var message = new MimeMessage();
+						message.From.Add(new MailboxAddress("Jan Sebastián Kostlán", emailAddress));
+						message.To.Add(new MailboxAddress(email.Email, email.Email));
+						message.Subject = newsLetterRequest.Subject;
+
+						message.Body = new TextPart("html")
+						{
+							Text = newsLetterRequest.Body
+						};
+
+						try
+						{
+							await client.SendAsync(message);
+						}
+						catch (Exception ex)
+						{
+							_logger.LogError(ex, "Chyba při odesílání newsletteru na email: {Email}", email.Email);
+						}
+					}
 				}
 				catch (Exception ex)
 				{
-					// Zpracování chyby při odesílání
-					Console.WriteLine("Chyba při odesílání emailu: " + ex.Message);
+					_logger.LogError(ex, "Chyba při připojování k SMTP serveru pro newsletter.");
 				}
 				finally
 				{
-					// Odpojení od serveru
-					client.Disconnect(true);
+					if (client.IsConnected)
+					{
+						await client.DisconnectAsync(true);
+					}
 				}
 			}
 		}
 
+		/// <summary>
+		/// Odesílá verifikační email.
+		/// </summary>
+		public async Task SendVeritificationEmailAsync()
+		{
+			var emailAddress = _configuration["EmailSettings:Username"];
+			var password = _configuration["EmailSettings:Password"];
+			
+			if (string.IsNullOrEmpty(emailAddress) || string.IsNullOrEmpty(password))
+			{
+				_logger.LogError("Chybí konfigurace EmailSettings:Username nebo EmailSettings:Password.");
+				return;
+			}
+
+			var message = new MimeMessage();
+			message.From.Add(new MailboxAddress("Jan Sebastián Kostlán", emailAddress));
+			message.To.Add(new MailboxAddress("Jan Sebastián Kostlán", "info@kostlanovec.cz"));
+			message.Subject = "Verifikace";
+			message.Body = new TextPart("html") { Text = "Verifikační email." };
+
+			using var client = new SmtpClient();
+			try
+			{
+				await client.ConnectAsync("smtp.example.com", 587, SecureSocketOptions.StartTls);
+				await client.AuthenticateAsync(emailAddress, password);
+				await client.SendAsync(message);
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "Chyba při odesílání verifikačního emailu.");
+			}
+			finally
+			{
+				if (client.IsConnected)
+				{
+					await client.DisconnectAsync(true);
+				}
+			}
+		}
 
 		/// <summary>
 		/// Přidá email pro newsletter.
 		/// </summary>
-		/// <param name="email">Emailová adresa</param>
-		/// <returns>Vrací true, pokud byl email úspěšně přidán, jinak false</returns>
 		public bool AddEmailForNewsLetter(string email)
 		{
-			bool emailExist = context.NewsLetters.Any(x => x.Email == email);
+			bool emailExist = _context.NewsLetters.Any(x => x.Email == email);
 			if (emailExist)
 			{
-				return false; // Email již existuje
+				return false;
 			}
 
 			var newsLetterEmail = NewsLetter.Create(email);
-			context.NewsLetters.Add(newsLetterEmail);
-			context.SaveChanges();
-			return true; // Email byl úspěšně přidán
+			_context.NewsLetters.Add(newsLetterEmail);
+			_context.SaveChanges();
+			return true;
 		}
 
 		public async Task<List<NewsLetter>> GetAllNewsletterEmails()
 		{
-			return await Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync(context.NewsLetters);
+			return await _context.NewsLetters.AsNoTracking().ToListAsync();
 		}
 	}
 }

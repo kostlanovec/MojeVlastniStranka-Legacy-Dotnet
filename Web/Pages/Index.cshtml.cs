@@ -1,3 +1,4 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 #nullable disable
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,10 +13,10 @@ namespace MojeVlastniStranka.Web.Pages
 	public class IndexModel : PageModel
 	{
 		private readonly DataContext context;
-		private readonly BlogService blogService;
-		private readonly MailService mailService;
+		private readonly IBlogService blogService;
+		private readonly IMailService mailService;
 		private readonly Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> localizer;
-		private readonly RecaptchaService recaptchaService;
+		private readonly IRecaptchaService recaptchaService;
 
 		public List<BlogPostSummary> Posts
 		{
@@ -31,7 +32,7 @@ namespace MojeVlastniStranka.Web.Pages
 			set;
 		}
 
-		public IndexModel(DataContext context, BlogService blogService, MailService mailService, Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> localizer, RecaptchaService recaptchaService)
+		public IndexModel(DataContext context, IBlogService blogService, IMailService mailService, Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> localizer, IRecaptchaService recaptchaService)
 		{
 			this.context = context;
 			this.blogService = blogService;

@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MojeVlastniStranka.DataAccess.Entities;
 using Reservanto.NPS.DataAccess;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -63,6 +63,7 @@ namespace MojeVlastniStranka.DataAccess
 		public DbSet<ServiceRequest> ServiceRequests { get; set; }
 		public DbSet<NewsLetter> NewsLetters { get; set; }
 		public DbSet<UserSubscriptionNewsLetter> UserSubscriptionsNewsLetter { get; set; }
+		public DbSet<GameIdea> GameIdeas { get; set; }
 		#endregion
 	}
 }

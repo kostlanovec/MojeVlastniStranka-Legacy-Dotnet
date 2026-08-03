@@ -1,11 +1,13 @@
-﻿using MojeVlastniStranka.ApplicationCore.Dto;
+using Microsoft.EntityFrameworkCore;
+using MojeVlastniStranka.ApplicationCore.Interfaces;
+using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.DataAccess;
 using MojeVlastniStranka.DataAccess.Entities;
 using MojeVlastniStranka.Common.Enums;
 
 namespace MojeVlastniStranka.ApplicationCore.Services
 {
-	public class ServicesOfferedService
+	public class ServicesOfferedService : IServicesOfferedService
 	{
 		private readonly DataContext context;
 
@@ -36,7 +38,7 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 		/// </summary>
 		public List<ServiceRequest> getAllServicesRequests()
 		{
-			return context.ServiceRequests.ToList();
+			return context.ServiceRequests.AsNoTracking().ToList();
 		}
 	}
 }

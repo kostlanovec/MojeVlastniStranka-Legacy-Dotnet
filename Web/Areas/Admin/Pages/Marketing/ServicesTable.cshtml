@@ -1,38 +1,39 @@
 ﻿@page
+@using MojeVlastniStranka.ApplicationCore.Constants
 @model MojeVlastniStranka.Web.Areas.Admin.Pages.Marketing.ServicesTableModel
 @{
-	ViewData["Title"] = "Tabulka objednaných služeb.";
+    ViewData[ViewDataKeys.Title] = "Tabulka objednaných služeb.";
 }
 
 <div class="col-sm-12">
-	<div class="bg-secondary rounded h-100 p-4">
-		<h6 class="mb-4">Data z formuláře</h6>
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Hlavní služba</th>
-					<th>Vedlejší služba</th>
-					<th>Email</th>
-					<th>Telefonní číslo</th>
-					<th>Zpráva</th>
-					<th>Datum</th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach (var service in Model.serviceRequests)
-				{
-					<tr>
-						<td>@service.MainService</td>
-						<td>@service.SubService</td>
-						<td><a href="mailto:@service.Email">@service.Email</a></td>
-						<td><a href="tel:@service.PhoneNumber">@service.PhoneNumber</a></td>
-						<td>@service.Message</td>
-						<td>@service.CreatedAt</td>
-					</tr>
-				}
+    <div class="bg-secondary rounded h-100 p-4">
+        <h6 class="mb-4">Data z formuláře</h6>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Hlavní služba</th>
+                    <th>Vedlejší služba</th>
+                    <th>Email</th>
+                    <th>Telefonní číslo</th>
+                    <th>Zpráva</th>
+                    <th>Datum</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var service in Model.serviceRequests)
+                {
+                    <tr>
+                        <td>@service.MainService</td>
+                        <td>@service.SubService</td>
+                        <td><a href="mailto:@service.Email">@service.Email</a></td>
+                        <td><a href="tel:@service.PhoneNumber">@service.PhoneNumber</a></td>
+                        <td>@service.Message</td>
+                        <td>@service.CreatedAt</td>
+                    </tr>
+                }
 
-			</tbody>
-		</table>
-	</div>
+            </tbody>
+        </table>
+    </div>
 </div>
 

@@ -1,8 +1,9 @@
 ﻿@page
+@using MojeVlastniStranka.ApplicationCore.Constants
 @model MojeVlastniStranka.Web.Areas.Admin.Pages.Project.EditProjectModel
 @using MojeVlastniStranka.Common.Enums
 @{
-	ViewData["Title"] = "Editování projektu příspěvku";
+    ViewData[ViewDataKeys.Title] = "Editování projektu příspěvku";
 }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
@@ -13,157 +14,157 @@
 <script src="/lib/typo-js/typo.js"></script>
 
 <div class="col-md-12">
-	@await Html.PartialAsync("_ResponseViewModel", Model.responseViewModel)
-	<link rel="stylesheet" href="~/css/fast-style-blog.css" asp-append-version="true" />
-	<div id="summernote"></div>
-	<button id="editSettingsBtn" class="btn btn-primary">Publikovat</button>
+    @await Html.PartialAsync("_ResponseViewModel", Model.responseViewModel)
+    <link rel="stylesheet" href="~/css/fast-style-blog.css" asp-append-version="true" />
+    <div id="summernote"></div>
+    <button id="editSettingsBtn" class="btn btn-primary">Publikovat</button>
 </div>
 <div class="container d-flex justify-content-center">
-	<div id="settingsTable">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4 mx-auto" style="margin-top:80px">
-					<form id="settingsForm" method="post" enctype="multipart/form-data">
-						<h1>Editování blog příspěvku.</h1>
-						<div class="form-group mt-2">
-							<label for="Name" class="text-white">Jméno projektu:</label>
-							<input name="Name" type="text" class="form-control bg-white" value="@Model.ProjectEditDto.Name" required />
-						</div>
-						<div class="form-group mt-2">
-							<label for="Slug" class="text-white">Url projektu:</label>
-							<input name="Slug" type="text" class="form-control bg-white" value="@Model.ProjectEditDto.Slug" required />
-						</div>
-						<div class="form-group mt-2">
-							<label for="Title" class="text-white">Titulek:</label>
-							<input type="text" class="form-control bg-white" name="Title" value="@Model.ProjectEditDto.Title" required />
-						</div>
-						<div class="form-group mt-2">
-							<label for="floatingTextarea" class="text-white">Popis:</label>
-							<textarea class="form-control bg-white" placeholder="Zanech vystižný popis" id="floatingTextarea" name="Description" required>@Model.ProjectEditDto.Description</textarea>
-						</div>
-						<div class="form-group mt-2">
-							<label for="Keywords" class="text-white">Klíčová slova:</label>
-							<input type="text" class="form-control bg-white" name="Keywords" value="@Model.ProjectEditDto.Keywords" required />
-						</div>
-						<div class="form-group mt-2">
-							<label for="file" class="text-white">Obrázek:</label>
-							<input type="file" class="form-control bg-white" name="FileUpload" id="file" />
-							<div id="image-preview" class="mt-2">
-								<img src="@Model.ProjectEditDto.FileUpload" class="img-fluid" />
-							</div>
-						</div>
-						<div class="form-group mt-2">
-							<label for="ProjectStatus" class="text-white">Status projektu:</label>
-							<select class="form-select bg-white" name="Status" id="ProjectStatus" required>
-								<option value="">Všechny statusy</option>
-								@foreach (ProjectStatusEnum status in Enum.GetValues(typeof(ProjectStatusEnum)))
-								{
-									if (status == Model.ProjectEditDto.ProjectStatus)
-									{
-										<option value="@status" selected>@status</option>
-									}
-									else
-									{
-										<option value="@status">@status</option>
-									}
-								}
-							</select>
-						</div>
-						<input type="hidden" name="Content" id="hiddenContent" />
-						<input type="hidden" asp-for="Id" />
-						<div class="d-flex justify-content-between mt-2">
-							<button type="submit" asp-page-handler="DeleteProjectById" class="btn btn-danger">Odstranit</button>
-							<button id="backBtn" class="btn btn-secondary">Zpátky</button>
-							<button type="submit" asp-page-handler="UpdateProject" class="btn btn-primary">Aktualizovat</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div id="settingsTable">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mx-auto" style="margin-top:80px">
+                    <form id="settingsForm" method="post" enctype="multipart/form-data">
+                        <h1>Editování blog příspěvku.</h1>
+                        <div class="form-group mt-2">
+                            <label for="Name" class="text-white">Jméno projektu:</label>
+                            <input name="Name" type="text" class="form-control bg-white" value="@Model.ProjectEditDto.Name" required />
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="Slug" class="text-white">Url projektu:</label>
+                            <input name="Slug" type="text" class="form-control bg-white" value="@Model.ProjectEditDto.Slug" required />
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="Title" class="text-white">Titulek:</label>
+                            <input type="text" class="form-control bg-white" name="Title" value="@Model.ProjectEditDto.Title" required />
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="floatingTextarea" class="text-white">Popis:</label>
+                            <textarea class="form-control bg-white" placeholder="Zanech vystižný popis" id="floatingTextarea" name="Description" required>@Model.ProjectEditDto.Description</textarea>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="Keywords" class="text-white">Klíčová slova:</label>
+                            <input type="text" class="form-control bg-white" name="Keywords" value="@Model.ProjectEditDto.Keywords" required />
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="file" class="text-white">Obrázek:</label>
+                            <input type="file" class="form-control bg-white" name="FileUpload" id="file" />
+                            <div id="image-preview" class="mt-2">
+                                <img src="@Model.ProjectEditDto.FileUpload" class="img-fluid" />
+                            </div>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="ProjectStatus" class="text-white">Status projektu:</label>
+                            <select class="form-select bg-white" name="Status" id="ProjectStatus" required>
+                                <option value="">Všechny statusy</option>
+                                @foreach (ProjectStatusEnum status in Enum.GetValues(typeof(ProjectStatusEnum)))
+                                {
+                                    if (status == Model.ProjectEditDto.ProjectStatus)
+                                    {
+                                        <option value="@status" selected>@status</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@status">@status</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <input type="hidden" name="Content" id="hiddenContent" />
+                        <input type="hidden" asp-for="Id" />
+                        <div class="d-flex justify-content-between mt-2">
+                            <button type="submit" asp-page-handler="DeleteProjectById" class="btn btn-danger">Odstranit</button>
+                            <button id="backBtn" class="btn btn-secondary">Zpátky</button>
+                            <button type="submit" asp-page-handler="UpdateProject" class="btn btn-primary">Aktualizovat</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
-	$('#editSettingsBtn').click(function () {
-		$('#settingsTable').toggle();
-	});
+    $('#editSettingsBtn').click(function () {
+        $('#settingsTable').toggle();
+    });
 
-	$('#backBtn').click(function () {
-		$('#settingsTable').hide();
-	});
+    $('#backBtn').click(function () {
+        $('#settingsTable').hide();
+    });
 
-	// Inicializování summernote
-	$('#summernote').summernote({
-		lang: 'cs-CZ',
-		spellCheck: true,
-		addclass: {
-			debug: false,
-			classTags: [{ title: "Button", "value": "btn btn-success" }, "body", "red", "h2__div__article", "header__h1", "fadeInLeft", "header__other", "header__p", "main"]
-		},
-		focus: true,
-		height: 300,
-		toolbar: [
-			['structure', ['structurePlugin']],
-			['img', ['picture']],
-			['style', ['style', 'addclass', 'clear']],
-			['fontstyle', ['bold', 'italic', 'ul', 'ol', 'link', 'paragraph']],
-			['fontstyleextra', ['strikethrough', 'underline', 'hr', 'color', 'superscript', 'subscript']],
-			['extra', ['video', 'table', 'height']],
-			['misc', ['undo', 'redo', 'codeview', 'help']],
-			['fontname', ['fontname']],
-			['fullscreen', ['fullscreen']]
-		],
-		callbacks: {
-			onInit: function () {
-				var htmlContent = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.ProjectEditDto.Content));
-				$('#summernote').summernote('code', htmlContent);
+    // Inicializování summernote
+    $('#summernote').summernote({
+        lang: 'cs-CZ',
+        spellCheck: true,
+        addclass: {
+            debug: false,
+            classTags: [{ title: "Button", "value": "btn btn-success" }, "body", "red", "h2__div__article", "header__h1", "fadeInLeft", "header__other", "header__p", "main"]
+        },
+        focus: true,
+        height: 300,
+        toolbar: [
+            ['structure', ['structurePlugin']],
+            ['img', ['picture']],
+            ['style', ['style', 'addclass', 'clear']],
+            ['fontstyle', ['bold', 'italic', 'ul', 'ol', 'link', 'paragraph']],
+            ['fontstyleextra', ['strikethrough', 'underline', 'hr', 'color', 'superscript', 'subscript']],
+            ['extra', ['video', 'table', 'height']],
+            ['misc', ['undo', 'redo', 'codeview', 'help']],
+            ['fontname', ['fontname']],
+            ['fullscreen', ['fullscreen']]
+        ],
+        callbacks: {
+            onInit: function () {
+                var htmlContent = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.ProjectEditDto.Content));
+                $('#summernote').summernote('code', htmlContent);
 
-			}
-		}
-	});
+            }
+        }
+    });
 
-	// Odesílání formuláře
-	$('form').on('submit', function () {
-		var htmlContent = $('.note-editable').html().trim();
-		$('#hiddenContent').val(htmlContent);
-		if (htmlContent === '' || htmlContent === '<p><br></p>') {
-			return null;
-		}
-	});
+    // Odesílání formuláře
+    $('form').on('submit', function () {
+        var htmlContent = $('.note-editable').html().trim();
+        $('#hiddenContent').val(htmlContent);
+        if (htmlContent === '' || htmlContent === '<p><br></p>') {
+            return null;
+        }
+    });
 
-	// Vykreslení obrázku po nahrátí
-	function showImagePreview(input) {
-		if (input.files && input.files[0]) {
-			var reader = new FileReader();
+    // Vykreslení obrázku po nahrátí
+    function showImagePreview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-			reader.onload = function (e) {
-				var img = document.createElement('img');
-				img.src = e.target.result;
+            reader.onload = function (e) {
+                var img = document.createElement('img');
+                img.src = e.target.result;
 
-				var previewDiv = document.getElementById('image-preview');
-				previewDiv.innerHTML = '';
-				previewDiv.appendChild(img);
-			};
+                var previewDiv = document.getElementById('image-preview');
+                previewDiv.innerHTML = '';
+                previewDiv.appendChild(img);
+            };
 
-			reader.readAsDataURL(input.files[0]);
-		}
-	}
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
-	document.getElementById('file').addEventListener('change', function () {
-		showImagePreview(this);
-	});
+    document.getElementById('file').addEventListener('change', function () {
+        showImagePreview(this);
+    });
 
-	// Speciální efekt pro moji stránku
-	$(document).ready(function () {
-		$('.note-editable').addClass('body');
-		$(window).scroll(function () {
-			$('.fadeIn, .fadeInUp, .fadeInDown, .fadeInRight, .fadeInLeft').each(function () {
-				let position = $(this).offset().top;
-				let topPosition = $(window).scrollTop() + $(window).height();
-				if (position < topPosition) {
-					$(this).addClass('visible');
-				}
-			});
-		});
-	});
+    // Speciální efekt pro moji stránku
+    $(document).ready(function () {
+        $('.note-editable').addClass('body');
+        $(window).scroll(function () {
+            $('.fadeIn, .fadeInUp, .fadeInDown, .fadeInRight, .fadeInLeft').each(function () {
+                let position = $(this).offset().top;
+                let topPosition = $(window).scrollTop() + $(window).height();
+                if (position < topPosition) {
+                    $(this).addClass('visible');
+                }
+            });
+        });
+    });
 </script>

@@ -1,3 +1,4 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 ﻿using Microsoft.EntityFrameworkCore;
 using MojeVlastniStranka.ApplicationCore.Dto;
 using MojeVlastniStranka.DataAccess;
@@ -5,7 +6,7 @@ using MojeVlastniStranka.DataAccess.Entities;
 
 namespace MojeVlastniStranka.ApplicationCore.Services
 {
-	public class NotificationService
+	public class NotificationService : INotificationService
 	{
 		private readonly DataContext context;
 

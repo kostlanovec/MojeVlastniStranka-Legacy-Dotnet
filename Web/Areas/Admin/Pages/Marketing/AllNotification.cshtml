@@ -1,7 +1,8 @@
 ﻿@page
+@using MojeVlastniStranka.ApplicationCore.Constants
 @model MojeVlastniStranka.Web.Areas.Admin.Pages.Marketing.AllNotificationModel
 @{
-	ViewData["Title"] = "Všechny notifikace";
+    ViewData[ViewDataKeys.Title] = "Všechny notifikace";
 }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -13,26 +14,26 @@
 <script src="/lib/typo-js/typo.js"></script>
 
 <div class="col-sm-12">
-	<div class="bg-secondary rounded h-100 p-4">
-		<h6 class="mb-4">Data z formuláře</h6>
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Činnost</th>
-					<th>Datum</th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach (var post in Model.notificationDtos)
-				{
-					<tr>
-						<td>@post.Id</td>
-						<td>@post.ShortMessage</td>
-						<td>@post.TimePublish</td>
-					</tr>
-				}
-			</tbody>
-		</table>
-	</div>
+    <div class="bg-secondary rounded h-100 p-4">
+        <h6 class="mb-4">Data z formuláře</h6>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Činnost</th>
+                    <th>Datum</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var post in Model.notificationDtos)
+                {
+                    <tr>
+                        <td>@post.Id</td>
+                        <td>@post.ShortMessage</td>
+                        <td>@post.TimePublish</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>

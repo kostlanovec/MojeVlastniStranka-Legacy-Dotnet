@@ -1,4 +1,4 @@
-﻿#nullable disable
+#nullable disable
 #nullable disable
 #nullable disable
 using System.ComponentModel.DataAnnotations;
@@ -80,7 +80,7 @@ namespace MojeVlastniStranka.Web.Areas.Identity.Pages.Account
 				if (user != null)
 				{
 					// Přihlásit se pomocí ID uživatele a hesla
-					var result = await _signInManager.PasswordSignInAsync(user.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+					var result = await _signInManager.PasswordSignInAsync(user.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: true);
 					if (result.Succeeded)
 					{
 						_logger.LogInformation("User logged in.");

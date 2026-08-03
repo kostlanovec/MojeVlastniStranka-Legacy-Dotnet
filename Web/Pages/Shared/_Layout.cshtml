@@ -1,168 +1,173 @@
+@using MojeVlastniStranka.ApplicationCore.Constants
 @{
-	var path = Context.Request.Path.Value?.TrimEnd('/') ?? "";
-	string canonicalUrl = $"https://{Context.Request.Host}{path}";
+    var path = Context.Request.Path.Value?.TrimEnd('/') ?? "";
+    string canonicalUrl = $"https://{Context.Request.Host}{path}";
 
-	var currentCulture = System.Globalization.CultureInfo.CurrentCulture.Name;
-	var culturePfx = currentCulture == "en" ? "/en" : "";
-	var indexHref = culturePfx == "" ? "/" : culturePfx;
+    var currentCulture = System.Globalization.CultureInfo.CurrentCulture.Name;
+    var culturePfx = currentCulture == "en" ? "/en" : "";
+    var indexHref = culturePfx == "" ? "/" : culturePfx;
 
-	var pathNoCulture = path;
-	if ((pathNoCulture.StartsWith("/en") || pathNoCulture.StartsWith("/cs")) &&
-		(pathNoCulture.Length == 3 || pathNoCulture[3] == '/'))
-	{
-		pathNoCulture = pathNoCulture.Length == 3 ? "/" : pathNoCulture[3..];
-	}
-	var csHref = string.IsNullOrEmpty(pathNoCulture) ? "/" : pathNoCulture;
-	var enHref = "/en" + (pathNoCulture == "/" ? "" : pathNoCulture);
+    var pathNoCulture = path;
+    if ((pathNoCulture.StartsWith("/en") || pathNoCulture.StartsWith("/cs")) &&
+        (pathNoCulture.Length == 3 || pathNoCulture[3] == '/'))
+    {
+        pathNoCulture = pathNoCulture.Length == 3 ? "/" : pathNoCulture[3..];
+    }
+    var csHref = string.IsNullOrEmpty(pathNoCulture) ? "/" : pathNoCulture;
+    var enHref = "/en" + (pathNoCulture == "/" ? "" : pathNoCulture);
 }
 <!DOCTYPE html>
 <html lang="@System.Globalization.CultureInfo.CurrentCulture.Name">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>@ViewData["Title"] | Jan Sebastián Kostlán</title>
-	<meta name="description" content="@ViewData["Description"]">
-	<meta name="author" content="@ViewData["Author"]">
-	<meta name="keywords" content="@ViewData["Keywords"]">
-	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-	<link rel="manifest" href="/site.webmanifest">
-	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-	<meta name="msapplication-TileColor" content="#2b5797">
-	<meta name="msapplication-TileImage" content="/mstile-144x144.png">
-	<meta name="theme-color" content="#ffffff">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<meta property="og:locale" content="@(System.Globalization.CultureInfo.CurrentCulture.Name == "en" ? "en_US" : "cs_CZ")">
-	<meta property="og:site_name" content="Kostlanovec">
-	<meta property="og:type" content="website">
-	<meta property="og:url" content="@canonicalUrl">
-	<meta property="og:title" content="@ViewData["SocialTitle"]">
-	<meta property="og:description" content="@ViewData["Description"]">
-	<meta property="og:image" content="@ViewData["Image"]">
-	<meta property="twitter:card" content="@ViewData["Image"]">
-	<meta property="twitter:url" content="@canonicalUrl">
-	<meta property="twitter:title" content="@ViewData["SocialTitle"]">
-	<meta property="twitter:description" content="@ViewData["Description"]">
-	<meta property="twitter:image" content="@ViewData["Image"]">
-	<link rel="preload" as="style" href="~/css/fast-style.css" asp-append-version="true">
-	<link rel="stylesheet" href="~/css/fast-style.css" asp-append-version="true" media="print" onload="this.media='all'">
-	<noscript><link rel="stylesheet" href="~/css/fast-style.css" asp-append-version="true"></noscript>
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-SFNW32KZW0"></script>
-	<script type="text/plain" data-cookiecategory="analytics">
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-		gtag('config', 'G-SFNW32KZW0');
-	</script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData[ViewDataKeys.Title] | Jan Sebastián Kostlán</title>
+    <meta name="description" content="@ViewData[ViewDataKeys.Description]">
+    <meta name="author" content="@ViewData[ViewDataKeys.Author]">
+    <meta name="keywords" content="@ViewData[ViewDataKeys.Keywords]">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta property="og:locale" content="@(System.Globalization.CultureInfo.CurrentCulture.Name == "en" ? "en_US" : "cs_CZ")">
+    <meta property="og:site_name" content="Kostlanovec">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="@canonicalUrl">
+    <meta property="og:title" content="@ViewData[ViewDataKeys.SocialTitle]">
+    <meta property="og:description" content="@ViewData[ViewDataKeys.Description]">
+    <meta property="og:image" content="@ViewData[ViewDataKeys.Image]">
+    <meta property="twitter:card" content="@ViewData[ViewDataKeys.Image]">
+    <meta property="twitter:url" content="@canonicalUrl">
+    <meta property="twitter:title" content="@ViewData[ViewDataKeys.SocialTitle]">
+    <meta property="twitter:description" content="@ViewData[ViewDataKeys.Description]">
+    <meta property="twitter:image" content="@ViewData[ViewDataKeys.Image]">
+    <link rel="preload" as="style" href="~/css/fast-style.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/fast-style.css" asp-append-version="true" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="~/css/fast-style.css" asp-append-version="true"></noscript>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SFNW32KZW0"></script>
+    <script type="text/plain" data-cookiecategory="analytics">
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SFNW32KZW0');
+    </script>
 
-	@if (ViewData["nofollow"]?.ToString() == "true")
-	{
-		<meta name="robots" content="noindex, nofollow">
-	}
+    @if (ViewData[ViewDataKeys.NoFollow]?.ToString() == "true")
+    {
+        <meta name="robots" content="noindex, nofollow">
+    }
 
-	@if (ViewData["JsonLD"] != null)
-	{
-		<script type="application/ld+json">
-			@Html.Raw(ViewData["JsonLD"])
-		</script>
-	}
-	<link rel="canonical" href="@canonicalUrl" />
-	<link rel="alternate" hreflang="cs" href="https://@Context.Request.Host@csHref" />
-	<link rel="alternate" hreflang="en" href="https://@Context.Request.Host@enHref" />
-	<link rel="alternate" hreflang="x-default" href="https://@Context.Request.Host@csHref" />
+    @if (ViewData[ViewDataKeys.JsonLD] != null)
+    {
+        <script type="application/ld+json">
+            @Html.Raw(ViewData[ViewDataKeys.JsonLD])
+        </script>
+    }
+    <link rel="canonical" href="@canonicalUrl" />
+    <link rel="alternate" hreflang="cs" href="https://@Context.Request.Host@csHref" />
+    <link rel="alternate" hreflang="en" href="https://@Context.Request.Host@enHref" />
+    <link rel="alternate" hreflang="x-default" href="https://@Context.Request.Host@csHref" />
 </head>
 <body class="body">
-	<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-		<symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 40" id="icon-menu">
-			<path d="M48.33,45.6H18a14.17,14.17,0,0,1,0-28.34H78.86a17.37,17.37,0,0,1,0,34.74H42.33l-21-21.26L47.75,4" />
-		</symbol>
-	</svg>
-	<nav class="menu reveal" id="menu">
-		<div class="menu-basic">
-			<a class="a-index" href="@indexHref">@SharedLocalizer["Kostlanovec"]</a>
-			<button class="hamburger" aria-label="Hamburger menu" aria-controls="menu-list" aria-expanded="false">
-				<svg class="svg--hamburger">
-					<use xlink:href="#icon-menu" />
-					<use xlink:href="#icon-menu" />
-				</svg>
-			</button>
-		</div>
-		<ul id="menu-list" class="menu-list">
-			<li class="menu-item"><a href="@culturePfx/blog">@SharedLocalizer["Blog"]</a></li>
-			<li class="menu-item"><a href="@culturePfx/projekty">@SharedLocalizer["Projekty"]</a></li>
-			<li class="menu-item"><a href="@culturePfx/kontakt">@SharedLocalizer["Kontakt"]</a></li>
-			<li class="menu-item" style="display: flex; gap: 0.5rem; justify-content: center; align-items: center;">
-				<a href="@csHref" style="padding: 0; min-width: auto;">CS</a>
-				<span style="color: var(--primary-color);">|</span>
-				<a href="@enHref" style="padding: 0; min-width: auto;">EN</a>
-			</li>
-		</ul>
-	</nav>
-	@RenderBody()
-	<footer class="footer">
-		<p>2026 | @SharedLocalizer["MadeBy"]</p>
-		<div class="footer__last__element">
-			<a class="white--a" href="@culturePfx/gdpr">@SharedLocalizer["GDPR"]</a>
-			<a class="white--a" href="@culturePfx/zasadycookies">@SharedLocalizer["Cookies"]</a>
-		</div>
-	</footer>
-	<script>
-		document.addEventListener('DOMContentLoaded', function () {
-			 var hamburger = document.querySelector('.hamburger');
-			 var menu = document.querySelector('.menu');
-			 var menuList = document.querySelector('.menu-list');
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 40" id="icon-menu">
+            <path d="M48.33,45.6H18a14.17,14.17,0,0,1,0-28.34H78.86a17.37,17.37,0,0,1,0,34.74H42.33l-21-21.26L47.75,4" />
+        </symbol>
+    </svg>
+    <nav class="menu reveal" id="menu">
+        <div class="menu-basic">
+            <a class="a-index" href="@indexHref">@SharedLocalizer["Kostlanovec"]</a>
+            <button class="hamburger" aria-label="Hamburger menu" aria-controls="menu-list" aria-expanded="false">
+                <svg class="svg--hamburger">
+                    <use xlink:href="#icon-menu" />
+                    <use xlink:href="#icon-menu" />
+                </svg>
+            </button>
+        </div>
+        <ul id="menu-list" class="menu-list">
+            <li class="menu-item"><a href="@culturePfx/blog">@SharedLocalizer["Blog"]</a></li>
+            <li class="menu-item"><a href="@culturePfx/projekty">@SharedLocalizer["Projekty"]</a></li>
+            <li class="menu-item"><a href="@culturePfx/kontakt">@SharedLocalizer["Kontakt"]</a></li>
+            <li class="menu-item"><a href="@culturePfx/namety-na-hry">@SharedLocalizer["NametyNaHry"]</a></li>
+            <li class="menu-item" style="display: flex; gap: 0.5rem; justify-content: center; align-items: center;">
+                <a href="@csHref" aria-label="Čeština" style="padding: 0; min-width: auto; opacity: @(currentCulture == "en" ? "0.5" : "1");">
+                    <img src="/images/flags/cs.svg" alt="CS" width="24" height="16" />
+                </a>
+                <a href="@enHref" aria-label="English" style="padding: 0; min-width: auto; opacity: @(currentCulture == "en" ? "1" : "0.5");">
+                    <img src="/images/flags/en.svg" alt="EN" width="24" height="16" />
+                </a>
+            </li>
+        </ul>
+    </nav>
+    @RenderBody()
+    <footer class="footer">
+        <p>2026 | @SharedLocalizer["MadeBy"]</p>
+        <div class="footer__last__element">
+            <a class="white--a" href="@culturePfx/gdpr">@SharedLocalizer["GDPR"]</a>
+            <a class="white--a" href="@culturePfx/zasadycookies">@SharedLocalizer["Cookies"]</a>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+             var hamburger = document.querySelector('.hamburger');
+             var menu = document.querySelector('.menu');
+             var menuList = document.querySelector('.menu-list');
 
-			 hamburger.addEventListener('click', function () {
-				  var isOpen = menuList.classList.toggle('open');
-				  menu.classList.toggle('open', isOpen);
-				  hamburger.classList.toggle('open', isOpen);
-				  hamburger.setAttribute('aria-expanded', isOpen);
-			 });
+             hamburger.addEventListener('click', function () {
+                  var isOpen = menuList.classList.toggle('open');
+                  menu.classList.toggle('open', isOpen);
+                  hamburger.classList.toggle('open', isOpen);
+                  hamburger.setAttribute('aria-expanded', isOpen);
+             });
 
-			 const observer = new IntersectionObserver((entries, observer) => {
-				  entries.forEach(entry => {
-						if (entry.isIntersecting) {
-							 entry.target.classList.add('visible');
-							 observer.unobserve(entry.target);
-						}
-				  });
-			 }, { threshold: 0.1 });
+             const observer = new IntersectionObserver((entries, observer) => {
+                  entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                             entry.target.classList.add('visible');
+                             observer.unobserve(entry.target);
+                        }
+                  });
+             }, { threshold: 0.1 });
 
-			 const revealElements = document.querySelectorAll('.reveal');
-			 revealElements.forEach(element => {
-				  observer.observe(element);
-			 });
-		});
-	</script>
-	<link rel="stylesheet" href="/lib/vanilla-cookieconsent/src/cookieconsent.css" media="print" onload="this.media='all'">
-	<script defer src="/lib/vanilla-cookieconsent/src/cookieconsent.js" onload="this.media='all'"></script>
-	<script defer src="Scripts/cookieconsent-init.js" onload="this.media='all'"></script>
-	@if (!string.IsNullOrEmpty(Configuration["GoogleRecaptcha:Sitekey"]) && Configuration["GoogleRecaptcha:Sitekey"] != "YOUR-GOOGLE-SITEKEY-HERE")
-	{
-		<script src="https://www.google.com/recaptcha/api.js?render=@Configuration["GoogleRecaptcha:Sitekey"]"></script>
-		<script>
-			document.addEventListener("submit", function(e) {
-				var form = e.target;
-				if (form.classList.contains("contact__form") || form.classList.contains("form__newsletter")) {
-					e.preventDefault();
-					grecaptcha.ready(function() {
-						grecaptcha.execute('@Configuration["GoogleRecaptcha:Sitekey"]', { action: 'submit' }).then(function(token) {
-							var hiddenInput = form.querySelector('input[name="RecaptchaToken"]');
-							if (!hiddenInput) {
-								hiddenInput = document.createElement('input');
-								hiddenInput.type = 'hidden';
-								hiddenInput.name = 'RecaptchaToken';
-								form.appendChild(hiddenInput);
-							}
-							hiddenInput.value = token;
-							form.submit();
-						});
-					});
-				}
-			});
-		</script>
-	}
-	@await RenderSectionAsync("Scripts", required: false)
+             const revealElements = document.querySelectorAll('.reveal');
+             revealElements.forEach(element => {
+                  observer.observe(element);
+             });
+        });
+    </script>
+    <link rel="stylesheet" href="/lib/vanilla-cookieconsent/src/cookieconsent.css" media="print" onload="this.media='all'">
+    <script defer src="/lib/vanilla-cookieconsent/src/cookieconsent.js" onload="this.media='all'"></script>
+    <script defer src="Scripts/cookieconsent-init.js" onload="this.media='all'"></script>
+    @if (!string.IsNullOrEmpty(Configuration["GoogleRecaptcha:Sitekey"]) && Configuration["GoogleRecaptcha:Sitekey"] != "YOUR-GOOGLE-SITEKEY-HERE")
+    {
+        <script src="https://www.google.com/recaptcha/api.js?render=@Configuration["GoogleRecaptcha:Sitekey"]"></script>
+        <script>
+            document.addEventListener("submit", function(e) {
+                var form = e.target;
+                if (form.classList.contains("contact__form") || form.classList.contains("form__newsletter")) {
+                    e.preventDefault();
+                    grecaptcha.ready(function() {
+                        grecaptcha.execute('@Configuration["GoogleRecaptcha:Sitekey"]', { action: 'submit' }).then(function(token) {
+                            var hiddenInput = form.querySelector('input[name="RecaptchaToken"]');
+                            if (!hiddenInput) {
+                                hiddenInput = document.createElement('input');
+                                hiddenInput.type = 'hidden';
+                                hiddenInput.name = 'RecaptchaToken';
+                                form.appendChild(hiddenInput);
+                            }
+                            hiddenInput.value = token;
+                            form.submit();
+                        });
+                    });
+                }
+            });
+        </script>
+    }
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

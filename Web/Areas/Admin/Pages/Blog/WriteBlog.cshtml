@@ -1,7 +1,8 @@
 ﻿@page
+@using MojeVlastniStranka.ApplicationCore.Constants
 @model MojeVlastniStranka.Web.Areas.Admin.Pages.Blog.WriteBlogModel
 @{
-	ViewData["Title"] = "Napsání blogu";
+    ViewData[ViewDataKeys.Title] = "Napsání blogu";
 }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
@@ -14,218 +15,218 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark-dimmed.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <script>
-	document.addEventListener("DOMContentLoaded", function () {
-		hljs.highlightAll();
-	});
+    document.addEventListener("DOMContentLoaded", function () {
+        hljs.highlightAll();
+    });
 </script>
 
 <div class="col-md-12">
-	@await Html.PartialAsync("_ResponseViewModel", Model.responseViewModel)
-	<link rel="stylesheet" href="~/css/fast-style-blog.css" asp-append-version="true" />
-	<h3>Český obsah</h3>
-	<div id="summernote"></div>
-	<h3 class="mt-4">Anglický obsah</h3>
-	<div id="summernote-en"></div>
-	<button id="editSettingsBtn" class="btn btn-primary">Publikovat</button>
+    @await Html.PartialAsync("_ResponseViewModel", Model.responseViewModel)
+    <link rel="stylesheet" href="~/css/fast-style-blog.css" asp-append-version="true" />
+    <h3>Český obsah</h3>
+    <div id="summernote"></div>
+    <h3 class="mt-4">Anglický obsah</h3>
+    <div id="summernote-en"></div>
+    <button id="editSettingsBtn" class="btn btn-primary">Publikovat</button>
 </div>
 <div class="container d-flex justify-content-center">
-	<div id="settingsTable">
-		<div>
-			<div class="row">
-				<div class="col-md-4  mx-auto">
-					<form id="settingsForm" method="post" enctype="multipart/form-data" class="mt-2">
-						<h2>Vytvoření blog příspěvku.</h2>
-						<div class="form-group mt-2">
-							<label for="Name" class="text-white">Jméno blogu:</label>
-							<input name="Name" type="text" class="form-control bg-white" required />
-							<label for="NameEn" class="text-white mt-2">Jméno blogu (EN):</label>
-							<input name="NameEn" type="text" class="form-control bg-white" />
-						</div>
-						<div class="form-group mt-2">
-							<label for="Slug" class="text-white">Url blogu:</label>
-							<input name="Slug" type="text" class="form-control bg-white" required />
-						</div>
-						<div class="form-group mt-2">
-							<label for="Title" class="text-white">Titulek:</label>
-							<input type="text" class="form-control bg-white" name="Title" required />
-							<label for="TitleEn" class="text-white mt-2">Titulek (EN):</label>
-							<input type="text" class="form-control bg-white" name="TitleEn" />
-						</div>
-						<div class="form-group mt-2">
-							<label for="Description" class="text-white">Popis:</label>
-							<input type="text" class="form-control bg-white" name="Description" required />
-							<label for="DescriptionEn" class="text-white mt-2">Popis (EN):</label>
-							<input type="text" class="form-control bg-white" name="DescriptionEn" />
-						</div>
-						<div class="form-group mt-2">
-							<label for="Author" class="text-white">Autor:</label>
-							<input type="text" class="form-control bg-white" name="Author" required />
-						</div>
-						<div class="form-group mt-2">
-							<label for="Keywords" class="text-white">Klíčová slova:</label>
-							<input type="text" class="form-control bg-white" name="Keywords" id="keywords" required />
-							<label for="KeywordsEn" class="text-white mt-2">Klíčová slova (EN):</label>
-							<input type="text" class="form-control bg-white" name="KeywordsEn" />
-						</div>
-						<div class="form-group mt-2">
-							<label for="file" class="text-white">Obrázek:</label>
-							<input type="file" class="form-control-file" name="FileUpload" id="file" />
-							<div id="image-preview"></div>
-						</div>
-						<div class="form-group mt-2">
-							<label for="BlogCategoryId" class="text-white">Kategorie blogů:</label>
-							<select class="form-control" name="BlogCategoryId">
-								@foreach (var category in Model.BlogCategory)
-								{
-									<option value=@category.Id>@category.Name</option>
-								}
-								<option value="">Bez kategorie</option>
-							</select>
-						</div>
-						<input type="hidden" name="Content" id="hiddenContent" />
-						<input type="hidden" name="ContentEn" id="hiddenContentEn" />
-						<button type="submit" class="btn btn-primary mt-2">Publikovat</button>
-						<button id="backBtn" class="btn btn-secondary mt-2">Zpátky</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div id="settingsTable">
+        <div>
+            <div class="row">
+                <div class="col-md-4  mx-auto">
+                    <form id="settingsForm" method="post" enctype="multipart/form-data" class="mt-2">
+                        <h2>Vytvoření blog příspěvku.</h2>
+                        <div class="form-group mt-2">
+                            <label for="Name" class="text-white">Jméno blogu:</label>
+                            <input name="Name" type="text" class="form-control bg-white" required />
+                            <label for="NameEn" class="text-white mt-2">Jméno blogu (EN):</label>
+                            <input name="NameEn" type="text" class="form-control bg-white" />
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="Slug" class="text-white">Url blogu:</label>
+                            <input name="Slug" type="text" class="form-control bg-white" required />
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="Title" class="text-white">Titulek:</label>
+                            <input type="text" class="form-control bg-white" name="Title" required />
+                            <label for="TitleEn" class="text-white mt-2">Titulek (EN):</label>
+                            <input type="text" class="form-control bg-white" name="TitleEn" />
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="Description" class="text-white">Popis:</label>
+                            <input type="text" class="form-control bg-white" name="Description" required />
+                            <label for="DescriptionEn" class="text-white mt-2">Popis (EN):</label>
+                            <input type="text" class="form-control bg-white" name="DescriptionEn" />
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="Author" class="text-white">Autor:</label>
+                            <input type="text" class="form-control bg-white" name="Author" required />
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="Keywords" class="text-white">Klíčová slova:</label>
+                            <input type="text" class="form-control bg-white" name="Keywords" id="keywords" required />
+                            <label for="KeywordsEn" class="text-white mt-2">Klíčová slova (EN):</label>
+                            <input type="text" class="form-control bg-white" name="KeywordsEn" />
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="file" class="text-white">Obrázek:</label>
+                            <input type="file" class="form-control-file" name="FileUpload" id="file" />
+                            <div id="image-preview"></div>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="BlogCategoryId" class="text-white">Kategorie blogů:</label>
+                            <select class="form-control" name="BlogCategoryId">
+                                @foreach (var category in Model.BlogCategory)
+                                {
+                                    <option value=@category.Id>@category.Name</option>
+                                }
+                                <option value="">Bez kategorie</option>
+                            </select>
+                        </div>
+                        <input type="hidden" name="Content" id="hiddenContent" />
+                        <input type="hidden" name="ContentEn" id="hiddenContentEn" />
+                        <button type="submit" class="btn btn-primary mt-2">Publikovat</button>
+                        <button id="backBtn" class="btn btn-secondary mt-2">Zpátky</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
 
-	function applyHighlighting() {
-		  // Apply Highlight.js to the code blocks within the Summernote content
-		  $('#summernote').find('pre code').each(function(i, block) {
-				hljs.highlightElement(block);
-		  });
-	 }
+    function applyHighlighting() {
+          // Apply Highlight.js to the code blocks within the Summernote content
+          $('#summernote').find('pre code').each(function(i, block) {
+                hljs.highlightElement(block);
+          });
+     }
 
-	$('#editSettingsBtn').click(function () {
-		$('#settingsTable').toggle();
-	});
+    $('#editSettingsBtn').click(function () {
+        $('#settingsTable').toggle();
+    });
 
-	// Tlačítko pro vrácení zpět
-	$('#backBtn').click(function () {
-		$('#settingsTable').hide();
-	});
+    // Tlačítko pro vrácení zpět
+    $('#backBtn').click(function () {
+        $('#settingsTable').hide();
+    });
 
-	// Definování základního textu pro snaží orientaci v editoru
-	var defaultContent = '<main class="main blog--post"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>';
+    // Definování základního textu pro snaží orientaci v editoru
+    var defaultContent = '<main class="main blog--post"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>';
 
-	// Inicializování summernote
-	
-	$('#summernote-en').summernote({
-		lang: 'en-US',
-		dialogsInBody: true,
-		spellCheck: true,
-		addclass: {
-			debug: false,
-			classTags: [{ title: "Button", "value": "btn btn-success" }, "body", "red", "h2__div__article", "header__h1", "fadeInLeft", "header__other", "header__p", "main" ]
-		},
-		focus: false,
-		height: 300,
-		toolbar: [
-			['structure', ['structurePlugin']],
-			['img', ['picture']],
-			['style', ['style', 'addclass', 'clear']],
-			['fontstyle', ['bold', 'italic', 'ul', 'ol', 'link', 'paragraph']],
-			['fontstyleextra', ['strikethrough', 'underline', 'hr', 'color', 'superscript', 'subscript']],
-			['extra', ['video', 'table', 'height']],
-			['misc', ['undo', 'redo', 'codeview', 'help']],
-			['fontname', ['fontname']],
-			['fullscreen', ['fullscreen']]
-		]
-	});
+    // Inicializování summernote
+    
+    $('#summernote-en').summernote({
+        lang: 'en-US',
+        dialogsInBody: true,
+        spellCheck: true,
+        addclass: {
+            debug: false,
+            classTags: [{ title: "Button", "value": "btn btn-success" }, "body", "red", "h2__div__article", "header__h1", "fadeInLeft", "header__other", "header__p", "main" ]
+        },
+        focus: false,
+        height: 300,
+        toolbar: [
+            ['structure', ['structurePlugin']],
+            ['img', ['picture']],
+            ['style', ['style', 'addclass', 'clear']],
+            ['fontstyle', ['bold', 'italic', 'ul', 'ol', 'link', 'paragraph']],
+            ['fontstyleextra', ['strikethrough', 'underline', 'hr', 'color', 'superscript', 'subscript']],
+            ['extra', ['video', 'table', 'height']],
+            ['misc', ['undo', 'redo', 'codeview', 'help']],
+            ['fontname', ['fontname']],
+            ['fullscreen', ['fullscreen']]
+        ]
+    });
 
-	$('#summernote').summernote({
-		lang: 'cs-CZ',
-		dialogsInBody: true,
-		spellCheck: true,
-		addclass: {
-			debug: false,
-			classTags: [{ title: "Button", "value": "btn btn-success" }, "body", "red", "h2__div__article", "header__h1", "fadeInLeft", "header__other", "header__p", "main" ]
-		},
-		focus: true,
-		height: 300,
-		toolbar: [
-			['structure', ['structurePlugin']],
-			['img', ['picture']],
-			['style', ['style', 'addclass', 'clear']],
-			['fontstyle', ['bold', 'italic', 'ul', 'ol', 'link', 'paragraph']],
-			['fontstyleextra', ['strikethrough', 'underline', 'hr', 'color', 'superscript', 'subscript']],
-			['extra', ['video', 'table', 'height']],
-			['misc', ['undo', 'redo', 'codeview', 'help']],
-			['fontname', ['fontname']],
-			['fullscreen', ['fullscreen']]
-		],
-		callbacks: {
-			onInit: function () {
-				$('#summernote').summernote('code', defaultContent);
-				$('#summernote-en').summernote('code', defaultContent);
-				 applyHighlighting();
-			},
-			onChange: function (contents, $editable) {
-				 applyHighlighting();
-			}
-		}
-	});
+    $('#summernote').summernote({
+        lang: 'cs-CZ',
+        dialogsInBody: true,
+        spellCheck: true,
+        addclass: {
+            debug: false,
+            classTags: [{ title: "Button", "value": "btn btn-success" }, "body", "red", "h2__div__article", "header__h1", "fadeInLeft", "header__other", "header__p", "main" ]
+        },
+        focus: true,
+        height: 300,
+        toolbar: [
+            ['structure', ['structurePlugin']],
+            ['img', ['picture']],
+            ['style', ['style', 'addclass', 'clear']],
+            ['fontstyle', ['bold', 'italic', 'ul', 'ol', 'link', 'paragraph']],
+            ['fontstyleextra', ['strikethrough', 'underline', 'hr', 'color', 'superscript', 'subscript']],
+            ['extra', ['video', 'table', 'height']],
+            ['misc', ['undo', 'redo', 'codeview', 'help']],
+            ['fontname', ['fontname']],
+            ['fullscreen', ['fullscreen']]
+        ],
+        callbacks: {
+            onInit: function () {
+                $('#summernote').summernote('code', defaultContent);
+                $('#summernote-en').summernote('code', defaultContent);
+                 applyHighlighting();
+            },
+            onChange: function (contents, $editable) {
+                 applyHighlighting();
+            }
+        }
+    });
 
-	// Při odesílání formuláře zaregistrovat, zda tam je nějaký obsah
-	$('form').on('submit', function () {
-		var htmlContent = $('.note-editable').html().trim();
+    // Při odesílání formuláře zaregistrovat, zda tam je nějaký obsah
+    $('form').on('submit', function () {
+        var htmlContent = $('.note-editable').html().trim();
 
-		$('#hiddenContent').val(htmlContent);
-		var htmlContentEn = $('#summernote-en').summernote('code');
-		$('#hiddenContentEn').val(htmlContentEn);
-		if (htmlContent === '' || htmlContent === '<p><br></p>') {
-			return null;
-		}
-	});
+        $('#hiddenContent').val(htmlContent);
+        var htmlContentEn = $('#summernote-en').summernote('code');
+        $('#hiddenContentEn').val(htmlContentEn);
+        if (htmlContent === '' || htmlContent === '<p><br></p>') {
+            return null;
+        }
+    });
 
-	// Ukazání obrázků po jeho odesláním
-	function showImagePreview(input) {
-		if (input.files && input.files[0]) {
-			var reader = new FileReader();
+    // Ukazání obrázků po jeho odesláním
+    function showImagePreview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-			reader.onload = function (e) {
-				var img = document.createElement('img');
-				img.src = e.target.result;
+            reader.onload = function (e) {
+                var img = document.createElement('img');
+                img.src = e.target.result;
 
-				var previewDiv = document.getElementById('image-preview');
-				previewDiv.innerHTML = '';
-				previewDiv.appendChild(img);
-			}
+                var previewDiv = document.getElementById('image-preview');
+                previewDiv.innerHTML = '';
+                previewDiv.appendChild(img);
+            }
 
-			reader.readAsDataURL(input.files[0]);
-		}
-	}
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
-	document.getElementById('file').addEventListener('change', function () {
-		if (this.files && this.files[0]) {
-			var reader = new FileReader();
-			reader.onload = function (e) {
-				var img = document.createElement('img');
-				img.src = e.target.result;
-				var previewDiv = document.getElementById('image-preview');
-				previewDiv.innerHTML = '';
-				previewDiv.appendChild(img);
-			}
-			reader.readAsDataURL(this.files[0]);
-		}
-	});
+    document.getElementById('file').addEventListener('change', function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var img = document.createElement('img');
+                img.src = e.target.result;
+                var previewDiv = document.getElementById('image-preview');
+                previewDiv.innerHTML = '';
+                previewDiv.appendChild(img);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
 
-	// Speciální efekt pro moji stránku
-	$(document).ready(function () {
-		$('.note-editable').addClass('body');
-		$(window).scroll(function () {
-			$('.fadeIn, .fadeInUp, .fadeInDown, .fadeInRight, .fadeInLeft').each(function () {
-				let position = $(this).offset().top;
-				let topPosition = $(window).scrollTop() + $(window).height();
-				if (position < topPosition) {
-					$(this).addClass('visible');
-				}
-			});
-		});
-	});
+    // Speciální efekt pro moji stránku
+    $(document).ready(function () {
+        $('.note-editable').addClass('body');
+        $(window).scroll(function () {
+            $('.fadeIn, .fadeInUp, .fadeInDown, .fadeInRight, .fadeInLeft').each(function () {
+                let position = $(this).offset().top;
+                let topPosition = $(window).scrollTop() + $(window).height();
+                if (position < topPosition) {
+                    $(this).addClass('visible');
+                }
+            });
+        });
+    });
 </script>

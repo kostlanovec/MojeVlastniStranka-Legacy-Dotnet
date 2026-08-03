@@ -1,3 +1,4 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 #nullable disable
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,7 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Development
 	public class DevelopmentNotesModel : PageModel
 	{
 		private readonly DataContext context;
-		private readonly DevelopmentService developmentService;
+		private readonly IDevelopmentService developmentService;
 
 		public List<ReportedBugDto> ReportedBugDto
 		{
@@ -27,7 +28,7 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.Development
 			set;
 		}
 
-		public DevelopmentNotesModel(DataContext context, DevelopmentService developmentService)
+		public DevelopmentNotesModel(DataContext context, IDevelopmentService developmentService)
 		{
 			this.context = context;
 			this.developmentService = developmentService;

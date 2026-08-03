@@ -1,3 +1,4 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 ﻿using MojeVlastniStranka.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using MojeVlastniStranka.Common.Enums;
@@ -5,7 +6,7 @@ using MojeVlastniStranka.Common.Models;
 
 namespace MojeVlastniStranka.ApplicationCore.Services
 {
-	public class DashboardService
+	public class DashboardService : IDashboardService
 	{
 		private readonly DataContext context;
 

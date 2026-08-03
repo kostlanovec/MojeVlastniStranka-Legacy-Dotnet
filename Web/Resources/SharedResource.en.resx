@@ -24,6 +24,24 @@
   <data name="Kontakt" xml:space="preserve">
     <value>Contact</value>
   </data>
+  <data name="NametyNaHry" xml:space="preserve">
+    <value>Game Ideas</value>
+  </data>
+  <data name="NametyNaHry_H1" xml:space="preserve">
+    <value>Game Ideas</value>
+  </data>
+  <data name="NametyNaHry_Desc" xml:space="preserve">
+    <value>Game ideas I'm working on or thinking about.</value>
+  </data>
+  <data name="NametyNaHry_Keywords" xml:space="preserve">
+    <value>game idea, game development, gamedev</value>
+  </data>
+  <data name="NametyNaHry_SocialTitle" xml:space="preserve">
+    <value>Kostlanovec – game ideas</value>
+  </data>
+  <data name="NametyNaHry_Empty" xml:space="preserve">
+    <value>There are no ideas here yet.</value>
+  </data>
   <data name="MadeBy" xml:space="preserve">
     <value>Made by Jan Sebastián Kostlán</value>
   </data>

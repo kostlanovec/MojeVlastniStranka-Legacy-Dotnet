@@ -1,10 +1,13 @@
-﻿namespace MojeVlastniStranka.ApplicationCore.Requests
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MojeVlastniStranka.ApplicationCore.Requests
 {
 	public class NewsLetterRequest
 	{
 		/// <summary>
 		/// Vrací nebo nastavuje subject emailů.
 		/// </summary>
+		[Required]
 		public string Subject
 		{
 			get;
@@ -14,7 +17,7 @@
 		/// <summary>
 		/// Vrací nebo nastavuje html
 		/// </summary>
-		/// todo přijít na nějaký vhodný validační html tag.
+		[Required]
 		public string Body
 		{
 			get;

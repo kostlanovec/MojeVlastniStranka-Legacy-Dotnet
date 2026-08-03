@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MojeVlastniStranka.DataAccess.Entities
@@ -28,6 +28,11 @@ namespace MojeVlastniStranka.DataAccess.Entities
 		}
 
 		/// <summary>
+		/// Určuje, zda tato kategorie patří k projektům.
+		/// </summary>
+		public bool IsProjectCategory { get; set; }
+
+		/// <summary>
 		/// Vrací nebo nastavuje kolekci blog příspěvku.
 		/// </summary>
 		public ICollection<BlogPost> BlogPosts
@@ -36,12 +41,13 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			set;
 		}
 
-		public static BlogCategory Create(string name)
+		public static BlogCategory Create(string name, bool isProjectCategory = false)
 		{
 			var blogCategory = new BlogCategory()
 			{
 				Id = Guid.NewGuid(),
-				Name = name
+				Name = name,
+				IsProjectCategory = isProjectCategory
 			};
 
 			return blogCategory;

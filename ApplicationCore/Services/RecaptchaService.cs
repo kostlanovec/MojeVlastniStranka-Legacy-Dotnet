@@ -1,10 +1,11 @@
+using MojeVlastniStranka.ApplicationCore.Interfaces;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.Extensions.Configuration;
 
 namespace MojeVlastniStranka.ApplicationCore.Services
 {
-	public class RecaptchaService
+	public class RecaptchaService : IRecaptchaService
 	{
 		private readonly HttpClient httpClient;
 		private readonly IConfiguration configuration;
