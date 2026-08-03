@@ -129,6 +129,37 @@ namespace MojeVlastniStrankaFinanali.Web
 
 			app.UseForwardedHeaders();
 
+			var supportedCultures = new[] { "cs", "en" };
+
+			static string DetectPreferredCulture(HttpContext context, string[] supported, string defaultCulture)
+			{
+				var header = context.Request.Headers.AcceptLanguage.ToString();
+				if (string.IsNullOrWhiteSpace(header)) return defaultCulture;
+
+				var ranked = header.Split(',')
+					.Select(part =>
+					{
+						var segments = part.Trim().Split(';');
+						var tag = segments[0].Trim();
+						var quality = 1.0;
+						if (segments.Length > 1
+							&& segments[1].Trim().StartsWith("q=")
+							&& double.TryParse(segments[1].Trim()[2..], System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out var q))
+						{
+							quality = q;
+						}
+						return (tag, quality);
+					})
+					.OrderByDescending(x => x.quality);
+
+				foreach (var (tag, _) in ranked)
+				{
+					var lang = tag.Split('-')[0].ToLowerInvariant();
+					if (supported.Contains(lang)) return lang;
+				}
+				return defaultCulture;
+			}
+
 			app.Use(async (context, next) =>
 			{
 				context.Response.Headers.Append("X-Frame-Options", "DENY");
@@ -136,9 +167,9 @@ namespace MojeVlastniStrankaFinanali.Web
 				context.Response.Headers.Append("X-Content-Type-Options", "nosniff");
 				context.Response.Headers.Append("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; frame-src 'self' https://www.google.com;");
 				context.Response.Headers.Append("Referrer-Policy", "strict-origin-when-cross-origin");
-				
+
 				var path = context.Request.Path.Value ?? "/";
-				var skip = path == "/" || path.StartsWith("/cs") || path.StartsWith("/en")
+				var skip = path.StartsWith("/cs") || path.StartsWith("/en")
 					|| path.StartsWith("/api") || path.StartsWith("/metrics")
 					|| path.StartsWith("/css") || path.StartsWith("/js") || path.StartsWith("/lib")
 					|| path.StartsWith("/images") || path.StartsWith("/Admin")
@@ -147,8 +178,17 @@ namespace MojeVlastniStrankaFinanali.Web
 					|| path.StartsWith("/healthcheck") || path.StartsWith("/_framework");
 				if (!skip)
 				{
-					context.Response.Redirect("/cs" + path, permanent: false);
-					return;
+					var preferred = DetectPreferredCulture(context, supportedCultures, "cs");
+					if (preferred == "en")
+					{
+						context.Response.Redirect("/en" + (path == "/" ? "" : path), permanent: false);
+						return;
+					}
+					if (path != "/")
+					{
+						context.Response.Redirect("/cs" + path, permanent: false);
+						return;
+					}
 				}
 				await next(context);
 			});
@@ -188,7 +228,6 @@ namespace MojeVlastniStrankaFinanali.Web
 				}
 			});
 
-			var supportedCultures = new[] { "cs", "en" };
 			var localizationOptions = new RequestLocalizationOptions()
 				.SetDefaultCulture("cs")
 				.AddSupportedCultures(supportedCultures)
