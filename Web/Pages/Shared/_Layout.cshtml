@@ -15,6 +15,11 @@
     }
     var csHref = string.IsNullOrEmpty(pathNoCulture) ? "/" : pathNoCulture;
     var enHref = "/en" + (pathNoCulture == "/" ? "" : pathNoCulture);
+
+    // Explicitly prefixed targets for the language switcher: bare cs URLs would
+    // re-enter the Accept-Language redirect middleware and bounce back to /en.
+    var csSwitchHref = "/cs" + (pathNoCulture == "/" ? "" : pathNoCulture);
+    var enSwitchHref = enHref;
 }
 <!DOCTYPE html>
 <html lang="@System.Globalization.CultureInfo.CurrentCulture.Name">
@@ -97,13 +102,13 @@
             <li class="menu-item" style="display: flex; justify-content: center; align-items: center;">
                 @if (currentCulture == "en")
                 {
-                    <a href="@csHref" aria-label="Čeština" style="padding: 0; min-width: auto;">
+                    <a href="@csSwitchHref" aria-label="Čeština" style="padding: 0; min-width: auto;">
                         <img src="/images/flags/cs.svg" alt="CS" width="24" height="16" />
                     </a>
                 }
                 else
                 {
-                    <a href="@enHref" aria-label="English" style="padding: 0; min-width: auto;">
+                    <a href="@enSwitchHref" aria-label="English" style="padding: 0; min-width: auto;">
                         <img src="/images/flags/en.svg" alt="EN" width="24" height="16" />
                     </a>
                 }
