@@ -51,10 +51,6 @@ namespace MojeVlastniStranka.Web.Controllers
 				new { Path = "/blog",                    Freq = SitemapFrequency.Daily,   Pri = 0.9  },
 				new { Path = "/projekty",                Freq = SitemapFrequency.Weekly,  Pri = 0.9  },
 				new { Path = "/namety-na-hry",           Freq = SitemapFrequency.Weekly,  Pri = 0.6  },
-				new { Path = "/sluzby/webovestranky",    Freq = SitemapFrequency.Monthly, Pri = 0.8  },
-				new { Path = "/sluzby/seo",              Freq = SitemapFrequency.Monthly, Pri = 0.8  },
-				new { Path = "/sluzby/tvorbaher",        Freq = SitemapFrequency.Monthly, Pri = 0.8  },
-				new { Path = "/sluzby/socialnisite",     Freq = SitemapFrequency.Monthly, Pri = 0.8  },
 			};
 
 			var nodes = new List<SitemapNode>();
