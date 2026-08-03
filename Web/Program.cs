@@ -175,7 +175,10 @@ namespace MojeVlastniStrankaFinanali.Web
 					|| path.StartsWith("/images") || path.StartsWith("/Admin")
 					|| path.StartsWith("/favicon") || path.StartsWith("/site.webmanifest")
 					|| path.StartsWith("/apple-touch-icon") || path.StartsWith("/safari-pinned")
-					|| path.StartsWith("/healthcheck") || path.StartsWith("/_framework");
+					|| path.StartsWith("/healthcheck") || path.StartsWith("/_framework")
+					|| path.Equals("/robots.txt", StringComparison.OrdinalIgnoreCase)
+					|| path.Equals("/sitemap.xml", StringComparison.OrdinalIgnoreCase)
+					|| path.Equals("/hangfire", StringComparison.OrdinalIgnoreCase) || path.StartsWith("/hangfire/");
 				if (!skip)
 				{
 					var preferred = DetectPreferredCulture(context, supportedCultures, "cs");
