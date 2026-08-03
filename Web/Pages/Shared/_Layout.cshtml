@@ -13,16 +13,14 @@
         pathNoCulture = pathNoCulture.Length == 3 ? "/" : pathNoCulture[3..];
     }
     if (string.IsNullOrEmpty(pathNoCulture)) pathNoCulture = "/";
-    var csHref = pathNoCulture;
-    var enHref = "/en" + (pathNoCulture == "/" ? "" : pathNoCulture);
 
     // The homepage alone is reachable both bare ("/") and prefixed ("/cs") with
-    // identical content; canonicalize it to the bare form so they aren't seen as
-    // duplicate pages. Every other cs page is only reachable via its /cs URL
-    // (bare paths redirect there), so that prefixed URL stays canonical for them.
-    var canonicalPath = pathNoCulture == "/"
-        ? (currentCulture == "en" ? "/en" : "/")
-        : (currentCulture == "en" ? "/en" : "/cs") + pathNoCulture;
+    // identical content, so its cs URL is the bare form. Every other cs page is
+    // only reachable via its /cs URL (bare paths redirect there) — hreflang and
+    // canonical must point at these actually-reachable, non-redirecting URLs.
+    var csHref = pathNoCulture == "/" ? "/" : "/cs" + pathNoCulture;
+    var enHref = pathNoCulture == "/" ? "/en" : "/en" + pathNoCulture;
+    var canonicalPath = currentCulture == "en" ? enHref : csHref;
     string canonicalUrl = $"https://{Context.Request.Host}{canonicalPath}";
 
     // Explicitly prefixed targets for the language switcher: bare cs URLs would
