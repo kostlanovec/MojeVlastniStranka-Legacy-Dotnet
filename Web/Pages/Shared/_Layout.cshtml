@@ -94,13 +94,19 @@
             <li class="menu-item"><a href="@culturePfx/projekty">@SharedLocalizer["Projekty"]</a></li>
             <li class="menu-item"><a href="@culturePfx/kontakt">@SharedLocalizer["Kontakt"]</a></li>
             <li class="menu-item"><a href="@culturePfx/namety-na-hry">@SharedLocalizer["NametyNaHry"]</a></li>
-            <li class="menu-item" style="display: flex; gap: 0.5rem; justify-content: center; align-items: center;">
-                <a href="@csHref" aria-label="Čeština" style="padding: 0; min-width: auto; opacity: @(currentCulture == "en" ? "0.5" : "1");">
-                    <img src="/images/flags/cs.svg" alt="CS" width="24" height="16" />
-                </a>
-                <a href="@enHref" aria-label="English" style="padding: 0; min-width: auto; opacity: @(currentCulture == "en" ? "1" : "0.5");">
-                    <img src="/images/flags/en.svg" alt="EN" width="24" height="16" />
-                </a>
+            <li class="menu-item" style="display: flex; justify-content: center; align-items: center;">
+                @if (currentCulture == "en")
+                {
+                    <a href="@csHref" aria-label="Čeština" style="padding: 0; min-width: auto;">
+                        <img src="/images/flags/cs.svg" alt="CS" width="24" height="16" />
+                    </a>
+                }
+                else
+                {
+                    <a href="@enHref" aria-label="English" style="padding: 0; min-width: auto;">
+                        <img src="/images/flags/en.svg" alt="EN" width="24" height="16" />
+                    </a>
+                }
             </li>
         </ul>
     </nav>
