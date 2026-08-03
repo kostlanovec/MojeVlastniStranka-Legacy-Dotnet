@@ -1,7 +1,6 @@
 @using MojeVlastniStranka.ApplicationCore.Constants
 @{
     var path = Context.Request.Path.Value?.TrimEnd('/') ?? "";
-    string canonicalUrl = $"https://{Context.Request.Host}{path}";
 
     var currentCulture = System.Globalization.CultureInfo.CurrentCulture.Name;
     var culturePfx = currentCulture == "en" ? "/en" : "";
@@ -15,6 +14,15 @@
     }
     var csHref = string.IsNullOrEmpty(pathNoCulture) ? "/" : pathNoCulture;
     var enHref = "/en" + (pathNoCulture == "/" ? "" : pathNoCulture);
+
+    // The homepage alone is reachable both bare ("/") and prefixed ("/cs") with
+    // identical content; canonicalize it to the bare form so they aren't seen as
+    // duplicate pages. Every other cs page is only reachable via its /cs URL
+    // (bare paths redirect there), so that prefixed URL stays canonical for them.
+    var canonicalPath = pathNoCulture == "/"
+        ? (currentCulture == "en" ? "/en" : "/")
+        : (currentCulture == "en" ? "/en" : "/cs") + pathNoCulture;
+    string canonicalUrl = $"https://{Context.Request.Host}{canonicalPath}";
 
     // Explicitly prefixed targets for the language switcher: bare cs URLs would
     // re-enter the Accept-Language redirect middleware and bounce back to /en.
