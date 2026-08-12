@@ -595,25 +595,47 @@ input[type="text"] {
 	stroke-linejoin: round;
 }
 
-	.hamburger svg use:nth-of-type(1) {
+	.hamburger svg .icon-rest.layer-static {
 		opacity: 1;
-		stroke-dashoffset: 221;
+		stroke-dashoffset: 251.33;
 		stroke-dasharray: 46 249;
 		transition: stroke-dashoffset .12s linear .2s, stroke-dasharray .12s linear .2s, opacity 0s linear .2s;
 	}
 
-	.hamburger svg use:nth-of-type(2) {
-		animation: stroke-animation-reverse 1.2s ease-out forwards;
+	.hamburger svg .icon-rest.layer-anim {
+		animation: stroke-animation-reverse-rest 1.2s ease-out forwards;
 	}
 
-.hamburger.open svg use:nth-of-type(1) {
+.hamburger.open svg .icon-rest.layer-static {
+	stroke-dashoffset: 205.33;
+	stroke-dasharray: 0 295;
+	opacity: 0;
+	transition: stroke-dashoffset .07s linear .07s, stroke-dasharray .07s linear .07s, opacity 0s linear .14s;
+}
+
+.hamburger.open svg .icon-rest.layer-anim {
+	animation: stroke-animation-rest 1.2s ease-out forwards;
+}
+
+.hamburger svg .icon-bottom.layer-static {
+	opacity: 1;
+	stroke-dashoffset: 221;
+	stroke-dasharray: 46 249;
+	transition: stroke-dashoffset .12s linear .2s, stroke-dasharray .12s linear .2s, opacity 0s linear .2s;
+}
+
+.hamburger svg .icon-bottom.layer-anim {
+	animation: stroke-animation-reverse 1.2s ease-out forwards;
+}
+
+.hamburger.open svg .icon-bottom.layer-static {
 	stroke-dashoffset: 175;
 	stroke-dasharray: 0 295;
 	opacity: 0;
 	transition: stroke-dashoffset .07s linear .07s, stroke-dasharray .07s linear .07s, opacity 0s linear .14s;
 }
 
-.hamburger.open svg use:nth-of-type(2) {
+.hamburger.open svg .icon-bottom.layer-anim {
 	animation: stroke-animation 1.2s ease-out forwards;
 }
 
@@ -682,6 +704,50 @@ input[type="text"] {
 
 	100% {
 		stroke-dashoffset: 290;
+		stroke-dasharray: 25 270;
+	}
+}
+
+@keyframes stroke-animation-rest {
+	0% {
+		stroke-dashoffset: 325.33;
+		stroke-dasharray: 25 270;
+	}
+
+	50% {
+		stroke-dashoffset: 98.33;
+		stroke-dasharray: 59 236;
+	}
+
+	65% {
+		stroke-dashoffset: 89.33;
+		stroke-dasharray: 59 236;
+	}
+
+	100% {
+		stroke-dashoffset: 98.33;
+		stroke-dasharray: 59 236;
+	}
+}
+
+@keyframes stroke-animation-reverse-rest {
+	0% {
+		stroke-dashoffset: 98.33;
+		stroke-dasharray: 59 236;
+	}
+
+	50% {
+		stroke-dashoffset: 320.33;
+		stroke-dasharray: 25 270;
+	}
+
+	65% {
+		stroke-dashoffset: 325.33;
+		stroke-dasharray: 25 270;
+	}
+
+	100% {
+		stroke-dashoffset: 320.33;
 		stroke-dasharray: 25 270;
 	}
 }
