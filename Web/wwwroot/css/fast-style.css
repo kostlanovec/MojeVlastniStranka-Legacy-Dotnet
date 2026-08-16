@@ -343,7 +343,7 @@ input[type="text"] {
 	color: var(--white);
 	border-radius: 10px;
 	box-shadow: 0 0 20px 0 var(--purple);
-	height: 300px;
+	aspect-ratio: 1 / 1;
 	transition: transform 0.3s;
 }
 
@@ -1081,10 +1081,6 @@ input[type="text"] {
 	.main, .shared--buttons {
 		margin-left: 70px;
 		margin-right: 70px;
-	}
-
-	.figure__blog {
-		height: 450px;
 	}
 
 	.blog__Swiper {
