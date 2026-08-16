@@ -8,11 +8,13 @@ services:
       - APP_UID=1000
       - SELF_BASE_URL=https://kostlanovec.cz
       - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=postgres;User Id=postgres;Password=${DB_PASSWORD:?DB_PASSWORD not set}
+      - DataProtectionKeysPath=/app/dataprotection-keys
     ports:
       - "127.0.0.1:8080:8080"
     user: "1000:1000"
     volumes:
      - /var/uploads/user-uploads:/app/wwwroot/user-uploads:rw
+     - /var/dataprotection-keys:/app/dataprotection-keys:rw
   db:
     image: postgres:17.2
     restart: unless-stopped

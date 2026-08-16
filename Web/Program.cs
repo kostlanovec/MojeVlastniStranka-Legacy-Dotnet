@@ -1,4 +1,5 @@
 #nullable disable
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
@@ -84,6 +85,14 @@ namespace MojeVlastniStrankaFinanali.Web
 			builder.Services.AddScoped<IServicesOfferedService, ServicesOfferedService>();
 			builder.Services.AddScoped<IGameIdeaService, GameIdeaService>();
 			builder.Services.AddHttpClient<IRecaptchaService, RecaptchaService>();
+
+			var dataProtectionKeysPath = builder.Configuration["DataProtectionKeysPath"];
+			if (!string.IsNullOrEmpty(dataProtectionKeysPath))
+			{
+				builder.Services.AddDataProtection()
+					.PersistKeysToFileSystem(new DirectoryInfo(dataProtectionKeysPath))
+					.SetApplicationName("Kostlanovec");
+			}
 
 			builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
