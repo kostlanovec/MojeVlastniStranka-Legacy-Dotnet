@@ -239,7 +239,7 @@ Typo.prototype = {
 	 */
 	
 	_readFile: function (path, charset, async) {
-		console.log("Reading file: " + path);)
+		console.log("Reading file: " + path);
 		charset = charset || "utf8";
 		
 		if (typeof XMLHttpRequest !== 'undefined') {
