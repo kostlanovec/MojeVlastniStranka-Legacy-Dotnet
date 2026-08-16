@@ -69,6 +69,12 @@ namespace MojeVlastniStranka.ApplicationCore.Dto.Project
 			set;
 		}
 
+		public string? NameEn { get; set; }
+		public string? DescriptionEn { get; set; }
+		public string? ContentEn { get; set; }
+		public string? TitleEn { get; set; }
+		public string? KeywordsEn { get; set; }
+
 		/// <summary>
 		/// Obrázek, z kterého pak získáme url cestu.
 		/// </summary>

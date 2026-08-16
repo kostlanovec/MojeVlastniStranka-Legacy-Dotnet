@@ -2,8 +2,13 @@
 @using MojeVlastniStranka.ApplicationCore.Constants
 @model MojeVlastniStranka.Web.Pages.projekty.IndexModel
 @using MojeVlastniStranka.Common.Enums
+@functions {
+    string ProjectName(MojeVlastniStranka.DataAccess.Entities.Project p, bool isEn) =>
+        isEn && !string.IsNullOrEmpty(p.NameEn) ? p.NameEn : p.Name;
+}
 @{
-    var culturePfx = System.Globalization.CultureInfo.CurrentCulture.Name == "en" ? "/en" : "";
+    bool isEn = System.Globalization.CultureInfo.CurrentCulture.Name.StartsWith("en");
+    var culturePfx = isEn ? "/en" : "";
     ViewData[ViewDataKeys.Title] = SharedLocalizer["Projekty_PageTitle"];
     ViewData[ViewDataKeys.Description] = SharedLocalizer["Projekty_Desc"];
     ViewData[ViewDataKeys.Keywords] = SharedLocalizer["Projekty_Keywords"];
@@ -22,8 +27,8 @@
         {
             <article class="article--project zoom-effect">
                 <a class="article--project__a" href="@culturePfx/projekty/@project.Slug">
-                    <img src="@project.ImagePath" alt="@project.Name" />
-                    <h3 class="article--project__h3">@project.Name</h3>
+                    <img src="@project.ImagePath" alt="@ProjectName(project, isEn)" />
+                    <h3 class="article--project__h3">@ProjectName(project, isEn)</h3>
                 </a>
             </article>
         }
@@ -38,8 +43,8 @@
         {
             <article class="article--project zoom-effect">
                 <a class="article--project__a" href="@culturePfx/projekty/@project.Slug">
-                    <img src="@project.ImagePath" alt="@project.Name" />
-                    <h3 class="article--project__h3">@project.Name</h3>
+                    <img src="@project.ImagePath" alt="@ProjectName(project, isEn)" />
+                    <h3 class="article--project__h3">@ProjectName(project, isEn)</h3>
                 </a>
             </article>
         }
@@ -53,8 +58,8 @@
         {
             <article class="article--project zoom-effect">
                 <a class="article--project__a" href="@culturePfx/projekty/@project.Slug">
-                    <img src="@project.ImagePath" alt="@project.Name" />
-                    <h3 class="article--project__h3">@project.Name</h3>
+                    <img src="@project.ImagePath" alt="@ProjectName(project, isEn)" />
+                    <h3 class="article--project__h3">@ProjectName(project, isEn)</h3>
                 </a>
             </article>
         }

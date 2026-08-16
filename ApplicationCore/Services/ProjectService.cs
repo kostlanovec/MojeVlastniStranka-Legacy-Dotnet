@@ -69,7 +69,12 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				imagePath,
 				projectRequest.Slug,
 				DateTime.Now,
-				projectRequest.projectStatus
+				projectRequest.projectStatus,
+				projectRequest.NameEn,
+				projectRequest.DescriptionEn,
+				sanitizer.Sanitize(projectRequest.ContentEn ?? ""),
+				projectRequest.TitleEn,
+				projectRequest.KeywordsEn
 			);
 
 			context.Projects.Add(blogPost);
@@ -128,6 +133,11 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				FileUpload = project.ImagePath,
 				ProjectStatus = project.projectStatus,
 				Title = project.Title,
+				NameEn = project.NameEn,
+				DescriptionEn = project.DescriptionEn,
+				ContentEn = project.ContentEn,
+				TitleEn = project.TitleEn,
+				KeywordsEn = project.KeywordsEn,
 			};
 
 			return projectEditDto;
@@ -163,6 +173,11 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			project.Date = DateTime.Now;
 			project.Title = request.Title;
 			project.Keywords = request.Keywords;
+			project.NameEn = request.NameEn;
+			project.DescriptionEn = request.DescriptionEn;
+			project.ContentEn = sanitizer.Sanitize(request.ContentEn ?? "");
+			project.TitleEn = request.TitleEn;
+			project.KeywordsEn = request.KeywordsEn;
 
 			context.Projects.Update(project);
 			await context.SaveChangesAsync();

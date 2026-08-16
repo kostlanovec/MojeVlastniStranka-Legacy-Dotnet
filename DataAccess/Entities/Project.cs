@@ -78,6 +78,21 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			set;
 		}
 
+		[Column(TypeName = "text")]
+		public string? NameEn { get; set; }
+
+		[Column(TypeName = "text")]
+		public string? DescriptionEn { get; set; }
+
+		[Column(TypeName = "text")]
+		public string? ContentEn { get; set; }
+
+		[Column(TypeName = "text")]
+		public string? TitleEn { get; set; }
+
+		[Column(TypeName = "text")]
+		public string? KeywordsEn { get; set; }
+
 		/// <summary>
 		/// Vrací nebo nastavuje cestu k obrázku.
 		/// </summary>
@@ -108,7 +123,7 @@ namespace MojeVlastniStranka.DataAccess.Entities
 			set;
 		}
 
-		public static Project Create(string descriptions, string content, string title, string keywords, string name, string imagePath, string slug, DateTime date, ProjectStatusEnum projectStatus)
+		public static Project Create(string descriptions, string content, string title, string keywords, string name, string imagePath, string slug, DateTime date, ProjectStatusEnum projectStatus, string? nameEn = null, string? descriptionEn = null, string? contentEn = null, string? titleEn = null, string? keywordsEn = null)
 		{
 			var blogCategory = new Project()
 			{
@@ -121,7 +136,12 @@ namespace MojeVlastniStranka.DataAccess.Entities
 				ImagePath = imagePath,
 				Slug = slug,
 				Date = date.Date,
-				projectStatus = projectStatus
+				projectStatus = projectStatus,
+				NameEn = nameEn,
+				DescriptionEn = descriptionEn,
+				ContentEn = contentEn,
+				TitleEn = titleEn,
+				KeywordsEn = keywordsEn
 			};
 
 			return blogCategory;

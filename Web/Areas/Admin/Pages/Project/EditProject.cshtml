@@ -16,7 +16,10 @@
 <div class="col-md-12">
     @await Html.PartialAsync("_ResponseViewModel", Model.responseViewModel)
     <link rel="stylesheet" href="~/css/fast-style-blog.css" asp-append-version="true" />
+    <h3>Český obsah</h3>
     <div id="summernote"></div>
+    <h3 class="mt-4">Anglický obsah</h3>
+    <div id="summernote-en"></div>
     <button id="editSettingsBtn" class="btn btn-primary">Publikovat</button>
 </div>
 <div class="container d-flex justify-content-center">
@@ -29,6 +32,8 @@
                         <div class="form-group mt-2">
                             <label for="Name" class="text-white">Jméno projektu:</label>
                             <input name="Name" type="text" class="form-control bg-white" value="@Model.ProjectEditDto.Name" required />
+                            <label for="NameEn" class="text-white mt-2">Jméno projektu (EN):</label>
+                            <input name="NameEn" type="text" class="form-control bg-white" value="@Model.ProjectEditDto.NameEn" />
                         </div>
                         <div class="form-group mt-2">
                             <label for="Slug" class="text-white">Url projektu:</label>
@@ -37,14 +42,20 @@
                         <div class="form-group mt-2">
                             <label for="Title" class="text-white">Titulek:</label>
                             <input type="text" class="form-control bg-white" name="Title" value="@Model.ProjectEditDto.Title" required />
+                            <label for="TitleEn" class="text-white mt-2">Titulek (EN):</label>
+                            <input type="text" class="form-control bg-white" name="TitleEn" value="@Model.ProjectEditDto.TitleEn" />
                         </div>
                         <div class="form-group mt-2">
                             <label for="floatingTextarea" class="text-white">Popis:</label>
                             <textarea class="form-control bg-white" placeholder="Zanech vystižný popis" id="floatingTextarea" name="Description" required>@Model.ProjectEditDto.Description</textarea>
+                            <label for="DescriptionEn" class="text-white mt-2">Popis (EN):</label>
+                            <textarea class="form-control bg-white" placeholder="Leave a descriptive summary" id="floatingTextareaEn" name="DescriptionEn">@Model.ProjectEditDto.DescriptionEn</textarea>
                         </div>
                         <div class="form-group mt-2">
                             <label for="Keywords" class="text-white">Klíčová slova:</label>
                             <input type="text" class="form-control bg-white" name="Keywords" value="@Model.ProjectEditDto.Keywords" required />
+                            <label for="KeywordsEn" class="text-white mt-2">Klíčová slova (EN):</label>
+                            <input type="text" class="form-control bg-white" name="KeywordsEn" value="@Model.ProjectEditDto.KeywordsEn" />
                         </div>
                         <div class="form-group mt-2">
                             <label for="file" class="text-white">Obrázek:</label>
@@ -71,6 +82,7 @@
                             </select>
                         </div>
                         <input type="hidden" name="Content" id="hiddenContent" />
+                        <input type="hidden" name="ContentEn" id="hiddenContentEn" />
                         <input type="hidden" asp-for="Id" />
                         <div class="d-flex justify-content-between mt-2">
                             <button type="submit" asp-page-handler="DeleteProjectById" class="btn btn-danger">Odstranit</button>
@@ -94,6 +106,34 @@
     });
 
     // Inicializování summernote
+    $('#summernote-en').summernote({
+        lang: 'en-US',
+        spellCheck: true,
+        addclass: {
+            debug: false,
+            classTags: [{ title: "Button", "value": "btn btn-success" }, "body", "red", "h2__div__article", "header__h1", "fadeInLeft", "header__other", "header__p", "main"]
+        },
+        focus: false,
+        height: 300,
+        toolbar: [
+            ['structure', ['structurePlugin']],
+            ['img', ['picture']],
+            ['style', ['style', 'addclass', 'clear']],
+            ['fontstyle', ['bold', 'italic', 'ul', 'ol', 'link', 'paragraph']],
+            ['fontstyleextra', ['strikethrough', 'underline', 'hr', 'color', 'superscript', 'subscript']],
+            ['extra', ['video', 'table', 'height']],
+            ['misc', ['undo', 'redo', 'codeview', 'help']],
+            ['fontname', ['fontname']],
+            ['fullscreen', ['fullscreen']]
+        ],
+        callbacks: {
+            onInit: function () {
+                var htmlContentEn = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.ProjectEditDto.ContentEn ?? ""));
+                $('#summernote-en').summernote('code', htmlContentEn);
+            }
+        }
+    });
+
     $('#summernote').summernote({
         lang: 'cs-CZ',
         spellCheck: true,
@@ -127,6 +167,8 @@
     $('form').on('submit', function () {
         var htmlContent = $('.note-editable').html().trim();
         $('#hiddenContent').val(htmlContent);
+        var htmlContentEn = $('#summernote-en').summernote('code');
+        $('#hiddenContentEn').val(htmlContentEn);
         if (htmlContent === '' || htmlContent === '<p><br></p>') {
             return null;
         }

@@ -65,7 +65,8 @@ namespace MojeVlastniStranka.Web.Controllers
 			foreach (var project in projects)
 			{
 				nodes.Add(new SitemapNode { Url = $"{baseUrl}/cs/projekty/{project.Slug}", LastModified = project.Date, Frequency = SitemapFrequency.Weekly, Priority = 0.7 });
-				nodes.Add(new SitemapNode { Url = $"{baseUrl}/en/projekty/{project.Slug}", LastModified = project.Date, Frequency = SitemapFrequency.Weekly, Priority = 0.7 });
+				if (!string.IsNullOrEmpty(project.ContentEn))
+					nodes.Add(new SitemapNode { Url = $"{baseUrl}/en/projekty/{project.Slug}", LastModified = project.Date, Frequency = SitemapFrequency.Weekly, Priority = 0.7 });
 			}
 
 			var blogPosts = context.BlogPosts.ToList();

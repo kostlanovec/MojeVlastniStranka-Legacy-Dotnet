@@ -3,18 +3,23 @@
 @model MojeVlastniStranka.DataAccess.Entities.Project
 @{
     bool isEn = Thread.CurrentThread.CurrentCulture.Name.StartsWith("en");
+    string title = isEn && !string.IsNullOrEmpty(Model.TitleEn) ? Model.TitleEn : Model.Title;
+    string desc = isEn && !string.IsNullOrEmpty(Model.DescriptionEn) ? Model.DescriptionEn : Model.Description;
+    string keys = isEn && !string.IsNullOrEmpty(Model.KeywordsEn) ? Model.KeywordsEn : Model.Keywords;
+    string name = isEn && !string.IsNullOrEmpty(Model.NameEn) ? Model.NameEn : Model.Name;
+    string content = isEn && !string.IsNullOrEmpty(Model.ContentEn) ? Model.ContentEn : Model.Content;
     string culturePfx = isEn ? "/en" : "";
     string projectUrl = $"https://kostlanovec.cz{culturePfx}/projekty/{Model.Slug}";
 
-    ViewData[ViewDataKeys.Title] = @Model.Title;
-    ViewData[ViewDataKeys.Description] = @Model.Description;
-    ViewData[ViewDataKeys.Keywords] = @Model.Keywords;
+    ViewData[ViewDataKeys.Title] = title;
+    ViewData[ViewDataKeys.Description] = desc;
+    ViewData[ViewDataKeys.Keywords] = keys;
     ViewData[ViewDataKeys.Image] = "https://kostlanovec.cz" + Model.ImagePath;
-    ViewData[ViewDataKeys.SocialTitle] = Model.Name;
+    ViewData[ViewDataKeys.SocialTitle] = name;
 }
 
 <main class="main">
-@Html.Raw(Model.Content)
+@Html.Raw(content)
 </main>
 <script src="https://kit.fontawesome.com/704ff50790.js" crossorigin="anonymous"></script>
 <div class="shared--buttons">
@@ -23,7 +28,7 @@
         <a href="https://www.facebook.com/dialog/share?app_id=1552041721475989&display=popup&href=@projectUrl&redirect_uri=@projectUrl" class="share-button facebook" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-facebook-f"></i>
         </a>
-        <a href="https://x.com/intent/tweet?title=@Uri.EscapeDataString(Model.Name)&related=Kostlanovec&url=@projectUrl" class="share-button twitter" target="_blank" rel="noopener noreferrer">
+        <a href="https://x.com/intent/tweet?title=@Uri.EscapeDataString(name)&related=Kostlanovec&url=@projectUrl" class="share-button twitter" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-x-twitter"></i>
         </a>
         <a href="https://www.linkedin.com/shareArticle?mini=true&url=@projectUrl" class="share-button linkedin" target="_blank" rel="noopener noreferrer">

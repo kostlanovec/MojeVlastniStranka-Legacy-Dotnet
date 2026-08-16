@@ -178,6 +178,7 @@ namespace MojeVlastniStrankaFinanali.Web
 					|| path.StartsWith("/healthcheck") || path.StartsWith("/_framework")
 					|| path.Equals("/robots.txt", StringComparison.OrdinalIgnoreCase)
 					|| path.Equals("/sitemap.xml", StringComparison.OrdinalIgnoreCase)
+					|| path.Equals("/rss.xml", StringComparison.OrdinalIgnoreCase)
 					|| path.Equals("/hangfire", StringComparison.OrdinalIgnoreCase) || path.StartsWith("/hangfire/");
 				if (!skip)
 				{
