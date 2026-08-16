@@ -167,7 +167,7 @@
     </script>
     <link rel="stylesheet" href="/lib/vanilla-cookieconsent/src/cookieconsent.css" media="print" onload="this.media='all'">
     <script defer src="/lib/vanilla-cookieconsent/src/cookieconsent.js" onload="this.media='all'"></script>
-    <script defer src="Scripts/cookieconsent-init.js" onload="this.media='all'"></script>
+    <script defer src="/Scripts/cookieconsent-init.js" onload="this.media='all'"></script>
     @if (!string.IsNullOrEmpty(Configuration["GoogleRecaptcha:Sitekey"]) && Configuration["GoogleRecaptcha:Sitekey"] != "YOUR-GOOGLE-SITEKEY-HERE")
     {
         <script src="https://www.google.com/recaptcha/api.js?render=@Configuration["GoogleRecaptcha:Sitekey"]"></script>

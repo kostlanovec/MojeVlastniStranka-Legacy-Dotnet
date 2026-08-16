@@ -174,20 +174,17 @@ namespace MojeVlastniStrankaFinanali.Web
 				context.Response.Headers.Append("X-Frame-Options", "DENY");
 				context.Response.Headers.Append("X-Xss-Protection", "1; mode=block");
 				context.Response.Headers.Append("X-Content-Type-Options", "nosniff");
-				context.Response.Headers.Append("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://www.google.com https://www.gstatic.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; img-src 'self' data: https:; frame-src 'self' https://www.google.com;");
+				context.Response.Headers.Append("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://www.google.com https://www.gstatic.com https://static.cloudflareinsights.com https://www.googletagmanager.com https://kit.fontawesome.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://ka-f.fontawesome.com; frame-src 'self' https://www.google.com;");
 				context.Response.Headers.Append("Referrer-Policy", "strict-origin-when-cross-origin");
 
 				var path = context.Request.Path.Value ?? "/";
-				var skip = path.StartsWith("/cs") || path.StartsWith("/en")
+				var lastSegment = path[(path.LastIndexOf('/') + 1)..];
+				var looksLikeStaticFile = lastSegment.Contains('.');
+				var skip = looksLikeStaticFile
+					|| path.StartsWith("/cs") || path.StartsWith("/en")
 					|| path.StartsWith("/api") || path.StartsWith("/metrics")
-					|| path.StartsWith("/css") || path.StartsWith("/js") || path.StartsWith("/lib")
-					|| path.StartsWith("/images") || path.StartsWith("/Admin")
-					|| path.StartsWith("/favicon") || path.StartsWith("/site.webmanifest")
-					|| path.StartsWith("/apple-touch-icon") || path.StartsWith("/safari-pinned")
+					|| path.StartsWith("/Admin")
 					|| path.StartsWith("/healthcheck") || path.StartsWith("/_framework")
-					|| path.Equals("/robots.txt", StringComparison.OrdinalIgnoreCase)
-					|| path.Equals("/sitemap.xml", StringComparison.OrdinalIgnoreCase)
-					|| path.Equals("/rss.xml", StringComparison.OrdinalIgnoreCase)
 					|| path.Equals("/hangfire", StringComparison.OrdinalIgnoreCase) || path.StartsWith("/hangfire/");
 				if (!skip)
 				{
