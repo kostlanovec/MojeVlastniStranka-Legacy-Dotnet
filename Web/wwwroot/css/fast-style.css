@@ -39,6 +39,7 @@ figure {
 }
 
 .figure__blog {
+	animation: slide-left 5s linear;
 	overflow: hidden;
 }
 
@@ -101,7 +102,7 @@ sr-only{
 }
 
 .figure__blog__div{
-	text-align: left;
+	text-align: center;
 }
 
 .serivce--price--div{
@@ -279,26 +280,22 @@ input[type="text"] {
 }
 
 .behind--dot {
-    border: 2px solid var(--white);
+    border: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: transparent;
+    background-color: var(--white);
     border-radius: 50%;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     -moz-user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
     user-select: none;
-    padding: 0;
-    cursor: pointer;
-    transition: border-color 0.2s;
 }
 
-.behind--dot:hover {
-	border-color: var(--white);
-	opacity: 0.8;
+.behind--dot:hover{
+	cursor: pointer;
 }
 
 .blog__h3{
@@ -337,48 +334,10 @@ input[type="text"] {
 }
 
 .figure__blog {
-	position: relative;
-	display: block;
+	display: flex;
+	flex-direction: column;
 	text-decoration: none;
 	color: var(--white);
-	border-radius: 10px;
-	box-shadow: 0 0 20px 0 var(--purple);
-	aspect-ratio: 1 / 1;
-	transition: transform 0.3s;
-}
-
-.figure__blog:hover {
-	transform: scale(1.02);
-}
-
-.figure__blog > img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	display: block;
-}
-
-.figure__blog__div {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	padding: 1.5em 1em 1em;
-	background: linear-gradient(to top, rgba(6, 11, 39, 0.95) 0%, rgba(6, 11, 39, 0.5) 60%, transparent 100%);
-}
-
-.figure__blog__div h3 {
-	margin: 0 0 0.3em;
-}
-
-.figure__blog__div p {
-	margin: 0;
-	font-size: 0.9em;
-	opacity: 0.85;
-	display: -webkit-box;
-	-webkit-line-clamp: 2;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
 }
 
 .results {
@@ -693,14 +652,9 @@ input[type="text"] {
 
 .dot {
 	border-radius: 50%;
-	width: 10px;
-	height: 10px;
-	background-color: transparent;
-	transition: background-color 0.2s;
-}
-
-.dot.active {
-	background-color: var(--white);
+	width: 15px;
+	height: 15px;
+	position: absolute;
 }
 
 .scrolling__article {
@@ -1081,6 +1035,22 @@ input[type="text"] {
 	.main, .shared--buttons {
 		margin-left: 70px;
 		margin-right: 70px;
+	}
+
+	.figure__blog {
+		flex-direction: row-reverse;
+	}
+
+	.figure__blog > img {
+		width: 50%;
+		height: auto;
+	}
+
+	.figure__blog__div {
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		width: 50%;
 	}
 
 	.blog__Swiper {
