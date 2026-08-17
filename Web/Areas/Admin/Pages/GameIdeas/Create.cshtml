@@ -67,16 +67,7 @@
         $('#settingsTable').hide();
     });
 
-    $('#summernote').summernote({
-        lang: 'cs-CZ',
-        spellCheck: true,
-        height: 300,
-        toolbar: [
-            ['style', ['style', 'clear']],
-            ['fontstyle', ['bold', 'italic', 'ul', 'ol', 'link', 'paragraph']],
-            ['misc', ['undo', 'redo', 'codeview']]
-        ]
-    });
+    var defaultContent = '<main class="main blog--post"><header><h1>Proč používat unity engine?</h1></header><p>V dnešní době unity engine se tak moc rozvinul i skrz ai, že se to dneš již vyplatí.</p></main>';
 
     $('#summernote-en').summernote({
         lang: 'en-US',
@@ -87,6 +78,23 @@
             ['fontstyle', ['bold', 'italic', 'ul', 'ol', 'link', 'paragraph']],
             ['misc', ['undo', 'redo', 'codeview']]
         ]
+    });
+
+    $('#summernote').summernote({
+        lang: 'cs-CZ',
+        spellCheck: true,
+        height: 300,
+        toolbar: [
+            ['style', ['style', 'clear']],
+            ['fontstyle', ['bold', 'italic', 'ul', 'ol', 'link', 'paragraph']],
+            ['misc', ['undo', 'redo', 'codeview']]
+        ],
+        callbacks: {
+            onInit: function () {
+                $('#summernote').summernote('code', defaultContent);
+                $('#summernote-en').summernote('code', defaultContent);
+            }
+        }
     });
 
     $('form').on('submit', function () {
