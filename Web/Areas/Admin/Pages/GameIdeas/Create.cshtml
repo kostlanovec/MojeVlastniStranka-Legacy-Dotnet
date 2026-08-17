@@ -14,6 +14,7 @@
 <script src="/lib/typo-js/typo.js"></script>
 
 <div class="col-md-12">
+    @await Html.PartialAsync("_ResponseViewModel", Model.responseViewModel)
     <link rel="stylesheet" href="~/css/fast-style-blog.css" asp-append-version="true" />
     <h3>Český popis</h3>
     <div id="summernote"></div>

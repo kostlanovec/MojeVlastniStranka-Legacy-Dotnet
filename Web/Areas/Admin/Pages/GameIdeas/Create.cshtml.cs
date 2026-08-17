@@ -6,6 +6,7 @@ using MojeVlastniStranka.DataAccess.Entities;
 using Microsoft.AspNetCore.Authorization;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
+using MojeVlastniStranka.Common.Models;
 
 namespace MojeVlastniStranka.Web.Areas.Admin.Pages.GameIdeas
 {
@@ -23,6 +24,8 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.GameIdeas
 
         [BindProperty]
         public InputModel Input { get; set; } = new InputModel();
+
+        public ResponseViewModel responseViewModel { get; set; }
 
         public class InputModel
         {
@@ -49,6 +52,11 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.GameIdeas
         {
             if (!ModelState.IsValid)
             {
+                responseViewModel = new ResponseViewModel
+                {
+                    IsSuccess = false,
+                    Errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList()
+                };
                 return Page();
             }
 
@@ -61,7 +69,13 @@ namespace MojeVlastniStranka.Web.Areas.Admin.Pages.GameIdeas
             var idea = GameIdea.Create(Input.TitleCs, Input.TitleEn, Input.DescriptionCs, Input.DescriptionEn, imageUrl);
             await _service.CreateAsync(idea);
 
-            return RedirectToPage("./Index");
+            responseViewModel = new ResponseViewModel
+            {
+                IsSuccess = true,
+                SuccessMessage = "Námět na hru byl úspěšně přidán."
+            };
+            Input = new InputModel();
+            return Page();
         }
     }
 }
