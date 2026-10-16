@@ -66,7 +66,7 @@ namespace Reservanto.NPS.DataAccess
 			if (!context.ContactForms.Any())
 			{
 				var contact1 = ContactForm.Create("jan.novak@example.com", "123456789", "Dobrý den, rád bych se zeptal na možnost spolupráce na novém projektu.", DateTime.Now);
-				var contact2 = ContactForm.Create("info@kostlanovec.cz", "987654321", "Dobrý, mám zájem o nové stránky vámi vyrobené. Těším se, až mi ukážete, co všechno dokážete.", DateTime.Now);
+				var contact2 = ContactForm.Create("petr.svoboda@example.com", "987654321", "Dobrý, mám zájem o nové stránky vámi vyrobené. Těším se, až mi ukážete, co všechno dokážete.", DateTime.Now);
 
 				context.ContactForms.AddRange(contact1, contact2);
 				context.SaveChanges();
@@ -102,9 +102,9 @@ namespace Reservanto.NPS.DataAccess
 				Id = "00000000-0000-0000-0000-000000000001",
 				UserName = "admin",
 				NormalizedUserName = "ADMIN",
-				Email = "info@kostlanovec.cz",
+				Email = "admin@example.com",
 				EmailConfirmed = true,
-				NormalizedEmail = "INFO@KOSTLANOVEC.CZ",
+				NormalizedEmail = "ADMIN@EXAMPLE.COM",
 				SecurityStamp = "00000000-0000-0000-0000-000000000002",
 				ConcurrencyStamp = "00000000-0000-0000-0000-000000000004",
 				PasswordHash = "[REDACTED_HASH]"

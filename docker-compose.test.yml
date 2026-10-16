@@ -1,4 +1,4 @@
-﻿services:
+services:
   mojevlastnistranka.web:
     build:
       context: .
@@ -18,7 +18,7 @@
     image: postgres:17.2
     restart: unless-stopped
     environment:
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-[REDACTED]}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD not set}
       POSTGRES_USER: postgres
     volumes:
       - local_postgres_data:/var/lib/postgresql/data

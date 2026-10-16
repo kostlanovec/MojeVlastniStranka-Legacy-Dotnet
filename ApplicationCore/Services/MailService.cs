@@ -97,9 +97,10 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 				return;
 			}
 
+			var recipientAddress = _configuration["EmailSettings:AdminEmail"] ?? emailAddress;
 			var message = new MimeMessage();
-			message.From.Add(new MailboxAddress("Jan Sebastián Kostlán", emailAddress));
-			message.To.Add(new MailboxAddress("Jan Sebastián Kostlán", "info@kostlanovec.cz"));
+			message.From.Add(new MailboxAddress("Web", emailAddress));
+			message.To.Add(new MailboxAddress("Admin", recipientAddress));
 			message.Subject = "Verifikace";
 			message.Body = new TextPart("html") { Text = "Verifikační email." };
 

@@ -58,7 +58,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "00000000-0000-0000-0000-000000000001", 0, "00000000-0000-0000-0000-000000000004", "info@kostlanovec.cz", true, false, null, "INFO@KOSTLANOVEC.CZ", "ADMIN", "[REDACTED_HASH]", null, false, "00000000-0000-0000-0000-000000000002", false, "admin" });
+                values: new object[] { "00000000-0000-0000-0000-000000000001", 0, "00000000-0000-0000-0000-000000000004", "admin@example.com", true, false, null, "ADMIN@EXAMPLE.COM", "ADMIN", "[REDACTED_HASH]", null, false, "00000000-0000-0000-0000-000000000002", false, "admin" });
         }
 
         /// <inheritdoc />
@@ -102,7 +102,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "d785cfbb-ac25-454e-893e-61c5cc3d47c9", 0, "208baf6f-e8c5-4096-a45c-55e7497c3816", "info@kostlanovec.cz", true, false, null, "INFO@KOSTLANOVEC.CZ", "ADMIN", "[REDACTED_HASH]", null, false, "f35b716a-4186-4276-8ebc-a91ff8edbbe3", false, "admin" });
+                values: new object[] { "d785cfbb-ac25-454e-893e-61c5cc3d47c9", 0, "208baf6f-e8c5-4096-a45c-55e7497c3816", "admin@example.com", true, false, null, "ADMIN@EXAMPLE.COM", "ADMIN", "[REDACTED_HASH]", null, false, "f35b716a-4186-4276-8ebc-a91ff8edbbe3", false, "admin" });
         }
     }
 }
