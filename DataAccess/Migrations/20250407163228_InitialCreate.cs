@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -339,15 +339,7 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         principalColumn: "Id");
                 });
 
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "89e04b6f-0640-46f0-8d9c-27181481c533", null, "admin", "ADMIN" });
 
-            migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "d785cfbb-ac25-454e-893e-61c5cc3d47c9", 0, "208baf6f-e8c5-4096-a45c-55e7497c3816", "admin@example.com", true, false, null, "ADMIN@EXAMPLE.COM", "ADMIN", "[REDACTED_HASH]", null, false, "f35b716a-4186-4276-8ebc-a91ff8edbbe3", false, "admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

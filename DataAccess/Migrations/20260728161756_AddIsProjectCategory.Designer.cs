@@ -49,15 +49,6 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "00000000-0000-0000-0000-000000000003",
-                            ConcurrencyStamp = "00000000-0000-0000-0000-000000000005",
-                            Name = "admin",
-                            NormalizedName = "ADMIN"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -561,24 +552,6 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "00000000-0000-0000-0000-000000000001",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "00000000-0000-0000-0000-000000000004",
-                            Email = "admin@example.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@EXAMPLE.COM",
-                            NormalizedUserName = "ADMIN",
-                            PasswordHash = "[REDACTED_HASH]",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "00000000-0000-0000-0000-000000000002",
-                            TwoFactorEnabled = false,
-                            UserName = "admin"
-                        });
                 });
 
             modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.UserSubscriptionNewsLetter", b =>

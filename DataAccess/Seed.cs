@@ -93,29 +93,5 @@ namespace Reservanto.NPS.DataAccess
 				context.SaveChanges();
 			}
 		}
-
-				public static void InitializeAdmin(ModelBuilder modelBuilder)
-		{
-			// Identity Seed Users and Roles
-			modelBuilder.Entity<User>().HasData(new User
-			{
-				Id = "00000000-0000-0000-0000-000000000001",
-				UserName = "admin",
-				NormalizedUserName = "ADMIN",
-				Email = "admin@example.com",
-				EmailConfirmed = true,
-				NormalizedEmail = "ADMIN@EXAMPLE.COM",
-				SecurityStamp = "00000000-0000-0000-0000-000000000002",
-				ConcurrencyStamp = "00000000-0000-0000-0000-000000000004",
-				PasswordHash = "[REDACTED_HASH]"
-			});
-
-			modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
-			{
-				Id = "00000000-0000-0000-0000-000000000003",
-				Name = "admin",
-				NormalizedName = "ADMIN",
-				ConcurrencyStamp = "00000000-0000-0000-0000-000000000005"
-			});
-		}	}
+	}
 }

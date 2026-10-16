@@ -49,14 +49,6 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "89e04b6f-0640-46f0-8d9c-27181481c533",
-                            Name = "admin",
-                            NormalizedName = "ADMIN"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -509,24 +501,6 @@ namespace MojeVlastniStranka.DataAccess.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "d785cfbb-ac25-454e-893e-61c5cc3d47c9",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "208baf6f-e8c5-4096-a45c-55e7497c3816",
-                            Email = "admin@example.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@EXAMPLE.COM",
-                            NormalizedUserName = "ADMIN",
-                            PasswordHash = "[REDACTED_HASH]",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "f35b716a-4186-4276-8ebc-a91ff8edbbe3",
-                            TwoFactorEnabled = false,
-                            UserName = "admin"
-                        });
                 });
 
             modelBuilder.Entity("MojeVlastniStranka.DataAccess.Entities.UserSubscriptionNewsLetter", b =>

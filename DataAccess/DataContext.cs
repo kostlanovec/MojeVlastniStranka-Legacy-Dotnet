@@ -23,8 +23,6 @@ namespace MojeVlastniStranka.DataAccess
 				entity.Property(e => e.Id).ValueGeneratedOnAdd();
 			});
 
-			Seed.InitializeAdmin(modelBuilder);
-
 			base.OnModelCreating(modelBuilder);
 		}
 
