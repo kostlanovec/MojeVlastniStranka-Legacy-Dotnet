@@ -21,7 +21,7 @@ namespace MojeVlastniStranka.DataAccess
 
 			var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
 
-			var connectionString = Configuration.GetConnectionString("DefaultConnection") ?? "Host=127.0.0.1;Port=5432;Database=postgres;User Id=postgres;Password=your_password_here";
+			var connectionString = Configuration.GetConnectionString("DefaultConnection") ?? "Host=127.0.0.1;Port=5432;Database=postgres;User Id=postgres;Password=";
 			optionsBuilder.UseNpgsql(connectionString);
 
 			// Vytváří novou instanci DataContextu s nastavenými možnostmi.
