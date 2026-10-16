@@ -14,7 +14,7 @@ services:
     user: "1000:1000"
     volumes:
      - /var/uploads/user-uploads:/app/wwwroot/user-uploads:rw
-     - /var/dataprotection-keys:/app/dataprotection-keys:rw
+     - ${DATA_PROTECTION_KEYS_PATH:-/var/dataprotection-keys}:/app/dataprotection-keys:rw
   db:
     image: postgres:17.2
     restart: unless-stopped

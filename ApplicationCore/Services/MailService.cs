@@ -41,16 +41,19 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 					return;
 				}
 
+				var smtpHost = _configuration["EmailSettings:Host"] ?? "localhost";
+				var smtpPort = int.TryParse(_configuration["EmailSettings:Port"], out var port) ? port : 587;
+
 				using var client = new SmtpClient();
 				try
 				{
-					await client.ConnectAsync("smtp.example.com", 587, SecureSocketOptions.StartTls);
+					await client.ConnectAsync(smtpHost, smtpPort, SecureSocketOptions.StartTls);
 					await client.AuthenticateAsync(emailAddress, password);
 
 					foreach (var email in emails)
 					{
 						var message = new MimeMessage();
-						message.From.Add(new MailboxAddress("Jan Sebastián Kostlán", emailAddress));
+						message.From.Add(new MailboxAddress("Web", emailAddress));
 						message.To.Add(new MailboxAddress(email.Email, email.Email));
 						message.Subject = newsLetterRequest.Subject;
 
@@ -104,10 +107,13 @@ namespace MojeVlastniStranka.ApplicationCore.Services
 			message.Subject = "Verifikace";
 			message.Body = new TextPart("html") { Text = "Verifikační email." };
 
+			var smtpHost = _configuration["EmailSettings:Host"] ?? "localhost";
+			var smtpPort = int.TryParse(_configuration["EmailSettings:Port"], out var port) ? port : 587;
+
 			using var client = new SmtpClient();
 			try
 			{
-				await client.ConnectAsync("smtp.example.com", 587, SecureSocketOptions.StartTls);
+				await client.ConnectAsync(smtpHost, smtpPort, SecureSocketOptions.StartTls);
 				await client.AuthenticateAsync(emailAddress, password);
 				await client.SendAsync(message);
 			}
